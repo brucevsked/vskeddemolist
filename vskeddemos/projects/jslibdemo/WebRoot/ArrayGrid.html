@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <base href="">
+    
+    <title> </title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="">
+	<meta http-equiv="description" content="">
+  <link rel="stylesheet" type="text/css" href="css/extjs421css/resources/css/ext-all.css">
+  <script type="text/javascript" src="js/extjs421js/ext-all.js"></script>
+<script>
+	
+Ext.require([
+    'Ext.direct.*',
+    'Ext.data.*',
+    'Ext.toolbar.*',
+    'Ext.grid.*'
+]);
+ 
+var myData = [
+    ['3m Co',71.72,0.02,0.03,'2014/08/09'],
+    ['Alcoa Inc',29.01,0.42,1.47,'2014/08/11'],
+    ['Boeing Co.',75.43,0.53,0.71,'2014/11/05'],
+    ['Hewlett-Packard Co.',36.53,-0.03,-0.08,'2014/01/09'],
+    ['Hewlett-Packard Co.',36.53,-0.03,-0.08,'2014/01/09'],
+    ['Hewlett-Packard Co.',36.53,-0.03,-0.08,'2014/01/09'],
+    ['Hewlett-Packard Co.',36.53,-0.03,-0.08,'2014/01/09'],
+    ['Hewlett-Packard Co.',36.53,-0.03,-0.08,'2014/01/09'],
+    ['Hewlett-Packard Co.',36.53,-0.03,-0.08,'2014/01/09'],
+    ['Hewlett-Packard Co.',36.53,-0.03,-0.08,'2014/01/09'],
+    ['Hewlett-Packard Co.',36.53,-0.03,-0.08,'2014/01/09'],
+    ['Wal-Mart Stores, Inc.',45.45,0.73,1.63,'2014/11/15']
+];
+
+var st = Ext.create('Ext.data.ArrayStore', {
+    // store configs
+    storeId: 'myStore',
+    pageSize:12,
+    data: myData,
+    fields: [
+       'company',
+       {name: 'price', type: 'float'},
+       {name: 'change', type: 'float'},
+       {name: 'pctChange', type: 'float'},
+       {name: 'lastChange', type: 'string'}
+    ]
+}); 
+
+
+
+
+Ext.onReady(function() {
+    // create the Grid
+   var grid= Ext.create('Ext.grid.Panel', {
+    	  id:'mygrid',
+        store: st ,
+        columns: [
+                  {xtype: 'rownumberer',text:'ÐÐºÅ',width:40},
+                  {
+                	  dataIndex: 'price',
+                	  align: 'right',
+                	  menuDisabled : true,
+                	  text: 'a0'
+                  },
+                  {
+                	  dataIndex: 'change',
+                	  align: 'center',
+                	  menuDisabled : true,
+                	  text: 'a1'
+                  },
+                  {
+                	  dataIndex: 'pctChange',
+                	  align: 'left',
+                	  text: 'a2'
+                  },
+                  {
+                	  dataIndex: 'lastChange',
+                	  align: 'center',
+                	  renderer:function(v){
+                	  	return '<a href="javascript:alert(1);"><font color=red>'+v+'</a>';
+                	  },
+                	  text: 'a1'
+                  }                  
+                  ],
+        columnLines:true,
+        autoHeight: true,
+        width: 700,
+        title: 'testGrid',
+        bbar: Ext.create('Ext.PagingToolbar', {
+            store: st,
+            displayInfo: true,
+            displayMsg: 'Displaying topics {0} - {1} of {2}',
+            emptyMsg: "No topics to display"
+        }),
+        renderTo: Ext.getBody()
+    });
+
+});
+	
+</script>
+  </head>
+  
+  <body>
+    
+  </body>
+</html>

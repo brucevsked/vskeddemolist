@@ -1,0 +1,14 @@
+
+
+<script>
+
+function ts(){
+	personObject={"name":"vsked","age":18,"sex":"boy"};
+	alert(personObject.name+'|'+personObject.age+'|'+personObject.sex);
+	personArray={"data":[{"name":"vsked","age":18,"sex":"boy"},{"name":"admin","age":10,"sex":"girl"},{"name":"tiantian","age":25,"sex":"wolf"}]};
+	alert(personArray.data.length)
+	for(i=0;i<personArray.data.length;i++)
+		alert(personArray.data[i].name+'|'+personArray.data[i].age+'|'+personArray.data[i].sex);
+}
+ts();
+</script>

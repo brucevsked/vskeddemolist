@@ -1,0 +1,31 @@
+<script>
+	
+function outPutArray(myArr){
+    for(var i=0;i<myArr.length;i++){
+    	console.log(i+'|'+myArr[i]);
+	}
+}
+	
+function trims(inStr){
+    return inStr.replace(/ /g,'');
+}
+
+function getParameterArray(reqUrl){
+	var regx=/\{[^\{]*\}/ig;
+	return reqUrl.match(regx);
+}
+
+function testGetParameterArray(){
+	var s1='a.html?v.Id={id}';
+	outPutArray(getParameterArray(s1));
+	console.log('--------------------------');
+	var s2='a.html?v.Id={id}&pp={ok.id}&vv={jj.d}';
+	outPutArray(getParameterArray(s2));
+}
+	
+function ts(){
+	testGetParameterArray();
+}
+	
+ts();
+</script>

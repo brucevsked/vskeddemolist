@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="socketdemo"
+  id="myeclipse.1393985141872"
+  context-root="/socketdemo"
+  j2ee-spec="6.0"
+  archive="socketdemo.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <base href="">
+    
+    <title> </title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="">
+	<meta http-equiv="description" content="">
+  <link rel="stylesheet" type="text/css" href="css/extjs421css/resources/css/ext-all.css">
+  <script type="text/javascript" src="js/extjs421js/ext-all.js"></script>
+<script>
+	
+Ext.onReady(function(){
+	
+	function resetForm(){
+		Ext.getCmp('loginForm').getForm().reset();
+	}
+	
+	function login(){
+		Ext.getCmp('loginForm').getForm().submit({
+			method:'POST',
+			url: 'http://localhost:8080/jslibdemo/SortGridServlet', 
+			success:function(){
+				alert('ok');
+      }  
+			});
+	}
+	
+	var loginForm = Ext.create("Ext.form.Panel", {  
+		    id   : 'loginForm',
+        frame: true,  
+        width: 320,  
+        bodyPadding: 10,  
+        defaultType: 'textfield',  
+        defaults: {  
+            anchor: '100%',  
+            labelWidth: 50,  
+            labelAlign: "right"  
+        },  
+        items: [  
+            {  
+                allowBlank: false,  
+                fieldLabel: '用户名',  
+                name: 'Cat_framework_user.Loginid',  
+                blankText: '用户名不能为空', 
+                emptyText: '用户名'  
+            },  
+            {  
+                allowBlank: false,  
+                fieldLabel: '密码',  
+                name: 'Cat_framework_user.Loginpwd', 
+                blankText: '密码不能为空',  
+                emptyText: '密码',  
+                inputType: 'password'  
+            }
+        ],  
+        buttons: [  
+            { 	text: '登陆',
+            	handler: login
+            },  
+            {   text: '重置',
+            	handler: resetForm
+            }  
+        ]
+	});
+	
+     var win = new Ext.Window({
+     	             title    : '用户登陆',  
+                   closable : true,  
+                   width    : 330,  
+                   height   : 145,
+                   draggable:false,
+                   resizable:false,
+                   closable:false,  
+                  //border : false,  
+                  plain    : true,  
+                  layout   : 'border',  
+                  items    : [loginForm]  
+                  });
+    win.show();
+
+});
+	
+</script>
+  </head>
+  
+  <body>
+    
+  </body>
+</html>

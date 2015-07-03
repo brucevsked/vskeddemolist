@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ <configuration>
+ 
+  <settings>
+    <setting name="cacheEnabled" value="true"/>
+    <setting name="lazyLoadingEnabled" value="false"/>
+    <setting name="aggressiveLazyLoading" value="true"/>
+    <setting name="logImpl" value="LOG4J"/>
+  </settings>
+  
+  <plugins>
+  <plugin interceptor="com.github.pagehelper.PageHelper">
+    <property name="dialect" value="mysql"/>
+    <property name="pageSizeZero" value="true"/>
+    <property name="reasonable" value="true"/>
+  </plugin>
+  </plugins>
+     <environments default="development">
+         <environment id="development">
+         <transactionManager type="JDBC"/>
+             <dataSource type="POOLED">
+             <property name="driver" value="com.mysql.jdbc.Driver"/>
+             <property name="url" value="jdbc:mysql://127.0.0.1:3306/pagehelperdb" />
+             <property name="username" value="root"/>
+             <property name="password" value="bufu110"/>
+             </dataSource>
+         </environment>
+     </environments>
+     
+     <mappers>
+         <mapper class="com.vsked.dao.UserTMapper" />
+     </mappers>
+ </configuration>

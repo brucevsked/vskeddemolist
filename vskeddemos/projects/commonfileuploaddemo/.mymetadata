@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="commonfileuploaddemo"
+  id="myeclipse.1385435400726"
+  context-root="/commonfileuploaddemo"
+  j2ee-spec="5.0"
+  archive="commonfileuploaddemo.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

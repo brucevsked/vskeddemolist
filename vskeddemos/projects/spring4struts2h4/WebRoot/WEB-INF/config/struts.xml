@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 将对象交给spring管理 -->  
+    <constant name="struts.objectFactory" value="spring" />  
+	<!-- 配置struts2应用于开发模式 -->
+	<constant name="struts.devMode" value="true"/>
+	<!-- 配置Convention插件自动重加载映射 -->
+	<constant name="struts.convention.classes.reload" value="true"/>
+    <!-- 指定资源编码类型 -->  
+    <constant name="struts.i18n.encoding" value="UTF-8" />
+    <constant name="struts.convention.result.path" value="/WEB-INF/pages/" />
+    <constant name="struts.convention.result.flatLayout" value="false" />  
+	<constant name="struts.custom.i18n.resources" value="messageResource" />
+	<package name="default" namespace="/" extends="struts-default"></package>
+</struts>

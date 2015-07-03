@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.hs.dao.BaseUserTDao">
+	<resultMap type="BaseUserT" id="baseUserTList">
+		<result property="buId" column="buId"/>
+		<result property="buSeq" column="buSeq"/>
+		<result property="buLoginId" column="buLoginId"/>
+		<result property="buLoginName" column="buLoginName"/>
+		<result property="buLoginMobile" column="buLoginMobile"/>
+		<result property="buLoginEmail" column="buLoginEmail"/>
+		<result property="buLoginPass" column="buLoginPass"/>
+		<result property="buAvataUrl" column="buAvataUrl"/>
+		<result property="buStatus" column="buStatus"/>
+		<result property="buRegTime" column="buRegTime"/>
+		<result property="buLastLoginTime" column="buLastLoginTime"/>
+		<result property="buLastLoginIp" column="buLastLoginIp"/>
+		<result property="buMemo" column="buMemo"/>
+	</resultMap>
+
+     <select id="queryById" parameterType="int" resultType="BaseUserT">
+         select buId,buSeq,buLoginId,buLoginName,buLoginMobile,buLoginEmail,buLoginPass,buAvataUrl,buStatus,buRegTime,buLastLoginTime,buLastLoginIp,buMemo from baseUserT 
+         where buId = #{buId}
+     </select>
+     
+     <select id="queryByName" parameterType="String"  resultMap="baseUserTList">
+		select u.buId as buId,u.buLoginName as buLoginName, u.buLoginPass as buLoginPass
+		from baseUserT u 
+			where u.buLoginName like '%' || #{buLoginName} || '%'     
+     </select>
+     
+     <select id="login" parameterType="java.util.HashMap" resultType="BaseUserT">
+		select u.buId as buId,u.buLoginName as buLoginName, u.buLoginPass as buLoginPass
+		from baseUserT u
+			where u.buLoginName=#{buLoginName} and u.buLoginPass=#{buLoginPass}
+     </select>
+     
+     <select id="queryAll"  resultMap="baseUserTList">
+		select buId,buSeq,buLoginId,buLoginName,buLoginMobile,buLoginEmail,buLoginPass,buAvataUrl,buStatus,buRegTime,buLastLoginTime,buLastLoginIp,buMemo 
+		from baseUserT u
+     </select>
+     
+     <insert id="add" parameterType="BaseUserT">
+     	insert into baseUserT (buId,buSeq,buLoginId,buLoginName,buLoginMobile,buLoginEmail,buLoginPass,buStatus,buRegTime,buLastLoginTime,buLastLoginIp,buMemo) 
+     	values(seqForBaseUserT.nextval,#{buSeq},#{buLoginId},#{buLoginName},#{buLoginMobile},#{buLoginEmail},#{buLoginPass},#{buStatus},sysdate,sysdate,#{buLastLoginIp},#{buMemo})
+     </insert>
+     
+     <update id="update" parameterType="BaseUserT">
+     	update baseUserT set buSeq=#{buSeq},buLoginId=#{buLoginId},buLoginName=#{buLoginName},buLoginMobile=#{buLoginMobile},buLoginEmail=#{buLoginEmail},buLoginPass=#{buLoginPass},buStatus=#{buStatus},buLastLoginIp=#{buLastLoginIp},buMemo=#{buMemo} 
+     	where buId = #{buId}
+     </update>
+     
+     <delete id="delete" parameterType="int">
+     	delete from baseUserT where buId=#{buId}
+     </delete>
+ </mapper>

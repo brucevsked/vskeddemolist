@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="nettydemo"
+  id="myeclipse.1393829822487"
+  context-root="/nettydemo"
+  j2ee-spec="6.0"
+  archive="nettydemo.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

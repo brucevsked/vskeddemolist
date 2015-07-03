@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <base href="">
+    
+    <title> </title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="">
+	<meta http-equiv="description" content="">
+  <link rel="stylesheet" type="text/css" href="css/extjs421css/resources/css/ext-all.css">
+  <script type="text/javascript" src="js/extjs421js/ext-all.js"></script>
+<script>
+	var data1=[
+            ['a','a'],
+            ['b','b'],
+            ['c','c']
+        ];
+        
+        var store1 = new Ext.data.SimpleStore({
+            fields:['value','text'],
+            data:data1
+        });
+        
+        var combo1 = new Ext.form.ComboBox({
+            store:store1,
+            //renderTo:'combo',
+            emptyText:'Please select...',
+            fieldLabel:'combo',
+            mode:'local',
+            triggerAction:'all',
+            valueField:'value',
+            displayField:'text'
+        });
+        
+         var combo2 = new Ext.form.ComboBox({
+            store:store1,
+            //renderTo:'combo',
+            emptyText:'Please select...',
+            fieldLabel:'combo',
+            mode:'local',
+            triggerAction:'all',
+            valueField:'value',
+            displayField:'text'
+        });
+        
+         var combo3 = new Ext.form.ComboBox({
+            store:store1,
+            //renderTo:'combo',
+            emptyText:'Please select...',
+            fieldLabel:'combo',
+            mode:'local',
+            triggerAction:'all',
+            valueField:'value',
+            displayField:'text'
+        });
+        
+        var form = new Ext.form.FormPanel({
+            id:'form',
+            title:'form',
+            renderTo:'tsFm',
+            height:500,
+            items:[combo1,combo2,combo3]
+        });  
+
+Ext.onReady(function() {  
+    alert(Ext.getDom('ts1').length+'|'+Ext.getDom('ts2').length)
+});
+	
+</script>
+  </head>
+  
+  <body>
+  	<select id="ts1">
+</select>
+
+
+<select id="ts2">
+	<option value=1>1</option>
+</select>
+    
+  </body>
+</html>

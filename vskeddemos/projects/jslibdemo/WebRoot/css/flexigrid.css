@@ -1,0 +1,764 @@
+.bbit-grid
+{
+    font-family: "微软雅黑","宋体",Arial, sans-serif;
+    font-size: 12px;
+    position: relative;
+    border: none;
+    overflow: hidden;
+    color: #000;
+}
+.bbit-grid .gBlock
+{
+    background: #E3E3E3 url('../img/flexigrid/load-bg.png');        
+}
+.bbit-grid .gBlock .loading
+{
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: url('../img/flexigrid/indicator_waitanim.gif') no-repeat center center;  
+}
+.bbit-grid.hideBody
+{
+    height: 25px !important;
+    border-bottom: 1px solid #99bbe8;
+}
+
+.ie6fullwidthbug
+{
+    border-right: 0px solid #ccc;
+    padding-right: 2px;	
+}
+
+.bbit-grid div.nDiv
+{
+    background: #eee url(../img/flexigrid/line.gif) repeat-y -1px top;
+    border: 1px solid #ccc;
+    border-top: 0px;
+    overflow: auto;
+    left: 0px;
+    position: absolute;
+    z-index: 999;
+    float: left;
+}
+
+.bbit-grid div.nDiv table
+{
+    margin: 2px;
+}
+
+.bbit-grid div.hDivBox
+{
+    float: left; 
+    padding-right: 40px;
+}
+
+.bbit-grid div.bDiv table
+{
+    margin-bottom: 10px;
+}
+
+.bbit-grid div.bDiv table.autoht
+{
+    border-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.bbit-grid div.nDiv td
+{
+    padding: 2px 3px;
+    border: 1px solid #eee;
+    cursor: default;
+}
+
+.bbit-grid div.nDiv tr:hover td, .bbit-grid div.nDiv tr.ndcolover td
+{
+    background: #d5effc url(../img/flexigrid/hl.png) repeat-x top;
+    border: 1px solid #a8d8eb;
+}
+
+.bbit-grid div.nDiv td.ndcol1
+{
+    border-right: 1px solid #ccc;
+}
+
+.bbit-grid div.nDiv td.ndcol2
+{
+    border-left: 1px solid #fff;
+    padding-right: 10px;
+}
+
+
+.bbit-grid div.nDiv tr:hover td.ndcol1, .bbit-grid div.nDiv tr.ndcolover td.ndcol1
+{
+    border-right: 1px solid #d2e3ec;
+}
+
+.bbit-grid div.nDiv tr:hover td.ndcol2, .bbit-grid div.nDiv tr.ndcolover td.ndcol2
+{
+    border-left: 1px solid #eef8ff;
+}
+
+.bbit-grid div.nBtn
+{
+    position: absolute;
+    height: 25px;
+    width: 14px;
+    z-index: 900;
+    background: #e3f7ff url(../img/flexigrid/gridth.gif) repeat-x bottom;
+    border: 0px solid #ccc;
+    border-left: 1px solid #ccc;
+    top: 0px;
+    left: 0px;
+    margin-top: 1px;
+    cursor: pointer;
+    display: none;
+}
+
+.bbit-grid div.nBtn div
+{
+    height: 25px;
+    width: 12px;
+    border-left: 1px solid #fff;
+    float: left;
+    background: url(../img/flexigrid/ddn.png) no-repeat center;
+}		
+
+.bbit-grid div.nBtn.srtd
+{
+    background: #e3f7ff url(../img/flexigrid/gridth.gif) repeat-x bottom;
+}
+
+
+.bbit-grid div.mDiv
+{
+    background: url(../img/flexigrid/wbg.gif) repeat-x top;
+    border: 1px solid #ccc;
+    border-top: 0px;
+    font-weight: bold;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.bbit-grid div.mDiv div
+{
+    padding:4px;
+    white-space: nowrap;
+}
+.bbit-grid div.mDiv div.ftitle
+{
+    background:url("../img/flexigrid/grid.png") no-repeat left ;
+    color:#15428b;
+    margin-left:10px;
+    padding-left:20px;
+}
+.bbit-grid div.mDiv div.ptogtitle
+{
+    position: absolute;
+    top: 4px;
+    right: 3px;
+    padding: 0px;
+    height: 16px;
+    width: 16px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.bbit-grid div.mDiv div.ptogtitle:hover
+{
+    background-position: left -2px;
+    border-color: #99bbe8;
+}
+
+.bbit-grid div.mDiv div.ptogtitle span
+{
+    display: block;
+    border-left: 1px solid #eee;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #ddd;
+    width: 14px;
+    height: 14px;
+    background: url(../img/flexigrid/uup.png) no-repeat center;
+}
+
+.bbit-grid div.mDiv div.ptogtitle.vsble span
+{
+    background: url(../img/flexigrid/ddn.png) no-repeat center;			
+}			
+
+.bbit-grid div.tDiv /*toolbar*/
+{
+    background:#ccc url(../img/flexigrid/bg.gif) repeat-x top;
+    position: relative;	
+    height:25px;	
+    border: 1px solid #ccc;
+    border-top:0px;	  
+    overflow: hidden;
+}
+
+.bbit-grid div.tDiv2
+{
+    float: left;
+    clear: both;
+    padding: 1px;
+}
+
+.bbit-grid div.sDiv /*锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷锟绞�  background: #fafafa url(../img/flexigrid/wbg.gif) repeat-x top;*/
+{
+    
+    position: relative;
+    border: 1px solid #ccc;
+    border-top: 0px;
+    overflow: hidden;
+    display: none;
+}
+
+.bbit-grid div.sDiv2
+{
+    float: left;
+    clear: both;
+    padding: 5px;
+    padding-left: 5px;
+    width: 1024px;
+}
+
+.bbit-grid div.sDiv2 input, .bbit-grid div.sDiv2 select
+{
+    vertical-align: middle;
+    border:solid 1px #ccc;
+}
+.bbit-grid nobordercheckbox
+{
+  border:none;
+}
+.bbit-grid div.btnseparator
+{
+    float: left;
+    height: 18px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #fff;
+    margin: 1px;
+}
+
+.bbit-grid div.fbutton
+{
+    float: left;
+    display: block;
+    cursor: pointer;
+    padding: 1px;
+    height:22px;
+}
+
+.bbit-grid div.fbutton div
+{
+    float: left;
+    padding: 2px 3px;
+}		
+
+.bbit-grid div.fbutton span
+{
+    float: left;
+    display: block;		
+}
+
+.bbit-grid div.fbutton:hover, .bbit-grid div.fbutton.fbOver
+{
+    border: #466094 1px solid;
+    padding: 0;
+    cursor: pointer;
+    background-color: #EDF1D5;
+}
+
+.bbit-grid div.fbutton:hover div, .bbit-grid div.fbutton.fbOver div
+{
+    padding: 1px 2px;
+    border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}		
+
+
+/* end toolbar*/
+
+.bbit-grid div.hDiv
+{
+    background: #e3f7ff url(../img/flexigrid/gridth.gif) repeat-x left bottom;
+    position: relative;
+    border: 1px solid #ccc;	
+    border-top:solid 1px #fff;
+    border-bottom:  0px solid #9C9C9C;
+    overflow: hidden;
+}	
+
+.bbit-grid div.hDiv table
+{
+/*border-right: 1px solid #fff;*/
+}
+
+.bbit-grid div.cDrag
+{
+    float: left;
+    position: absolute;
+    z-index: 2;
+    overflow: visible;
+}
+
+.bbit-grid div.cDrag div
+{   
+    float: left;
+    background: none;
+    display: block;
+    position: absolute;
+    height: 24px;
+    width: 5px;
+    cursor: e-resize;
+}
+
+.bbit-grid div.cDrag div:hover, .bbit-grid div.cDrag div.dragging
+{
+    background: url(../img/flexigrid/line.gif) repeat-y 2px center;
+}
+
+.bbit-grid div.iDiv
+{
+    border: 1px solid #316ac5;
+    position: absolute;
+    overflow: visible;
+    background: none;
+    }
+
+.bbit-grid div.iDiv input, .bbit-grid div.iDiv select, .bbit-grid div.iDiv textarea
+{
+
+}
+
+.bbit-grid div.iDiv input.tb
+{
+    border: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    background: none;
+}			
+/*grid鑳屾櫙鐨勯鑹�/
+.bbit-grid div.bDiv
+{
+    border: 1px solid #ccc; 
+    border-top: 0px;
+    background: #e4e4e4;
+    overflow: auto;
+    position: relative;
+}
+
+.bbit-grid div.bDiv table
+{
+    border-bottom: 0px;
+}
+
+.bbit-grid div.hGrip
+{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 5px;
+    width: 5px;
+    background: url(../img/flexigrid/line.gif) repeat-x center;
+    margin-right: 1px;
+    cursor: e-resize;
+}
+
+.bbit-grid div.hGrip:hover, .bbit-grid div.hGrip.hgOver
+{
+    border-right: 1px solid #999;				
+    margin-right: 0px;
+}
+
+.bbit-grid div.vGrip
+{
+    height: 5px;
+    overflow: hidden;
+    position: relative;
+    background: #fafafa url(../img/flexigrid/wbg.gif) repeat-x 0px -1px;
+    border: 1px solid #ccc;
+    border-top: 0px;
+    text-align: center;
+    cursor: n-resize;
+}
+
+.bbit-grid div.vGrip span
+{
+    display: block;
+    margin: 1px auto;
+    width: 20px;
+    height: 1px;
+    overflow: hidden;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;	
+    background: none;
+}
+
+.bbit-grid div.hDiv th /* common cell properties*/
+{
+    text-align: left;	
+    border-right:solid 1px #ddd;  
+    border-left:solid 1px #fff;
+    overflow: hidden;
+    vertical-align: top !important;
+    padding:0px;
+}
+.bbit-grid div.bDiv td  /* common cell properties*/
+{
+    text-align: left;	
+    border-left:solid 1px #fff;
+    border-top: none;
+    border-bottom: 1px dotted #ddd;
+    border-right:solid 1px #ddd;
+    overflow: hidden;
+    vertical-align: top !important;
+    white-space: nowrap; 
+    background-color:#fff;
+}
+.bbit-grid div.hDiv th div,.bbit-grid div.bDiv td div, div.colCopy div /* common inner cell properties*/
+{
+    padding: 4px;
+    border-left:none;
+    
+}	
+.bbit-grid div.hDiv th div
+{
+    height:17px;
+ }		
+.bbit-grid div.hDiv th.cth div
+{
+    padding:1px 4px;    
+}
+
+.bbit-grid div.hDiv th, div.colCopy
+{
+    font-weight: normal;
+    cursor: default;
+    white-space: nowrap;
+    overflow: hidden;
+   
+}	
+.bbit-grid .itemchk
+{
+    border:none;
+}
+.bbit-grid .noborder
+{
+    border:none;
+}
+div.colCopy {	
+    background: #e3f7ff url(../img/flexigrid/gridth.gif) repeat-x bottom;
+    border: 1px solid #ccc;
+    border-bottom: 0px;
+    overflow: hidden;
+}
+
+.bbit-grid div.hDiv th.sorted
+{
+    background:#e3f7ff url(../img/flexigrid/gridth.gif) repeat-x bottom;
+    border-bottom: 0px solid #ccc;
+}
+
+.bbit-grid div.hDiv th.thOver
+{
+}
+
+.bbit-grid div.hDiv th.thOver div, .bbit-grid div.hDiv th.sorted.thOver div
+{
+    /*border-bottom: 1px solid orange;*/
+    padding-bottom: 4px;
+}
+
+.bbit-grid div.hDiv th.sorted div
+{
+    border-bottom: 0px solid #ccc;
+    padding-bottom: 4px;
+}
+
+.bbit-grid div.hDiv th.thMove
+{
+    background: #fff;
+    color: #fff;
+}
+
+.bbit-grid div.hDiv th.sorted.thMove div
+{
+    /*border-bottom: 1px solid #fff;*/
+    padding-bottom: 4px
+}
+
+.bbit-grid div.hDiv th.thMove div
+{
+    background: #fff !important;
+}	
+
+.bbit-grid div.hDiv th div.sdesc
+{
+    background: url(../img/flexigrid/sort_desc.gif) no-repeat center top;
+}	
+
+.bbit-grid div.hDiv th div.sasc
+{
+    background: url(../img/flexigrid/sort_asc.gif) no-repeat center top;
+}	
+
+
+.bbit-grid div.hDiv th div
+{
+}
+
+.bbit-grid span.cdropleft
+{
+    display: block;
+    background: url(../img/flexigrid/prev.gif) no-repeat -4px center;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    top: -24px;
+    margin-bottom: -24px;
+    z-index: 3;
+}
+
+.bbit-grid div.hDiv span.cdropright
+{
+    display: block;
+    background: url(../img/flexigrid/next.gif) no-repeat 12px center;
+    width: 24px;
+    height: 24px;
+    float: right;
+    position: relative;
+    top: -24px;
+    margin-bottom: -24px;
+}
+
+
+.bbit-grid div.bDiv td div
+{
+    border-top: 0px solid #fff;
+    padding-bottom: 2px;
+}
+
+
+.bbit-grid tr td.sorted
+{
+}		
+
+.bbit-grid tr td.sorted div
+{
+}
+
+.bbit-grid tr.erow td
+{
+    background: #f7f7f7;
+		
+}
+
+.bbit-grid tr.erow td.sorted
+{
+/*background: #EEF6FF;*/
+}						
+
+.bbit-grid tr.erow td.sorted div
+{    
+}
+
+.bbit-grid div.bDiv tr:hover td, 
+.bbit-grid div.bDiv tr:hover td.sorted,
+.bbit-grid div.bDiv tr.trOver td.sorted, 
+.bbit-grid div.bDiv tr.trOver td
+{
+    background: #FFFFBB;
+    border-left: 1px solid #eef8ff;
+    border-bottom: 1px dotted #a8d8eb;
+}
+
+.bbit-grid div.bDiv tr.trSelected:hover td, 
+.bbit-grid div.bDiv tr.trSelected:hover td.sorted,
+.bbit-grid div.bDiv tr.trOver.trSelected td.sorted, 
+.bbit-grid div.bDiv tr.trOver.trSelected td,
+.bbit-grid tr.trSelected td.sorted, 
+.bbit-grid tr.trSelected td
+{
+    background: #d5effc url(../img/flexigrid/hl.png) repeat-x top;
+    border-right: 1px solid #d2e3ec;
+    border-left: 1px solid #eef8ff;	
+    border-top:none;			
+}
+
+/* novstripe adjustments */
+
+.bbit-grid.novstripe .bDiv table
+{
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.bbit-grid.novstripe  div.bDiv td  
+{
+    border-right-color: #fff;	
+}
+
+.bbit-grid.novstripe div.bDiv tr.erow td.sorted
+{
+    border-right-color: #e3e3e3;
+}
+
+.bbit-grid.novstripe div.bDiv tr td.sorted
+{
+    border-right-color: #f3f3f3;
+}
+
+.bbit-grid.novstripe  div.bDiv tr.erow td  
+{
+    border-right-color: #f7f7f7;
+    border-left-color: #f7f7f7;
+}
+
+.bbit-grid.novstripe div.bDiv tr.trSelected:hover td, 
+.bbit-grid.novstripe div.bDiv tr.trSelected:hover td.sorted,
+.bbit-grid.novstripe div.bDiv tr.trOver.trSelected td.sorted, 
+.bbit-grid.novstripe div.bDiv tr.trOver.trSelected td,
+.bbit-grid.novstripe tr.trSelected td.sorted, 
+.bbit-grid.novstripe tr.trSelected td
+{
+    border-right: 1px solid #0066FF;
+    border-left: 1px solid #0066FF;
+}		
+
+.bbit-grid.novstripe div.bDiv tr.trOver td, .bbit-grid.novstripe div.bDiv tr:hover td
+{
+    border-left-color: #d9ebf5;
+    border-right-color: #d9ebf5;
+}
+
+/* end novstripe */
+
+.bbit-grid div.pDiv
+{
+    background: url(../img/flexigrid/wbg.gif) repeat-x;
+    /*padding-top: 3px;*/
+    border: 1px solid #ccc;
+    border-top: 0px;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding-left:3px;
+}
+
+.bbit-grid div.pDiv div.pDiv2
+{
+    margin: 3px;
+    margin-left: -2px;
+    float: left;
+    width: 1024px;
+}	
+
+div.pGroup
+{
+    float: left;
+    background: none;
+    height: 24px;
+    margin: 0px 5px;
+}
+div.pGroup select
+{
+    width:50px;
+}
+.bbit-grid div.pDiv .pPageStat, .bbit-grid div.pDiv .pcontrol
+{
+    position: relative;
+    top: 5px;
+    overflow: visible;
+}
+
+.bbit-grid div.pDiv input
+{
+    vertical-align: text-top;
+    position: relative;
+    top: -5px;
+}
+
+.bbit-grid div.pDiv  div.pButton
+{
+    float: left;
+    width: 22px;
+    height: 22px;
+    border: 0px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.bbit-grid div.pDiv  div.pButton:hover, .bbit-grid div.pDiv  div.pButton.pBtnOver
+{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.bbit-grid div.pDiv  div.pButton span
+{
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: left;
+}		
+
+.bbit-grid div.pDiv  div.pButton:hover span, .bbit-grid div.pDiv  div.pButton.pBtnOver span
+{
+    width: 19px;
+    height: 19px;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+}		
+
+
+.bbit-grid .pSearch
+{
+    background: url(../img/flexigrid/magnifier.png) no-repeat center;
+}
+
+.bbit-grid .pFirst
+{
+    background: url(../img/flexigrid/page-first.png) no-repeat center;
+}
+
+.bbit-grid .pPrev
+{
+    background: url(../img/flexigrid/page-prev.png) no-repeat center;
+}
+
+.bbit-grid .pNext
+{
+    background: url(../img/flexigrid/page-next.png) no-repeat center;
+}
+
+.bbit-grid .pLast
+{
+    background: url(../img/flexigrid/page-last.png) no-repeat center;
+}
+
+.bbit-grid .pReload
+{
+    background: url(../img/flexigrid/load.png) no-repeat center;
+}
+
+.bbit-grid .pReload.loading
+{
+    background: url(../img/flexigrid/load.gif) no-repeat center;
+}															
+
+/* ie adjustments */
+.bbit-grid.ie div.hDiv th div, .bbit-grid.ie  div.bDiv td  div, div.colCopy.ie div /* common inner cell properties*/
+{
+    overflow: hidden;
+}			

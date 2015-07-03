@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <!-- must set here! -->
+  <base href="">
+    
+  <title>baseDemo</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="">
+	<meta http-equiv="description" content="">
+
+  </head>
+  
+<body>
+<script language="javascript" src="js/jquery.1.9.1.min.js"></script>
+ <script type="text/javascript" >
+ 	function mainTest(){
+ 		console.log('here is main')
+ 		console.log(mDiv.innerHTML);
+ 	}
+ 	function cf1(){
+ 		myFrame1.f1Test();
+ 		console.log(myFrame1.f1Div.innerHTML);
+ 		var tmpStr=$('#f1Div',myFrame1.document).html();
+ 		console.log('jq__|__'+tmpStr);
+ 	}
+ 	function cf2(){
+ 		myFrame2.f2Test();
+ 		console.log(myFrame2.f2Div.innerHTML);
+ 	}
+ </script>
+
+
+<button onclick='mainTest();'> call local </button>
+<button onclick='cf1();'> call f1 </button>
+<button onclick='cf2();'> call f2 </button> 
+<iframe id="myFrame1" name="myFrame1" src="f1.html" style="HEIGHT: 100%; width:180px;"></iframe> 
+<iframe id="myFrame2" name="myFrame2" src="f2.html" style="HEIGHT: 100%; width:180px;"></iframe> 
+<div id='mDiv' name='mDiv'>mainDivishere</div>
+</body>
+</html>

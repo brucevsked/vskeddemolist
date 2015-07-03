@@ -1,0 +1,13 @@
+
+button{
+ background:#F0F0F0 repeat-x;
+ padding-top:3px;
+ border-top:1px solid #708090;
+ border-right:1px solid #708090;
+ border-bottom:2px solid #708090;
+ border-left:1px solid #708090; 
+ width:80px;
+ height:auto;
+ font-size:10pt;
+ cursor:hand;
+}

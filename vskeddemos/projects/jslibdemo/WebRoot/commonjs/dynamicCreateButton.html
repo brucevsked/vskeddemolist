@@ -1,0 +1,10 @@
+<script>
+	var ct=0;
+function ts(){
+var btn = document.createElement('button');
+btn.innerText='click me'+ct++;
+btn.onclick = function(){alert(this.innerText)}
+document.body.appendChild(btn);	
+}	
+</script>
+<button onclick=ts() >tss</button>

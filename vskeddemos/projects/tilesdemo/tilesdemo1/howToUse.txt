@@ -1,0 +1,39 @@
+1在web.xml中添加tiles支持
+  <listener>
+    <listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class>
+  </listener>
+
+2编写tiles.xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="testT1" template="/WEB-INF/view/template/template1/template.jsp">
+        <put-attribute name="title" value="this is first page title" />
+        <put-attribute name="header" value="/WEB-INF/view/template/template1/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/view/template/template1/menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/view/different/body1.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/view/template/template1/footer.jsp" />
+    </definition>
+    
+  <definition name="testT2" extends="testT1">  
+    <put name="title" value="can u c here page"/>  
+    <put name="body" value="/WEB-INF/view/different/body2.jsp"/>  
+  </definition>  
+</tiles-definitions>
+
+3准备模板页面template.jsp,header.jsp,menu.jsp.footer.jsp
+
+4使用tiles定义的模板如新建example.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<tiles:insertDefinition name="testT1" />
+
+5使用tiles定义的模板如新建pages1.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<tiles:insertDefinition name="testT2" />
+
+6以后需要添加页面先要在tiles.xml中添加定义再新建页面去引用定义的模板名字

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/data/jpa 
+		http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+
+	<!-- Activates annotation-based bean configuration -->
+	<context:annotation-config />
+
+	<!-- Scans for application @Components to deploy -->
+	<context:component-scan base-package="com.hs" />
+
+	<!-- 数据库配置文件位置 -->
+	<context:property-placeholder location="WEB-INF/configs/jdbc.properties" />
+	<!-- 配置dbcp数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />        <!-- 队列中的最小等待数 -->
+		<property name="maxIdle" value="${jdbc.maxIdle}" />        <!-- 队列中的最大等待数 -->
+		<property name="initialSize" value="${jdbc.initialSize}" /><!-- 初始大小 -->		  
+	</bean>
+
+	<!-- 使用JDBC事物 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- AOP配置事物 -->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="query*" read-only="true" propagation="REQUIRED" />
+			<tx:method name="delete*"  propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 配置AOP切面 -->
+	<aop:config>
+        <aop:pointcut id="transactionPointcut" expression="execution(* com.hs..service.*.*(..))"/>
+        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>
+    </aop:config>
+
+	<!-- 使用annotation注解方式配置事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="WEB-INF/configs/sqlMapConfig.xml"></property>
+	</bean>
+
+	<!-- 配置SQLSession模板 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- 自动扫描Mapper的接口(上面的是一个一个注入) -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	  <property name="basePackage" value="com.hs.dao" />
+	</bean>
+
+</beans>

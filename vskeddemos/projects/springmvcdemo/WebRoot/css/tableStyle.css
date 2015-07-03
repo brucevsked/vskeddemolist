@@ -1,0 +1,37 @@
+table {
+  border:1px;
+  border-collapse: collapse;
+  font-size:0.9em;
+  font-family: Arial, Helvetica, verdana sans-serif;
+  background-color:#fff;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-top:1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+table tr{
+	/*
+	background-color:expression('#eef6fe,#cfEFEF'.split(',')[rowIndex%2]);
+	*/
+}
+
+table tr td {
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-top:1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+table thead tr th {
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-top:1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+table tr td input{  
+	border:#999 1px solid;
+	height:20px;
+	background-color:#e8f4ff;  
+}

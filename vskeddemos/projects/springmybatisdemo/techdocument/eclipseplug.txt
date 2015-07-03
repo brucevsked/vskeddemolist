@@ -1,0 +1,9 @@
+
+https://github.com/harawata/mybatipse
+
+There are several ways to install MyBatipse.
+
+Drag this button drag-to-install button from browser to your Eclipse workbench (i.e. window).
+Choose Eclipse Marketplace... in Help menu of your Eclipse and search MyBatipse.
+Choose Install New Software... in Help menu and enter the following URL.
+http://dl.bintray.com/harawata/eclipse

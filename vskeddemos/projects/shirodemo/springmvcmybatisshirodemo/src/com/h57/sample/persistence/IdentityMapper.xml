@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h57.sample.persistence.IdentityMapper">
+
+	<resultMap id="identityResult" type="Identity">
+		<result property="id" column="id" />
+		<result property="userid" column="userid" />
+
+		<result property="salt" column="salt" />
+		<result property="email" column="email" />
+		<result property="created" column="date_created" />
+	</resultMap>
+
+
+	<insert id="registerIdentity" parameterType="RegistrationForm"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT INTO shiro_user (userid, passphrase, salt, email, date_created)
+		VALUES (#{username}, #{passphrase}, #{salt}, #{email}, CURDATE());
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<select id="getIdentityById" parameterType="int" resultMap="identityResult">
+		SELECT id, userid, salt, email, date_created FROM shiro_user WHERE id
+		= #{id}
+	</select>
+
+	<select id="getIdentityByUserId" parameterType="String"
+		resultMap="identityResult">
+		SELECT id, userid, salt, email, date_created FROM shiro_user
+		WHERE userid =
+		#{userId}
+	</select>
+
+</mapper>

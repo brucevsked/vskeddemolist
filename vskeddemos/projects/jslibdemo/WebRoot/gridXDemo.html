@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <base href="">
+  
+    <title>gridxdemo</title>
+        
+    <meta http-equiv="keywords" content="">
+    <meta http-equiv="description" content="">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" href="js/dojo193/dojo/resources/dojo.css" media="screen">
+    <link rel="stylesheet" href="js/dojo193/dijit/themes/claro/claro.css" media="screen">
+    <link rel="stylesheet" href="js/dojo193/gridx/resources/claro/Gridx.css" media="screen">
+    <script type="text/javascript" src="js/mydemojs/dojodemo/dojoExtendsConfig.js"></script>
+    <script type="text/javascript" src="js/dojo193/dojo/dojo.js" data-dojo-config="async: true"></script>
+<script>
+require([
+    'dojo/store/Memory',
+    'gridx/Grid',
+    'gridx/core/model/cache/Sync',
+    'dojo/domReady!'
+], function(Store, Grid, Cache){
+	
+    var st = new Store({
+        data: [
+            {id: 1, title: 'Hey There', artist: 'Bette Midler'},
+            {id: 2, title: 'Love or Confusion', artist: 'Jimi Hendrix'},
+            {id: 3, title: 'Sugar Street', artist: 'Andy Narell'}
+        ]
+    });
+    var columns = [
+                   {field: 'id', name: 'fft' },
+                   {field: 'artist', name: 'Artist'}
+               ];
+    var tmpColumn=new Object();
+    tmpColumn.field='title';
+    tmpColumn.name='myTitle';
+    //tmpColumn.decorator=function(cellData, rowId, rowIndex){ return "<a href='www.google.com?q=" + cellData + "'><b>" + cellData + "</b></a>"; };
+    tmpFu=("function(cellData, rowId, rowIndex){ return \"<a href='http://www.baidu.com?q=\" + cellData + \"'><b>\" + cellData + \"</b></a>\"; };");
+   
+    tmpColumn.decorator=(new Function("return "+tmpFu))();
+    
+    columns.push(tmpColumn)
+    
+    var grid = new Grid({
+        cacheClass: Cache,
+        store: st,
+        structure: columns
+    }, 'gridDiv'); //Assume we have a node with id 'gridNode'
+    grid.startup();
+});
+</script>
+  </head>
+  
+<body class="claro">
+use tomcat open this page!Because the gridx use ajax
+	<div id="gridDiv"></div>
+</body>
+</html>

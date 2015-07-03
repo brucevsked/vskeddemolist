@@ -1,0 +1,7 @@
+2014-08-15 at 11:28:16 CST TRACE com.vsked.test.TestLog4j2 28 main - entry
+2014-08-15 at 11:28:16 CST DEBUG com.vsked.test.TestLog4j2 29 main - debug msg
+2014-08-15 at 11:28:16 CST INFO  com.vsked.test.TestLog4j2 30 main - info msg
+2014-08-15 at 11:28:16 CST WARN  com.vsked.test.TestLog4j2 31 main - warn msg
+2014-08-15 at 11:28:16 CST ERROR com.vsked.test.TestLog4j2 32 main - error msg
+2014-08-15 at 11:28:16 CST FATAL com.vsked.test.TestLog4j2 33 main - fatal msg
+2014-08-15 at 11:28:16 CST TRACE com.vsked.test.TestLog4j2 34 main - exit

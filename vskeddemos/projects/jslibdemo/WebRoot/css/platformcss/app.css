@@ -1,0 +1,7 @@
+.row-s .x-grid-cell{
+    background-color : pink !important;
+}
+
+.row-f .x-grid-cell{
+    background-color: green !important;
+}

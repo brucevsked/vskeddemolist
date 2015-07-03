@@ -1,0 +1,37 @@
+1在mybatis配置文件中添加配置
+
+  <settings>
+    <setting name="cacheEnabled" value="true"/>
+    <setting name="lazyLoadingEnabled" value="false"/>
+    <setting name="aggressiveLazyLoading" value="true"/>
+    <setting name="logImpl" value="LOG4J"/>
+  </settings>
+  
+  <plugins>
+  <plugin interceptor="com.github.pagehelper.PageHelper">
+    <property name="dialect" value="mysql"/>
+    <property name="pageSizeZero" value="true"/>
+    <property name="reasonable" value="true"/>
+  </plugin>
+  </plugins>
+  
+  2添加jar包 数据库驱动 日志 mybatis pagehelper包 jsqlparse包
+  
+  3准备代码查询所有如findAll();方法
+  
+  4如果是注解配置要在mybatis配置文件中编写映射
+     <mappers>
+         <mapper class="com.vsked.dao.UserTMapper" />
+     </mappers>
+     
+ 5定义当前页与页大小并使用分页
+ 
+        int pageNum=1;
+		int pageSize=5;
+		PageHelper.startPage(pageNum, pageSize);
+		
+6调用查询所有findAll()方法就可以得到分页后结果
+		int pageNum=1;
+		int pageSize=5;
+		PageHelper.startPage(pageNum, pageSize);
+		List<UserT> userTList = um.findAll();

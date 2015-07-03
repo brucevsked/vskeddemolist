@@ -1,0 +1,16 @@
+<script>
+	var ct=0;
+function getInfo(btName){
+	console.log('|'+btName);
+	alert(btName);
+}
+function ts(){
+	var s='function(){ return getInfo(this.innerText) }';
+var btn = document.createElement('button');
+btn.innerText='click me'+ct++;
+btn.onclick = (new Function("return "+s))();
+document.body.appendChild(btn);
+	
+}	
+</script>
+<button onclick=ts() >tss</button>
