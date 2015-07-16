@@ -24,55 +24,55 @@ public class HwpfReadTest1 {
 	public void testReadByExtractor() throws Exception {
 		InputStream is = new FileInputStream(SystemUtil.getSystemPath("testw2003.doc"));
 		WordExtractor extractor = new WordExtractor(is);
-		// Êä³öwordÎÄµµËùÓĞµÄÎÄ±¾
+		// è¾“å‡ºwordæ–‡æ¡£æ‰€æœ‰çš„æ–‡æœ¬
 		System.out.println(extractor.getText());
 		System.out.println(extractor.getTextFromPieces());
-		// Êä³öµ±Ç°wordÎÄµµµÄÔªÊı¾İĞÅÏ¢£¬°üÀ¨×÷Õß¡¢ÎÄµµµÄĞŞ¸ÄÊ±¼äµÈ¡£
+		// è¾“å‡ºå½“å‰wordæ–‡æ¡£çš„å…ƒæ•°æ®ä¿¡æ¯ï¼ŒåŒ…æ‹¬ä½œè€…ã€æ–‡æ¡£çš„ä¿®æ”¹æ—¶é—´ç­‰ã€‚
 		System.out.println(extractor.getMetadataTextExtractor().getText());
-		// »ñÈ¡¸÷¸ö¶ÎÂäµÄÎÄ±¾
+		// è·å–å„ä¸ªæ®µè½çš„æ–‡æœ¬
 		String paraTexts[] = extractor.getParagraphText();
 		for (int i = 0; i < paraTexts.length; i++) {
 			System.out.println("Paragraph " + (i + 1) + " : " + paraTexts[i]);
 		}
-		// Êä³öµ±Ç°wordµÄÒ»Ğ©ĞÅÏ¢
+		// è¾“å‡ºå½“å‰wordçš„ä¸€äº›ä¿¡æ¯
 		printInfo(extractor.getSummaryInformation());
-		// Êä³öµ±Ç°wordµÄÒ»Ğ©ĞÅÏ¢
+		// è¾“å‡ºå½“å‰wordçš„ä¸€äº›ä¿¡æ¯
 		this.printInfo(extractor.getDocSummaryInformation());
 		this.closeStream(is);
 	}
 
 	/**
-	 * Êä³öSummaryInfomation
+	 * è¾“å‡ºSummaryInfomation
 	 * 
 	 * @param info
 	 */
 	private void printInfo(SummaryInformation info) {
-		// ×÷Õß
+		// ä½œè€…
 		System.out.println(info.getAuthor());
-		// ×Ö·ûÍ³¼Æ
+		// å­—ç¬¦ç»Ÿè®¡
 		System.out.println(info.getCharCount());
-		// Ò³Êı
+		// é¡µæ•°
 		System.out.println(info.getPageCount());
-		// ±êÌâ
+		// æ ‡é¢˜
 		System.out.println(info.getTitle());
-		// Ö÷Ìâ
+		// ä¸»é¢˜
 		System.out.println(info.getSubject());
 	}
 
 	/**
-	 * Êä³öDocumentSummaryInfomation
+	 * è¾“å‡ºDocumentSummaryInfomation
 	 * 
 	 * @param info
 	 */
 	private void printInfo(DocumentSummaryInformation info) {
-		// ·ÖÀà
+		// åˆ†ç±»
 		System.out.println(info.getCategory());
-		// ¹«Ë¾
+		// å…¬å¸
 		System.out.println(info.getCompany());
 	}
 
 	/**
-	 * ¹Ø±ÕÊäÈëÁ÷
+	 * å…³é—­è¾“å…¥æµ
 	 * 
 	 * @param is
 	 */

@@ -21,7 +21,7 @@ import com.vsked.util.SystemUtil;
 public class XwpfWriteTest1 {
 	
 	public static void main(String[] args) throws Exception {
-		//ÎÄ¼şĞ´ÔÚweb-info/classes/Ä¿Â¼ÏÂ
+		//æ–‡ä»¶å†™åœ¨web-info/classes/ç›®å½•ä¸‹
 		XwpfWriteTest1 t=new XwpfWriteTest1();
 		t.testSimpleWrite();
 		t.testWriteTable();
@@ -29,53 +29,53 @@ public class XwpfWriteTest1 {
 	}
 
 	/**
-	 * »ù±¾µÄĞ´²Ù×÷
+	 * åŸºæœ¬çš„å†™æ“ä½œ
 	 * 
 	 * @throws Exception
 	 */
 	public void testSimpleWrite() throws Exception {
-		// ĞÂ½¨Ò»¸öÎÄµµ
+		// æ–°å»ºä¸€ä¸ªæ–‡æ¡£
 		XWPFDocument doc = new XWPFDocument();
-		// ´´½¨Ò»¸ö¶ÎÂä
+		// åˆ›å»ºä¸€ä¸ªæ®µè½
 		XWPFParagraph para = doc.createParagraph();
 		XWPFParagraph para1 = doc.createParagraph();
 
-		// Ò»¸öXWPFRun´ú±í¾ßÓĞÏàÍ¬ÊôĞÔµÄÒ»¸öÇøÓò¡£
+		// ä¸€ä¸ªXWPFRunä»£è¡¨å…·æœ‰ç›¸åŒå±æ€§çš„ä¸€ä¸ªåŒºåŸŸã€‚
 		XWPFRun run = para.createRun();
-		run.setBold(true); // ¼Ó´Ö
-		run.setText("¼Ó´ÖµÄÄÚÈİ");
+		run.setBold(true); // åŠ ç²—
+		run.setText("åŠ ç²—çš„å†…å®¹");
 		run = para.createRun();
 		run.setColor("FF0000");
-		run.setText("ºìÉ«µÄ×Ö¡£");
+		run.setText("çº¢è‰²çš„å­—ã€‚");
 		
-		// Ò»¸öXWPFRun´ú±í¾ßÓĞÏàÍ¬ÊôĞÔµÄÒ»¸öÇøÓò¡£
+		// ä¸€ä¸ªXWPFRunä»£è¡¨å…·æœ‰ç›¸åŒå±æ€§çš„ä¸€ä¸ªåŒºåŸŸã€‚
 	    XWPFRun runa = para1.createRun();
-		runa.setBold(true); // ¼Ó´Ö
-		runa.setText("¼Ó´ÖµÄÄÚÈİ");
+		runa.setBold(true); // åŠ ç²—
+		runa.setText("åŠ ç²—çš„å†…å®¹");
 		runa = para1.createRun();
-		runa.setText("ºìÉ«µÄ×Ö¡£");
+		runa.setText("çº¢è‰²çš„å­—ã€‚");
 		OutputStream os = new FileOutputStream(SystemUtil.getSystemPath("testw111notable.docx"));
-		// °ÑdocÊä³öµ½Êä³öÁ÷
+		// æŠŠdocè¾“å‡ºåˆ°è¾“å‡ºæµ
 		doc.write(os);
 		this.close(os);
 	}
 
 	/***
-	 * Ğ´Ò»¸ö±í¸ñ
+	 * å†™ä¸€ä¸ªè¡¨æ ¼
 	 * 
 	 * @throws Exception
 	 */
 	public void testWriteTable() throws Exception {
 		XWPFDocument doc = new XWPFDocument();
-		// ´´½¨Ò»¸ö5ĞĞ5ÁĞµÄ±í¸ñ
+		// åˆ›å»ºä¸€ä¸ª5è¡Œ5åˆ—çš„è¡¨æ ¼
 		XWPFTable table = doc.createTable(5, 5);
-		// ÕâÀïÔö¼ÓµÄÁĞÔ­±¾³õÊ¼»¯´´½¨µÄÄÇ5ĞĞÔÚÍ¨¹ıgetTableCells()·½·¨»ñÈ¡Ê±»ñÈ¡²»µ½£¬µ«Í¨¹ırowĞÂÔöµÄ¾Í¿ÉÒÔ¡£
-		// table.addNewCol(); //¸ø±í¸ñÔö¼ÓÒ»ÁĞ£¬±ä³É6ÁĞ
-		table.createRow(); // ¸ø±í¸ñĞÂÔöÒ»ĞĞ£¬±ä³É6ĞĞ
+		// è¿™é‡Œå¢åŠ çš„åˆ—åŸæœ¬åˆå§‹åŒ–åˆ›å»ºçš„é‚£5è¡Œåœ¨é€šè¿‡getTableCells()æ–¹æ³•è·å–æ—¶è·å–ä¸åˆ°ï¼Œä½†é€šè¿‡rowæ–°å¢çš„å°±å¯ä»¥ã€‚
+		// table.addNewCol(); //ç»™è¡¨æ ¼å¢åŠ ä¸€åˆ—ï¼Œå˜æˆ6åˆ—
+		table.createRow(); // ç»™è¡¨æ ¼æ–°å¢ä¸€è¡Œï¼Œå˜æˆ6è¡Œ
 		List<XWPFTableRow> rows = table.getRows();
-		// ±í¸ñÊôĞÔ
+		// è¡¨æ ¼å±æ€§
 		CTTblPr tablePr = table.getCTTbl().addNewTblPr();
-		// ±í¸ñ¿í¶È
+		// è¡¨æ ¼å®½åº¦
 		CTTblWidth width = tablePr.addNewTblW();
 		width.setW(BigInteger.valueOf(8000));
 		XWPFTableRow row;
@@ -85,43 +85,43 @@ public class XwpfWriteTest1 {
 		int cellSize;
 		for (int i = 0; i < rowSize; i++) {
 			row = rows.get(i);
-			// ĞÂÔöµ¥Ôª¸ñ
+			// æ–°å¢å•å…ƒæ ¼
 			row.addNewTableCell();
-			// ÉèÖÃĞĞµÄ¸ß¶È
+			// è®¾ç½®è¡Œçš„é«˜åº¦
 			row.setHeight(500);
-			// ĞĞÊôĞÔ
+			// è¡Œå±æ€§
 			// CTTrPr rowPr = row.getCtRow().addNewTrPr();
-			// ÕâÖÖ·½Ê½ÊÇ¿ÉÒÔ»ñÈ¡µ½ĞÂÔöµÄcellµÄ¡£
+			// è¿™ç§æ–¹å¼æ˜¯å¯ä»¥è·å–åˆ°æ–°å¢çš„cellçš„ã€‚
 			// List<CTTc> list = row.getCtRow().getTcList();
 			cells = row.getTableCells();
 			cellSize = cells.size();
 			for (int j = 0; j < cellSize; j++) {
 				cell = cells.get(j);
 				if ((i + j) % 2 == 0) {
-					// ÉèÖÃµ¥Ôª¸ñµÄÑÕÉ«
-					cell.setColor("ff0000"); // ºìÉ«
+					// è®¾ç½®å•å…ƒæ ¼çš„é¢œè‰²
+					cell.setColor("ff0000"); // çº¢è‰²
 				} else {
-					cell.setColor("0000ff"); // À¶É«
+					cell.setColor("0000ff"); // è“è‰²
 				}
-				// µ¥Ôª¸ñÊôĞÔ
+				// å•å…ƒæ ¼å±æ€§
 				CTTcPr cellPr = cell.getCTTc().addNewTcPr();
 				cellPr.addNewVAlign().setVal(STVerticalJc.CENTER);
 				if (j == 3) {
-					// ÉèÖÃ¿í¶È
+					// è®¾ç½®å®½åº¦
 					cellPr.addNewTcW().setW(BigInteger.valueOf(3000));
 				}
 				cell.setText(i + ", " + j);
 			}
 		}
-		// ÎÄ¼ş²»´æÔÚÊ±»á×Ô¶¯´´½¨
+		// æ–‡ä»¶ä¸å­˜åœ¨æ—¶ä¼šè‡ªåŠ¨åˆ›å»º
 		OutputStream os = new FileOutputStream(SystemUtil.getSystemPath("testw111withtable.docx"));
-		// Ğ´ÈëÎÄ¼ş
+		// å†™å…¥æ–‡ä»¶
 		doc.write(os);
 		this.close(os);
 	}
 
 	/**
-	 * ¹Ø±ÕÊä³öÁ÷
+	 * å…³é—­è¾“å‡ºæµ
 	 * 
 	 * @param os
 	 */

@@ -19,7 +19,7 @@ public class XwpfReadTest2 {
 	}
 
 	/**
-	 * Í¨¹ıXWPFDocument¶ÔÄÚÈİ½øĞĞ·ÃÎÊ¡£¶ÔÓÚXWPFÎÄµµ¶øÑÔ£¬ÓÃÕâÖÖ·½Ê½½øĞĞ¶Á²Ù×÷¸ü¼Ñ¡£
+	 * é€šè¿‡XWPFDocumentå¯¹å†…å®¹è¿›è¡Œè®¿é—®ã€‚å¯¹äºXWPFæ–‡æ¡£è€Œè¨€ï¼Œç”¨è¿™ç§æ–¹å¼è¿›è¡Œè¯»æ“ä½œæ›´ä½³ã€‚
 	 * 
 	 * @throws Exception
 	 */
@@ -28,21 +28,21 @@ public class XwpfReadTest2 {
 		XWPFDocument doc = new XWPFDocument(is);
 		List<XWPFParagraph> paras = doc.getParagraphs();
 		for (XWPFParagraph para : paras) {
-			// µ±Ç°¶ÎÂäµÄÊôĞÔ
+			// å½“å‰æ®µè½çš„å±æ€§
 			// CTPPr pr = para.getCTP().getPPr();
 			System.out.println(para.getText());
 		}
-		// »ñÈ¡ÎÄµµÖĞËùÓĞµÄ±í¸ñ
+		// è·å–æ–‡æ¡£ä¸­æ‰€æœ‰çš„è¡¨æ ¼
 		List<XWPFTable> tables = doc.getTables();
 		List<XWPFTableRow> rows;
 		List<XWPFTableCell> cells;
 		for (XWPFTable table : tables) {
-			// ±í¸ñÊôĞÔ
+			// è¡¨æ ¼å±æ€§
 			// CTTblPr pr = table.getCTTbl().getTblPr();
-			// »ñÈ¡±í¸ñ¶ÔÓ¦µÄĞĞ
+			// è·å–è¡¨æ ¼å¯¹åº”çš„è¡Œ
 			rows = table.getRows();
 			for (XWPFTableRow row : rows) {
-				// »ñÈ¡ĞĞ¶ÔÓ¦µÄµ¥Ôª¸ñ
+				// è·å–è¡Œå¯¹åº”çš„å•å…ƒæ ¼
 				cells = row.getTableCells();
 				for (XWPFTableCell cell : cells) {
 					System.out.println(cell.getText());
@@ -54,7 +54,7 @@ public class XwpfReadTest2 {
 	}
 
 	/**
-	 * ¹Ø±ÕÊäÈëÁ÷
+	 * å…³é—­è¾“å…¥æµ
 	 * 
 	 * @param is
 	 */

@@ -23,13 +23,13 @@ import com.vsked.util.SystemUtil;
 public class XwpfWriteTest2 {
 	 
 	 public static void main(String[] args) throws Exception {
-		//ÎÄ¼şĞ´ÔÚweb-info/classes/Ä¿Â¼ÏÂ
+		//æ–‡ä»¶å†™åœ¨web-info/classes/ç›®å½•ä¸‹
 		 XwpfWriteTest2 t=new XwpfWriteTest2();
 		 t.testTemplateWrite();
 		 System.out.println("write finish");
 	 }
 	   /**
-	    * ÓÃÒ»¸ödocxÎÄµµ×÷ÎªÄ£°å£¬È»ºóÌæ»»ÆäÖĞµÄÄÚÈİ£¬ÔÙĞ´ÈëÄ¿±êÎÄµµÖĞ¡£
+	    * ç”¨ä¸€ä¸ªdocxæ–‡æ¡£ä½œä¸ºæ¨¡æ¿ï¼Œç„¶åæ›¿æ¢å…¶ä¸­çš„å†…å®¹ï¼Œå†å†™å…¥ç›®æ ‡æ–‡æ¡£ä¸­ã€‚
 	    * @throws Exception
 	    */
 	   public void testTemplateWrite() throws Exception {
@@ -41,9 +41,9 @@ public class XwpfWriteTest2 {
 	      String filePath = SystemUtil.getSystemPath("templateV1.docx");
 	      InputStream is = new FileInputStream(filePath);
 	      XWPFDocument doc = new XWPFDocument(is);
-	      //Ìæ»»¶ÎÂäÀïÃæµÄ±äÁ¿
+	      //æ›¿æ¢æ®µè½é‡Œé¢çš„å˜é‡
 	      this.replaceInPara(doc, params);
-	      //Ìæ»»±í¸ñÀïÃæµÄ±äÁ¿
+	      //æ›¿æ¢è¡¨æ ¼é‡Œé¢çš„å˜é‡
 	      this.replaceInTable(doc, params);
 	      OutputStream os = new FileOutputStream(SystemUtil.getSystemPath("templateV1Result1.docx"));
 	      doc.write(os);
@@ -52,9 +52,9 @@ public class XwpfWriteTest2 {
 	   }
 	  
 	   /**
-	    * Ìæ»»¶ÎÂäÀïÃæµÄ±äÁ¿
-	    * @param doc ÒªÌæ»»µÄÎÄµµ
-	    * @param params ²ÎÊı
+	    * æ›¿æ¢æ®µè½é‡Œé¢çš„å˜é‡
+	    * @param doc è¦æ›¿æ¢çš„æ–‡æ¡£
+	    * @param params å‚æ•°
 	    */
 	   private void replaceInPara(XWPFDocument doc, Map<String, Object> params) {
 	      Iterator<XWPFParagraph> iterator = doc.getParagraphsIterator();
@@ -66,9 +66,9 @@ public class XwpfWriteTest2 {
 	   }
 	  
 	   /**
-	    * Ìæ»»¶ÎÂäÀïÃæµÄ±äÁ¿
-	    * @param para ÒªÌæ»»µÄ¶ÎÂä
-	    * @param params ²ÎÊı
+	    * æ›¿æ¢æ®µè½é‡Œé¢çš„å˜é‡
+	    * @param para è¦æ›¿æ¢çš„æ®µè½
+	    * @param params å‚æ•°
 	    */
 	   private void replaceInPara(XWPFParagraph para, Map<String, Object> params) {
 	      List<XWPFRun> runs;
@@ -81,8 +81,8 @@ public class XwpfWriteTest2 {
 	            matcher = getMatcher(runText);
 	            
 	            if (params.containsKey(runText)) {
-	                //Ö±½Óµ÷ÓÃXWPFRunµÄsetText()·½·¨ÉèÖÃÎÄ±¾Ê±£¬ÔÚµ×²ã»áÖØĞÂ´´½¨Ò»¸öXWPFRun£¬°ÑÎÄ±¾¸½¼ÓÔÚµ±Ç°ÎÄ±¾ºóÃæ£¬
-	                //ËùÒÔÎÒÃÇ²»ÄÜÖ±½ÓÉèÖµ£¬ĞèÒªÏÈÉ¾³ıµ±Ç°run,È»ºóÔÙ×Ô¼ºÊÖ¶¯²åÈëÒ»¸öĞÂµÄrun¡£
+	                //ç›´æ¥è°ƒç”¨XWPFRunçš„setText()æ–¹æ³•è®¾ç½®æ–‡æœ¬æ—¶ï¼Œåœ¨åº•å±‚ä¼šé‡æ–°åˆ›å»ºä¸€ä¸ªXWPFRunï¼ŒæŠŠæ–‡æœ¬é™„åŠ åœ¨å½“å‰æ–‡æœ¬åé¢ï¼Œ
+	                //æ‰€ä»¥æˆ‘ä»¬ä¸èƒ½ç›´æ¥è®¾å€¼ï¼Œéœ€è¦å…ˆåˆ é™¤å½“å‰run,ç„¶åå†è‡ªå·±æ‰‹åŠ¨æ’å…¥ä¸€ä¸ªæ–°çš„runã€‚
 	            	para.removeRun(i);
 	                para.insertNewRun(i).setText(params.get(runText).toString());
 	                para.removeRun(i-1);
@@ -94,9 +94,9 @@ public class XwpfWriteTest2 {
 	   }
 	  
 	   /**
-	    * Ìæ»»±í¸ñÀïÃæµÄ±äÁ¿
-	    * @param doc ÒªÌæ»»µÄÎÄµµ
-	    * @param params ²ÎÊı
+	    * æ›¿æ¢è¡¨æ ¼é‡Œé¢çš„å˜é‡
+	    * @param doc è¦æ›¿æ¢çš„æ–‡æ¡£
+	    * @param params å‚æ•°
 	    */
 	   private void replaceInTable(XWPFDocument doc, Map<String, Object> params) {
 	      Iterator<XWPFTable> iterator = doc.getTablesIterator();
@@ -120,7 +120,7 @@ public class XwpfWriteTest2 {
 	   }
 	  
 	   /**
-	    * ÕıÔòÆ¥Åä×Ö·û´®
+	    * æ­£åˆ™åŒ¹é…å­—ç¬¦ä¸²
 	    * @param str
 	    * @return
 	    */
@@ -131,7 +131,7 @@ public class XwpfWriteTest2 {
 	   }
 	  
 	   /**
-	    * ¹Ø±ÕÊäÈëÁ÷
+	    * å…³é—­è¾“å…¥æµ
 	    * @param is
 	    */
 	   private void close(InputStream is) {
@@ -145,7 +145,7 @@ public class XwpfWriteTest2 {
 	   }
 	  
 	   /**
-	    * ¹Ø±ÕÊä³öÁ÷
+	    * å…³é—­è¾“å‡ºæµ
 	    * @param os
 	    */
 	   private void close(OutputStream os) {

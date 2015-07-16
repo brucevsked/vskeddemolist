@@ -14,7 +14,7 @@ import com.vsked.util.SystemUtil;
 
 public class HwpfWriteTest2 {
 	public static void main(String[] args) throws Exception {
-		//ÎÄ¼şĞ´ÔÚweb-info/classes/Ä¿Â¼ÏÂ
+		//æ–‡ä»¶å†™åœ¨web-info/classes/ç›®å½•ä¸‹
 		HwpfWriteTest2 t=new HwpfWriteTest2();
 		t.testWrite();
 		System.out.println("write finish");
@@ -24,20 +24,20 @@ public class HwpfWriteTest2 {
 		InputStream is = new FileInputStream(templatePath);
 		HWPFDocument doc = new HWPFDocument(is);
 		Range range = doc.getRange();
-		// °Ñrange·¶Î§ÄÚµÄ${reportDate}Ìæ»»Îªµ±Ç°µÄÈÕÆÚ
+		// æŠŠrangeèŒƒå›´å†…çš„${reportDate}æ›¿æ¢ä¸ºå½“å‰çš„æ—¥æœŸ
 		range.replaceText("${reportDate}",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		range.replaceText("${appleAmt}", "100.00");
 		range.replaceText("${bananaAmt}", "200.00");
 		range.replaceText("${totalAmt}", "300.00");
 		OutputStream os = new FileOutputStream(SystemUtil.getSystemPath("templateV12003Result.doc"));
-		// °ÑdocÊä³öµ½Êä³öÁ÷ÖĞ
+		// æŠŠdocè¾“å‡ºåˆ°è¾“å‡ºæµä¸­
 		doc.write(os);
 		this.closeStream(os);
 		this.closeStream(is);
 	}
 
 	/**
-	 * ¹Ø±ÕÊäÈëÁ÷
+	 * å…³é—­è¾“å…¥æµ
 	 * 
 	 * @param is
 	 */
@@ -52,7 +52,7 @@ public class HwpfWriteTest2 {
 	}
 
 	/**
-	 * ¹Ø±ÕÊä³öÁ÷
+	 * å…³é—­è¾“å‡ºæµ
 	 * 
 	 * @param os
 	 */

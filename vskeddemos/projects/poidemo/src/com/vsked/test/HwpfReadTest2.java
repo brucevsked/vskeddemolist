@@ -25,27 +25,27 @@ public class HwpfReadTest2 {
 	public void testReadByDoc() throws Exception {
 		InputStream is = new FileInputStream(SystemUtil.getSystemPath("testw2003.doc"));
 		HWPFDocument doc = new HWPFDocument(is);
-		// Êä³öÊéÇ©ĞÅÏ¢
+		// è¾“å‡ºä¹¦ç­¾ä¿¡æ¯
 		this.printInfo(doc.getBookmarks());
-		// Êä³öÎÄ±¾
+		// è¾“å‡ºæ–‡æœ¬
 		System.out.println(doc.getDocumentText());
 		Range range = doc.getRange();
 		// this.insertInfo(range);
 		this.printInfo(range);
-		// ¶Á±í¸ñ
+		// è¯»è¡¨æ ¼
 		this.readTable(range);
-		// ¶ÁÁĞ±í
+		// è¯»åˆ—è¡¨
 		this.readList(range);
-		// É¾³ırange
+		// åˆ é™¤range
 		Range r = new Range(2, 5, doc);
-		r.delete();// ÔÚÄÚ´æÖĞ½øĞĞÉ¾³ı£¬Èç¹ûĞèÒª±£´æµ½ÎÄ¼şÖĞĞèÒªÔÙ°ÑËüĞ´»ØÎÄ¼ş
-		// °Ñµ±Ç°HWPFDocumentĞ´µ½Êä³öÁ÷ÖĞ
+		r.delete();// åœ¨å†…å­˜ä¸­è¿›è¡Œåˆ é™¤ï¼Œå¦‚æœéœ€è¦ä¿å­˜åˆ°æ–‡ä»¶ä¸­éœ€è¦å†æŠŠå®ƒå†™å›æ–‡ä»¶
+		// æŠŠå½“å‰HWPFDocumentå†™åˆ°è¾“å‡ºæµä¸­
 		doc.write(new FileOutputStream(SystemUtil.getSystemPath("testw2003Result.doc")));
 		this.closeStream(is);
 	}
 
 	/**
-	 * ¹Ø±ÕÊäÈëÁ÷
+	 * å…³é—­è¾“å…¥æµ
 	 * 
 	 * @param is
 	 */
@@ -60,29 +60,29 @@ public class HwpfReadTest2 {
 	}
 
 	/**
-	 * Êä³öÊéÇ©ĞÅÏ¢
+	 * è¾“å‡ºä¹¦ç­¾ä¿¡æ¯
 	 * 
 	 * @param bookmarks
 	 */
 	private void printInfo(Bookmarks bookmarks) {
 		int count = bookmarks.getBookmarksCount();
-		System.out.println("ÊéÇ©ÊıÁ¿£º" + count);
+		System.out.println("ä¹¦ç­¾æ•°é‡ï¼š" + count);
 		Bookmark bookmark;
 		for (int i = 0; i < count; i++) {
 			bookmark = bookmarks.getBookmark(i);
-			System.out.println("ÊéÇ©" + (i + 1) + "µÄÃû³ÆÊÇ£º" + bookmark.getName());
-			System.out.println("¿ªÊ¼Î»ÖÃ£º" + bookmark.getStart());
-			System.out.println("½áÊøÎ»ÖÃ£º" + bookmark.getEnd());
+			System.out.println("ä¹¦ç­¾" + (i + 1) + "çš„åç§°æ˜¯ï¼š" + bookmark.getName());
+			System.out.println("å¼€å§‹ä½ç½®ï¼š" + bookmark.getStart());
+			System.out.println("ç»“æŸä½ç½®ï¼š" + bookmark.getEnd());
 		}
 	}
 
 	/**
-	 * ¶Á±í¸ñ Ã¿Ò»¸ö»Ø³µ·û´ú±íÒ»¸ö¶ÎÂä£¬ËùÒÔ¶ÔÓÚ±í¸ñ¶øÑÔ£¬Ã¿Ò»¸öµ¥Ôª¸ñÖÁÉÙ°üº¬Ò»¸ö¶ÎÂä£¬Ã¿ĞĞ½áÊø¶¼ÊÇÒ»¸ö¶ÎÂä¡£
+	 * è¯»è¡¨æ ¼ æ¯ä¸€ä¸ªå›è½¦ç¬¦ä»£è¡¨ä¸€ä¸ªæ®µè½ï¼Œæ‰€ä»¥å¯¹äºè¡¨æ ¼è€Œè¨€ï¼Œæ¯ä¸€ä¸ªå•å…ƒæ ¼è‡³å°‘åŒ…å«ä¸€ä¸ªæ®µè½ï¼Œæ¯è¡Œç»“æŸéƒ½æ˜¯ä¸€ä¸ªæ®µè½ã€‚
 	 * 
 	 * @param range
 	 */
 	private void readTable(Range range) {
-		// ±éÀúrange·¶Î§ÄÚµÄtable¡£
+		// éå†rangeèŒƒå›´å†…çš„tableã€‚
 		TableIterator tableIter = new TableIterator(range);
 		Table table;
 		TableRow row;
@@ -95,7 +95,7 @@ public class HwpfReadTest2 {
 				int cellNum = row.numCells();
 				for (int k = 0; k < cellNum; k++) {
 					cell = row.getCell(k);
-					// Êä³öµ¥Ôª¸ñµÄÎÄ±¾
+					// è¾“å‡ºå•å…ƒæ ¼çš„æ–‡æœ¬
 					System.out.println(cell.text().trim());
 				}
 			}
@@ -103,7 +103,7 @@ public class HwpfReadTest2 {
 	}
 
 	/**
-	 * ¶ÁÁĞ±í
+	 * è¯»åˆ—è¡¨
 	 * 
 	 * @param range
 	 */
@@ -119,17 +119,17 @@ public class HwpfReadTest2 {
 	}
 
 	/**
-	 * Êä³öRange
+	 * è¾“å‡ºRange
 	 * 
 	 * @param range
 	 */
 	private void printInfo(Range range) {
-		// »ñÈ¡¶ÎÂäÊı
+		// è·å–æ®µè½æ•°
 		int paraNum = range.numParagraphs();
 		System.out.println(paraNum);
 		for (int i = 0; i < paraNum; i++) {
 			// this.insertInfo(range.getParagraph(i));
-			System.out.println("¶ÎÂä" + (i + 1) + "£º"
+			System.out.println("æ®µè½" + (i + 1) + "ï¼š"
 					+ range.getParagraph(i).text());
 			if (i == (paraNum - 1)) {
 				this.insertInfo(range.getParagraph(i));
@@ -150,7 +150,7 @@ public class HwpfReadTest2 {
 	}
 
 	/**
-	 * ²åÈëÄÚÈİµ½Range£¬ÕâÀïÖ»»áĞ´µ½ÄÚ´æÖĞ
+	 * æ’å…¥å†…å®¹åˆ°Rangeï¼Œè¿™é‡Œåªä¼šå†™åˆ°å†…å­˜ä¸­
 	 * 
 	 * @param range
 	 */

@@ -17,7 +17,7 @@ public class XwpfReadTest1 {
 	}
 	 
 	   /**
-	    * Í¨¹ıXWPFWordExtractor·ÃÎÊXWPFDocumentµÄÄÚÈİ
+	    * é€šè¿‡XWPFWordExtractorè®¿é—®XWPFDocumentçš„å†…å®¹
 	    * @throws Exception
 	    */
 	   public void testReadByExtractor() throws Exception {
@@ -32,18 +32,18 @@ public class XwpfReadTest1 {
 	   }
 	  
 	   /**
-	    * Êä³öCorePropertiesĞÅÏ¢
+	    * è¾“å‡ºCorePropertiesä¿¡æ¯
 	    * @param coreProps
 	    */
 	   private void printCoreProperties(CoreProperties coreProps) {
-	      System.out.println(coreProps.getCategory());   //·ÖÀà
-	      System.out.println(coreProps.getCreator()); //´´½¨Õß
-	      System.out.println(coreProps.getCreated()); //´´½¨Ê±¼ä
-	      System.out.println(coreProps.getTitle());   //±êÌâ
+	      System.out.println(coreProps.getCategory());   //åˆ†ç±»
+	      System.out.println(coreProps.getCreator()); //åˆ›å»ºè€…
+	      System.out.println(coreProps.getCreated()); //åˆ›å»ºæ—¶é—´
+	      System.out.println(coreProps.getTitle());   //æ ‡é¢˜
 	   }
 	  
 	   /**
-	    * ¹Ø±ÕÊäÈëÁ÷
+	    * å…³é—­è¾“å…¥æµ
 	    * @param is
 	    */
 	   private void close(InputStream is) {
