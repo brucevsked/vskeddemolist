@@ -26,7 +26,7 @@ public class jodaTimeTest {
 		System.out.println("获取上年最后一天日期:"+DateTimeUtilVsked.getLastDayOfBeforeYear());
 		System.out.println("获取下年第一天日期:"+DateTimeUtilVsked.getFirstDayOfNextYear());
 		System.out.println("获取下年最后一天日期:"+DateTimeUtilVsked.getLastDayOfNextYear());
-		System.out.println("获取当天日期:"+DateTimeUtilVsked.getFirstDayOfCurrentQuarter()); //测试中未完成
+		System.out.println("获取当天日期:"+DateTimeUtilVsked.getFirstDayOfCurrentSeason()); //测试中未完成
 //		System.out.println("获取当天日期:"+DateTimeUtilVsked);
 //		System.out.println("获取当天日期:"+DateTimeUtilVsked);
 

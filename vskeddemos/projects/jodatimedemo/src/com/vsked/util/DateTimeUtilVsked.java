@@ -117,7 +117,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	//TODO will goon  wirte
-	public static String getFirstDayOfCurrentQuarter(){
+	public static String getFirstDayOfCurrentSeason(){
 		return dt.getMonthOfYear()/3+"";
 	}
 	

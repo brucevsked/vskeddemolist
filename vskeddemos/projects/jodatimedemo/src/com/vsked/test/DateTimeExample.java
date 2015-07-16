@@ -42,22 +42,16 @@ public class DateTimeExample {
     public static void main(String[] args) {  
   
         // 107天之后的日期  
-        System.out.println(DateTime.now().dayOfYear().addToCopy(107)  
-                .toString("yyyy-MM-dd"));  
+        System.out.println(DateTime.now().dayOfYear().addToCopy(107).toString("yyyy-MM-dd"));  
         // 当前周的周一，周日  
         System.out.println(String.format("min:%s, max:%s",DateTime.now().dayOfWeek().withMinimumValue().toString("yyyy-MM-dd"),
         		DateTime.now().dayOfWeek().withMaximumValue().toString("yyyy-MM-dd")));  
         // 当前月的第一天和最后一天  
-        System.out.println(String.format( "min:%s, max:%s",  DateTime.now().dayOfMonth().withMinimumValue()   .toString("yyyy-MM-dd"),  
-                DateTime.now().dayOfMonth().withMaximumValue()  
-                        .toString("yyyy-MM-dd")));  
+        System.out.println(String.format( "min:%s, max:%s",  DateTime.now().dayOfMonth().withMinimumValue().toString("yyyy-MM-dd"),  
+                DateTime.now().dayOfMonth().withMaximumValue().toString("yyyy-MM-dd")));  
         // 当前年的第一天和最后一天  
-        System.out.println(String.format(  
-                "min:%s, max:%s",  
-                DateTime.now().dayOfYear().withMinimumValue()  
-                        .toString("yyyy-MM-dd"),  
-                DateTime.now().dayOfYear().withMaximumValue()  
-                        .toString("yyyy-MM-dd")));  
+        System.out.println(String.format( "min:%s, max:%s",  DateTime.now().dayOfYear().withMinimumValue().toString("yyyy-MM-dd"),  
+                DateTime.now().dayOfYear().withMaximumValue().toString("yyyy-MM-dd")));  
   
         DateTime start = new DateTime(2014, 5, 30, 20, 11, 40);  
         DateTime now = DateTime.now();  
@@ -97,8 +91,7 @@ public class DateTimeExample {
   
         LocalDate d = LocalDate.now();  
         LocalDate lastDayOfPreviousMonth = d.minusMonths(1).dayOfMonth().withMaximumValue();  
-        System.out.println("我希望计算上一个月的最后一天:"  
-                + lastDayOfPreviousMonth.toString(FORMATE_DATE, Locale.CHINESE));  
+        System.out.println("我希望计算上一个月的最后一天:"  + lastDayOfPreviousMonth.toString(FORMATE_DATE, Locale.CHINESE));  
         Property e = d.minusWeeks(1).dayOfWeek();  
         System.out.println("上周的周一：" + e.withMinimumValue().toString(FORMATE_DATE, Locale.CHINESE));  
         System.out.println("上周的周日：" + e.withMaximumValue().toString(FORMATE_DATE, Locale.CHINESE));  
