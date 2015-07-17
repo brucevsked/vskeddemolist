@@ -13,7 +13,7 @@ public class ConnectOracle {
 	private static String dbHost="127.0.0.1";
 	private static String dbName="ORCLVSKED";
 	private static String userName = "scott";
-	private static String userPassword = "Y4yhl9tbf110";
+	private static String userPassword = "tiger";
 	private static String dbPort="1521";
 	private static String url = "";
 
