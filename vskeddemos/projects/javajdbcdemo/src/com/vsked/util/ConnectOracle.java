@@ -10,10 +10,10 @@ public class ConnectOracle {
 	private static Connection conn;
 	private static PreparedStatement pt = null;
 	private static ResultSet rs = null;
-	private static String dbHost="192.168.1.201";
-	private static String dbName="xxp";
-	private static String userName = "vskedtest";
-	private static String userPassword = "y4yhl9tbf110";
+	private static String dbHost="127.0.0.1";
+	private static String dbName="ORCLVSKED";
+	private static String userName = "scott";
+	private static String userPassword = "Y4yhl9tbf110";
 	private static String dbPort="1521";
 	private static String url = "";
 
@@ -42,7 +42,7 @@ public class ConnectOracle {
 
 	public static void main(String[] args) throws Exception {
 		Connection conn = ConnectOracle.getMySqlConnection();
-		String sql = "select * from LOGINLOG_T ";
+		String sql = "select * from user_tables ";
 		PreparedStatement pt = conn.prepareStatement(sql);
 		ResultSet rs=pt.executeQuery();
 		while(rs.next()){
