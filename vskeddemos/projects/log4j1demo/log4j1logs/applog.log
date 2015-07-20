@@ -1,0 +1,11 @@
+[DEBUG] 2015-07-20 15:44:37,509(0) --> [main] com.vsked.test.TestLog4j1.main(TestLog4j1.java:23): debug msg  
+ [INFO ] 2015-07-20 15:44:37,509(0) --> [main] com.vsked.test.TestLog4j1.main(TestLog4j1.java:24): info msg  
+ [WARN ] 2015-07-20 15:44:37,509(0) --> [main] com.vsked.test.TestLog4j1.main(TestLog4j1.java:25): warn msg  
+ [ERROR] 2015-07-20 15:44:37,509(0) --> [main] com.vsked.test.TestLog4j1.main(TestLog4j1.java:26): error msg  
+ [FATAL] 2015-07-20 15:44:37,509(0) --> [main] com.vsked.test.TestLog4j1.main(TestLog4j1.java:27): fatal msg  
+ [DEBUG] 2015-07-20 15:48:45,235(0) --> [main] com.vsked.test.TestLog4j1.main(TestLog4j1.java:23): debug msg  
+ [INFO ] 2015-07-20 15:48:45,453(218) --> [main] com.vsked.test.TestLog4j1.main(TestLog4j1.java:24): info msg  
+ [WARN ] 2015-07-20 15:48:45,453(218) --> [main] com.vsked.test.TestLog4j1.main(TestLog4j1.java:25): warn msg  
+ [ERROR] 2015-07-20 15:48:45,453(218) --> [main] com.vsked.test.TestLog4j1.main(TestLog4j1.java:26): error msg  
+ [FATAL] 2015-07-20 15:48:45,469(234) --> [main] com.vsked.test.TestLog4j1.main(TestLog4j1.java:27): fatal msg  
+ 

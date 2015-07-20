@@ -1,6 +1,7 @@
 package com.vsked.test;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.MDC;
 import org.apache.log4j.PropertyConfigurator;
 
 public class TestLog4j1 {
@@ -17,6 +18,8 @@ public class TestLog4j1 {
 
 	public static void main(String[] args) {
 		initConfig();
+		MDC.put("userId", "12");
+		MDC.put("userName", "admin");
 		log.debug("debug msg");
 		log.info("info msg");
 		log.warn("warn msg");
