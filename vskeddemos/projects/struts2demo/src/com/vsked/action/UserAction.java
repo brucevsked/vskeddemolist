@@ -13,6 +13,7 @@ public class UserAction extends BasicAction{
 	
 	private User u;
 	private Logs log;
+	private String avInput;
 	
 	public User getU() {
 		return u;
@@ -30,6 +31,14 @@ public class UserAction extends BasicAction{
 
 	public void setLog(Logs log) {
 		this.log = log;
+	}
+
+	public String getAvInput() {
+		return avInput;
+	}
+
+	public void setAvInput(String avInput) {
+		this.avInput = avInput;
 	}
 
 
@@ -50,6 +59,7 @@ public class UserAction extends BasicAction{
         */
 		System.out.println("|userName|"+u.getUserName()+"|userPass|"+u.getUserPass());
 		System.out.println(log.getLogId()+"||"+log.getLogName());
+		System.out.println("|"+avInput+"|");
 		if("vsked".equals(u.getUserName())&& "vsked".equals(u.getUserPass()))
 			return "f1";
 		return "f2";

@@ -37,7 +37,7 @@ request.setAttribute("basePath", basePath);
   
   <s:hidden name="log.logId" value="88"/>
   <s:hidden name="log.logName" value="this is another object" />
-  
+  <s:hidden name="avInput" value="here you are" />
   <s:submit value="let's go" />
   </s:form>
   </body>
