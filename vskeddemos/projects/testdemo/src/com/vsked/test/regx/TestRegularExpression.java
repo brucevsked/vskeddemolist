@@ -1,4 +1,4 @@
-package com.vsked.test;
+package com.vsked.test.regx;
 
 import java.io.File;
 import java.util.ArrayList;

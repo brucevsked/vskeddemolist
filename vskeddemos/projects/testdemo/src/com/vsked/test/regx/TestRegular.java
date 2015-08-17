@@ -1,4 +1,4 @@
-package com.vsked.test;
+package com.vsked.test.regx;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class TestRegular {
 	
 	public static void main(String[] args) {
-		
+		testUrlReg();
 	}
 	
 	public static void testUrlReg(){
