@@ -10,6 +10,7 @@ public class TomLogRegExp {
 //	    String logEntryLine = "123.45.67.89 - - [27/Oct/2000:09:27:09 -0400] \"GET /java/javaResources.html HTTP/1.0\" 200 10450 \"-\" \"Mozilla/4.6 [en] (X11; U; OpenBSD 2.8 i386; Nav)\"";
 	    String logEntryLine = "192.168.1.100 - - [25/Apr/2015:01:36:27 +0800] \"GET /tomcat.png HTTP/1.1\" 200 5103 0.003";
 
+//	    String logEntryPattern = "^([\\d.]+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(.+?)\" (\\d{3}) (\\d+) (\\d+.\\d{3})";
 	    String logEntryPattern = "^([\\d.]+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(.+?)\" (\\d{3}) (\\d+) (\\d+.\\d{3})";
 
 	    System.out.println("Using RE Pattern:");
@@ -20,8 +21,7 @@ public class TomLogRegExp {
 
 	    Pattern p = Pattern.compile(logEntryPattern);
 	    Matcher matcher = p.matcher(logEntryLine);
-	    if (!matcher.matches() || 
-	      NUM_FIELDS != matcher.groupCount()) {
+	    if (!matcher.matches() || NUM_FIELDS != matcher.groupCount()) {
 	      System.err.println("Bad log entry (or problem with RE?):");
 	      System.err.println(logEntryLine);
 	      return;

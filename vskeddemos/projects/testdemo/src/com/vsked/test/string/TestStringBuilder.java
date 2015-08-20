@@ -1,4 +1,4 @@
-package com.vsked.test;
+package com.vsked.test.string;
 
 public class TestStringBuilder {
 	public static void main(String[] args) {
