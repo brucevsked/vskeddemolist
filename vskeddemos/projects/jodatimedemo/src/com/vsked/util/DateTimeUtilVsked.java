@@ -5,6 +5,8 @@ import java.util.Locale;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 
 public class DateTimeUtilVsked {
     private static final String FORMATE_DATE = "yyyy-MM-dd";  
@@ -168,6 +170,16 @@ public class DateTimeUtilVsked {
 	 */
 	public static String getLastDayOfNextYear(){
 		return DateTime.now().plusYears(1).dayOfYear().withMaximumValue().toString(FORMATE_DATE);
+	}
+	
+	/**
+	 * 计算两个日期之间相隔多少天
+	 * @param startDate
+	 * @param endDate
+	 * @return int
+	 */
+	public static int getDaysBetweenTwoDate(DateTime startDate,DateTime endDate){
+		return new Period(startDate,endDate,PeriodType.days()).getDays();
 	}
 
 }

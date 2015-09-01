@@ -1,5 +1,9 @@
 package com.vsked.test;
 
+import java.text.SimpleDateFormat;
+
+import org.joda.time.DateTime;
+
 import com.vsked.util.DateTimeUtilVsked;
 
 
@@ -26,8 +30,8 @@ public class jodaTimeTest {
 		System.out.println("获取上年最后一天日期:"+DateTimeUtilVsked.getLastDayOfBeforeYear());
 		System.out.println("获取下年第一天日期:"+DateTimeUtilVsked.getFirstDayOfNextYear());
 		System.out.println("获取下年最后一天日期:"+DateTimeUtilVsked.getLastDayOfNextYear());
-		System.out.println("获取当天日期:"+DateTimeUtilVsked.getFirstDayOfCurrentSeason()); //测试中未完成
-//		System.out.println("获取当天日期:"+DateTimeUtilVsked);
+		System.out.println("获取当前季度:"+DateTimeUtilVsked.getFirstDayOfCurrentSeason()); //测试中未完成
+		System.out.println("两日期相差:"+DateTimeUtilVsked.getDaysBetweenTwoDate(new DateTime(2015, 5, 6, 20, 11, 40), new DateTime(2015, 5, 8, 20, 11, 40)));
 //		System.out.println("获取当天日期:"+DateTimeUtilVsked);
 
 	}
