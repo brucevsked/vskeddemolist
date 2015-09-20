@@ -1,0 +1,23 @@
+﻿
+
+1 bean must implements Serializable
+1 bean 必须实现序列化接口
+
+2 copy the weld-api.jar weld-core-impl.jar weld-core.jar weld-environment-common.jar weld-se.jar weld-servlet.jar weld-spi.jar to lib folder
+2 复制weld-api.jar weld-core-impl.jar weld-core.jar weld-environment-common.jar weld-se.jar weld-servlet.jar weld-spi.jar 到lib目录
+
+3 web.xml add listener content :
+3 web.xml添加监听内容如下:
+
+ <listener><listener-class>org.jboss.weld.environment.servlet.Listener</listener-class></listener> 
+ 
+4 web-info add beans.xml content :
+4 web-info添加beans.xml内容如下:
+
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://java.sun.com/xml/ns/javaee"   
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   
+    http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">  
+</beans>  
+
