@@ -17,20 +17,22 @@ public class UserDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public int getMatchCount(String userName, String password) {
-		String sqlString = "select count(*) from Users_T where username = ? and password = ?";
-		return jdbcTemplate.queryForObject(sqlString, Integer.class,  new Object[]{userName, password});
+	public int getMatchCount(String usName, String password) {
+		String sqlString = "select count(*) from userT where usName = ? and usPass = ?";
+		return jdbcTemplate.queryForObject(sqlString, Integer.class,  new Object[]{usName, password});
 	}
 	
-	public User findUserByUserName(final String userName) {
-		String sqlString = "select userid, username, credits from Users_T where username=?";
+	public User findUserByUsName(final String usName) {
+		String sqlString = "select usId, usName, usPass, usCredits, usLastIp, usLastVisit from userT where usName=?";
 		final User user = new User();
-		jdbcTemplate.query(sqlString, new Object[] {userName},
+		jdbcTemplate.query(sqlString, new Object[] {usName},
 				new RowCallbackHandler() {
 					public void processRow(ResultSet rs) throws SQLException {
-						user.setUserId(rs.getInt("userid"));
-						user.setUserName(userName);
-						user.setCredits(rs.getInt("credits"));
+						user.setUsId(rs.getInt("usId"));
+						user.setUsName(usName);
+						user.setUsCredits(rs.getInt("usCredits"));
+						user.setUsLastIp(rs.getString("usLastIp"));
+						user.setUsLastVisit(rs.getDate("usLastVisit"));
 					}
 		});
 		return user;
@@ -38,14 +40,14 @@ public class UserDao {
 	
 	
 	public void updateLoginInfo(User user) {
-		String sqlString = "update Users_T set lastvisit=?, lastip=?,credits=? where userid=?";
-		jdbcTemplate.update(sqlString, new Object[]{user.getLastVisit(), user.getLastIp(),user.getCredits(), user.getUserId()});
-		try{
-			System.out.println("this is e");
-			throw new Exception("let's gos error");
-		}catch (Exception e) {
-			System.out.println("this is ea1");
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-		}
+		String sqlString = "update userT set usLastVisit=?, usLastIp=?,usCredits=? where usId=?";
+		jdbcTemplate.update(sqlString, new Object[]{user.getUsLastVisit(), user.getUsLastIp(),user.getUsCredits(), user.getUsId()});
+//		try{
+//			System.out.println("this is e");
+//			throw new Exception("let's gos error");
+//		}catch (Exception e) {
+//			System.out.println("this is ea1");
+//			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+//		}
 	}
 }

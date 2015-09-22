@@ -25,15 +25,14 @@ public class UserService {
 	}
 	
 	public User findUserByUserName(String userName) {
-		return userDao.findUserByUserName(userName);
+		return userDao.findUserByUsName(userName);
 	}
 	
 	public void loginSuccess(User user) {
-		user.setCredits(5+user.getCredits());
 		LoginLog loginLog = new LoginLog();
-		loginLog.setUserId(user.getUserId());
-		loginLog.setIp(user.getLastIp());
-		loginLog.setLoginDate(user.getLastVisit());
+		loginLog.setUserId(user.getUsId());
+		loginLog.setIp(user.getUsLastIp());
+		loginLog.setLoginDate(user.getUsLastVisit());
 		userDao.updateLoginInfo(user);
 		loginLogDao.insertLoginLog(loginLog);
 	}

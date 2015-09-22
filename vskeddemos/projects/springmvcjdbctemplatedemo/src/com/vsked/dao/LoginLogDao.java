@@ -13,7 +13,7 @@ public class LoginLogDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	public void insertLoginLog(LoginLog loginLog) {
-		String sqlString = "insert into LoginLog_T (loginLog,userid, ip, loginDate) values(?,?,?,?)";
-		jdbcTemplate.update(sqlString, new Object[]{jdbcTemplate.queryForInt("select count(1)+1 from LoginLog_T"),loginLog.getUserId(),loginLog.getIp(), loginLog.getLoginDate()});
+		String sqlString = "insert into loginLogT (llId,usId, llIp, llDate) values(?,?,?,?)";
+		jdbcTemplate.update(sqlString, new Object[]{jdbcTemplate.queryForObject("select count(1)+1 from loginLogT", Integer.class,  new Object[]{}),loginLog.getUserId(),loginLog.getIp(), loginLog.getLoginDate()});
 	}
 }
