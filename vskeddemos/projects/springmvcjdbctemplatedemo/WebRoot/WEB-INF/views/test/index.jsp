@@ -24,7 +24,15 @@ request.setAttribute("basePath", basePath);
   </head>
   
   <body>
-    <a href="${basePath }LoginController/login.html">paoxiaobashaonian0</a> <br>
-    <a href="${basePath }BaseController/index.html">paoxiaobashaonian1</a>
+        <form action="<c:url value='${basePath }BaseController/addOrUpDate.html'/>" method="post">
+    	用户名：
+    	<input type="text" name="usName"/>
+    	<br>
+    	密码：
+    	<input type="password" name="usPass"/>
+    	<br>
+    	<input type="submit" value="添加"/>
+    	<input type="reset" value="重置"/>
+    </form>
   </body>
 </html>
