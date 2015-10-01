@@ -2,8 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 request.setAttribute("basePath", basePath);
 %>
 
@@ -18,6 +17,7 @@ request.setAttribute("basePath", basePath);
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="">
 	<meta http-equiv="description" content="">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   </head>
   
   <body>

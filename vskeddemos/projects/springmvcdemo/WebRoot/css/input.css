@@ -1,0 +1,14 @@
+﻿input[type="text"] {  
+	border:#999 1px solid;
+	height:20px;
+	background-color:#e8f4ff;
+	width:35%;
+}
+input[type="password"]  {  
+	border:#999 1px solid;
+	height:20px;
+	background-color:#e8f4ff;
+ } 
+input[type="radio"]{
+	border:1px #f00 solid;
+} 

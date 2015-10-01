@@ -1,0 +1,24 @@
+﻿input[type=button]:disabled,input[type=submit]:disabled,button:disabled{color:#999;cursor:auto;}
+input[type=button],input[type=submit],input[type=reset],button{
+	color:#369;
+	background:#ddeef7;
+	border-top:1px solid #86caef;
+	border-left:1px solid #86caef;
+	border-right:1px solid #389bca;
+	border-bottom:1px solid #389bca;
+	border-radius:3px;
+	padding: 2px 8px;
+	text-shadow: #fff 1px 1px 0px;
+}
+input[type=button]:enabled:hover,
+input[type=button]:enabled:focus,
+input[type=submit]:enabled:hover,
+input[type=submit]:enabled:focus,
+input[type=reset]:enabled:hover,
+input[type=reset]:enabled:focus,
+button:enabled:hover,
+button:enabled:focus{
+	border: 1px solid #8c0;
+	color:#360;
+	background:#f4fee3;
+}

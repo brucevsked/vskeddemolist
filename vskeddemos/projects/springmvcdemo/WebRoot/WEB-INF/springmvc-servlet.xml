@@ -7,17 +7,23 @@ xmlns:p="http://www.springframework.org/schema/p"
            http://www.springframework.org/schema/context   
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">  
           
-       <!-- 自动扫描bean，把作了注解的类转换为bean -->  
-      <context:component-scan base-package="com" />  
+    <!-- 自动扫描bean，把作了注解的类转换为bean -->  
+    <context:component-scan base-package="com" />  
     
-       <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->  
-      <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" /> 
+    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->  
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" /> 
 
- 
-     
-       <!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->  
-       <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"  p:prefix="/WEB-INF/views/" p:suffix=".jsp" p:contentType="text/html;charset=UTF-8" />  
+    <!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->  
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"  p:prefix="/WEB-INF/views/" p:suffix=".jsp" p:contentType="text/html;charset=UTF-8" />  
         
-       <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"  p:defaultEncoding="utf-8" />  
-           
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"  p:defaultEncoding="utf-8" />  
+    
+    <!-- 启用responsebody注解 返回json时用 -->  
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">  
+        <property name="messageConverters">  
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">  
+                <property name="supportedMediaTypes"><value>text/html;charset=UTF-8</value></property>  
+            </bean>  
+        </property>  
+    </bean>  
   </beans>
