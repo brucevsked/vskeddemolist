@@ -13,8 +13,8 @@ public class ConnectOracle {
 	private static Connection conn;
 	private static String dbHost="VskedWa1";
 	private static String dbName="orcl";
-	private static String userName = "powerProject";
-	private static String userPassword = "y4yhl9t";
+	private static String userName = "aaabbb";
+	private static String userPassword = "aaabbb";
 	private static String dbPort="1521";
 	private static String url = DbDrivers.oraclelUrl;
 

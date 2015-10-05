@@ -25,6 +25,8 @@ public class Page {
 	//数据集合
 	private List dataList;
 	
+	String sql="";
+	
 	public Page(){
 		
 	}
@@ -95,6 +97,23 @@ public class Page {
 	
 	public String getOraclePage(String inSql){
 		return "select * from ("+inSql+")  tmpPageT where RN between "+(getEndNum()-getPagesize()+1)+" and "+(getEndNum());
+	}
+	
+	/**
+	 * 
+	 * @param inSql
+	 * select * from [hyfd].[dbo].[testpagea1] 
+	 * @param orderByColumn
+	 * testid asc
+	 * @return sql 
+	 * SELECT t.* FROM ( SELECT t1.* ,row_number() over(order by testid asc) r FROM (select tmpPageT.* from [hyfd].[dbo].[testpagea1] tmpPageT) t1) t where t.r <= 21 and t.r >= 11
+	 */
+	public String getSqlServerPage(String inSql,String orderByColumn){
+		sql="";
+		sql+="SELECT t.* FROM ( SELECT t1.* , row_number() over(order by "+orderByColumn+") r FROM (";
+		sql+=inSql+") t1) t ";
+		sql+="where t.r <="+getEndNum()+" and t.r >= "+(getEndNum()-getPagesize()+1);
+		return sql;
 	}
 	
 }
