@@ -12,8 +12,8 @@ public class ConnectOracle {
 	private static ResultSet rs = null;
 	private static String dbHost="127.0.0.1";
 	private static String dbName="ORCL";
-	private static String userName = "brucevsked";
-	private static String userPassword = "Y4yhl9tbf110";
+	private static String userName = "aabb";
+	private static String userPassword = "aabb";
 	private static String dbPort="1521";
 
 	public static Connection getMySqlConnection() throws Exception {
