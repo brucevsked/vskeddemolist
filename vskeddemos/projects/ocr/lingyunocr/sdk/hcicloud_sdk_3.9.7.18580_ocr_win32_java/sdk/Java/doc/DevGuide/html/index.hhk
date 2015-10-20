@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD></HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="FrameName" value="right">
+</OBJECT>
+<UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="prepare_android_intro_page.html"><param name="Name" value="Android平台"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_asr_recorder_intro_page.html"><param name="Name" value="ASR录音机"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_asr_intro_page.html"><param name="Name" value="ASR能力"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_asr_page.html"><param name="Name" value="ASR能力描述"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_fpr_intro_page.html"><param name="Name" value="FPR能力"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_fpr_page.html"><param name="Name" value="FPR能力描述"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_hwr_intro_page.html"><param name="Name" value="HWR能力"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_hwr_page.html"><param name="Name" value="HWR能力描述"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_kb_intro_page.html"><param name="Name" value="KB能力"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_kb_page.html"><param name="Name" value="KB能力描述"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_mt_intro_page.html"><param name="Name" value="MT能力"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_mt_page.html"><param name="Name" value="MT能力描述"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_nlu_intro_page.html"><param name="Name" value="NLU能力"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_nlu_page.html"><param name="Name" value="NLU能力描述"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_ocr_capture_intro_page.html"><param name="Name" value="OCR拍照器"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_ocr_intro_page.html"><param name="Name" value="OCR能力"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_ocr_page.html"><param name="Name" value="OCR能力描述"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_tts_player_intro_page.html"><param name="Name" value="TTS播放器"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_tts_intro_page.html"><param name="Name" value="TTS能力"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_tts_page.html"><param name="Name" value="TTS能力描述"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_vpr_intro_page.html"><param name="Name" value="VPR能力"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_vpr_page.html"><param name="Name" value="VPR能力描述"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="prepare_win_intro_page.html"><param name="Name" value="Windows平台"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_common_intro_page.html"><param name="Name" value="各能力通用流程"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="app_channel.html"><param name="Name" value="应用渠道列表"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_dev_content.html"><param name="Name" value="开发指南"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_dev_ext_api.html"><param name="Name" value="扩展API"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="prepare_intro_page.html"><param name="Name" value="环境准备"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_getstart_page.html"><param name="Name" value="简单示例"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_dev_sys_api.html"><param name="Name" value="系统API"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_sys_intro_page.html"><param name="Name" value="系统模块"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_dev_capability_api.html"><param name="Name" value="能力API"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="caplist_page.html"><param name="Name" value="能力列表"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="hci_dev_appendix.html"><param name="Name" value="附录"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="codec_intro_page.html"><param name="Name" value="音频编解码库"></OBJECT>
+</UL>
+</BODY>
+</HTML>

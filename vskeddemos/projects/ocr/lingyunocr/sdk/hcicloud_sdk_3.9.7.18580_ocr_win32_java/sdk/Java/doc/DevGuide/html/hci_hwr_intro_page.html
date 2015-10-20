@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>灵云SDK开发手册(Java API): HWR能力</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">灵云SDK开发手册(Java API)
+   &#160;<span id="projectnumber">3.9</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li class="current"><a href="pages.html"><span>开发指南</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('hci_hwr_intro_page.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>全部</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>页</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">HWR能力 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>以下描述了如何使用灵云HWR能力。</p>
+<h1><a class="anchor" id="hci_hwr_intro"></a>
+1. HWR简介</h1>
+<p>HWR (HandWritten Recognition) 联机手写识别技术，可以将在手写设备上书写时产生的有序轨迹信息化转化为汉字内码。</p>
+<h1><a class="anchor" id="hci_hwr_choice"></a>
+2. 选择模块和能力</h1>
+<p>手写识别提供了三种模式：</p>
+<ol type="1">
+<li>单字识别，只能将一段输入的笔迹识别为一个单字。这种模式目前可支持87种语言的识别 （包括英文、阿拉伯数字、符号）。单字识别支持本地端识别和云端识别。 在某些确保一次输入一个单字的情况下，可以选用单字识别模式。<br/>
+<br/>
+</li>
+<li>多字识别，支持叠写和行写模式，也即会自动将输入的笔迹进行切割，按照多字进行识别。 目前这种模式支持云端和本地，支持中文简繁体、英文、韩语、日语的识别（都包括英文、阿拉伯数字、符号等）。 一般都应该选用这种模式，包括云端和本地总共8种能力可以选择(<a class="el" href="hci_hwr_page.html">HWR能力描述</a>)。 如果能确认输入的都是英文（包括阿拉伯数字、符号），也可以考虑选用 hwr.local.freestylus.english 或 hwr.cloud.freewrite.english，此时会使用英文的语言模型对识别结果进行校正，如果用户书写的是一个英文单词， 会有更好的识别效果。英文识别的识别范围固定为字母与数字，不支持识别范围设置，如果传入识别范围仅作参数检查。<br/>
+<br/>
+</li>
+<li>笔势识别，输入的笔迹被识别为列表里50种笔势(<a class="el" href="hci_hwr_page.html#gestures_list">笔势列表</a>)中的一种，输出结果为对应的索引值，存于结果条目HwrRecogResultItem 中通过getResult()获取。</li>
+</ol>
+<p>另外，手写识别还提供了一些开发手写识别应用时有用的辅助能力，例如获取联想词和拼音、模拟笔形等，目前只有本地端能力， 分别是 hwr.local.associateword 和 hwr.local.pinyin 能力，以及 hwr.local.penscript 能力。</p>
+<p>无论使用何种能力，基础模块 hci_hwr都是需要的。 使用云端识别时，需要加上hci_hwr_cloud_recog模块； 需要使用本地端识别时，需要加上hci_hwr_local_recog模块； 需要使用联想词，需要加上hci_hwr_associate模块； 需要使用拼音，需要加上hci_hwr_pinyin模块； 需要使用笔形，需要加上hci_hwr_penscript模块。</p>
+<h1><a class="anchor" id="hci_hwr_recog"></a>
+3. 手写识别</h1>
+<p>一个手写识别的过程如下：</p>
+<div class="fragment"><div class="line"><span class="comment">// 创建Session对象</span></div>
+<div class="line">Session mSessionId = <span class="keyword">new</span> Session();</div>
+<div class="line">String sSessionConfig = <span class="stringliteral">&quot;capKey=hwr.local.freestylus&quot;</span>;</div>
+<div class="line"><span class="comment">// 创建会话</span></div>
+<div class="line"><span class="keywordtype">int</span> errCode =HciCloudHwr.hciHwrSessionStart(sSessionConfig, mSessionId);;</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// 笔迹数据</span></div>
+<div class="line"><span class="keywordtype">short</span> [] g_StrokeData=</div>
+<div class="line">{</div>
+<div class="line">        103 ,283 ,105 ,283 ,107 ,283 ,113 ,283 ,120 ,283,</div>
+<div class="line">        129 ,283 ,138 ,283 ,146 ,283 ,156 ,283 ,162 ,283,</div>
+<div class="line">        ...</div>
+<div class="line">        -1 ,0 , -1, -1</div>
+<div class="line"> };</div>
+<div class="line"></div>
+<div class="line">String  strRecogConfig = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line">HwrRecogResult recogResult = <span class="keyword">new</span> HwrRecogResult();</div>
+<div class="line"><span class="comment">// 进行识别</span></div>
+<div class="line">errCode = HciCloudHwr.hciHwrRecog(mSessionId, g_StrokeData, strRecogConfig, recogResult);</div>
+<div class="line"></div>
+<div class="line">errCode = HciCloudHwr.hciHwrSessionStop(mSessionId);</div>
+</div><!-- fragment --><p>手写笔迹的数据是一连串的坐标点，每个坐标点是两个short，分别是 x 和 y 坐标。如果是 (-1, 0) 表示一个笔画结束（抬笔），如果是 (-1, -1) 则表示整个字结束。</p>
+<p>云端识别只需要将能力key改为相应的云端能力key即可。</p>
+<h1><a class="anchor" id="hci_hwr_realtime"></a>
+4. 实时识别</h1>
+<p>缺省情况下，识别会话是不启动实时识别的，也即每次调用 HciCloudHwr.hciHwrRecog() 函数时所输入的笔迹数据被认为是完整的笔迹数据， 如果不是(-1,0)(-1,-1)结束，会认为数据非法。</p>
+<p>而当启用实时识别时，对于每次连续的识别内容，可以多次调用 HciCloudHwr.hciHwrRecog() 。每次调用追加输入新的数据， 每次输入的数据以(-1,0)结束，也即每次输入的笔画是完整的，可以一次输入多个笔画。 最后一次以(-1,0)(-1,-1)结束，表示整次识别结束。</p>
+<p>启动实时识别时，需要在创建识别会话时，加入realtime=yes选项。 </p>
+<div class="fragment"><div class="line"><span class="comment">// 创建Session对象</span></div>
+<div class="line">Session mSessionId = <span class="keyword">new</span> Session();</div>
+<div class="line">String sSessionConfig = <span class="stringliteral">&quot;capKey=hwr.local.freestylus, realtime=yes&quot;</span>;</div>
+<div class="line"><span class="comment">// 创建会话</span></div>
+<div class="line"><span class="keywordtype">int</span> errCode =HciCloudHwr.hciHwrSessionStart(sSessionConfig, mSessionId);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// 实时识别过程</span></div>
+<div class="line"><span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line">        <span class="comment">// 获取新的笔迹放在 g_StrokeData中</span></div>
+<div class="line">        <span class="keywordtype">short</span> [] g_StrokeData=get_storke();</div>
+<div class="line"></div>
+<div class="line">        String  strRecogConfig = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line">        HwrRecogResult recogResult = <span class="keyword">new</span> HwrRecogResult();</div>
+<div class="line">        </div>
+<div class="line">        <span class="comment">// 进行识别</span></div>
+<div class="line">        errCode = HciCloudHwr.hciHwrRecog(mSessionId, g_StrokeData, strRecogConfig, recogResult);</div>
+<div class="line"></div>
+<div class="line">        <span class="comment">// 可以打印当前的识别结果，每次返回都是从头开始的完整结果</span></div>
+<div class="line">        ...</div>
+<div class="line"></div>
+<div class="line">        <span class="comment">// 如果是最后一笔，跳出循环</span></div>
+<div class="line">        <span class="keywordflow">if</span> (is_last_stroke()) {</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">        }</div>
+<div class="line">}</div>
+<div class="line">errCode = HciCloudHwr.hciHwrSessionStop(mSessionId);</div>
+</div><!-- fragment --><p>实时识别时，每次调用本函数都会返回从头开始的完整结果，新输入的数据会导致切分发生变化， 因此后一次结果不一定是前次结果再追加字符，可能会更改掉部分前次结果。</p>
+<dl class="section note"><dt>注解</dt><dd>实时识别仅对 <b>本地 多字</b> 识别模式的能力起作用，也即本地多字能力才能设置realtime，否则会提示 HCI_ERR_CONFIG_UNSUPPORT.</dd></dl>
+<h1><a class="anchor" id="hci_hwr_config"></a>
+5. 识别选项</h1>
+<p>识别时可以同时配置一些识别选项，来进一步控制识别流程，下面介绍两个主要选项：</p>
+<ol type="1">
+<li>recogRange <br/>
+ 使用 recogRange 可以将识别范围限制在有限的字符集内，例如可以设置 recogRange=alphabet， 则输出肯定在52个大小写英文字母中，如果设置 recogRange=gb, 则输出为简体汉字集合， 如果设置 recogRange=big5，则输出为繁体汉字集合。也可以采用 '+' 连接多个识别范围， 例如可以设置 recogRange=lower+number+gb。英文能力hwr.local.freestylus.english和hwr.cloud.freewrite.english 暂时不支持识别范围的设置，传入此参数不会返回HCI_ERR_CONFIG_UNSUPPORT，会在识别时忽略此参数，但若传入的值 非法，则会返回HCI_ERR_CONFIG_INVALID。<br/>
+<br/>
+</li>
+<li>splitMode <br/>
+ 在多字识别时，我们可以用splitMode设置行写或叠写模式。当应用的书写区域较宽时，可以配置splitMode=line， 表示采用行写模式，当书写区域较小时，可以配置splitMode=overlap，表示叠写模式。<br/>
+<br/>
+</li>
+<li>candNum <br/>
+ 表示输出的候选结果数目。<br/>
+<br/>
+</li>
+</ol>
+<p>其余选项请参见 HciCloudHwr.hciHwrRecog() 函数说明。</p>
+<h1><a class="anchor" id="hci_hwr_confirm"></a>
+6. 提交确认结果</h1>
+<p>当用户选择了候选中的其它结果，可以考虑提交确认结果，来帮助灵云学习用户的笔迹习惯， 以便建立针对此用户的个性化模型。</p>
+<div class="fragment"><div class="line">String result = “确认结果”;</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// 确认结果</span></div>
+<div class="line">errCode = HciCloudHwr.hciHwrConfirm (mSessionId, result);</div>
+</div><!-- fragment --><p>当采用云端识别能力时，提交确认结果时会直接将确认结果发送到云端。由于发送结果可能会带来一定的延迟感， 因此最好放在一个后台线程中进行。</p>
+<p>当采用本地识别能力时，提交的确认结果会缓存在本地，会在上传用户历史数据时一同上传。</p>
+<h1><a class="anchor" id="hci_hwr_associateword"></a>
+7. 获取联想词</h1>
+<p>灵云手写能力提供了获取联想词的功能。</p>
+<p>为了使用联想词功能，需要在 HciCloudHwr.hciHwrInt() 的时候加上联想词能力的配置项： </p>
+<div class="fragment"><div class="line">initCapKeys=hwr.local.associateword </div>
+</div><!-- fragment --><p>获取联想词的方法如下： </p>
+<div class="fragment"><div class="line">String strWord = <span class="stringliteral">&quot;中华&quot;</span>;</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// 获取联想词</span></div>
+<div class="line">HwrAssociateWordsResult awResult = <span class="keyword">new</span> HwrAssociateWordsResult();</div>
+<div class="line"><span class="keywordtype">int</span> nRet = HciCloudHwr.hciHwrAssociateWords(strWord, awResult);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// 显示联想词</span></div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> index = 0; index &lt; awResult.getResultList().size(); index++){</div>
+<div class="line">        Log.d(tag, <span class="stringliteral">&quot;Associate result[&quot;</span> + index + <span class="stringliteral">&quot;]:&quot;</span> + awResult.getResultList().get(index));</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>上述代码的输出结果如下：</p>
+<div class="fragment"><div class="line">Associate result[0]: 共和国</div>
+<div class="line">Associate result[1]: 币</div>
+<div class="line">Associate result[2]: 政府</div>
+<div class="line">Associate result[3]: 法院</div>
+<div class="line">Associate result[4]: 群众</div>
+<div class="line">Associate result[5]: 网</div>
+<div class="line">Associate result[6]: 代表</div>
+<div class="line">Associate result[7]: 银行</div>
+<div class="line">Associate result[8]: 日报</div>
+<div class="line">Associate result[9]: 代表大会</div>
+<div class="line">Associate result[10]: 大学</div>
+<div class="line">Associate result[11]: 检察院</div>
+<div class="line">Associate result[12]: 币汇率</div>
+<div class="line">Associate result[13]: 解放军</div>
+<div class="line">Associate result[14]: 出版社</div>
+<div class="line">Associate result[15]: 生活</div>
+<div class="line">Associate result[16]: 大会堂</div>
+<div class="line">Associate result[17]: 医院</div>
+<div class="line">Associate result[18]: 政府关于</div>
+<div class="line">Associate result[19]: 广播电台</div>
+<div class="line">Associate result[20]: 族</div>
+<div class="line">Associate result[21]: 主</div>
+<div class="line">Associate result[22]: 间</div>
+<div class="line">Associate result[23]: 营</div>
+<div class="line">Associate result[24]: 事</div>
+<div class="line">Associate result[25]: 警</div>
+<div class="line">Associate result[26]: 众</div>
+<div class="line">Associate result[27]: 国</div>
+<div class="line">Associate result[28]: 工</div>
+<div class="line">Associate result[29]: 营企业</div>
+<div class="line">Associate result[30]: 航</div>
+<div class="line">Associate result[31]: 俗</div>
+<div class="line">Associate result[32]: 用</div>
+</div><!-- fragment --><p>可以看到，获取联想词的时候会先按照输入串整体进行联想，然后依次从前去除字符进行联想， 例如，这里会先给出"共和国"(按照"中华人民"匹配)，然后是"币"(按照"人民"匹配）等， 然后是"族"等(按照"民"匹配)等。但总的联想词的累计字数有一定限制，是由SDK内部确定的， 目前不能由开发者设置大小。</p>
+<p>当输入串为全部英文时，会进行英文词的联想功能。例如：</p>
+<div class="fragment"><div class="line">String strWord = <span class="stringliteral">&quot;app&quot;</span>; </div>
+<div class="line"></div>
+<div class="line"><span class="comment">// 联想字</span></div>
+<div class="line">HwrAssociateWordsResult awResult = <span class="keyword">new</span> HwrAssociateWordsResult();</div>
+<div class="line"><span class="keywordtype">int</span> nRet = HciCloudHwr.hciHwrAssociateWords(strWord, awResult);</div>
+</div><!-- fragment --><p>其输出为：</p>
+<div class="fragment"><div class="line">Associate result[0]: appal</div>
+<div class="line">Associate result[1]: appall</div>
+<div class="line">Associate result[2]: appalling</div>
+<div class="line">Associate result[3]: appallingly</div>
+<div class="line">Associate result[4]: apparatus</div>
+<div class="line">Associate result[5]: apparel</div>
+<div class="line">Associate result[6]: apparent</div>
+<div class="line">Associate result[7]: apparently</div>
+<div class="line">Associate result[8]: appeal</div>
+<div class="line">Associate result[9]: appealed</div>
+<div class="line">Associate result[10]: appealing</div>
+<div class="line">Associate result[11]: appeals</div>
+<div class="line">Associate result[12]: appear</div>
+<div class="line">Associate result[13]: appearance</div>
+<div class="line">Associate result[14]: appeared</div>
+<div class="line">Associate result[15]: appearing</div>
+<div class="line">Associate result[16]: appears</div>
+<div class="line">Associate result[17]: appease</div>
+<div class="line">Associate result[18]: appeased</div>
+<div class="line">Associate result[19]: appeasement</div>
+</div><!-- fragment --><p>如果输入是中英文混杂的，仍会按照中文匹配方式，一个一个从前去除字符后进行联想。</p>
+<h1><a class="anchor" id="hci_hwr_pinyin"></a>
+8. 获取拼音</h1>
+<p>灵云手写能力提供了获取拼音的功能（此功能目前仅在Windows平台上支持）。</p>
+<p>为了使用拼音功能，需要在 HciCloudHwr.hciHwrInt() 的时候加上拼音能力的配置项： </p>
+<div class="fragment"><div class="line">initCapKeys=hwr.local.pinyin </div>
+</div><!-- fragment --><p>获取拼音的方法如下： </p>
+<div class="fragment"><div class="line">    String strWord = <span class="stringliteral">&quot;重&quot;</span>; </div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// 获取拼音</span></div>
+<div class="line">HwrPinYinResult pyResult = <span class="keyword">new</span> HwrPinYinResult();</div>
+<div class="line">    <span class="keywordtype">int</span> nRet = HciCloudHwr.hciHwrAssociateWords(strWord, pyResult);</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// 显示拼音</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> index = 0; index &lt; pyResult.getResultList().size(); index++){</div>
+<div class="line">            Log.d(tag, <span class="stringliteral">&quot;Pinyin result[&quot;</span> + index + <span class="stringliteral">&quot;]:&quot;</span> + pyResult.getResultList().get(index));</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>上述代码的输出为：</p>
+<div class="fragment"><div class="line">Pinyin result[0] : chóng</div>
+<div class="line">Pinyin result[1] : zhòng</div>
+</div><!-- fragment --><h1><a class="anchor" id="hci_hwr_penscript"></a>
+9. 笔形库功能</h1>
+<p>输出时支持笔形 </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="hci_dev_content.html">开发指南</a></li><li class="navelem"><a class="el" href="hci_dev_capability_api.html">能力API</a></li>
+    <li class="footer">生成于 2015年 七月 23日 星期四 17:55:50 , 为 灵云SDK开发手册(Java API)使用 
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
+  </ul>
+</div>
+</body>
+</html>

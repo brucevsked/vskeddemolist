@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>灵云SDK开发手册(Java API): KB能力</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">灵云SDK开发手册(Java API)
+   &#160;<span id="projectnumber">3.9</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li class="current"><a href="pages.html"><span>开发指南</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('hci_kb_intro_page.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>全部</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>页</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">KB能力 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>以下描述了如何使用灵云KB能力。</p>
+<h1><a class="anchor" id="hci_kb_intro"></a>
+1. KB简介</h1>
+<p>KB 键盘输入识别能力，支持中文，外文，韩文，日文等识别，同时支持多种键盘（T9，Qwerty以及容错键盘）以及多种输入模式（拼音，五笔，笔画等）。</p>
+<h1><a class="anchor" id="hci_kb_choice"></a>
+2. 选择模块和能力</h1>
+<p>灵云目前可以提供本地端能力:<br/>
+ kb.local.* : 本地识别<br/>
+</p>
+<p>使用本地的识别能力，需要基础模块hci_kb，以及hci_kb_local_recog模块。</p>
+<h1><a class="anchor" id="hci_kb_recog"></a>
+3. 键盘识别</h1>
+<p>调用识别接口进行识别，识别接口支持设置输入模式，键盘以及返回结果数据大小等,示例代码如下： </p>
+<div class="fragment"><div class="line"><span class="comment">//识别</span></div>
+<div class="line"><span class="keywordtype">boolean</span> bReturnAll = <span class="keyword">true</span>;</div>
+<div class="line"></div>
+<div class="line">KbQueryInfo queryInfo = <span class="keyword">new</span> KbQueryInfo();</div>
+<div class="line">KbRecogResult recogResult = <span class="keyword">new</span> KbRecogResult();</div>
+<div class="line"></div>
+<div class="line">queryInfo.setQuery(strQuery);</div>
+<div class="line">queryInfo.setSlideInfoItemCount(0);</div>
+<div class="line">queryInfo.setSlideInfoItemList(null);</div>
+<div class="line">queryInfo.setSelectedItemCount(0);</div>
+<div class="line">queryInfo.setQuerySelectedItemList(null);</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> errCode = HciCloudKb.hciKbRecog(session, strRecogConfig, queryInfo, recogResult);</div>
+<div class="line"><span class="keywordflow">if</span>(errCode != HciErrorCode.HCI_ERR_NONE) {</div>
+<div class="line">        Log.e(TAG, <span class="stringliteral">&quot;hciKbRecog return: &quot;</span> + errCode);</div>
+<div class="line">        <span class="keywordflow">return</span>;</div>
+<div class="line">} <span class="keywordflow">else</span> {</div>
+<div class="line">        Log.i(TAG, <span class="stringliteral">&quot;hciKbRecog success!&quot;</span>);</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line">PrintKbResult(recogResult);</div>
+<div class="line"></div>
+<div class="line">String confirmResult = recogResult.getRecogResultItemList().get(0).getResult();</div>
+<div class="line">HciCloudKb.hciKbConfirm(session, confirmResult);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">//获取多页结果</span></div>
+<div class="line"><span class="keywordflow">while</span>(bReturnAll &amp;&amp; recogResult.getBmore()) {</div>
+<div class="line">        errCode = HciCloudKb.hciKbRecog(session, strRecogConfig, null, recogResult);</div>
+<div class="line">        <span class="keywordflow">if</span>(errCode != HciErrorCode.HCI_ERR_NONE) {</div>
+<div class="line">                Log.e(TAG, <span class="stringliteral">&quot;hciKbRecog return:&quot;</span> + errCode);</div>
+<div class="line">                <span class="keywordflow">return</span>;</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">                Log.i(TAG, <span class="stringliteral">&quot;hciKbRecog success!&quot;</span>);</div>
+<div class="line">        }</div>
+<div class="line">        </div>
+<div class="line">        PrintKbResult(recogResult);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="hci_kb_udb"></a>
+4. 用户自定义词条编辑</h1>
+<p>支持用户自定义词条的添加删除和遍历，调用示例如下： </p>
+<div class="fragment"><div class="line"><span class="comment">//提交</span></div>
+<div class="line">KbUdbItemInfo udbItem = <span class="keyword">new</span> KbUdbItemInfo();</div>
+<div class="line">KbRecogResultItem recogResultItem = <span class="keyword">new</span> KbRecogResultItem();</div>
+<div class="line">recogResultItem.setResult(<span class="stringliteral">&quot;beautiful&quot;</span>);</div>
+<div class="line">udbItem.setRecogResultItem(recogResultItem);</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> errCode = HciCloudKb.hciKbUdbCommit(session, null, udbItem);</div>
+<div class="line"><span class="keywordflow">if</span>(errCode != HciErrorCode.HCI_ERR_NONE) {</div>
+<div class="line">        Log.e(TAG, <span class="stringliteral">&quot;hciKbUdbCommit return: &quot;</span> + errCode);</div>
+<div class="line">        <span class="keywordflow">return</span>;</div>
+<div class="line">} <span class="keywordflow">else</span> {</div>
+<div class="line">        Log.i(TAG, <span class="stringliteral">&quot;hciKbUdbCommit success!&quot;</span>);</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line">HciCloudKb.hciKbUdbIterate(session, udbIterateCallBack);</div>
+<div class="line"></div>
+<div class="line">errCode = HciCloudKb.hciKbUdbDelete(session, null, udbItem);</div>
+<div class="line"><span class="keywordflow">if</span>(errCode != HciErrorCode.HCI_ERR_NONE) {</div>
+<div class="line">        Log.e(TAG, <span class="stringliteral">&quot;hciKbUdbDelete return: &quot;</span> + errCode);</div>
+<div class="line">        <span class="keywordflow">return</span>;</div>
+<div class="line">} <span class="keywordflow">else</span> {</div>
+<div class="line">        Log.i(TAG, <span class="stringliteral">&quot;hciKbUdbDelete success!&quot;</span>);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> 目前只有中文和英文支持该接口，中文提交时还可以根据识别结果进行提交.</p>
+<h1><a class="anchor" id="hci_kb_conv"></a>
+5. 编码转化</h1>
+<p>可以通过输入需要转化的模式，将字符串转化为键盘序列。目前日文不支持该接口。 如下： </p>
+<div class="fragment"><div class="line">KbConvResult convResult = <span class="keyword">new</span> KbConvResult();</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> errCode = HciCloudKb.hciKbConv(session, strConvConfig, strSrc, convResult);</div>
+<div class="line"><span class="keywordflow">if</span>(errCode != HciErrorCode.HCI_ERR_NONE) {</div>
+<div class="line">        Log.e(TAG, <span class="stringliteral">&quot;hciKbConv return: &quot;</span> + errCode);</div>
+<div class="line">        <span class="keywordflow">return</span>;</div>
+<div class="line">} <span class="keywordflow">else</span> {</div>
+<div class="line">        Log.i(TAG, <span class="stringliteral">&quot;hciKbConv success!&quot;</span>);</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="comment">//打印键盘序列</span></div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; convResult.getConvItemCount(); ++i) {</div>
+<div class="line">        String utf8 = convResult.getConvResultItemList().get(i).getSymbols();</div>
+<div class="line">        Log.e(TAG, <span class="stringliteral">&quot;syllable&quot;</span> + <span class="stringliteral">&quot;[&quot;</span>+i+<span class="stringliteral">&quot;]&quot;</span> + utf8);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="hci_kb_fuzzy"></a>
+6. 音节容错</h1>
+<p>中文识别支持音节容错设置，即可以将容易混淆的音节进行设置，以此提高输入的识别率。 如下： </p>
+<div class="fragment"><div class="line">KbFuzzySyllable[] fuzzyData = <span class="keyword">new</span> KbFuzzySyllable[2];</div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 2; ++i) {</div>
+<div class="line">        fuzzyData[i] = <span class="keyword">new</span> KbFuzzySyllable();</div>
+<div class="line">}</div>
+<div class="line">fuzzyData[0].setFuzzySyllableType(fuzzyData[0].KB_FUZZY_SYLLABLE_TYPE_INITIAL);</div>
+<div class="line">fuzzyData[0].setSyllableOne(<span class="stringliteral">&quot;b&quot;</span>);</div>
+<div class="line">fuzzyData[0].setSyllableTwo(<span class="stringliteral">&quot;p&quot;</span>);</div>
+<div class="line">fuzzyData[1].setFuzzySyllableType(fuzzyData[1].KB_FUZZY_SYLLABLE_TYPE_INITIAL);</div>
+<div class="line">fuzzyData[1].setSyllableOne(<span class="stringliteral">&quot;m&quot;</span>);</div>
+<div class="line">fuzzyData[1].setSyllableTwo(<span class="stringliteral">&quot;n&quot;</span>);</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> errCode = HciCloudKb.hciKbFuzzySyllable(session, fuzzyData);</div>
+<div class="line"><span class="keywordflow">if</span>(errCode != HciErrorCode.HCI_ERR_NONE) {</div>
+<div class="line">        Log.e(TAG, <span class="stringliteral">&quot;hciKbFuzzySyllable return: &quot;</span> + errCode);</div>
+<div class="line">        <span class="keywordflow">return</span>;</div>
+<div class="line">} <span class="keywordflow">else</span> {</div>
+<div class="line">        Log.i(TAG, <span class="stringliteral">&quot;hciKbFuzzySyllable success!&quot;</span>);</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="hci_dev_content.html">开发指南</a></li><li class="navelem"><a class="el" href="hci_dev_capability_api.html">能力API</a></li>
+    <li class="footer">生成于 2015年 七月 23日 星期四 17:55:50 , 为 灵云SDK开发手册(Java API)使用 
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
+  </ul>
+</div>
+</body>
+</html>

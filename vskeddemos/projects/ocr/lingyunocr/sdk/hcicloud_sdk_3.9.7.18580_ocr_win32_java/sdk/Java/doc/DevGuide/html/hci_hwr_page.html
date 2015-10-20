@@ -1,0 +1,911 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>灵云SDK开发手册(Java API): HWR能力描述</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">灵云SDK开发手册(Java API)
+   &#160;<span id="projectnumber">3.9</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li class="current"><a href="pages.html"><span>开发指南</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('hci_hwr_page.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>全部</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>页</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">HWR能力描述 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="capkey_detail"></a>
+能力列表</h1>
+<p>下面列出灵云支持的HWR能力：</p>
+<p><b>本地端手写识别能力</b> </p>
+<table class="doxtable">
+<tr>
+<td><b>能力Key</b> </td><td><b>类别</b> </td><td><b>语种</b> </td><td><b>支持配置</b> </td><td><b>所需本地库文件</b>  </td></tr>
+<tr>
+<td>hwr.local.letter </td><td>单字识别 </td><td>中文简繁体 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, gb, gbk, big5_5401, big5, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half  </td><td><p class="starttd">HWR_SYS_SIN_UNI  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.gb </td><td>单字识别 </td><td>中文简体 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, gb, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half  </td><td><p class="starttd">HWR_SYS_SIN_UNI_GB  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.big5 </td><td>单字识别 </td><td>中文繁体-台湾 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, big5_5401, big5, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half  </td><td><p class="starttd">HWR_SYS_SIN_UNI_BIG5  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.hk </td><td>单字识别 </td><td>中文繁体-香港 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, gb, gbk, big5_5401, big5, hkscs, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half  </td><td><p class="starttd">HWR_SYS_SIN_UNI_HK  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.gb18030 </td><td>单字识别 </td><td>中文繁体-台湾 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, gb, gbk, gb18030, big5_5401, big5, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half  </td><td><p class="starttd">HWR_SYS_SIN_UNI_GB18030  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.japanese </td><td>单字识别 </td><td>日文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, katakana, hiragana, kanji_jis0208, kanji_cp932, kanji_jis0213, kanji_jis0212, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">HWR_SYS_SIN_UNI_JAPANESE  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.korean </td><td>单字识别 </td><td>韩文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, hanja, hangul_basic, hangul, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">HWR_SYS_SIN_UNI_KOREAN  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.thai </td><td>单字识别 </td><td>泰文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, thai, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">HWR_SYS_SIN_UNI_THAI  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.hindi </td><td>单字识别 </td><td>印地文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, hindi, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">HWR_SYS_SIN_UNI_HINDI  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.hebrew </td><td>单字识别 </td><td>希伯来文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, hebrew, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">HWR_SYS_SIN_UNI_HEBREW  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.greek </td><td>单字识别 </td><td>希腊文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, greek_uppercase, greek_lowercase, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">HWR_SYS_SIN_UNI_GREEK  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.latin </td><td>单字识别 </td><td>拉丁语系 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, latin_uppercase, latin_lowercase, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>subLang</b>: <a class="el" href="hci_hwr_page.html#sublang_list">语种列表</a>  </td><td><p class="starttd">HWR_SYS_SIN_UNI_LATIN  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.cyrillic </td><td>单字识别 </td><td>西里尔语系 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, cyrillic_uppercase, cyrillic_lowercase, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>subLang</b>: <a class="el" href="hci_hwr_page.html#sublang_list">语种列表</a>  </td><td><p class="starttd">HWR_SYS_SIN_UNI_CYRILLIC  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.letter.arabic </td><td>单字识别 </td><td>阿拉伯语系 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, arabic, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>subLang</b>: <a class="el" href="hci_hwr_page.html#sublang_list">语种列表</a>  </td><td>HWR_SYS_SIN_UNI_ARABIC   </td></tr>
+<tr>
+<td>hwr.local.freestylus </td><td>多字识别，支持行写和<br/>
+叠写 </td><td>中文简繁体 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, gb, gbk, big5_5401, big5, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half<br/>
+ <b>splitMode</b>: line, overlap  </td><td>HWR_SYS_SIN_UNI<br/>
+ HWR_SYS_MUL_UNI_PART_CN<br/>
+ HWR_SYS_MUL_UNI_PART_ENG   </td></tr>
+<tr>
+<td>hwr.local.freestylus.gb </td><td>多字识别，支持行写和<br/>
+叠写 </td><td>中文简体 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, gb, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half<br/>
+ <b>splitMode</b>: line, overlap  </td><td>HWR_SYS_SIN_UNI_GB<br/>
+ HWR_SYS_MUL_UNI_PART_CN<br/>
+ HWR_SYS_MUL_UNI_PART_ENG   </td></tr>
+<tr>
+<td>hwr.local.freestylus.big5 </td><td>多字识别，支持行写和<br/>
+叠写 </td><td>中文繁体-台湾 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, big5_5401, big5 all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half<br/>
+ <b>splitMode</b>: line, overlap  </td><td><p class="starttd">HWR_SYS_SIN_UNI_BIG5<br/>
+ HWR_SYS_MUL_UNI_PART_CN<br/>
+ HWR_SYS_MUL_UNI_PART_ENG  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.freestylus.hk </td><td>多字识别，支持行写和<br/>
+叠写 </td><td>中文香港增补 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, gb, gbk, big5_5401, big5, hkscs, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half<br/>
+ <b>splitMode</b>: line, overlap  </td><td>HWR_SYS_SIN_UNI_HK<br/>
+ HWR_SYS_MUL_UNI_PART_CN<br/>
+ HWR_SYS_MUL_UNI_PART_ENG   </td></tr>
+<tr>
+<td>hwr.local.freestylus.gb18030 </td><td>多字识别，支持行写和<br/>
+叠写 </td><td>中文繁体-台湾 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, gb, gbk, gb18030, big5_5401, big5, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half<br/>
+ <b>splitMode</b>: line, overlap  </td><td>HWR_SYS_SIN_UNI_GB18030<br/>
+ HWR_SYS_MUL_UNI_PART_CN<br/>
+ HWR_SYS_MUL_UNI_PART_ENG   </td></tr>
+<tr>
+<td>hwr.local.freestylus.english </td><td>多字识别，支持连笔书写<br/>
+和字母叠写的单词识别 </td><td>英文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange(目前仅作合法性判断)</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>splitMode</b>: line, overlap<br/>
+ <b>wordMode</b>: mixed, capital, lowercase, initial<br/>
+  </td><td><p class="starttd">HWR_SYS_SIN_UNI<br/>
+ HWR_SYS_MUL_UNI_PART_CN<br/>
+ HWR_SYS_MUL_UNI_PART_ENG  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.freestylus.japanese </td><td>多字识别，支持行写和<br/>
+叠写 </td><td>日文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, katakana, hiragana, kanji_jis0208, kanji_cp932, kanji_jis0213, kanji_jis0212, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>splitMode</b>: line, overlap<br/>
+  </td><td><p class="starttd">HWR_SYS_SIN_UNI_JAPANESE<br/>
+ HWR_SYS_MUL_UNI_PART_JP<br/>
+ HWR_SYS_MUL_UNI_PART_ENG  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.freestylus.korean </td><td>多字识别，支持行写和<br/>
+叠写 </td><td>韩文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, hanja, hangul_basic, hangul, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>splitMode</b>: line, overlap<br/>
+  </td><td><p class="starttd">HWR_SYS_SIN_UNI_KOREAN<br/>
+ HWR_SYS_MUL_UNI_PART_KO<br/>
+ HWR_SYS_MUL_UNI_PART_ENG  </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.gesture </td><td>笔势识别，支持列表中50种笔势的识别 参见<a class="el" href="hci_hwr_page.html#gestures_list">笔势列表</a> </td><td>无 </td><td><b>candNum</b>: 1-10<br/>
+ </td><td><p class="starttd">HWR_SYS_MUL_UNI  </p>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<p><b>云端手写识别能力</b> </p>
+<table class="doxtable">
+<tr>
+<td><b>能力Key</b> </td><td><b>类别</b> </td><td><b>语种</b> </td><td><b>支持配置</b> </td><td><p class="starttd"><b>所需本地库文件</b> </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.letter </td><td>单字识别 </td><td>中文简繁体 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, gb, gbk, gb18030, big5_5401, big5, hkscs, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.letter.japanese </td><td>单字识别 </td><td>日文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, katakana, hiragana, kanji_jis0208, kanji_cp932, kanji_jis0213, kanji_jis0212, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.letter.korean </td><td>单字识别 </td><td>韩文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, hanja, hangul_basic, hangul, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.letter.thai </td><td>单字识别 </td><td>泰文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, thai, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.letter.hindi </td><td>单字识别 </td><td>印地文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, hindi, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.letter.greek </td><td>单字识别 </td><td>希腊文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, greek_uppercase, greek_lowercase, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.letter.latin </td><td>单字识别 </td><td>拉丁语系 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, latin_uppercase, latin_lowercase, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>subLang</b>: <a class="el" href="hci_hwr_page.html#sublang_list">语种列表</a>  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.letter.cyrillic </td><td>单字识别 </td><td>西里尔语系 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, cyrillic_uppercase, cyrillic_lowercase, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>subLang</b>: <a class="el" href="hci_hwr_page.html#sublang_list">语种列表</a>  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.letter.arabic </td><td>单字识别 </td><td>阿拉伯语系 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, arabic, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>subLang</b>: <a class="el" href="hci_hwr_page.html#sublang_list">语种列表</a>  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.freewrite </td><td>多字识别，支持行写和<br/>
+叠写 </td><td>中文简繁体 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, gb, gbk, gb18030, big5_5401, big5, hkscs, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>dispCode</b>: nochange, tosimplified, totraditional<br/>
+ <b>fullHalf</b>: full, half<br/>
+ <b>splitMode</b>: line, overlap </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.freewrite.english </td><td>多字识别，支持连笔书写<br/>
+和字母叠写的单词识别 </td><td>英文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange(目前仅作合法性判断)</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>splitMode</b>: line, overlap<br/>
+ <b>wordMode</b>: mixed, capital, lowercase, initial<br/>
+  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.freewrite.japanese </td><td>多字识别，支持行写和<br/>
+叠写 </td><td>日文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, katakana, hiragana, kanji_jis0208, kanji_cp932, kanji_jis0213, kanji_jis0212, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>splitMode</b>: line, overlap<br/>
+  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.freewrite.korean </td><td>多字识别，支持行写和<br/>
+叠写 </td><td>韩文 </td><td><b>candNum</b>: 1-10<br/>
+ <b>recogRange</b>: <a class="el" href="hci_hwr_page.html#common_recogrange">通用范围</a>, hanja, hangul_basic, hangul, all<br/>
+ <b>openSlant</b>: no, yes<br/>
+ <b>splitMode</b>: line, overlap<br/>
+  </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.cloud.gesture </td><td>笔势识别，支持列表中50种笔势的识别 参见<a class="el" href="hci_hwr_page.html#gestures_list">笔势列表</a> </td><td>无 </td><td><b>candNum</b>: 1-10<br/>
+ </td><td>无   </td></tr>
+</table>
+<p><b>本地端手写辅助能力</b> </p>
+<table class="doxtable">
+<tr>
+<td><b>能力Key</b> </td><td><b>类别</b> </td><td><b>语种</b> </td><td><b>支持配置</b> </td><td><b>所需本地库文件</b>  </td></tr>
+<tr>
+<td>hwr.local.associateword </td><td>中文和英文获取联想词 </td><td>中英文 </td><td>无  </td><td><p class="starttd">HWR_SYS_ASS_GBK<br/>
+ HWR_SYS_ASS_ENG </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.pinyin </td><td>获取汉字的拼音，仅windows支持 </td><td>中文 </td><td>无 </td><td><p class="starttd">HWR_SYS_PIN_UNI </p>
+<p class="endtd"></p>
+</td></tr>
+<tr>
+<td>hwr.local.penscript </td><td>生成笔形位图 </td><td>无 </td><td><b>penMode</b>: pencil, pen, brush<br/>
+ <b>penColor</b>: #000000-#FFFFFF、rainbow<br/>
+ <b>penWidth</b>: 1-15<br/>
+ <b>penSpeed</b>: 1-10<br/>
+ </td><td><p class="starttd">无 </p>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<h1><a class="anchor" id="common_recogrange"></a>
+通用范围</h1>
+<p>对各能力参数中的recogRange，首先列出各能力通用的识别范围：<br/>
+ <b>lower，upper，alphabet，number，alnum，symbol，punct，sympun，punctuation</b><br/>
+ 各能力recogRange中<b>all</b>的值，为通用识别范围与各能力独有识别范围的和。</p>
+<h1><a class="anchor" id="gestures_list"></a>
+笔势列表</h1>
+<p>笔势识别(hwr.local.gesture和hwr.cloud.gesture)现在支持50个笔势的识别，识别结果为该笔势的序号。<br/>
+ 50个笔势写法依次如下（红色数字表示笔画书写序号，笔画内的白色箭头表示书写方向）：</p>
+<table  border="1" cellspacing="0" cellpadding="0">
+<tr>
+<td width="38" style="border:solid 3px;padding:0 8px 0 8px;"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>序号</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-left: none;padding:0 8px 0 8px;"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>笔势形状</p>
+<p class="endtd"></p>
+</td><td width="19" style="border:solid 3px;border-left: none;padding:0 8px 0 8px;"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>序号</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-left: none;padding:0 8px 0 8px;"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>笔势形状</p>
+<p class="endtd"></p>
+</td><td width="19" style="border:solid 3px;border-left: none;padding:0 8px 0 8px;"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>序号</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-left: none;padding:0 8px 0 8px;"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>笔势形状</p>
+<p class="endtd"></p>
+</td><td width="19" style="border:solid 3px;border-left: none;padding:0 8px 0 8px;"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>序号</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-left: none;padding:0 8px 0 8px;"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>笔势形状</p>
+<p class="endtd"></p>
+</td><td width="19" style="border:solid 3px;border-left: none;padding:0 8px 0 8px;"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>序号</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-left: none;padding:0 8px 0 8px;"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>笔势形状</p>
+<p class="endtd"></p>
+</td></tr>
+<tr style="height:120px">
+<td width="38" style="border:solid 3px;border-top:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>0</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image004.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>1</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image005.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>2</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image006.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>3</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image007.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>4</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image008.bmp"  width="79" height="79"/>
+</div>
+  </td></tr>
+<tr style="height:10pt">
+<td width="38" colspan="10" style="border:solid 3px;border-top:none;padding:0 8px 0 8px"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>&#160;</p>
+<p class="endtd"></p>
+</td></tr>
+<tr style="height:120px">
+<td width="38" style="border:solid 3px;border-top:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>5</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image009.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>6</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image010.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>7</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image011.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>8</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image012.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>9</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image013.bmp"  width="79" height="79"/>
+</div>
+  </td></tr>
+<tr style="height:10pt">
+<td width="38" colspan="10" style="border:solid 3px;border-top:none;padding:0 8px 0 8px"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>&#160;</p>
+<p class="endtd"></p>
+</td></tr>
+<tr style="height:120px">
+<td width="38" style="border:solid 3px;border-top:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>10</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image014.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>11</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image015.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>12</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image016.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>13</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image017.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>14</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image018.bmp"  width="79" height="79"/>
+</div>
+  </td></tr>
+<tr style="height:10pt">
+<td width="38" colspan="10" style="border:solid 3px;border-top:none;padding:0 8px 0 8px"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>&#160;</p>
+<p class="endtd"></p>
+</td></tr>
+<tr style="height:120px">
+<td width="38" style="border:solid 3px;border-top:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>15</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image019.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>16</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image020.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>17</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image021.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>18</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image022.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>19</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image023.bmp"  width="79" height="79"/>
+</div>
+  </td></tr>
+<tr style="height:10pt">
+<td width="38" colspan="10" style="border:solid 3px;border-top:none;padding:0 8px 0 8px"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>&#160;</p>
+<p class="endtd"></p>
+</td></tr>
+<tr style="height:120px">
+<td width="38" style="border:solid 3px;border-top:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>20</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image024.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>21</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image025.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>22</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image026.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>23</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image027.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>24</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image028.bmp"  width="79" height="79"/>
+</div>
+  </td></tr>
+<tr style="height:10pt">
+<td width="38" colspan="10" style="border:solid 3px;border-top:none;padding:0 8px 0 8px"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>&#160;</p>
+<p class="endtd"></p>
+</td></tr>
+<tr style="height:120px">
+<td width="38" style="border:solid 3px;border-top:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>25</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image029.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>26</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image030.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>27</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image031.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>28</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image032.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>29</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image033.bmp"  width="79" height="79"/>
+</div>
+  </td></tr>
+<tr style="height:10pt">
+<td width="38" colspan="10" style="border:solid 3px;border-top:none;padding:0 8px 0 8px"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>&#160;</p>
+<p class="endtd"></p>
+</td></tr>
+<tr style="height:120px">
+<td width="38" style="border:solid 3px;border-top:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>30</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image034.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>31</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image035.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>32</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image036.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>33</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image037.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>34</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image038.bmp"  width="79" height="79"/>
+</div>
+  </td></tr>
+<tr style="height:10pt">
+<td width="38" colspan="10" style="border:solid 3px;border-top:none;padding:0 8px 0 8px"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>&#160;</p>
+<p class="endtd"></p>
+</td></tr>
+<tr style="height:120px">
+<td width="38" style="border:solid 3px;border-top:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>35</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image039.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>36</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image040.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>37</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image041.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>38</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image042.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>39</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image043.bmp"  width="79" height="79"/>
+</div>
+  </td></tr>
+<tr style="height:10pt">
+<td width="38" colspan="10" style="border:solid 3px;border-top:none;padding:0 8px 0 8px"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>&#160;</p>
+<p class="endtd"></p>
+</td></tr>
+<tr style="height:120px">
+<td width="38" style="border:solid 3px;border-top:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>40</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image044.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>41</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image045.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>42</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image046.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>43</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image047.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>44</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image048.bmp"  width="79" height="79"/>
+</div>
+  </td></tr>
+<tr style="height:10pt">
+<td width="38" colspan="10" style="border:solid 3px;border-top:none;padding:0 8px 0 8px"><p class="starttd"></p>
+<p></p>
+<p></p>
+<p>&#160;</p>
+<p class="endtd"></p>
+</td></tr>
+<tr style="height:120px">
+<td width="38" style="border:solid 3px;border-top:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>45</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image049.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>46</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image050.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>47</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image051.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>48</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image052.bmp"  width="79" height="79"/>
+</div>
+ </td><td width="19" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;background:#B3B3B3;"><p class="starttd"></p>
+<p>49</p>
+<p class="endtd"></p>
+</td><td width="95" style="border:solid 3px;border-top:none;border-left:none;padding:0 8px 0 8px;"><div class="image">
+<img src="./images/image053.bmp"  width="79" height="79"/>
+</div>
+  </td></tr>
+</table>
+<h1><a class="anchor" id="sublang_list"></a>
+语种列表</h1>
+<p><b>拉丁语系(latin)</b>、<b>西里尔语系(cyrillic)</b>、<b>阿拉伯语系(arabic)</b>字典为多语种字典，一个能力包含多种语言，<b>subLang</b>可取值列举如下：<br/>
+<br/>
+ 1、<b>hwr.local.letter.latin</b>和<b>hwr.cloud.letter.latin</b>支持的语种列表如下(65种)：<br/>
+ afrikaans, albanian, basque, belarussian_latin, bosnian_latin, catalan, cebuano, croatian, czech, danish, dutch , english, esperanto, estonian, faroese, fijian, finnish, flemish, french, gagauz_latin, galician, german, hausa, hungarian, icelandic, igbo, indonesian, irish, italian, kurdish_latin, latvian, lithuanian, luxembourgish, malay, maltese, maori, moldavian_latin, norwegian, oromo, polish, portuguese_brazil, portuguese_portugal, romansch, romanian, samoan, serbian, slovak, slovenian, sotho, spanish, swahili, swazi, swedish, tagalog, tahitian, tatar, tongan, turkish, turkmen, vietnamese, wallon, welsh, xhosa, yoruba, zulu<br/>
+ 注：云端暂不支持hausa, igbo, serbian, yoruba<br/>
+<br/>
+</p>
+<p>2、<b>hwr.local.letter.cyrillic</b>和<b>hwr.cloud.letter.cyrillic</b>支持的语种列表如下(17种): <br/>
+ belarussian_cyrillic, bosnian_cyrillic, bulgarian, gagauz_cyrillic, ingush, kabardian, kazakh, kirghiz, kurdish_cyrillic, lezgi, macedonian, moldavian_cyrillic, mongolian, russian, serbian, ukrainian, uzbek<br/>
+ 注：云端暂不支持uzbek<br/>
+<br/>
+</p>
+<p>3、<b>hwr.local.letter.arabic</b>和<b>hwr.cloud.letter.arabic</b>支持的语种列表如下(2种):<br/>
+ arabic, uyghur<br/>
+ </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="hci_dev_content.html">开发指南</a></li><li class="navelem"><a class="el" href="hci_dev_appendix.html">附录</a></li><li class="navelem"><a class="el" href="caplist_page.html">能力列表</a></li>
+    <li class="footer">生成于 2015年 七月 23日 星期四 17:55:50 , 为 灵云SDK开发手册(Java API)使用 
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
+  </ul>
+</div>
+</body>
+</html>

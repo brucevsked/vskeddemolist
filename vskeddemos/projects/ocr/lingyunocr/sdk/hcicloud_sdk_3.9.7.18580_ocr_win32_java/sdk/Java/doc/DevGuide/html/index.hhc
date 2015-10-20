@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD></HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="FrameName" value="right">
+</OBJECT>
+<UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="开发指南"><param name="Local" value="hci_dev_content.html"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="环境准备"><param name="Local" value="prepare_intro_page.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Windows平台"><param name="Local" value="prepare_win_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. 兼容性"><param name="Local" value="prepare_win_intro_page.html#win_support_os"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 开发环境搭建"><param name="Local" value="prepare_win_intro_page.html#win_dev_env"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 引入SDK文件"><param name="Local" value="prepare_win_intro_page.html#win_using_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.1 ASR能力"><param name="Local" value="prepare_win_intro_page.html#win_asr_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.2 TTS能力"><param name="Local" value="prepare_win_intro_page.html#win_tts_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.3 HWR能力"><param name="Local" value="prepare_win_intro_page.html#win_hwr_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.4 OCR能力"><param name="Local" value="prepare_win_intro_page.html#win_ocr_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.5 MT能力"><param name="Local" value="prepare_win_intro_page.html#win_mt_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.6 NLU能力"><param name="Local" value="prepare_win_intro_page.html#win_nlu_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.7 KB能力"><param name="Local" value="prepare_win_intro_page.html#win_kb_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.8 VPR能力"><param name="Local" value="prepare_win_intro_page.html#win_vpr_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.9 VPR能力"><param name="Local" value="prepare_win_intro_page.html#win_fpr_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.10 注意"><param name="Local" value="prepare_win_intro_page.html#win_common_lib"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 本地资源文件"><param name="Local" value="prepare_win_intro_page.html#win_local_res"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Android平台"><param name="Local" value="prepare_android_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. 兼容性"><param name="Local" value="prepare_android_intro_page.html#android_support_os"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 开发环境搭建"><param name="Local" value="prepare_android_intro_page.html#android_dev_env"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 引入SDK文件"><param name="Local" value="prepare_android_intro_page.html#android_using_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.1 ASR能力"><param name="Local" value="prepare_android_intro_page.html#android_asr_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.2 TTS能力"><param name="Local" value="prepare_android_intro_page.html#android_tts_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.3 HWR能力"><param name="Local" value="prepare_android_intro_page.html#android_hwr_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.4 OCR能力"><param name="Local" value="prepare_android_intro_page.html#win_ocr_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.5 MT能力"><param name="Local" value="prepare_android_intro_page.html#win_mt_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.6 NLU能力"><param name="Local" value="prepare_android_intro_page.html#win_nlu_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.7 KB能力"><param name="Local" value="prepare_android_intro_page.html#win_kb_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.8 VPR能力"><param name="Local" value="prepare_android_intro_page.html#win_vpr_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.9 VPR能力"><param name="Local" value="prepare_android_intro_page.html#win_fpr_lib"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.10 注意"><param name="Local" value="prepare_android_intro_page.html#android_common_lib"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 配置Manifest"><param name="Local" value="prepare_android_intro_page.html#android_config_manifest"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="5. 本地资源文件"><param name="Local" value="prepare_android_intro_page.html#android_local_res"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="5.1 存放在外部存储上"><param name="Local" value="prepare_android_intro_page.html#android_loca_res_sdcard"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="5.2 存放在内部存储上"><param name="Local" value="prepare_android_intro_page.html#android_loca_res_pkg"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      </UL>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="简单示例"><param name="Local" value="hci_getstart_page.html"><param name="ImageNumber" value="11"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="1. 初始化灵云系统"><param name="Local" value="hci_getstart_page.html#hci_getstart_hci_init"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 获取授权"><param name="Local" value="hci_getstart_page.html#hci_getstart_check_auth"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 初始化HWR能力"><param name="Local" value="hci_getstart_page.html#hci_getstart_hwr_init"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 开启HWR识别会话"><param name="Local" value="hci_getstart_page.html#hci_getstart_hwr_session_start"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="5. 识别"><param name="Local" value="hci_getstart_page.html#hci_getstart_hwr_recog"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="6. 关闭HWR识别会话"><param name="Local" value="hci_getstart_page.html#hci_getstart_hwr_session_stop"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="7. 终止HWR能力"><param name="Local" value="hci_getstart_page.html#hci_getstart_hwr_release"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="8. 终止灵云系统"><param name="Local" value="hci_getstart_page.html#hci_getstart_hci_release"><param name="ImageNumber" value="1"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="各能力通用流程"><param name="Local" value="hci_common_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="1. 初始化能力"><param name="Local" value="hci_common_intro_page.html#hci_common_init"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 终止能力"><param name="Local" value="hci_common_intro_page.html#hci_common_release"><param name="ImageNumber" value="1"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 会话(Session)"><param name="Local" value="hci_common_intro_page.html#hci_common_session"><param name="ImageNumber" value="1"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="系统API"><param name="Local" value="hci_dev_sys_api.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="系统模块"><param name="Local" value="hci_sys_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. 初始化/终止"><param name="Local" value="hci_sys_intro_page.html#hci_sys_init"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 获取授权文件"><param name="Local" value="hci_sys_intro_page.html#hci_sys_check_auth"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 更新授权文件"><param name="Local" value="hci_sys_intro_page.html#hci_sys_update_auth"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 检查本地资源文件更新"><param name="Local" value="hci_sys_intro_page.html#hci_sys_update_local"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="5. 获取可用能力列表"><param name="Local" value="hci_sys_intro_page.html#hci_sys_get_cap"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="6. 上传用户历史数据"><param name="Local" value="hci_sys_intro_page.html#hci_hwr_upload_history"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="能力API"><param name="Local" value="hci_dev_capability_api.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="ASR能力"><param name="Local" value="hci_asr_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. ASR简介"><param name="Local" value="hci_asr_intro_page.html#hci_asr_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 选择模块和能力"><param name="Local" value="hci_asr_intro_page.html#hci_asr_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 语法识别"><param name="Local" value="hci_asr_intro_page.html#hci_asr_grammar"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.1 词表识别"><param name="Local" value="hci_asr_intro_page.html#hci_asr_grammar_wordlist"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.2 语法识别"><param name="Local" value="hci_asr_intro_page.html#hci_asr_grammar_jsgf"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.3 语法ID识别"><param name="Local" value="hci_asr_intro_page.html#hci_asr_grammar_id"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.4 本地语法加载"><param name="Local" value="hci_asr_intro_page.html#hci_asr_grammar_local_load"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.6 语法识别的选项"><param name="Local" value="hci_asr_intro_page.html#hci_asr_grammar_config"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 自由说识别"><param name="Local" value="hci_asr_intro_page.html#hci_asr_freetalk"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="4.1 自由说识别"><param name="Local" value="hci_asr_intro_page.html#hci_asr_freetalk_proc"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="4.2 自由说识别的选项"><param name="Local" value="hci_asr_intro_page.html#hci_asr_freetalk_config"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="5. 意图识别"><param name="Local" value="hci_asr_intro_page.html#hci_asr_dialog"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="5.1 意图识别"><param name="Local" value="hci_asr_intro_page.html#hci_asr_dialog_proc"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="5.2 意图识别的选项"><param name="Local" value="hci_asr_intro_page.html#hci_asr_dialog_config"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="6. 端点检测"><param name="Local" value="hci_asr_intro_page.html#hci_asr_vad"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="6.1 端点检测过程"><param name="Local" value="hci_asr_intro_page.html#hci_asr_vad_proc"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="6.2 端点检测的选项"><param name="Local" value="hci_asr_intro_page.html#hci_asr_vad_config"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="7. 实时识别"><param name="Local" value="hci_asr_intro_page.html#hci_asr_realtime"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="TTS能力"><param name="Local" value="hci_tts_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. TTS简介"><param name="Local" value="hci_tts_intro_page.html#hci_tts_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 选择模块和能力"><param name="Local" value="hci_tts_intro_page.html#hci_tts_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 语音合成"><param name="Local" value="hci_tts_intro_page.html#hci_tts_synth"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 合成选项"><param name="Local" value="hci_tts_intro_page.html#hci_tts_config"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="HWR能力"><param name="Local" value="hci_hwr_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. HWR简介"><param name="Local" value="hci_hwr_intro_page.html#hci_hwr_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 选择模块和能力"><param name="Local" value="hci_hwr_intro_page.html#hci_hwr_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 手写识别"><param name="Local" value="hci_hwr_intro_page.html#hci_hwr_recog"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 实时识别"><param name="Local" value="hci_hwr_intro_page.html#hci_hwr_realtime"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="5. 识别选项"><param name="Local" value="hci_hwr_intro_page.html#hci_hwr_config"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="6. 提交确认结果"><param name="Local" value="hci_hwr_intro_page.html#hci_hwr_confirm"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="7. 获取联想词"><param name="Local" value="hci_hwr_intro_page.html#hci_hwr_associateword"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="8. 获取拼音"><param name="Local" value="hci_hwr_intro_page.html#hci_hwr_pinyin"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="9. 笔形库功能"><param name="Local" value="hci_hwr_intro_page.html#hci_hwr_penscript"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="OCR能力"><param name="Local" value="hci_ocr_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. OCR简介"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 选择模块和能力"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 支持的图像"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_image"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.1 图像格式"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_image_kind"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.2 二值化"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_image_binarize"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.3 图像文件格式"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_image_format"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.4 截屏图像设置"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_image_type"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4 设置图像"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_set_image"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="4.1 直接设置图像数据"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_set_recog_image"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="4.3 获取图像"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_get_image"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="4.4 保存图像"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_save_image"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="5. 识别"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_recog"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="5.1 最简单的识别"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_recog_simplest"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="5.2 指定区域识别"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_recog_manual"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="5.3 自动版面分析"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_recog_auto_layout"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="5.3 自动倾斜校正"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_recog_auto_deskew"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="5.4 识别选项"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_config"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="6. 版面分析"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_layout"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="7. 倾斜校正"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_skew"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="8. 详细结果"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_node"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="9 模板识别"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_template_recog"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="10 名片识别"><param name="Local" value="hci_ocr_intro_page.html#hci_ocr_bizcard_recog"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="MT能力"><param name="Local" value="hci_mt_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. MT简介"><param name="Local" value="hci_mt_intro_page.html#hci_mt_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 选择模块和能力"><param name="Local" value="hci_mt_intro_page.html#hci_mt_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 文字翻译"><param name="Local" value="hci_mt_intro_page.html#hci_mt_trans"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 翻译选项"><param name="Local" value="hci_mt_intro_page.html#hci_mt_config"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="NLU能力"><param name="Local" value="hci_nlu_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. NLU简介"><param name="Local" value="hci_nlu_intro_page.html#hci_nul_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 选择模块和能力"><param name="Local" value="hci_nlu_intro_page.html#hci_nlu_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 语言理解"><param name="Local" value="hci_nlu_intro_page.html#hci_nlu_recog"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 识别选项"><param name="Local" value="hci_nlu_intro_page.html#hci_nlu_config"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="KB能力"><param name="Local" value="hci_kb_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. KB简介"><param name="Local" value="hci_kb_intro_page.html#hci_kb_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 选择模块和能力"><param name="Local" value="hci_kb_intro_page.html#hci_kb_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 键盘识别"><param name="Local" value="hci_kb_intro_page.html#hci_kb_recog"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 用户自定义词条编辑"><param name="Local" value="hci_kb_intro_page.html#hci_kb_udb"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="5. 编码转化"><param name="Local" value="hci_kb_intro_page.html#hci_kb_conv"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="6. 音节容错"><param name="Local" value="hci_kb_intro_page.html#hci_kb_fuzzy"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="VPR能力"><param name="Local" value="hci_vpr_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. VPR简介"><param name="Local" value="hci_vpr_intro_page.html#hci_vpr_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 选择模块和能力"><param name="Local" value="hci_vpr_intro_page.html#hci_vpr_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 声纹特征注册和训练"><param name="Local" value="hci_vpr_intro_page.html#hci_vpr_enroll"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 声纹特征确认"><param name="Local" value="hci_vpr_intro_page.html#hci_vpr_verify"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="FPR能力"><param name="Local" value="hci_fpr_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. FPR简介"><param name="Local" value="hci_fpr_intro_page.html#hci_fpr_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. 选择模块和能力"><param name="Local" value="hci_fpr_intro_page.html#hci_fpr_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 指纹图像数据格式"><param name="Local" value="hci_fpr_intro_page.html#hci_fpr_image"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 指纹特征注册和训练"><param name="Local" value="hci_fpr_intro_page.html#hci_fpr_train"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="5. 指纹特征确认"><param name="Local" value="hci_fpr_intro_page.html#hci_fpr_verify"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="扩展API"><param name="Local" value="hci_dev_ext_api.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="ASR录音机"><param name="Local" value="hci_asr_recorder_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. ASR录音机简介"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. ASR能力"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 初始化"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_init"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.1 创建录音机对象"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_init_create"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.2 设置初始化参数"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_init_init"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.3 录音机监听器"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_init_callback"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 启动录音机"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_start"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="5. 端点检测"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_vad"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="6. 结束录音"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_stop_and_recog"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="7. 获取录音机状态"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_get_state"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="8. 反初始化"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_release"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="9. 注意"><param name="Local" value="hci_asr_recorder_intro_page.html#hci_asr_recorder_notice"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="TTS播放器"><param name="Local" value="hci_tts_player_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. TTS播放器简介"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. TTS能力"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 初始化"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_init"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.1 创建播放器对象"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_init_create"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.2 设置初始化参数"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_init_init"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.3 播放器监听器"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_init_callback"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 合成播放"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_start"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="5. 暂停和恢复"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_pause_resume"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="6. 停止"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_stop"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="7. 获取播放器状态"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_get_state"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="8. 反初始化"><param name="Local" value="hci_tts_player_intro_page.html#hci_tts_player_release"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="OCR拍照器"><param name="Local" value="hci_ocr_capture_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. OCR拍照器简介"><param name="Local" value="hci_ocr_capture_intro_page.html#hci_ocr_capture_intro"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. OCR能力"><param name="Local" value="hci_ocr_capture_intro_page.html#hci_ocr_capture_choice"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. 初始化"><param name="Local" value="hci_ocr_capture_intro_page.html#hci_ocr_capture_init"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.1 创建拍照器对象"><param name="Local" value="hci_ocr_capture_intro_page.html#hci_ocr_capture_init_create"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.2 设置初始化参数"><param name="Local" value="hci_ocr_capture_intro_page.html#hci_ocr_capture_init_init"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="3.3 拍照器监听器"><param name="Local" value="hci_ocr_capture_intro_page.html#hci_ocr_capture_init_callback"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="4. 启动拍照器"><param name="Local" value="hci_ocr_capture_intro_page.html#hci_ocr_capture_start"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="6. 结束预览不识别"><param name="Local" value="hci_ocr_capture_intro_page.html#hci_ocr_capture_stop_and_recog"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="7. 反初始化"><param name="Local" value="hci_ocr_capture_intro_page.html#hci_ocr_capture_release"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="附录"><param name="Local" value="hci_dev_appendix.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="能力列表"><param name="Local" value="caplist_page.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="ASR能力描述"><param name="Local" value="hci_asr_page.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="能力列表"><param name="Local" value="hci_asr_page.html#capkey_detail"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Intel MKL库"><param name="Local" value="hci_asr_page.html#hci_asr_intel_mkl"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="TTS能力描述"><param name="Local" value="hci_tts_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="HWR能力描述"><param name="Local" value="hci_hwr_page.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="能力列表"><param name="Local" value="hci_hwr_page.html#capkey_detail"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="通用范围"><param name="Local" value="hci_hwr_page.html#common_recogrange"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="笔势列表"><param name="Local" value="hci_hwr_page.html#gestures_list"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="语种列表"><param name="Local" value="hci_hwr_page.html#sublang_list"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="OCR能力描述"><param name="Local" value="hci_ocr_page.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="能力列表"><param name="Local" value="hci_ocr_page.html#capkey_detail"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="模板列表"><param name="Local" value="hci_ocr_page.html#ocr_templates"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="MT能力描述"><param name="Local" value="hci_mt_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="NLU能力描述"><param name="Local" value="hci_nlu_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="KB能力描述"><param name="Local" value="hci_kb_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="VPR能力描述"><param name="Local" value="hci_vpr_page.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Intel MKL库"><param name="Local" value="hci_vpr_page.html#hci_vpr_intel_mkl"><param name="ImageNumber" value="1"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="FPR能力描述"><param name="Local" value="hci_fpr_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="音频编解码库"><param name="Local" value="codec_intro_page.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="1. 简介"><param name="Local" value="codec_intro_page.html#codec_common"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="2. TTS音频压缩"><param name="Local" value="codec_intro_page.html#codec_for_tts"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="3. ASR和VPR音频压缩"><param name="Local" value="codec_intro_page.html#codec_for_asr"><param name="ImageNumber" value="1"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="应用渠道列表"><param name="Local" value="app_channel.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  </UL>
+</UL>
+</BODY>
+</HTML>

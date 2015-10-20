@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>灵云SDK开发手册(Java API): Windows平台</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">灵云SDK开发手册(Java API)
+   &#160;<span id="projectnumber">3.9</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li class="current"><a href="pages.html"><span>开发指南</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('prepare_win_intro_page.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>全部</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>页</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Windows平台 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="win_support_os"></a>
+1. 兼容性</h1>
+<p>灵云提供的lib和dll文件为32bit版本，支持在Windows32bit及64bit操作系统上进行Win32程序的开发，开发的Win32程序可以运行在Windows32bit和64bit操作系统上。如有需要可以提供64bit版本。</p>
+<h1><a class="anchor" id="win_dev_env"></a>
+2. 开发环境搭建</h1>
+<p>开发者可以自行选择Java开发环境，下面我们主要是针对Eclipse开发环境进行编写的。</p>
+<p>1) 安装JDK <br/>
+ 编者采用的版本是jdk1.6.0_20，开发者可以从以下Oracle 官网下载所需的版本：http://www.oracle.com/technetwork/java/javase/downloads/index.html</p>
+<p>2) 安装Eclipse Java IDE <br/>
+ 编者采用的版本是Eclipse3.4，开发者可以从以下官网下载所需的版本：http://www.eclipse.org/</p>
+<h1><a class="anchor" id="win_using_lib"></a>
+3. 引入SDK文件</h1>
+<p>在开发应用前，需要将灵云SDK中的Jar包文件(.jar)和相应的动态运行库(.dll)引入到工程中。</p>
+<p>1) 通过菜单 Project-&gt;Properties-&gt;Java Build Path-&gt;Libraries-&gt;Add JARS或ADD External JARS引入相应的Jar包。</p>
+<p>2) 将相应的dll文件拷贝到工作目录下。</p>
+<p>具体需要引入的文件和开发者所需要使用的能力有关。</p>
+<h2><a class="anchor" id="win_asr_lib"></a>
+3.1 ASR能力</h2>
+<p>jar包文件</p>
+<ul>
+<li>hcicloud-3.9.jar</li>
+</ul>
+<p>so文件</p>
+<ul>
+<li><b>必选模块</b></li>
+<li>libcurl.dll</li>
+<li>hci_sys.dll</li>
+<li>hci_sys_jni.dll</li>
+<li>hci_asr.dll</li>
+<li>hci_asr_jni.dll</li>
+<li><b>云端识别</b></li>
+<li>hci_asr_cloud_recog.dll</li>
+<li>jtspeex.dll 或者 jtopus.dll (根据所使用的编解码格式进行选择)</li>
+<li><b>本地识别</b></li>
+<li>hci_asr_local_recog.dll</li>
+<li><b>V4本地识别</b></li>
+<li>hci_asr_local_v4_recog.dll</li>
+<li><a class="el" href="hci_asr_page.html#hci_asr_intel_mkl">Intel MKL库</a></li>
+</ul>
+<p>本地资源文件：</p>
+<ul>
+<li>使用本地语音识别能力，需要相应的资源文件。具体可参照 <a class="el" href="hci_asr_page.html">ASR能力描述</a> 进行选择。</li>
+</ul>
+<p>使用ASR录音机，需要增加 jar包文件</p>
+<ul>
+<li>hcicloud_recorder-3.9.jar</li>
+</ul>
+<h2><a class="anchor" id="win_tts_lib"></a>
+3.2 TTS能力</h2>
+<p>jar包文件</p>
+<ul>
+<li>hcicloud-3.9.jar</li>
+</ul>
+<p>so文件</p>
+<ul>
+<li><b>必选模块</b></li>
+<li>libcurl.dll</li>
+<li>hci_sys.dll</li>
+<li>hci_sys_jni.dll</li>
+<li>hci_tts.dll</li>
+<li>hci_tts_jni.dll</li>
+<li><b>云端合成</b></li>
+<li>hci_tts_cloud_synth.dll</li>
+<li>jtspeex.dll 或者 jtopus.dll (根据所使用的编解码格式进行选择)</li>
+<li><b>本地非V6合成</b></li>
+<li>hci_tts_local_synth.dll</li>
+<li><b>本地V6合成</b></li>
+<li>hci_tts_local_v6_synth.dll</li>
+</ul>
+<p>本地资源文件：</p>
+<ul>
+<li>使用本地语音合成能力，需要相应的资源文件。具体可参照 <a class="el" href="hci_tts_page.html">TTS能力描述</a> 进行选择。</li>
+</ul>
+<p>使用TTS播放器，需要增加 jar包文件</p>
+<ul>
+<li>hcicloud_player-3.9.jar</li>
+</ul>
+<h2><a class="anchor" id="win_hwr_lib"></a>
+3.3 HWR能力</h2>
+<p>jar包文件</p>
+<ul>
+<li>hcicloud-3.9.jar</li>
+</ul>
+<p>so文件</p>
+<ul>
+<li><b>必选模块</b></li>
+<li>libcurl.dll</li>
+<li>hci_sys.dll</li>
+<li>hci_sys_jni.dll</li>
+<li>hci_hwr.dll</li>
+<li>hci_hwr_jni.dll</li>
+<li><b>云端识别</b></li>
+<li>hci_hwr_cloud_recog.dll</li>
+<li><b>本地识别</b></li>
+<li>hci_hwr_local_recog.dll</li>
+<li><b>联想功能</b></li>
+<li>hci_hwr_associate.dll</li>
+<li><b>拼音功能</b></li>
+<li>hci_hwr_pinyin.dll</li>
+<li><b>笔形功能</b></li>
+<li>hci_hwr_penscript.dll</li>
+</ul>
+<p>本地资源文件：</p>
+<ul>
+<li>使用本地手写识别能力，需要相应的资源文件。具体可参照 <a class="el" href="hci_hwr_page.html">HWR能力描述</a> 进行选择。</li>
+</ul>
+<h2><a class="anchor" id="win_ocr_lib"></a>
+3.4 OCR能力</h2>
+<p>jar包文件</p>
+<ul>
+<li>hcicloud-3.9.jar</li>
+</ul>
+<p>so文件</p>
+<ul>
+<li><b>必选模块</b></li>
+<li>libcurl.dll</li>
+<li>hci_sys.dll</li>
+<li>hci_sys_jni.dll</li>
+<li>hci_ocr.dll</li>
+<li>hci_ocr_jni.dll</li>
+<li><b>云端识别</b></li>
+<li>hci_ocr_cloud_recog.dll</li>
+<li><b>本地识别</b></li>
+<li>hci_ocr_local_recog.dll</li>
+<li><b>模板识别</b></li>
+<li>hci_ocr_local_recog_template.dll</li>
+<li><b>名片识别</b></li>
+<li>hci_ocr_local_recog_bizcard.dll</li>
+</ul>
+<p>本地资源文件：</p>
+<ul>
+<li>使用本地光学字符识别能力，需要相应的资源文件。具体可参照 <a class="el" href="hci_ocr_page.html">OCR能力描述</a> 进行选择。</li>
+</ul>
+<p>如果使用拍图器，需要增加 jar包文件</p>
+<ul>
+<li>hcicloud_capture-3.9.jar</li>
+</ul>
+<h2><a class="anchor" id="win_mt_lib"></a>
+3.5 MT能力</h2>
+<p>灵云SDK头文件：</p>
+<ul>
+<li>hci_mt.h</li>
+<li>hci_sys.h</li>
+</ul>
+<p>灵云SDK库文件：</p>
+<ul>
+<li>hci_mt.lib</li>
+<li>hci_sys.lib</li>
+</ul>
+<p>运行时所需DLL文件</p>
+<ul>
+<li><b>必选模块</b></li>
+<li>libcurl.dll</li>
+<li>hci_sys.dll</li>
+<li>hci_mt.dll</li>
+<li><b>云端识别</b></li>
+<li>hci_mt_cloud_trans.dll</li>
+<li><b>本地识别（暂不支持）</b></li>
+<li>hci_mt_local_trans.dll</li>
+</ul>
+<h2><a class="anchor" id="win_nlu_lib"></a>
+3.6 NLU能力</h2>
+<p>灵云SDK头文件：</p>
+<ul>
+<li>hci_nlu.h</li>
+<li>hci_sys.h</li>
+</ul>
+<p>灵云SDK库文件：</p>
+<ul>
+<li>hci_nlu.lib</li>
+<li>hci_sys.lib</li>
+</ul>
+<p>运行时所需DLL文件</p>
+<ul>
+<li><b>必选模块</b></li>
+<li>libcurl.dll</li>
+<li>hci_sys.dll</li>
+<li>hci_nlu.dll</li>
+<li><b>云端识别</b></li>
+<li>hci_nlu_cloud_recog.dll</li>
+<li><b>本地识别（暂不支持）</b></li>
+<li>hci_nlu_local_recog.dll</li>
+</ul>
+<h2><a class="anchor" id="win_kb_lib"></a>
+3.7 KB能力</h2>
+<p>灵云SDK头文件：</p>
+<ul>
+<li>hci_kb.h</li>
+<li>hci_sys.h</li>
+</ul>
+<p>灵云SDK库文件：</p>
+<ul>
+<li>hci_kb.lib</li>
+<li>hci_sys.lib</li>
+</ul>
+<p>运行时所需DLL文件</p>
+<ul>
+<li><b>必选模块</b></li>
+<li>libcurl.dll</li>
+<li>hci_sys.dll</li>
+<li>hci_sys_jni.dll</li>
+<li>hci_kb.dll</li>
+<li>hci_kb_jni.dll</li>
+<li><b>云端识别（暂不支持）</b></li>
+<li>hci_kb_cloud_recog.dll</li>
+<li><b>本地识别</b></li>
+<li>hci_kb_local_recog.dll</li>
+</ul>
+<h2><a class="anchor" id="win_vpr_lib"></a>
+3.8 VPR能力</h2>
+<p>灵云SDK头文件：</p>
+<ul>
+<li>hci_vpr.h</li>
+<li>hci_sys.h</li>
+</ul>
+<p>灵云SDK库文件：</p>
+<ul>
+<li>hci_vpr.lib</li>
+<li>hci_sys.lib</li>
+</ul>
+<p>运行时所需DLL文件</p>
+<ul>
+<li><b>必选模块</b></li>
+<li>libcurl.dll</li>
+<li>hci_sys.dll</li>
+<li>hci_sys_jni.dll</li>
+<li>hci_vpr.dll</li>
+<li>hci_vpr_jni.dll</li>
+<li><b>云端识别</b></li>
+<li>hci_vpr_cloud_recog.dll</li>
+<li>jtspeex.dll 或者 jtopus.dll (根据所使用的编解码格式进行选择)</li>
+<li><b>本地识别</b></li>
+<li>hci_vpr_local_recog.dll</li>
+</ul>
+<h2><a class="anchor" id="win_fpr_lib"></a>
+3.9 VPR能力</h2>
+<p>灵云SDK头文件：</p>
+<ul>
+<li>hci_fpr.h</li>
+<li>hci_sys.h</li>
+</ul>
+<p>灵云SDK库文件：</p>
+<ul>
+<li>hci_fpr.lib</li>
+<li>hci_sys.lib</li>
+</ul>
+<p>运行时所需DLL文件</p>
+<ul>
+<li><b>必选模块</b></li>
+<li>libcurl.dll</li>
+<li>hci_sys.dll</li>
+<li>hci_sys_jni.dll</li>
+<li>hci_fpr.dll</li>
+<li>hci_fpr_jni.dll</li>
+<li><b>云端识别</b></li>
+<li>hci_fpr_cloud_recog.dll</li>
+<li><b>本地识别</b></li>
+<li>hci_fpr_local_recog.dll</li>
+</ul>
+<h2><a class="anchor" id="win_common_lib"></a>
+3.10 注意</h2>
+<ul>
+<li>jtopus.dll是opus编码库，jtspeex.dll是speex编码库，仅在使用云端ASR或者TTS时候用于音频压缩。 应用可以根据需要的编码方式（请参见 <a class="el" href="codec_intro_page.html">音频编解码库</a> ），选择其中合适的编码库，这样可以减少应用包的大小．</li>
+</ul>
+<h1><a class="anchor" id="win_local_res"></a>
+4. 本地资源文件</h1>
+<p>当使用本地能力时，需要在本地存放资源文件，并在能力初始化时通过指定dataPath告知资源所在路径。</p>
+<p>每种本地能力，所需要的资源文件并不相同，在实际使用时，可以只拷贝所使用能力对应的资源文件， 这样可以减少所占用的外部存储空间。具体每种本地能力所需要的本地资源文件，请参见 <a class="el" href="caplist_page.html">能力列表</a> 。 </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="hci_dev_content.html">开发指南</a></li><li class="navelem"><a class="el" href="prepare_intro_page.html">环境准备</a></li>
+    <li class="footer">生成于 2015年 七月 23日 星期四 17:55:50 , 为 灵云SDK开发手册(Java API)使用 
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
+  </ul>
+</div>
+</body>
+</html>

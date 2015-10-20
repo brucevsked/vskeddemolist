@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>灵云SDK开发手册(Java API): TTS能力</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">灵云SDK开发手册(Java API)
+   &#160;<span id="projectnumber">3.9</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li class="current"><a href="pages.html"><span>开发指南</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('hci_tts_intro_page.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>全部</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>页</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">TTS能力 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>以下描述了如何使用灵云TTS能力。</p>
+<h1><a class="anchor" id="hci_tts_intro"></a>
+1. TTS简介</h1>
+<p>TTS (Text To Speech) 语音合成技术，能将任意文字信息实时转化为标准流畅的自然语音并朗读出来。</p>
+<h1><a class="anchor" id="hci_tts_choice"></a>
+2. 选择模块和能力</h1>
+<p>灵云可以提供云端和本地端的合成能力 无论使用云端或本地端的合成能力，基础模块 hci_tts都是需要的。 需要使用云端能力时，需要加上hci_tts_cloud_synth模块； 需要使用本地端非V6能力时，需要加上hci_tts_local_synth模块； 需要使用本地端V6能力时，需要加上hci_tts_local_v6_synth模块；</p>
+<p>如果使用本地合成引擎，需要访问相应的本地音库。具体某种能力需要的本地音库，可参见 <a class="el" href="caplist_page.html">能力列表</a> 。</p>
+<p>V6 版本的本地合成引擎可以提供合成质量更好，声音更加清晰和自然的合成效果。但是其算法复杂度较高，需要较强的CPU能力， 同时音库文件也较大。用户可以根据需求选择是否使用 hci_tts_local_v6_synth 模块。</p>
+<h1><a class="anchor" id="hci_tts_synth"></a>
+3. 语音合成</h1>
+<p>通过 HciCloudTts. hciTtsSynth() 来进行语音合成，示例如下：</p>
+<div class="fragment"><div class="line">Session mSessionId = <span class="keyword">new</span> Session();</div>
+<div class="line">String sessionConfig = <span class="stringliteral">&quot;capKey=tts.cloud.xiaokun&quot;</span>;</div>
+<div class="line"><span class="keywordtype">int</span> nRet = HciCloudTts.hciTtsSessionStart(sessionConfig, mSessionId);</div>
+<div class="line"></div>
+<div class="line">String text = <span class="stringliteral">&quot;要合成的文本&quot;</span>;</div>
+<div class="line">String synthConfig = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// synthCallBack是回调对象</span></div>
+<div class="line">nRet = HciCloudTts.hciTtsSynth(mSessionId, text, synthConfig, synthCallBack);</div>
+</div><!-- fragment --><p>synthCallBack回调对象的示例如下：</p>
+<div class="fragment"><div class="line">ITtsSynthCallback synthCallBack = <span class="keyword">new</span> ITtsSynthCallback() {</div>
+<div class="line">        <span class="comment">// 回调函数</span></div>
+<div class="line">        @Override</div>
+<div class="line">        <span class="keyword">public</span> <span class="keywordtype">boolean</span> onSynthFinish(<span class="keywordtype">int</span> errorCode, TtsSynthResult result) {</div>
+<div class="line">                <span class="keywordflow">try</span> {</div>
+<div class="line">                        <span class="comment">// 所有文本是否合成结束</span></div>
+<div class="line">                        <span class="keywordtype">boolean</span> bMore = result.isHasMoreData();</div>
+<div class="line">                        <span class="comment">// 当前的语音数据</span></div>
+<div class="line">                        <span class="keywordflow">if</span> (result.getVoiceData() != null) {</div>
+<div class="line">                        </div>
+<div class="line">                        }<span class="keywordflow">else</span>{</div>
+<div class="line">                        </div>
+<div class="line">                        }</div>
+<div class="line">                        </div>
+<div class="line">                        <span class="comment">// 当前的合成文本</span></div>
+<div class="line">                        <span class="keywordflow">if</span> (result.getCurrentSynthText() != null) {</div>
+<div class="line">                                </div>
+<div class="line">                        } <span class="keywordflow">else</span> {</div>
+<div class="line">              </div>
+<div class="line">                        }</div>
+<div class="line">                        </div>
+<div class="line">                } <span class="keywordflow">catch</span> (IOException e) {</div>
+<div class="line">                        e.printStackTrace();</div>
+<div class="line">                } </div>
+<div class="line">                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">        }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>合成函数是通过回调函数的方式给出数据，但仍然是同步方式，也即只有所有数据都通过回调函数给出后，合成函数才会返回。 因此如果需要响应用户界面操作等，需要将此函数放在一个独立的线程中进行。</p>
+<p>合成是分段进行的，在合成过程中会调用多次回调函数，每次给出部分数据。在回调函数的TtsSynthResult参数中， 其getCurrentSynthText()返回当前正在合成文本内容。如果当前文本段的合成数据需要多次回调， 则只在第一次回调时给出该文本段的信息，其余回调中，该地址为null。</p>
+<p>合成的过程中，也有可能出现某个回调没有声音数据返回，即getVoiceData()可能为null的情况， 这是正常的，简单忽略即可。</p>
+<p>回调函数传入的数据，在退出回调函数后，不保证继续有效，因此，如果需要继续使用这些数据， 需要开发者自行将数据拷贝出去。</p>
+<p>回调函数返回false会中止合成，而返回true则会继续合成。可以利用这一特性实现中断合成的操作。</p>
+<h1><a class="anchor" id="hci_tts_config"></a>
+4. 合成选项</h1>
+<p>主要支持的合成选项如下：</p>
+<ol type="1">
+<li>pitch, speed, volume <br/>
+ 分别对应基频、语速、音量，这些配置项可用于调节合成语音的效果，一般情况下取默认值即可。<br/>
+<br/>
+</li>
+<li>audioFormat <br/>
+ 输出的语音格式，根据云端或本地合成不同，支持的语音格式不一样，可根据需要选择。<br/>
+<br/>
+</li>
+<li>encode, encLevel <br/>
+ 如果是云端合成，可以使用音频压缩配置，以便让云端对合成的音频数据进行压缩后再进行传输，以节省网络流量。 另外，可以使用encLevel选项，来调节音频压缩的级别， 以便在传输流量和音频质量之间达到平衡。具体编解码库使用上的说明参见 <a class="el" href="codec_intro_page.html">音频编解码库</a>。<br/>
+ 当本地合成时，不支持这两个配置项，将会直接忽略。当云端合成但audioFormat为vox6k4bit/vox8k4bit/mp3时， 也会忽略这两个配置项，数据会直接使用vox或mp3格式传输，不再另行启动encode指定的压缩。<br/>
+ 这一选项只影响传输过程，在数据传输到客户端后，灵云SDK会将数据转换为audioFormat选项指定的格式， 因此在回调函数中获取的数据格式，仍然是audioFormat指定的格式。<br/>
+<br/>
+</li>
+<li>其它配置 <br/>
+ 例如数字读法(digitMode), 标点符号读法(puncMode)等，请参见 HciCloudTts. hciTtsSynth()的说明。 要注意的是，这些参数和不同的合成引擎相关，不同的引擎支持的配置项不完全一致，具体请参见《灵云能力列表》文档。<br/>
+<br/>
+ </li>
+</ol>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="hci_dev_content.html">开发指南</a></li><li class="navelem"><a class="el" href="hci_dev_capability_api.html">能力API</a></li>
+    <li class="footer">生成于 2015年 七月 23日 星期四 17:55:50 , 为 灵云SDK开发手册(Java API)使用 
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
+  </ul>
+</div>
+</body>
+</html>

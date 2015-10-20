@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>灵云SDK开发手册(Java API): OCR拍照器</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">灵云SDK开发手册(Java API)
+   &#160;<span id="projectnumber">3.9</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li class="current"><a href="pages.html"><span>开发指南</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('hci_ocr_capture_intro_page.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>全部</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>页</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">OCR拍照器 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>以下描述了如何使用灵云OCR拍照器功能。</p>
+<h1><a class="anchor" id="hci_ocr_capture_intro"></a>
+1. OCR拍照器简介</h1>
+<p>OCR拍照器封装了系统的拍照功能和灵云sdk的OCR接口，其目标是将输入的图片转换为相应的文本。 目前只支持Android版本。</p>
+<h1><a class="anchor" id="hci_ocr_capture_choice"></a>
+2. OCR能力</h1>
+<p>OCR拍照器封装了灵云SDK的OCR能力，其许多概念仍然是基于OCR基础API的。建议在使用灵云OCR拍照器之前， 先熟悉 <a class="el" href="hci_ocr_intro_page.html">OCR能力</a> 的相关内容。</p>
+<p>在使用灵云OCR拍照器之前，需要选择合适的OCR模块和能力以及图像编解码库， 具体请参见 <a class="el" href="hci_ocr_intro_page.html#hci_ocr_choice">选择模块和能力</a> 和 <a class="el" href="codec_intro_page.html">图像编解码库</a>。</p>
+<h1><a class="anchor" id="hci_ocr_capture_init"></a>
+3. 初始化</h1>
+<p>在使用拍照器之前，仍然需要先初始化系统模块，请参见 <a class="el" href="hci_sys_intro_page.html#hci_sys_init">系统模块的初始化/终止</a>。</p>
+<h2><a class="anchor" id="hci_ocr_capture_init_create"></a>
+3.1 创建拍照器对象</h2>
+<p>在初始化系统模块之后，就可以直接创建拍照器对象：</p>
+<div class="fragment"><div class="line"><span class="comment">// 创建拍照器对象</span></div>
+<div class="line">OCRCapture ocrCapture = <span class="keyword">new</span> OCRCapture();</div>
+</div><!-- fragment --><h2><a class="anchor" id="hci_ocr_capture_init_init"></a>
+3.2 设置初始化参数</h2>
+<p>然后需要初始化拍照器对象，主要是设置本地资源库的路径等： </p>
+<div class="fragment"><div class="line"><span class="comment">// 创始初始化参数辅助类对象</span></div>
+<div class="line">OcrInitParam ocrInitParam = <span class="keyword">new</span> OcrInitParam();</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// 如果使用本地能力，需要设置OCR资源文件的路径</span></div>
+<div class="line"><span class="keywordflow">if</span> (capKeys.contains(<span class="stringliteral">&quot;local&quot;</span>)) {</div>
+<div class="line">        String ocrDirPath = Environment.getExternalStorageDirectory().getPath() </div>
+<div class="line">                        + File.separator + <span class="stringliteral">&quot;HciCloud&quot;</span></div>
+<div class="line">                        + File.separator + <span class="stringliteral">&quot;HciCloudOcrCaptureExample&quot;</span> </div>
+<div class="line">                        + File.separator + <span class="stringliteral">&quot;data&quot;</span>;</div>
+<div class="line">        Log.v(TAG, ocrDirPath);</div>
+<div class="line">                </div>
+<div class="line">        ocrInitParam.addParam(OcrInitParam.PARAM_KEY_DATA_PATH, ocrDirPath);</div>
+<div class="line">                </div>
+<div class="line">        ocrInitParam.addParam(OcrInitParam.PARAM_KEY_INIT_CAP_KEYS, capKeys);</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// 用指定的初始化参数对拍照器对象进行初始化</span></div>
+<div class="line">String initParam = ocrInitParam.getStringConfig();</div>
+<div class="line"><span class="keywordtype">int</span> captureErrorCode = ocrCapture.hciOcrCaptureInit(context, initParam, ocrCaptureListener);</div>
+</div><!-- fragment --><dl class="section note"><dt>注解</dt><dd>使用OCR拍照器模块，并不需要调用OCR基础API的初始化操作，也即无需调用 HciCloudOcr.hciOcrInit()。</dd></dl>
+<h2><a class="anchor" id="hci_ocr_capture_init_callback"></a>
+3.3 拍照器监听器</h2>
+<p>为了能接拍照器的内部信息，如状态信息、识别情况及错误信息等，应用层需要实现拍照器监听器。下面的代码示例实现了一个监听器： 详细参见OCRCaptureListener接口文档。</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span> OCRCaptureListener ocrCaptureListener = <span class="keyword">new</span> OCRCaptureListener() {</div>
+<div class="line">        </div>
+<div class="line">        @Override</div>
+<div class="line">        <span class="keyword">public</span> <span class="keywordtype">void</span> onCaptureEventStateChange(CaptureEvent captureEvent) {</div>
+<div class="line">                <span class="comment">// 状态变化通知</span></div>
+<div class="line">                </div>
+<div class="line">        }</div>
+<div class="line">        </div>
+<div class="line">        @Override</div>
+<div class="line">        <span class="keyword">public</span> <span class="keywordtype">void</span> onCaptureEventRecogFinish(CaptureEvent captureEvent,</div>
+<div class="line">                        OcrRecogResult ocrRecogResult) {</div>
+<div class="line">                <span class="keywordflow">switch</span> (captureEvent) {</div>
+<div class="line">                <span class="keywordflow">case</span> CAPTURE_EVENT_RECOGNIZE_FINISH:</div>
+<div class="line">                        <span class="keywordflow">if</span>(ocrRecogResult != null){</div>
+<div class="line">                                Log.v(TAG, <span class="stringliteral">&quot;recog result = &quot;</span> + ocrRecogResult.getResultText());</div>
+<div class="line">                                showResultView(ocrRecogResult.getResultText());</div>
+<div class="line">                        }</div>
+<div class="line">                        <span class="keywordflow">break</span>;</div>
+<div class="line"></div>
+<div class="line">                <span class="keywordflow">default</span>:</div>
+<div class="line">                        <span class="keywordflow">break</span>;</div>
+<div class="line">                }</div>
+<div class="line">        }</div>
+<div class="line">        </div>
+<div class="line">        @Override</div>
+<div class="line">        <span class="keyword">public</span> <span class="keywordtype">void</span> onCaptureEventError(CaptureEvent captureEvent, <span class="keywordtype">int</span> errorCode) {</div>
+<div class="line">                <span class="comment">// 拍照器错误</span></div>
+<div class="line">                </div>
+<div class="line">        }</div>
+<div class="line">        </div>
+<div class="line">        @Override</div>
+<div class="line">        <span class="keyword">public</span> <span class="keywordtype">void</span> onCaptureEventCapturing(CaptureEvent captureEvent,</div>
+<div class="line">                        <span class="keyword">final</span> byte[] imageData, OcrCornersResult ocrCornersResult) {</div>
+<div class="line">                Log.i(TAG, <span class="stringliteral">&quot;onCaptureEventCapturing. imageData len = &quot;</span> + imageData.length);</div>
+<div class="line">                </div>
+<div class="line">                <span class="comment">//文档识别</span></div>
+<div class="line">                <span class="keywordflow">if</span>(capKeys.equalsIgnoreCase(<span class="stringliteral">&quot;ocr.cloud&quot;</span>)</div>
+<div class="line">                                || capKeys.equalsIgnoreCase(<span class="stringliteral">&quot;ocr.cloud.english&quot;</span>)</div>
+<div class="line">                                || capKeys.equalsIgnoreCase(<span class="stringliteral">&quot;ocr.local&quot;</span>)){</div>
+<div class="line">                        </div>
+<div class="line">                        hander.post(<span class="keyword">new</span> Runnable() {</div>
+<div class="line">                                </div>
+<div class="line">                                @Override</div>
+<div class="line">                                <span class="keyword">public</span> <span class="keywordtype">void</span> run() {</div>
+<div class="line">                                        ocrCapture.hciOcrCaptureRecog(imageData, recogConfig, null);</div>
+<div class="line">                                }</div>
+<div class="line">                        });</div>
+<div class="line">                }</div>
+<div class="line">        }</div>
+<div class="line">};</div>
+</div><!-- fragment --><h1><a class="anchor" id="hci_ocr_capture_start"></a>
+4. 启动拍照器</h1>
+<p>开发者在启动拍照器之前需要首选获取CameraPreview视图，布局到用户的layout中。 使用start()来启动拍照器，启动后，拍照器就正常预览图像。</p>
+<p>以云端文本识别为例：</p>
+<div class="fragment"><div class="line"><span class="comment">//布局CameraPreview视图</span></div>
+<div class="line">cameraPreviewLayout = (FrameLayout) findViewById(R.id.layout_camera_preview);</div>
+<div class="line">cameraPreviewLayout.addView(ocrCapture.getCameraPreview());</div>
+<div class="line"></div>
+<div class="line"><span class="comment">//启动拍照器</span></div>
+<div class="line">String recogConfig = <span class="stringliteral">&quot;capKey=ocr.cloud&quot;</span>;</div>
+<div class="line">ocrCapture.hciOcrCaptureStart(recogConfig);</div>
+</div><!-- fragment --><h1><a class="anchor" id="hci_ocr_capture_stop_and_recog"></a>
+6. 结束预览不识别</h1>
+<div class="fragment"><div class="line"><span class="comment">//调用此方法结束摄像头的预览，并拍照，识别状态通知和识别结果通过init时候注册的OCRCaptureListener接口传递出来。</span></div>
+<div class="line">ocrCapture.hciOcrCaptureStopAndRecog();</div>
+</div><!-- fragment --><h1><a class="anchor" id="hci_ocr_capture_stop_and_recog"></a>
+6. 结束预览不识别</h1>
+<div class="fragment"><div class="line"><span class="comment">//调用此方法结束摄像头的预览</span></div>
+<div class="line">ocrCapture.hciOcrCaptureStop;</div>
+</div><!-- fragment --><h1><a class="anchor" id="hci_ocr_capture_release"></a>
+7. 反初始化</h1>
+<p>当不再使用OCR拍照器的时候，需要反初始化OCR拍照器，示例如下：</p>
+<div class="fragment"><div class="line"><span class="comment">// 反初始化</span></div>
+<div class="line"><span class="keywordtype">int</span> captureErrorCode = ocrCapture.hciOcrCaptureRelease();</div>
+</div><!-- fragment --><p>当不再使用其它灵云能力时，需要反初始化系统模块，请参见 <a class="el" href="hci_sys_intro_page.html#hci_sys_init">系统模块的初始化/终止</a>。 </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="hci_dev_content.html">开发指南</a></li><li class="navelem"><a class="el" href="hci_dev_ext_api.html">扩展API</a></li>
+    <li class="footer">生成于 2015年 七月 23日 星期四 17:55:50 , 为 灵云SDK开发手册(Java API)使用 
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>灵云SDK开发手册(Java API): OCR能力描述</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">灵云SDK开发手册(Java API)
+   &#160;<span id="projectnumber">3.9</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li class="current"><a href="pages.html"><span>开发指南</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('hci_ocr_page.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>全部</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>页</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">OCR能力描述 </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="capkey_detail"></a>
+能力列表</h1>
+<p>下面列出灵云支持的OCR能力中的识别功能：</p>
+<p><b>云端中文OCR能力</b> </p>
+<table class="doxtable">
+<tr>
+<td><b>能力Key</b> </td><td><b>语种</b> </td><td><b>领域</b>  </td></tr>
+<tr>
+<td>ocr.cloud </td><td>中文简繁体 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.template </td><td>模板识别 </td><td>目前可以指定为dlcard（驾驶证）、vlcard（行驶证）、idcard（身份证）  </td></tr>
+</table>
+<p><b>云端多语种OCR能力</b> </p>
+<table class="doxtable">
+<tr>
+<td><b>能力Key</b> </td><td><b>语种</b> </td><td><b>领域</b>  </td></tr>
+<tr>
+<td>ocr.cloud.chinese </td><td>中文 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.english </td><td>纯英文 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.japanese </td><td>日语 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.korean </td><td>韩语 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.german </td><td>德语 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.french </td><td>法语 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.russian </td><td>俄语 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.spanish </td><td>西班牙语 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.portuguese </td><td>葡萄牙语 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.indonesian </td><td>印尼语 </td><td>通用  </td></tr>
+<tr>
+<td>ocr.cloud.italian </td><td>意大利语 </td><td>通用  </td></tr>
+</table>
+<p><b>本地端OCR能力</b> </p>
+<table class="doxtable">
+<tr>
+<td><b>能力Key</b> </td><td><b>语种</b> </td><td><b>领域</b> </td><td><b>所需本地库文件</b>  </td></tr>
+<tr>
+<td>ocr.local </td><td>中文简繁体 </td><td>通用 </td><td>iread_chs.dat<br/>
+ iread_cht.dat<br/>
+ iread_eng.dat<br/>
+ iread_engdict.dat<br/>
+ jt_t2s.dat<br/>
+   </td></tr>
+<tr>
+<td>ocr.local.english </td><td>本地英文 </td><td>通用 </td><td>iread_chs.dat<br/>
+ iread_cht.dat<br/>
+ iread_eng.dat<br/>
+ iread_engdict.dat<br/>
+ jt_t2s.dat<br/>
+   </td></tr>
+</table>
+<p><b>本地端OCR模板能力</b> </p>
+<table class="doxtable">
+<tr>
+<td><b>能力Key</b> </td><td><b>语种</b> </td><td><b>领域</b> </td><td><b>所需本地库文件</b>  </td></tr>
+<tr>
+<td>ocr.local.template.v6 </td><td>本地模板识别能力 </td><td>通用 </td><td>iRead_Binary_GB.dat<br/>
+ iRead_Cmn_LM.dat<br/>
+ iRead_Gray_GBK.dat<br/>
+   </td></tr>
+</table>
+<p><b>本地端OCR名片能力</b> </p>
+<table class="doxtable">
+<tr>
+<td><b>能力Key</b> </td><td><b>语种</b> </td><td><b>领域</b> </td><td><b>所需本地库文件</b>  </td></tr>
+<tr>
+<td>ocr.local.bizcard.v6 </td><td>本地名片识别能力,iOS暂不支持该能力 </td><td>通用 </td><td>LM_cn.dat<br/>
+   </td></tr>
+</table>
+<h1><a class="anchor" id="ocr_templates"></a>
+模板列表</h1>
+<p>OCR模板识别能力支持的模板列表 </p>
+<table class="doxtable">
+<tr>
+<td><b>模板名</b> </td><td><b>对应云端领域</b> </td><td><b>可用模板文件</b> </td><td><b>模板索引号</b> </td><td><b>模板页索引号</b> </td><td><b>说明</b> </td><td><b>模板依赖资源文件</b>  </td></tr>
+<tr>
+<td rowspan="2">身份证 </td><td rowspan="2">idcard </td><td rowspan="2">IDCard_EN.xml </td><td>0 </td><td>0 </td><td>正面 </td><td rowspan="2">iRead_IDCard_Gender.dat<br/>
+ iRead_IDCard_Gray.dat<br/>
+ iRead_IDCard_LM.dat<br/>
+ iRead_IDCard_Nation.dat<br/>
+   </td></tr>
+<tr>
+<td>0 </td><td>1 </td><td>反面  </td></tr>
+<tr>
+<td>增值税发票 </td><td>&#160; </td><td>iRead_VAT_EN.xml </td><td>0 </td><td>0 </td><td>&#160; </td><td>iRead_VAT_Gray.dat<br/>
+ iRead_VAT_LM.dat<br/>
+ iRead_VAT_TaxRate.dat<br/>
+   </td></tr>
+</table>
+<p>本地模板识别需要通过加载接口进行模板文件的加载，识别过程中指定templateId为加载返回的ID。<br/>
+ 模板依赖资源文件需要放到模板文件所在路径中，不然加载会失败。<br/>
+ 其中模板文件建议放在不同于datapath的路径中，模板依赖文件同名文件以发布目录中模板文件夹为准。 </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="hci_dev_content.html">开发指南</a></li><li class="navelem"><a class="el" href="hci_dev_appendix.html">附录</a></li><li class="navelem"><a class="el" href="caplist_page.html">能力列表</a></li>
+    <li class="footer">生成于 2015年 七月 23日 星期四 17:55:50 , 为 灵云SDK开发手册(Java API)使用 
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
+  </ul>
+</div>
+</body>
+</html>
