@@ -25,7 +25,7 @@ public class TestA1 {
 		
 		xmlFilePath=basePath+"data/templates/IdCard/IDCard_EN.xml";
 		//TODO fixed the path
-		sourceFileName=basePath+"sCardPic/IDCard.jpg";
+		sourceFileName=basePath+"sCardPic/f1.jpg";
 		
 		//用户信息
 		AccountInfo mAccountInfo;
