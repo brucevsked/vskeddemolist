@@ -5,7 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -51,6 +54,7 @@ public class ExcelUtils {
 		return m;
 	}
 	
+	
 	public static Map<String, String[][]> hssfRead(String fname) throws Exception{
 		Map<String, String[][]> m=new HashMap<String, String[][]>();
 	
@@ -80,6 +84,77 @@ public class ExcelUtils {
 			}
 			m.put(sheetName, sheetData);
 		}
+		wb.close();
+		return m;
+	}
+	
+	public static Map<String, List<String[]>> xssfRead1(String fname) throws Exception{
+		Map<String, List<String[]>> m=new TreeMap<String, List<String[]>>();
+		
+		List<String[]> sheetData=null;
+		
+		String cellData="";
+		OPCPackage pkg = OPCPackage.open(new File(fname));
+		XSSFWorkbook wb = new XSSFWorkbook(pkg);
+		int sheetCount=wb.getNumberOfSheets();
+		for(int sheetIndex=0;sheetIndex<sheetCount;sheetIndex++){
+			XSSFSheet sheet=wb.getSheetAt(sheetIndex);
+			String sheetName=sheet.getSheetName();
+			sheetData=new LinkedList<String[]>();
+			int rowCount=sheet.getPhysicalNumberOfRows();
+			for(int rowIndex=0;rowIndex<rowCount;rowIndex++){
+				XSSFRow row=sheet.getRow(rowIndex);
+				int columnCount=row==null?0:row.getLastCellNum();
+
+				String[] rowData=new String[columnCount];
+				boolean flag=false;
+				int tmpCount=0;
+				for(int columnIndex=0;columnIndex<columnCount;columnIndex++){
+					XSSFCell cell=row.getCell(columnIndex);
+					cellData=getCellValue(cell);
+					rowData[columnIndex]=cellData;
+					if(cellData==null || "".equals(cellData))tmpCount++;
+					if(tmpCount==columnCount-1)flag=true;
+				}
+				if(!flag)sheetData.add(rowData);
+			}
+			m.put(sheetName, sheetData);
+		}
+//		wb.close();
+		pkg.close();
+		return m;
+	}
+	
+	public static Map<String, List<String[]>> hssfRead1(String fname) throws Exception{
+		Map<String, List<String[]>> m=new TreeMap<String, List<String[]>>();
+		List<String[]> sheetData=null;
+		String cellData="";
+		InputStream is=new FileInputStream(fname);
+		HSSFWorkbook wb=new HSSFWorkbook(new POIFSFileSystem(is));
+		int sheetCount=wb.getNumberOfSheets();
+		for(int sheetIndex=0;sheetIndex<sheetCount;sheetIndex++){
+			HSSFSheet hs=wb.getSheetAt(sheetIndex);
+			String sheetName=hs.getSheetName();
+			sheetData=new LinkedList<String[]>();
+			int rowCount=hs.getPhysicalNumberOfRows();
+			for(int rowIndex=0;rowIndex<rowCount;rowIndex++){
+				HSSFRow row=hs.getRow(rowIndex);
+				int columnCount=row==null?0:row.getLastCellNum();
+				String[] rowData=new String[columnCount];
+				boolean flag=false;
+				int tmpCount=0;
+				for(int columnIndex=0;columnIndex<columnCount;columnIndex++){
+					HSSFCell cell=row.getCell(columnIndex);
+					cellData=getCellValue(cell);
+					rowData[columnIndex]=cellData;
+					if(cellData==null || "".equals(cellData))tmpCount++;
+					if(tmpCount==columnCount-1)flag=true;
+				}
+				if(!flag)sheetData.add(rowData);
+			}
+			m.put(sheetName, sheetData);
+		}
+		wb.close();
 		return m;
 	}
 	
