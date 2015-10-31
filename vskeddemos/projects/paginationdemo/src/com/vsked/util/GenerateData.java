@@ -1,4 +1,4 @@
-package com.vsked.util;
+package com.hyfd.common;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -13,12 +13,24 @@ public class GenerateData {
 	static DecimalFormat floatFormat = new DecimalFormat("0.00");
 	static String dateFormat="yyyy-MM-dd";
 	static String timeFormat="HH:mm:ss";
+	static String longDateFormat="yyyyMMDDHHmmssSSS";
 	static DateFormat df = new SimpleDateFormat(dateFormat+" "+timeFormat);
+	static DateFormat dfl=new SimpleDateFormat(longDateFormat);
 	static String letterLow="abcdefghijklmnopqrstuvwxyz";
 	static String letterUpper=letterLow.toUpperCase();
 	
 	public static int getIntData(int inD){
 		return r.nextInt(inD);
+	}
+	
+	public static int getIntData(int inMax,int inCount){
+		String c="";
+		int x=0;
+		while(c.length()<inCount){
+			x=getIntData(inMax);
+			c+=""+x+"";
+		}
+		return new Integer(c);
 	}
 	
 	public static float getFloatData(int inD){
@@ -69,8 +81,13 @@ public class GenerateData {
 		return df.format(Calendar.getInstance().getTime());
 	}
 	
+	public static String getLongDate(){
+		return dfl.format(Calendar.getInstance().getTime());
+	}
+	
 	public static void main(String[] args) throws Exception {
 		System.out.println(GenerateData.getIntData(26));
+		System.out.println(GenerateData.getIntData(9,6));
 		System.out.println(GenerateData.getFloatData(10));
 		System.out.println(GenerateData.getCharLow());
 		System.out.println(GenerateData.getChineseChar0());
@@ -81,6 +98,8 @@ public class GenerateData {
 		System.out.println(GenerateData.getStringLow(5));
 		System.out.println(GenerateData.getStringUpper(5));
 		System.out.println(GenerateData.getSystemDateTime());
+		System.out.println(GenerateData.getLongDate());
+		
 		
 	}
 
