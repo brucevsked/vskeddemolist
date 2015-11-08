@@ -3,6 +3,7 @@ package com.vsked.test;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -11,7 +12,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -19,8 +20,7 @@ public class TestDemo2 {
 
 	public static void main(String[] args) throws Exception {
 		// 核心应用类
-		HttpClient httpClient = new DefaultHttpClient();
-
+		HttpClient httpClient = HttpClients.createDefault();
 		List<NameValuePair> parameterList = new ArrayList<NameValuePair>();
 		parameterList.add(new BasicNameValuePair("q", "httpclient"));
 		parameterList.add(new BasicNameValuePair("btnG", "Google Search"));
@@ -37,7 +37,6 @@ public class TestDemo2 {
 		// 打印响应信息
 		System.out.println(response.getStatusLine());
 		System.out.println(EntityUtils.toString(entity));
-		httpClient.getConnectionManager().shutdown();
 
 	}
 
