@@ -1,106 +1,145 @@
-package com.hyfd.common;
+package com.vsked.data;
 
-import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Random;
+import java.util.LinkedList;
+import java.util.List;
 
+import com.vsked.util.BaseJson;
 
 public class GenerateData {
 	
-	static Random r=new Random();
-	static DecimalFormat floatFormat = new DecimalFormat("0.00");
-	static String dateFormat="yyyy-MM-dd";
-	static String timeFormat="HH:mm:ss";
-	static String longDateFormat="yyyyMMDDHHmmssSSS";
-	static DateFormat df = new SimpleDateFormat(dateFormat+" "+timeFormat);
-	static DateFormat dfl=new SimpleDateFormat(longDateFormat);
-	static String letterLow="abcdefghijklmnopqrstuvwxyz";
-	static String letterUpper=letterLow.toUpperCase();
+	static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	
-	public static int getIntData(int inD){
-		return r.nextInt(inD);
-	}
+	static String[] columnArray={"\"userId\"","\"userName\"","\"userNick\"","\"userPass\"","\"userAge\"","\"akb45\"","\"akb44\"","\"akb43\"","\"akb42\"","\"akb41\"","\"akb51\"","\"akb52\""};
 	
-	public static int getIntData(int inMax,int inCount){
-		String c="";
-		int x=0;
-		while(c.length()<inCount){
-			x=getIntData(inMax);
-			c+=""+x+"";
+	static String[] sm={"\"text\"","\"dataIndex\"","\"hidden\"","\"align\"","\"menuDisabled\"","\"sortable\"","\"xtype\"","\"renderer\"","\"width\""};
+	
+	static int columnCount=12;
+	
+	/**
+	 * init the body data for UserServlet
+	 * @return List<VskUserT>
+	 * @throws Exception
+	 */
+	public static List<VskUserT> getBodyData() throws Exception{
+		List<VskUserT> userList=new LinkedList<VskUserT>();
+		for(int i=0;i<8;i++){
+			userList.add(new VskUserT(i, "user"+i, "nick"+i, "pass"+i, (18+i), sdf.parse("2014-08-09"), sdf.parse("2014-08-09")));
 		}
-		return new Integer(c);
+		return userList;
+		
 	}
 	
-	public static float getFloatData(int inD){
-		return new Float(floatFormat.format(r.nextFloat()*inD));
+	/**
+	 * generate grid head column data for SortGridServlet and GenerateServlet
+	 * data format
+	 * "fieldHeader":[{"a":"b","c":1,...},{...}],"fields":["a","b",...]
+	 * @return String
+	 */
+	public static String getHeadData(){
+		
+		String rd="function(v){return '<a href=\"javascript:alert(18);\">'+v+'</a>';}";
+		
+		String s="\"fieldHeader\":";
+		s+="[";
+		for(int i=0;i<columnCount;i++)
+			s+=("{"+getGridHead("\"columnS_"+i+"\"",""+columnArray[i]+"","-1","\"right\"","true","-1","-1",i==1?rd:"-1")+"},");
+		s=s.substring(0,s.length()-1);
+		s+="],\"fields\":[";
+		for(int i=0;i<columnCount;i++){
+			s+=(columnArray[i]+",");
+		}
+		s=s.substring(0,s.length()-1);
+		s+="]";
+		return s;
 	}
 	
-	public static char getCharLow(){
-		return letterLow.charAt(getIntData(26));
+	public static String getJsonBodyData(){
+		
+		String s="\"dataStr\":";
+		s+="[";
+		for(int i=0;i<10;i++)
+			s+=("{"+getGridBody("\""+i+"\"","\"nameIs"+i+"\"","\"nick"+i+"\"","\"ps"+i+"d\"","\""+(i+10)+"\"")+"},");
+		s=s.substring(0,s.length()-1);
+		s+="]";
+		return s;
 	}
 	
-	public static char getChineseChar0(){
-		return (char)(0x4e00 + r.nextInt(0x9fa5 - 0x4e00 + 1));
-	}
-	public static char getChineseChar1() throws Exception {
-		byte[] b = new byte[2];
-		b[0] = (new Integer((176 + Math.abs(r.nextInt(39))))).byteValue();
-		b[1] = (new Integer(161 + Math.abs(r.nextInt(93)))).byteValue();
-		return new String(b, "GB2312").charAt(0);
-	}
-	
-	public static String getChineseString0(int inLength){
-		String s="";
-		for(int i=0;i<inLength;i++) s+=getChineseChar0();
-		return s;		
-	}
-	
-	public static String getChineseString1(int inLength) throws Exception {
-		String s="";
-		for(int i=0;i<inLength;i++) s+=getChineseChar1();
-		return s;		
-	}
-	
-	public static char getCharUpper(){
-		return letterUpper.charAt(getIntData(26));
-	}
-	
-	public static String getStringLow(int inLentgh){
-		StringBuilder sb=new StringBuilder("");
-		for(int i=0;i<inLentgh;i++) sb.append(letterLow.charAt(getIntData(26)));
+    public static String getJsonBodyData(int st,int pageSize,boolean isArray){
+    	StringBuilder sb=new StringBuilder("\"dataStr\":");
+		sb.append("[");
+		for(int i=(st-1)*pageSize;i<st*pageSize;i++)
+			sb.append(isArray?("[\""+i+"\",\"nameIs"+i+"\",\"nick"+i+"\",\"ps"+i+"d\",\""+(i+10)+"\"],") :("{"+getGridBody("\""+i+"\"","\"nameIs"+i+"\"","\"nick"+i+"\"","\"ps"+i+"d\"","\""+(i+18)+"\"","\"ttyynjiopc_"+(i+17)+"\"","\"vgy61"+(i+16)+"\"","\"ctgh12303"+(i+15)+"\"","\"888*--+"+(i+14)+"\"","\"ca09_?"+(i+13)+"\"","\"a_8Y$#_"+(i+12)+"\"","\"b_09_"+(i+11)+"\"")+"},"));
+		sb.setLength(sb.length()-1);
+		sb.append("]");
 		return sb.toString();
 	}
 	
-	public static String getStringUpper(int inLentgh){
-		return getStringLow(inLentgh).toUpperCase();
+    /**
+     * generate pageInfo json Object
+     * @param int st
+     * @param int pageSize
+     * @return
+     */
+	public static String getPageInfo(int st,int pageSize){
+		String s="\"pageInfo\": {";
+		s+="\"pageSize\":"+ pageSize +",";
+		s+="\"currentPage\":"+ st +",";
+		s+="\"columnLines\": false ,";
+		s+="\"isMutiSelect\": false,";
+		s+="\"gridId\": \"grid1a\",";
+		s+="\"isPage\": true ";
+		s+="}";
+		return s;
 	}
 	
-	public static String getSystemDateTime()  {
-		return df.format(Calendar.getInstance().getTime());
+	public static String getTotal(int maxCount){
+		return "\"totalCount\":"+maxCount;
 	}
 	
-	public static String getLongDate(){
-		return dfl.format(Calendar.getInstance().getTime());
+	/**
+	 * sm={"\"text\"","\"dataIndex\"","\"hidden\"","\"align\"","\"menuDisabled\"","\"sortable\"","\"xtype\"","\"renderer\"","\"width\""};
+	 * @param ss
+	 * @return
+	 */
+	public static String getGridHead(String... ss){
+		String s="";
+		for(int i=0;i<ss.length;i++){
+			s+="-1".equals(ss[i])?"":","+sm[i]+":"+ss[i];
+		}
+		s=s.substring(1);
+		return s;
 	}
 	
-	public static void main(String[] args) throws Exception {
-		System.out.println(GenerateData.getIntData(26));
-		System.out.println(GenerateData.getIntData(9,6));
-		System.out.println(GenerateData.getFloatData(10));
-		System.out.println(GenerateData.getCharLow());
-		System.out.println(GenerateData.getChineseChar0());
-		System.out.println(GenerateData.getChineseString0(15));
-		System.out.println(GenerateData.getChineseChar1());
-		System.out.println(GenerateData.getChineseString1(15));
-		System.out.println(GenerateData.getCharUpper());
-		System.out.println(GenerateData.getStringLow(5));
-		System.out.println(GenerateData.getStringUpper(5));
-		System.out.println(GenerateData.getSystemDateTime());
-		System.out.println(GenerateData.getLongDate());
-		
-		
+	/**
+	 * columnArray={"\"userId\"","\"userName\"","\"userNick\"","\"userPass\"","\"userAge\"","\"userId\""};
+	 * @param ss
+	 * @return
+	 */
+	public static String getGridBody(String... ss){
+		String s="";
+		for(int i=0;i<ss.length;i++){
+			s+=","+columnArray[i]+":"+ss[i];
+		}
+		s=s.substring(1);
+		return s;
+	}
+	
+	public static String getGridBodyForArray(String... ss){
+		String s="";
+		for(int i=0;i<ss.length;i++){
+			s+=","+columnArray[i]+":"+ss[i];
+		}
+		s=s.substring(1);
+		return s;
+	}
+	
+	public static void main(String[] args) {
+		String s="";
+		for(int i=0;i<columnCount;i++)
+			s+=("{"+getGridBody("\""+i+"\"","\"nameIs"+i+"\"","\"nick"+i+"\"","\"ps"+i+"d\"","\""+(i+10)+"\"")+"},");
+		s=s.substring(0,s.length()-1);
+		System.out.println(s);
 	}
 
 }
