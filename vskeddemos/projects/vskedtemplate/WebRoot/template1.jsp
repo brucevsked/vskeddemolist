@@ -15,10 +15,12 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<script type="text/javascript" charset="UTF-8" src="${basePath }js/project/baseSet.js" ></script>
   </head>
   
   <body>
     template1.jsp <br>这儿写完base标签以后其他可以直接写相对根目录
     ${pageContext.request.scheme }://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/ <br>
+    <button onclick="ts();">getBasePath</button>
   </body>
 </html>

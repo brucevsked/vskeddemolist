@@ -19,10 +19,12 @@ request.setAttribute("basePath", basePath);
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<script type="text/javascript" charset="UTF-8" src="${basePath }js/project/baseSet.js" ></script>
   </head>
   
   <body>
-  template2.jsp <br>
-  ${basePath }
+  template3.jsp <br>
+  ${basePath } <br>
+  <button onclick="ts();">getBasePath</button>
   </body>
 </html>
