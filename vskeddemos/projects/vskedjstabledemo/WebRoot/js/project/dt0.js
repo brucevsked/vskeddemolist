@@ -10,6 +10,14 @@
 	            "visible": false,
 	            "searchable": false
 	        }],
+	        dom: 'Bfrtip',
+	        buttons: [{ extend: 'colvis',
+	        	        columns: ':not(:first-child)'
+	        	       },
+	        	        {
+	        	        	extend:'excel' , 
+	        	        	exportOptions: { columns: [ 1,2,3,4,5,6 ] } 
+	        	        }], //[隐藏显示列时]不显示第一列
 	        "fnRowCallback":function(nRow,aData,iDataIndex){
 	            var suId = aData[0];
 	            $('td:eq(-1)',nRow).html('<button onclick=toEdit("'+suId+'")>编辑</button>');
