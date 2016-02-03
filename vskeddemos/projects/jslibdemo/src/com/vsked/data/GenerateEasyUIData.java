@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspWriter;
-
 import com.vsked.util.BaseJson;
 
 public class GenerateEasyUIData {
@@ -23,12 +22,16 @@ public class GenerateEasyUIData {
 	}
 	
 	public void proc(HttpServletRequest req,HttpServletResponse res,JspWriter out) throws Exception{
-		out.write("{\"total\":2000,\"rows\":"+getBodyData()+",\"columns\":"+getHeadData()+","+getPageInfo(true,1, 15)+"}");
+		int page=Integer.parseInt(req.getParameter("page")==null?"1":req.getParameter("page")); //当前页
+		int rows=Integer.parseInt(req.getParameter("rows")==null?"10":req.getParameter("rows"));  //页大小
+//		System.out.println(page+"|"+rows);
+		out.write("{\"total\":20000,\"rows\":"+getBodyData(page,rows)+",\"columns\":"+getHeadData()+","+getPageInfo(true,page, rows)+"}");
 	}
 	
-	public String getBodyData(){
+	public String getBodyData(int start,int pagesize){
+		start=start==1?1:(start-1)*pagesize+1;
 		List<VskUserT> userList=new LinkedList<VskUserT>();
-		for(int i=0;i<20;i++){
+		for(int i=start;i<start+pagesize;i++){
 			userList.add(new VskUserT(i, "user"+i, "nick"+i));
 		}
 		String s=BaseJson.listToJson(userList);
@@ -65,5 +68,5 @@ public class GenerateEasyUIData {
 		s+="}";
 		return s;
 	}
-
+	
 }
