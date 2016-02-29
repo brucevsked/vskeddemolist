@@ -35,13 +35,15 @@ public class TestDemo6 {
 			// 打印响应信息
 			System.out.println(response.getStatusLine());
 			System.out.println(EntityUtils.toString(entity));
-			getCookie(httpClient);
+			
 
 			myUrl = "http://localhost:8080/hyfd/MobileInfoController/toList.html?pageSize=10";
 			request = new HttpPost(myUrl);
 			// 打印请求信息
 			System.out.println(request.getRequestLine());
 
+			request.setHeader("Cookie", getCookie(httpClient));
+			
 			response = httpClient.execute(request);
 			entity = response.getEntity();
 			// 打印响应信息
