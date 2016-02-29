@@ -59,6 +59,7 @@ public class TestDemo6 {
 	
 	public static String getCookie(HttpClient hc){
 		StringBuilder sb=new StringBuilder();
+		//TODO fixed here
 		List<Cookie> cookies=((AbstractHttpClient)hc).getCookieStore().getCookies();
 		for(Cookie cookie:cookies){
 			sb.append(cookie.getName()+""+cookie.getValue()+";");
