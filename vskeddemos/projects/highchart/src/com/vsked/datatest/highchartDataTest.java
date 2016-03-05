@@ -20,10 +20,10 @@ public class highchartDataTest {
 		String tooltip_valueSuffix="万元";
 		String series="";
 		series+="{\"name\":\"线上online1\",  \"data\":["+getRandom(10)+"]},";
-		series+="{\"name\":\"线上online2\", \"data\":["+getRandom(12)+"]},";
-		series+="{\"name\":\"线上online3\", \"data\":["+getRandom(5)+"]},";
-		series+="{\"name\":\"线上online4\", \"data\":["+getRandom(12)+"]},";
-		series+="{\"name\":\"线下offline1\", \"data\":["+getRandom(6)+"]},";
+//		series+="{\"name\":\"线上online2\", \"data\":["+getRandom(12)+"]},";
+//		series+="{\"name\":\"线上online3\", \"data\":["+getRandom(5)+"]},";
+//		series+="{\"name\":\"线上online4\", \"data\":["+getRandom(12)+"]},";
+//		series+="{\"name\":\"线下offline1\", \"data\":["+getRandom(6)+"]},";
 		series+="{\"name\":\"线下offline2\", \"data\":["+getRandom(9)+"]},";
 		series+="{\"name\":\"线下offline3\",  \"data\":["+getRandom(12)+"]}";
 		
