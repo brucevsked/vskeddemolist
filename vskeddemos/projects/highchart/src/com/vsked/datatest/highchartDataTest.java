@@ -8,7 +8,7 @@ import com.vsked.highchart.HCGlobal;
 
 public class highchartDataTest {
 	
-	public static String getLineBaseTest(){
+	public static String getBaseTest(){
 		
 		StringBuilder sb=new StringBuilder();
 		for(int i=1;i<13;i++) sb.append("\""+i+"月\",");
@@ -38,7 +38,7 @@ public class highchartDataTest {
 		
 //		System.out.println(highchartData.getLineBase(dtm));
 		
-		return highchartData.getLineBase(dtm);
+		return highchartData.getBase(dtm);
 	}
 	
 	public static String getRandom(int count){

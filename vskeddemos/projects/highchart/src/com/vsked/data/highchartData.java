@@ -10,7 +10,7 @@ public class highchartData {
 		return "\""+key+"\"";
 	}
 	
-	public static String getLineBase(Map<String, String> dtm){
+	public static String getBase(Map<String, String> dtm){
 		StringBuilder sb=new StringBuilder();
 		sb.append("{");//start chart
 		sb.append(getJsonKey("credits")+":{"+getJsonKey("enabled")+":false},");

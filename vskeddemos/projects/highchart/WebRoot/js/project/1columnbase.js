@@ -6,10 +6,11 @@ $(function () {
 	c1.attr('id','myLineBaseContent');
 	$(document.body).append(c1);
 	
-	myBasePath=basePath+'proc/0linebaseproc.jsp';
+	myBasePath=basePath+'proc/1columnbaseproc.jsp';
 	$.post(myBasePath,{ myName: 'vsked' },function (dt){
 		$('#myLineBaseContent').highcharts({
 			credits:{enabled:dt.credits.enabled},
+			chart: {type: 'column' },
 	        title  :{text:dt.title.text},
 	       // subtitle:{text: dt.subtitle.text},
 	        xAxis: {
