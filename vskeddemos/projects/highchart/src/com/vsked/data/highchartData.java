@@ -45,7 +45,6 @@ public class highchartData {
 		sb.append("}");//end chart
 		
 		return sb.toString();
-	}
-	
+	}	
 
 }

@@ -7,6 +7,7 @@ import com.vsked.data.highchartData;
 import com.vsked.highchart.HCGlobal;
 
 public class highchartDataTest {
+	static Random rd=new Random();
 	
 	public static String getBaseTest(){
 		
@@ -41,8 +42,32 @@ public class highchartDataTest {
 		return highchartData.getBase(dtm);
 	}
 	
+public static String getPieBaseTest(){
+		
+		StringBuilder sb=new StringBuilder();
+		for(int i=1;i<13;i++) sb.append("\""+i+"月\",");
+		sb.setLength(sb.length()-1);
+		
+		String title="主标题:虚商部2016年1月个人销售业绩f6888";
+		String tooltip_valueSuffix="{series.name}: <b>{point.percentage:.1f}%</b>";
+		String series="";
+		series+="{\"name\":\"线上online1\",  \"data\":["+getRandom(10)+"]},";
+		series+="{\"name\":\"线下offline2\", \"data\":["+getRandom(9)+"]},";
+		series+="{\"name\":\"线下offline3\",  \"data\":["+getRandom(12)+"]}";
+		
+			
+		Map<String, String> dtm=new HashMap<String, String>();
+		dtm.put(HCGlobal.title, title);
+		dtm.put(HCGlobal.tooltip_valueSuffix, tooltip_valueSuffix);
+		dtm.put(HCGlobal.series, series);
+		
+//		System.out.println(highchartData.getLineBase(dtm));
+		
+		return highchartData.getBase(dtm);
+	}
+	
 	public static String getRandom(int count){
-		Random rd=new Random();
+		
 		StringBuilder sb=new StringBuilder();
 		for(int i=0;i<count;i++){
 			sb.append(rd.nextInt(100)+",");
@@ -50,9 +75,13 @@ public class highchartDataTest {
 		sb.setLength(sb.length()-1);
 		return sb.toString();
 	}
+	
+	public static String getRandomFloat(){
+		return rd.nextFloat()*rd.nextInt(2000)+"";
+	}
 
 	public static void main(String[] args) {
-
+		System.out.println(getRandomFloat());
 	}
 
 }
