@@ -4,10 +4,10 @@
 ######################################################
 
 #应用程序序号
-appKey=985d5472 
+appKey=5d5d543b 
 
 #开发者密钥
-developerKey=70b399f73d425f9c0ae8035769b31535 
+developerKey=7e0e780f13ede13ac227ab5593779961
 
 #灵云云服务的接口地址 
 cloudUrl=test.api.hcicloud.com:8888 
