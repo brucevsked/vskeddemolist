@@ -18,9 +18,14 @@ request.setAttribute("basePath", basePath);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   </head>
-  
-  <body>
-  <a href="${basePath }demo/demo1.jsp">demo1</a><br>
-  <a href="${basePath }demo/demo2.jsp">demo2</a><br>
-  </body>
+
+<body>
+    <form name="myform" action="${basePath }demoproc/demo1proc.jsp" method="post" enctype="multipart/form-data" >
+       username: <input type="text" name="uname1" ><br>
+       username: <input type="text" name="uname2" ><br>
+       userfile: <input type="file" name="ufile1"><br>
+       userfile: <input type="file" name="ufile2"><br>
+       <button type="submit">upload</button>
+    </form>
+</body>
 </html>

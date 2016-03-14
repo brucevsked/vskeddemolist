@@ -20,9 +20,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="">
 	<meta http-equiv="description" content="">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
   </head>
   
   <body>
@@ -40,10 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            //检查当前项目是普通表单项目还是上传文件。
            if (item.isFormField()) {//如果是普通表单项目，显示表单内容。
                String fieldName = item.getFieldName();
-               
-               if (fieldName.equals("uname")){ //对应demo1.html中type="text" name="uname"     
-                   out.println("<br>uname is:" + new String(item.getString().getBytes(),"utf-8"));
-               }
+               out.println("<br>"+fieldName+" is:" + item.getString("utf-8"));
            } else {//如果是上传文件，显示文件名。
                String fileName=item.getName();
                out.println("<br>upload file name is:" + new String(fileName.getBytes(),"utf-8"));

@@ -20,7 +20,14 @@ request.setAttribute("basePath", basePath);
   </head>
   
   <body>
-  <a href="${basePath }demo/demo1.jsp">demo1</a><br>
-  <a href="${basePath }demo/demo2.jsp">demo2</a><br>
+    <form name="myform" action="${basePath }demoproc/demo2proc.jsp" method="post" enctype="multipart/form-data" >
+       username: <input type="text" name="uname" ><br>
+       userpass: <input type="text" name="upass" ><br>
+       userage:  <input type="text" name="uage" ><br>
+       userfile1: <input type="file" name="ufile1"><br>
+       userfile2: <input type="file" name="ufile2"><br>
+       userfile3: <input type="file" name="ufile3"><br>
+       <button type="submit">upload</button>
+    </form>
   </body>
 </html>
