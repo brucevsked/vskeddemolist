@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>选择器</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="">
+<meta http-equiv="description" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="css/demo2.css">
+
+</head>
+
+<body>
+<button id="selAllBt" onclick="selectAllTest()">选中所有</button>
+<button id="selByIdBt" onclick="selectByIdTest()">根据Id选</button>
+<button id="selByClassBt" onclick="selectByClassTest()">根据样式选</button>
+<button id="selByTagBt" onclick="selectByTagTest()">根据标签类型</button>
+<button id="selByMutiClassBt" onclick="selectByMutiClassTest()">根据多个样式选</button>
+<button id="selFirstElBt" onclick="selectTagFirstTest()">选某标签第一个元素</button>
+<button id="selLastElBt" onclick="selectTagLastTest()">选某标签最后一个元素</button>
+<button id="selEvenTrElBt" onclick="selectEvenTrTest()">偶数表格行</button>
+<button id="selOddTrElBt" onclick="selectOddTrTest()">奇数表格行</button>
+
+
+
+<hr>
+<h1>Welcome to My Homepage</h1>
+<p class="intro">My name is Donald</p>
+<p>I live in Duckburg</p>
+<p>My best friend is Mickey</p>
+<p><input id="usName" value="myname is vsked"></p>
+<div id="choose" class="myStyleA1">
+Who is your favourite:
+<ul>
+<li>Goofy</li>
+<li>Mickey</li>
+<li>Pluto</li>
+</ul>
+</div>
+<table class="myStyleA3 myStyleA4 myStyleA5 myStyleA6">
+	<tr><td>cc1</td><td>cc2</td><td>cc3</td></tr>
+	<tr><td>ac1</td><td>6c2</td><td>cc3</td></tr>
+	<tr><td>bc1</td><td>7c2</td><td>cc3</td></tr>
+	<tr><td>dc1</td><td>8c2</td><td>cc3</td></tr>
+	<tr><td>ec1</td><td>9c2</td><td>cc3</td></tr>
+</table>
+<hr>
+
+
+
+  <script type="text/javascript" charset="UTF-8" src="js/lib/jquery.min.js"></script>
+  <script type="text/javascript" charset="UTF-8" src="js/project/demo2.js"></script>
+</body>
+</html>
