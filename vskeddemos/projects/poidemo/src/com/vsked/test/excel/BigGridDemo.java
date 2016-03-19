@@ -15,7 +15,7 @@
    limitations under the License.
 ==================================================================== */
 
-package org.apache.poi.xssf.usermodel.examples;
+package com.vsked.test.excel;
 
 import java.io.*;
 import java.util.*;
@@ -65,7 +65,7 @@ public class BigGridDemo {
     private static final String XML_ENCODING = "UTF-8";
     
     public static void main(String[] args) throws Exception {
-
+    	long writeStartTime=System.currentTimeMillis();
         // Step 1. Create a template file. Setup sheets and workbook-level objects such as
         // cell styles, number formats, etc.
 
@@ -91,6 +91,11 @@ public class BigGridDemo {
         FileOutputStream out = new FileOutputStream("big-grid.xlsx");
         substitute(new File("template.xlsx"), tmp, sheetRef.substring(1), out);
         out.close();
+        
+        System.out.println("耗时 :"+(System.currentTimeMillis()-writeStartTime)/1000f+" 秒 ");
+        
+        //Step 4. delete the template file
+        new File("template.xlsx").delete();
     }
 
     /**
