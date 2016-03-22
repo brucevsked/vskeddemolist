@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>获取硬件信息</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="">
+<meta http-equiv="description" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+</head>
+
+<body>
+<button onclick="document.write(CpuInfo())">cpu</button>
+<button onclick="document.write(MainBoard())">主板信息</button>
+<button onclick="document.write(RamInfo())">内存</button>
+<button onclick="document.write(IpInfo())">网络连接</button>
+<button onclick="document.write(OsInfo())">操作系统</button>
+<button onclick="document.write(UidInfo())">用户帐号</button>
+<button onclick="document.write(SysuidInfo())">系统组帐号</button>
+<button onclick="document.write(SysmadInfo())">管理组</button>
+<button onclick="document.write(SysserInfo())">安装的服务</button>
+
+<script type="text/javascript" charset="UTF-8" src="js/project/hardware.js"></script>
+</body>
+</html>
