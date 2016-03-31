@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service name="HelloWorld">
+    <description>HelloWorld Service Example </description>
+    <parameter name="ServiceClass">com.vsked.server.HelloWorldImpl</parameter>
+    <parameter name="useOriginalwsdl">false</parameter>
+    <operation name="sayHello">
+        <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+    </operation>
+</service>
