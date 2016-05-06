@@ -20,6 +20,7 @@ public class MyResponse {
         }
         result=sb.toString();
         System.out.println(result);
+        reader.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
