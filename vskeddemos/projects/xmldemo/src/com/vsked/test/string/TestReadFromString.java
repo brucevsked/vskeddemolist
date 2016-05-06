@@ -1,6 +1,8 @@
 package com.vsked.test.string;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.dom4j.Document;
@@ -9,12 +11,13 @@ import org.dom4j.Element;
 
 public class TestReadFromString {
 
-	public static void main(String[] args) {
-		testReadFromString();
+	public static void main(String[] args) throws Exception {
+//		testReadFromString1();
+		testReadFromString2();
 
 	}
 	
-	public static void testReadFromString(){
+	public static void testReadFromString1(){
 		String xmlData="";
 		xmlData+="<root>";
 		xmlData+="<house>";
@@ -26,6 +29,19 @@ public class TestReadFromString {
 		xmlData+="</root>";
 		
 		System.out.println(readXmlA1(xmlData));
+	}
+	
+	public static void testReadFromString2() throws Exception{
+		String xmlData="";
+		xmlData+="<productList>";
+		for(int i=0;i<10;i++){
+		xmlData+="<product>";
+		xmlData+="<productName>p"+i+"</productName>";
+		xmlData+="<productCode>c"+i+"</productCode>";
+		xmlData+="</product>";
+		}
+		xmlData+="</productList>";
+		System.out.println(getSomeData(xmlData));
 	}
 	
 	public static Map<String, String> readXmlA1(String xml) {
@@ -45,6 +61,20 @@ public class TestReadFromString {
 			e.printStackTrace();
 		}
 		return map;
+	}
+	
+	public static Map<String,String> getSomeData(String xml) throws Exception{
+		Map<String, String> rm=new HashMap<String, String>();
+		Document doc = DocumentHelper.parseText(xml);
+		Element rootElt = doc.getRootElement(); 
+		Iterator<?> it = rootElt.elementIterator();
+		while (it.hasNext()) {
+			Element recordEle = (Element) it.next();
+			System.out.println(recordEle);
+			
+		}
+		
+		return rm;
 	}
 
 }
