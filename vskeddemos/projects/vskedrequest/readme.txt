@@ -1,4 +1,5 @@
-﻿第一种
+﻿post请求方式有四种分别是
+第一种
 application/x-www-form-urlencoded
 第二种
 multipart/form-data

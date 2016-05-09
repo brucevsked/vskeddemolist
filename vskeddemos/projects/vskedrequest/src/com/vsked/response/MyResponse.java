@@ -11,6 +11,7 @@ public class MyResponse {
 		String result="";
 		try{
 		System.out.println("request method is|"+req.getMethod());
+		System.out.println("request content type is|"+req.getContentType());
 		
 		BufferedReader reader=new BufferedReader(new InputStreamReader(req.getInputStream()));
         String line = null;

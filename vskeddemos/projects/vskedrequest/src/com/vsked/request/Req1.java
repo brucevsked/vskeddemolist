@@ -6,11 +6,34 @@ import com.vsked.util.ToolHttp;
 public class Req1 {
 
 	public static void main(String[] args) {
-		testR1();
+		xwwwformurlencodedSend();
+//		formdataSend();
+//		jsonSend();
+//		textxmlSend();
 
 	}
 	
-	public static void testR1(){
+	public static void xwwwformurlencodedSend(){
+		String postMethod="application/x-www-form-urlencoded";
+		testR1(postMethod);
+	}
+	
+	public static void formdataSend(){
+		String postMethod="multipart/form-data";
+		testR1(postMethod);
+	}
+	
+	public static void jsonSend(){
+		String postMethod="application/json";
+		testR1(postMethod);
+	}
+	
+	public static void textxmlSend(){
+		String postMethod="text/xml";
+		testR1(postMethod);
+	}
+	
+	public static void testR1(String postMethod){
 		String url="http://127.0.0.1:8080/vskedrequest/resp/r1.jsp";
 		String orderid="0429326171241361";
 		String state="9999";
@@ -36,7 +59,7 @@ public class Req1 {
 		
 		sb.append("}");
 		
-		String responseMsg=ToolHttp.post(false, url, sb.toString(), "application/x-www-form-urlencoded");
+		String responseMsg=ToolHttp.post(false, url, sb.toString(), postMethod);
 		System.out.println(responseMsg);
 	}
 	
