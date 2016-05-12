@@ -2,9 +2,7 @@ package com.vsked.test.string;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -35,7 +33,7 @@ public class TestReadFromString {
 		String xmlData="";
 		xmlData+="<productList>";
 		for(int i=0;i<10;i++){
-		xmlData+="<product>";
+		xmlData+="<product ps=\"ps"+i+"\">";
 		xmlData+="<productName>p"+i+"</productName>";
 		xmlData+="<productCode>c"+i+"</productCode>";
 		xmlData+="</product>";
@@ -63,15 +61,19 @@ public class TestReadFromString {
 		return map;
 	}
 	
-	public static Map<String,String> getSomeData(String xml) throws Exception{
-		Map<String, String> rm=new HashMap<String, String>();
+	public static Map<String,Map<String, String>> getSomeData(String xml) throws Exception{
+		Map<String, Map<String, String>> rm=new HashMap<String, Map<String,String>>();
 		Document doc = DocumentHelper.parseText(xml);
 		Element rootElt = doc.getRootElement(); 
 		Iterator<?> it = rootElt.elementIterator();
 		while (it.hasNext()) {
 			Element recordEle = (Element) it.next();
-			System.out.println(recordEle);
-			
+			Map<String, String> tmpMap=new HashMap<String, String>();
+			tmpMap.put("productName", recordEle.elementText("productName"));
+			tmpMap.put("productCode", recordEle.elementText("productCode"));
+//			System.out.println(recordEle.attributeValue("ps"));
+//			System.out.println(recordEle.elementText("productName")+"|"+recordEle.elementText("productCode"));
+			rm.put(recordEle.attributeValue("ps"), tmpMap);
 		}
 		
 		return rm;
