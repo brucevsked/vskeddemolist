@@ -26,7 +26,8 @@ public class JdbcRealmTest {
 		jr.setPermissionsLookupEnabled(true);
 		jr.setAuthenticationQuery("SELECT PASSWORD FROM account WHERE name = ?");  
 		jr.setUserRolesQuery("SELECT NAME FROM role WHERE id =(SELECT roleId FROM account_role WHERE userId = (SELECT id FROM account WHERE NAME = ?))");  
-		jr.setPermissionsQuery("SELECT NAME FROM permission WHERE id in (SELECT permissionId FROM permission_role WHERE (SELECT id FROM role WHERE NAME = ?))"); 
+		//jr.setPermissionsQuery("SELECT NAME FROM permission WHERE id in (SELECT permissionId FROM permission_role WHERE (SELECT id FROM role WHERE NAME = ?))"); 
+		jr.setPermissionsQuery("SELECT NAME FROM permission WHERE id in (SELECT permissionId FROM permission_role WHERE roleId=(SELECT id FROM role WHERE NAME = ?))"); 
 		
 		DefaultSecurityManager dsm=new DefaultSecurityManager(jr);
 		SecurityUtils.setSecurityManager(dsm); 
