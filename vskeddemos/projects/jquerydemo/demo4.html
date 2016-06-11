@@ -4,7 +4,7 @@
 <!-- must set here! -->
 <base href="">
 
-<title>页面</title>
+<title>操作单选与多选</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -14,9 +14,26 @@
 </head>
 
 <body>
+请选择国家 <button onclick="getSelCou()">取选中国家值</button><br>
+
+<input type="radio" name="country" id="usa"  value="1" >美国1 <br>
+<input type="radio" name="country" id="ger"  value="2">德国2 <br>
+<input type="radio" name="country" id="fre"  value="3" checked="checked" >法国3 <br>
+<input type="radio" name="country" id="cha"  value="4">中国4 <br>
+<input type="radio" name="country" id="kor"  value="5">韩国5 <br>
+
+请选择修行境界 <button onclick="getSelC1()">取选修行境界值</button><br>
+
+<input type="checkbox" name="c1" id="ca"  value="1" >万法全通1 <br>
+<input type="checkbox" name="c1" id="cb"  value="2" checked="checked">忘我杀境2 <br>
+<input type="checkbox" name="c1" id="cc"  value="3" checked="checked" >唯情不破3 <br>
+<input type="checkbox" name="c1" id="cd"  value="4">唯我剑宗4 <br>
+<input type="checkbox" name="c1" id="ce"  value="5" checked="checked" >仁者剑侠5 <br>
+
+
 
 
   <script type="text/javascript" charset="UTF-8" src="js/lib/jquery.min.js"></script>
-  <script type="text/javascript" charset="UTF-8" src="js/project/demo1.js"></script>
+  <script type="text/javascript" charset="UTF-8" src="js/project/demo4.js"></script>
 </body>
 </html>
