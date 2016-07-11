@@ -8,4 +8,15 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
+<servlet>
+	<servlet-name>initServlet</servlet-name>
+	<servlet-class>com.vsked.log.Log4jInit</servlet-class>
+	<init-param>
+		<param-name>log4jConfigPath</param-name>
+		<param-value>WEB-INF/classes/log4jconfig.properties</param-value>
+	</init-param>
+	<load-on-startup>1</load-on-startup>
+</servlet>
+
 </web-app>

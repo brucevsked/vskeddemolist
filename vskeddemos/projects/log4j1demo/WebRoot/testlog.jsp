@@ -1,17 +1,18 @@
+<%@page import="com.vsked.test.TestWeb"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 request.setAttribute("basePath", basePath);
+new TestWeb().writeLog();
 %>
-
 <!DOCTYPE HTML>
 <html>
   <head>
     <base href="${basePath }">
     
-    <title>DreamWork</title>
+    <title>testlogwrite</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -25,6 +26,6 @@ request.setAttribute("basePath", basePath);
   </head>
   
   <body>
-    <a href="${basePath }testlog.jsp">测试写日志</a> <br><br>
+    日志已经写入到tomcat目录logs/log4j1logs/applog.log
   </body>
 </html>
