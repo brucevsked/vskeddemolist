@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vsked.util.BaseJson;
 
 public class TestGson {
 	
@@ -42,7 +43,7 @@ public class TestGson {
 	    }
 	}
 	
-	public static void jsonToMap(){
+	public static void mapToJson(){
 		Map<String, Integer> m=new HashMap<String, Integer>();
 		m.put("smallvillm1", 25);
 		m.put("smallvillm2", 26);
@@ -50,10 +51,21 @@ public class TestGson {
 		System.out.println(s);
 	}
 	
-	public static void mapToJson(){
+	public static void jsonToMap(){
 		String s="{'smallvillm1':25,'smallvillm2':26}";
 		Map<String, Integer> m=gson.fromJson(s, new TypeToken<Map<String, Integer>>(){}.getType());
 		System.out.println(m.get("smallvillm1")+"|"+m.get("smallvillm2"));		
+	}
+	
+	public static void mapToJsonWithNull(){
+		Map<String, Object> myUser=new HashMap<String, Object>();
+		myUser.put("userId", "18");
+		myUser.put("userName", "vsked");
+		myUser.put("userAge",null);
+		myUser.put("userAddr","");
+		
+		String result=new BaseJson().mapToJson(myUser);
+		System.out.println(result);
 	}
 	
 
@@ -70,6 +82,8 @@ public class TestGson {
 		jsonToMap();
 		System.out.println("-------------------------6");
 		mapToJson();
+		System.out.println("-------------------------7");
+		mapToJsonWithNull();
 	}
 
 }
