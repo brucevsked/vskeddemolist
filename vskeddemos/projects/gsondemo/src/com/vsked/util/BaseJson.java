@@ -8,6 +8,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 public class BaseJson {
+	
+	//with null value
 	Gson gson = new GsonBuilder().serializeNulls().create();
 	
 	public  String objectToJson(Object o){
