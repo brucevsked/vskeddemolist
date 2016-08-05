@@ -1,4 +1,4 @@
-package com.hyfd.common;
+package com.vsked.util;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -85,6 +85,23 @@ public class GenerateData {
 		return dfl.format(Calendar.getInstance().getTime());
 	}
 	
+    public static String getCharAndNumr(int length) {
+        String val = "";
+        for (int i = 0; i < length; i++) {
+            // 输出字母还是数字
+            String charOrNum = r.nextInt(2) % 2 == 0 ? "char" : "num"; 
+            // 字符串
+            if ("char".equalsIgnoreCase(charOrNum)) {
+                // 取得大写字母还是小写字母
+                int choice = r.nextInt(2) % 2 == 0 ? 65 : 97; 
+                val += (char) (choice + r.nextInt(26));
+            } else if ("num".equalsIgnoreCase(charOrNum)) { // 数字
+                val += String.valueOf(r.nextInt(10));
+            }
+        }
+        return val;
+    }
+	
 	public static void main(String[] args) throws Exception {
 		System.out.println(GenerateData.getIntData(26));
 		System.out.println(GenerateData.getIntData(9,6));
@@ -99,6 +116,7 @@ public class GenerateData {
 		System.out.println(GenerateData.getStringUpper(5));
 		System.out.println(GenerateData.getSystemDateTime());
 		System.out.println(GenerateData.getLongDate());
+		System.out.println(GenerateData.getCharAndNumr(10));
 		
 		
 	}
