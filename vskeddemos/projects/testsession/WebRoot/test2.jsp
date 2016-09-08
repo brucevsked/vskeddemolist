@@ -13,7 +13,7 @@ System.out.println("Hello,Apache and Tomcat!!!!!!!!====="+request.getSession().g
   <head>
     <base href="${basePath }">
     
-    <title>DreamWork</title>
+    <title>test2</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -30,27 +30,21 @@ System.out.println("Hello,Apache and Tomcat!!!!!!!!====="+request.getSession().g
 Server Info:
 
 <%
-
 out.println(request.getLocalAddr() + " : " + request.getLocalPort()+"<br>");%>
-
 <%
 
   out.println("<br> ID " + session.getId()+"<br>");
-
   // 如果有新的 Session 属性设置
-
   String dataName = request.getParameter("dataName");
-
+  
   if (dataName != null && dataName.length() > 0) {
-
      String dataValue = request.getParameter("dataValue");
-
      session.setAttribute(dataName, dataValue);
 
   }
 
   out.println("<b>Session 列表</b><br>");
-
+  
   System.out.println("============================");
 
   Enumeration e = session.getAttributeNames();
@@ -58,29 +52,18 @@ out.println(request.getLocalAddr() + " : " + request.getLocalPort()+"<br>");%>
   while (e.hasMoreElements()) {
 
      String name = (String)e.nextElement();
-
      String value = session.getAttribute(name).toString();
-
      out.println( name + " = " + value+"<br>");
-
-         System.out.println( name + " = " + value);
+     System.out.println( name + " = " + value);
 
    }
 
 %>
 
-  <form action="test2.jsp" method="POST">
-
-    名称:<input type=text size=20 name="dataName">
-
-     <br>
-
-    值:<input type=text size=20 name="dataValue">
-
-     <br>
-
+  <form action="${basePath }test2.jsp" method="POST">
+    名称:<input type=text size=20 name="dataName"> <br>
+    值:<input type=text size=20 name="dataValue"> <br>
     <input type=submit>
-
    </form>
 
   </body>

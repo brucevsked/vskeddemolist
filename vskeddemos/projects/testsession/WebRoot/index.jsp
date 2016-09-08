@@ -4,8 +4,6 @@
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 request.setAttribute("basePath", basePath);
 
-request.getSession().setAttribute("myName", "lostworld");
-System.out.println("set value success!");
 %>
 
 <!DOCTYPE HTML>
@@ -13,7 +11,7 @@ System.out.println("set value success!");
   <head>
     <base href="${basePath }">
     
-    <title>DreamWork</title>
+    <title>index</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -27,8 +25,14 @@ System.out.println("set value success!");
   </head>
   
   <body>
-  abc<br>
+ <%
+ request.getSession().setAttribute("myName", "lostworld");
+ out.println("set value success!"+"myName is"+"lostworld|"+request.getSession().getId());
+ System.out.println("set value success!"+"myName is"+"lostworld|"+request.getSession().getId());
+ %>
+ <hr>
   <a href="${basePath }lost.jsp">lost</a><hr>
-  <a href="${basePath }test2.jsp">lost</a>
+  <a href="${basePath }test2.jsp">test2</a> <hr>
+  <a href="${basePath }test3.jsp">test3</a> <hr>
   </body>
 </html>

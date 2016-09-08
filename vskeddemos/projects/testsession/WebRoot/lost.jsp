@@ -4,8 +4,6 @@
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 request.setAttribute("basePath", basePath);
 
-System.out.println("Hello,Apache and Tomcat!!!!!!!!====="+request.getSession().getAttribute("myName"));
-
 %>
 
 <!DOCTYPE HTML>
@@ -13,7 +11,7 @@ System.out.println("Hello,Apache and Tomcat!!!!!!!!====="+request.getSession().g
   <head>
     <base href="${basePath }">
     
-    <title>DreamWork</title>
+    <title>lost</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -27,6 +25,10 @@ System.out.println("Hello,Apache and Tomcat!!!!!!!!====="+request.getSession().g
   </head>
   
   <body>
-  abc
+<%
+out.println("Hello,Apache and Tomcat!!!!!!!!====="+request.getSession().getAttribute("myName")+"|"+request.getSession().getId());
+System.out.println("Hello,Apache and Tomcat!!!!!!!!====="+request.getSession().getAttribute("myName")+"|"+request.getSession().getId());
+
+%>
   </body>
 </html>
