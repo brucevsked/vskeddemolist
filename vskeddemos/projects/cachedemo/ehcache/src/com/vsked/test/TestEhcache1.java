@@ -14,7 +14,7 @@ public class TestEhcache1 {
 	 */
 	public static String getWebInfoPath(){
 		String path="";
-		path=Thread.currentThread().getClass().getResource("/").toString();
+		path=TestEhcache1.class.getResource("/").toString();
 		if(path.startsWith("file:/")){
 			path=path.substring(6);
 		}

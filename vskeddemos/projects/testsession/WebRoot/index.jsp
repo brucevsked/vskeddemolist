@@ -34,5 +34,6 @@ request.setAttribute("basePath", basePath);
   <a href="${basePath }lost.jsp">lost</a><hr>
   <a href="${basePath }test2.jsp">test2</a> <hr>
   <a href="${basePath }test3.jsp">test3</a> <hr>
+  <a href="${basePath }test4.jsp">test4</a> <hr>
   </body>
 </html>

@@ -1,0 +1,50 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:noNamespaceSchemaLocation="ehcache.xsd">
+  <diskStore path="java.io.tmpdir"/>
+  <defaultCache
+    maxElementsInMemory="50000"
+    maxElementsOnDisk="100000"
+    eternal="true"
+    overflowToDisk="true"
+    diskPersistent="false"
+    timeToIdleSeconds="0"
+    timeToLiveSeconds="0"
+    diskSpoolBufferSizeMB="50"
+    diskExpiryThreadIntervalSeconds="120"
+    memoryStoreEvictionPolicy="LFU"
+    />
+  <cache name="demoCache"
+    maxElementsInMemory="500000"
+    maxElementsOnDisk="100000"
+    eternal="true" 
+    overflowToDisk="true"
+    diskPersistent="false"
+    timeToIdleSeconds="119"
+    timeToLiveSeconds="119"
+    diskSpoolBufferSizeMB="50"
+    diskExpiryThreadIntervalSeconds="120"
+    memoryStoreEvictionPolicy="FIFO"
+    >
+    <cacheEventListenerFactory  
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"  
+                properties="replicateAsynchronously=true, replicatePuts=true,  
+                            replicatePutsViaCopy=true, replicateUpdates=true,  
+                            replicateUpdatesViaCopy=true, replicateRemovals=true,  
+                            asynchronousReplicationIntervalMillis=200"/>  
+        <bootstrapCacheLoaderFactory  
+                class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/> 
+    </cache>
+    
+<cacheManagerPeerProviderFactory
+            class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+            properties="peerDiscovery=manual,
+ 						rmiUrls=//localhost:40002/demoCache"
+            propertySeparator=","
+    />
+          
+<cacheManagerPeerListenerFactory
+            class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+            properties="hostName=localhost, port=40001, socketTimeoutMillis=2000" 
+    />
+    
+</ehcache>

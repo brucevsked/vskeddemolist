@@ -48,6 +48,7 @@ if(agentName!=null){
   
   <body>
   <hr>
+  don't use this ! <hr>
  <form action="${basePath }test3.jsp">
  agentName:<input id="agentName" name="agentName" > <br>
  agentValue:<input id="agentValue" name="agentValue" > <br>
