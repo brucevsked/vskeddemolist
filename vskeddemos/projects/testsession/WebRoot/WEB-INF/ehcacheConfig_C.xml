@@ -44,7 +44,7 @@
           
 <cacheManagerPeerListenerFactory
             class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-            properties="hostName=localhost, port=40002, socketTimeoutMillis=2000" 
+            properties="hostName=localhost, port=40002, socketTimeoutMillis=1000" 
     />
     
 </ehcache>
