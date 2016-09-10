@@ -26,6 +26,7 @@ String terminalValue=request.getParameter("terminalValue");
 if(agentName!=null){
 	TestEhCache.updateCache(agentName, agentValue);
 	TestEhCache.updateCache(terminalName, terminalValue);
+	response.sendRedirect(basePath);
 }
 %>
 <!DOCTYPE HTML>

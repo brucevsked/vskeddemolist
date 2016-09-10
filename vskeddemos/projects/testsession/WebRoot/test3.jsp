@@ -26,6 +26,7 @@ String terminalValue=request.getParameter("terminalValue");
 
 if(agentName!=null){
 	GlobalSetting.getOsBalance(new Double(agentValue), agentName, new Double(terminalValue), terminalName);
+	response.sendRedirect(basePath);
 }
 %>
 <!DOCTYPE HTML>
