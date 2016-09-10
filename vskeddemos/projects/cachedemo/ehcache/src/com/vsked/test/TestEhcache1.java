@@ -7,6 +7,7 @@ import net.sf.ehcache.Element;
 public class TestEhcache1 {
 
 	public static void main(String[] args) {
+		System.out.println("cacheFile:"+System.getProperty("java.io.tmpdir"));
 		CacheManager manager = CacheManager.create("src/ehcacheConfig.xml");
 		Cache demoCache = manager.getCache("demoCache");
 		
