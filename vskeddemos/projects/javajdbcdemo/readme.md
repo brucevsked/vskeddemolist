@@ -1,5 +1,5 @@
 windows10 64 bit
-myeclipse 2014 64bit
+myeclipse 2015 64bit
 jdk1.7.0_71 64 bit
 tomcat8.0.21 64bit
 oracle 12c 64bit
