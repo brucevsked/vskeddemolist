@@ -1,4 +1,9 @@
-﻿
+﻿开涛的博客
+http://jinnianshilongnian.iteye.com/
+
+网页模板
+http://www.freemoban.com/
+
 图片1
 http://huaban.com/
 
@@ -28,3 +33,7 @@ http://www.ruanyifeng.com/blog/archives.html
 
 google project
 https://github.com/google
+
+
+慧都控件
+https://www.evget.com/
