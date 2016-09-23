@@ -33,7 +33,7 @@ public class DbTool {
 	 * @return {DataSource} 返回一个可用数据源
 	 * @throws Exception
 	 */
-	public static DataSource getDataSource() throws Exception {
+	public static synchronized DataSource getDataSource() throws Exception {
 		if (!isInit) {
 			Properties p = new Properties();
 			InputStream inputStream = null;
@@ -73,7 +73,7 @@ public class DbTool {
 	 * @param username 要查询余额的用户名
 	 * @return {String} 没有用户时将会返回0.000有用户时将会返回这个用户的余额
 	 */
-	public static String getUserBalanceByUserName(String username) {
+	public static synchronized String getUserBalanceByUserName(String username) {
 		String userBalance = "0.000";
 		try {
 			String getUserBalanceSql="select balance from usertest where username=? ";
@@ -92,7 +92,7 @@ public class DbTool {
 		return userBalance;
 	}
 	
-	public static boolean userRecharge(String username,BigDecimal money){
+	public static synchronized boolean userRecharge(String username,BigDecimal money){
 		BigDecimal userBalance=new BigDecimal(0);
 		
 		boolean isSuccess=false;
@@ -183,7 +183,7 @@ public class DbTool {
 	 * 获取32位uuid
 	 * @return
 	 */
-	public static String getUUID(){
+	public static synchronized String getUUID(){
 		return UUID.randomUUID().toString().replace("-", "");
 	}
 

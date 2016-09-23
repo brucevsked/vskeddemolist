@@ -13,9 +13,9 @@ public class DbTest {
 	public static void main(String[] args) {
 //		testGetDataSource();
 //		testTransaction();
-//		testGetUserBalanceByUserName();
+		testGetUserBalanceByUserName();
 //		testGetUUID();
-		testUserRecharge();
+//		testUserRecharge();
 	}
 
 	public static void testGetDataSource() {
