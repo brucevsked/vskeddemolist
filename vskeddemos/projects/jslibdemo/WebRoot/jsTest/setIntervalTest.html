@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>模板页面</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="">
+<meta http-equiv="description" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="css/allStyle.css">
+
+</head>
+
+<body>
+
+
+<div id="refreshTimeD">刷新时间0</div>
+<button id="runStateBt" onclick="procRun()">停止</button>
+
+<script type="text/javascript">
+var curTime=0;
+var waitTime=10;
+
+
+function procRefreshTime(n){
+	if(curTime<waitTime){ 
+		document.getElementById('refreshTimeD').innerHTML='刷新时间'+(waitTime-curTime);
+		curTime++;
+	}else{
+		//window.location.reload();
+		//window.location.href=getBasePath()+'MobileInfoController/toList.html?pageSize=10';
+		//console.log("hello s1");
+		window.location.reload();
+	}
+}
+runStateA1=setInterval(function(){procRefreshTime(curTime)},1000);
+
+function procRun(){
+	
+	if(document.getElementById('runStateBt').innerHTML=='开始'){
+		document.getElementById('runStateBt').innerHTML='停止';
+		runStateA1=setInterval(function(){procRefreshTime(curTime)},1000);
+	}else{
+		document.getElementById('runStateBt').innerHTML='开始';
+		clearInterval(runStateA1);
+	}
+}
+</script>
+
+</body>
+</html>

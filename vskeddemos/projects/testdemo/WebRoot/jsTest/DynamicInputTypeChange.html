@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <!-- must set here! -->
+  <base href="">
+    
+  <title>ts</title>
+ 	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="">
+	<meta http-equiv="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  
+  
+  </head>
+  
+<body>
+
+ <script type="text/javascript" >
+ 	function ts(){ 
+ 		console.log('|||'+(document.getElementById('tsi')).getAttribute("type"));
+ 		
+ 		document.getElementById('tsi').setAttribute("type",document.getElementById('tsi').getAttribute("type")=='button'?'checkbox':'button');
+ 	}
+ 	ts();
+ </script>
+<a href="javascript:void(0);" onclick="ts()">ggg</a>
+<input id="tsi" type="button" value="sssttt" />
+</body>
+</html>

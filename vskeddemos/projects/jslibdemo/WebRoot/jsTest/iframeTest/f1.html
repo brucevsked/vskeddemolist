@@ -1,0 +1,40 @@
+﻿<!DOCTYPE HTML>
+<html>
+  <head>
+  <!-- must set here! -->
+  <base href="">
+    
+  <title>baseDemo</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="">
+	<meta http-equiv="description" content="">
+
+  </head>
+  
+<body>
+<script language="javascript" src="../../js/lib/jquery-1.4.4.min.js"></script>
+ <script type="text/javascript" >
+ 	function f1Test(){
+ 		console.log('here is f1test')
+ 	}
+ 	function cm(){
+ 		parent.mainTest();
+ 		console.log(parent.mDiv.innerHTML);
+ 		var tmpStr=$('#mDiv', parent.document).html();
+ 		console.log('jqF1a|'+tmpStr);
+ 	}
+ 	function f1cf2(){
+ 		parent.myFrame2.f2Test();
+ 		console.log(parent.myFrame2.f2Div.innerHTML);
+ 		var tmpStr=$('#f2Div', parent.document.myFrame2.document).html();
+ 		console.log('jqF1b|'+tmpStr);
+ 	}
+ </script>
+
+<button onclick='cm();'> call main </button>
+<button onclick='f1cf2();'> call f2s </button>
+<div id='f1Div' name='f1Div'>f1||||Divishere</div>
+</body>
+</html>

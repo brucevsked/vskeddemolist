@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>页面</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="">
+<meta http-equiv="description" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+</head>
+
+<body>
+<button onclick="testUuid1()">uuid1</button><button onclick="testUuid2()">uuid2</button><button onclick="testUuid3()">uuid3</button>
+<div id="targetData"></div>
+
+
+  <script type="text/javascript" charset="UTF-8" src="uuid.js"></script>
+  
+  
+<script>
+	function testUuid1(){
+		document.getElementById('targetData').innerHTML=uuid1();
+	}
+	function testUuid2(){
+		document.getElementById('targetData').innerHTML=uuid2();
+	}
+	function testUuid3(){
+		document.getElementById('targetData').innerHTML=uuid3();
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+﻿
+<script>
+	
+	function god(){
+		this.pk=1;
+		this.reqUrl='hello kitty';
+		
+		this.makeMan=function (a,b,c){
+			alert(a+'|'+b+'|'+c+'|'+this.pk+'|'+this.reqUrl);
+		}; //end function makeMan
+	}
+	
+	function ts(){
+		t=new god();
+		t.pk=18;
+		t.reqUrl='super man is fly';
+		t.makeMan(1,2,3);
+	}
+	
+	ts();
+
+</script>
