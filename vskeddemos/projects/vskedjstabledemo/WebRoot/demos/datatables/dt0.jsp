@@ -31,6 +31,14 @@ request.setAttribute("basePath", basePath);
   <body>
   ${basePath }
   
+  <!--  
+  firstName:
+  <input id="firstName" name="firstName" />
+  lastName:
+  <input id="firstName" name="firstName" />
+  <button onclick="">gosearch</button>
+  -->
+  
   <table id="dt0" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -44,6 +52,18 @@ request.setAttribute("basePath", basePath);
                 <th>operate</th>
             </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <th>id</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Start date</th>
+                <th>Salary</th>
+                <th>operate</th>
+            </tr>
+        </tfoot>
     </table>
   </body>
 </html>

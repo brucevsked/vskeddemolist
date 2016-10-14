@@ -1,9 +1,6 @@
   $(document).ready(function() {
 	  var basePath=document.getElementsByTagName('base')[0].href;
-	  $.extend( $.fn.dataTable.defaults, {
-		    searching: false,
-		    ordering:  false
-		} );
+
 	    $('#dt0').DataTable( {
 	        "columnDefs": [{
 	        	"targets": [0],
@@ -11,6 +8,7 @@
 	            "searchable": false
 	        }],
 	        dom: 'Bfrtip',
+//	        searching: false, //隐藏搜索
 	        buttons: [{ extend: 'colvis',
 	        	        columns: ':not(:first-child)'
 	        	       },
@@ -27,6 +25,30 @@
 	        "serverSide": true,
 	        "ajax": basePath+"demosproc/datatables/dt0proc.jsp"
 	    } );
+
+	    //------------------------------
+	    $('#dt0 tfoot th').each( function () {
+	        var title = $(this).text();
+	        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+	    } );
+	    
+	    var table = $('#dt0').DataTable();
+	    
+	    // Apply the search
+	    table.columns().every( function () {
+	        var that = this;
+	 
+	        $( 'input', this.footer() ).on( 'change', function () {
+	            if ( that.search() !== this.value ) {
+	                that
+	                    .search( this.value )
+	                    .draw();
+	            }
+	        } );
+	    } );
+	  //------------------------------
+	    
+	    
 	} );
   
   function toEdit(suId){
