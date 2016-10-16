@@ -1,15 +1,19 @@
 package com.vsked.test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class TestSet {
 
 	public static void main(String[] args) {
 //		testHashSet();
-		testTreeSet();
+//		testTreeSet();
+		testListToSet();
 	}
 
 	public static void testHashSet() {
@@ -49,6 +53,32 @@ public class TestSet {
 			System.out.println(x);
 			ts.remove(x);
 		}
+	}
+	
+	public static void testListToSet(){
+		List<String> sourceList=new ArrayList<String>();
+		sourceList.add("1");
+		sourceList.add("1");
+		sourceList.add("1");
+		
+		sourceList.add("2");
+		sourceList.add("2");
+		sourceList.add("2");
+		
+		sourceList.add("3");
+		sourceList.add("3");
+		sourceList.add("3");
+		
+		sourceList.add("4");
+		sourceList.add("5");
+		sourceList.add("6");
+		
+		Set<String> targetSet=new HashSet<String>();
+		targetSet.addAll(sourceList);
+		
+		System.out.println(targetSet);
+		
+		
 	}
 
 }
