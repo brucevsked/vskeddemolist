@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <link rel="stylesheet" href="js/lib/jqueryeasyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" href="js/lib/jqueryeasyui/themes/icon.css"/>
+<style>
+	html,body {height:98%;} 
+</style>
+</head>
+<body>
+
+<div id="loginWin" class="easyui-window" title="欢迎您使用我沉默" style="width:350px;height:188px;padding:5px;"
+   minimizable="false" maximizable="false" resizable="false" collapsible="false" closable="false" > 
+    <div class="easyui-layout" fit="true">
+            <div region="center" border="false" style="padding:5px;background:#fff;border:1px solid #ccc;">
+        <form id="loginForm" method="post">
+            <div style="padding:5px 0;">
+                <label for="login">帐号:</label>
+                <input type="text" id="suName" name="suName" style="width:260px;"></input>
+            </div>
+            <div style="padding:5px 0;">
+                <label for="password">密码:</label>
+                <input type="password" id="suPass" name="suPass" style="width:260px;"></input>
+            </div>
+             <div style="padding:5px 0;text-align: center;color: red;" id="showMsg"></div>
+        </form>
+            </div>
+            <div region="south" border="false" style="text-align:right;padding:5px 0;">
+                <a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onclick="toLogin()">登录</a>
+                <a class="easyui-linkbutton" iconCls="icon-cancel" href="javascript:void(0)" onclick="cleanData()">重置</a>
+            </div>
+    </div>
+</div>
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jqueryeasyui/jquery.easyui.min.js"></script>
+    <script>
+    	$(function(){
+
+    		$('#suName').focus();
+    	});
+      $('#loginWin').bind('keyup', function(event) {/* 增加回车提交功能 */
+            if (event.keyCode == '13') {
+                $('#loginForm').submit();
+            }
+        }); 
+    	function toLogin(){
+    		$('#showMsg').html('让他们继续飞一会吧');
+    	}
+    	
+    	function cleanData(){
+    		$('#suName').val('');
+    		$('#suPass').val('');
+    		$('#suName').focus();
+    	}
+    </script>
+</body>
+</html>

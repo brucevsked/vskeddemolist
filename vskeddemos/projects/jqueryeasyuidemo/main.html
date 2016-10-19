@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <link rel="stylesheet" href="js/lib/jqueryeasyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" href="js/lib/jqueryeasyui/themes/icon.css"/>
+<style>
+	html,body {height:98%;} 
+</style>
+</head>
+<body>
+	<button id="bts" onclick="showToolBar(true)"> &gt; </button>
+<a href="javascript:void(0)" id="mb" class="easyui-menubutton"
+    data-options="menu:'#mm',iconCls:'icon-edit'">Edit</a> &nbsp;
+    <button id="bth" onclick="showToolBar(false)"> &lt; </button>
+<div id="mm" style="width:150px;">
+    <div data-options="iconCls:'icon-undo'">Undo</div>
+    <div data-options="iconCls:'icon-redo'">Redo</div>
+    <div class="menu-sep"></div>
+    <div>Cut</div>
+    <div>Copy</div>
+    <div>Paste</div>
+    <div class="menu-sep"></div>
+    <div data-options="iconCls:'icon-remove'">Delete</div>
+    <div>Select All</div>
+</div>
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jqueryeasyui/jquery.easyui.min.js"></script>
+    <script>
+    	$(function(){
+    		$('#mb').hide();
+    		$('#bth').hide();
+    		
+    	});
+     function showToolBar(fg){
+     	if(fg){
+     	  $('#bts').hide();
+     	  $('#mb').show();
+     	  $('#bth').show();
+      }else{
+      	$('#mb').hide();
+      	$('#bth').hide();
+      	$('#bts').show();
+      }
+     }
+    </script>
+</body>
+</html>
