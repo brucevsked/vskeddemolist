@@ -20,12 +20,16 @@ public class Reqv {
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         QueueingConsumer consumer = new QueueingConsumer(channel);
-        channel.basicConsume(QUEUE_NAME, true, consumer);
+        //开启手工确认[ack]
+        channel.basicConsume(QUEUE_NAME, false, consumer);
   
         while (true) {
             QueueingConsumer.Delivery delivery = consumer.nextDelivery();
             String message = new String(delivery.getBody());
             System.out.println(" [x] Received '" + message + "'");
+            Thread.sleep(10);
+            //返回确认状态 
+            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
         }  
     }  
 }  
