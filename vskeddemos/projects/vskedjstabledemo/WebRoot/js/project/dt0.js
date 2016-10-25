@@ -23,9 +23,11 @@
 	        },
 	        "processing": true,
 	        "serverSide": true,
+	        "sPaginationType" : "full_numbers", //will fixed
 	        "ajax": basePath+"demosproc/datatables/dt0proc.jsp"
 	    } );
 
+	    /*
 	    //------------------------------
 	    $('#dt0 tfoot th').each( function () {
 	        var title = $(this).text();
@@ -47,7 +49,7 @@
 	        } );
 	    } );
 	  //------------------------------
-	    
+	    */
 	    
 	} );
   

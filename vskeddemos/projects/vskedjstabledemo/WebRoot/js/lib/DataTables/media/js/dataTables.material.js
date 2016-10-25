@@ -46,16 +46,24 @@ var DataTable = $.fn.dataTable;
 /* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
 	dom:
-		"<'row'<'col-sm-6'l><'col-sm-6'f>>" +
-		"<'row'<'col-sm-12'tr>>" +
-		"<'row'<'col-sm-5'i><'col-sm-7'p>>",
-	renderer: 'bootstrap'
+		"<'mdl-grid'"+
+			"<'mdl-cell mdl-cell--6-col'l>"+
+			"<'mdl-cell mdl-cell--6-col'f>"+
+		">"+
+		"<'mdl-grid dt-table'"+
+			"<'mdl-cell mdl-cell--12-col'tr>"+
+		">"+
+		"<'mdl-grid'"+
+			"<'mdl-cell mdl-cell--4-col'i>"+
+			"<'mdl-cell mdl-cell--8-col'p>"+
+		">",
+	renderer: 'material'
 } );
 
 
 /* Default class modification */
 $.extend( DataTable.ext.classes, {
-	sWrapper:      "dataTables_wrapper form-inline dt-bootstrap",
+	sWrapper:      "dataTables_wrapper form-inline dt-material",
 	sFilterInput:  "form-control input-sm",
 	sLengthSelect: "form-control input-sm",
 	sProcessing:   "dataTables_processing panel panel-default"
@@ -63,7 +71,7 @@ $.extend( DataTable.ext.classes, {
 
 
 /* Bootstrap paging button renderer */
-DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, buttons, page, pages ) {
+DataTable.ext.renderer.pageButton.material = function ( settings, host, idx, buttons, page, pages ) {
 	var api     = new DataTable.Api( settings );
 	var classes = settings.oClasses;
 	var lang    = settings.oLanguage.oPaginate;
@@ -71,7 +79,7 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 	var btnDisplay, btnClass, counter=0;
 
 	var attach = function( container, buttons ) {
-		var i, ien, node, button;
+		var i, ien, node, button, disabled, active;
 		var clickHandler = function ( e ) {
 			e.preventDefault();
 			if ( !$(e.currentTarget).hasClass('disabled') && api.page() != e.data.action ) {
@@ -87,7 +95,7 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 			}
 			else {
 				btnDisplay = '';
-				btnClass = '';
+				active = false;
 
 				switch ( button ) {
 					case 'ellipsis':
@@ -121,27 +129,28 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 
 					default:
 						btnDisplay = button + 1;
-						btnClass = page === button ?
-							'active' : '';
+						btnClass = '';
+						active = page === button;
 						break;
 				}
 
+				if ( active ) {
+					btnClass += ' mdl-button--raised mdl-button--colored';
+				}
+
 				if ( btnDisplay ) {
-					node = $('<li>', {
-							'class': classes.sPageButton+' '+btnClass,
+					node = $('<button>', {
+							'class': 'mdl-button '+btnClass,
 							'id': idx === 0 && typeof button === 'string' ?
 								settings.sTableId +'_'+ button :
-								null
+								null,
+							'aria-controls': settings.sTableId,
+							'aria-label': aria[ button ],
+							'data-dt-idx': counter,
+							'tabindex': settings.iTabIndex,
+							'disabled': btnClass.indexOf('disabled') !== -1
 						} )
-						.append( $('<a>', {
-								'href': '#',
-								'aria-controls': settings.sTableId,
-								'aria-label': aria[ button ],
-								'data-dt-idx': counter,
-								'tabindex': settings.iTabIndex
-							} )
-							.html( btnDisplay )
-						)
+						.html( btnDisplay )
 						.appendTo( container );
 
 					settings.oApi._fnBindAction(
@@ -168,7 +177,7 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 	catch (e) {}
 
 	attach(
-		$(host).empty().html('<ul class="pagination"/>').children('ul'),
+		$(host).empty().html('<div class="pagination"/>').children(),
 		buttons
 	);
 
