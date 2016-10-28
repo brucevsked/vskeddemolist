@@ -1,4 +1,6 @@
 ﻿
+系统管理员资源大全中文版
+https://github.com/jobbole/awesome-sysadmin-cn
 
 http://www.maiziedu.com/
 http://www.imooc.com/
