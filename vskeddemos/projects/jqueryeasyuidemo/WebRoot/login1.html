@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <link rel="stylesheet" href="js/lib/jqueryeasyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" href="js/lib/jqueryeasyui/themes/icon.css"/>
+
+</head>
+<body>
+
+<div id="loginWin"></div>
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jqueryeasyui/jquery.easyui.min.js"></script>
+    <script>
+    	$(function(){
+$('#loginWin').window({
+	title:'欢迎您使用我沉默',
+	width:350,
+  height:180,
+  minimizable:false,
+  maximizable:false,
+  resizable:false,
+  collapsible:false,
+  closable:false,
+  modal:true,
+  content:'aaaaa'
+});
+
+    	});
+
+    	function toLogin(){
+    		$('#showMsg').html('让他们继续飞一会吧');
+    	}
+    	
+    	function cleanData(){
+    		$('#suName').val('');
+    		$('#suPass').val('');
+    		$('#suName').focus();
+    	}
+    </script>
+</body>
+</html>

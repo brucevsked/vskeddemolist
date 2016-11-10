@@ -10,15 +10,11 @@ request.setAttribute("basePath", basePath);
     <base href="${basePath }">
     
     <title> </title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="">
-	<meta http-equiv="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
     <link rel="stylesheet" type="text/css" href="${basePath }css/lib/jqueryui/jquery-ui.min.css">
+   
     <link rel="stylesheet" type="text/css" href="${basePath }css/lib/jqgrid/ui.jqgrid.css">
   </head>
   
