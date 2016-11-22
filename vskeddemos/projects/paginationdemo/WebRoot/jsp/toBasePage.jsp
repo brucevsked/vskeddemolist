@@ -4,12 +4,12 @@
 <%@page import="com.vsked.dao.impl.BasicDaoImpl"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
-String path = request.getContextPath();
+	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
 String inTbName="testTableInfo";
 BasicDaoImpl bd=new BasicDaoImpl();
-bd.setConn(ConnectOracle.getConnection());
+bd.setConn(TestConnectOracle.getConnection());
 Map<String, String> m=BasicServlet.getMapInParameter(request);
 Page p=BasicServlet.getPage(request);
 
