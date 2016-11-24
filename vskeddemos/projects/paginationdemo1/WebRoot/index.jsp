@@ -19,7 +19,8 @@ request.setAttribute("basePath", basePath);
   <body>
   
   <a href="${basePath }proc/pageProc1.jsp">myoldpage</a>|
-  <a href="${basePath }proc/pageProc2.jsp">laypage-v1.3</a>
+  <a href="${basePath }proc/pageProc2.jsp">laypage-v1.3</a>|
+  <a href="${basePath }proc/pageProc3.jsp">mricode.pagination</a>|
   
   <script type="text/javascript">
   </script>  

@@ -14,11 +14,11 @@ request.setAttribute("basePath", basePath);
 <title>index</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
+<link rel="stylesheet" href="${basePath }css/lib/mricode.pagination.css" />
 </head>
 
 <body>
-	<form action="${basePath }proc/pageProc2.jsp" name="fm" id="fm" method="post">
+	<form action="${basePath }proc/pageProc3.jsp" name="fm" id="fm" method="post">
 	
 	<table border="1" id="myTb">
 	<tr> <td colspan="9" >用户列表</td></tr>
@@ -47,13 +47,16 @@ request.setAttribute("basePath", basePath);
       </tr>
   </c:forEach>
   </table>
-  <div id="page1"></div>
+  <div id="page1" class="m-pagination"></div>
  </form>
 
 <script type="text/javascript" charset="UTF-8" src="${basePath }js/lib/jquery.js"></script>
-<script type="text/javascript" charset="UTF-8" src="${basePath }js/lib/laypage/laypage.js"></script>
-<script type="text/javascript" charset="UTF-8" src="${basePath }js/project/pageView2.js"></script>
+<script type="text/javascript" charset="UTF-8" src="${basePath }js/lib/mricode.pagination.js"></script>
+<script type="text/javascript" charset="UTF-8" src="${basePath }js/project/pageView3.js"></script>
 <script type="text/javascript">
+var pageIndexV=${p.currentPage-1} ;
+var pageSizeV=${p.pageSize} ;
+var totalV=${p.count} ;
 
 </script>
 </body>
