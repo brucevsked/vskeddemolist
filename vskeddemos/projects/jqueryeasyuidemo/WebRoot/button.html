@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>template</title>
+    <link rel="stylesheet" type="text/css" href="js/lib/jqueryeasyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="js/lib/jqueryeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="js/lib/jqueryeasyui/themes/demo.css">
+
+</head>
+<body >
+
+<button type="button" onclick="msg1()" class="easyui-linkbutton c1" >msg1</button> |
+<button type="button" onclick="msg2()" class="easyui-linkbutton c2">msg2</button> |
+<button type="button" onclick="msg3()">msg3</button> |
+<button type="button" onclick="msg4()">msg4</button> |
+<button type="button" onclick="msg5()">msg5</button> |
+<button id="dd" type="button" onclick="msg6()">msg6</button> |
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/jqueryeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/lib/jqueryeasyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+function msg1(){
+	$.messager.alert('标题显示操作提示', '内容显示操作成功！');
+}
+
+function msg2(){
+	$.messager.alert('操作提示', '操作成功！','info'); //info,error,question,warning
+}
+
+function msg3(){
+  $.messager.alert("操作提示", "操作成功！", "info", function () {  
+    alert(11);  
+  }); 
+}
+
+function msg4(){
+$.messager.confirm("操作提示", "您确定要执行操作吗？", function (data) {
+	alert(data?'确定':'取消');
+}); 
+}
+
+function msg5(){
+$.messager.progress({
+	title:'进度条',
+	msg:'能量加载中。。。',
+	text:'请稍后。。。',
+	interval:1000
+});
+}
+
+function msg6(){
+$('#dd').tooltip({
+    position: 'right',
+    content: '<span style="color:#fff">This is the tooltip message.</span>',
+    onShow: function(){
+		$('#dd').tooltip('tip').css({
+			backgroundColor: '#666',
+			borderColor: '#666'
+		});
+    }
+});
+}
+</script>
+</body>
+</html>
