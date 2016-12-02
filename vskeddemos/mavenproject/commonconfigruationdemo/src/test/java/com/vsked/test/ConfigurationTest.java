@@ -1,5 +1,7 @@
 package com.vsked.test;
 
+import java.util.Iterator;
+
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
@@ -21,6 +23,14 @@ public class ConfigurationTest {
 		        .setFileName("config/systemConfig.properties"));
 		try{
 		    Configuration config = builder.getConfiguration();
+		    
+		    Iterator<String> configIt=config.getKeys();
+		    while(configIt.hasNext()){
+		    	String configKey=configIt.next();
+		        String configValue=config.getString(configKey);
+		    	System.out.println(configKey+"|"+configValue);
+		    }
+		    
 		    String db_jdbcUrl=config.getString("db_jdbcUrl");
 		    String db_userName=config.getString("db_userName");
 		    String db_userPass=config.getString("db_userPass");
@@ -46,6 +56,14 @@ public class ConfigurationTest {
 		        );
 		try{
 		XMLConfiguration config = builder.getConfiguration();
+		
+	    Iterator<String> configIt=config.getKeys();
+	    while(configIt.hasNext()){
+	    	String configKey=configIt.next();
+	        String configValue=config.getString(configKey);
+	    	System.out.println(configKey+"|"+configValue);
+	    }
+	    
 		String SSN=config.getString("Employee.SSN");
 		String Name=config.getString("Employee.Name");
 		String DateOfBirth=config.getString("Employee.DateOfBirth");
