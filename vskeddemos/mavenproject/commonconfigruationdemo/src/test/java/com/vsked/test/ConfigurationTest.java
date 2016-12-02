@@ -1,6 +1,8 @@
 package com.vsked.test;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
@@ -13,6 +15,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ConfigurationTest {
+	
+	Map<String, String> configMap=new HashMap<String, String>();
 	
 	@Test
 	public void propertiesTest(){
@@ -29,6 +33,7 @@ public class ConfigurationTest {
 		    	String configKey=configIt.next();
 		        String configValue=config.getString(configKey);
 		    	System.out.println(configKey+"|"+configValue);
+		    	configMap.put(configKey, configValue);
 		    }
 		    
 		    String db_jdbcUrl=config.getString("db_jdbcUrl");
@@ -39,6 +44,7 @@ public class ConfigurationTest {
 		    System.out.println(db_userName);
 		    System.out.println(db_userPass);
 		    assertEquals("helthmanager",db_userName);
+		    System.out.println("|"+configMap.get("db_jdbcUrl"));
 		}catch(Exception cex){
 			System.out.println(cex.getMessage());
 		}
@@ -62,6 +68,7 @@ public class ConfigurationTest {
 	    	String configKey=configIt.next();
 	        String configValue=config.getString(configKey);
 	    	System.out.println(configKey+"|"+configValue);
+	    	configMap.put(configKey, configValue);
 	    }
 	    
 		String SSN=config.getString("Employee.SSN");
@@ -76,6 +83,7 @@ public class ConfigurationTest {
 		System.out.println(EmployeeType);
 		System.out.println(Salary);
 		assertEquals("555121211",SSN);
+		System.out.println("|"+configMap.get("Employee.SSN"));
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
