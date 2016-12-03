@@ -9,8 +9,10 @@ import java.util.Map;
 
 import jodd.db.DbQuery;
 import jodd.db.DbSession;
+import jodd.db.QueryMapper;
 import jodd.db.connection.ConnectionProvider;
 import jodd.db.connection.DriverManagerConnectionProvider;
+import jodd.db.oom.DbOomQuery;
 
 import org.junit.Test;
 
@@ -30,7 +32,6 @@ public class DboomTest {
 		assertNotNull(session);
     }
     
-    @Test
 	public void selectTest(){
 		try{
 		String driverClass="com.mysql.jdbc.Driver";
@@ -58,4 +59,8 @@ public class DboomTest {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	
+    
+    
 }
