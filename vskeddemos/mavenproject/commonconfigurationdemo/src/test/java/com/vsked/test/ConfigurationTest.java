@@ -24,6 +24,7 @@ public class ConfigurationTest {
 		FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
 		    new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
 		    .configure(params.properties()
+		    .setEncoding("utf-8")
 		        .setFileName("config/systemConfig.properties"));
 		try{
 		    Configuration config = builder.getConfiguration();
@@ -56,6 +57,7 @@ public class ConfigurationTest {
 		FileBasedConfigurationBuilder<XMLConfiguration> builder =
 		    new FileBasedConfigurationBuilder<XMLConfiguration>(XMLConfiguration.class)
 		    .configure(params.xml()
+		    	.setEncoding("utf-8")
 		        .setFileName("config/myconfig.xml")
 		        .setValidating(false)
 		        .setSchemaValidation(false)
