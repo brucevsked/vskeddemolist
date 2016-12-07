@@ -1,14 +1,23 @@
-﻿$(function () {
-  var basePath=document.getElementsByTagName('base')[0].href;
+﻿  var basePath=document.getElementsByTagName('base')[0].href;
+
+  var myTbId='myt1';
+  var myJqTbId='#'+myTbId;
+  var myPageId='myp1';
+  var myJqPageId='#'+myPageId;
+
+$(function () {
+
   var t1=$('<table></table>');
-  t1.attr('id','myt1');
+  t1.attr('id',myTbId);
   $(document.body).append(t1);
   
   var p1=$('<div></div>');
-  p1.attr('id','myp1');
-  $(document.body).append(p1);
+  p1.attr('id',myPageId);
   
-  $("#myt1").jqGrid({
+  p1.insertAfter(t1);
+  
+  
+  $(myJqTbId).jqGrid({
       url: basePath+'demoproc/demo1proc.jsp',
       mtype: "GET",
       datatype: "json",
@@ -31,14 +40,14 @@
       rowNum: 10,
       rowList : [5,10,15,20,25,30],
       rownumbers: true,
-      pager: "#myp1",
+      pager: myJqPageId,
       gridComplete:function (){
-    	  var ids = jQuery("#myt1").jqGrid('getDataIDs');
+    	  var ids = jQuery(myJqTbId).jqGrid('getDataIDs');
     	  for (var i = 0; i < ids.length; i++) {
     	  var id = ids[i];
     	  var editBtn = '<button onclick="edit('+ids[i]+')">编辑</button>';
     	  var delBtn = '<button onclick="del('+ids[i]+')">删除</button>';
-    	  jQuery("#myt1").jqGrid('setRowData', ids[i], { edit: editBtn, del: delBtn });
+    	  jQuery(myJqTbId).jqGrid('setRowData', ids[i], { edit: editBtn, del: delBtn });
     	  }
       }
   });
@@ -46,13 +55,13 @@
 });
 
 function edit(rowIndex){
-	var rowData = $('#myt1').jqGrid('getRowData',rowIndex);
+	var rowData = $(myJqTbId).jqGrid('getRowData',rowIndex);
 	console.log(rowData);
 	console.log(rowData.OrderID);
 }
 
 function del(rowIndex){
-	var rowData = $('#myt1').jqGrid('getRowData',rowIndex);
+	var rowData = $(myJqTbId).jqGrid('getRowData',rowIndex);
 	console.log(rowData);
 	console.log(rowData.OrderID);
 }
