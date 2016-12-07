@@ -14,6 +14,9 @@ public class Demo1Service extends BasicService{
 		resp.setContentType("application/json; charset=utf-8");
 		Map<String, Object> m=getMaps(req);
 //		System.out.println(m);
+		String customerId=(String) m.get("customerId");
+		String freight=(String) m.get("freight");
+		System.out.println("查询条件"+customerId+"|"+freight);
 		int page=Integer.parseInt((String)m.get("page"));
 		int rows=Integer.parseInt((String)m.get("rows"));
 		try {

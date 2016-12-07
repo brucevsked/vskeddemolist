@@ -25,10 +25,10 @@ $(function () {
       colNames: ['Order ID', 'Customer ID', 'Order Date', 'Freight', 'Ship Name','编辑','删除'],
       colModel: [
           { name: 'OrderID', key: true, sortable: false,hidedlg:true,hidden:true },
-          { name: 'CustomerID', sortable: false },
-          { name: 'OrderDate', sortable: false },
-          { name: 'Freight', sortable: false },
-          { name: 'ShipName', sortable: false },
+          { name: 'CustomerID',index:'CustomerID', sortable: false },
+          { name: 'OrderDate' ,index:'OrderDate', sortable: false },
+          { name: 'Freight' ,index:'Freight', sortable: false },
+          { name: 'ShipName' ,index:'ShipName', sortable: false },
           { name: 'edit', sortable: false },
           { name: 'del', sortable: false }
       ],
@@ -52,6 +52,9 @@ $(function () {
       }
   });
   
+  //给查询条件焦点
+  $('#customerId').focus();
+  
 });
 
 function edit(rowIndex){
@@ -64,4 +67,16 @@ function del(rowIndex){
 	var rowData = $(myJqTbId).jqGrid('getRowData',rowIndex);
 	console.log(rowData);
 	console.log(rowData.OrderID);
+}
+
+function search(){
+	var customerId=$('#customerId').val();
+	var freight=$('#freight').val();
+	console.log(customerId+'|'+freight)
+	
+    $(myJqTbId).jqGrid('setGridParam',{ 
+        url:basePath+'demoproc/demo1proc.jsp', 
+        postData:{'customerId':customerId,'freight':freight}, //发送数据 
+        page:1 
+    }).trigger("reloadGrid"); //重新载入
 }

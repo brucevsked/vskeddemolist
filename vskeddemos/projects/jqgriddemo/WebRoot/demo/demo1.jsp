@@ -20,6 +20,14 @@ request.setAttribute("basePath", basePath);
   
   <body>
   
+ <p>
+ customerId:
+ <input type="text" id="customerId" name="customerId" value="" /> 
+ Freight:
+ <input type="text" id="freight" name="freight" value="" />
+ <button type="button" onclick="search()">查询</button>
+ </p>
+  
   <script type="text/javascript" charset="UTF-8" src="${basePath }js/lib/jquery.js" ></script>
   <script type="text/javascript" charset="UTF-8" src="${basePath }js/lib/jqgrid/i18n/grid.locale-cn.js" ></script>
   <script type="text/javascript" charset="UTF-8" src="${basePath }js/lib/jqgrid/jquery.jqGrid.min.js" ></script>
