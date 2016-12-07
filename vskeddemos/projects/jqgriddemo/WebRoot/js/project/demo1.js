@@ -15,7 +15,7 @@
       page: 1,
       colNames: ['Order ID', 'Customer ID', 'Order Date', 'Freight', 'Ship Name','编辑','删除'],
       colModel: [
-          { name: 'OrderID', key: true, sortable: false },
+          { name: 'OrderID', key: true, sortable: false,hidedlg:true,hidden:true },
           { name: 'CustomerID', sortable: false },
           { name: 'OrderDate', sortable: false },
           { name: 'Freight', sortable: false },
@@ -47,10 +47,12 @@
 
 function edit(rowIndex){
 	var rowData = $('#myt1').jqGrid('getRowData',rowIndex);
-	console.log(rowData)
+	console.log(rowData);
+	console.log(rowData.OrderID);
 }
 
 function del(rowIndex){
 	var rowData = $('#myt1').jqGrid('getRowData',rowIndex);
-	console.log(rowData)
+	console.log(rowData);
+	console.log(rowData.OrderID);
 }

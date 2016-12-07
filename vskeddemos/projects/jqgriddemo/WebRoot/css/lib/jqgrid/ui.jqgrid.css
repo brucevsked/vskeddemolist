@@ -88,23 +88,31 @@
 .ui-jqgrid td input, .ui-jqgrid td select, .ui-jqgrid td textarea { margin: 0; padding-top:5px;padding-bottom: 5px;}
 .ui-jqgrid td textarea {width:auto;height:auto;}
 .ui-jqgrid .ui-jqgrid-toppager {border-left: 0 none !important;border-right: 0 none !important; border-top: 0 none !important; margin: 0 !important; padding: 0 !important; position: relative;white-space: nowrap;overflow: hidden;}
-.ui-jqgrid .ui-jqgrid-pager .ui-pager-table {
+.ui-jqgrid .ui-jqgrid-pager .ui-pager-table,
+.ui-jqgrid .ui-jqgrid-toppager .ui-pager-table 
+{
 	width:100%;
 	table-layout:fixed;
 	height:100%;
 }
-.ui-jqgrid .ui-jqgrid-pager .ui-paging-info { 
+.ui-jqgrid .ui-jqgrid-pager .ui-paging-info,
+.ui-jqgrid .ui-jqgrid-toppager .ui-paging-info
+{ 
 	font-weight: normal;
 	height:auto; 
 	margin-top:3px;
 	margin-right:4px;
 	display: inline;
 }
-.ui-jqgrid .ui-jqgrid-pager .ui-paging-pager {
+.ui-jqgrid .ui-jqgrid-pager .ui-paging-pager,
+.ui-jqgrid .ui-jqgrid-toppager .ui-paging-pager
+{
 	table-layout:auto;
 	height:100%;
 }
-.ui-jqgrid .ui-jqgrid-pager .navtable {
+.ui-jqgrid .ui-jqgrid-pager .navtable,
+.ui-jqgrid .ui-jqgrid-toppager .navtable
+{
 	float:left;
 	table-layout:auto;
 	height:100%;
@@ -205,7 +213,7 @@
 .ui-jqgrid-dnd tr td {border-right-width: 1px; border-right-color: inherit; border-right-style: solid; height:20px}
 /* RTL Support */
 .ui-jqgrid .ui-jqgrid-caption-rtl {text-align: right;}
-.ui-jqgrid .ui-jqgrid-hbox-rtl {float: right; padding-left: 20px;}
+.ui-jqgrid .ui-jqgrid-hbox-rtl {float: right;}
 .ui-jqgrid .ui-jqgrid-resize-ltr {float: right;margin: -2px -2px -2px 0;}
 .ui-jqgrid .ui-jqgrid-resize-rtl {float: left;margin: -2px 0 -1px -3px;}
 .ui-jqgrid .ui-sort-rtl {left:0;}
@@ -273,6 +281,10 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 	height:100%;
 	color : black;
 }
+.ui-jqgrid .ui-jqgrid-htable .colmenu-rtl {
+	right:auto;
+	left : 1px;
+}
 .ui-jqgrid .ui-jqgrid-htable .colmenuspan {
 	display:inline-block;
 }
@@ -294,7 +306,8 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 }
 .ui-menu-item .ui-common-table .menu_icon {
 	white-space: pre;
-	padding-right: 8px;
+	padding-right: 4px;
+	padding-left: 4px;
 	width : auto;
 }
 .ui-menu-item .ui-common-table .menu_icon .ui-icon {
