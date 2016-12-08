@@ -20,22 +20,22 @@ $(function () {
   $(myJqTbId).jqGrid({
       url: basePath+'demoproc/demo1proc.jsp',
       mtype: "GET",
+      caption: "这是一个jqgrid例子",
       datatype: "json",
       page: 1,
-      colNames: ['Order ID', 'Customer ID', 'Order Date', 'Freight', 'Ship Name','编辑','删除'],
+      colNames: ['Order ID', 'Customer ID', 'Order Date', 'Freight', 'Ship Name','操作选项'],
       colModel: [
-          { name: 'OrderID', key: true, sortable: false,hidedlg:true,hidden:true },
+          { name: 'OrderID', index:'OrderID',key: true, sortable: false,hidedlg:true,hidden:true },
           { name: 'CustomerID',index:'CustomerID', sortable: false },
           { name: 'OrderDate' ,index:'OrderDate', sortable: false },
           { name: 'Freight' ,index:'Freight', sortable: false },
           { name: 'ShipName' ,index:'ShipName', sortable: false },
-          { name: 'edit', sortable: false },
-          { name: 'del', sortable: false }
+          { name: '_operate', sortable: false }
       ],
       //width: 750,
       height: 'auto',
-      //autowidth:true,
-      shrinkToFit:false,
+      autowidth:true,
+      shrinkToFit:true,
       autoScroll: false,
       rowNum: 10,
       rowList : [5,10,15,20,25,30],
@@ -45,9 +45,10 @@ $(function () {
     	  var ids = jQuery(myJqTbId).jqGrid('getDataIDs');
     	  for (var i = 0; i < ids.length; i++) {
     	  var id = ids[i];
-    	  var editBtn = '<button onclick="edit('+ids[i]+')">编辑</button>';
-    	  var delBtn = '<button onclick="del('+ids[i]+')">删除</button>';
-    	  jQuery(myJqTbId).jqGrid('setRowData', ids[i], { edit: editBtn, del: delBtn });
+    	  var btn='';
+    	  btn += '<button onclick=edit("'+id+'")>编辑</button>';
+    	  btn +=  '<button onclick=del("'+id+'")>删除</button>';
+    	  jQuery(myJqTbId).jqGrid('setRowData', ids[i], { _operate: btn });
     	  }
       }
   });
@@ -79,4 +80,17 @@ function search(){
         postData:{'customerId':customerId,'freight':freight}, //发送数据 
         page:1 
     }).trigger("reloadGrid"); //重新载入
+}
+
+function getSelectData(){
+	var rowId = jQuery(myJqTbId).jqGrid("getGridParam", "selrow");
+	if(rowId==null){
+		console.log('没有选中行！')
+	}else{
+		console.log(rowId);
+		var rowData = $(myJqTbId).jqGrid('getRowData',rowId);
+		console.log(rowData);
+		console.log(rowData.OrderID);
+	}
+	
 }

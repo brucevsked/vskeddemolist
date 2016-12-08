@@ -21,6 +21,7 @@ request.setAttribute("basePath", basePath);
   <body>
   
  <p>
+ <button type="button" onclick="getSelectData();">获取选中行数据</button>
  customerId:
  <input type="text" id="customerId" name="customerId" value="" /> 
  Freight:
