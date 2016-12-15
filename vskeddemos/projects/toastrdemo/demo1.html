@@ -1,0 +1,30 @@
+﻿<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通知示例</title>
+    <link href="build/toastr.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+  	
+<script src="jquery.js"></script>
+<script src="toastr.js"></script>
+<script>
+	function ts(){
+    toastr.options = {
+    closeButton: true,
+    progressBar: true,
+    showMethod: 'slideDown',
+    timeOut: 4000
+    };
+    toastr.success('内容放在这里就好了<br>可以多放一些东西a', '标题显示这个1');
+    toastr.info('内容放在这里就好了<br>可以多放一些东西b', '标题显示这个2');
+    toastr.warning('内容放在这里就好了<br>可以多放一些东西c', '标题显示这个3');
+    toastr.error('内容放在这里就好了<br>可以多放一些东西d', '标题显示这个4');
+	}
+	ts();
+</script>
+  </body>
+</html>
