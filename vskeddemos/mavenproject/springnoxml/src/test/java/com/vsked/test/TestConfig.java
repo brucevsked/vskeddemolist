@@ -1,5 +1,6 @@
 package com.vsked.test;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;  
 import org.springframework.test.context.ContextConfiguration;  
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;  
@@ -16,4 +17,8 @@ import com.vsked.config.AppConfig;
 @WebAppConfiguration
 public class TestConfig {
 	
+	@Test
+	public void test(){
+		System.out.println();
+	}
 }
