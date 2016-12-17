@@ -18,7 +18,6 @@ public class UserSer {
 		Map<String, Object> userData=null;
 		try{
 			userData=userDao.getSysUserBySuId(suId);
-			System.out.println(userData);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
