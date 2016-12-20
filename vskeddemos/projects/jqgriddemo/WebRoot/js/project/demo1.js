@@ -28,7 +28,7 @@ $(function () {
           { name: 'OrderID', index:'OrderID',key: true, sortable: false,hidedlg:true,hidden:true },
           { name: 'CustomerID',index:'CustomerID', sortable: false },
           { name: 'OrderDate' ,index:'OrderDate', sortable: false },
-          { name: 'Freight' ,index:'Freight', sortable: false },
+          { name: 'Freight' ,index:'Freight', sortable: false,formatter:freightFormat },
           { name: 'ShipName' ,index:'ShipName', sortable: false },
           { name: '_operate', sortable: false }
       ],
@@ -94,3 +94,10 @@ function getSelectData(){
 	}
 	
 }
+
+function freightFormat(cellvalue, options, rowObject){
+	cellvalue=cellvalue.replace('f','');
+	cellvalue=cellvalue%2==1?'省':'国';
+	return cellvalue;
+}
+
