@@ -10,9 +10,9 @@ public class TestExcelUtils {
 	public static void main(String[] args) throws Exception {
 		TestExcelUtils ts=new TestExcelUtils();
 		//ts.testExcelXssfRead();
-		//ts.testExcelHssfRead();
+		ts.testExcelHssfRead();
 		//ts.testExcelHssfWrite();
-		ts.testExcelXssfWrite();
+//		ts.testExcelXssfWrite();
 	}
 	
 	public String[] testExcelXssfRead() throws Exception{
@@ -45,13 +45,12 @@ public class TestExcelUtils {
 	
 	public String[] testExcelHssfRead() throws Exception{
 		String[] rtsql=null;
-		String beforeSql="insert into userT(username,password,qq,ips) values(";
-		String afterSql=");";
-		String fname=TestExcelUtils.class.getResource("/")+"t1.xls";
-		fname=fname.substring(6);
+//		String fname=TestExcelUtils.class.getResource("/")+"t1.xls";
+		String fname="d:/data_back.xls";
+//		fname=fname.substring(6);
 		fname=fname.replace("%20", " ");
 		Map<String, String[][]> m=ExcelUtils.hssfRead(fname);
-		StringBuffer dt = new StringBuffer(beforeSql);
+		StringBuffer dt = new StringBuffer();
 		for(Map.Entry<String, String[][]> entry:m.entrySet()){
 			String sheetName=entry.getKey();
 			System.out.println("--------|"+sheetName);
@@ -59,11 +58,10 @@ public class TestExcelUtils {
 			if(sheetData!=null){
 			rtsql=new String[sheetData.length];
 			for(int i=0;i<sheetData.length;i++){
-				dt.setLength(beforeSql.length());
 				for(int c=0;c<sheetData[i].length;c++){
 					dt.append((c==0?"":",")+sheetData[i][c]);
 				}
-				rtsql[i]=dt.toString()+afterSql;
+				rtsql[i]=dt.toString();
 				System.out.println(rtsql[i]);
 			}
 			}
