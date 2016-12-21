@@ -21,8 +21,10 @@ public class AsposeExcel {
 			Cells cells=worksheet.getCells();
 			
 			for(int i=0;i<cells.getMaxRow();i++){
-				Cell cell=cells.get(i);
-				System.out.println(cell.getValue());
+				for(int column=0;column<cells.getMaxColumn();column++){
+					Cell cell=cells.get(i, column);
+					System.out.println(cell.getValue());
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
