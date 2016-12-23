@@ -120,7 +120,7 @@ public class fmTest {
 	}
 	
 	private String getImageStr() {
-	     String imgFile = "d:/bbkk1.png";
+	     String imgFile = "C:/inetpub/wwwroot/iisstart.png";
 	     InputStream in = null;
 	     byte[] data = null;
 	     try {
