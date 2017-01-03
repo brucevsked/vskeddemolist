@@ -14,7 +14,7 @@ public class BasicService {
 	}
 	
 	public String getMyAppPath(HttpServletRequest req){
-		return req.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+		return req.getServletContext().getRealPath("/").replace("\\", "/");
 	}
 	
 	public Map<String,Object> getMaps(HttpServletRequest req){

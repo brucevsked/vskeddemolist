@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 public class BaseSer {
 	
 	public static String getMyAppPath(HttpServletRequest req){
-		return req.getSession().getServletContext().getRealPath("/").replace("\\", "/");
+		return req.getServletContext().getRealPath("/").replace("\\", "/");
 	}
 	
 	  /**
