@@ -7,5 +7,11 @@ public class UserService {
 		System.out.println(userName);
 		return userName;
 	}
+	
+	public static void proc(){
+		MyTask task1=new MyTask();
+		Thread t1=new Thread(task1);
+		t1.start();
+	}
 
 }
