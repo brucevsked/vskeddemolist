@@ -24,6 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-<%=UserService.getName() %>
+<%=UserSer.getName()%>
   </body>
 </html>
