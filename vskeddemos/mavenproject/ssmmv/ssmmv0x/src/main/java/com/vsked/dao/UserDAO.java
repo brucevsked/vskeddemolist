@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.vsked.mapper.UserMapper;
-import com.vsked.model.User;
 
 @Repository
 public class UserDAO {
@@ -19,7 +18,7 @@ public class UserDAO {
         return userMapper.insertUser(user)==1?true:false;
     }
     
-    public User login(String username ,String password){
+    public Map<String, Object> login(String username ,String password){
         return userMapper.selectByUsernameAndPwd(username, password);
     }
 }

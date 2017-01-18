@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.vsked.model.User;
 import com.vsked.service.UserService;
 
 @Controller
@@ -27,17 +26,6 @@ public class UserController {
     @RequestMapping("login")
     public ModelAndView login(@RequestParam("username") String username,
                               @RequestParam("password") String password){
-        User user = userService.login(username, password);
-        
-        ModelAndView modelAndView = new ModelAndView();
-        if(user == null){
-            modelAndView.addObject("message", "用户不存在或者密码错误！请重新输入");
-            modelAndView.setViewName("error");
-        }else{
-            modelAndView.addObject("user", user);
-            modelAndView.setViewName("userinfo");
-        }
-        
-        return modelAndView;
+        return userService.login(username, password);
     }
 }
