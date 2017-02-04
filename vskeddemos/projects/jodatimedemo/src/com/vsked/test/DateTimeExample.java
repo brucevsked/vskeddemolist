@@ -1,4 +1,4 @@
-package com.vsked.test;
+ï»¿package com.vsked.test;
 
 import org.joda.time.DateTime;  
 import org.joda.time.Days;  
@@ -24,7 +24,7 @@ import java.util.Locale;
  * Test.java 
  * @author kanpiaoxue<br> 
  * @version 1.0 
- * Create Time 2014Äê6ÔÂ30ÈÕ ÏÂÎç8:10:08<br> 
+ * Create Time 2014å¹´6æœˆ30æ—¥ ä¸‹åˆ8:10:08<br> 
  * Description : 
  * </pre> 
  */  
@@ -41,15 +41,15 @@ public class DateTimeExample {
      */  
     public static void main(String[] args) {  
   
-        // 107ÌìÖ®ºóµÄÈÕÆÚ  
+        // 107å¤©ä¹‹åçš„æ—¥æœŸ  
         System.out.println(DateTime.now().dayOfYear().addToCopy(107).toString("yyyy-MM-dd"));  
-        // µ±Ç°ÖÜµÄÖÜÒ»£¬ÖÜÈÕ  
+        // å½“å‰å‘¨çš„å‘¨ä¸€ï¼Œå‘¨æ—¥  
         System.out.println(String.format("min:%s, max:%s",DateTime.now().dayOfWeek().withMinimumValue().toString("yyyy-MM-dd"),
         		DateTime.now().dayOfWeek().withMaximumValue().toString("yyyy-MM-dd")));  
-        // µ±Ç°ÔÂµÄµÚÒ»ÌìºÍ×îºóÒ»Ìì  
+        // å½“å‰æœˆçš„ç¬¬ä¸€å¤©å’Œæœ€åä¸€å¤©  
         System.out.println(String.format( "min:%s, max:%s",  DateTime.now().dayOfMonth().withMinimumValue().toString("yyyy-MM-dd"),  
                 DateTime.now().dayOfMonth().withMaximumValue().toString("yyyy-MM-dd")));  
-        // µ±Ç°ÄêµÄµÚÒ»ÌìºÍ×îºóÒ»Ìì  
+        // å½“å‰å¹´çš„ç¬¬ä¸€å¤©å’Œæœ€åä¸€å¤©  
         System.out.println(String.format( "min:%s, max:%s",  DateTime.now().dayOfYear().withMinimumValue().toString("yyyy-MM-dd"),  
                 DateTime.now().dayOfYear().withMaximumValue().toString("yyyy-MM-dd")));  
   
@@ -63,26 +63,26 @@ public class DateTimeExample {
         System.out.println("after now 30 days:" + now.plusDays(30).toString(FORMATE_DATE));  
   
         Duration duration = new Duration(start, now);  
-        System.out.println("duration.getStandardDays(): " + start.toString(FORMATE_FULL) + " Óë "  
-                + now.toString(FORMATE_FULL) + " Ïà²îµÄÌìÊı£º" + duration.getStandardDays());  
-        System.out.println("duration.getStandardHours(): " + start.toString(FORMATE_FULL) + " Óë "  
-                + now.toString(FORMATE_FULL) + " Ïà²îµÄĞ¡Ê±Êı£º" + duration.getStandardHours());  
+        System.out.println("duration.getStandardDays(): " + start.toString(FORMATE_FULL) + " ä¸ "  
+                + now.toString(FORMATE_FULL) + " ç›¸å·®çš„å¤©æ•°ï¼š" + duration.getStandardDays());  
+        System.out.println("duration.getStandardHours(): " + start.toString(FORMATE_FULL) + " ä¸ "  
+                + now.toString(FORMATE_FULL) + " ç›¸å·®çš„å°æ—¶æ•°ï¼š" + duration.getStandardHours());  
   
         Calendar calendar = now.toCalendar(Locale.CHINESE);  
-        System.out.println("with JDK interact£º"  
+        System.out.println("with JDK interactï¼š"  
                 + new SimpleDateFormat(FORMATE_DATE).format(calendar.getTime()));  
         Calendar calendar1 = Calendar.getInstance();  
         System.out.println("Calendar:"  
                 + new SimpleDateFormat(FORMATE_DATE).format(calendar1.getTime()));  
   
         DateTime a = new DateTime(new Date());  
-        System.out.println("¸ñÊ½»¯£º" + a.toString(FORMATE_DATE, Locale.CHINESE));  
+        System.out.println("æ ¼å¼åŒ–ï¼š" + a.toString(FORMATE_DATE, Locale.CHINESE));  
         DateTime b = new DateTime(2014, 1, 1, 0, 0);  
-        System.out.println("¸ñÊ½»¯£º" + b.toString(FORMATE_DATE, Locale.CHINESE));  
+        System.out.println("æ ¼å¼åŒ–ï¼š" + b.toString(FORMATE_DATE, Locale.CHINESE));  
   
         String timeString = "2006-01-26";  
         DateTime c = new DateTime(timeString);  
-        System.out.println("parse£º" + c.toString(FORMATE_DATE, Locale.CHINESE));  
+        System.out.println("parseï¼š" + c.toString(FORMATE_DATE, Locale.CHINESE));  
   
         LocalDate localDate = new LocalDate(2009, 9, 6);// September 6, 2009  
         System.out.println("LocalDate:" + localDate.toString(FORMATE_DATE, Locale.CHINESE));  
@@ -91,10 +91,10 @@ public class DateTimeExample {
   
         LocalDate d = LocalDate.now();  
         LocalDate lastDayOfPreviousMonth = d.minusMonths(1).dayOfMonth().withMaximumValue();  
-        System.out.println("ÎÒÏ£Íû¼ÆËãÉÏÒ»¸öÔÂµÄ×îºóÒ»Ìì:"  + lastDayOfPreviousMonth.toString(FORMATE_DATE, Locale.CHINESE));  
+        System.out.println("æˆ‘å¸Œæœ›è®¡ç®—ä¸Šä¸€ä¸ªæœˆçš„æœ€åä¸€å¤©:"  + lastDayOfPreviousMonth.toString(FORMATE_DATE, Locale.CHINESE));  
         Property e = d.minusWeeks(1).dayOfWeek();  
-        System.out.println("ÉÏÖÜµÄÖÜÒ»£º" + e.withMinimumValue().toString(FORMATE_DATE, Locale.CHINESE));  
-        System.out.println("ÉÏÖÜµÄÖÜÈÕ£º" + e.withMaximumValue().toString(FORMATE_DATE, Locale.CHINESE));  
+        System.out.println("ä¸Šå‘¨çš„å‘¨ä¸€ï¼š" + e.withMinimumValue().toString(FORMATE_DATE, Locale.CHINESE));  
+        System.out.println("ä¸Šå‘¨çš„å‘¨æ—¥ï¼š" + e.withMaximumValue().toString(FORMATE_DATE, Locale.CHINESE));  
   
         System.out.println(".dayOfWeek().getAsText(Locale.CHINESE):"  
                 + a.minusYears(1).dayOfWeek().getAsText(Locale.CHINESE));  
@@ -108,15 +108,15 @@ public class DateTimeExample {
                         .getDays());  
   
         DateTime one = DateTime.parse("2014-06-27T13:23:01");  
-        System.out.println(one.minuteOfDay()// ×ª»»µ½ minuteOfDay  
-                .setCopy(11)// ÉèÖÃ minuteOfDay µÄÊıÖµÎª 11£¬Ò²¾ÍÊÇ 11 ·ÖÖÓ  
+        System.out.println(one.minuteOfDay()// è½¬æ¢åˆ° minuteOfDay  
+                .setCopy(11)// è®¾ç½® minuteOfDay çš„æ•°å€¼ä¸º 11ï¼Œä¹Ÿå°±æ˜¯ 11 åˆ†é’Ÿ  
                 .toString(FORMATE_FULL));  
         System.out.println(one.hourOfDay().setCopy(0).toString(FORMATE_FULL));  
-        System.out.println(one.hourOfDay().addToCopy(3)// ÔÚ hourOfDay ÉÏÃæÔö¼Ó 3¸öĞ¡Ê±  
+        System.out.println(one.hourOfDay().addToCopy(3)// åœ¨ hourOfDay ä¸Šé¢å¢åŠ  3ä¸ªå°æ—¶  
                 .toString(FORMATE_FULL));  
-        System.out.println("ÊÇ·ñÈòÔÂ:" + one.minusMonths(4)// ÔÚ"2014-06-27"¼õÈ¥4¸öÔÂµ½"2014-02-27"  
-                .monthOfYear()// ×ª»»µ½monthOfYearµÄÄ£Ê½  
-                .isLeap()// ÊÇ·ñÈòÔÂ  
+        System.out.println("æ˜¯å¦é—°æœˆ:" + one.minusMonths(4)// åœ¨"2014-06-27"å‡å»4ä¸ªæœˆåˆ°"2014-02-27"  
+                .monthOfYear()// è½¬æ¢åˆ°monthOfYearçš„æ¨¡å¼  
+                .isLeap()// æ˜¯å¦é—°æœˆ  
         );  
   
         DateTime from = DateTime.parse("2014-06-27");  
@@ -142,8 +142,8 @@ public class DateTimeExample {
          * </pre> 
          */  
   
-        // ¶ÔÓÚ¸ø¶¨ÈÕÆÚ "2014-07-02" µÃµ½¸ÃÄê2ÔÂµÄÍ¬Ò»Ìì£¬¼´£º2014-02-02  
-        // ====== start ÕâÀï¸ø³öÁË3ÖÖ·½·¨£¬µ±È»²»ÖÁÓÚÕâĞ©·½·¨  
+        // å¯¹äºç»™å®šæ—¥æœŸ "2014-07-02" å¾—åˆ°è¯¥å¹´2æœˆçš„åŒä¸€å¤©ï¼Œå³ï¼š2014-02-02  
+        // ====== start è¿™é‡Œç»™å‡ºäº†3ç§æ–¹æ³•ï¼Œå½“ç„¶ä¸è‡³äºè¿™äº›æ–¹æ³•  
         DateTime two = DateTime.parse("2014-07-02");  
         String feb = two.monthOfYear().withMinimumValue().plusMonths(1).toString(FORMATE_DATE);  
         System.out.println("with " + two.toString(FORMATE_DATE) + " to get " + feb);  
@@ -155,17 +155,17 @@ public class DateTimeExample {
         for (int i = 0; i < 10; i++) {  
             DateTime in = two.plusYears(i);  
             if (in.year().isLeap()) {  
-                System.out.println(in.toString("yyyy") + " ÊÇÈòÄê");  
+                System.out.println(in.toString("yyyy") + " æ˜¯é—°å¹´");  
             }  
         }  
   
         System.out.println(Strings.repeat("=", 100));  
   
-        DateTime temp = DateTime.parse("2014-07-02")// µ±Ç°ÈÕÆÚ  
-                .monthOfYear()// ÄêµÄÔÂ·İ  
-                .withMinimumValue()// ÄêµÄÔÂ·İÖĞ×îĞ¡µÄÊıÖµ£ºÒ»ÔÂ  
-                .plusMonths(1);// ÔÚÒ»ÔÂÉÏÃæ¼ÓÉÏÒ»¸öÔÂ£¬¾ÍÊÇ¶şÔÂ  
-        List<Long> dateLongValues = getDaysOfMonth(temp);// ¶şÔÂËùÓĞÌìÊıµÄºÁÃëÊıÁĞ±í  
+        DateTime temp = DateTime.parse("2014-07-02")// å½“å‰æ—¥æœŸ  
+                .monthOfYear()// å¹´çš„æœˆä»½  
+                .withMinimumValue()// å¹´çš„æœˆä»½ä¸­æœ€å°çš„æ•°å€¼ï¼šä¸€æœˆ  
+                .plusMonths(1);// åœ¨ä¸€æœˆä¸Šé¢åŠ ä¸Šä¸€ä¸ªæœˆï¼Œå°±æ˜¯äºŒæœˆ  
+        List<Long> dateLongValues = getDaysOfMonth(temp);// äºŒæœˆæ‰€æœ‰å¤©æ•°çš„æ¯«ç§’æ•°åˆ—è¡¨  
         List<String> dates = FluentIterable.from(dateLongValues)  
                 .transform(new Function<Long, String>() {  
                     public String apply(Long input) {  
@@ -263,18 +263,18 @@ public class DateTimeExample {
         /** 
          * <pre> 
          * -- output 
-         * Ò»ÔÂ 
-         * ¶şÔÂ 
-         * ÈıÔÂ 
-         * ËÄÔÂ 
-         * ÎåÔÂ 
-         * ÁùÔÂ 
-         * ÆßÔÂ 
-         * °ËÔÂ 
-         * ¾ÅÔÂ 
-         * Ê®ÔÂ 
-         * Ê®Ò»ÔÂ 
-         * Ê®¶şÔÂ 
+         * ä¸€æœˆ 
+         * äºŒæœˆ 
+         * ä¸‰æœˆ 
+         * å››æœˆ 
+         * äº”æœˆ 
+         * å…­æœˆ 
+         * ä¸ƒæœˆ 
+         * å…«æœˆ 
+         * ä¹æœˆ 
+         * åæœˆ 
+         * åä¸€æœˆ 
+         * åäºŒæœˆ 
          * </pre> 
          */  
         for (String str : months) {  
@@ -288,9 +288,9 @@ public class DateTimeExample {
     /** 
      * <pre> 
      * @param date 
-     * @return date ËùÔÚÌìµÄĞ¡Ê±ÁĞ±í 
-     * ±¸×¢£ºÕâ¸ö·½·¨µÄÊµ¼ÊÊ¹ÓÃÒâÒå²»´ó£¬ÒòÎªÃ¿Ìì¶¼ÊÇ24¸öĞ¡Ê±£¬²»»á²úÉú±ä»¯¡£ 
-     * ÕâÀïµÄÀı×Ó¾ÍÊÇÎªÁËÕ¹Ê¾DateTimeµÄAPI 
+     * @return date æ‰€åœ¨å¤©çš„å°æ—¶åˆ—è¡¨ 
+     * å¤‡æ³¨ï¼šè¿™ä¸ªæ–¹æ³•çš„å®é™…ä½¿ç”¨æ„ä¹‰ä¸å¤§ï¼Œå› ä¸ºæ¯å¤©éƒ½æ˜¯24ä¸ªå°æ—¶ï¼Œä¸ä¼šäº§ç”Ÿå˜åŒ–ã€‚ 
+     * è¿™é‡Œçš„ä¾‹å­å°±æ˜¯ä¸ºäº†å±•ç¤ºDateTimeçš„API 
      * </pre> 
      */  
     public static List<Long> getHoursTimeOfDate(DateTime date) {  
@@ -309,7 +309,7 @@ public class DateTimeExample {
     /** 
      * <pre> 
      * @param date 
-     * @return date ËùÔÚÔÂ·İµÄÈÕÆÚÁĞ±í 
+     * @return date æ‰€åœ¨æœˆä»½çš„æ—¥æœŸåˆ—è¡¨ 
      * </pre> 
      */  
     public static List<Long> getDaysOfMonth(DateTime date) {  
@@ -327,9 +327,9 @@ public class DateTimeExample {
     /** 
      * <pre> 
      * @param date 
-     * @return date ËùÔÚÄê·İµÄÔÂ·İÁĞ±í 
-     * ±¸×¢£ºÕâ¸ö·½·¨µÄÊµ¼ÊÊ¹ÓÃÒâÒå²»´ó£¬ÒòÎªÃ¿Äê¶¼ÊÇ12¸öÔÂ£¬²»»á²úÉú±ä»¯¡£ 
-     * ÕâÀïµÄÀı×Ó¾ÍÊÇÎªÁËÕ¹Ê¾DateTimeµÄAPI 
+     * @return date æ‰€åœ¨å¹´ä»½çš„æœˆä»½åˆ—è¡¨ 
+     * å¤‡æ³¨ï¼šè¿™ä¸ªæ–¹æ³•çš„å®é™…ä½¿ç”¨æ„ä¹‰ä¸å¤§ï¼Œå› ä¸ºæ¯å¹´éƒ½æ˜¯12ä¸ªæœˆï¼Œä¸ä¼šäº§ç”Ÿå˜åŒ–ã€‚ 
+     * è¿™é‡Œçš„ä¾‹å­å°±æ˜¯ä¸ºäº†å±•ç¤ºDateTimeçš„API 
      * </pre> 
      */  
     public static List<Long> getMonthsOfYear(DateTime date) {  
@@ -346,7 +346,7 @@ public class DateTimeExample {
   
     /** 
      * <pre> 
-     * ¹ÙÍøµÄÀı×Ó 
+     * å®˜ç½‘çš„ä¾‹å­ 
      * </pre> 
      */  
     private static void run() {  

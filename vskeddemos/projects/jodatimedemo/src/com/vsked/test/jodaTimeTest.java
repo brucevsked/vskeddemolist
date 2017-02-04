@@ -1,4 +1,4 @@
-package com.vsked.test;
+ï»¿package com.vsked.test;
 
 import java.text.SimpleDateFormat;
 
@@ -11,28 +11,28 @@ import com.vsked.util.DateTimeUtilVsked;
 public class jodaTimeTest {
 
 	public static void main(String[] args) {
-		System.out.println("»ñÈ¡µ±ÌìÈÕÆÚ:"+DateTimeUtilVsked.getCurrentDate("yyyy-MM-dd"));
-		System.out.println("»ñÈ¡±¾ÖÜÒ»ÈÕÆÚ:"+DateTimeUtilVsked.getMondayOfCurrentWeek());
-		System.out.println("»ñÈ¡±¾ÖÜÄ©ÈÕÆÚ:"+DateTimeUtilVsked.getSundayOfCurrentWeek());
-		System.out.println("»ñÈ¡ÉÏÖÜÒ»ÈÕÆÚ:"+DateTimeUtilVsked.getMondayOfBeforeWeek());
-		System.out.println("»ñÈ¡ÉÏÖÜÄ©ÈÕÆÚ:"+DateTimeUtilVsked.getSundayOfBeforeWeek());
-		System.out.println("»ñÈ¡ÏÂÖÜÒ»ÈÕÆÚ:"+DateTimeUtilVsked.getMondayOfNextWeek());
-		System.out.println("»ñÈ¡ÏÂÖÜÄ©ÈÕÆÚ:"+DateTimeUtilVsked.getSundayOfNextWeek());
-		System.out.println("»ñÈ¡±¾ÔÂµÚÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getFirstDayOfCurrentMonth());
-		System.out.println("»ñÈ¡±¾ÔÂ×îºóÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getLastDayOfCurrentMonth());
-		System.out.println("»ñÈ¡ÉÏÔÂµÚÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getFirstDayOfBeforeMonth());
-		System.out.println("»ñÈ¡ÉÏÔÂ×îºóÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getLastDayOfBeforeMonth());
-		System.out.println("»ñÈ¡ÏÂÔÂµÚÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getFirstDayOfNextMonth());
-		System.out.println("»ñÈ¡ÏÂÔÂ×îºóÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getLastDayOfNextMonth());
-		System.out.println("»ñÈ¡±¾ÄêµÚÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getFirstDayOfCurrentYear());
-		System.out.println("»ñÈ¡±¾Äê×îºóÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getLastDayOfCurrentYear());
-		System.out.println("»ñÈ¡ÉÏÄêµÚÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getFirstDayOfBeforeYear());
-		System.out.println("»ñÈ¡ÉÏÄê×îºóÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getLastDayOfBeforeYear());
-		System.out.println("»ñÈ¡ÏÂÄêµÚÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getFirstDayOfNextYear());
-		System.out.println("»ñÈ¡ÏÂÄê×îºóÒ»ÌìÈÕÆÚ:"+DateTimeUtilVsked.getLastDayOfNextYear());
-		System.out.println("»ñÈ¡µ±Ç°¼¾¶È:"+DateTimeUtilVsked.getFirstDayOfCurrentSeason()); //²âÊÔÖĞÎ´Íê³É
-		System.out.println("Á½ÈÕÆÚÏà²î:"+DateTimeUtilVsked.getDaysBetweenTwoDate(new DateTime(2015, 5, 6, 20, 11, 40), new DateTime(2015, 5, 8, 20, 11, 40)));
-//		System.out.println("»ñÈ¡µ±ÌìÈÕÆÚ:"+DateTimeUtilVsked);
+		System.out.println("è·å–å½“å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getCurrentDate("yyyy-MM-dd"));
+		System.out.println("è·å–æœ¬å‘¨ä¸€æ—¥æœŸ:"+DateTimeUtilVsked.getMondayOfCurrentWeek());
+		System.out.println("è·å–æœ¬å‘¨æœ«æ—¥æœŸ:"+DateTimeUtilVsked.getSundayOfCurrentWeek());
+		System.out.println("è·å–ä¸Šå‘¨ä¸€æ—¥æœŸ:"+DateTimeUtilVsked.getMondayOfBeforeWeek());
+		System.out.println("è·å–ä¸Šå‘¨æœ«æ—¥æœŸ:"+DateTimeUtilVsked.getSundayOfBeforeWeek());
+		System.out.println("è·å–ä¸‹å‘¨ä¸€æ—¥æœŸ:"+DateTimeUtilVsked.getMondayOfNextWeek());
+		System.out.println("è·å–ä¸‹å‘¨æœ«æ—¥æœŸ:"+DateTimeUtilVsked.getSundayOfNextWeek());
+		System.out.println("è·å–æœ¬æœˆç¬¬ä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getFirstDayOfCurrentMonth());
+		System.out.println("è·å–æœ¬æœˆæœ€åä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getLastDayOfCurrentMonth());
+		System.out.println("è·å–ä¸Šæœˆç¬¬ä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getFirstDayOfBeforeMonth());
+		System.out.println("è·å–ä¸Šæœˆæœ€åä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getLastDayOfBeforeMonth());
+		System.out.println("è·å–ä¸‹æœˆç¬¬ä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getFirstDayOfNextMonth());
+		System.out.println("è·å–ä¸‹æœˆæœ€åä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getLastDayOfNextMonth());
+		System.out.println("è·å–æœ¬å¹´ç¬¬ä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getFirstDayOfCurrentYear());
+		System.out.println("è·å–æœ¬å¹´æœ€åä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getLastDayOfCurrentYear());
+		System.out.println("è·å–ä¸Šå¹´ç¬¬ä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getFirstDayOfBeforeYear());
+		System.out.println("è·å–ä¸Šå¹´æœ€åä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getLastDayOfBeforeYear());
+		System.out.println("è·å–ä¸‹å¹´ç¬¬ä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getFirstDayOfNextYear());
+		System.out.println("è·å–ä¸‹å¹´æœ€åä¸€å¤©æ—¥æœŸ:"+DateTimeUtilVsked.getLastDayOfNextYear());
+		System.out.println("è·å–å½“å‰å­£åº¦:"+DateTimeUtilVsked.getFirstDayOfCurrentSeason()); //æµ‹è¯•ä¸­æœªå®Œæˆ
+		System.out.println("ä¸¤æ—¥æœŸç›¸å·®:"+DateTimeUtilVsked.getDaysBetweenTwoDate(new DateTime(2015, 5, 6, 20, 11, 40), new DateTime(2015, 5, 8, 20, 11, 40)));
+//		System.out.println("è·å–å½“å¤©æ—¥æœŸ:"+DateTimeUtilVsked);
 
 	}
 	

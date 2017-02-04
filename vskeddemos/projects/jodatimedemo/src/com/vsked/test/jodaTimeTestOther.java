@@ -1,4 +1,4 @@
-package com.vsked.test;
+ï»¿package com.vsked.test;
 
 import java.util.Date;
 import java.text.ParseException;
@@ -26,35 +26,35 @@ public class jodaTimeTestOther {
 	}
 
 	public static void test1(Date d1, Date d2) {
-		// ºÁÃëms
+		// æ¯«ç§’ms
 		long diff = d2.getTime() - d1.getTime();
 		long diffSeconds = diff / 1000 % 60;
 		long diffMinutes = diff / (60 * 1000) % 60;
 		long diffHours = diff / (60 * 60 * 1000) % 24;
 		long diffDays = diff / (24 * 60 * 60 * 1000);
-		System.out.print("Ê±¼äÏà²î£º");
-		System.out.print(diffDays + " Ìì ");
-		System.out.print(diffHours + " Ğ¡Ê± ");
-		System.out.print(diffMinutes + " ·ÖÖÓ ");
-		System.out.print(diffSeconds + " Ãë.");
+		System.out.print("æ—¶é—´ç›¸å·®ï¼š");
+		System.out.print(diffDays + " å¤© ");
+		System.out.print(diffHours + " å°æ—¶ ");
+		System.out.print(diffMinutes + " åˆ†é’Ÿ ");
+		System.out.print(diffSeconds + " ç§’.");
 		System.out.println();
 	}
 
 	public static void test2(Date d1, Date d2) throws ParseException {
 		DateTime dt1 = new DateTime(d1);
 		DateTime dt2 = new DateTime(d2);
-		System.out.print("Ê±¼äÏà²î£º");
-		System.out.print(Days.daysBetween(dt1, dt2).getDays() + " Ìì ");
-		System.out.print(Hours.hoursBetween(dt1, dt2).getHours() % 24 + " Ğ¡Ê± ");
-		System.out.print(Minutes.minutesBetween(dt1, dt2).getMinutes() % 60	+ " ·ÖÖÓ ");
-		System.out.print(Seconds.secondsBetween(dt1, dt2).getSeconds() % 60	+ " Ãë.");
+		System.out.print("æ—¶é—´ç›¸å·®ï¼š");
+		System.out.print(Days.daysBetween(dt1, dt2).getDays() + " å¤© ");
+		System.out.print(Hours.hoursBetween(dt1, dt2).getHours() % 24 + " å°æ—¶ ");
+		System.out.print(Minutes.minutesBetween(dt1, dt2).getMinutes() % 60	+ " åˆ†é’Ÿ ");
+		System.out.print(Seconds.secondsBetween(dt1, dt2).getSeconds() % 60	+ " ç§’.");
 		System.out.println();
 	}
 
 	public static void test3(Date d1, Date d2) {
 		Interval interval = new Interval(d1.getTime(), d2.getTime());
 		Period p = interval.toPeriod();
-		System.out.println("Ê±¼äÏà²î£º" + p.getDays() + " Ìì " + p.getHours()+ " Ğ¡Ê± " + p.getMinutes() + " ·ÖÖÓ" + p.getSeconds() + " Ãë");
+		System.out.println("æ—¶é—´ç›¸å·®ï¼š" + p.getDays() + " å¤© " + p.getHours()+ " å°æ—¶ " + p.getMinutes() + " åˆ†é’Ÿ" + p.getSeconds() + " ç§’");
 	}
 
 }

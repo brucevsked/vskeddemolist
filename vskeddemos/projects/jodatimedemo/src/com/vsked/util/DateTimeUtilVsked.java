@@ -1,4 +1,4 @@
-package com.vsked.util;
+ï»¿package com.vsked.util;
 
 
 import java.util.Locale;
@@ -15,7 +15,7 @@ public class DateTimeUtilVsked {
     static DateTime dt=new DateTime();
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÈÕÆÚ Èç2015-07-15
+	 * è·å–å½“å‰æ—¥æœŸ å¦‚2015-07-15
 	 * @return String 
 	 */
 	public static String getCurrentDate(String dateformat){
@@ -23,7 +23,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡±¾ÖÜÖÜÒ»ÈÕÆÚ
+	 * è·å–æœ¬å‘¨å‘¨ä¸€æ—¥æœŸ
 	 * @return String
 	 */
 	public static String getMondayOfCurrentWeek(){
@@ -31,7 +31,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÉÏÖÜÖÜÒ»ÈÕÆÚ
+	 * è·å–ä¸Šå‘¨å‘¨ä¸€æ—¥æœŸ
 	 * @return String
 	 */
 	public static String getMondayOfBeforeWeek(){
@@ -39,7 +39,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÏÂÖÜÖÜÒ»ÈÕÆÚ
+	 * è·å–ä¸‹å‘¨å‘¨ä¸€æ—¥æœŸ
 	 * @return String
 	 */
 	public static String getMondayOfNextWeek(){
@@ -47,7 +47,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡±¾ÖÜÖÜÄ©ÈÕÆÚ
+	 * è·å–æœ¬å‘¨å‘¨æœ«æ—¥æœŸ
 	 * @return String
 	 */
 	public static String getSundayOfCurrentWeek(){
@@ -55,7 +55,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÉÏÖÜÖÜÄ©ÈÕÆÚ
+	 * è·å–ä¸Šå‘¨å‘¨æœ«æ—¥æœŸ
 	 * @return String
 	 */
 	public static String getSundayOfBeforeWeek(){
@@ -63,7 +63,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÉÏÖÜÖÜÄ©ÈÕÆÚ
+	 * è·å–ä¸Šå‘¨å‘¨æœ«æ—¥æœŸ
 	 * @return String
 	 */
 	public static String getSundayOfNextWeek(){
@@ -71,7 +71,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡±¾ÔÂµÚÒ»Ìì
+	 * è·å–æœ¬æœˆç¬¬ä¸€å¤©
 	 * @return String
 	 */
 	public static String getFirstDayOfCurrentMonth(){
@@ -79,7 +79,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÉÏÔÂµÚÒ»Ìì
+	 * è·å–ä¸Šæœˆç¬¬ä¸€å¤©
 	 * @return String
 	 */
 	public static String getFirstDayOfBeforeMonth(){
@@ -87,7 +87,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡±¾ÄêµÚÒ»Ìì
+	 * è·å–æœ¬å¹´ç¬¬ä¸€å¤©
 	 * @return
 	 */
 	public static String getFirstDayOfCurrentYear(){
@@ -95,7 +95,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÏÂÔÂµÚÒ»Ìì
+	 * è·å–ä¸‹æœˆç¬¬ä¸€å¤©
 	 * @return String
 	 */
 	public static String getFirstDayOfNextMonth(){
@@ -103,7 +103,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÉÏÄêµÚÒ»Ìì
+	 * è·å–ä¸Šå¹´ç¬¬ä¸€å¤©
 	 * @return String
 	 */
 	public static String getFirstDayOfBeforeYear(){
@@ -111,7 +111,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÏÂÄêµÚÒ»Ìì
+	 * è·å–ä¸‹å¹´ç¬¬ä¸€å¤©
 	 * @return String
 	 */
 	public static String getFirstDayOfNextYear(){
@@ -125,7 +125,7 @@ public class DateTimeUtilVsked {
 	
 	
 	/**
-	 * »ñÈ¡±¾ÔÂ×îºóÒ»Ìì
+	 * è·å–æœ¬æœˆæœ€åä¸€å¤©
 	 * @return String
 	 */
 	public static String getLastDayOfCurrentMonth(){
@@ -133,7 +133,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÉÏÔÂ×îºóÒ»Ìì
+	 * è·å–ä¸Šæœˆæœ€åä¸€å¤©
 	 * @return String
 	 */
 	public static String getLastDayOfBeforeMonth(){
@@ -141,7 +141,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÏÂÔÂ×îºóÒ»Ìì
+	 * è·å–ä¸‹æœˆæœ€åä¸€å¤©
 	 * @return String
 	 */
 	public static String getLastDayOfNextMonth(){
@@ -149,7 +149,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡±¾Äê×îºóÒ»Ìì
+	 * è·å–æœ¬å¹´æœ€åä¸€å¤©
 	 * @return
 	 */
 	public static String getLastDayOfCurrentYear(){
@@ -157,7 +157,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÉÏÄê×îºóÒ»Ìì
+	 * è·å–ä¸Šå¹´æœ€åä¸€å¤©
 	 * @return
 	 */
 	public static String getLastDayOfBeforeYear(){
@@ -165,7 +165,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * »ñÈ¡ÏÂÄê×îºóÒ»Ìì
+	 * è·å–ä¸‹å¹´æœ€åä¸€å¤©
 	 * @return String
 	 */
 	public static String getLastDayOfNextYear(){
@@ -173,7 +173,7 @@ public class DateTimeUtilVsked {
 	}
 	
 	/**
-	 * ¼ÆËãÁ½¸öÈÕÆÚÖ®¼äÏà¸ô¶àÉÙÌì
+	 * è®¡ç®—ä¸¤ä¸ªæ—¥æœŸä¹‹é—´ç›¸éš”å¤šå°‘å¤©
 	 * @param startDate
 	 * @param endDate
 	 * @return int
