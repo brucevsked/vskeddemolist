@@ -6,10 +6,12 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Log4jConfigurer;
 
 import com.vsked.service.SysUserSer;
 
@@ -17,6 +19,15 @@ import com.vsked.service.SysUserSer;
 @ContextConfiguration(locations = { "classpath:xml/spring-mybatis.xml" })
 public class TestMyBatis {
 	private static Logger logger = Logger.getLogger(TestMyBatis.class);
+	
+	@Before
+	public void initLog4j(){
+        try {  
+            Log4jConfigurer.initLogging("classpath:properties/log4j.properties");  
+        } catch (Exception ex) {  
+            System.err.println("Cannot Initialize log4j");  
+        } 
+	}
 	
 	@Resource
 	SysUserSer sysUserSer;
