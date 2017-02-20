@@ -23,7 +23,7 @@ import com.vsked.service.BaseService;
 @Transactional
 public class SysUserSer extends BaseService{
 	
-	public Logger log = Logger.getLogger(this.getClass());
+	public Logger log = Logger.getLogger(SysUserSer.class);
 	
 	@Resource
 	private SysUserDao sysUserDao;

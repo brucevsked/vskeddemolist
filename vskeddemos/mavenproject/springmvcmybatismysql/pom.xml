@@ -15,7 +15,12 @@
 	</properties>
 
 	<dependencies>
-
+		<!-- 导入java ee jar 包 -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -79,55 +84,55 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
 		</dependency>
-       <!-- spring -->  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-core</artifactId>  
-            <version>${spring.version}</version>  
-        </dependency>  
-  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-beans</artifactId>  
-            <version>${spring.version}</version>  
-        </dependency>  
-  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-context</artifactId>  
-            <version>${spring.version}</version>  
-        </dependency>  
-  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-tx</artifactId>  
-            <version>${spring.version}</version>  
-        </dependency>  
-  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-web</artifactId>  
-            <version>${spring.version}</version>  
-        </dependency>  
-  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-webmvc</artifactId>  
-            <version>${spring.version}</version>  
-        </dependency>  
-  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-jdbc</artifactId>  
-            <version>${spring.version}</version>  
-        </dependency>  
-  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-test</artifactId>  
-            <version>${spring.version}</version>  
-            <scope>test</scope>  
-        </dependency>
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-all</artifactId>
@@ -149,18 +154,18 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.4</version>
 		</dependency>
-        <!-- mybatis 包 -->  
-        <dependency>  
-            <groupId>org.mybatis</groupId>  
-            <artifactId>mybatis</artifactId>  
-            <version>3.4.2</version>  
-        </dependency>
-        <!--mybatis spring 插件 -->  
-        <dependency>  
-            <groupId>org.mybatis</groupId>  
-            <artifactId>mybatis-spring</artifactId>  
-            <version>1.3.1</version>  
-        </dependency>
+		<!-- mybatis 包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+		<!--mybatis spring 插件 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.1</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
@@ -174,19 +179,50 @@
 			<artifactId>jsqlparser</artifactId>
 			<version>0.9.6</version>
 		</dependency>
-        <!-- 导入dbcp的jar包，用来配置数据库 -->
-	    <dependency>
-	        <groupId>commons-dbcp</groupId>
-	        <artifactId>commons-dbcp</artifactId>
-	        <version>1.4</version>
-	    </dependency>
-	    <!-- 日志文件管理包 -->
-	    <!-- log start -->
-	    <dependency>
-	        <groupId>log4j</groupId>
-	        <artifactId>log4j</artifactId>
-	        <version>1.2.17</version>
-	    </dependency>
+		<!-- 导入dbcp的jar包，用来配置数据库 -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- 日志文件管理包 -->
+		<!-- log start -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<!-- fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.24</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.8.6</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.6</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.8.6</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>springmvcmybatismysql</finalName>

@@ -20,9 +20,7 @@ request.setAttribute("basePath", basePath);
   </head>
   
   <body>
-  <a href="${basePath }index">go</a>
-  <script type="text/javascript">
-  </script>  
+  welcome spring mvc for mybatis
   </body>
 </html>
 
