@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Log4jConfigurer;
 
+import com.vsked.dao.SysUserDao;
 import com.vsked.service.SysUserSer;
 
 @RunWith(SpringJUnit4ClassRunner.class) // 表示继承了SpringJUnit4ClassRunner类
@@ -31,15 +32,22 @@ public class TestMyBatis {
 	
 	@Resource
 	SysUserSer sysUserSer;
+	
+	@Resource
+	SysUserDao sysUserDao;
 
-	@Test
-	public void test(){
+	
+	public void testService(){
 		String suName="admin";
 		Map<String, Object> sysUser=sysUserSer.getSysUserBySuName(suName);
-		
-		System.out.println(sysUser);
 		logger.info(sysUser);
 		
-		
+	}
+	
+	@Test
+	public void testDao(){
+		String suName="admin";
+        Map<String, Object> sysUser=sysUserDao.getSysUserBySuName(suName);
+		logger.info(sysUser);
 	}
 }
