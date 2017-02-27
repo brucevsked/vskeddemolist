@@ -3,6 +3,8 @@ http://localhost:8080/
 
 http://localhost:8080/SpringMVC_Shiro
 
+http://localhost:8080/SpringMVC_Shiro/user/add.html
+
 
 
 用户名：sam ----密码：000000

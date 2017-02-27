@@ -13,6 +13,14 @@ File Encoding         : 65001
 Date: 2014-10-04 17:08:01
 */
 
+CREATE USER 'shiro'@'%' IDENTIFIED BY 'shiro'; 
+
+CREATE DATABASE shiro DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+grant all  on shiro.* to 'shiro'@'%' ;
+
+use shiro ;
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -34,6 +42,8 @@ INSERT INTO `t_user` VALUES ('2', 'ding', '670b14728ad9902aecba32e22fa4f6bd');
 INSERT INTO `t_user` VALUES ('3', 'baoseed', '670b14728ad9902aecba32e22fa4f6bd');
 INSERT INTO `t_user` VALUES ('4', 'jeremie', 'e10adc3949ba59abbe56e057f20f883e');
 
+select * from `t_user` ;
+
 -- ----------------------------
 -- Table structure for `t_permission`
 -- ----------------------------
@@ -44,6 +54,7 @@ CREATE TABLE `t_permission` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 -- ----------------------------
 -- Records of t_permission
 -- ----------------------------
@@ -51,6 +62,8 @@ INSERT INTO `t_permission` VALUES ('1', 'user:add');
 INSERT INTO `t_permission` VALUES ('2', 'user:del');
 INSERT INTO `t_permission` VALUES ('3', 'user:update');
 INSERT INTO `t_permission` VALUES ('4', 'user:query');
+
+select * from `t_permission` ;
 
 -- ----------------------------
 -- Table structure for `t_role`
@@ -70,6 +83,7 @@ INSERT INTO `t_role` VALUES ('2', 'manager');
 INSERT INTO `t_role` VALUES ('3', 'normal');
 INSERT INTO `t_role` VALUES ('4', 'user');
 
+select * from `t_role` ;
 
 -- ----------------------------
 -- Table structure for `t_function`
@@ -99,7 +113,7 @@ INSERT INTO `t_function` VALUES ('6', '/user/edit.html', '3', null, 'perms');
 INSERT INTO `t_function` VALUES ('7', '/test.html', null, '4', 'roles');
 
 
-
+select * from `t_function` ;
 -- ----------------------------
 -- Table structure for `t_role_permission`
 -- ----------------------------

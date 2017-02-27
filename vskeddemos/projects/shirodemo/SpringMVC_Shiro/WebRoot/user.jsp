@@ -1,6 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+request.setAttribute("basePath", basePath);
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -10,7 +14,8 @@
 <body>
 <h1>${message }</h1>
 
-<h1>用户列表<shiro:hasPermission name="user:add">--<a href="/user/add.html">添加用户</a></shiro:hasPermission>---<a href="/logout.html">退出登录</a></h1>
+<h1>用户列表<shiro:hasPermission name="user:add">--<a href="${basePath }user/add.html">添加用户</a></shiro:hasPermission>---
+<a href="${basePath }logout.html">退出登录</a></h1>
 
 <h2>权限列表</h2>
 <shiro:authenticated>用户已经登录显示此内容</shiro:authenticated><br/>
@@ -37,7 +42,7 @@
     <c:forEach items="${userList }" var="user">
         <li><shiro:hasPermission name="user:query">用户名：${user.username }</shiro:hasPermission>
             <shiro:hasPermission name="user:query">----密码：${user.password }</shiro:hasPermission>
-            <shiro:hasPermission name="user:update">----<a href="/user/edit.html?id=${user.id}">修改用户</a></shiro:hasPermission>
+            <shiro:hasPermission name="user:update">----<a href="${basePath }user/edit.html?id=${user.id}">修改用户</a></shiro:hasPermission>
             <shiro:hasPermission name="user:del">----<a href="javascript:void(0);" class="del" ref="${user.id }">删除用户</a></shiro:hasPermission>
         </li>
     </c:forEach>
