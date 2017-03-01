@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.SysPermissionDao">
+
+	<select id="getSysPermissionBySpId" resultType="java.util.Map">
+		select * from sysPermissionT where spId=#{srId}
+	</select>
+	
+	<select id="getSysPermissionCount" resultType="java.lang.Integer">
+		select count(0) from sysPermissionT 
+		<include refid="myWhere" />
+	</select>
+	
+	<select id="getSysPermissionList" resultType="java.util.Map">
+		select * from sysPermissionT 
+		<include refid="myWhere" />
+		ORDER BY spAddTime desc
+	</select>
+	
+	<insert id="sysPermissionAdd" >
+	<selectKey keyProperty="myuuid" resultType="String" order="BEFORE">select  replace(uuid(),'-','') as myuuid  from dual</selectKey>
+	  insert into sysPermissionT(spId,spName,spNick) 
+	  VALUES(#{myuuid,jdbcType=VARCHAR},#{spName,jdbcType=VARCHAR},#{spNick,jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="sysPermissionEdit">
+	  update sysPermissionT set spName=#{spName,jdbcType=VARCHAR},spNick=#{spNick,jdbcType=VARCHAR} where spId=#{spId,jdbcType=VARCHAR}
+	</update>
+	
+    <delete id="sysPermissionDel">
+      delete from sysPermissionT where spId=#{spId,jdbcType=VARCHAR}
+    </delete>
+    
+	<sql id="myWhere">
+		<where>
+			<if test="spNick !=null ">
+				and spNick like concat('%',#{spNick,jdbcType=VARCHAR},'%')
+			</if>
+		</where>
+	</sql>
+
+</mapper>

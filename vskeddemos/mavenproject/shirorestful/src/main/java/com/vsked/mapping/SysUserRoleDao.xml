@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.SysUserRoleDao">
+
+	<select id="getSysUserRoleListBySuId" resultType="java.util.Map">
+		select * from
+		sysUserRoleT a LEFT JOIN sysUserT b on a.suId=b.suId LEFT JOIN
+		sysRoleT c on a.srId=c.srId where a.suId=#{suId}
+	</select>
+
+	<select id="getSysUserRoleListBySrId" resultType="java.util.Map">
+		select * from
+		sysUserRoleT a LEFT JOIN sysUserT b on a.suId=b.suId LEFT JOIN
+		sysRoleT c on a.srId=c.srId where a.srId=#{srId}
+	</select>
+
+	<select id="getHasSysUserList" resultType="java.util.Map">
+		select * from sysUserT
+		a where a.suId in(
+		select b.suId from sysUserRoleT b left join sysUserT
+		c on b.suId=c.suId left
+		join sysRoleT d on b.srId=d.srId where
+		b.srId=#{srId})
+	</select>
+
+	<select id="getNoSysUserList" resultType="java.util.Map">
+		select * from sysUserT
+		a where a.suId not in(
+		select b.suId from sysUserRoleT b left join
+		sysUserT c on b.suId=c.suId left
+		join sysRoleT d on b.srId=d.srId where
+		b.srId=#{srId})
+	</select>
+
+	<select id="getHasSysRoleList" resultType="java.util.Map">
+		select * from sysRoleT
+		a where a.srId in(
+		select b.srId from sysUserRoleT b left join sysRoleT
+		c on b.srId=c.srId left
+		join sysUserT d on b.suId=d.suId where
+		b.suId=#{suId})
+	</select>
+
+	<select id="getNoSysRoleList" resultType="java.util.Map">
+		select * from sysRoleT
+		a where a.srId not in(
+		select b.srId from sysUserRoleT b left join
+		sysRoleT c on b.srId=c.srId left
+		join sysUserT d on b.suId=d.suId where
+		b.suId=#{suId})
+	</select>
+
+	<delete id="sysUserRoleDelBySrId">
+		delete from sysUserRoleT where
+		srId=#{srId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="sysUserRoleDelBySuId">
+		delete from sysUserRoleT where
+		suId=#{suId,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="sysUserRoleAdd">
+		insert into sysUserRoleT(suId,srId,surAddTime)
+		VALUES(#{suId,jdbcType=VARCHAR},#{srId,jdbcType=VARCHAR},CURRENT_TIMESTAMP)
+	</insert>
+
+</mapper>
