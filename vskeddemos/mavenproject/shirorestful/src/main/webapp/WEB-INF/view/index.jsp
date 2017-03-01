@@ -14,8 +14,8 @@ request.setAttribute("basePath", basePath);
 <body>
 <h1>${message }</h1>
 
-<h1>用户列表<shiro:hasPermission name="user:add">--<a href="${basePath }user/add.html">添加用户</a></shiro:hasPermission>---
-<a href="${basePath }logout.html">退出登录</a></h1>
+<h1>用户列表<shiro:hasPermission name="user:add">--<a href="${basePath }user/add">添加用户</a></shiro:hasPermission>---
+<a href="${basePath }logout">退出登录</a></h1>
 
 <h2>权限列表</h2>
 <shiro:authenticated>用户已经登录显示此内容</shiro:authenticated><br/>
@@ -42,7 +42,7 @@ request.setAttribute("basePath", basePath);
     <c:forEach items="${userList }" var="user">
         <li><shiro:hasPermission name="user:query">用户名：${user.username }</shiro:hasPermission>
             <shiro:hasPermission name="user:query">----密码：${user.password }</shiro:hasPermission>
-            <shiro:hasPermission name="user:update">----<a href="${basePath }user/edit.html?id=${user.id}">修改用户</a></shiro:hasPermission>
+            <shiro:hasPermission name="user:update">----<a href="${basePath }user/edit?id=${user.id}">修改用户</a></shiro:hasPermission>
             <shiro:hasPermission name="user:del">----<a href="javascript:void(0);" class="del" ref="${user.id }">删除用户</a></shiro:hasPermission>
         </li>
     </c:forEach>
@@ -53,7 +53,7 @@ request.setAttribute("basePath", basePath);
             var id = $(this).attr("ref");
             $.ajax({
                 type: "GET",
-                url: "/user/del.html?id="+id,
+                url: "/user/del?id="+id,
                 success: function (e) {
                     alert("删除成功(不是真删除，测试而已)");
                 },

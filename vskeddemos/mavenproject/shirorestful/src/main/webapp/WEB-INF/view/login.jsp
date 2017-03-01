@@ -15,7 +15,7 @@ request.setAttribute("basePath", basePath);
 
 <body>
 <h1>登录页面----<span style="color: red;">${message }</span></h1>
-<form action="${basePath }login.html" name="user" method="post">
+<form action="${basePath }login" name="user" method="post">
     用户名：<input type="text" name="suName" value="admin" /> <br/>
     密&nbsp;&nbsp;码：
     <input type="password" id="suPass" name="suPass" value="000000"/> <br/>
