@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -22,7 +23,7 @@ public class SysFunctionSer extends BaseService {
 	
 	public Logger log = Logger.getLogger(this.getClass());
 
-	@Autowired
+	@Resource
 	SysFunctionDao sysFunctionDao;
 	
 

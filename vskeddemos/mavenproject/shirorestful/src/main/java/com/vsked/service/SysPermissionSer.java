@@ -2,11 +2,15 @@ package com.vsked.service;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.apache.log4j.Logger;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.vsked.dao.SysPermissionDao;
 
 
@@ -16,7 +20,7 @@ public class SysPermissionSer extends BaseService{
 	
 	public Logger log = Logger.getLogger(this.getClass());
 	
-	@Autowired
+	@Resource
 	SysPermissionDao sysPermissionDao;
 	
 	public int getSysPermissionCount(Map<String, Object> m){

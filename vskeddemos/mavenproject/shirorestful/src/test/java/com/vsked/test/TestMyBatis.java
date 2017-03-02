@@ -36,7 +36,7 @@ public class TestMyBatis {
 	@Resource
 	SysUserDao sysUserDao;
 
-	
+	//@Test
 	public void testService(){
 		String suName="admin";
 		Map<String, Object> sysUser=sysUserSer.getSysUserBySuName(suName);
@@ -49,5 +49,10 @@ public class TestMyBatis {
 		String suName="admin";
         Map<String, Object> sysUser=sysUserDao.getSysUserBySuName(suName);
 		logger.info(sysUser);
+	}
+	
+	
+	public void testA1(){
+		logger.info(1);
 	}
 }

@@ -3,6 +3,7 @@ package com.vsked.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -21,7 +22,7 @@ public class SysRoleSer extends BaseService{
 	
 	public Logger log = Logger.getLogger(this.getClass());
 	
-	@Autowired
+	@Resource
 	SysRoleDao sysRoleDao;
 	
 	

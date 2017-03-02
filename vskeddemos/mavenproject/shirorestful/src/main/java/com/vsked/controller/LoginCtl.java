@@ -1,10 +1,10 @@
 package com.vsked.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +18,11 @@ import com.vsked.service.SysUserSer;
 
 @Controller
 //@Scope("prototype") //开启非单例模式 用于并发控制
-public class LoginCtl extends BaseController{
+public class LoginCtl {
 	
 	public Logger log = Logger.getLogger(LoginCtl.class);
 	
-	@Autowired 
+	@Resource
 	private SysUserSer sysUserSer;
 	
 	/**

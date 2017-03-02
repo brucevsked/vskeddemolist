@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -23,7 +24,7 @@ public class SysUserRoleSer extends BaseService {
 	
 	public Logger log = Logger.getLogger(this.getClass());
 
-	@Autowired
+	@Resource
 	SysUserRoleDao sysUserRoleDao;
 
 

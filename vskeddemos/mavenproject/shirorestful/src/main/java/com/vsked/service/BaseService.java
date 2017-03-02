@@ -5,16 +5,15 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vsked.dao.SysUserDao;
@@ -27,7 +26,8 @@ public class BaseService {
 	
 	String currentPageName="page";
 	String pageSizeName="rows";
-	@Autowired
+	
+	@Resource
 	private SysUserDao sysUserDao;
 	
 	
