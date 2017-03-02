@@ -226,6 +226,9 @@ alter table `sysFunctionT` add constraint fk_sysFunctionT_srId foreign key(`srId
 
 insert into `sysFunctionT`(`sfId`,`sfValue`,`spId`,`srId`,`sfType`) VALUES('40000000000000000000000000000001','/login'   ,null                              ,null,'anon')  ;
 insert into `sysFunctionT`(`sfId`,`sfValue`,`spId`,`srId`,`sfType`) VALUES('40000000000000000000000000000002','/user'    ,'20000000000000000000000000000001',null,'cusperm') ;
+insert into `sysFunctionT`(`sfId`,`sfValue`,`spId`,`srId`,`sfType`) VALUES('40000000000000000000000000000003','/user'    ,'20000000000000000000000000000002',null,'cusperm') ;
+insert into `sysFunctionT`(`sfId`,`sfValue`,`spId`,`srId`,`sfType`) VALUES('40000000000000000000000000000004','/user'    ,'20000000000000000000000000000003',null,'cusperm') ;
+insert into `sysFunctionT`(`sfId`,`sfValue`,`spId`,`srId`,`sfType`) VALUES('40000000000000000000000000000005','/user'    ,'20000000000000000000000000000004',null,'cusperm') ;
 
 select * from `sysFunctionT`;
 /********+*********+*********+*********+*********+*********+*/

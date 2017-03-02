@@ -51,7 +51,7 @@
         <property name="unauthorizedUrl" value="/page403"/>
         <!-- 权限配置 -->
         <property name="filterChainDefinitionMap" ref="chainDefinitionSectionMetaSource"/>
-            <property name="filters">    
+        <property name="filters">    
            <map>    
                <entry key="cusperm" value-ref="myRestFilter"/>  
            </map>    
