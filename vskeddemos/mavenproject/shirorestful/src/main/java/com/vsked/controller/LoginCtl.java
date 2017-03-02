@@ -41,10 +41,16 @@ public class LoginCtl extends BaseController{
 		return "index";
 	}
 	
-	@GetMapping("user/add")
+	@PostMapping("user")
 	public String userAdd(){
 		log.info("user/add");
 		return "useradd";
+	}
+	
+	@GetMapping("user")
+	public String userList(){
+		log.info("user/list");
+		return "userlist";
 	}
 	
 	@GetMapping("user/edit")
@@ -53,11 +59,6 @@ public class LoginCtl extends BaseController{
 		return "useredit";
 	}
 	
-	@GetMapping("user/list")
-	public String userList(){
-		log.info("user/list");
-		return "userlist";
-	}
 	
 	@GetMapping("user/del")
 	public String userDel(){

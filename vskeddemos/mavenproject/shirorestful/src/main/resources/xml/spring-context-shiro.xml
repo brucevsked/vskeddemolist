@@ -34,6 +34,8 @@
     <!--自定义Realm-->
     <bean id="myRealm" class="com.vsked.shiro.MyRealm"/>
     
+    <bean id="myRestFilter" class="com.vsked.shiro.RestFilter"></bean>  
+    
     <!--自定义filterChainDefinitionMap-->
     <bean id="chainDefinitionSectionMetaSource" class="com.vsked.shiro.ChainDefinitionSectionMetaSource"/>
 
@@ -49,6 +51,11 @@
         <property name="unauthorizedUrl" value="/page403"/>
         <!-- 权限配置 -->
         <property name="filterChainDefinitionMap" ref="chainDefinitionSectionMetaSource"/>
+            <property name="filters">    
+           <map>    
+               <entry key="cusperm" value-ref="myRestFilter"/>  
+           </map>    
+       </property> 
     </bean>
 
     <!--shiro缓存管理器-->

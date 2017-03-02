@@ -71,6 +71,12 @@ public class ChainDefinitionSectionMetaSource implements FactoryBean<Ini.Section
                     case "roles":
                         permission = "roles[" + srName + "]";
                         break;
+                    case "rest":
+                    	permission = "rest[" + spName + "]";
+                    	break;
+                    case "cusperm":
+                    	permission = "cusperm[" + spName + "]";
+                    	break;
                     default:
                         break;
                 }

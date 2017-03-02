@@ -8,14 +8,23 @@ request.setAttribute("basePath", basePath);
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+    <base href="${basePath }">
     <title>用户列表</title>
     <script type="text/javascript" src="static/js/jquery-2.0.3.min.js"></script>
 </head>
 <body>
 <h1>${message }</h1>
 
-<h1>用户列表<shiro:hasPermission name="user:add">--<a href="${basePath }user/add">添加用户</a></shiro:hasPermission>---
+<h1>用户列表<shiro:hasPermission name="user:add">--<a href="${basePath }user">添加用户</a></shiro:hasPermission>---
 <a href="${basePath }logout">退出登录</a></h1>
+
+<button type="button" onclick="add()">add</button>
+<button type="button" onclick="query()">query</button>
+<button type="button" onclick="edit()">edit</button>
+<button type="button" onclick="del()">del</button>
+
+<br>权限结果
+<div id="permissionResult"></div>
 
 <h2>权限列表</h2>
 <shiro:authenticated>用户已经登录显示此内容</shiro:authenticated><br/>
@@ -48,6 +57,7 @@ request.setAttribute("basePath", basePath);
     </c:forEach>
 </ul>
 <script type="text/javascript">
+var basePath=document.getElementsByTagName('base')[0].href;
     $(function () {
         $(".del").click(function () {
             var id = $(this).attr("ref");
@@ -63,6 +73,83 @@ request.setAttribute("basePath", basePath);
             });
         });
     });
+    
+    function add(){
+		$.ajax({
+    		type:'post',
+    		url :basePath+'user',
+    		data:{ suId: 1 },
+    		success:function (dt){
+    			console.log(dt)
+    			$('#permissionResult').html(dt);
+    	    },
+    	    error:function (XMLHttpRequest, textStatus, errorThrown){
+    	    	if(XMLHttpRequest.status=405){
+        	    	console.log('无权限操作该资源');
+        	    	$('#permissionResult').html('无权限操作该资源');
+    	    	}
+
+    	    },
+    	    dataType: 'html'
+    	});
+    }
+    
+    function query(){
+		$.ajax({
+    		type:'get',
+    		url :basePath+'user',
+    		data:{ suId: 1 },
+    		success:function (dt){
+    			console.log(dt)
+    			$('#permissionResult').html(dt);
+    	    },
+    	    error:function (rs){
+    	    	if(XMLHttpRequest.status=405){
+        	    	console.log('无权限操作该资源');
+        	    	$('#permissionResult').html('无权限操作该资源');
+    	    	}
+    	    },
+    	    dataType: 'html'
+    	});
+    }
+    
+    function edit(){
+		$.ajax({
+    		type:'put',
+    		url :basePath+'user',
+    		data:{ suId: 1 },
+    		success:function (dt){
+    			console.log(dt)
+    			$('#permissionResult').html(dt);
+    	    },
+    	    error:function (rs){
+    	    	if(XMLHttpRequest.status=405){
+        	    	console.log('无权限操作该资源');
+        	    	$('#permissionResult').html('无权限操作该资源');
+    	    	}
+    	    },
+    	    dataType: 'html'
+    	});
+    }
+    
+    function del(){
+		$.ajax({
+    		type:'delete',
+    		url :basePath+'user',
+    		data:{ suId: 1 },
+    		success:function (dt){
+    			console.log(dt)
+    			$('#permissionResult').html(dt);
+    	    },
+    	    error:function (rs){
+    	    	if(XMLHttpRequest.status=405){
+        	    	console.log('无权限操作该资源');
+        	    	$('#permissionResult').html('无权限操作该资源');
+    	    	}
+    	    },
+    	    dataType: 'html'
+    	});
+    }
 </script>
 </body>
 </html>
