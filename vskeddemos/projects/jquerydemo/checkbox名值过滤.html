@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>Ò³Ãæ</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="">
+<meta http-equiv="description" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+
+<input type="checkbox" name="a1" value="a1">a1 <br>
+<input type="checkbox" name="a1" value="a2">a2 <br>
+<input type="checkbox" name="a1" value="a3">a3 <br>
+<input type="checkbox" name="a1" value="a4">a4 <br>
+<hr>
+<input type="checkbox" name="a2" value="a1">a1 <br>
+<input type="checkbox" name="a2" value="a2">a2 <br>
+<input type="checkbox" name="a2" value="a3">a3 <br>
+<input type="checkbox" name="a2" value="a4">a4 <br>
+
+  <script type="text/javascript" charset="UTF-8" src="js/lib/jquery.min.js"></script>
+<script>
+	function inita1(){
+		$('input[type=checkbox][name="a1"][value="a3"]').attr('checked','checked');
+	}
+	inita1();
+</script>
+</body>
+</html>
