@@ -10,7 +10,7 @@ request.setAttribute("basePath", basePath);
 <head>
     <base href="${basePath }">
     <title>用户列表</title>
-    <script type="text/javascript" src="static/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery.min.js"></script>
 </head>
 <body>
 <h1>${message }</h1>
@@ -124,6 +124,7 @@ var basePath=document.getElementsByTagName('base')[0].href;
     			$('#permissionResult').html(dt);
     	    },
     	    error:function (rs){
+    	    	console.log(rs)
     	    	if(XMLHttpRequest.status=405){
         	    	console.log('无权限操作该资源');
         	    	$('#permissionResult').html('无权限操作该资源');
@@ -162,6 +163,7 @@ var basePath=document.getElementsByTagName('base')[0].href;
     			$('#permissionResult').html(dt);
     	    },
     	    error:function (rs){
+    	    	console.log(rs)
     	    	if(XMLHttpRequest.status=405){
         	    	console.log('无权限操作该资源');
         	    	$('#permissionResult').html('无权限操作该资源');

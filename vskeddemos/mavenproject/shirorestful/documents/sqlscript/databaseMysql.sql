@@ -109,6 +109,7 @@ insert into `sysPermissionT`(`spId`,`spName`,`spNick`) VALUES('20000000000000000
 insert into `sysPermissionT`(`spId`,`spName`,`spNick`) VALUES('20000000000000000000000000000002','user:post'   ,'用户添加')  ;
 insert into `sysPermissionT`(`spId`,`spName`,`spNick`) VALUES('20000000000000000000000000000003','user:put'    ,'用户修改') ;
 insert into `sysPermissionT`(`spId`,`spName`,`spNick`) VALUES('20000000000000000000000000000004','user:delete' ,'用户删除')  ;
+insert into `sysPermissionT`(`spId`,`spName`,`spNick`) VALUES('20000000000000000000000000000005','user:patch'  ,'密码修改')  ;
 
 
 select * from `sysPermissionT`;
@@ -193,11 +194,11 @@ insert into `sysRolePermissionT`(`srId`,`spId`) VALUES('300000000000000000000000
 insert into `sysRolePermissionT`(`srId`,`spId`) VALUES('30000000000000000000000000000001','20000000000000000000000000000002') ;
 insert into `sysRolePermissionT`(`srId`,`spId`) VALUES('30000000000000000000000000000001','20000000000000000000000000000003') ;
 insert into `sysRolePermissionT`(`srId`,`spId`) VALUES('30000000000000000000000000000001','20000000000000000000000000000004') ;
+insert into `sysRolePermissionT`(`srId`,`spId`) VALUES('30000000000000000000000000000001','20000000000000000000000000000005') ;
 insert into `sysRolePermissionT`(`srId`,`spId`) VALUES('30000000000000000000000000000002','20000000000000000000000000000001') ;
 insert into `sysRolePermissionT`(`srId`,`spId`) VALUES('30000000000000000000000000000002','20000000000000000000000000000002') ;
 insert into `sysRolePermissionT`(`srId`,`spId`) VALUES('30000000000000000000000000000003','20000000000000000000000000000001') ;
 insert into `sysRolePermissionT`(`srId`,`spId`) VALUES('30000000000000000000000000000004','20000000000000000000000000000001') ;
-insert into `sysRolePermissionT`(`srId`,`spId`) VALUES('30000000000000000000000000000005','20000000000000000000000000000001') ;
 
 
 select * from `sysRolePermissionT`;
@@ -229,6 +230,7 @@ insert into `sysFunctionT`(`sfId`,`sfValue`,`spId`,`srId`,`sfType`) VALUES('4000
 insert into `sysFunctionT`(`sfId`,`sfValue`,`spId`,`srId`,`sfType`) VALUES('40000000000000000000000000000003','/user'    ,'20000000000000000000000000000002',null,'cusperm') ;
 insert into `sysFunctionT`(`sfId`,`sfValue`,`spId`,`srId`,`sfType`) VALUES('40000000000000000000000000000004','/user'    ,'20000000000000000000000000000003',null,'cusperm') ;
 insert into `sysFunctionT`(`sfId`,`sfValue`,`spId`,`srId`,`sfType`) VALUES('40000000000000000000000000000005','/user'    ,'20000000000000000000000000000004',null,'cusperm') ;
+insert into `sysFunctionT`(`sfId`,`sfValue`,`spId`,`srId`,`sfType`) VALUES('40000000000000000000000000000006','/user'    ,'20000000000000000000000000000005',null,'cusperm') ;
 
 select * from `sysFunctionT`;
 /********+*********+*********+*********+*********+*********+*/
