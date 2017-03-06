@@ -22,6 +22,7 @@ request.setAttribute("basePath", basePath);
 <button type="button" onclick="query()">query</button>
 <button type="button" onclick="edit()">edit</button>
 <button type="button" onclick="del()">del</button>
+<button type="button" onclick="patch()">patch</button>
 
 <br>权限结果
 <div id="permissionResult"></div>
@@ -135,6 +136,25 @@ var basePath=document.getElementsByTagName('base')[0].href;
     function del(){
 		$.ajax({
     		type:'delete',
+    		url :basePath+'user',
+    		data:{ suId: 1 },
+    		success:function (dt){
+    			console.log(dt)
+    			$('#permissionResult').html(dt);
+    	    },
+    	    error:function (rs){
+    	    	if(XMLHttpRequest.status=405){
+        	    	console.log('无权限操作该资源');
+        	    	$('#permissionResult').html('无权限操作该资源');
+    	    	}
+    	    },
+    	    dataType: 'html'
+    	});
+    }
+    
+    function patch(){
+		$.ajax({
+    		type:'PATCH',
     		url :basePath+'user',
     		data:{ suId: 1 },
     		success:function (dt){
