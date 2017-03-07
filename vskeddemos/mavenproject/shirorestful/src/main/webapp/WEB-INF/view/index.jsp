@@ -79,7 +79,7 @@ var basePath=document.getElementsByTagName('base')[0].href;
 		$.ajax({
     		type:'post',
     		url :basePath+'user',
-    		data:{ suId: 1 },
+    		data:{ suId: 1 ,suName:'addvvas'},
     		success:function (dt){
     			console.log(dt)
     			$('#permissionResult').html(dt);
@@ -118,7 +118,7 @@ var basePath=document.getElementsByTagName('base')[0].href;
 		$.ajax({
     		type:'put',
     		url :basePath+'user',
-    		data:{ suId: 1 },
+    		data:{ suId: 1 ,suName:'likeedit'},
     		success:function (dt){
     			console.log(dt)
     			$('#permissionResult').html(dt);
@@ -138,7 +138,7 @@ var basePath=document.getElementsByTagName('base')[0].href;
 		$.ajax({
     		type:'delete',
     		url :basePath+'user',
-    		data:{ suId: 1 },
+    		data:{ suId: 1 ,suName:'delak'},
     		success:function (dt){
     			console.log(dt)
     			$('#permissionResult').html(dt);
@@ -157,7 +157,7 @@ var basePath=document.getElementsByTagName('base')[0].href;
 		$.ajax({
     		type:'PATCH',
     		url :basePath+'user',
-    		data:{ suId: 1 },
+    		data:{ suId: 1 ,suName:'xway'},
     		success:function (dt){
     			console.log(dt)
     			$('#permissionResult').html(dt);

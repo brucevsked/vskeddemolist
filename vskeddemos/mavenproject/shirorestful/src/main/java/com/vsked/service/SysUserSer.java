@@ -132,4 +132,9 @@ public class SysUserSer extends BaseService{
 		return "system/sysUserChangePass";
 	}
 	
+	public void getParTest(HttpServletRequest req){
+		Map<String, Object> m=getMaps(req);
+		System.out.println(m);
+	}
+	
 }

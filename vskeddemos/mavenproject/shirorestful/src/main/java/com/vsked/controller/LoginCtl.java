@@ -46,7 +46,8 @@ public class LoginCtl {
 	}
 	
 	@PostMapping("user")
-	public String userAdd(){
+	public String userAdd(HttpServletRequest req){
+		sysUserSer.getParTest(req);
 		log.info("user/add");
 		return "useradd";
 	}
@@ -59,8 +60,9 @@ public class LoginCtl {
 	
 	@PutMapping("user")
 	@ResponseBody
-	public String userEdit(){
+	public String userEdit(HttpServletRequest req){
 		log.info("user/edit");
+		sysUserSer.getParTest(req);
 		return "useredit";
 	}
 	
@@ -74,7 +76,8 @@ public class LoginCtl {
 	
 	@PatchMapping("user")
 	@ResponseBody
-	public String userChangePass(){
+	public String userChangePass(HttpServletRequest req){
+		sysUserSer.getParTest(req);
 		log.info("user/userChangePass");
 		return "userpass";
 	}

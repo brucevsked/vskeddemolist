@@ -68,7 +68,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	</listener>
 	<!-- log4j end -->
 
-    <!--shiro filter start  -->
+	<!--shiro filter start -->
 	<filter>
 		<filter-name>shiroFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -77,8 +77,15 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!--shiro filter end  -->
-	
+	<!--shiro filter end -->
+	<filter>
+		<filter-name>HttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HttpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<welcome-file-list>
 		<welcome-file>login</welcome-file>
 	</welcome-file-list>
