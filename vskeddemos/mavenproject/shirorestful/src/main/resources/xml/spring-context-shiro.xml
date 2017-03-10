@@ -32,7 +32,11 @@
         <property name="sessionManager" ref="sessionManager"></property>  
     </bean>
     <!--自定义Realm-->
-    <bean id="myRealm" class="com.vsked.shiro.MyRealm"/>
+    <bean id="myRealm" class="com.vsked.shiro.MyRealm">
+    <property name="credentialsMatcher" ref="passwordMatcher"></property>
+    </bean>
+    
+    <bean id="passwordMatcher" class="com.vsked.shiro.MyPasswordMatcher"></bean>
     
     <bean id="myRestFilter" class="com.vsked.shiro.RestFilter"></bean>  
     
