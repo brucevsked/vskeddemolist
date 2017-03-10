@@ -17,7 +17,7 @@ import com.vsked.dao.SysUserDao;
 import com.vsked.service.SysUserSer;
 
 @RunWith(SpringJUnit4ClassRunner.class) // 表示继承了SpringJUnit4ClassRunner类
-@ContextConfiguration(locations = { "classpath:xml/spring-context-mybatis.xml" })
+@ContextConfiguration(locations = { "classpath:xml/spring-context-*.xml" })
 public class TestMyBatis {
 	private static Logger logger = Logger.getLogger(TestMyBatis.class);
 	
