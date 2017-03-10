@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.SysFunctionDao">
+
+	<select id="getSysFunctionList" resultType="java.util.Map">
+		select * from sysFunctionT a left JOIN sysPermissionT b on
+		a.spId=b.spId left JOIN sysRoleT c on a.srId=c.srId
+		<include refid="myWhere" />
+		ORDER BY sfAddTime desc
+	</select>
+	<select id="getSysFunctionCount" resultType="java.lang.Integer">
+		select count(0) from sysFunctionT
+		<include refid="myWhere" />
+	</select>
+	<select id="sysGetRoleList" resultType="java.util.Map">
+		select * from sysRolet
+	</select>
+	<select id="sysGetPermissionList" resultType="java.util.Map">
+		select * from sysPermissiont
+	</select>
+	<select id="getSysFunctionBySfId" resultType="java.util.Map">
+		select * from sysFunctionT where sfId=#{sfId}
+	</select>
+
+	<insert id="sysFunctionAdd">
+		<selectKey keyProperty="myuuid" resultType="String" order="BEFORE">select
+			replace(uuid(),'-','') as myuuid from dual</selectKey>
+		insert into sysFunctionT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			sfId,
+			<if test="sfValue != null">
+				sfValue,
+			</if>
+			<if test="spId != null">
+				spId,
+			</if>
+			<if test="srId != null">
+				srId,
+			</if>
+			<if test="sfType != null">
+				sfType,
+			</if>
+			sfAddTime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{myuuid,jdbcType=VARCHAR},
+			<if test="sfValue != null">
+				#{sfValue,jdbcType=VARCHAR},
+			</if>
+			<if test="spId != null">
+				#{spId,jdbcType=VARCHAR},
+			</if>
+			<if test="srId != null">
+				#{srId,jdbcType=VARCHAR},
+			</if>
+			<if test="sfType != null">
+				#{sfType,jdbcType=VARCHAR},
+			</if>
+			CURRENT_TIMESTAMP
+		</trim>
+	</insert>
+
+	<delete id="sysFunctionDel">
+		delete from sysFunctionT where sfId=#{sfId,jdbcType=VARCHAR}
+	</delete>
+
+	<update id="sysFunctionEdit">
+		update sysFunctionT
+		<set>
+			<if test="sfValue != null">
+				sfValue= #{sfValue,jdbcType=VARCHAR},
+			</if>
+				spId=#{spId,jdbcType=VARCHAR},
+				srId=#{srId,jdbcType=VARCHAR},
+			<if test="sfType != null">
+				sfType=#{sfType,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where sfId=#{sfId,jdbcType=VARCHAR}
+	</update>
+
+	<sql id="myWhere">
+		<where>
+			<if test="sfId != null and sfId != ''">
+				and sfId = {#sfId,jdbcType=VARCHAR}
+			</if>
+			<if test="sfValue != null and sfValue != ''">
+				<!-- and sfValue = {#sfValue,jdbcType=VARCHAR} -->
+				and sfValue like concat('%',#{sfValue,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="spId != null and spId != ''">
+				and spId = {#spId,jdbcType=VARCHAR}
+			</if>
+			<if test="srId != null and srId != ''">
+				and srId = {#srId,jdbcType=VARCHAR}
+			</if>
+			<if test="sfType != null and sfType != ''">
+				and sfType = {#sfType,jdbcType=VARCHAR}
+			</if>
+			<if test="sfAddTime != null and sfAddTime != ''">
+				and sfAddTime = {#sfAddTime,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+</mapper>
