@@ -18,10 +18,10 @@ public class RestFilter extends HttpMethodPermissionFilter{
 		System.out.println("-----------s1,method|"+req.getMethod());
 		System.out.println("-----------s2,url|"+req.getRequestURI());
 		String resourceFront=req.getRequestURI();
-		resourceFront=resourceFront.substring(resourceFront.lastIndexOf("/")+1);
+		String[] tmpArray=resourceFront.split("/");
 		String permissionMethod=req.getMethod().toLowerCase();
 		
-		String permission=resourceFront+":"+permissionMethod;
+		String permission=tmpArray[2]+":"+permissionMethod;
 		System.out.println(resourceFront);
 		
 		Subject subject = getSubject(request, response);
