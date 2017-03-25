@@ -26,6 +26,7 @@ request.setAttribute("basePath", basePath);
       </form>
       <br>
  当前第:  ${userSession.loginCount } 次登陆 <br>
- ${userSession}
+ ${userSession}<br>
+${pageContext.session.id}
   </body>
 </html>

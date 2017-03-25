@@ -17,7 +17,7 @@ request.setAttribute("basePath", basePath);
   </head>
   
   <body>
-  
+  ${pageContext.session.id}
        <c:if test="${userSession.userId!=null }"><c:redirect url="${basePath }index.jsp" /></c:if>
   
   <form action="${basePath }proc/loginProc.jsp" method="post">
