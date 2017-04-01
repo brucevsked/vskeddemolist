@@ -35,6 +35,7 @@ public class jodaTimeTest {
 		System.out.println("两日期相差:"+DateTimeUtilVsked.getDaysBetweenTwoDate(new DateTime(2015, 5, 6, 20, 11, 40), new DateTime(2015, 5, 8, 20, 11, 40)));
 //		System.out.println("获取当天日期:"+DateTimeUtilVsked);
 		System.out.println("获取昨天日期:"+DateTimeUtilVsked.getYesterday("yyyyMMdd"));
+		System.out.println("获取明天日期:"+DateTimeUtilVsked.getTomorrow("yyyyMMdd"));
 
 	}
 	

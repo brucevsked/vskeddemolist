@@ -187,8 +187,17 @@ public class DateTimeUtilVsked {
      * @param format yyyyMMdd
      * @return
      */
-	public static String getYesterday(String format){
-		return LocalDate.now().minusDays(1).toString(format);
+	public static String getYesterday(String dateformat){
+		return LocalDate.now().minusDays(1).toString(dateformat);
+	}
+	
+	/**
+	 * 获取明天日期需要传入格式
+	 * @param dateformat yyyyMMdd
+	 * @return
+	 */
+	public static String getTomorrow(String dateformat){
+		return LocalDate.now().plusDays(1).toString(dateformat);
 	}
 
 }
