@@ -3,6 +3,7 @@
 import java.text.SimpleDateFormat;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import com.vsked.util.DateTimeUtilVsked;
 
@@ -33,6 +34,7 @@ public class jodaTimeTest {
 		System.out.println("获取当前季度:"+DateTimeUtilVsked.getFirstDayOfCurrentSeason()); //测试中未完成
 		System.out.println("两日期相差:"+DateTimeUtilVsked.getDaysBetweenTwoDate(new DateTime(2015, 5, 6, 20, 11, 40), new DateTime(2015, 5, 8, 20, 11, 40)));
 //		System.out.println("获取当天日期:"+DateTimeUtilVsked);
+		System.out.println("获取昨天日期:"+DateTimeUtilVsked.getYesterday("yyyyMMdd"));
 
 	}
 	

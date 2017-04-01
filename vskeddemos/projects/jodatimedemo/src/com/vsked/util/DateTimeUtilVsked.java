@@ -181,5 +181,14 @@ public class DateTimeUtilVsked {
 	public static int getDaysBetweenTwoDate(DateTime startDate,DateTime endDate){
 		return new Period(startDate,endDate,PeriodType.days()).getDays();
 	}
+	
+    /**
+     * 获取昨天日期 需要传入格式
+     * @param format yyyyMMdd
+     * @return
+     */
+	public static String getYesterday(String format){
+		return LocalDate.now().minusDays(1).toString(format);
+	}
 
 }
