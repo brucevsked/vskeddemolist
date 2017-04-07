@@ -3,7 +3,7 @@ $(function(){
 	$('#mytb').datagrid({ 
         title:'应用系统列表', 
         iconCls:'icon-edit',//图标 
-        width: 350, 
+//        width: 350, 
         height: 'auto', 
         nowrap: false, 
         striped: true, 
@@ -21,7 +21,7 @@ $(function(){
         frozenColumns:[[ 
             {field:'ck',checkbox:true} 
         ]], 
-        toolbar: [{ 
+ /*       toolbar: [{ 
             text: '添加', 
             iconCls: 'icon-add', 
             handler: function() { 
@@ -39,7 +39,7 @@ $(function(){
             handler: function(){ 
             	console.log("del");
             } 
-        }], 
+        }], */
     }); 
     //设置分页控件 
     var p = $('#mytb').datagrid('getPager'); 
@@ -56,3 +56,12 @@ $(function(){
         }*/ 
     }); 
 });
+
+function queryData(){
+	var userName=$('#userName').val();
+	var userQq=$('#userQq').val();
+	$('#mytb').datagrid('load',{
+		userName: userName,
+		userQq: userQq
+	});
+}

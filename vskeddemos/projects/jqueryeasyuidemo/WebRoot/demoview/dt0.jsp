@@ -21,7 +21,13 @@ request.setAttribute("basePath", basePath);
   </head>
   
   <body>
-  <table id="mytb" cellspacing="0" cellpadding="0"> 
+  <div id="queryDiv">
+用户名<input type="text" id="userName" name="userName"> &nbsp;&nbsp;
+qq<input type="text" id="userQq" name="userQq">
+<button onclick="queryData()">query</button>
+</div>
+  
+  <table id="mytb" cellspacing="0" cellpadding="0" toolbar="#queryDiv"> 
     <thead> 
         <tr> 
             <th field="a1">a11</th> 
@@ -30,7 +36,7 @@ request.setAttribute("basePath", basePath);
             <th field="a4" >a44</th>
          </tr>
     </thead> 
-</table> 
+</table>
 
   <script type="text/javascript" charset="UTF-8" src="${basePath }js/project/dt0.js"></script>
   </body>

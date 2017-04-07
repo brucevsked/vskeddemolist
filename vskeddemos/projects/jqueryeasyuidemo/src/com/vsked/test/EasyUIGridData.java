@@ -1,6 +1,5 @@
 package com.vsked.test;
 
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,7 +23,7 @@ public class EasyUIGridData {
 		sb.append("{"+getKey("total")+":"+total+",");
 		sb.append(""+getKey("rows")+":"+"[");
 		for(int i=(curPage-1)*rows;i<curPage*rows;i++){
-		sb.append("{"+getKey("a1")+":"+getKey("ssa"+i)+","+getKey("a2")+":"+getKey("ssv"+i)+","+getKey("a3")+":"+getKey("ssc"+i)+","+getKey("a4")+":"+getKey("ssx"+i)+"},");
+		sb.append("{"+getKey("a1")+":"+getKey("ssaxxxxxxxxxxxxxxxxxxxxxxx"+i)+","+getKey("a2")+":"+getKey("ssvbbbbbbbbbbbbbbbbbbbbbbbb"+i)+","+getKey("a3")+":"+getKey("ssccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"+i)+","+getKey("a4")+":"+getKey("ssxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+i)+"},");
 		}
 		sb.setLength(sb.length()-1);
 		sb.append("]");
