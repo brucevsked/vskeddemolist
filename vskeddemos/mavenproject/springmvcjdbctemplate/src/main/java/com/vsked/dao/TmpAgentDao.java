@@ -26,7 +26,7 @@ public class TmpAgentDao {
 	 * 清空tmpAgent表中所有数据
 	 */
 	public void cleanAll(){
-		//truncate table tmpAgent 如果换成这个会立即提交
+		//truncate table tmpAgent 如果换成这个会立即提交 并不在springmvc事务控制范围内
 		//delete from tmpAgent 事务可以控制
 		String sql="delete from tmpAgent";
 		log.debug(sql);
