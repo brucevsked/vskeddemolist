@@ -1,0 +1,4 @@
+
+
+这里面有一个log4j+maven的配置不包括spring的那种
+需要配合spring的可以参考shirorestfulpagination项目
