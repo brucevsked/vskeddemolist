@@ -34,21 +34,7 @@ public class ExcelUtilTest {
 		long start=System.currentTimeMillis();
 		Map<String, List<String[]>> dataMapAll=ExcelUtil.readExcel03And07(filePath);
 		long end=System.currentTimeMillis();
-		log.debug((end-start));//1990 ms
-		
-		}catch(Exception e){
-			log.error(e.getMessage());
-		}
-	}
-	
-//	@Test
-	public void xssfRead1(){
-		try{
-		String filePath="e:/yuante.xlsx";
-		long start=System.currentTimeMillis();
-		Map<String, List<String[]>> dataMapAll=ExcelUtil.xssfRead1(filePath);
-		long end=System.currentTimeMillis();
-		log.debug((end-start));//2480 ms
+		log.debug("|s1|"+(end-start));//1990 ms this method more faster
 		
 		}catch(Exception e){
 			log.error(e.getMessage());
@@ -56,6 +42,20 @@ public class ExcelUtilTest {
 	}
 	
 	@Test
+	public void xssfRead1(){
+		try{
+		String filePath="e:/yuante.xlsx";
+		long start=System.currentTimeMillis();
+		Map<String, List<String[]>> dataMapAll=ExcelUtil.xssfRead1(filePath);
+		long end=System.currentTimeMillis();
+		log.debug("|s2|"+(end-start));//2480 ms this method slow
+		
+		}catch(Exception e){
+			log.error(e.getMessage());
+		}
+	}
+	
+//	@Test
 	public void t1(){
 		log.debug(11);
 	}

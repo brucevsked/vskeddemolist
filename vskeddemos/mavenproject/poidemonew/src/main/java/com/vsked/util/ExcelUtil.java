@@ -15,8 +15,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -72,15 +70,15 @@ public class ExcelUtil {
 			sheetData = new LinkedList<String[]>();
 			int rowCount = sheet.getPhysicalNumberOfRows();
 			for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-				XSSFRow row = sheet.getRow(rowIndex);
+				Row row = sheet.getRow(rowIndex);
 				int columnCount = row == null ? 0 : row.getLastCellNum();
 
 				String[] rowData = new String[columnCount];
 				boolean flag = false;
 				int tmpCount = 0;
 				for (int columnIndex = 0; columnIndex < columnCount; columnIndex++) {
-					XSSFCell cell = row.getCell(columnIndex);
-					cellData = getCellValue(cell);
+					Cell cell = row.getCell(columnIndex);
+					cellData = cell.toString();
 					rowData[columnIndex] = cellData;
 					if (cellData == null || "".equals(cellData))
 						tmpCount++;
@@ -92,41 +90,7 @@ public class ExcelUtil {
 			}
 			m.put(sheetName, sheetData);
 		}
-		// wb.close();
 		pkg.close();
 		return m;
-	}
-	
-	public static String getCellValue(XSSFCell c) {
-		String s = "";
-		if (c == null) {
-			return s;
-		}
-		switch (c.getCellType()) {
-		case XSSFCell.CELL_TYPE_NUMERIC:
-			c.setCellType(XSSFCell.CELL_TYPE_STRING);
-			s = c.getStringCellValue();
-			break;
-		case XSSFCell.CELL_TYPE_STRING:
-			s = c.getStringCellValue();
-			break;
-		case XSSFCell.CELL_TYPE_FORMULA:
-			try {
-				s = String.valueOf(c.getNumericCellValue());
-			} catch (IllegalStateException e) {
-				s = String.valueOf(c.getRichStringCellValue());
-			}
-			break;
-		case XSSFCell.CELL_TYPE_BLANK:
-			break;
-		case XSSFCell.CELL_TYPE_BOOLEAN:
-			s = String.valueOf(c.getBooleanCellValue());
-			break;
-		case XSSFCell.CELL_TYPE_ERROR:
-			break;
-		default:
-			s = String.valueOf(c.getRichStringCellValue());
-		}
-		return s;
 	}
 }
