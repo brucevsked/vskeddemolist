@@ -12,6 +12,7 @@ import java.util.TreeMap;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -42,7 +43,7 @@ public class ExcelUtil {
 				int columnIndex=0;
 				String[] columnArray=new String[row.getPhysicalNumberOfCells()];
 				for(Cell cell:row){
-					columnArray[columnIndex]=cell.toString();
+					columnArray[columnIndex]=getValueFor03And07(cell);
 					columnIndex++;
 				}
 				sheetDataList.add(columnArray);
@@ -92,5 +93,14 @@ public class ExcelUtil {
 		}
 		pkg.close();
 		return m;
+	}
+	
+	public static String getValueFor03And07(Cell c){
+		if(c.getCellTypeEnum()==CellType.NUMERIC){
+			c.setCellType(CellType.STRING);
+			return c.getStringCellValue();
+		}else{
+			return c.toString();
+		}
 	}
 }
