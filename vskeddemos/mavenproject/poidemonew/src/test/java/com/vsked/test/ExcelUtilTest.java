@@ -1,7 +1,8 @@
 package com.vsked.test;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +43,7 @@ public class ExcelUtilTest {
 		String filePath="e:/yuante.xlsx";
 		long start=System.currentTimeMillis();
 		Map<String, List<String[]>> dataMapAll=ExcelUtil.readExcel03And07(filePath);
+		log.debug(dataMapAll.size());
 		long end=System.currentTimeMillis();
 		log.debug("|s1|"+(end-start));//1990 ms this method more faster
 		
@@ -56,6 +58,7 @@ public class ExcelUtilTest {
 		String filePath="e:/yuante.xlsx";
 		long start=System.currentTimeMillis();
 		Map<String, List<String[]>> dataMapAll=ExcelUtil.xssfRead1(filePath);
+		log.debug(dataMapAll.size());
 		long end=System.currentTimeMillis();
 		log.debug("|s2|"+(end-start));//2480 ms this method slow
 		
@@ -64,13 +67,13 @@ public class ExcelUtilTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void testWriteCellAttach(){
 		/**
 		 * 注意excel单元格与行坐标从0开始
 		 */
 		try {
-			FileOutputStream fos=new FileOutputStream("e:/s13.xlsx");
+			FileOutputStream fos=new FileOutputStream("e:/stt11.xlsx");
 			Workbook wb=new XSSFWorkbook();
 			Sheet sheet=wb.createSheet();
 			//--------------------------------表头数据 start
@@ -191,8 +194,54 @@ public class ExcelUtilTest {
 	        
 	        wb.write(fos);  
 	          
-	        fos.close();  
+	        fos.close();
+	        wb.close();
 		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+	}
+	
+//	@Test
+	public void xssfWrite(){
+		try{
+			String fname="e:/t2a1.xlsx";
+			Map<String, String[][]> sheetData=new HashMap<String, String[][]>();
+			int rowCount=10;
+			int colCount=5;
+			String[][] rowData=new String[rowCount][colCount];
+			for(int rowIndex=0;rowIndex<rowCount;rowIndex++){
+				for(int columnIndex=0;columnIndex<colCount;columnIndex++){
+					rowData[rowIndex][columnIndex]=rowIndex+columnIndex+"";
+				}
+			}
+			sheetData.put("mydata2017", rowData);
+			
+			ExcelUtil.xssfWrite(fname, sheetData);
+		}catch(Exception e){
+			log.error(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void xssfWrite1(){
+		try{
+			String fname="e:/xxffw178.xlsx";
+			Map<String, List<String[]>> sheetData=new HashMap<String, List<String[]>>();
+			int rowCount=10;
+			int colCount=5;
+			
+			List<String[]> rowData=new LinkedList<String[]>();
+			for(int rowIndex=0;rowIndex<rowCount;rowIndex++){
+				String[] colData=new String[colCount];
+				for(int columnIndex=0;columnIndex<colCount;columnIndex++){
+					colData[columnIndex]=rowIndex+columnIndex+"";
+				}
+				rowData.add(colData);
+			}
+			sheetData.put("whocare", rowData);
+			
+			ExcelUtil.xssfWrite1(fname, sheetData);
+		}catch(Exception e){
 			log.error(e.getMessage());
 		}
 	}
