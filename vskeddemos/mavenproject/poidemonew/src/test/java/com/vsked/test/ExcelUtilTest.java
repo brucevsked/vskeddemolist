@@ -2,6 +2,7 @@ package com.vsked.test;
 
 import java.io.FileOutputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -37,14 +38,32 @@ public class ExcelUtilTest {
         } 
 	}
 	
-//	@Test
+	@Test
 	public void readExcel03And07(){
 		try{
-		String filePath="e:/yuante.xlsx";
+		String filePath="e:/dijia.xlsx";
 		long start=System.currentTimeMillis();
 		Map<String, List<String[]>> dataMapAll=ExcelUtil.readExcel03And07(filePath);
 		log.debug(dataMapAll.size());
 		long end=System.currentTimeMillis();
+		Iterator<Map.Entry<String, List<String[]>>> it=dataMapAll.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry<String, List<String[]>> entry=it.next();
+			String sheetName=entry.getKey();
+			log.debug(sheetName);
+			List<String[]> lineData=entry.getValue();
+			int lineDataSize=lineData.size();
+			String s="";
+			for(int i=0;i<lineDataSize;i++){
+				s="";
+				String[] dta=lineData.get(i);
+				for(String dt:dta){
+				    s+="|"+dt+"|";
+				}
+				log.debug(s);
+			}
+			
+		}
 		log.debug("|s1|"+(end-start));//1990 ms this method more faster
 		
 		}catch(Exception e){
@@ -60,6 +79,25 @@ public class ExcelUtilTest {
 		Map<String, List<String[]>> dataMapAll=ExcelUtil.xssfRead1(filePath);
 		log.debug(dataMapAll.size());
 		long end=System.currentTimeMillis();
+		
+		Iterator<Map.Entry<String, List<String[]>>> it=dataMapAll.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry<String, List<String[]>> entry=it.next();
+			String sheetName=entry.getKey();
+			log.debug(sheetName);
+			List<String[]> lineData=entry.getValue();
+			int lineDataSize=lineData.size();
+			String s="";
+			for(int i=0;i<lineDataSize;i++){
+				s="";
+				String[] dta=lineData.get(i);
+				for(String dt:dta){
+				    s+="|"+dt+"|";
+				}
+				log.debug(s);
+			}
+			
+		}
 		log.debug("|s2|"+(end-start));//2480 ms this method slow
 		
 		}catch(Exception e){
@@ -222,7 +260,7 @@ public class ExcelUtilTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void xssfWrite1(){
 		try{
 			String fname="e:/xxffw178.xlsx";

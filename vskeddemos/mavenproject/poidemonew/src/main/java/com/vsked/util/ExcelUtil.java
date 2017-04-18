@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -26,6 +29,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelUtil {
 	
 	public static String isNumberReg="^0|[0-9]\\d*(\\.\\d+)?$";
+	private static String isDateFormate1="\\d{2}-[a-zA-Z]{3}-\\d{4}"; //01-Apr-2017
+	private static Pattern r = Pattern.compile(isDateFormate1);
+	private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	
 	/**
 	 * 读取xls或xlsx文件
@@ -175,8 +181,14 @@ public class ExcelUtil {
 		wb.close();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static String getValueFor03And07(Cell c){
+		
 		if(c.getCellTypeEnum()==CellType.NUMERIC){
+			//自定义日期格式处理 bug fixed for poi
+			if(isData1(c.toString())){
+				return dateFormat1(c.toString());
+			}
 			c.setCellType(CellType.STRING);
 			return c.getStringCellValue();
 		}else{
@@ -201,5 +213,26 @@ public class ExcelUtil {
 	
 	public static boolean isNullOrIsEmpty(String s){
 		return isNull(s)||isEmpty(s);
+	}
+	
+	/**
+	 * 判断是否为日期格式 01-Apr-2017
+	 * @param s 01-Apr-2017
+	 * @return
+	 */
+	public static boolean isData1(String s){
+		Matcher m = r.matcher(s);
+		return m.matches();
+	}
+	
+	/**
+	 * 将传入日期01-Apr-2017格式化为2017-04-01
+	 * @param myDate 格式01-Apr-2017
+	 * @return
+	 */
+	public static String dateFormat1(String myDate){
+		@SuppressWarnings("deprecation")
+		Date d=new Date(myDate);
+		return sdf.format(d);
 	}
 }
