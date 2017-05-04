@@ -19,6 +19,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -32,9 +33,12 @@ public class ExcelUtil {
 	private static Logger log = Logger.getLogger(ExcelUtil.class);
 	
 	public static String isNumberReg="^0|[0-9]\\d*(\\.\\d+)?$";
-	private static String isDateFormate1="\\d{2}-[a-zA-Z]{3}-\\d{4}"; //01-Apr-2017
+	private static String isDateFormate1="\\d{2}-.*-\\d{4}"; //01-Apr-2017或 15-四月-2017
 	private static Pattern r = Pattern.compile(isDateFormate1);
-	private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+	private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+	private static String[] cnMonth={"一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"};
+	private static String[] enMonth={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 	
 	/**
 	 * 读取xls或xlsx文件
@@ -45,7 +49,7 @@ public class ExcelUtil {
 	public static Map<String, List<String[]>> readExcel03And07(String filePath) throws Exception{
 		Map<String, List<String[]>> m=new TreeMap<String, List<String[]>>();
 		Workbook wb = null; 
-		
+		log.debug(filePath);
 		InputStream stream = new FileInputStream(filePath);
 		if(filePath.endsWith(".xls")){
 			wb = new HSSFWorkbook(stream); 
@@ -81,6 +85,7 @@ public class ExcelUtil {
 	 * @return Map<工作表名,行数据list中放列数组>
 	 * @throws Exception
 	 */
+	@SuppressWarnings("resource")
 	public static Map<String, List<String[]>> xssfRead1(String fname)
 			throws Exception {
 		Map<String, List<String[]>> m = new TreeMap<String, List<String[]>>();
@@ -188,9 +193,10 @@ public class ExcelUtil {
 		if(c==null){
 			return "";
 		}else if(c.getCellTypeEnum()==CellType.NUMERIC){
+			String s=c.toString();
 			//自定义日期格式处理 bug fixed for poi
-			if(isData1(c.toString())){
-				return dateFormat1(c.toString());
+			if(isData1(s)){
+				return sdf.format(DateUtil.getJavaDate(c.getNumericCellValue()));
 			}
 			c.setCellType(CellType.STRING);
 			return c.getStringCellValue();
@@ -238,4 +244,20 @@ public class ExcelUtil {
 		Date d=new Date(myDate);
 		return sdf.format(d);
 	}
+	
+	/**
+	 * 将中文月份转成英文朋份
+	 * @param s
+	 * @return
+	 */
+	public static String cnMonthToEnDate(String s){
+		for(int i=0;i<cnMonth.length;i++){
+			if(s.indexOf(cnMonth[i])>0){
+				s=s.replace(cnMonth[i], enMonth[i]);
+				return s;
+			}
+		}
+		return s;
+	}
+	
 }
