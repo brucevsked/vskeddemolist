@@ -14,6 +14,7 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
@@ -27,6 +28,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtil {
+	
+	private static Logger log = Logger.getLogger(ExcelUtil.class);
 	
 	public static String isNumberReg="^0|[0-9]\\d*(\\.\\d+)?$";
 	private static String isDateFormate1="\\d{2}-[a-zA-Z]{3}-\\d{4}"; //01-Apr-2017
@@ -58,11 +61,10 @@ public class ExcelUtil {
 			Sheet sheet=sheetIt.next();
 			List<String[]> sheetDataList=new LinkedList<String[]>();
 			for(Row row:sheet){
-				int columnIndex=0;
-				String[] columnArray=new String[row.getPhysicalNumberOfCells()];
-				for(Cell cell:row){
-					columnArray[columnIndex]=getValueFor03And07(cell);
-					columnIndex++;
+				String[] columnArray=new String[row.getLastCellNum()];
+				for(int i=0;i<columnArray.length;i++){
+//				  log.debug(row.getCell(i)+"|");
+				  columnArray[i]=getValueFor03And07(row.getCell(i));
 				}
 				sheetDataList.add(columnArray);
 			}
@@ -183,8 +185,9 @@ public class ExcelUtil {
 	
 	@SuppressWarnings("deprecation")
 	public static String getValueFor03And07(Cell c){
-		
-		if(c.getCellTypeEnum()==CellType.NUMERIC){
+		if(c==null){
+			return "";
+		}else if(c.getCellTypeEnum()==CellType.NUMERIC){
 			//自定义日期格式处理 bug fixed for poi
 			if(isData1(c.toString())){
 				return dateFormat1(c.toString());

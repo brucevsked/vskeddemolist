@@ -41,7 +41,7 @@ public class ExcelUtilTest {
 	@Test
 	public void readExcel03And07(){
 		try{
-		String filePath="e:/dijia.xlsx";
+		String filePath="e:/test.xlsx";
 		long start=System.currentTimeMillis();
 		Map<String, List<String[]>> dataMapAll=ExcelUtil.readExcel03And07(filePath);
 		log.debug(dataMapAll.size());
@@ -58,7 +58,7 @@ public class ExcelUtilTest {
 				s="";
 				String[] dta=lineData.get(i);
 				for(String dt:dta){
-				    s+="|"+dt+"|";
+				    s+="|"+dt+"";
 				}
 				log.debug(s);
 			}
