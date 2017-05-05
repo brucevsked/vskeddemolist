@@ -24,6 +24,14 @@
     toastr.warning('内容放在这里就好了<br>可以多放一些东西c', '标题显示这个3');
     toastr.error('内容放在这里就好了<br>可以多放一些东西d', '标题显示这个4');
 	}
+	
+	function ts1(){
+		toastr.info('内容放在这里就好了<br>可以多放一些东西e', '标题显示这个5', {timeOut: 5000,
+			closeButton : true,
+			progressBar : true,
+			showMethod : 'slideDown',
+			positionClass : "toast-bottom-right"})
+	}
 	ts();
 </script>
   </body>
