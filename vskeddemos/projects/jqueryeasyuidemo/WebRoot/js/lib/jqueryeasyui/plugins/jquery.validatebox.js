@@ -1,7 +1,7 @@
-﻿/**
- * jQuery EasyUI 1.5
+/**
+ * jQuery EasyUI 1.5.2
  * 
- * Copyright (c) 2009-2016 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2017 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -14,8 +14,11 @@ $(_2).addClass("validatebox-text");
 function _3(_4){
 var _5=$.data(_4,"validatebox");
 _5.validating=false;
-if(_5.timer){
-clearTimeout(_5.timer);
+if(_5.vtimer){
+clearTimeout(_5.vtimer);
+}
+if(_5.ftimer){
+clearTimeout(_5.ftimer);
 }
 $(_4).tooltip("destroy");
 $(_4).unbind();
@@ -48,10 +51,10 @@ if(_c.validating){
 var _e=_d.val(_b);
 if(_c.value!=_e){
 _c.value=_e;
-if(_c.timer){
-clearTimeout(_c.timer);
+if(_c.vtimer){
+clearTimeout(_c.vtimer);
 }
-_c.timer=setTimeout(function(){
+_c.vtimer=setTimeout(function(){
 $(_b).validatebox("validate");
 },_d.delay);
 }else{
@@ -59,7 +62,7 @@ if(_c.message){
 _d.err(_b,_c.message);
 }
 }
-setTimeout(arguments.callee,_d.interval);
+_c.ftimer=setTimeout(arguments.callee,_d.interval);
 }
 })();
 };
@@ -68,12 +71,18 @@ var _10=e.data.target;
 var _11=$.data(_10,"validatebox");
 var _12=_11.options;
 _11.validating=false;
-if(_11.timer){
-clearTimeout(_11.timer);
-_11.timer=undefined;
+if(_11.vtimer){
+clearTimeout(_11.vtimer);
+_11.vtimer=undefined;
+}
+if(_11.ftimer){
+clearTimeout(_11.ftimer);
+_11.ftimer=undefined;
 }
 if(_12.validateOnBlur){
+setTimeout(function(){
 $(_10).validatebox("validate");
+},0);
 }
 _12.err(_10,_11.message,"hide");
 };
@@ -97,7 +106,7 @@ if(_1c=="hide"||!_1b){
 t.tooltip("hide");
 }else{
 if((t.is(":focus")&&_1d.validating)||_1c=="show"){
-t.tooltip($.extend({},_1e.tipOptions,{content:_1b,position:_1e.tipPosition,deltaX:_1e.deltaX})).tooltip("show");
+t.tooltip($.extend({},_1e.tipOptions,{content:_1b,position:_1e.tipPosition,deltaX:_1e.deltaX,deltaY:_1e.deltaY})).tooltip("show");
 }
 }
 };
@@ -269,7 +278,7 @@ $.fn.validatebox.parseOptions=function(_3d){
 var t=$(_3d);
 return $.extend({},$.parser.parseOptions(_3d,["validType","missingMessage","invalidMessage","tipPosition",{delay:"number",interval:"number",deltaX:"number"},{editable:"boolean",validateOnCreate:"boolean",validateOnBlur:"boolean"}]),{required:(t.attr("required")?true:undefined),disabled:(t.attr("disabled")?true:undefined),readonly:(t.attr("readonly")?true:undefined),novalidate:(t.attr("novalidate")!=undefined?true:undefined)});
 };
-$.fn.validatebox.defaults={required:false,validType:null,validParams:null,delay:200,interval:200,missingMessage:"This field is required.",invalidMessage:null,tipPosition:"right",deltaX:0,novalidate:false,editable:true,disabled:false,readonly:false,validateOnCreate:true,validateOnBlur:false,events:{focus:_a,blur:_f,mouseenter:_13,mouseleave:_16,click:function(e){
+$.fn.validatebox.defaults={required:false,validType:null,validParams:null,delay:200,interval:200,missingMessage:"This field is required.",invalidMessage:null,tipPosition:"right",deltaX:0,deltaY:0,novalidate:false,editable:true,disabled:false,readonly:false,validateOnCreate:true,validateOnBlur:false,events:{focus:_a,blur:_f,mouseenter:_13,mouseleave:_16,click:function(e){
 var t=$(e.data.target);
 if(t.attr("type")=="checkbox"||t.attr("type")=="radio"){
 t.focus().validatebox("validate");
