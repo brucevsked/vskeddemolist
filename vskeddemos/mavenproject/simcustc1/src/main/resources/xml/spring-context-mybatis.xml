@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd  
+                        http://www.springframework.org/schema/tx     
+                        http://www.springframework.org/schema/tx/spring-tx.xsd   
+                        http://www.springframework.org/schema/context  
+                        http://www.springframework.org/schema/context/spring-context.xsd  
+                        http://www.springframework.org/schema/aop 
+                        http://www.springframework.org/schema/aop/spring-aop.xsd 
+                        ">
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="com.vsked" />
+
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:properties/jdbc.properties" />
+    </bean>
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
+		<property name="minPoolSize" value="${jdbc.minPoolSize}" />
+		<property name="maxIdleTime" value="${jdbc.maxIdleTime}" />
+		<property name="maxStatements" value="${jdbc.maxStatements}" />
+		<property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}" />
+		<property name="acquireIncrement" value="${jdbc.acquireIncrement}" />
+		<property name="preferredTestQuery" value="${jdbc.preferredTestQuery}" />
+	</bean>
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:com/vsked/mapping/*.xml"></property>
+    <property name="plugins">
+        <array>
+            <bean class="com.github.pagehelper.PageInterceptor">
+                <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
+                <property name="properties">
+                    <value>
+                        helperDialect=oracle
+                        reasonable=true
+                        supportMethodsArguments=true
+                        params=count=countSql
+                        autoRuntimeDialect=true
+                    </value>
+                </property>
+            </bean>
+        </array>
+    </property>
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.vsked.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+    
+    <!-- 开启事务注解驱动 -->  
+    <tx:annotation-driven />
+    
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
+	    <property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception" isolation="DEFAULT"/>
+		</tx:attributes>
+	</tx:advice>	
+	
+    <aop:config proxy-target-class="true">
+        <aop:advisor  pointcut="execution(* com.vsked.service..*.*(..))" advice-ref="txAdvice"/>
+    </aop:config>
+    
+    <!-- 切面时间统计拦截 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+</beans>

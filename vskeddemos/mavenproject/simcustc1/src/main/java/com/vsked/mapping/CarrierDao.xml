@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.CarrierDao">
+
+	<select id="getCarrierCount" resultType="java.lang.Integer">
+		select count(0) from carrierT
+		<include refid="myWhere" />
+	</select>
+	
+	<select id="getCarrierList" resultType="java.util.Map">
+		select * from carrierT
+		<include refid="myWhere" /> 
+		order by carrierAddTime desc
+	</select>
+	
+	<select id="getCarrierByCarrierId" resultType="java.util.Map">
+		select * from carrierT where carrierId=#{carrierId,jdbcType=NVARCHAR}
+	</select>
+
+	<insert id="carrierAdd" >
+	  <selectKey keyProperty="myuuid" resultType="String" order="BEFORE">select rawtohex(sys_guid()) as "myuuid" from dual</selectKey> 
+	  insert into carrierT(carrierId,carrierName,carrierNick,carrierShortName,officialWebSite,hotline) 
+	  values(#{myuuid,jdbcType=NVARCHAR},#{carrierName,jdbcType=NVARCHAR},#{carrierNick,jdbcType=NVARCHAR},
+	  #{carrierShortName,jdbcType=NVARCHAR},#{officialWebSite,jdbcType=NVARCHAR},#{hotline,jdbcType=NVARCHAR}) 
+	</insert>
+	
+	<update id="carrierEdit">
+	  update carrierT set carrierName=#{carrierName,jdbcType=NVARCHAR} ,carrierNick=#{carrierNick,jdbcType=NVARCHAR} , 
+	  carrierShortName=#{carrierShortName,jdbcType=NVARCHAR},officialWebSite=#{officialWebSite,jdbcType=NVARCHAR} ,
+	  hotline=#{hotline,jdbcType=NVARCHAR} 
+	  where carrierId=#{carrierId,jdbcType=NVARCHAR}
+	</update>
+	
+    <sql id="myWhere">
+    <where>
+		<if test="carrierName !=null and carrierName != '' ">
+		and carrierName like '%'||#{carrierName,jdbcType=NVARCHAR}||'%' 
+		</if>
+		<if test="carrierNick !=null and carrierNick != '' ">
+		and carrierNick like '%'||#{carrierNick,jdbcType=NVARCHAR}||'%' 
+		</if>
+		<if test="carrierShortName !=null and carrierShortName != '' ">
+		and carrierShortName like '%'||#{carrierShortName,jdbcType=NVARCHAR}||'%' 
+		</if>
+    </where>
+    </sql>
+</mapper>

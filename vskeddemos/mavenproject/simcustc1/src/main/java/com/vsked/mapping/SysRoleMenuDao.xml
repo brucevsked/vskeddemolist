@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.SysRoleMenuDao">
+
+	<select id="getHasSysRoleList" resultType="java.util.Map">
+		select * from sysRoleT 
+		a where a.srId in( 
+		select b.srId from sysRoleMenuT b where b.smId=#{smId})
+	</select>
+
+	<select id="getNoSysRoleList" resultType="java.util.Map">
+		select * from sysRoleT 
+		a where a.srId not in( 
+		select b.srId from sysRoleMenuT b where b.smId=#{smId})
+	</select>
+	
+	<delete id="sysRoleMenuDelBySrId">
+		delete from sysRoleMenuT where srId=#{srId,jdbcType=NVARCHAR}
+	</delete>
+	
+	<delete id="sysRoleMenuDelBySmId">
+		delete from sysRoleMenuT where smId=#{smId,jdbcType=NVARCHAR}
+	</delete>
+	
+	<insert id="sysRoleMenuAdd">
+insert into sysRoleMenuT(srId,smId) 
+VALUES(#{srId,jdbcType=NVARCHAR},#{smId,jdbcType=NVARCHAR}) 
+	</insert>
+</mapper>

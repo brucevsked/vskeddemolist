@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.SysUserDao">
+
+	<select id="getSysUserBySuName" resultType="java.util.Map">
+		select * from sysUserT where suName=#{suName,jdbcType=NVARCHAR}
+	</select>
+
+	<select id="getSysUserBySuId" resultType="java.util.Map">
+		select * from sysUserT where suId=#{suId}
+	</select>
+
+	<select id="getSysUserCount" resultType="java.lang.Integer">
+		select count(0) from sysUserT 
+		<include refid="myWhere" />
+	</select>
+	<select id="getSysUserList" resultType="java.util.Map">
+		select * from sysUserT 
+		<include refid="myWhere" />
+		 ORDER BY suRegTime desc
+	</select>
+	
+	<insert id="sysUserAdd" >
+	<selectKey keyProperty="myuuid" resultType="String" order="BEFORE">select rawtohex(sys_guid()) as "myuuid" from dual</selectKey>
+	  insert into sysUserT(suId,suName,suNick,suPass,suMobile,suLastVisit) 
+	  VALUES(#{myuuid,jdbcType=NVARCHAR},#{suName,jdbcType=NVARCHAR},#{suNick,jdbcType=NVARCHAR},#{suPass,jdbcType=NVARCHAR},#{suMobile,jdbcType=NVARCHAR},sysdate)
+	</insert>
+	
+	<update id="sysUserEdit">
+	  update sysUserT set suNick=#{suNick,jdbcType=NVARCHAR},suMobile=#{suMobile,jdbcType=NVARCHAR} where suId=#{suId,jdbcType=NVARCHAR}
+	</update>
+	
+	<update id="sysUserPassChange">
+	  update sysUserT set suPass=#{suPass,jdbcType=NVARCHAR} where suId=#{suId,jdbcType=NVARCHAR}
+	</update>
+	
+    <delete id="sysUserDel">
+      delete from sysUserT where suId=#{suId,jdbcType=NVARCHAR}
+    </delete>
+    
+    <sql id="myWhere">
+    <where>
+		<if test="suName !=null and suName != '' ">
+		and suName like '%'||#{suName,jdbcType=NVARCHAR}||'%' 
+		</if>
+		<if test="suNick !=null and suNick != '' ">
+		and suNick like '%'||#{suNick,jdbcType=NVARCHAR}||'%' 
+		</if>
+    </where>
+    </sql>
+</mapper>

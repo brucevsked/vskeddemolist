@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.SysMenuDao">
+
+	<select id="getSysMenuCount" resultType="java.lang.Integer">
+		select count(0) from sysMenuT a1 left join sysMenuT b1 on a1.parentSmId=b1.smId 
+		<include refid="myWhere" />
+	</select>
+	
+	<select id="getSysMenuList" resultType="java.util.Map">
+		select a1.*,b1.smName smName1 from sysMenuT a1 left join sysMenuT b1 on a1.parentSmId=b1.smId 
+		<include refid="myWhere" />
+	</select>
+	
+	<select id="getSysMenuBySmId" resultType="java.util.Map">
+		select * from sysMenuT where smId=#{smId,jdbcType=NVARCHAR}
+	</select>
+	
+	<select id="getSysUserMenuBySuId" resultType="java.util.Map">
+select * from sysMenuT where smId in(
+    select distinct smId from sysRoleMenuT 
+    where srId in(
+    select srId from sysUserRoleT where suId=#{suId,jdbcType=NVARCHAR}
+    )
+) order by smAddTime
+	</select>
+	
+	<insert id="sysMenuAdd" >
+	<selectKey keyProperty="myuuid" resultType="String" order="BEFORE">select rawtohex(sys_guid()) as "myuuid" from dual</selectKey>
+	  insert into sysMenuT(smId,smName,smHref,smClick,smClass,smDataOptions,parentSmId) 
+	  VALUES(#{myuuid,jdbcType=NVARCHAR},#{smName,jdbcType=NVARCHAR},#{smHref,jdbcType=NVARCHAR},
+	  #{smClick,jdbcType=NVARCHAR},#{smClass,jdbcType=NVARCHAR},#{smDataOptions,jdbcType=NVARCHAR},#{parentSmId,jdbcType=NVARCHAR})
+	</insert>
+	
+	<update id="sysMenuEdit">
+	  update sysMenuT set smName=#{smName,jdbcType=NVARCHAR},smHref=#{smHref,jdbcType=NVARCHAR},
+	  smClick=#{smClick,jdbcType=NVARCHAR},smClass=#{smClass,jdbcType=NVARCHAR},smDataOptions=#{smDataOptions,jdbcType=NVARCHAR},
+	  parentSmId=#{parentSmId,jdbcType=NVARCHAR} where smId=#{smId,jdbcType=NVARCHAR} 
+	</update>
+	
+    <sql id="myWhere">
+    <where>
+		<if test="smName !=null and smName != '' ">
+		and a1.smName like '%'||#{smName,jdbcType=NVARCHAR}||'%' 
+		</if>
+		<if test="smHref !=null and smHref != '' ">
+		and a1.smHref like '%'||#{smHref,jdbcType=NVARCHAR}||'%' 
+		</if>
+		<if test="smClick !=null and smClick != '' ">
+		and a1.smClick like '%'||#{smClick,jdbcType=NVARCHAR}||'%' 
+		</if>
+		<if test="smName1 !=null and smName1 != '' ">
+		and b1.smName like '%'||#{smName1,jdbcType=NVARCHAR}||'%' 
+		</if>
+    </where>
+    </sql>
+</mapper>

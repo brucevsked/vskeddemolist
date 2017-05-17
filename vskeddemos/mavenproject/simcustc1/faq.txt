@@ -1,0 +1,15 @@
+
+q1 系统菜单显示在第一位,主页显示在第二位菜单
+如果主页不是第一个那可以通过调整smAddTime字段调整前台显示菜单顺序
+也就是说你可以通过修改sysMenuT表中smAddTime来调整菜单显示顺序
+
+q2 菜单样式不对
+检查sysMenu菜单表中样式是否正确
+
+q3 在service层加了try catch后事务不回滚
+在catch块中添加手动事务回滚
+			//手动回滚事务
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+
+
+

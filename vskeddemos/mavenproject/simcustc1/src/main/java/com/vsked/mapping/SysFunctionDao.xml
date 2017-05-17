@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.SysFunctionDao">
+
+	<select id="getSysFunctionList" resultType="java.util.Map">
+		select * from sysFunctionT LEFT JOIN sysPermissionT on sysFunctionT.spId=sysPermissionT.spId 
+		<include refid="myWhere" />
+		ORDER BY sfAddTime desc
+	</select>
+	<select id="getSysFunctionCount" resultType="java.lang.Integer">
+		select count(0) from sysFunctionT
+		<include refid="myWhere" />
+	</select>
+
+	<select id="getSysFunctionBySfId" resultType="java.util.Map">
+		select * from sysFunctionT where sfId=#{sfId}
+	</select>
+
+	<insert id="sysFunctionAdd">
+		<selectKey keyProperty="myuuid" resultType="String" order="BEFORE">select rawtohex(sys_guid()) as "myuuid" from dual</selectKey>
+		insert into sysFunctionT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			sfId,
+			<if test="sfValue != null">
+				sfValue,
+			</if>
+			<if test="spId != null">
+				spId,
+			</if>
+			<if test="srId != null">
+				srId,
+			</if>
+			<if test="sfType != null">
+				sfType,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{myuuid,jdbcType=NVARCHAR},
+			<if test="sfValue != null">
+				#{sfValue,jdbcType=NVARCHAR},
+			</if>
+			<if test="spId != null">
+				#{spId,jdbcType=NVARCHAR},
+			</if>
+			<if test="srId != null">
+				#{srId,jdbcType=NVARCHAR},
+			</if>
+			<if test="sfType != null">
+				#{sfType,jdbcType=NVARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<delete id="sysFunctionDel">
+		delete from sysFunctionT where sfId=#{sfId,jdbcType=NVARCHAR}
+	</delete>
+
+	<update id="sysFunctionEdit">
+		update sysFunctionT
+		<set>
+			<if test="sfValue != null">
+				sfValue= #{sfValue,jdbcType=NVARCHAR},
+			</if>
+			
+			<if test="spId != null">
+				spId=#{spId,jdbcType=NVARCHAR},
+			</if>
+			
+			<if test="srId != null">
+				srId=#{srId,jdbcType=NVARCHAR},
+			</if>
+				
+			<if test="sfType != null">
+				sfType=#{sfType,jdbcType=NVARCHAR},
+			</if>
+		</set>
+		where sfId=#{sfId,jdbcType=NVARCHAR}
+	</update>
+
+	<sql id="myWhere">
+		<where>
+			<if test="sfId != null and sfId != ''">
+				and sfId = #{sfId,jdbcType=NVARCHAR}
+			</if>
+			<if test="sfValue != null and sfValue != ''">
+				and sfValue like '%'||#{sfValue,jdbcType=NVARCHAR}||'%' 
+			</if>
+			<if test="spNick != null and spNick != ''">
+				and spNick like '%'||#{spNick,jdbcType=NVARCHAR}||'%' 
+			</if>
+		</where>
+	</sql>
+
+</mapper>

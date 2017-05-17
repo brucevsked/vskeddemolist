@@ -1,0 +1,3 @@
+html,body{ height:100%;}
+body,div{ margin:0; padding:0;}
+* html{ padding-top:100px;}/*for ie6*/

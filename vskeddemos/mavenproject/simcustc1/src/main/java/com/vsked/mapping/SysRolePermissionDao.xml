@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.SysRolePermissionDao">
+
+	<select id="getSysRolePermissionBySrId" resultType="java.util.Map">
+		select * from 
+		sysRolePermissionT a LEFT JOIN sysRoleT b on a.srId=b.srId LEFT JOIN 
+		sysPermissionT c on a.spId=c.spId where a.srId=#{srId}
+	</select>
+
+	<select id="getHasSysPermissionList" resultType="java.util.Map">
+		SELECT * FROM syspermissiont a WHERE a.spId in( 
+		SELECT b.spId FROM sysrolepermissiont b LEFT JOIN syspermissiont c ON b.spId= c.spId LEFT JOIN 
+			sysrolet d ON b.srId=d.srId WHERE b.srId=#{srId})
+	</select>
+	
+	<select id="getNoSysPermissionList" resultType="java.util.Map">
+		SELECT * FROM syspermissiont a WHERE a.spId not in( 
+		SELECT b.spId FROM sysrolepermissiont b LEFT JOIN syspermissiont c ON b.spId= c.spId LEFT JOIN 
+			sysrolet d ON b.srId=d.srId WHERE b.srId=#{srId})
+	</select>
+	
+	<select id="getHasSysRoleList" resultType="java.util.Map">
+		select * from sysRoleT 
+		a where a.srId in( 
+		select b.srId from sysRolePermissionT b where b.spId=#{spId})
+	</select>
+
+	<select id="getNoSysRoleList" resultType="java.util.Map">
+		select * from sysRoleT 
+		a where a.srId not in( 
+		select b.srId from sysRolePermissionT b where b.spId=#{spId})
+	</select>
+	
+	<delete id="sysRolePermissionDelBySrId">
+		delete from sysRolePermissiont where srId=#{srId,jdbcType=NVARCHAR}
+	</delete>
+	
+	<delete id="sysRolePermissionDelBySpId">
+		delete from sysRolePermissiont where spId=#{spId,jdbcType=NVARCHAR}
+	</delete>
+	
+	<insert id="sysRolePermissionAdd">
+		insert into sysRolePermissiont(srId,spId) 
+		VALUES(#{srId,jdbcType=NVARCHAR},#{spId,jdbcType=NVARCHAR})
+	</insert>
+</mapper>
