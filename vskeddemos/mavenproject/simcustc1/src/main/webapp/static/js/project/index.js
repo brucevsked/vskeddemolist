@@ -24,6 +24,59 @@ $(function(){
 });
 
 /**
+ * 转换为easyui树格式需要id,name,parentId请提前在数据库或代码端处理好
+ * @param rows
+ * @returns {Array}
+ */
+function convertEasyUITreeData(rows){
+    var nodes = [];  
+    // get the top level nodes  
+    for (var i = 0; i < rows.length; i++) {  
+        var row = rows[i];  
+        if (!existsChildNode(rows, row.parentId)) {  
+            nodes.push({  
+                id: row.id,  
+                text: row.name  
+            });  
+        }  
+    } 
+    var toDo = [];  
+    for (var i = 0; i < nodes.length; i++) {  
+        toDo.push(nodes[i]);  
+    }  
+    while (toDo.length) {  
+        var node = toDo.shift();    // the parent node  
+        // get the children nodes  
+        for (var i = 0; i < rows.length; i++) {  
+            var row = rows[i];  
+            if (row.parentId == node.id) {  
+                var child = { id: row.id, text: row.name };  
+                if (node.children) {  
+                    node.children.push(child);  
+                } else {  
+                    node.children = [child];  
+                }  
+                toDo.push(child);  
+            }  
+        }  
+    }  
+    return nodes;  
+}
+
+/**
+ * 是否存在子节点
+ * @param rows
+ * @param parentId
+ * @returns {Boolean}
+ */
+function existsChildNode(rows, parentId) {
+    for (var i = 0; i < rows.length; i++) {  
+        if (rows[i].id === parentId) return true;  
+    }  
+    return false;  
+} 
+
+/**
  * 将指定页面载入mainDiv
  * @param pageUrl 页面地址不包括项目地址只写controller那层就可以 只有本参数时会用get方法载入
  * @param data 要传的数据 注意使用本参数时会用post方法载入后台controller需要用post接收
@@ -31,6 +84,22 @@ $(function(){
  */
 function loadPage(pageUrl,data,callback){
 	$('#mainDiv').load(basePath+pageUrl,data,callback);
+}
+
+/**
+ * 是否存在某种权限如果没有移除元素
+ * @param permission 权限表达式
+ * @param elId 元素id
+ */
+function isExistPermission(permission,elId){
+	var myBasePath=basePath+'isExistPermission';
+	$.post(myBasePath,{myPermission:permission},function (dt){
+		if(dt!='true'){
+			var el=document.getElementById(elId);
+			removeElement(el);
+		}
+	 }
+	);
 }
 
 /**
@@ -257,5 +326,19 @@ function carrierListPage(){
  */
 function carrierAddPage(){
 	loadPage('carrierAddPage');
+}
+
+/**
+ * 组织列表页
+ */
+function organizeListPage(){
+	loadPage('organizeListPage');
+}
+
+/**
+ * 组织添加页
+ */
+function organizeAddPage(){
+	loadPage('organizeAddPage');
 }
 

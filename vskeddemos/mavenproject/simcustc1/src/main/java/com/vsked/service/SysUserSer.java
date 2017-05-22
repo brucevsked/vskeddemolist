@@ -212,7 +212,7 @@ public class SysUserSer extends BaseService{
 			if(data.containsKey("suId")){
 				String suId=(String) data.get("suId");
 				if("".equals(suId)){
-					suId=(String) getCurrentUser().get("SUID");
+					suId=getCurrentUserId();
 					data.put("suId", suId);
 				}
 			}

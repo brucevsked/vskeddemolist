@@ -52,4 +52,10 @@ public class PermissionController {
 	public String permissionEditProc(HttpServletRequest req){
 		return sysPermissionSer.permissionEditProc(req);
 	}
+	
+	@PostMapping("isExistPermission")
+	@ResponseBody
+	public String isExistPermission(HttpServletRequest req){
+		return sysPermissionSer.isExistPermission(req);
+	}
 }

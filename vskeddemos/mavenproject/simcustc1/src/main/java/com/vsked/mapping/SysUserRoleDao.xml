@@ -10,8 +10,8 @@ left join sysRoleT c on a.srId=c.srId
 <include refid="myWhere" />
     </select>
     
-    <select id="isPermitted" resultType="java.util.Map">
-select * from sysUserRoleT where suId=#{suId} 
+    <select id="isPermitted" resultType="java.lang.Integer">
+select count(0) from sysUserRoleT where suId=#{suId} 
 and srId in(select srId from sysRolePermissionT 
 where spId=(select spId from sysPermissionT where spName=#{spName}))
     </select>

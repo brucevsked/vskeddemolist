@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.SysOrganizeDao">
+
+	<select id="getSysOrganizeCount" resultType="java.lang.Integer">
+		select count(0) from sysOrganizeT a1 left join sysOrganizeT b1 on a1.parentSoId=b1.soId 
+		<include refid="myWhere" />
+	</select>
+	
+	<select id="getSysOrganizeList" resultType="java.util.Map">
+		select a1.*,b1.soName soName1 from sysOrganizeT a1 left join sysOrganizeT b1 on a1.parentSoId=b1.soId 
+		<include refid="myWhere" />
+		order by a1.soAddTime desc 
+	</select>
+	
+	<select id="getSysOrganizeListAll" resultType="java.util.Map">
+    select soId as "id",soName as "name",parentSoId as "parentId" from sysOrganizeT
+	</select>
+	
+	<select id="getSysOrganizeBySoId" resultType="java.util.Map">
+		select * from sysOrganizeT where soId=#{soId,jdbcType=NVARCHAR}
+	</select>
+	
+	<insert id="sysOrganizeAdd" >
+	<selectKey keyProperty="myuuid" resultType="String" order="BEFORE">select rawtohex(sys_guid()) as "myuuid" from dual</selectKey>
+	  insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) 
+	  VALUES(#{myuuid,jdbcType=NVARCHAR},#{soName,jdbcType=NVARCHAR},#{soCode,jdbcType=NVARCHAR},
+	  #{soSort},#{parentSoId,jdbcType=NVARCHAR})
+	</insert>
+	
+	<update id="sysOrganizeEdit">
+	update sysOrganizeT set soName=#{soName,jdbcType=NVARCHAR},soCode=#{soCode,jdbcType=NVARCHAR},
+	soSort=#{soSort},parentSoId=#{parentSoId,jdbcType=NVARCHAR} where soId=#{soId,jdbcType=NVARCHAR} 	 
+	</update>
+	
+    <sql id="myWhere">
+    <where>
+		<if test="soName !=null and soName != '' ">
+		and a1.soName like '%'||#{soName,jdbcType=NVARCHAR}||'%' 
+		</if>
+		<if test="soCode !=null and soCode != '' ">
+		and a1.soCode like '%'||#{soCode,jdbcType=NVARCHAR}||'%' 
+		</if>
+		<if test="soName1 !=null and soName1 != '' ">
+		and b1.soName like '%'||#{soName1,jdbcType=NVARCHAR}||'%' 
+		</if>
+    </where>
+    </sql>
+</mapper>

@@ -89,5 +89,14 @@ public class SysUserRoleDaoTest extends TestMyBatis{
 		log.debug(effectLine);
 	}
 	
+//	@Test
+	public void isPermitted(){
+		Map<String, Object> parMap=new HashMap<String, Object>();
+		parMap.put("suId", "10000000000000000000000000000001");
+		parMap.put("spName", "userRoleListPage:get");
+		int count=sysUserRoleDao.isPermitted(parMap);
+		log.debug(count);
+		
+	}
 
 }

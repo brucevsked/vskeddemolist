@@ -27,6 +27,8 @@ $(function(){
     
 	$.parser.parse();//重新加载样式
 	
+	initPagePermission(); //权限初始化
+	
     $('#suName').textbox('textbox').focus(); 
     
 });
@@ -75,4 +77,14 @@ function userPass(){
 	}else{
 		toastr.info('请选择行', '提示');
 	}
+}
+
+/**
+ * 初始化权限,将没权限的按钮移除
+ */
+function initPagePermission(){
+	isExistPermission('userListData:post','queryBt');
+	isExistPermission('userEditPage:get','editBt');
+	isExistPermission('userPassPage:get','userPassBt');
+	isExistPermission('userRoleListPage:get','userRoleBt');
 }

@@ -25,6 +25,6 @@ public interface SysUserRoleDao {
 	
 	public int sysUserRoleDelBySuId(String suId);//根据用户ID删除
 	
-	public List<Map<String,Object>> isPermitted(Map<String,Object> m); //是否有权限操作
+	public int isPermitted(Map<String,Object> m); //是否有权限操作
 	
 }

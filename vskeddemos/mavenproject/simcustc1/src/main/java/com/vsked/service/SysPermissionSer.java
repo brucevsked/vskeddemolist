@@ -3,15 +3,19 @@ package com.vsked.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.github.pagehelper.PageHelper;
 import com.vsked.common.BaseJson;
 import com.vsked.common.Page;
 import com.vsked.dao.SysPermissionDao;
+import com.vsked.dao.SysUserRoleDao;
 
 @Service
 @Transactional
@@ -21,6 +25,9 @@ public class SysPermissionSer extends BaseService{
 	
 	@Autowired
 	SysPermissionDao sysPermissionDao;
+	
+	@Autowired
+	SysUserRoleDao sysUserRoleDao;
 	
 	public int getSysPermissionCount(Map<String, Object> m){
 		int count=0;
@@ -129,6 +136,29 @@ public class SysPermissionSer extends BaseService{
 			log.error(e.getMessage());
 		}
 		return result;
+	}
+	
+	/**
+	 * 用户是否存在某种权限 传入参数myPermission为权限表达式如userRoleListPage:get
+	 * @param req
+	 * @return 存在返回true不存在返回false
+	 */
+	public String isExistPermission(HttpServletRequest req){
+		boolean flag=false;
+		try{
+			Map<String, Object> m=getMaps(req);
+			String permission=(String) m.get("myPermission");
+			Map<String, Object> parMap=new HashMap<String, Object>();
+			parMap.put("suId", getCurrentUserId());
+			parMap.put("spName", permission);
+			
+			if(sysUserRoleDao.isPermitted(parMap)>0){
+				flag=true;
+			}
+		}catch(Exception e){
+			log.error(e.getMessage());
+		}
+		return flag+"";
 	}
 	
 }

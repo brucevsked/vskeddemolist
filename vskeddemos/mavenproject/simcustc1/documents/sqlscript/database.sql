@@ -23,6 +23,7 @@
 /**  数据查询区  **/
 
 /********+*********+*********+*********+*********+*********+*/
+drop table sysOrganizeT;
 drop table sysRoleMenuT;
 drop table sysFunctionT ;
 drop table sysRolePermissionT ;
@@ -31,6 +32,41 @@ drop table sysRoleT ;
 drop table sysPermissionT ;
 drop table sysUserT ;
 drop table sysMenuT;
+/********+*********+*********+*********+*********+*********+*/
+
+create table sysOrganizeT(
+soId nvarchar2(64)  primary key,        --组织编号
+soName nvarchar2(640) unique not null,  --组织名
+soCode nvarchar2(64),                   --组织代码
+soSort number(10),                      --排序
+parentSoId nvarchar2(64),               --上级组织
+soAddTime timestamp default sysdate     --添加时间
+);
+
+comment on table  sysOrganizeT              is '组织表'        ;
+comment on column sysOrganizeT.soId         is '组织ID'        ;
+comment on column sysOrganizeT.soName       is '组织名'        ;
+comment on column sysOrganizeT.soCode       is '组织代码'      ;
+comment on column sysOrganizeT.soSort       is '排序'          ;
+comment on column sysOrganizeT.parentSoId   is '上级组织'      ;
+comment on column sysOrganizeT.soAddTime    is '组织添加时间'  ;
+
+alter table sysOrganizeT add constraint fk_sysOrganizeT_parentSoId foreign key(parentSoId) references sysOrganizeT(soId);
+
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('orga0000000000000000000000010000','山东济南有限公司','jnyxgs',0,null);
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('orga0000000000000000000000010001','总经办','zjb',0,'orga0000000000000000000000010000');
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('orga0000000000000000000000010002','财务部','cwb',1,'orga0000000000000000000000010000');
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('orga0000000000000000000000010003','综合管理部','zhglb',2,'orga0000000000000000000000010000');
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('orga0000000000000000000000010004','经营管理部','jyglb',3,'orga0000000000000000000000010000');
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('orga0000000000000000000000010005','规划发展部','ghfzb',4,'orga0000000000000000000000010000');
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('orga0000000000000000000000010006','虚商部','xs',5,'orga0000000000000000000000010000');
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('xushang0000000000000000000000001','BOD','bod',0,'orga0000000000000000000000010006');
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('xushang0000000000000000000000002','产品组','cpz',1,'orga0000000000000000000000010006');
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('xushang0000000000000000000000003','仓库','ck',2,'orga0000000000000000000000010006');
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('orga0000000000000000000000010007','移动互联事业部','ydhlsyb',6,'orga0000000000000000000000010000');
+insert into sysOrganizeT(soId,soName,soCode,soSort,parentSoId) VALUES('orga0000000000000000000000010008','动漫事业部','dmsyb',7,'orga0000000000000000000000010000');
+
+select * from sysOrganizeT;
 /********+*********+*********+*********+*********+*********+*/
 
 create table sysUserT(
@@ -160,6 +196,13 @@ insert into sysPermissionT(spId,spName,spNick) VALUES('2000000000000000000000000
 insert into sysPermissionT(spId,spName,spNick) VALUES('20000000000000000000000000000045','carrierEditPage:get'   ,'运营商修改页'  )  ;
 insert into sysPermissionT(spId,spName,spNick) VALUES('20000000000000000000000000000046','carrierEditProc:post'  ,'运营商修改处理')  ;
 
+insert into sysPermissionT(spId,spName,spNick) VALUES('20000000000000000000000000000047','organizeListPage:get'   ,'组织列表页'  )  ;
+insert into sysPermissionT(spId,spName,spNick) VALUES('20000000000000000000000000000048','organizeListData:post'  ,'组织列表数据')  ;
+insert into sysPermissionT(spId,spName,spNick) VALUES('20000000000000000000000000000049','organizeAddPage:get'    ,'组织添加页'  )  ;
+insert into sysPermissionT(spId,spName,spNick) VALUES('20000000000000000000000000000050','organizeAddProc:post'   ,'组织添加处理')  ;
+insert into sysPermissionT(spId,spName,spNick) VALUES('20000000000000000000000000000051','organizeEditPage:get'   ,'组织修改页'  )  ;
+insert into sysPermissionT(spId,spName,spNick) VALUES('20000000000000000000000000000052','organizeEditProc:post'  ,'组织修改处理')  ;
+
 select * from sysPermissionT;
 /********+*********+*********+*********+*********+*********+*/
 
@@ -275,6 +318,12 @@ insert into sysRolePermissionT(srId,spId) VALUES('300000000000000000000000000000
 insert into sysRolePermissionT(srId,spId) VALUES('30000000000000000000000000000001','20000000000000000000000000000044') ;
 insert into sysRolePermissionT(srId,spId) VALUES('30000000000000000000000000000001','20000000000000000000000000000045') ;
 insert into sysRolePermissionT(srId,spId) VALUES('30000000000000000000000000000001','20000000000000000000000000000046') ;
+insert into sysRolePermissionT(srId,spId) VALUES('30000000000000000000000000000001','20000000000000000000000000000047') ;
+insert into sysRolePermissionT(srId,spId) VALUES('30000000000000000000000000000001','20000000000000000000000000000048') ;
+insert into sysRolePermissionT(srId,spId) VALUES('30000000000000000000000000000001','20000000000000000000000000000049') ;
+insert into sysRolePermissionT(srId,spId) VALUES('30000000000000000000000000000001','20000000000000000000000000000050') ;
+insert into sysRolePermissionT(srId,spId) VALUES('30000000000000000000000000000001','20000000000000000000000000000051') ;
+insert into sysRolePermissionT(srId,spId) VALUES('30000000000000000000000000000001','20000000000000000000000000000052') ;
 
 
 
@@ -358,6 +407,13 @@ insert into sysFunctionT(sfId,sfValue,spId,srId,sfType) VALUES('4000000000000000
 insert into sysFunctionT(sfId,sfValue,spId,srId,sfType) VALUES('40000000000000000000000000000046','/carrierEditPage'            ,'20000000000000000000000000000045',null,'cusperm') ;
 insert into sysFunctionT(sfId,sfValue,spId,srId,sfType) VALUES('40000000000000000000000000000047','/carrierEditProc'            ,'20000000000000000000000000000046',null,'cusperm') ;
 
+insert into sysFunctionT(sfId,sfValue,spId,srId,sfType) VALUES('40000000000000000000000000000048','/organizeListPage'            ,'20000000000000000000000000000047',null,'cusperm') ;
+insert into sysFunctionT(sfId,sfValue,spId,srId,sfType) VALUES('40000000000000000000000000000049','/organizeListData'            ,'20000000000000000000000000000048',null,'cusperm') ;
+insert into sysFunctionT(sfId,sfValue,spId,srId,sfType) VALUES('40000000000000000000000000000050','/organizeAddPage'             ,'20000000000000000000000000000049',null,'cusperm') ;
+insert into sysFunctionT(sfId,sfValue,spId,srId,sfType) VALUES('40000000000000000000000000000051','/organizeAddProc'             ,'20000000000000000000000000000050',null,'cusperm') ;
+insert into sysFunctionT(sfId,sfValue,spId,srId,sfType) VALUES('40000000000000000000000000000052','/organizeEditPage'            ,'20000000000000000000000000000051',null,'cusperm') ;
+insert into sysFunctionT(sfId,sfValue,spId,srId,sfType) VALUES('40000000000000000000000000000053','/organizeEditProc'            ,'20000000000000000000000000000052',null,'cusperm') ;
+
 
 select * from sysFunctionT;
 /********+*********+*********+*********+*********+*********+*/
@@ -399,6 +455,8 @@ insert into sysMenuT(smId,smName,smHref,smClick,smClass,smDataOptions,parentSmId
 insert into sysMenuT(smId,smName,smHref,smClick,smClass,smDataOptions,parentSmId) VALUES('2_10','菜单添加','javascript:void(0);','menuAddPage();',null,null,'2') ;
 insert into sysMenuT(smId,smName,smHref,smClick,smClass,smDataOptions,parentSmId) VALUES('2_11','运营商列表','javascript:void(0);','carrierListPage();',null,null,'2') ;
 insert into sysMenuT(smId,smName,smHref,smClick,smClass,smDataOptions,parentSmId) VALUES('2_12','运商商添加','javascript:void(0);','carrierAddPage();',null,null,'2') ;
+insert into sysMenuT(smId,smName,smHref,smClick,smClass,smDataOptions,parentSmId) VALUES('2_13','组织列表','javascript:void(0);','organizeListPage();',null,null,'2') ;
+insert into sysMenuT(smId,smName,smHref,smClick,smClass,smDataOptions,parentSmId) VALUES('2_14','组织添加','javascript:void(0);','organizeAddPage();',null,null,'2') ;
 insert into sysMenuT(smId,smName,smHref,smClick,smClass,smDataOptions,parentSmId) VALUES('9'   ,'注销','logout',null,'easyui-linkbutton','plain:true',null) ;
 insert into sysMenuT(smId,smName,smHref,smClick,smClass,smDataOptions,parentSmId) VALUES('100' ,'修改密码','javascript:void(0);','myPassPage()','easyui-linkbutton','plain:true',null) ;
 
@@ -434,6 +492,8 @@ insert into sysRoleMenuT(srId,smId) VALUES('30000000000000000000000000000001','2
 insert into sysRoleMenuT(srId,smId) VALUES('30000000000000000000000000000001','2_10');
 insert into sysRoleMenuT(srId,smId) VALUES('30000000000000000000000000000001','2_11');
 insert into sysRoleMenuT(srId,smId) VALUES('30000000000000000000000000000001','2_12');
+insert into sysRoleMenuT(srId,smId) VALUES('30000000000000000000000000000001','2_13');
+insert into sysRoleMenuT(srId,smId) VALUES('30000000000000000000000000000001','2_14');
 insert into sysRoleMenuT(srId,smId) VALUES('30000000000000000000000000000001','9');
 insert into sysRoleMenuT(srId,smId) VALUES('30000000000000000000000000000001','100');
 

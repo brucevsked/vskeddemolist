@@ -18,10 +18,10 @@ request.setAttribute("basePath", basePath);
   
   <div id="searchPanel" class="easyui-panel">
   <input id="suName" name="suName" class="easyui-textbox" label="用户名:" style="width: 18%">
-  <button class="easyui-linkbutton" type="button" onclick="query()">&nbsp;查 &nbsp;询&nbsp;</button> <br>
-  <button class="easyui-linkbutton" type="button" onclick="edit()">&nbsp;编&nbsp;辑&nbsp;</button>
-  <button class="easyui-linkbutton" type="button" onclick="userPass()">&nbsp;修&nbsp;改&nbsp;密&nbsp;码&nbsp;</button>
-  <button class="easyui-linkbutton" type="button" onclick="userRole()">&nbsp;绑&nbsp;定&nbsp;角&nbsp;色&nbsp;</button>
+  <button class="easyui-linkbutton" type="button" onclick="query()" id="queryBt">&nbsp;查 &nbsp;询&nbsp;</button> <br>
+  <button class="easyui-linkbutton" type="button" onclick="edit()" id="editBt">&nbsp;编&nbsp;辑&nbsp;</button>
+  <button class="easyui-linkbutton" type="button" onclick="userPass()" id="userPassBt">&nbsp;修&nbsp;改&nbsp;密&nbsp;码&nbsp;</button>
+  <button class="easyui-linkbutton" type="button" onclick="userRole()" id="userRoleBt" >&nbsp;绑&nbsp;定&nbsp;角&nbsp;色&nbsp;</button>
   </div>
   
     <table id="mytb" toolbar="#searchPanel">

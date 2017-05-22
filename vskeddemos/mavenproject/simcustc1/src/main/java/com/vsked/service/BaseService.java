@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -12,6 +14,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.vsked.common.Page;
 
 @Service
@@ -83,6 +86,15 @@ public class BaseService {
 	public Map<String, Object> getCurrentUser(){
 		Subject currentUser = SecurityUtils.getSubject();
 		return (Map<String, Object>) currentUser.getPrincipal();
+	}
+	
+	/**
+	 * 获取当前用户编号
+	 * @return
+	 */
+	public String getCurrentUserId(){
+		Map<String, Object> userMap=getCurrentUser();
+		return (String) userMap.get("SUID");
 	}
 	
 

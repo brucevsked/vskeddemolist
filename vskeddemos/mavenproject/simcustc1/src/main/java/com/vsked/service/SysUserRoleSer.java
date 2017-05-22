@@ -84,8 +84,7 @@ public class SysUserRoleSer extends BaseService {
 	public boolean isPermitted(Map<String, Object> parMap){
 		boolean flag=false;
 		try{
-			List<Map<String, Object>> dataList=sysUserRoleDao.isPermitted(parMap);
-			if(dataList.size()>0){
+			if(sysUserRoleDao.isPermitted(parMap)>0){
 				flag=true;
 			}
 		}catch(Exception e){
