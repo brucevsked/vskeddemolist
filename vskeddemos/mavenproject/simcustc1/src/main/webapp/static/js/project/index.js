@@ -342,3 +342,31 @@ function organizeAddPage(){
 	loadPage('organizeAddPage');
 }
 
+/**
+ * 字典类型列表页
+ */
+function dictionaryTypeListPage(){
+	loadPage('dictionaryTypeListPage');
+}
+
+/**
+ * 字典类型添加页
+ */
+function dictionaryTypeAddPage(){
+	loadPage('dictionaryTypeAddPage');
+}
+
+/**
+ * 字典列表页
+ */
+function dictionaryListPage(){
+	loadPage('dictionaryListPage');
+}
+
+/**
+ * 字典添加页
+ */
+function dictionaryAddPage(){
+	loadPage('dictionaryAddPage');
+}
+

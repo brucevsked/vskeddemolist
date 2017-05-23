@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vsked.dao.SysDictionaryTypeDao">
+
+	<select id="getSysDictionaryTypeBySdtId" resultType="java.util.Map">
+		select * from sysDictionaryTypeT where sdtId=#{sdtId}
+	</select>
+	
+	<select id="getSysDictionaryTypeCount" resultType="java.lang.Integer">
+		select count(0) from sysDictionaryTypeT 
+		<include refid="myWhere" />
+	</select>
+	
+	<select id="getSysDictionaryTypeList" resultType="java.util.Map">
+		select * from sysDictionaryTypeT 
+		<include refid="myWhere" />
+		ORDER BY sdtAddTime desc
+	</select>
+	
+	<insert id="sysDictionaryTypeAdd" >
+	  <selectKey keyProperty="myuuid" resultType="String" order="BEFORE">select rawtohex(sys_guid()) as "myuuid" from dual</selectKey> 
+	  insert into sysDictionaryTypeT(sdtId,sdtName) VALUES(#{myuuid,jdbcType=NVARCHAR},#{sdtName,jdbcType=NVARCHAR})
+	</insert>
+	
+	<update id="sysDictionaryTypeEdit">
+	  update sysDictionaryTypeT set sdtName=#{sdtName,jdbcType=NVARCHAR} where sdtId=#{sdtId,jdbcType=NVARCHAR}
+	</update>
+	
+	<sql id="myWhere">
+		<where>
+			<if test="sdtName !=null and sdtName != '' ">
+				and sdtName like  '%'||#{sdtName,jdbcType=NVARCHAR}||'%' 
+			</if>
+		</where>
+	</sql>
+
+</mapper>
