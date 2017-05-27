@@ -96,7 +96,12 @@ public class Page {
 	}
 	
 	public String getOraclePage(String inSql){
-		return "select * from ("+inSql+")  tmpPageT where RN between "+(getEndNum()-getPagesize()+1)+" and "+(getEndNum());
+		sql="";
+		sql+="select vskedpn2s.* from (SELECT vskedpn1s.*,ROWNUM vskedpn1sRN FROM (";
+		sql+=inSql;
+		sql+=") vskedpn1s ) vskedpn2s WHERE vskedpn1sRN between  ";
+		sql+=(getEndNum()-getPageSize()+1)+" and "+(getEndNum());
+		return sql;
 	}
 	
 	/**
