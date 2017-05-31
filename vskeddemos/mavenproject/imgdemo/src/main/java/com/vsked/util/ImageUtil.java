@@ -5,9 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import org.apache.log4j.Logger;
-
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -73,6 +71,33 @@ public class ImageUtil {
 			return imgStr.substring(imgStr.indexOf(",")+1,imgStr.length());
 		}
 		return imgStr;
+	}
+	
+	/**
+	 * 提取出base64图片格式data:image/png;base64
+	 * @param imgStr
+	 * @return 返回base64编码中图片格式如果没有将返回jpg
+	 */
+	public static String getBase64ImageType(String imgStr){
+		int c1=imgStr.indexOf("/");
+		int c2=imgStr.indexOf(";");
+		if(c1>0 && c2>0){
+			return imgStr.substring(c1+1,c2);
+		}
+		return "jpg";
+	}
+	
+	/**
+	 * 获取文件中文件格式
+	 * @param fileName
+	 * @return 有时将返回图片格式。没有时返回jpg
+	 */
+	public static String getFileImageType(String fileName){
+		int c1=fileName.lastIndexOf(".");
+		if(c1>0){
+			return fileName.substring(c1+1);
+		}
+		return "jpg";
 	}
 
 }
