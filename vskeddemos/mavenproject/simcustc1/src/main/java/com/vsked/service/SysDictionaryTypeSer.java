@@ -88,7 +88,7 @@ public class SysDictionaryTypeSer extends BaseService{
 			if(effectLine<=0){
 				result="字典类型添加失败。";
 			}else{
-				result="字典类型:"+data.get("srName")+"添加成功.";
+				result="字典类型:"+data.get("sdtName")+"添加成功.";
 			}
 		}catch(Exception e){
 			log.error(e.getMessage());
@@ -105,7 +105,7 @@ public class SysDictionaryTypeSer extends BaseService{
 			if(effectLine<=0){
 				result="字典类型修改失败。";
 			}else{
-				result="字典类型:"+data.get("srName")+"修改成功.";
+				result="字典类型:"+data.get("sdtName")+"修改成功.";
 			}
 		}catch(Exception e){
 			log.error(e.getMessage());

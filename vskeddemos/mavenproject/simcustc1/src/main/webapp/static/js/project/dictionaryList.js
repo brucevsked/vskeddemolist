@@ -1,14 +1,14 @@
 
 $(function(){
 	$('#mytb').datagrid({
-		title:'字典类型列表',
+		title:'字典列表',
         height: 'auto',
         fitColumns:true,
         nowrap: true, 
         striped: true,
         border: true, 
-        url:basePath+'dictionaryTypeListData',
-        idField:'SDTID', 
+        url:basePath+'dictionaryListData',
+        idField:'SDID', 
         singleSelect:true,//是否单选 
         pagination:true,//分页控件 
         rownumbers:true //行号 
@@ -26,21 +26,25 @@ $(function(){
     
 	$.parser.parse();//重新加载样式
 	
-    $('#sdtName').textbox('textbox').focus(); 
+    $('#sdName').textbox('textbox').focus(); 
     
 });
 
 function query(){
+	var sdName=$('#sdName').val();
+	var sdValue=$('#sdValue').val();
 	var sdtName=$('#sdtName').val();
 	$('#mytb').datagrid('load',{
-		sdtName: sdtName		
+		sdName: sdName,
+		sdValue: sdValue,
+		sdtName:sdtName
 	});
 }
 
 function edit(){
 	var row = $('#mytb').datagrid('getSelected');
 	if (row){
-		loadPage('dictionaryTypeEditPage?sdtId='+row.SDTID);
+		loadPage('dictionaryEditPage?sdId='+row.SDID);
 	}else{
 		toastr.info('请选择行', '提示');
 	}
