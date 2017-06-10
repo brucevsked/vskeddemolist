@@ -9,21 +9,20 @@ request.setAttribute("basePath", basePath);
   <head>
     <base href="${basePath }">
     
-    <title>flowplayerdemo </title>
+    <title>flowplayerdemo 1</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   </head>
   
   <body>
 <div>
-<a href="${basePath }index1.jsp">use this</a><br>
    <video controls width="624" height="260" id="myVideo1">
 <source type="video/mp4" src="${basePath }videolist/test1.mp4">
    </video>
 </div>
 <div id="curTime" onclick="ts();"></div>
     <script src="${basePath }js/flowplayer/deps/jquery.min.js"></script>
-    <script src="${basePath }js/flowplayer/lib/flowplayer.js"></script>
+    <script src="${basePath }js/flowplayer/flowplayer.min.js"></script>
     <script>
     function ts(){
     	console.log(document.getElementById('myVideo1').currentTime)
