@@ -35,7 +35,7 @@ request.setAttribute("basePath", basePath);
      <input class="easyui-textbox" type="text" name="soSort" id="soSort" value="${data.SOSORT }"  label="排序:"  style="width:30%" />
 </div>
 <div style="margin-bottom:20px;margin-left:15%">
-    <button type="button" class="easyui-linkbutton" onclick="submitForm();">修改</button> 
+    <button type="button" class="easyui-linkbutton" onclick="submitForm();" id="editBt">修改</button> 
     <button type="reset" class="easyui-linkbutton">重写</button> 
 </div>
 		</form>

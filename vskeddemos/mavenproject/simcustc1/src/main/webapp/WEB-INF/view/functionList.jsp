@@ -19,8 +19,8 @@ request.setAttribute("basePath", basePath);
   <div id="searchPanel" class="easyui-panel">
   <input id="sfValue" name="sfValue" class="easyui-textbox" label="功能地址:" style="width: 18%">
   <input id="spNick" name="spNick" class="easyui-textbox" label="权限中文名:" style="width: 18%">
-  <button class="easyui-linkbutton" type="button" onclick="query()">&nbsp;查 &nbsp;询&nbsp;</button> <br>
-  <button class="easyui-linkbutton" type="button" onclick="edit()">&nbsp;编&nbsp;辑&nbsp;</button>
+  <button class="easyui-linkbutton" type="button" onclick="query()" id="queryBt">&nbsp;查 &nbsp;询&nbsp;</button> <br>
+  <button class="easyui-linkbutton" type="button" onclick="edit()" id="editBt">&nbsp;编&nbsp;辑&nbsp;</button>
   </div>
   
     <table id="mytb" toolbar="#searchPanel">

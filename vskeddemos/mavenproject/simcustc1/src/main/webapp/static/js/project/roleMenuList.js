@@ -3,6 +3,7 @@ $(function(){
 	initNoSysRoleList();
 	initHasSysRoleList();
 	$.parser.parse();//重新加载样式
+	initPagePermission(); //权限初始化
 });
 
 function initNoSysRoleList(){
@@ -48,4 +49,11 @@ function submitForm(){
 		    	userMenu();//重新加载菜单
 		    	}
 		    );
+}
+
+/**
+ * 初始化权限,将没权限的按钮移除
+ */
+function initPagePermission(){
+	isExistPermission('roleMenuProc:post','saveBt');
 }

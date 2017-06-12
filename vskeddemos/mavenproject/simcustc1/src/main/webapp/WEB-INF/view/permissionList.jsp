@@ -19,9 +19,9 @@ request.setAttribute("basePath", basePath);
   <div id="searchPanel" class="easyui-panel">
   <input id="spName" name="spName" class="easyui-textbox" label="权限表达式:" style="width: 18%">
   <input id="spNick" name="spNick" class="easyui-textbox" label="权限中文名:" style="width: 18%">
-  <button class="easyui-linkbutton" type="button" onclick="query()">&nbsp;查 &nbsp;询&nbsp;</button> <br>
-  <button class="easyui-linkbutton" type="button" onclick="edit()">&nbsp;编&nbsp;辑&nbsp;</button>
-  <button class="easyui-linkbutton" type="button" onclick="rolePermission()">&nbsp;绑&nbsp;定&nbsp;角&nbsp;色&nbsp;</button>
+  <button class="easyui-linkbutton" type="button" onclick="query()" id="queryBt" >&nbsp;查 &nbsp;询&nbsp;</button> <br>
+  <button class="easyui-linkbutton" type="button" onclick="edit()" id="editBt">&nbsp;编&nbsp;辑&nbsp;</button>
+  <button class="easyui-linkbutton" type="button" onclick="rolePermission()" id="rolePermissionBt">&nbsp;绑&nbsp;定&nbsp;角&nbsp;色&nbsp;</button>
   </div>
   
     <table id="mytb" toolbar="#searchPanel">

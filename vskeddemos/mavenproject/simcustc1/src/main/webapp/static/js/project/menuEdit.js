@@ -7,6 +7,7 @@ $(function(){
 	    value:$('#paremtSmIdOld').val() //设置combobox默认选中值
 	});
     $.parser.parse();//重新加载样式
+	initPagePermission(); //权限初始化
     $('#smName').textbox('textbox').focus(); 
 });
 
@@ -38,4 +39,11 @@ function submitForm(){
 		    	toastr.info(dt, '修改结果');
 		    	}
 		    );
+}
+
+/**
+ * 初始化权限,将没权限的按钮移除
+ */
+function initPagePermission(){
+	isExistPermission('menuEditProc:post','editBt');
 }

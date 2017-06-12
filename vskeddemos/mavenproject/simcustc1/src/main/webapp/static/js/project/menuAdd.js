@@ -6,7 +6,8 @@ $('#parentSmId').combobox({
 	    textField:'SMNAME'
 });
     $.parser.parse();//重新加载样式
-    $('#smName').textbox('smName').focus(); 
+	initPagePermission(); //权限初始化
+    $('#smName').textbox('textbox').focus(); 
 });
 
 function submitForm(){
@@ -35,4 +36,11 @@ function submitForm(){
 		    	toastr.info(dt, '添加结果');
 		    	}
 		    );
+}
+
+/**
+ * 初始化权限,将没权限的按钮移除
+ */
+function initPagePermission(){
+	isExistPermission('menuAddProc:post','addBt');
 }

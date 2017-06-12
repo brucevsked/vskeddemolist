@@ -46,7 +46,7 @@ request.setAttribute("basePath", basePath);
 <tr>
 <td colspan="3" align="center">
 <br>
-    <button type="button" class="easyui-linkbutton" onclick="submitForm();">保存</button> 
+    <button type="button" class="easyui-linkbutton" onclick="submitForm();" id="saveBt">保存</button> 
     <button type="reset" class="easyui-linkbutton">重置</button>
  </td>  
 </table>

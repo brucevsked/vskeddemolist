@@ -24,7 +24,7 @@ request.setAttribute("basePath", basePath);
      <input class="easyui-textbox" type="text" name="sdtName" id="sdtName" value="${data.SDTNAME }" label="字典类型名:" data-options="required:true,missingMessage:'请输入字典类型名'" style="width:30%" />
 			</div>
 <div style="margin-bottom:20px;margin-left:15%">
-    <button type="button" class="easyui-linkbutton" onclick="submitForm();">修改</button> 
+    <button type="button" class="easyui-linkbutton" onclick="submitForm();" id="editBt">修改</button> 
     <button type="reset" class="easyui-linkbutton">重写</button> 
 </div>
 		</form>

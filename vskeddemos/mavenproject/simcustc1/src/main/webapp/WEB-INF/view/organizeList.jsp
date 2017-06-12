@@ -20,8 +20,8 @@ request.setAttribute("basePath", basePath);
   <input id="soName" name="soName" class="easyui-textbox" label="组织名称:" style="width: 18%">
   <input id="soCode" name="soCode" class="easyui-textbox" label="代码:" style="width: 18%">
   <input id="soName1" name="soName1" class="easyui-textbox" label="上级组织:" style="width: 18%">
-  <button class="easyui-linkbutton" type="button" onclick="query()">&nbsp;查 &nbsp;询&nbsp;</button> <br>
-  <button class="easyui-linkbutton" type="button" onclick="edit()">&nbsp;编&nbsp;辑&nbsp;</button>
+  <button class="easyui-linkbutton" type="button" onclick="query()" id="queryBt">&nbsp;查 &nbsp;询&nbsp;</button> <br>
+  <button class="easyui-linkbutton" type="button" onclick="edit()" id="editBt">&nbsp;编&nbsp;辑&nbsp;</button>
   </div>
   
     <table id="mytb" toolbar="#searchPanel">

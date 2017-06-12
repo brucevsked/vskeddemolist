@@ -8,6 +8,7 @@ $(function(){
 });
     $.parser.parse();//重新加载样式
 	$('#parentSoId').combotree('setValues',$('#paremtSoIdOld').val());
+	initPagePermission(); //权限初始化
     $('#soName').textbox('textbox').focus();
 });
 
@@ -39,4 +40,11 @@ function submitForm(){
 
 function emptyParentSoId(){
 	$('#parentSoId').combotree('setValues','');
+}
+
+/**
+ * 初始化权限,将没权限的按钮移除
+ */
+function initPagePermission(){
+	isExistPermission('organizeEditProc:post','editBt');
 }

@@ -33,7 +33,7 @@ request.setAttribute("basePath", basePath);
 <input type="radio" id="sfType2" name="sfType" value="cusperm" ${data.SFTYPE=="cusperm"?" checked ":"" } >按角色拦截
 </div>
 <div style="margin-bottom:20px;margin-left:15%">
-    <button type="button" class="easyui-linkbutton" onclick="submitForm();">修改</button> 
+    <button type="button" class="easyui-linkbutton" onclick="submitForm();" id="editBt">修改</button> 
     <button type="reset" class="easyui-linkbutton">重写</button> 
 </div>
 		</form>

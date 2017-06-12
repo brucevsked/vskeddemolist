@@ -23,7 +23,7 @@ request.setAttribute("basePath", basePath);
      <input class="easyui-textbox" type="text" name="srName" id="srName" label="角色名:" data-options="required:true,missingMessage:'请输入角色名'" style="width:30%" />
 </div>
 <div style="margin-bottom:20px;margin-left:15%">
-    <button type="button" class="easyui-linkbutton" onclick="submitForm();">增加</button> 
+    <button type="button" class="easyui-linkbutton" onclick="submitForm();" id="addBt">增加</button> 
     <button type="reset" class="easyui-linkbutton">重写</button> 
 </div>
 		</form>
