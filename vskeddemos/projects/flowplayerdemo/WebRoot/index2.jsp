@@ -18,7 +18,8 @@ request.setAttribute("basePath", basePath);
 <div>
    <video controls width="624" height="260" id="myVideo1">
 <source type="video/mp4" src="${basePath }videolist/test1.mp4">
-   </video>
+   </video><br>
+   <progress value="0" max="100" id="procBar"></progress>
    <button type="button" id="myBt1" onclick="s2()">play</button>
 </div>
 <div id="curTime" onclick="ts();"></div>
@@ -31,12 +32,20 @@ request.setAttribute("basePath", basePath);
     }
     ts();
     function s1(){
+    	var myVideo1=document.getElementById('myVideo1');
     	console.log(881)
-    	document.getElementById('myVideo1').controls=false;
-    	document.getElementById('myVideo1').onended = function() {
+    	myVideo1.controls=false;
+    	myVideo1.onended = function() {
     		document.getElementById('myBt1').innerHTML="play";
     	};
-    	console.log(882)
+    	//console.log(myVideo1.currentTime);//当前时长
+    	  $("#myVideo1").on(
+    			    "timeupdate", 
+    			    function(event){
+    			    	console.log('当前时长:'+this.currentTime+'|总时长:'+this.duration);//总时长
+    			    	$("#procBar").attr('max',this.duration);
+    			    	$("#procBar").attr('value',this.currentTime);
+    			    });
     }
     s1();
     function s2(){
