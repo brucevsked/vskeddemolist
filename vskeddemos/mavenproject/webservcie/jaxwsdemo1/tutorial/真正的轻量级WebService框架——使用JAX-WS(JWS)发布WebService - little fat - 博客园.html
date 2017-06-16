@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://www.cnblogs.com/coprince/p/5732822.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/bundle-sea.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/bundle-sea-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/coprince/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/coprince/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/coprince/wlwmanifest.xml">
+<script async="" src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/encoder.js.下载"></script><script src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/jquery.js.下载" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'coprince', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="header">
+	
+<!--done-->
+<div class="header">
+	<div class="headerText">
+		<a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/coprince/">little fat</a><br>
+		
+	</div>
+</div>
+
+</div>
+
+<div id="mytopmenu">
+	
+		<div id="mylinks"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a> &nbsp;
+<a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/coprince/">首页</a> &nbsp;
+<a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a> &nbsp;
+<a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/little%20fat">联系</a> &nbsp;
+<a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/coprince/rss">订阅</a><a id="blog_nav_rss_image" href="http://www.cnblogs.com/coprince/rss"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/xml.gif" alt="订阅"></a>&nbsp;
+<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a>
+</div>
+		<div id="mystats"><div id="blog_stats">
+随笔-117&nbsp;
+评论-6&nbsp;
+文章-0&nbsp;
+<!--trackbacks-0-->
+</div></div>
+	
+</div>
+<div id="centercontent">
+	
+<div id="post_detail">
+<div class="post">
+	<h1 class="postTitle"><a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/coprince/p/5732822.html">真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService</a></h1>
+	<div id="cnblogs_post_body"><p>WebService历来都很受重视，特别是Java阵营，WebService框架和技术层出不穷。知名的XFile(新的如CXF)、Axis1、Axis2等。</p>
+<p>　　而Sun公司也不甘落后，从早期的JAX-RPC到现在成熟的、支持RPC调用与消息传递的JAX-WS都经过了市场的考验，十分成熟，而且使用JAX-WS开发WebService的收益是很大的，它是轻量级的。</p>
+<p>　　</p>
+<p>　　我们使用JAX-WS开发WebService只需要很简单的几个步骤：写接口和实现=&gt;发布=&gt;生成客户端(测试或使用)。</p>
+<p>　　而在开发阶段我们也不需要导入外部jar包，因为这些api都是现成的。首先是接口的编写(接口中只需要把类注明为@WebService，把 要暴露给客户端的方法注明为@WebMethod即可，其余如@WebResult、@WebParam等都不是必要的，而客户端和服务端的通信用RPC 和Message-Oriented两种，区别和配置以后再说)：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> service;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Date;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.jws.WebMethod;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.jws.WebParam;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.jws.WebResult;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.jws.WebService;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.jws.soap.SOAPBinding;
+
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+ * 作为测试的WebService接口
+ * 
+ * </span><span style="color: #808080;">@author</span><span style="color: #008000;"> Johness
+ * 
+ </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+@WebService
+@SOAPBinding(style </span>=<span style="color: #000000;"> SOAPBinding.Style.RPC)
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> SayHiService {
+
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 执行测试的WebService方法
+     </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    @WebMethod
+    </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> SayHiDefault();
+
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 执行测试的WebService方法(有参)
+     * 
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> name
+     </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    @WebMethod
+    </span><span style="color: #0000ff;">void</span> SayHi(@WebParam(name = "name"<span style="color: #000000;">) String name);
+
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 执行测试的WebService方法(用于时间校验)
+     * 
+     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> clentTime 客户端时间
+     * </span><span style="color: #808080;">@return</span><span style="color: #008000;"> 0表示时间校验失败 1表示校验成功
+     </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    @WebMethod
+    @WebResult(name </span>= "valid"<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">int</span> CheckTime(@WebParam(name = "clientTime"<span style="color: #000000;">) Date clientTime);
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>然后是实现类(注解@WebService及其endpointInterface属性是必要的)：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> service.imp;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.text.SimpleDateFormat;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Date;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.jws.WebService;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.jws.soap.SOAPBinding;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> service.SayHiService;
+
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+ * 作为测试的WebService实现类
+ * 
+ * </span><span style="color: #808080;">@author</span><span style="color: #008000;"> Johness
+ * 
+ </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+@WebService(endpointInterface </span>= "service.SayHiService"<span style="color: #000000;">)
+@SOAPBinding(style </span>=<span style="color: #000000;"> SOAPBinding.Style.RPC)
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> SayHiServiceImp <span style="color: #0000ff;">implements</span><span style="color: #000000;"> SayHiService {
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> SayHiDefault() {
+        System.out.println(</span>"Hi, Johness!"<span style="color: #000000;">);
+    }
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> SayHi(String name) {
+        System.out.println(</span>"Hi, " + name + "!"<span style="color: #000000;">);
+    }
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> CheckTime(Date clientTime) {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 精确到秒</span>
+        String dateServer = <span style="color: #0000ff;">new</span><span style="color: #000000;"> java.sql.Date(System.currentTimeMillis())
+                .toString()
+                </span>+ " "
+                + <span style="color: #0000ff;">new</span><span style="color: #000000;"> java.sql.Time(System.currentTimeMillis());
+        String dateClient </span>= <span style="color: #0000ff;">new</span> SimpleDateFormat("yyyy-MM-dd HH:mm:ss"<span style="color: #000000;">)
+                .format(clientTime);
+        </span><span style="color: #0000ff;">return</span> dateServer.equals(dateClient) ? 1 : 0<span style="color: #000000;">;
+    }
+
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>然后是发布(一般有两种方式)：</p>
+<p>　　方式一(此方式只能作为调试，有以下bug：</p>
+<p>　　　　jdk1.6u17?以下编译器不支持以Endpoint.publish方式发布document方式的soap，必须在service接口和实现类添加“@SOAPBinding(style = SOAPBinding.Style.RPC)”注解；</p>
+<p>　　　　访问受限，似乎只能本机访问(应该会绑定到publish的URL上，如下使用localhost的话就只能本机访问)……)：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> mian;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.xml.ws.Endpoint;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> service.imp.SayHiServiceImp;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Main {
+
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 发布WebService
+     * 简单
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+        Endpoint.publish(</span>"http://localhost:8080/testjws/service/sayHi", <span style="color: #0000ff;">new</span><span style="color: #000000;"> SayHiServiceImp());
+    }
+
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>方式二(基于web服务器Servlet方式)：</p>
+<p>　　以Tomcat为例，首先编写sun-jaxws.xml文件并放到WEB-INF下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">endpoints </span><span style="color: #ff0000;">xmlns</span><span style="color: #0000ff;">="http://java.sun.com/xml/ns/jax-ws/ri/runtime"</span><span style="color: #ff0000;">
+    version</span><span style="color: #0000ff;">="2.0"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">endpoint </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="SayHiService"</span><span style="color: #ff0000;">
+        implementation</span><span style="color: #0000ff;">="service.imp.SayHiServiceImpl"</span><span style="color: #ff0000;">
+        url-pattern</span><span style="color: #0000ff;">="/service/sayHi"</span> <span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">endpoints</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>然后改动web.xml，添加listener和servlet(url-pattern要相同哦)：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">web-app </span><span style="color: #ff0000;">xmlns:xsi</span><span style="color: #0000ff;">="http://www.w3.org/2001/XMLSchema-instance"</span><span style="color: #ff0000;"> xmlns</span><span style="color: #0000ff;">="http://java.sun.com/xml/ns/javaee"</span><span style="color: #ff0000;"> xmlns:web</span><span style="color: #0000ff;">="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span><span style="color: #ff0000;"> xsi:schemaLocation</span><span style="color: #0000ff;">="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span><span style="color: #ff0000;"> version</span><span style="color: #0000ff;">="2.5"</span><span style="color: #0000ff;">&gt;</span>
+    
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">listener</span><span style="color: #0000ff;">&gt;</span>  
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">listener-class</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+            com.sun.xml.ws.transport.http.servlet.WSServletContextListener  
+        </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">listener-class</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">listener</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">servlet</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">servlet-name</span><span style="color: #0000ff;">&gt;</span>SayHiService<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">servlet-name</span><span style="color: #0000ff;">&gt;</span>  
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">servlet-class</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+            com.sun.xml.ws.transport.http.servlet.WSServlet  
+        </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">servlet-class</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">servlet</span><span style="color: #0000ff;">&gt;</span>  
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">servlet-mapping</span><span style="color: #0000ff;">&gt;</span>  
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">servlet-name</span><span style="color: #0000ff;">&gt;</span>SayHiService<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">servlet-name</span><span style="color: #0000ff;">&gt;</span>  
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">url-pattern</span><span style="color: #0000ff;">&gt;</span>/service/sayHi<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">url-pattern</span><span style="color: #0000ff;">&gt;</span>  
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">servlet-mapping</span><span style="color: #0000ff;">&gt;</span>
+    
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">welcome-file-list</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">welcome-file</span><span style="color: #0000ff;">&gt;</span>index.html<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">welcome-file</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">welcome-file</span><span style="color: #0000ff;">&gt;</span>index.htm<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">welcome-file</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">welcome-file</span><span style="color: #0000ff;">&gt;</span>index.jsp<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">welcome-file</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">welcome-file-list</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">web-app</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>最后部署到Tomcat里，值得一提的是您可能需要添加以下jar包(因为Tomcat没有)：</p>
+<p>　　　　　　　　　　　　<img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/19110951-1138cabc1dc2422fbba31fe7d21534b6.x-png" alt=""></p>
+<p>　　启动Tomcat。</p>
+<p>　　</p>
+<p>　　服务端工作就完成了，注意两个事情。</p>
+<p>　　注意：项目需要使用UTF-8编码(至少sun-jaxws.xml必须是UTF-8格式的)；</p>
+<p>　　　　对于MyEclipse的内置Tomcat，可能会出现不需要手动添加上述jar包，但独立部署时应该添加，因为它们使用的class-path不一样；</p>
+<p>　　　　多个不同路径的接口也要使用同一个WSServlet；</p>
+<p>　　　　最好加上@SOAPBinding(style = SOAPBinding.Style.RPC)注解。</p>
+<p>　　部署好了之后打开浏览器输入网址：<a href="http://localhost/sayhi/service/sayHi?wsdl">http://localhost:8080/testjws/service/sayHi?wsdl</a>。可以看到东西就证明发布成功了。</p>
+<p>　　附上项目树状图：</p>
+<p>　　<img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/072347221751651.png" alt=""></p>
+<p>　　最后是客户端使用，由于WebService是平台和语言无关的基于xml的，所以我们完全可以使用不同语言来编写或生成客户端。</p>
+<p>　　一般有三种方式来使用(对于Java语言而言)：</p>
+<p>　　　　一，使用jdk自带工具wsimport生成客户端：</p>
+<p>　　<img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/080005315348111.png" alt=""></p>
+<p>　　jdk自带的wsimport工具生成，上图我是把客户端文件生成到了桌面src文件中(-d)，并保留了源文件(-keep)，指定了包名(-p)。</p>
+<p>&nbsp;</p>
+<p>　　然后我们就可以使用生成的文件来调用服务器暴露的方法了：</p>
+<p>　　　　　　　　　　　　<img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/080010160036372.png" alt=""></p>
+<p>　　　　值得一提的是你生成使用的jdk和你客户端的jre需要配套！</p>
+<p>　　从上面的目录结构我们可以发现：服务端的每个webmethod都被单独解析成为了一个类(如果使用了实体，实体也会被解析到客户端，并且是源码，所以建议使用实体时慎重)。</p>
+<p>　　<img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/19115041-6b1a8da1933b49eb80310802cbfd5718.x-png" alt=""></p>
+<p>　　（上面的图是旧图，只是为了表示一下jaxws是为每个webmethod生成类的情况）</p>
+<p>　　而我们的service则被生成了一个代理类来调用服务，接下来我们看看使用情况：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> test;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Date;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.GregorianCalendar;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.xml.datatype.DatatypeConfigurationException;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.xml.datatype.DatatypeFactory;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.xml.datatype.XMLGregorianCalendar;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> testjws.client.SayHiService;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> testjws.client.SayHiServiceImpService;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Main {
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> DatatypeConfigurationException {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 获取service</span>
+        SayHiService service = <span style="color: #0000ff;">new</span><span style="color: #000000;"> SayHiServiceImpService().getSayHiServiceImpPort();
+        
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> sayhi</span>
+<span style="color: #000000;">        service.sayHiDefault();
+        service.sayHi(</span>"Ahe"<span style="color: #000000;">);
+        
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> checktime
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 这里主要说一下时间日期的xml传递，方法还略显复杂</span>
+        GregorianCalendar calender = <span style="color: #0000ff;">new</span><span style="color: #000000;"> GregorianCalendar();
+        calender.setTime(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Date(System.currentTimeMillis()));
+        XMLGregorianCalendar xmldate </span>=<span style="color: #000000;"> DatatypeFactory.newInstance().newXMLGregorianCalendar(calender);
+        System.out.println(service.checkTime(xmldate));
+
+    }
+
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>看看服务器的输出，我们是否调用成功：</p>
+<p>　　<img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/080015536433520.png" alt=""></p>
+<p>　　　　</p>
+<p>　　　　成功了！</p>
+<p>　　　　对于校验时间的方法客户端也收到反馈了：</p>
+<p>　　　　　　　　<img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/080016076759567.png" alt=""></p>
+<p>　　　　二，使用诸如MyEclipse（Eclipse for Jave EE也可以）创建一个Web Service Client的项目</p>
+<p>　　　　　　　　<img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/080019163782585.png" alt=""></p>
+<p>　　　　然后填入wsdl地址即可，后续步骤我就不贴出了。</p>
+<p>　　　　三，自己写代码-_-，其实这个方法不得不说是最好的。</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(5732822,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;2f89d202-67d9-e211-8d02-90b11c0b17d6&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/coprince/" target="_blank"><img src="./真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService - little fat - 博客园_files/20130624151025.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/coprince/">little fat</a><br>
+            <a href="http://home.cnblogs.com/u/coprince/followees">关注 - 0</a><br>
+            <a href="http://home.cnblogs.com/u/coprince/followers">粉丝 - 6</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;2f89d202-67d9-e211-8d02-90b11c0b17d6&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(5732822,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(5732822,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/coprince/p/5719246.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/coprince/p/5719246.html" title="发布于2016-07-29 17:41">Tomcat发布项目时，浏览器地址栏图标的问题</a><br><a href="http://www.cnblogs.com/coprince/p/5752153.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/coprince/p/5752153.html" title="发布于2016-08-09 10:38">浅谈——页面静态化</a><br></div>
+</div>
+
+
+	<div class="postDesc">posted on <span id="post-date">2016-08-03 14:36</span> <a href="http://www.cnblogs.com/coprince/">little fat</a> 阅读(<span id="post_view_count">4322</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=5732822" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/coprince/p/5732822.html#" onclick="AddToWz(5732822);return false;">收藏</a></div>
+</div>
+<script type="text/javascript">var allowComments=true,cb_blogId=154990,cb_entryId=5732822,cb_blogApp=currentBlogApp,cb_blogUserGuid='2f89d202-67d9-e211-8d02-90b11c0b17d6',cb_entryCreatedDate='2016/8/3 14:36:00';loadViewCount(cb_entryId);</script>
+
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/coprince/p/5732822.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/coprince/p/5732822.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/571757/" target="_blank">只有18%中国大学生对跨国公司感兴趣 理工科最想去华为腾讯</a><br> ·  <a href="http://news.cnblogs.com/n/571735/" target="_blank">乐视手机轰然倒下！售后维修停摆</a><br> ·  <a href="http://news.cnblogs.com/n/571750/" target="_blank">Facebook训练机器人讨价还价 教它们与人类谈判</a><br> ·  <a href="http://news.cnblogs.com/n/571755/" target="_blank">华为的全面屏手机最快八月发布 看起来很“黑科技”</a><br> ·  <a href="http://news.cnblogs.com/n/571754/" target="_blank">摩的司机自白：我恨不得把共享单车都扔沟里去</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/570194/" target="_blank">小printf的故事：什么是真正的程序员？</a><br> ·  <a href="http://kb.cnblogs.com/page/569992/" target="_blank">程序员的工作、学习与绩效</a><br> ·  <a href="http://kb.cnblogs.com/page/569056/" target="_blank">软件开发为什么很难</a><br> ·  <a href="http://kb.cnblogs.com/page/565901/" target="_blank">唱吧DevOps的落地，微服务CI/CD的范本技术解读</a><br> ·  <a href="http://kb.cnblogs.com/page/566523/" target="_blank">程序员，如何从平庸走向理想？</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div id="leftcontent">
+	
+		<div id="leftcontentcontainer">
+			
+<!--done-->
+<div class="newsItem">
+	<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/coprince/">little fat</a><br>园龄：<a href="http://home.cnblogs.com/u/coprince/" title="入园时间：2013-06-20">3年11个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/coprince/followers/">6</a><br>关注：<a href="http://home.cnblogs.com/u/coprince/followees/">0</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;2f89d202-67d9-e211-8d02-90b11c0b17d6&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar"><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/05/01&#39;);return false;">&lt;</a></td><td align="center">2017年6月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/07/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td class="CalWeekendDay" align="center">3</td></tr><tr><td class="CalWeekendDay" align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center">9</td><td class="CalWeekendDay" align="center">10</td></tr><tr><td class="CalWeekendDay" align="center">11</td><td align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center"><a href="http://www.cnblogs.com/coprince/archive/2017/06/15.html"><u>15</u></a></td><td class="CalTodayDay" align="center"><a href="http://www.cnblogs.com/coprince/archive/2017/06/16.html"><u>16</u></a></td><td class="CalWeekendDay" align="center">17</td></tr><tr><td class="CalWeekendDay" align="center">18</td><td align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td class="CalWeekendDay" align="center">24</td></tr><tr><td class="CalWeekendDay" align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td align="center">30</td><td class="CalOtherMonthDay" align="center">1</td></tr><tr><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script><br>
+			<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/coprince/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/coprince/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/coprince/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/coprince/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/coprince/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+
+</div></div><div id="sidebar_toptags" class="sidebar-block"></div><div id="sidebar_categories">
+		<h3 class="catListTitle">随笔档案</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_0" class="listitem" href="http://www.cnblogs.com/coprince/archive/2017/06.html">2017年6月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_1" class="listitem" href="http://www.cnblogs.com/coprince/archive/2017/04.html">2017年4月 (9)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_2" class="listitem" href="http://www.cnblogs.com/coprince/archive/2017/03.html">2017年3月 (6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_3" class="listitem" href="http://www.cnblogs.com/coprince/archive/2017/02.html">2017年2月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_4" class="listitem" href="http://www.cnblogs.com/coprince/archive/2017/01.html">2017年1月 (7)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_5" class="listitem" href="http://www.cnblogs.com/coprince/archive/2016/12.html">2016年12月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_6" class="listitem" href="http://www.cnblogs.com/coprince/archive/2016/10.html">2016年10月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_7" class="listitem" href="http://www.cnblogs.com/coprince/archive/2016/09.html">2016年9月 (6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_8" class="listitem" href="http://www.cnblogs.com/coprince/archive/2016/08.html">2016年8月 (11)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_9" class="listitem" href="http://www.cnblogs.com/coprince/archive/2016/07.html">2016年7月 (9)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_10" class="listitem" href="http://www.cnblogs.com/coprince/archive/2016/06.html">2016年6月 (6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_11" class="listitem" href="http://www.cnblogs.com/coprince/archive/2016/05.html">2016年5月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_12" class="listitem" href="http://www.cnblogs.com/coprince/archive/2016/04.html">2016年4月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_13" class="listitem" href="http://www.cnblogs.com/coprince/archive/2016/03.html">2016年3月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_14" class="listitem" href="http://www.cnblogs.com/coprince/archive/2015/12.html">2015年12月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_15" class="listitem" href="http://www.cnblogs.com/coprince/archive/2015/11.html">2015年11月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_16" class="listitem" href="http://www.cnblogs.com/coprince/archive/2015/10.html">2015年10月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_17" class="listitem" href="http://www.cnblogs.com/coprince/archive/2015/06.html">2015年6月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_18" class="listitem" href="http://www.cnblogs.com/coprince/archive/2015/05.html">2015年5月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_19" class="listitem" href="http://www.cnblogs.com/coprince/archive/2015/04.html">2015年4月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_20" class="listitem" href="http://www.cnblogs.com/coprince/archive/2015/03.html">2015年3月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_21" class="listitem" href="http://www.cnblogs.com/coprince/archive/2015/01.html">2015年1月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_22" class="listitem" href="http://www.cnblogs.com/coprince/archive/2014/12.html">2014年12月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_23" class="listitem" href="http://www.cnblogs.com/coprince/archive/2014/11.html">2014年11月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_24" class="listitem" href="http://www.cnblogs.com/coprince/archive/2014/07.html">2014年7月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_25" class="listitem" href="http://www.cnblogs.com/coprince/archive/2014/06.html">2014年6月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_26" class="listitem" href="http://www.cnblogs.com/coprince/archive/2014/05.html">2014年5月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_27" class="listitem" href="http://www.cnblogs.com/coprince/archive/2014/04.html">2014年4月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_28" class="listitem" href="http://www.cnblogs.com/coprince/archive/2014/01.html">2014年1月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_29" class="listitem" href="http://www.cnblogs.com/coprince/archive/2013/12.html">2013年12月 (6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_30" class="listitem" href="http://www.cnblogs.com/coprince/archive/2013/11.html">2013年11月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_31" class="listitem" href="http://www.cnblogs.com/coprince/archive/2013/10.html">2013年10月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_32" class="listitem" href="http://www.cnblogs.com/coprince/archive/2013/09.html">2013年9月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_33" class="listitem" href="http://www.cnblogs.com/coprince/archive/2013/07.html">2013年7月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_34" class="listitem" href="http://www.cnblogs.com/coprince/archive/2013/06.html">2013年6月 (4)</a></li>
+			
+				</ul>
+			
+	
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<h3 class="catListTitle">最新评论</h3>
+<div class="RecentComment" id="RecentComments">
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/coprince/p/5757714.html#3702167">1. Re:公共POI导出Excel方法--java</a></li>
+        <li class="recent_comment_body">博主总结的非常详细完整。<br>我们项目用过一个叫pageoffice的插件，可以导入导出excel，生成excel后，可以直接在线查看excel。pageoffice的代码也比POI的代码简单。</li>
+        <li class="recent_comment_author">--qianxi</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/coprince/p/5848614.html#3644626">2. Re:Java锁 到底锁的是哪个对象？</a></li>
+        <li class="recent_comment_body">写的很好，顶一下</li>
+        <li class="recent_comment_author">--飞龙在天001</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/coprince/p/5702520.html#3644191">3. Re:WebService 超简单入门教程(Java)</a></li>
+        <li class="recent_comment_body">@只会拥抱你作者写错了，应该是：wsimport -s F:\\WorkBench\\Eclipse\\GiveMeWords\\src -p com.shu.service -keep :9001......</li>
+        <li class="recent_comment_author">--多动症</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/coprince/p/5045509.html#3621182">4. Re:java web session监听销毁跳转</a></li>
+        <li class="recent_comment_body">很有用，今天接触到了session的销毁，学习了</li>
+        <li class="recent_comment_author">--ERICALSR</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/coprince/p/5702520.html#3607672">5. Re:WebService 超简单入门教程(Java)</a></li>
+        <li class="recent_comment_body">CMD: after test order needs to append '?wsdl' , then test OK!</li>
+        <li class="recent_comment_author">--皎月时光</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<h3 class="catListTitle">阅读排行榜</h3>
+<div class="RecentComment" id="TopViewPosts"> 
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/coprince/p/5702520.html">1. WebService 超简单入门教程(Java)(12378)</a></li><li><a href="http://www.cnblogs.com/coprince/p/5756403.html">2. 下载文件的一种简单方法js(6705)</a></li><li><a href="http://www.cnblogs.com/coprince/p/5732822.html">3. 真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService(4321)</a></li><li><a href="http://www.cnblogs.com/coprince/p/5984816.html">4. Spring自定义缓存管理及配置Ehcache缓存(3290)</a></li><li><a href="http://www.cnblogs.com/coprince/p/5282532.html">5. js实现加减乘除(2943)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<h3 class="catListTitle">评论排行榜</h3>
+<div class="RecentComment" id="TopCommentsPosts">
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/coprince/p/5702520.html">1. WebService 超简单入门教程(Java)(3)</a></li><li><a href="http://www.cnblogs.com/coprince/p/5045509.html">2. java web session监听销毁跳转(1)</a></li><li><a href="http://www.cnblogs.com/coprince/p/5848614.html">3. Java锁 到底锁的是哪个对象？(1)</a></li><li><a href="http://www.cnblogs.com/coprince/p/5757714.html">4. 公共POI导出Excel方法--java(1)</a></li></ul></div>
+</div></div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/coprince/p/3386163.html">1. 解决Spring MVC @ResponseBody返回中文字符串乱码问题(1)</a></li><li><a href="http://www.cnblogs.com/coprince/p/5848614.html">2. Java锁 到底锁的是哪个对象？(1)</a></li><li><a href="http://www.cnblogs.com/coprince/p/5756403.html">3. 下载文件的一种简单方法js(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script></div>
+	
+</div>
+
+<!--done-->
+<div class="footer">
+	Powered by: <a href="http://www.cnblogs.com/">博客园</a>	模板提供：<a href="http://blog.hjenglish.com/">沪江博客</a>
+	Copyright ©2017 little fat
+</div>
+
+
+
+
+
+</body></html>
