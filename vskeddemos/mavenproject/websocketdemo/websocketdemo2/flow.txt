@@ -1,0 +1,8 @@
+
+第一步注册客户端
+客户端发送c:client1到服务端
+第二步
+服务端收到c:client1解析
+将client1与session放入会话列表
+GlobalSession。sessionMap
+第三步客户端发送
