@@ -1,0 +1,79 @@
+﻿官网
+http://bbs.aardio.com/
+--------------------------------------------------------------------------------
+控制台打印
+import console;
+	console.open();
+	console.print("aaaaaaaaaaaaaaaaaaaa");
+	console.pause(true);
+--------------------------------------------------------------------------------
+文件选择
+import fsys.dlg;
+
+var dir=fsys.dlg.open("*.txt");
+--------------------------------------------------------------------------------
+按行读文件
+
+var myDir="d:\1.txt";
+	for line in io.lines( myDir) { 
+      win.msgbox(line);
+	}
+--------------------------------------------------------------------------------
+遍历目录下所有文件
+import fsys;
+var myPath1="d:/11";
+    fsys.enum( myPath1, "*.*",
+    function(dir,file,fullpath,findData){ 
+       判断文件名中是否有某字符串
+       if string.find(file,文件名中包含的字符串)!=null{
+       //删除文件
+       fsys.delete(fullpath);
+       count=count+1;
+       }
+    }
+   );
+--------------------------------------------------------------------------------
+取edit中的值
+mainForm.edit1.text
+--------------------------------------------------------------------------------
+弹出提示框窗口
+win.msgbox("内容","标题");
+--------------------------------------------------------------------------------
+获取网页中元素并赋值
+var ea1=wb.getEle("msisdn");
+ea1.value="18888888888";
+//自动提交表单仅限于有form的
+ea1.form.submit();
+--------------------------------------------------------------------------------
+将浏览器刷入控件
+import web.form;
+import web.form.util;
+
+var wb = web.form( mainForm.edit );
+wb.external = mainForm.edit;
+
+//允许跨域操作
+web.form.util.crossDomain(true);
+//加载指定网址到浏览器
+wb.go("http://www.baidu.com");
+wb.wait("");
+--------------------------------------------------------------------------------
+网页自动点击
+import key;
+var btsub=f1.getEle("button1");
+//元素得焦点
+	btsub.focus();
+	//元素单击
+	btsub.click();
+	//触发onclick事件
+	btsub.fireEvent("onclick");
+	//模拟回车键
+	//key.press(key.VK.ENTER);
+	
+--------------------------------------------------------------------------------
+转换iframe为webform用来操作iframe中元素
+var f1=wb.getWebForm("frame");
+--------------------------------------------------------------------------------
+延时处理1000为1秒
+win.delay(1000);
+--------------------------------------------------------------------------------
