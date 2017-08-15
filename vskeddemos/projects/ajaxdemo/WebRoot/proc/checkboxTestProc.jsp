@@ -7,5 +7,5 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
 out.clear();
-LogUtil.outPutBasicMap(BaseController.getMaps(request));
+LogUtil.outPutBasicMap(BaseController.getMapsEx1(request));
 %>
