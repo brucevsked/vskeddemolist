@@ -1,4 +1,9 @@
-﻿
+﻿油猴脚本
+http://tampermonkey.net/
+
+在线软件
+https://uzer.me/
+
 企业级开发教程
 http://www.cnblogs.com/java-zhao/
 

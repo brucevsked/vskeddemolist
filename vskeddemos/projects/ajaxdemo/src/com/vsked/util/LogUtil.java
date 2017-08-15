@@ -18,10 +18,17 @@ public class LogUtil {
 		
 	}
 	
-	public static void outPutBasicMap(Map<String, String> m){
-		Iterator<Entry<String, String>> it=m.entrySet().iterator();	
+	public static void outPutBasicMap(Map<String, Object> m){
+		Iterator<Entry<String, Object>> it=m.entrySet().iterator();	
 		while(it.hasNext()){
-			Map.Entry<String, String> ent=it.next();
+			Map.Entry<String, Object> ent=it.next();
+			if (ent.getValue() instanceof String[]) {
+				String[] values = (String[]) ent.getValue();
+				for(String s:values){
+					System.out.println(s);
+				}
+				
+			}
 			System.out.println("|"+ent.getKey()+"|"+ent.getValue()+"|");
 		}
 	}

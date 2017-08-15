@@ -15,6 +15,7 @@ request.setAttribute("basePath", basePath);
   
   <body>
   <a href="${basePath }views/ajaxFileUpload.jsp">ajaxfileupload</a><br>
+  <a href="${basePath }views/checkboxTest.jsp">checkboxTest</a><br>
   <textarea rows="5" cols="100" id='sMobile'></textarea>
 <br><br>
 <button onclick="testPost0('${basePath }')">testPost0</button> 
