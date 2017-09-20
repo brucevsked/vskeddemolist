@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>日期时间格式化</title>
+    <link rel="stylesheet" type="text/css" href="js/lib/jqueryeasyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="js/lib/jqueryeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="js/lib/jqueryeasyui/themes/demo.css">
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/jqueryeasyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <h2>Basic Form</h2>
+    <p>Fill the form and submit it.</p>
+    <div style="margin:20px 0;"></div>
+    <div class="easyui-panel" title="New Topic" style="width:400px">
+        <div style="padding:10px 60px 20px 60px">
+        <form id="ff" method="post">
+<div style="margin-bottom:20px;margin-left:2%">
+     <input class="easyui-datetimebox"   name="businessCreateTime" id="businessCreateTime"  label="商户创建时间:"  data-options="formatter:dtFmt1,parser:dtParser,showSeconds:false" style="width:300px" />
+</div>
+        </form>
+        <div style="text-align:center;padding:5px">
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
+        </div>
+        </div>
+    </div>
+    <script>
+//为date类添加一个format方法  
+//yyyy 年  
+//MM 月  
+//dd 日  
+//hh 小时  
+//mm 分  
+//ss 秒  
+//qq 季度  
+//S  毫秒  
+Date.prototype.formatDate = function (format) //author: meizz  
+{  
+    var o = {  
+        'M+': this.getMonth() + 1, //month  
+        'd+': this.getDate(),    //day  
+        'h+': this.getHours(),   //hour  
+        'm+': this.getMinutes(), //minute  
+        's+': this.getSeconds(), //second  
+        'q+': Math.floor((this.getMonth() + 3) / 3),  //quarter  
+        'S': this.getMilliseconds() //millisecond  
+    }  
+    if (/(y+)/.test(format)) format = format.replace(RegExp.$1,  
+    (this.getFullYear() + '').substr(4 - RegExp.$1.length));  
+    for (var k in o) if (new RegExp('(' + k + ')').test(format))  
+        format = format.replace(RegExp.$1,  
+      RegExp.$1.length == 1 ? o[k] :  
+        ('00' + o[k]).substr(('' + o[k]).length));  
+    return format;  
+}
+
+//--------------------------------------------------------------------
+/**
+ * 格式化日期为 yyyy-MM-dd hh:mm:ss
+ * @param dt
+ * @returns
+ */
+function dtFmt1(dt){
+	return dt.formatDate('yyyy-MM-dd hh:mm:ss');
+}
+
+/**
+ * 转换字符串yyyy-MM-dd hh:mm:ss为日期格式
+ * @param dt
+ * @returns {Date}
+ */
+function dtParser(dt){
+	if(dt==null || dt==undefined || dt=='') return new Date();
+	return new Date(Date.parse(dt.replace(/-/g,"/")));
+}
+    	
+        function submitForm(){
+        	var a1=$('#businessCreateTime').datetimebox('getValue');
+        	console.log(a1)
+            //$('#ff').form('submit');
+        }
+        function clearForm(){
+            $('#ff').form('clear');
+        }
+        //当使用jquery的load方法后要调用本方法重新加载样式
+        $.parser.parse();//重新加载样式
+    </script>
+</body>
+</html>
