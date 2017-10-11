@@ -10,8 +10,8 @@
 </head>
 <body >
 
-<button type="button" onclick="msg1()" class="easyui-linkbutton c1" >msg1</button> |
-<button type="button" onclick="msg2()" class="easyui-linkbutton c2">msg2</button> |
+<button type="button" onclick="msg1()" class="easyui-linkbutton" id="bt1">msg1</button> |
+<button type="button" onclick="msg2()" class="easyui-linkbutton" id="bt2">msg2</button> |
 <button type="button" onclick="msg3()">msg3</button> |
 <button type="button" onclick="msg4()">msg4</button> |
 <button type="button" onclick="msg5()">msg5</button> |
@@ -25,10 +25,12 @@ function msg1(){
 }
 
 function msg2(){
+	$('#bt1').linkbutton('disable');
 	$.messager.alert('操作提示', '操作成功！','info'); //info,error,question,warning
 }
 
 function msg3(){
+	$('#bt1').linkbutton('enable');
   $.messager.alert("操作提示", "操作成功！", "info", function () {  
     alert(11);  
   }); 
