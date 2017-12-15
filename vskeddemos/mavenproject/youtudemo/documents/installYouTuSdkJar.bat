@@ -1,0 +1,1 @@
+mvn install:install-file -DgroupId=com.youtu -DartifactId=youtu -Dversion=3.1 -Dpackaging=jar -Dfile=youtu-java-sdk.jar 

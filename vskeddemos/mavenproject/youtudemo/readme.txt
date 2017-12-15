@@ -1,0 +1,1 @@
+请先运行documents目录中installYouTuSdkJar.bat
