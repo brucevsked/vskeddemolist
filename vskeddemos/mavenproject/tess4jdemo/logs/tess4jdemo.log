@@ -1,0 +1,6 @@
+2017-12-15 at 15:00:35 CST TRACE com.vsked.test.Log4j2Test 13 testBase - trace test
+2017-12-15 at 15:00:35 CST DEBUG com.vsked.test.Log4j2Test 14 testBase - debug test
+2017-12-15 at 15:00:35 CST INFO  com.vsked.test.Log4j2Test 15 testBase - info test
+2017-12-15 at 15:00:35 CST WARN  com.vsked.test.Log4j2Test 16 testBase - warn test
+2017-12-15 at 15:00:35 CST ERROR com.vsked.test.Log4j2Test 17 testBase - error test
+2017-12-15 at 15:00:35 CST FATAL com.vsked.test.Log4j2Test 18 testBase - fatal test
