@@ -14,21 +14,16 @@ public class ScardOcr {
 	
 	private static final Logger log=LogManager.getLogger(ScardOcr.class);
 	//http://api.youtu.qq.com/youtu/ocrapi/idcardocr
-		// appid, secretid secretkey请到http://open.youtu.qq.com/获取
-		// 请正确填写把下面的APP_ID、SECRET_ID和SECRET_KEY
-		public static final String APP_ID = "10008975";
-		public static final String SECRET_ID = "AKID1vdBXigT3ThmfMn8DYjiW8YpurDPqCnC";
-		public static final String SECRET_KEY = "KSRIxSmxwjKiy2tZ5RbZKyVt782kFYfZ";
-		public static final String USER_ID = "hyfdcompany";
+
 
 		public static void main(String[] args) {
 //			testFront();
-//			testBack();
+			testBack();
 		}
 		
 		public static void testFront(){
 			try {
-				Youtu faceYoutu = new Youtu(APP_ID, SECRET_ID, SECRET_KEY,Youtu.API_YOUTU_END_POINT,USER_ID);
+				Youtu faceYoutu = new Youtu(GlobalSet.APP_ID, GlobalSet.SECRET_ID, GlobalSet.SECRET_KEY,Youtu.API_YOUTU_END_POINT,GlobalSet.USER_ID);
 				JSONObject respose;
 				//respose= faceYoutu.FaceCompareUrl("http://open.youtu.qq.com/content/img/slide-1.jpg","http://open.youtu.qq.com/content/img/slide-1.jpg");
 				//respose = faceYoutu.DetectFace("e:/ocr_id_02.jpg",1);
@@ -59,7 +54,7 @@ public class ScardOcr {
 		
 		public static void testBack(){
 			try {
-				Youtu faceYoutu = new Youtu(APP_ID, SECRET_ID, SECRET_KEY,Youtu.API_YOUTU_END_POINT,USER_ID);
+				Youtu faceYoutu = new Youtu(GlobalSet.APP_ID, GlobalSet.SECRET_ID, GlobalSet.SECRET_KEY,Youtu.API_YOUTU_END_POINT,GlobalSet.USER_ID);
 				JSONObject respose;
 				//respose= faceYoutu.FaceCompareUrl("http://open.youtu.qq.com/content/img/slide-1.jpg","http://open.youtu.qq.com/content/img/slide-1.jpg");
 				//respose = faceYoutu.DetectFace("e:/ocr_id_02.jpg",1);

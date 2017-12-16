@@ -60,12 +60,13 @@
 			<artifactId>json</artifactId>
 			<version>20171018</version>
 		</dependency>
-		<!-- youtu jar from documents please run bat -->
+		<!-- not use this youtu jar from documents please run bat 
 		<dependency>
 			<groupId>com.youtu</groupId>
 			<artifactId>youtu</artifactId>
 			<version>3.1</version>
 		</dependency>
+		-->
 	</dependencies>
 	<build>
 		<finalName>youtudemo</finalName>
