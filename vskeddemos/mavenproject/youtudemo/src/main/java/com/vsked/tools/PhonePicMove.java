@@ -24,7 +24,7 @@ public class PhonePicMove {
 	}
 	
 	public static void letsGo(){
-		String sourceFolder="D:/tempMission/3";
+		String sourceFolder="D:/tempMission/4";
 		String targetFolder="d:/tempMission/out";
 		
 		createDir(targetFolder);//创建目标目录
@@ -100,7 +100,11 @@ public class PhonePicMove {
 				infoStr=(JSONObject) item;
 				itemStr=infoStr.getString("itemstring");
 				itemStr=itemStr.replace(" ", "");
-//				System.out.println("|"+itemStr+"|");
+				System.out.println("|"+itemStr+"|");
+				//跳过iccid检查
+				if(itemStr.indexOf("9860")>0 && itemStr.length()>14){
+					continue;
+				}
 				//不足11位补1
 				if(itemStr.length()==10){
 					itemStr="1"+itemStr;
