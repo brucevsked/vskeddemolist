@@ -3,9 +3,11 @@ package com.vsked.tools;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,13 +15,16 @@ import com.vsked.test.GlobalSet;
 import com.youtu.Youtu;
 
 public class PhonePicMove {
-
+	
+	public static String failList="";
+	public static String lineFlag="\r\n";
+	
 	public static void main(String[] args) {
 		letsGo();
 	}
 	
 	public static void letsGo(){
-		String sourceFolder="D:/tempMission/2";
+		String sourceFolder="D:/tempMission/3";
 		String targetFolder="d:/tempMission/out";
 		
 		createDir(targetFolder);//创建目标目录
@@ -27,11 +32,19 @@ public class PhonePicMove {
 		File fileTemp=new File(sourceFolder);
 		File[] fileArray=fileTemp.listFiles();
 		String fPath="";
+		int count=1;
 		for (File file : fileArray) {
 			fPath=file.getAbsolutePath();
 			fPath=fPath.replace("\\", "/");
-			System.out.println(file.getAbsolutePath());
-			isExistPhone(fPath, targetFolder);
+			System.out.println(count+"|"+file.getAbsolutePath());
+			if(!isExistPhone(fPath, targetFolder)){
+				try {
+					failList=fPath+lineFlag;
+					FileUtils.write(new File(targetFolder+"/rs.txt"), failList, "utf-8",true);
+				} catch (IOException e1) {
+				}
+			}
+			count++;
 		}
 	}
 	
@@ -88,7 +101,17 @@ public class PhonePicMove {
 				itemStr=infoStr.getString("itemstring");
 				itemStr=itemStr.replace(" ", "");
 //				System.out.println("|"+itemStr+"|");
+				//不足11位补1
+				if(itemStr.length()==10){
+					itemStr="1"+itemStr;
+				}
+				//不足11位补17
+				if(itemStr.length()==9){
+					itemStr="17"+itemStr;
+				}
+				
 				if(isPhone(itemStr)){
+					itemStr=itemStr.substring(itemStr.indexOf("17"),itemStr.indexOf("17")+11);
 					createDir(ouputPath+"/"+itemStr);
 					copyFile(fpath, ouputPath+"/"+itemStr+"/"+new File(fpath).getName());
 					return true;
@@ -97,13 +120,17 @@ public class PhonePicMove {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			failList=fpath+lineFlag;
+			try {
+				FileUtils.write(new File(ouputPath+"/rs.txt"), failList, "utf-8",true);
+			} catch (IOException e1) {
+			}
 		}
 		return false;
 	}
 	
 	public static boolean isPhone(String str){
-			Pattern pattern = Pattern.compile("(13\\d|14\\d|15\\d|17\\d|18\\d)\\d{8}");
+			Pattern pattern = Pattern.compile(".*(17\\d)\\d{8}.*");
 			return pattern.matcher(str).matches();    
 	}
 	
