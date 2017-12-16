@@ -4,6 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.regex.Pattern;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.vsked.test.GlobalSet;
+import com.youtu.Youtu;
 
 public class PhonePicMove {
 
@@ -12,7 +19,7 @@ public class PhonePicMove {
 	}
 	
 	public static void letsGo(){
-		String sourceFolder="D:/tempMission/1";
+		String sourceFolder="D:/tempMission/2";
 		String targetFolder="d:/tempMission/out";
 		
 		createDir(targetFolder);//创建目标目录
@@ -24,6 +31,7 @@ public class PhonePicMove {
 			fPath=file.getAbsolutePath();
 			fPath=fPath.replace("\\", "/");
 			System.out.println(file.getAbsolutePath());
+			isExistPhone(fPath, targetFolder);
 		}
 	}
 	
@@ -43,7 +51,7 @@ public class PhonePicMove {
         return dir.mkdirs();
     }
     
-    public  void  copyFile(String  oldPath,  String  newPath)  {    
+    public static void copyFile(String  oldPath,  String  newPath){    
         try  {    
             int  byteread  =  0;    
             File  oldfile  =  new  File(oldPath);    
@@ -63,4 +71,41 @@ public class PhonePicMove {
         }    
     
     }
+    
+    
+	public static boolean isExistPhone(String fpath,String ouputPath){
+		try {
+			Youtu faceYoutu = new Youtu(GlobalSet.APP_ID, GlobalSet.SECRET_ID, GlobalSet.SECRET_KEY,Youtu.API_YOUTU_END_POINT,GlobalSet.USER_ID);
+			JSONObject respose;
+			respose=faceYoutu.GeneralOcr(fpath);
+//			System.out.println(respose.toString());
+			JSONArray items=respose.getJSONArray("items");
+			
+			JSONObject infoStr;
+			String itemStr="";
+			for (Object item : items) {
+				infoStr=(JSONObject) item;
+				itemStr=infoStr.getString("itemstring");
+				itemStr=itemStr.replace(" ", "");
+//				System.out.println("|"+itemStr+"|");
+				if(isPhone(itemStr)){
+					createDir(ouputPath+"/"+itemStr);
+					copyFile(fpath, ouputPath+"/"+itemStr+"/"+new File(fpath).getName());
+					return true;
+				}
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static boolean isPhone(String str){
+			Pattern pattern = Pattern.compile("(13\\d|14\\d|15\\d|17\\d|18\\d)\\d{8}");
+			return pattern.matcher(str).matches();    
+	}
+	
+	
 }
