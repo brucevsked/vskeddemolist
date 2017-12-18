@@ -24,7 +24,7 @@ public class PhonePicMove {
 	}
 	
 	public static void letsGo(){
-		String sourceFolder="D:/tempMission/4";
+		String sourceFolder="D:/tempMission/3";
 		String targetFolder="d:/tempMission/out";
 		
 		createDir(targetFolder);//创建目标目录
@@ -134,7 +134,7 @@ public class PhonePicMove {
 	}
 	
 	public static boolean isPhone(String str){
-			Pattern pattern = Pattern.compile(".*(17\\d)\\d{8}.*");
+			Pattern pattern = Pattern.compile(".*(17[0|1])\\d{8}.*");
 			return pattern.matcher(str).matches();    
 	}
 	
