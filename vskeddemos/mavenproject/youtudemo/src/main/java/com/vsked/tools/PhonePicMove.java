@@ -100,7 +100,7 @@ public class PhonePicMove {
 				infoStr=(JSONObject) item;
 				itemStr=infoStr.getString("itemstring");
 				itemStr=itemStr.replace(" ", "");
-				System.out.println("|"+itemStr+"|");
+//				System.out.println("|"+itemStr+"|");
 				//跳过iccid检查
 				if(itemStr.indexOf("9860")>0 && itemStr.length()>14){
 					continue;
@@ -114,12 +114,14 @@ public class PhonePicMove {
 					itemStr="17"+itemStr;
 				}
 				
+				//是手机号
 				if(isPhone(itemStr)){
 					itemStr=itemStr.substring(itemStr.indexOf("17"),itemStr.indexOf("17")+11);
 					createDir(ouputPath+"/"+itemStr);
 					copyFile(fpath, ouputPath+"/"+itemStr+"/"+new File(fpath).getName());
 					return true;
 				}
+				
 			}
 			
 			
@@ -137,6 +139,5 @@ public class PhonePicMove {
 			Pattern pattern = Pattern.compile(".*(17[0|1])\\d{8}.*");
 			return pattern.matcher(str).matches();    
 	}
-	
 	
 }

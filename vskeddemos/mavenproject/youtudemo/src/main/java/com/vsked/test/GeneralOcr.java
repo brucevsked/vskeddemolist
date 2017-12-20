@@ -15,7 +15,7 @@ public class GeneralOcr {
 		try {
 			Youtu faceYoutu = new Youtu(GlobalSet.APP_ID, GlobalSet.SECRET_ID, GlobalSet.SECRET_KEY,Youtu.API_YOUTU_END_POINT,GlobalSet.USER_ID);
 			JSONObject respose;
-			respose=faceYoutu.GeneralOcr("D:/tempMission/1/1.jpg");
+			respose=faceYoutu.GeneralOcr("e:/cc1.jpg");
 //			System.out.println(respose.toString());
 			JSONArray items=respose.getJSONArray("items");
 			
@@ -24,7 +24,8 @@ public class GeneralOcr {
 			for (Object item : items) {
 				infoStr=(JSONObject) item;
 				itemStr=infoStr.getString("itemstring");
-				itemStr=itemStr.replace(" ", "");
+				//带空格
+//				itemStr=itemStr.replace(" ", "");
 				System.out.println("|"+itemStr+"|");
 			}
 			
