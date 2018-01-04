@@ -109,3 +109,14 @@ function ts1(wb){
     wb.go(mainForm.edit2.text);	
 }
 --------------------------------------------------------------------------------
+获取字符串长度
+var count=string.len(mainForm.edit1.text);
+--------------------------------------------------------------------------------
+一个字符一个字符显示
+	var count=string.len(mainForm.edit1.text);
+	mainForm.static.text=count;
+	for(i=1;count;1){
+	win.delay(1000);
+	mainForm.static.text=string.sub(mainForm.edit1.text,i,i);
+	}
+--------------------------------------------------------------------------------

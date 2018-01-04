@@ -2,15 +2,20 @@
 <Configuration>
 
 <Properties>
-    <Property name="fname">tess4jdemo.log</Property>
+    <Property name="logpath">${sys:catalina.home}/logs/test4jdemo</Property>
+    <Property name="logname">test4jdemo</Property>
 </Properties>
 <Appenders>
     <Console name="STDOUT" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
     </Console>
-    <RollingFile name="outRollingFile" fileName="logs/${fname}" filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+    <RollingFile name="outRollingFile" fileName="${logpath}/${logname}.log" filePattern="${logpath}/$${date:yyyy-MM}/${logname}-%d{yyyy-MM-dd}-%i.log">
         <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
-        <SizeBasedTriggeringPolicy size="50MB"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="24"/>
+                <SizeBasedTriggeringPolicy size="512 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
     </RollingFile>
 </Appenders>
 
