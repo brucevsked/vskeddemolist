@@ -1,11 +1,17 @@
 package com.vsked.util;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import javax.imageio.ImageIO;
+
 import org.apache.log4j.Logger;
+
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -98,6 +104,34 @@ public class ImageUtil {
 			return fileName.substring(c1+1);
 		}
 		return "jpg";
+	}
+	
+	/**
+	 * 图片二值化 比如验证码识别需要用到
+	 * @param oldPath 旧文件路径
+	 * @param newPath 新文件路径
+	 * @param fileType 文件类型不带点如jpg
+	 * @return
+	 */
+	public static String binaryImage(String oldPath,String newPath,String fileType){
+		try{
+		File file = new File(oldPath);
+	    BufferedImage image = ImageIO.read(file);
+	    int width = image.getWidth();
+	    int height = image.getHeight();
+	    BufferedImage grayImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
+	    for(int i= 0 ; i < width ; i++){
+	        for(int j = 0 ; j < height; j++){  
+	        int rgb = image.getRGB(i, j);
+	        grayImage.setRGB(i, j, rgb);
+	        }
+	    }
+	    File newFile = new File(newPath);
+	    ImageIO.write(grayImage, fileType, newFile);  
+		}catch(Exception e){
+			log.error(e.getMessage());
+		}
+		return newPath;
 	}
 
 }

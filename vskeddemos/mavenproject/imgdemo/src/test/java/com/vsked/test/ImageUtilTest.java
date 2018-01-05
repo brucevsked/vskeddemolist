@@ -534,4 +534,13 @@ public class ImageUtilTest extends BaseTest{
 		String imageType=ImageUtil.getFileImageType(fileName);
 		log.debug("|"+imageType+"|");
 	}
+	
+//	@Test
+	public void binaryImage(){
+		String oldPath="d:/aa1.jpg";
+		String newPath="d:/aa1n.jpg";
+		String fileType="jpg";
+		ImageUtil.binaryImage(oldPath, newPath, fileType);
+		log.debug("|"+newPath+"|");
+	}
 }
