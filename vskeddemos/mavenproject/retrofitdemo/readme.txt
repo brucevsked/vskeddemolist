@@ -4,4 +4,5 @@ http://localhost:8080/retrofitdemo
 
 
 
-http://localhost:8080/retrofitdemo/proc/test1proc.jsp?id=1&name=sst
+先把这个项目用tomcat跑起来
+然后再运行src/test/java/MyServiceTest.java中方法即可
