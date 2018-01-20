@@ -1,8 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<% 
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
-request.setAttribute("basePath", basePath);
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set var="basePath" value="${pageContext.request.scheme }://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/" scope="request"/>
 
 <!DOCTYPE HTML>
 <html>
@@ -18,10 +17,9 @@ request.setAttribute("basePath", basePath);
   </head>
   
   <body>
-  template3.jsp <br>
+  template4.jsp <br>
   ${basePath } <br>
   <button onclick="ts();">getBasePath</button>
-  
   <script type="text/javascript" charset="UTF-8" src="${basePath }js/project/baseSet.js" ></script>
   </body>
 </html>
