@@ -12,7 +12,7 @@ import com.vsked.bean.User;
 public class Test1 {
 
 	public static void main(String[] args) {
-//		testObjectToJson();
+		testObjectToJson();
 //		testJsonToObject();
 //		testListToJson();
 //		testJsonToList();
