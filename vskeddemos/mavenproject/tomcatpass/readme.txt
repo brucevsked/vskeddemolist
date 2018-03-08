@@ -1,5 +1,9 @@
-tomcat8ÃÜÂëÆÆ½âÔ­ĞÍ
+tomcatå¯†ç çˆ†ç ´
 
 http://localhost:8080/
 
 http://localhost:8080/tomcatpass
+
+
+
+å·²ç»å¯ä»¥å¯¹tomcat6å®ç°çˆ†ç ´
