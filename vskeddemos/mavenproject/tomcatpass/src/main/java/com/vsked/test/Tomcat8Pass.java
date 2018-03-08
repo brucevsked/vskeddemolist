@@ -15,9 +15,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import sun.misc.BASE64Encoder;
 
-public class Tomcat6Pass {
+public class Tomcat8Pass {
 	
-	private static Logger log = Logger.getLogger(Tomcat6Pass.class);
+	private static Logger log = Logger.getLogger(Tomcat8Pass.class);
 	
 	static{
 		BaseTest.initLog4j();
@@ -64,7 +64,12 @@ public class Tomcat6Pass {
 			passWord=passWord.replace("\r", "");
 			passWord=passWord.replace("\n", "");
 			
-			log.debug("|"+passWord+"|");
+			System.out.println(passWord.equals("\r"));
+			System.out.println(passWord.equals("\n"));
+			System.out.println(passWord.equals("\r\n"));
+			if(passWord==null || passWord.equals("")) continue;
+			
+			log.debug("|"+passWord+"|"+passWord.length());
 			
 			passWord=new BASE64Encoder().encode((userName+":"+passWord).getBytes());
 //			System.out.println(passWord);
