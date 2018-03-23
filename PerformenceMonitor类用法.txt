@@ -1,0 +1,13 @@
+第一步复制
+PerformenceMonitor
+类到service文件夹
+
+第二步修改
+PerformenceMonitor类中包名
+
+第三步
+在spring配置文件中添加
+    <!-- 切面时间统计拦截 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+第四步
+运行web项目登录下看看效果
