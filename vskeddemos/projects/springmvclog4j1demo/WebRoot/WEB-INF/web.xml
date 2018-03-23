@@ -14,18 +14,6 @@
      <servlet-name>default</servlet-name>  
      <url-pattern>*.css</url-pattern>  
  </servlet-mapping>  
-
- <servlet>  
-     <servlet-name>springmvc</servlet-name>  
-     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
-     <load-on-startup>1</load-on-startup>  
- </servlet>  
- <servlet-mapping>  
-     <servlet-name>springmvc</servlet-name>  
-     <url-pattern>/</url-pattern> 
-<!-- url配置为/，不带文件后缀，会造成其它静态文件(js，css等)不能访问。如配为*.do，则不影响静态文件的访问 --> 
- </servlet-mapping>  
-
   <context-param>
     <param-name>log4jConfigLocation</param-name>
     <param-value>/WEB-INF/log4j.properties</param-value>
@@ -37,6 +25,18 @@
   <listener>
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
+ <servlet>  
+     <servlet-name>springmvc</servlet-name>  
+     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
+     <load-on-startup>1</load-on-startup>  
+ </servlet>  
+ <servlet-mapping>  
+     <servlet-name>springmvc</servlet-name>  
+     <url-pattern>/</url-pattern> 
+<!-- url配置为/，不带文件后缀，会造成其它静态文件(js，css等)不能访问。如配为*.do，则不影响静态文件的访问 --> 
+ </servlet-mapping>  
+
+
   
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

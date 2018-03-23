@@ -31,7 +31,10 @@ public class PerformenceMonitor {
        long begin = System.nanoTime();
        Object o = pjp.proceed();
        long end = System.nanoTime();
-       log.debug("{"+pjp.getTarget().getClass()+"."+pjp.getSignature().getName()+"}:{"+TimeUnit.NANOSECONDS.toSeconds(end-begin)+"s"+"}");  
+       if(log.isDebugEnabled()){
+    	   log.debug("{"+pjp.getTarget().getClass()+"."+pjp.getSignature().getName()
+    			   +"}:{"+TimeUnit.NANOSECONDS.toSeconds(end-begin)+"s"+"}");
+       }
        return o;
    }
 }
