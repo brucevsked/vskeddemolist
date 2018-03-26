@@ -80,6 +80,52 @@ public class ExcelUtil {
 		stream.close();
 		return m;
 	}
+
+	/**
+	 * 读取xls或xlsx文件 指定开始读取行数
+	 * @param filePath 文件路径
+	 * @param startRow 起始行数
+	 * @return Map<工作表名,行数据list中放列数组>
+	 * @throws Exception
+	 */
+	public static Map<String, List<String[]>> readExcel03And07(String filePath,int startRow) throws Exception{
+		startRow=startRow<=0?0:startRow;
+		Map<String, List<String[]>> m=new TreeMap<String, List<String[]>>();
+		Workbook wb = null;
+		if(log.isDebugEnabled()){
+		log.debug(filePath);
+		}
+		InputStream stream = new FileInputStream(filePath);
+		if(filePath.endsWith(".xls")){
+			wb = new HSSFWorkbook(stream); 
+		}else if(filePath.endsWith(".xlsx")){
+			wb = new XSSFWorkbook(stream);
+		}else{
+			stream.close();
+			throw new Exception("not xls or xlsx file,please check filename");
+		}
+		
+		Iterator<Sheet> sheetIt=wb.sheetIterator();
+		while(sheetIt.hasNext()){
+			Sheet sheet=sheetIt.next();
+			List<String[]> sheetDataList=new LinkedList<String[]>();
+			int myRowIndex=startRow;
+			Row row=null;
+			for(myRowIndex=startRow;myRowIndex<=sheet.getLastRowNum();myRowIndex++){
+				row=sheet.getRow(myRowIndex);
+				String[] columnArray=new String[row.getLastCellNum()];
+				for(int i=0;i<columnArray.length;i++){
+//				  log.debug(row.getCell(i)+"|");
+				  columnArray[i]=getValueFor03And07(row.getCell(i));
+				}
+				sheetDataList.add(columnArray);
+			}
+			m.put(sheet.getSheetName(), sheetDataList);
+		}
+		wb.close();
+		stream.close();
+		return m;
+	}
 	
 	/**
 	 * 只读取xlsx文件
