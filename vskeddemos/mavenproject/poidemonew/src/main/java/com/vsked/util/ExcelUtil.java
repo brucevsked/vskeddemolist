@@ -48,8 +48,10 @@ public class ExcelUtil {
 	 */
 	public static Map<String, List<String[]>> readExcel03And07(String filePath) throws Exception{
 		Map<String, List<String[]>> m=new TreeMap<String, List<String[]>>();
-		Workbook wb = null; 
-		log.debug(filePath);
+		Workbook wb = null;
+		if(log.isDebugEnabled()){
+			log.debug(filePath);
+		}
 		InputStream stream = new FileInputStream(filePath);
 		if(filePath.endsWith(".xls")){
 			wb = new HSSFWorkbook(stream); 
@@ -188,14 +190,13 @@ public class ExcelUtil {
 		wb.close();
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static String getValueFor03And07(Cell c){
 		if(c==null){
 			return "";
 		}else if(c.getCellTypeEnum()==CellType.NUMERIC){
 			String s=c.toString();
 			//自定义日期格式处理 bug fixed for poi
-			if(isData1(s)){
+			if(isDate1(s)){
 				return sdf.format(DateUtil.getJavaDate(c.getNumericCellValue()));
 			}
 			c.setCellType(CellType.STRING);
@@ -229,7 +230,7 @@ public class ExcelUtil {
 	 * @param s 01-Apr-2017
 	 * @return
 	 */
-	public static boolean isData1(String s){
+	public static boolean isDate1(String s){
 		Matcher m = r.matcher(s);
 		return m.matches();
 	}

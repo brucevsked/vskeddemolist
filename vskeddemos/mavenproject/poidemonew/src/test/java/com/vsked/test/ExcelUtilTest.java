@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -16,7 +15,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.vsked.util.ExcelUtil;
@@ -25,10 +23,10 @@ public class ExcelUtilTest extends BaseTest{
 	
 	private static final Logger log = Logger.getLogger(ExcelUtilTest.class);
 	
-//	@Test
+	@Test
 	public void readExcel03And07(){
 		try{
-		String filePath="e:/test.xlsx";
+		String filePath="d:/a.xls";
 		long start=System.currentTimeMillis();
 		Map<String, List<String[]>> dataMapAll=ExcelUtil.readExcel03And07(filePath);
 		log.debug(dataMapAll.size());
@@ -51,7 +49,7 @@ public class ExcelUtilTest extends BaseTest{
 			}
 			
 		}
-		log.debug("|s1|"+(end-start));//1990 ms this method more faster
+		log.debug("|s1|"+(end-start)/1000);// this method more faster
 		
 		}catch(Exception e){
 			log.error(e.getMessage());
