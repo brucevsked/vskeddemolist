@@ -1,6 +1,15 @@
 
+对象管理及依赖注入事务等
+spring framework
+
+mvc
+spring mvc
+
 json处理
 jackson
+
+日志门面
+slf4j
 
 日志处理
 log4j2
