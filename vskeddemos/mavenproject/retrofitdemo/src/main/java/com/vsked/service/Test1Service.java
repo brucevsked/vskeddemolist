@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Test1Service extends BaseService{
 	
-	private static final Logger log=LogManager.getLogger(Test1Service.class);
+	private static final Logger log = LoggerFactory.getLogger(Test1Service.class);
 	
 	public static  String proc1(HttpServletRequest req){
 		String result="";

@@ -7,12 +7,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BaseService {
 	
-	private static final Logger log=LogManager.getLogger(BaseService.class);
+	private static final Logger log = LoggerFactory.getLogger(BaseService.class);
 	
 	/**
 	 * 将请求参数封装成map
@@ -26,7 +26,11 @@ public class BaseService {
 			String s=(String) e.nextElement();
 			m.put(s, req.getParameter(s));
 		}
-		log.debug(m);
+		
+		if(log.isDebugEnabled()){
+			log.debug(m.toString());
+		}
+
 		return m;
 	}
 	

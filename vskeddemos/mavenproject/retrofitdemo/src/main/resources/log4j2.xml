@@ -2,7 +2,8 @@
 <Configuration>
 
 <Properties>
-    <Property name="logpath">${sys:catalina.home}/logs/retrofitdemo/</Property>
+<!-- <Property name="logpath">${sys:catalina.home}/logs/retrofitdemo/</Property>  -->    
+    <Property name="logpath">/logs/retrofitdemo/</Property>
     <Property name="logname">retrofitdemo</Property>
 </Properties>
 <Appenders>
