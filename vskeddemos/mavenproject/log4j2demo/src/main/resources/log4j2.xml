@@ -30,6 +30,9 @@
 </Appenders>
 
 <loggers>
+	    <!-- 指定包日志级别 -->
+		<logger name="org.springframework" level="error"></logger>
+		<logger name="com.mchange" level="error"></logger>
     <root level="ALL">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="outRollingFile" />
