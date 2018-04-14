@@ -1,0 +1,36 @@
+html,body{
+width:100%;
+height:100%;
+}
+
+body {
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+
+#screenDiv {
+width:100%;
+height:100%;
+background-color:#fff;
+}
+
+#loginDiv {
+position:relative;
+top:35%;
+left:25%;
+width:50%;
+height:35%;
+background-color:#fff;
+}
+
+#ti1{
+	font-size: 18;
+	text-align: center;
+}
+
+#unameDiv{ text-align: center; }
+#upassDiv{ text-align: center; }
+#ubuttonDiv{ text-align: center; }
+#backResult{ text-align: center; color: #f00;}
