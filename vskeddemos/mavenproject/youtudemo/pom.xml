@@ -64,7 +64,7 @@
 		<dependency>
 			<groupId>com.youtu</groupId>
 			<artifactId>youtu</artifactId>
-			<version>3.1</version>
+			<version>3.2</version>
 		</dependency>
 		-->
 <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
