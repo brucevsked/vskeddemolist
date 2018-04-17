@@ -18,11 +18,14 @@ request.setAttribute("basePath", basePath);
   <a href="${basePath }views/checkboxTest.jsp">checkboxTest</a><br>
   <textarea rows="5" cols="100" id='sMobile'></textarea>
 <br><br>
-<button onclick="testPost0('${basePath }')">testPost0</button> 
-<button onclick="testPost1('${basePath }')">testPost1</button> 
-<button onclick="testPost2('${basePath }')">testPost2</button> 
-<button onclick="testPost3('${basePath }')">testPost3</button> 
-<button onclick="testPost4('${basePath }')">testPost4</button> 
+<button onclick="testGet0();" type="button">testGet0</button> 
+<button onclick="testGet1();" type="button">testGet1</button> 
+<button onclick="testGet2();" type="button">testGet2</button> 
+<button onclick="testPost0('${basePath }')" type="button">testPost0</button> 
+<button onclick="testPost1('${basePath }')" type="button">testPost1</button> 
+<button onclick="testPost2('${basePath }')" type="button">testPost2</button> 
+<button onclick="testPost3('${basePath }')" type="button">testPost3</button> 
+<button onclick="testPost4('${basePath }')" type="button">testPost4</button> 
 <br><br>
 <textarea rows="5" cols="100" id='tDecode'></textarea>
 

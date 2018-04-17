@@ -1,4 +1,21 @@
+var basePath = document.getElementsByTagName('base')[0].href;
 
+function testGet0(){
+	var myBasePath=basePath+'proc/proc1.jsp';
+	$.get(myBasePath);
+}
+
+function testGet1(){
+	var myBasePath=basePath+'proc/proc1.jsp';
+	$.get(myBasePath,{ myName: 'vskedget' , myAge: 20 , loveGirl: false});
+}
+
+function testGet2(){
+	var myBasePath=basePath+'proc/proc3.jsp';
+	$.get(myBasePath,{ myName: 'vskedget' , myAge: 20 , loveGirl: false},function(dt){
+		$('#tDecode').val(dt);		
+	});
+}
 
 function testPost0(myBasePath){
 	myBasePath+='proc/proc1.jsp';
