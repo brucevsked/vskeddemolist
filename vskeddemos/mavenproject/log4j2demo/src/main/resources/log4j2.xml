@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
+<Configuration monitorInterval="60" >
 
 <Properties>
     <Property name="logpath">${sys:catalina.home}/logs/log4j2demo</Property>
