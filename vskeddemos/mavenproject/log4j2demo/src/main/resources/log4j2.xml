@@ -9,13 +9,17 @@
     <Console name="STDOUT" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
     </Console>
-    <RollingFile name="outRollingFile" fileName="${logpath}/${logname}.log" filePattern="${logpath}/$${date:yyyy-MM}/${logname}-%d{yyyy-MM-dd}-%i.log">
+    <RollingFile name="outRollingFile" fileName="${logpath}/${logname}" 
+    filePattern="${logpath}/${logname}_%d{yyyy-MM-dd}_%i.log">
         <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy modulate="true" interval="24"/>
-                <SizeBasedTriggeringPolicy size="512 MB"/>
+               <!-- 每1天更新一次 -->
+                <TimeBasedTriggeringPolicy modulate="true" interval="1" />
+                <!-- 每个文件512MB -->
+                <SizeBasedTriggeringPolicy size="512MB"/>
             </Policies>
-            <DefaultRolloverStrategy max="20"/>
+            <!-- 最多备份90个 -->
+            <DefaultRolloverStrategy max="90"/>
     </RollingFile>
     <JDBC name="databaseAppender" tableName="myLogsT">
       <ConnectionFactory class="com.vsked.util.ConnectionFactory" method="getDatabaseConnection" />

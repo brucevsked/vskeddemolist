@@ -10,11 +10,13 @@ public class Slf4jLogTest {
 	
 	@Test
 	public void t1(){
+		for(int i=0;i<10;i++){
 		log.trace("trace test");
 		log.debug("debug test");
 		log.info("info test");
 		log.warn("warn test");
 		log.error("error test");
+		}
 	}
 
 }
