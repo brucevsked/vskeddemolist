@@ -4,13 +4,12 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +22,7 @@ public class TestJackson {
 	ObjectMapper jackson = new ObjectMapper();
 	Writer strWriter = new StringWriter();
 	
-	@Test
+//	@Test
 	public void objectToJson() throws Exception{
 		String s=jackson.writeValueAsString(new User("smallvill", 18));
 		log.debug(s);
@@ -48,6 +47,22 @@ public class TestJackson {
 			userList.add(new User("user"+i,20+i));
 		
 		String s=jackson.writeValueAsString(userList);
+		log.debug(s);
+	}
+	
+//	@Test
+	public void listToJson1() throws Exception{
+		List<Map<String, Object>> dataList=new LinkedList<Map<String,Object>>();
+		
+		Map<String, Object> data=null;
+		for(int i=0;i<10;i++){
+			data=new HashMap<String, Object>();
+			data.put("name", "x"+i);
+			data.put("seq", i);
+			data.put("isAllright", true);
+			dataList.add(data);
+		}
+		String s=jackson.writeValueAsString(dataList);
 		log.debug(s);
 	}
 	
