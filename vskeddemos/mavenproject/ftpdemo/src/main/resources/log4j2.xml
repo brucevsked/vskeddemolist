@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+
+	<Properties>
+		<!-- <Property name="logpath">${sys:catalina.home}/logs/custvs/</Property> -->
+<Property name="logpath">/logs/ftpdemo/</Property>
+		<Property name="logname">ftpdemo</Property>
+	</Properties>
+	<Appenders>
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+    <RollingFile name="outRollingFile" fileName="${logpath}/${logname}" 
+    filePattern="${logpath}/${logname}_%d{yyyy-MM-dd}_%i.log">
+        <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+               <!-- 每1天更新一次 -->
+                <TimeBasedTriggeringPolicy modulate="true" interval="1" />
+                <!-- 每个文件512MB -->
+                <SizeBasedTriggeringPolicy size="512MB"/>
+            </Policies>
+            <!-- 最多备份90个 -->
+            <DefaultRolloverStrategy max="90"/>
+    </RollingFile>
+	</Appenders>
+
+	<loggers>
+	    <!-- 指定包日志级别 -->
+		<logger name="org.springframework" level="error"></logger>
+		<logger name="com.mchange" level="error"></logger>
+		<logger name="org.mybatis" level="error"></logger>
+		<root level="ALL">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="outRollingFile" />
+		</root>
+	</loggers>
+
+</Configuration>
