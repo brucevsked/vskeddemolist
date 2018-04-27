@@ -37,6 +37,8 @@ public class FtpToolCommon {
         ftpClient.connect(host, port); //连接ftp服务器
         ftpClient.setDefaultPort(port);
         ftpClient.login(userName, userPass); //登录ftp服务器
+//				ftpClient.enterLocalActiveMode();	// 主动模式,创建文件但是一直为0KB的时候换被动模式试试,一般本地环境时使用
+				ftpClient.enterLocalPassiveMode();	// 被动模式,创建文件但是一直为0KB的时候换被主模式试试,一般远程时使用
         int replyCode = ftpClient.getReplyCode(); //是否成功登录服务器
         if(!FTPReply.isPositiveCompletion(replyCode)){
         	System.out.println("login fail");
