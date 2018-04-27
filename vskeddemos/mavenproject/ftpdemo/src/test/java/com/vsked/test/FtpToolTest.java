@@ -61,6 +61,15 @@ public class FtpToolTest {
 	}
 	
 //	@Test
+	public void download() throws Exception{
+		String sourceFile="/testa1/ocr_id_02.jpg";
+		String saveRemotePath="e:/c.jpg";
+		ftpTool.connect();
+		ftpTool.download(sourceFile, saveRemotePath);
+		ftpTool.disconnect();
+	}
+	
+//	@Test
 	public void delFile() throws Exception{
 		String sourceFile="/testa1/readme.txt";
 		ftpTool.connect();
