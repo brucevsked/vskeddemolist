@@ -20,10 +20,12 @@ public class FtpTool {
 	
 	private static final Logger log = LoggerFactory.getLogger(FtpTool.class);
 	
-	private String host="192.168.1.188";
-	private String userName="mytest1";
+	private String host="192.168.1.189";
+	private String userName="test";
 	private String userPass="0y0WcP4S";
-	private int port=52822;
+	private int port=5001;
+	private String prvkey="d:/zhongyoukey";
+	private int timeOut=9000;
 	
 	private ChannelSftp sftp = null;
 
@@ -51,9 +53,26 @@ public class FtpTool {
 	 */
     public void connect() throws Exception{
     	JSch jsch = new JSch();
-        jsch.getSession(userName, host, port);
         Session sshSession = jsch.getSession(userName, host, port);
         sshSession.setPassword(userPass);
+        Properties sshConfig = new Properties();
+        sshConfig.put("StrictHostKeyChecking", "no");
+        sshSession.setConfig(sshConfig);
+        sshSession.connect();
+        Channel channel = sshSession.openChannel("sftp");
+        channel.connect();
+        sftp = (ChannelSftp) channel;
+    }
+    
+    /**
+     * 使用私钥登录sftp
+     * @throws Exception
+     */
+    public void connectWithKey() throws Exception{
+    	JSch jsch = new JSch();
+    	jsch.addIdentity(prvkey,"zhongyoukey");
+        Session sshSession = jsch.getSession(userName, host, port);
+        sshSession.setTimeout(timeOut);
         Properties sshConfig = new Properties();
         sshConfig.put("StrictHostKeyChecking", "no");
         sshSession.setConfig(sshConfig);

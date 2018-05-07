@@ -85,4 +85,17 @@ public class FtpToolTest {
 		ftpTool.disconnect();
 	}
 	
+//	@Test
+	public void connectWithKey(){
+		try{
+		ftpTool.connectWithKey();
+		log.debug("connect ok");
+		ftpTool.disconnect();
+		log.debug("close ok");
+		}catch(Exception e){
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
+	}
+	
 }
