@@ -16,3 +16,14 @@ String ha1="";
 m.put("ha1",ha1);
 
 --------------------------------------------------------------------------------
+TextToStringAndMap3
+将字符串转换为声明并放入map
+示例
+输入数据
+merchantCode
+输出数据
+String merchantCode="";
+Map<String,Object> m=new HashMap<String, Object>();
+m.put("merchantCode",merchantCode);
+
+--------------------------------------------------------------------------------
