@@ -1,0 +1,10 @@
+merchantCode
+orderNum
+merchantNum
+accountName
+phoneNum
+idCard
+bankCard
+bankCardType
+notifyUrl
+returnUrl
