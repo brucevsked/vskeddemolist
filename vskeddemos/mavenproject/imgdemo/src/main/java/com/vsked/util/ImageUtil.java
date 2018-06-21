@@ -4,20 +4,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import javax.imageio.ImageIO;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.codec.binary.Base64;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 public class ImageUtil {
-	
-	private static Logger log = Logger.getLogger(ImageUtil.class);
 	
 	/**
 	 * 将base64编码转换为文件
@@ -27,9 +21,8 @@ public class ImageUtil {
 	 */
 	public static boolean base64ToFile(String imgStr, String path) {
 		if (imgStr == null) return false;
-		BASE64Decoder decoder = new BASE64Decoder();
 		try{
-			byte[] b = decoder.decodeBuffer(imgStr);
+			byte[] b = Base64.decodeBase64(imgStr);
 			for (int i = 0; i < b.length; ++i) {
 				if (b[i] < 0) {
 					b[i] += 256;
@@ -41,7 +34,7 @@ public class ImageUtil {
             out.close();
             return true;
 		}catch(Exception e){
-			log.error(e.getMessage());
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -51,20 +44,12 @@ public class ImageUtil {
 	 * @param imgFile 文件名
 	 * @return 编码后base64字符串
 	 */
-	public static String fileToBase64(String imgFile) {
-	    InputStream inputStream = null;
-	    byte[] data = null;
-	    try {
-	        inputStream = new FileInputStream(imgFile);
-	        data = new byte[inputStream.available()];
-	        inputStream.read(data);
-	        inputStream.close();
-	    } catch (IOException e) {
-	       log.error(e.getMessage());
-	    }
-	    // 加密
-	    BASE64Encoder encoder = new BASE64Encoder();
-	    return encoder.encode(data);
+	public static String fileToBase64(String imgFile) throws Exception{
+	    InputStream inputStream  = new FileInputStream(imgFile);
+	    byte[] data  = new byte[inputStream.available()];
+	    inputStream.read(data);
+	    inputStream.close();
+	    return Base64.encodeBase64String(data);
 	}
 	
 	/**
@@ -129,7 +114,7 @@ public class ImageUtil {
 	    File newFile = new File(newPath);
 	    ImageIO.write(grayImage, fileType, newFile);  
 		}catch(Exception e){
-			log.error(e.getMessage());
+			e.printStackTrace();
 		}
 		return newPath;
 	}

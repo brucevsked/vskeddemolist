@@ -1,12 +1,14 @@
 package com.vsked.test;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.vsked.util.ImageUtil;
 
-public class ImageUtilTest extends BaseTest{
+public class ImageUtilTest {
 	
-	private static Logger log = Logger.getLogger(ImageUtilTest.class);
+	private static final Logger log = LoggerFactory.getLogger(ImageUtilTest.class);
 	
 //	@Test
 	public void base64ToFile(){
@@ -181,9 +183,14 @@ public class ImageUtilTest extends BaseTest{
 	
 //	@Test
 	public void fileToBase64(){
+		try{
 		String imgFile="G:/SomePicture/Avatar/twitter9.png";
 		String result=ImageUtil.fileToBase64(imgFile);
 		log.debug(result);
+		}catch(Exception e){
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
 	}
 	
 //	@Test

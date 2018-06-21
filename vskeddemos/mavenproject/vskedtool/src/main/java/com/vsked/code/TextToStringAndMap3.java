@@ -20,7 +20,7 @@ public class TextToStringAndMap3 {
 			System.out.println("String "+s.replace(" ", "")+"=\"\";");
 		}
 		
-		System.out.println("Map<String,Object> m=new HashMap<String, Object>();");
+		System.out.println("Map<String,Object> m=new LinkedHashMap<String, Object>();");
 		
 		for(String s:dataList){
 			System.out.println("m.put(\""+s+"\","+s+");");
