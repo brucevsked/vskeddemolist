@@ -1,0 +1,5 @@
+﻿demo.php 本文件为向我方发送请求示例
+php_rsa验签.php 签名验证示例
+php接收xml或json流数据.php 接收回调示例
+testBase64AndRsa.php 使用base64及rsa加密示例
+testPost.php 发送post请求示例

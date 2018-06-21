@@ -1,0 +1,13 @@
+l:\Users\brucevsked\Documents\SharpDevelop Projects\demoproject\demoproject\bin\Debug\demoproject.exe.config
+l:\Users\brucevsked\Documents\SharpDevelop Projects\demoproject\demoproject\bin\Debug\demoproject.exe
+l:\Users\brucevsked\Documents\SharpDevelop Projects\demoproject\demoproject\bin\Debug\demoproject.pdb
+l:\Users\brucevsked\Documents\SharpDevelop Projects\demoproject\demoproject\obj\Debug\demoproject.csprojResolveAssemblyReference.cache
+l:\Users\brucevsked\Documents\SharpDevelop Projects\demoproject\demoproject\obj\Debug\demoproject.exe
+l:\Users\brucevsked\Documents\SharpDevelop Projects\demoproject\demoproject\obj\Debug\demoproject.pdb
+D:\vskedGxyf\project\demoproject\c#_qrcpaytest\demoproject\demoproject\obj\Debug\demoproject.csprojResolveAssemblyReference.cache
+D:\vskedGxyf\project\demoproject\c#_qrcpaytest\demoproject\demoproject\bin\Debug\demoproject.exe.config
+D:\vskedGxyf\project\demoproject\c#_qrcpaytest\demoproject\demoproject\bin\Debug\demoproject.exe
+D:\vskedGxyf\project\demoproject\c#_qrcpaytest\demoproject\demoproject\bin\Debug\demoproject.pdb
+D:\vskedGxyf\project\demoproject\c#_qrcpaytest\demoproject\demoproject\bin\Debug\BouncyCastle.Crypto.dll
+D:\vskedGxyf\project\demoproject\c#_qrcpaytest\demoproject\demoproject\obj\Debug\demoproject.exe
+D:\vskedGxyf\project\demoproject\c#_qrcpaytest\demoproject\demoproject\obj\Debug\demoproject.pdb

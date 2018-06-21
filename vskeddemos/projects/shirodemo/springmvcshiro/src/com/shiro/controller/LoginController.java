@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(params = "main")
-	public ModelAndView login(User user,HttpSession session, HttpServletRequest request) {
+	public ModelAndView login(User user, HttpServletRequest request) {
 
 		ModelAndView modelView = new ModelAndView();
 		Subject currentUser = SecurityUtils.getSubject();
@@ -43,8 +44,10 @@ public class LoginController {
 			
 		}
 		if(currentUser.isAuthenticated()){
+			Session session=getSession();
 			user.setUserName("张三");
 			session.setAttribute("userinfo", user);
+			session.setAttribute("companyid", "hereyouare");
 			modelView.setViewName("/main");
 		}else{
 			modelView.addObject("message", "login errors");
@@ -88,4 +91,10 @@ public class LoginController {
 		modelView.setViewName("/test");
 		return modelView;
 	}
+	
+	public Session getSession(){
+		Subject currentUser = SecurityUtils.getSubject();  
+		Session session = currentUser.getSession();
+		return session;
+    }
 }

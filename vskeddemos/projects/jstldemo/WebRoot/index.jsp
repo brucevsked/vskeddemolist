@@ -26,6 +26,10 @@ request.setAttribute("basePath", basePath);
   <ul>
   <li> <a href="${basePath }coreTagsDemo.jsp">coreTagsDemo</a> </li>
   <li> <a href="${basePath }proc/listmapproc.jsp">fortagDemo</a> </li>
+  
+  ${ck==null ?'cknull':'cknotnull' }
+  ${cv=='null' ?'cvnull':'cvnotnull' }
+  ${ca=="null" ?"canull":"canotnull" }
   </ul>
   </body>
 </html>

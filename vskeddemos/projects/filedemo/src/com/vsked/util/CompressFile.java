@@ -1,4 +1,4 @@
-package com.vsked.util;
+package com.vsked.test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -20,19 +20,18 @@ import java.util.zip.ZipOutputStream;
 public class CompressFile {
 
 	public static void main(String args[]) throws Exception {
-//		System.out.println(readFileInZip("c:/t.jar","tips.xml"));
+//		compress("E:/testa1/1.jpg", "E:/testa1/avv1.zip");
+		List<String> fileList=new LinkedList<String>();
+		fileList.add("E:/testa1/1.jpg");
+		fileList.add("E:/testa1/2.jpg");
+		fileList.add("E:/testa1/3.jpg");
+		compressEx(fileList, "E:/testa1/avv1.zip");
+		//uncompress("C:/Users/vsked/Desktop/temps/demoV.rar", "C:/Users/vsked/Desktop/temps/ss1/");
+		//scanZipFile("C:/ps.jar");
+		//loadZipFile("C:/ps.jar", "ps.xml");
 	}
 
-	public static String readFileInZip(String zipFilePath, String inFileName) throws Exception {
-		ZipFile zf =new ZipFile(new File(zipFilePath));
-		StringBuffer sb=new StringBuffer();
-		BufferedReader br=new BufferedReader(new InputStreamReader(zf.getInputStream(zf.getEntry(inFileName))));
-	    String s;
-	    while ((s = br.readLine()) != null) 
-	    	sb.append(s);
-	    br.close();
-	    return sb.toString();
-	}
+
 	public static String readFileContentInZip(String zipFilePath, String inFileName) {
 		String t = "";
 		String jarFilePath = zipFilePath;
@@ -46,7 +45,8 @@ public class CompressFile {
 				ZipEntry entry;
 				while ((entry = zin.getNextEntry()) != null) {
 					if (entry.getName().equals(fileName)) {
-						BufferedReader in = new BufferedReader(new InputStreamReader(zin,Charset.forName("utf-8")));
+						BufferedReader in = new BufferedReader(new InputStreamReader(zin));
+						//BufferedReader in = new BufferedReader(new InputStreamReader(zin,Charset.forName("utf-8")));
 						String s = "";
 						while ((s = in.readLine()) != null) {
 							t += s + "\n";
@@ -60,34 +60,39 @@ public class CompressFile {
 		}// end if jarFile
 		return t;
 	}
-	public static String readFileInZipByEncode(String zipFilePath, String inFileName,String inEncode) throws Exception {
-		inEncode=(inEncode==null||"".equals(inEncode))?"utf-8":inEncode;
-		ZipFile zf =new ZipFile(new File(zipFilePath));
-		StringBuffer sb=new StringBuffer();
-		BufferedReader br=new BufferedReader(new InputStreamReader(zf.getInputStream(zf.getEntry(inFileName)),Charset.forName(inEncode)));
-	    String s;
-	    while ((s = br.readLine()) != null) 
-	    	sb.append(s);
-	    br.close();
-	    return sb.toString();
-	}
 
-	public static List<String> getZipFileNameList(String zipname) throws Exception{
-		List<String> fileList = new ArrayList<String>();
-		ZipInputStream zin = new ZipInputStream(new FileInputStream(zipname));
-		ZipEntry entry;
-		while ((entry = zin.getNextEntry()) != null) {
-		fileList.add(entry.getName());
-		zin.closeEntry();
-		}
+	public static List getZipFileNameList(String zipname) {
+		List fileList = new ArrayList();
+		try {
+			ZipInputStream zin = new ZipInputStream(new FileInputStream(zipname));
+			ZipEntry entry;
+			while ((entry = zin.getNextEntry()) != null) {
+				// System.out.println(entry.getName());
+				fileList.add(entry.getName());
+				zin.closeEntry();
+			}
 			zin.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return fileList;
 	}
 
 	public static void compress(String inFileOrFolderName,String outCompressFileName) throws IOException {
+		File inFile = new File(inFileOrFolderName);
 		ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(outCompressFileName));
 		zos.setComment("");
 		zip(inFileOrFolderName, new File(outCompressFileName), zos, true, true);
+		zos.close();
+	}
+	
+	public static void compressEx(List<String> fileList,String outCompressFileName) throws IOException {
+		ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(outCompressFileName));
+		for(String inFileOrFolderName:fileList){
+		File inFile = new File(inFileOrFolderName);
+		zos.setComment("");
+		zip(inFileOrFolderName, new File(outCompressFileName), zos, true, true);
+		}
 		zos.close();
 	}
 
@@ -116,9 +121,9 @@ public class CompressFile {
            pathName=(pathName.substring(pathName.indexOf("\\", 0)+1));
            if(files[i].isDirectory()) {
                if(isOutBlankDir && basePath != null) {    
-                    zo.putNextEntry(new ZipEntry(pathName+"/"));  
+                    zo.putNextEntry(new ZipEntry(pathName+"/"));    //
                 }
-               if(isRecursive) {  
+               if(isRecursive) {    //
                     zip(files[i].getPath(), basePath, zo, isRecursive, isOutBlankDir);
                 }
             } else {

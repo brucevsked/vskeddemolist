@@ -1,4 +1,4 @@
-package com.vsked.util;
+package com.vsked.test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,11 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -21,7 +20,12 @@ import java.util.zip.ZipOutputStream;
 public class CompressFile {
 
 	public static void main(String args[]) throws Exception {
-		//compress("C:/Users/vsked/Desktop/temps/ss1", "C:/Users/vsked/Desktop/temps/demovx.rar");
+//		compress("E:/testa1/1.jpg", "E:/testa1/avv1.zip");
+		List<String> fileList=new LinkedList<String>();
+		fileList.add("E:/testa1/1.jpg");
+		fileList.add("E:/testa1/2.jpg");
+		fileList.add("E:/testa1/3.jpg");
+		compressEx(fileList, "E:/testa1/avv1.zip");
 		//uncompress("C:/Users/vsked/Desktop/temps/demoV.rar", "C:/Users/vsked/Desktop/temps/ss1/");
 		//scanZipFile("C:/ps.jar");
 		//loadZipFile("C:/ps.jar", "ps.xml");
@@ -79,6 +83,16 @@ public class CompressFile {
 		ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(outCompressFileName));
 		zos.setComment("");
 		zip(inFileOrFolderName, new File(outCompressFileName), zos, true, true);
+		zos.close();
+	}
+	
+	public static void compressEx(List<String> fileList,String outCompressFileName) throws IOException {
+		ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(outCompressFileName));
+		for(String inFileOrFolderName:fileList){
+		File inFile = new File(inFileOrFolderName);
+		zos.setComment("");
+		zip(inFileOrFolderName, new File(outCompressFileName), zos, true, true);
+		}
 		zos.close();
 	}
 
