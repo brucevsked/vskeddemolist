@@ -16,7 +16,7 @@ public class TextToMapGet {
 		String sourceFile="d:/source.txt";
 		List<String> dataList=FileUtils.readLines(new File(sourceFile),"utf-8");
 		
-		System.out.println("Map<String,Object> parMap=new LinkedHashMap<String, Object>();");
+		System.out.println("StringBuffer sb=new StringBuffer();");
 		
 		for(String s:dataList){
 			System.out.println("sb.append(\""+s+"\"+parMap.get(\""+s+"\"));");
