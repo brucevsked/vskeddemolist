@@ -7,23 +7,19 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TextToStringAndMap3 {
+public class TextToMapGet {
 	
-	private static final Logger log=LoggerFactory.getLogger(TextToStringAndMap3.class);
+	private static final Logger log=LoggerFactory.getLogger(TextToMapGet.class);
 
 	public static void main(String[] args) {
 		try{
 		String sourceFile="d:/source.txt";
 		List<String> dataList=FileUtils.readLines(new File(sourceFile),"utf-8");
 		
-		for(String s:dataList){
-			System.out.println("String "+s.replace(" ", "")+"=\"\";");
-		}
-		
 		System.out.println("Map<String,Object> parMap=new LinkedHashMap<String, Object>();");
 		
 		for(String s:dataList){
-			System.out.println("parMap.put(\""+s+"\","+s+");");
+			System.out.println("sb.append(\""+s+"\"+parMap.get(\""+s+"\"));");
 		}
 		
 		}catch(Exception e){

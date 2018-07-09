@@ -20,10 +20,16 @@ import com.vsked.service.MyService;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import java.util.concurrent.TimeUnit;
+import okhttp3.OkHttpClient;
 
 public class MyServiceNewTest {
 	
 	private final Logger log = LoggerFactory.getLogger(MyServiceNewTest.class);
+	private static final OkHttpClient client = new OkHttpClient.Builder().
+        connectTimeout(60, TimeUnit.SECONDS).
+        readTimeout(60, TimeUnit.SECONDS).
+        writeTimeout(60, TimeUnit.SECONDS).build();
 
 	
 	/**
