@@ -26,6 +26,7 @@ import okhttp3.OkHttpClient;
 public class MyServiceNewTest {
 	
 	private final Logger log = LoggerFactory.getLogger(MyServiceNewTest.class);
+	
 	private static final OkHttpClient client = new OkHttpClient.Builder().
         connectTimeout(60, TimeUnit.SECONDS).
         readTimeout(60, TimeUnit.SECONDS).
@@ -38,16 +39,21 @@ public class MyServiceNewTest {
 	@Test
 	public void getTest1() throws Exception{
 		String baseUrl="http://localhost:8080/retrofitdemo/";
-		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).build();
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.getTest1();
 		Response<ResponseBody> response=call.execute();
-		String responseBody=response.body().string();
-		if(log.isDebugEnabled()){
-			log.debug(response.isSuccessful()+"");
-			log.debug(response.toString());
-			log.debug(responseBody);
+		ResponseBody responseBody=response.body();
+		String result="";
+		if(responseBody!=null){
+			if(log.isDebugEnabled()){
+				log.debug(response.isSuccessful()+"");
+				log.debug(response.toString());
+				log.debug(responseBody.string());
+			}
+			result=responseBody.string();
 		}
+		log.debug("|"+result+"|");
 		
 	}
 	
@@ -59,16 +65,21 @@ public class MyServiceNewTest {
 		String baseUrl="http://localhost:8080/retrofitdemo/";
 		String mykey1="thisisfirest";
 		String mykey2="hallow2par";
-		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).build();
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.getTest2(mykey1,mykey2);
 		Response<ResponseBody> response=call.execute();
-		String responseBody=response.body().string();
-		if(log.isDebugEnabled()){
-			log.debug(response.isSuccessful()+"");
-			log.debug(response.toString());
-			log.debug(responseBody);
+		ResponseBody responseBody=response.body();
+		String result="";
+		if(responseBody!=null){
+			if(log.isDebugEnabled()){
+				log.debug(response.isSuccessful()+"");
+				log.debug(response.toString());
+				log.debug(responseBody.string());
+			}
+			result=responseBody.string();
 		}
+		log.debug("|"+result+"|");
 		
 	}
 	
@@ -83,16 +94,21 @@ public class MyServiceNewTest {
         myParMap.put("b2", "young");
         myParMap.put("c3", "girl");
         myParMap.put("d4", "youlove");
-		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).build();
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.getTest3(myParMap);
 		Response<ResponseBody> response=call.execute();
-		String responseBody=response.body().string();
-		if(log.isDebugEnabled()){
-			log.debug(response.isSuccessful()+"");
-			log.debug(response.toString());
-			log.debug(responseBody);
+		ResponseBody responseBody=response.body();
+		String result="";
+		if(responseBody!=null){
+			if(log.isDebugEnabled()){
+				log.debug(response.isSuccessful()+"");
+				log.debug(response.toString());
+				log.debug(responseBody.string());
+			}
+			result=responseBody.string();
 		}
+		log.debug("|"+result+"|");
 		
 	}
 
@@ -104,16 +120,21 @@ public class MyServiceNewTest {
 		String baseUrl="http://localhost:8080/retrofitdemo/";
 		String userName="admin";
 		String userPass="123456";
-		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).build();
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.postTest1(userName,userPass);
 		Response<ResponseBody> response=call.execute();
-		String responseBody=response.body().string();
-		if(log.isDebugEnabled()){
-			log.debug(response.isSuccessful()+"");
-			log.debug(response.toString());
-			log.debug(responseBody);
+		ResponseBody responseBody=response.body();
+		String result="";
+		if(responseBody!=null){
+			if(log.isDebugEnabled()){
+				log.debug(response.isSuccessful()+"");
+				log.debug(response.toString());
+				log.debug(responseBody.string());
+			}
+			result=responseBody.string();
 		}
+		log.debug("|"+result+"|");
 		
 	}
     
@@ -129,16 +150,21 @@ public class MyServiceNewTest {
         myParMap.put("c3", "girl");
         myParMap.put("d4", "youlove");
         myParMap.put("youcan", "seepost");
-		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).build();
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.postTest2(myParMap);
 		Response<ResponseBody> response=call.execute();
-		String responseBody=response.body().string();
-		if(log.isDebugEnabled()){
-			log.debug(response.isSuccessful()+"");
-			log.debug(response.toString());
-			log.debug(responseBody);
+		ResponseBody responseBody=response.body();
+		String result="";
+		if(responseBody!=null){
+			if(log.isDebugEnabled()){
+				log.debug(response.isSuccessful()+"");
+				log.debug(response.toString());
+				log.debug(responseBody.string());
+			}
+			result=responseBody.string();
 		}
+		log.debug("|"+result+"|");
 		
 	}
 	
@@ -148,7 +174,7 @@ public class MyServiceNewTest {
 //	@Test
 	public void postTest3()  throws Exception{
 		String baseUrl="http://localhost:8080/retrofitdemo/";
-		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).build();
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
 		
 		String userNameStr="mynameislost";
 		RequestBody userNameReqBody=RequestBody.create(MediaType.parse("multipart/form-data"), userNameStr);
@@ -163,12 +189,17 @@ public class MyServiceNewTest {
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.postTest3(userNameReqBody,myFileMultiBody);
 		Response<ResponseBody> response=call.execute();
-		String responseBody=response.body().string();
-		if(log.isDebugEnabled()){
-			log.debug(response.isSuccessful()+"");
-			log.debug(response.toString());
-			log.debug(responseBody);
+		ResponseBody responseBody=response.body();
+		String result="";
+		if(responseBody!=null){
+			if(log.isDebugEnabled()){
+				log.debug(response.isSuccessful()+"");
+				log.debug(response.toString());
+				log.debug(responseBody.string());
+			}
+			result=responseBody.string();
 		}
+		log.debug("|"+result+"|");
 		
 	}
 	
@@ -178,7 +209,7 @@ public class MyServiceNewTest {
 //	@Test
 	public void postTest4()  throws Exception{
 		String baseUrl="http://localhost:8080/retrofitdemo/";
-		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).build();
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
 		
         Map<String, RequestBody> myParMap=new HashMap<String, RequestBody>();
         
@@ -212,12 +243,17 @@ public class MyServiceNewTest {
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.postTest4(myParMap,partList);
 		Response<ResponseBody> response=call.execute();
-		String responseBody=response.body().string();
-		if(log.isDebugEnabled()){
-			log.debug(response.isSuccessful()+"");
-			log.debug(response.toString());
-			log.debug(responseBody);
+		ResponseBody responseBody=response.body();
+		String result="";
+		if(responseBody!=null){
+			if(log.isDebugEnabled()){
+				log.debug(response.isSuccessful()+"");
+				log.debug(response.toString());
+				log.debug(responseBody.string());
+			}
+			result=responseBody.string();
 		}
+		log.debug("|"+result+"|");
 		
 	}
 }
