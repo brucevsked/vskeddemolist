@@ -28,9 +28,9 @@ public class MyServiceNewTest {
 	private final Logger log = LoggerFactory.getLogger(MyServiceNewTest.class);
 	
 	private static final OkHttpClient client = new OkHttpClient.Builder().
-        connectTimeout(60, TimeUnit.SECONDS).
-        readTimeout(60, TimeUnit.SECONDS).
-        writeTimeout(60, TimeUnit.SECONDS).build();
+        connectTimeout(180, TimeUnit.SECONDS).
+        readTimeout(180, TimeUnit.SECONDS).
+        writeTimeout(180, TimeUnit.SECONDS).build();
 
 	
 	/**
@@ -43,13 +43,16 @@ public class MyServiceNewTest {
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.getTest1();
 		Response<ResponseBody> response=call.execute();
-		ResponseBody responseBody=response.body();
 		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
 		if(responseBody!=null){
 			if(log.isDebugEnabled()){
-				log.debug(response.isSuccessful()+"");
-				log.debug(response.toString());
-				log.debug(responseBody.string());
+				log.debug("|"+responseBody.string()+"|");
 			}
 			result=responseBody.string();
 		}
@@ -69,13 +72,16 @@ public class MyServiceNewTest {
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.getTest2(mykey1,mykey2);
 		Response<ResponseBody> response=call.execute();
-		ResponseBody responseBody=response.body();
 		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
 		if(responseBody!=null){
 			if(log.isDebugEnabled()){
-				log.debug(response.isSuccessful()+"");
-				log.debug(response.toString());
-				log.debug(responseBody.string());
+				log.debug("|"+responseBody.string()+"|");
 			}
 			result=responseBody.string();
 		}
@@ -98,13 +104,16 @@ public class MyServiceNewTest {
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.getTest3(myParMap);
 		Response<ResponseBody> response=call.execute();
-		ResponseBody responseBody=response.body();
 		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
 		if(responseBody!=null){
 			if(log.isDebugEnabled()){
-				log.debug(response.isSuccessful()+"");
-				log.debug(response.toString());
-				log.debug(responseBody.string());
+				log.debug("|"+responseBody.string()+"|");
 			}
 			result=responseBody.string();
 		}
@@ -124,13 +133,16 @@ public class MyServiceNewTest {
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.postTest1(userName,userPass);
 		Response<ResponseBody> response=call.execute();
-		ResponseBody responseBody=response.body();
 		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
 		if(responseBody!=null){
 			if(log.isDebugEnabled()){
-				log.debug(response.isSuccessful()+"");
-				log.debug(response.toString());
-				log.debug(responseBody.string());
+				log.debug("|"+responseBody.string()+"|");
 			}
 			result=responseBody.string();
 		}
@@ -154,13 +166,16 @@ public class MyServiceNewTest {
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.postTest2(myParMap);
 		Response<ResponseBody> response=call.execute();
-		ResponseBody responseBody=response.body();
 		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
 		if(responseBody!=null){
 			if(log.isDebugEnabled()){
-				log.debug(response.isSuccessful()+"");
-				log.debug(response.toString());
-				log.debug(responseBody.string());
+				log.debug("|"+responseBody.string()+"|");
 			}
 			result=responseBody.string();
 		}
@@ -189,13 +204,16 @@ public class MyServiceNewTest {
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.postTest3(userNameReqBody,myFileMultiBody);
 		Response<ResponseBody> response=call.execute();
-		ResponseBody responseBody=response.body();
 		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
 		if(responseBody!=null){
 			if(log.isDebugEnabled()){
-				log.debug(response.isSuccessful()+"");
-				log.debug(response.toString());
-				log.debug(responseBody.string());
+				log.debug("|"+responseBody.string()+"|");
 			}
 			result=responseBody.string();
 		}
@@ -243,13 +261,16 @@ public class MyServiceNewTest {
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.postTest4(myParMap,partList);
 		Response<ResponseBody> response=call.execute();
-		ResponseBody responseBody=response.body();
 		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
 		if(responseBody!=null){
 			if(log.isDebugEnabled()){
-				log.debug(response.isSuccessful()+"");
-				log.debug(response.toString());
-				log.debug(responseBody.string());
+				log.debug("|"+responseBody.string()+"|");
 			}
 			result=responseBody.string();
 		}
