@@ -51,10 +51,10 @@ public class MyServiceNewTest {
 		}
 		
 		if(responseBody!=null){
-			if(log.isDebugEnabled()){
-				log.debug("|"+responseBody.string()+"|");
-			}
 			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
 		}
 		log.debug("|"+result+"|");
 		
@@ -80,10 +80,10 @@ public class MyServiceNewTest {
 		}
 		
 		if(responseBody!=null){
-			if(log.isDebugEnabled()){
-				log.debug("|"+responseBody.string()+"|");
-			}
 			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
 		}
 		log.debug("|"+result+"|");
 		
@@ -112,10 +112,10 @@ public class MyServiceNewTest {
 		}
 		
 		if(responseBody!=null){
-			if(log.isDebugEnabled()){
-				log.debug("|"+responseBody.string()+"|");
-			}
 			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
 		}
 		log.debug("|"+result+"|");
 		
@@ -141,10 +141,10 @@ public class MyServiceNewTest {
 		}
 		
 		if(responseBody!=null){
-			if(log.isDebugEnabled()){
-				log.debug("|"+responseBody.string()+"|");
-			}
 			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
 		}
 		log.debug("|"+result+"|");
 		
@@ -174,10 +174,10 @@ public class MyServiceNewTest {
 		}
 		
 		if(responseBody!=null){
-			if(log.isDebugEnabled()){
-				log.debug("|"+responseBody.string()+"|");
-			}
 			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
 		}
 		log.debug("|"+result+"|");
 		
@@ -212,10 +212,10 @@ public class MyServiceNewTest {
 		}
 		
 		if(responseBody!=null){
-			if(log.isDebugEnabled()){
-				log.debug("|"+responseBody.string()+"|");
-			}
 			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
 		}
 		log.debug("|"+result+"|");
 		
@@ -269,10 +269,10 @@ public class MyServiceNewTest {
 		}
 		
 		if(responseBody!=null){
-			if(log.isDebugEnabled()){
-				log.debug("|"+responseBody.string()+"|");
-			}
 			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
 		}
 		log.debug("|"+result+"|");
 		
