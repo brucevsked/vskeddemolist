@@ -15,15 +15,16 @@ public class TextToStringAndMap3 {
 		try{
 		String sourceFile="d:/source.txt";
 		List<String> dataList=FileUtils.readLines(new File(sourceFile),"utf-8");
-		
+		int i=0;
 		for(String s:dataList){
-			System.out.println("String "+s.replace(" ", "")+"=\"\";");
+			System.out.println("String "+s.replace(" ", "")+"=\""+i+"\";");
+			i++;
 		}
 		
-		System.out.println("Map<String,Object> parMap=new LinkedHashMap<String, Object>();");
+		System.out.println("Map<String,Object> dataMap=new LinkedHashMap<String, Object>();");
 		
 		for(String s:dataList){
-			System.out.println("parMap.put(\""+s+"\","+s+");");
+			System.out.println("dataMap.put(\""+s+"\","+s+");");
 		}
 		
 		}catch(Exception e){

@@ -28,9 +28,9 @@ public class TextToString1 {
 		try{
 		String sourceFile="d:/source.txt";
 		List<String> dataList=FileUtils.readLines(new File(sourceFile),"utf-8");
-		
+		int i=0;
 		for(String s:dataList){
-			System.out.println("String "+s.replace(" ", "")+"=\"\";");
+			System.out.println("String "+s.replace(" ", "")+"=\""+i+"\";");
 		}
 		
 		}catch(Exception e){
