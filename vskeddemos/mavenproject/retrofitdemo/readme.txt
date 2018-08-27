@@ -2,6 +2,9 @@
 
 http://localhost:8080/retrofitdemo
 
+@Url String reqUrl
+可以使用动态路径
+
 
 
 先把这个项目用tomcat跑起来
