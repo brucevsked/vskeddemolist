@@ -71,7 +71,7 @@ public class StringToolsTest {
 		TraceUtils.endTrace();
 	}
 	
-	@Test
+//	@Test
 	public void xmlToMap_dom4jExt3(){
 		TraceUtils.beginTrace();
 		try{
