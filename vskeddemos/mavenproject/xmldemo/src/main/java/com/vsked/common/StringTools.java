@@ -2,14 +2,20 @@ package com.vsked.common;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 
 public class StringTools {
+	
+	static List<Map<String, String>> xmlDataList=new LinkedList<Map<String,String>>();
+	
 	
 	/**
 	 * 转换xml为map dom4j版本
@@ -37,5 +43,77 @@ public class StringTools {
 		}
 		return resultMap;
 	}
-
+	
+	public static List<Map<String, String>> xmlToMap_dom4jExt1(String xml) throws Exception{
+		xmlDataList=new LinkedList<Map<String,String>>();
+		Map<String, Object> resultMap=new LinkedHashMap<String, Object>();
+		Document doc = DocumentHelper.parseText(xml);
+		Element rootElt = doc.getRootElement(); 
+		xmlDataList=getNode(rootElt);
+		return xmlDataList;
+	}
+	
+	public static List<Map<String, String>> getNode(Element node){
+		Map<String, String> nodeMap=new LinkedHashMap<String, String>();
+		nodeMap.put("n1d_"+node.getName(), node.getText());
+		List<Attribute> listAttr=node.attributes();//当前节点的所有属性的list
+		for(Attribute attr:listAttr){//遍历当前节点的所有属性
+			String name=attr.getName();//属性名称
+			String value=attr.getValue();//属性的值
+			nodeMap.put("a1t_"+name, value);
+		}
+		xmlDataList.add(nodeMap);
+		List<Element> listElement=node.elements();
+		for(Element el:listElement){
+			getNode(el);
+		}
+		return xmlDataList;
+	}
+	
+	public static List<Map<String, String>> getNodeExt1(Element node){
+		Map<String, String> nodeMap=new LinkedHashMap<String, String>();
+		System.out.println("节点名称"+node.getName());
+		List<Attribute> listAttr=node.attributes();//当前节点的所有属性的list
+		for(Attribute attr:listAttr){//遍历当前节点的所有属性
+			String name=attr.getName();//属性名称
+			String value=attr.getValue();//属性的值
+			System.out.println("属性名称|"+name+"属性值|"+ value);
+		}
+		System.out.println("-------------------------------------------");
+		xmlDataList.add(nodeMap);
+		List<Element> listElement=node.elements();
+		for(Element el:listElement){
+			getNodeExt1(el);
+		}
+		return xmlDataList;
+	}
+	
+	//顶层
+	public static List<Map<String, String>>  xmlToMap_dom4jExt2(String xml) throws Exception{
+		List<Map<String, String>> dataList=new LinkedList<Map<String,String>>();
+		Document doc = DocumentHelper.parseText(xml);
+		Element rootElt = doc.getRootElement(); 
+		Iterator<?> it = rootElt.elementIterator();
+		while (it.hasNext()) {
+			Element recordEle = (Element) it.next();
+			System.out.println("节点名称"+recordEle.getName());
+			List<Attribute> listAttr=recordEle.attributes();//当前节点的所有属性的list
+			for(Attribute attr:listAttr){//遍历当前节点的所有属性
+				String name=attr.getName();//属性名称
+				String value=attr.getValue();//属性的值
+				System.out.println("属性名称|"+name+"属性值|"+ value);
+			}
+		}
+		return dataList;
+	}
+	
+	public static List<Map<String, String>>  xmlToMap_dom4jExt3(String xml) throws Exception{
+		xmlDataList=new LinkedList<Map<String,String>>();
+		Map<String, Object> resultMap=new LinkedHashMap<String, Object>();
+		Document doc = DocumentHelper.parseText(xml);
+		Element rootElt = doc.getRootElement(); 
+		xmlDataList=getNodeExt1(rootElt);
+		return xmlDataList;
+	}
+	
 }

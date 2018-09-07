@@ -1,7 +1,10 @@
 package com.vsked.common;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +14,7 @@ public class StringToolsTest {
 	
 	private static final Logger log=LoggerFactory.getLogger(StringToolsTest.class);
 	
-	@Test
+//	@Test
 	public void xmlToMap_dom4j(){
 		TraceUtils.beginTrace();
 		try{
@@ -25,6 +28,56 @@ public class StringToolsTest {
 			log.debug("xml|"+xml+"|");
 			Map<String, Object> resultMap=StringTools.xmlToMap_dom4j(xml);
 			log.debug("resultMap|"+resultMap+"|");
+		}catch(Exception e){
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
+		TraceUtils.endTrace();
+	}
+	
+//	@Test
+	public void xmlToMap_dom4jExt1(){
+		TraceUtils.beginTrace();
+		try{
+			String pathname="e:/pano.xml";
+			String xml=FileUtils.readFileToString(new File(pathname),"utf-8");
+			List<Map<String, String>> dataList=StringTools.xmlToMap_dom4jExt1(xml);
+			for(Map<String, String> data:dataList){
+				log.debug(data+"");
+				log.debug("-----------------------------------");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
+		TraceUtils.endTrace();
+	}
+	
+//	@Test
+	public void xmlToMap_dom4jExt2(){
+		TraceUtils.beginTrace();
+		try{
+			String pathname="e:/pano.xml";
+			String xml=FileUtils.readFileToString(new File(pathname),"utf-8");
+			List<Map<String, String>> dataList=StringTools.xmlToMap_dom4jExt2(xml);
+			for(Map<String, String> data:dataList){
+				log.debug(data+"");
+				log.debug("-----------------------------------");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
+		TraceUtils.endTrace();
+	}
+	
+	@Test
+	public void xmlToMap_dom4jExt3(){
+		TraceUtils.beginTrace();
+		try{
+			String pathname="e:/pano.xml";
+			String xml=FileUtils.readFileToString(new File(pathname),"utf-8");
+			List<Map<String, String>> dataList=StringTools.xmlToMap_dom4jExt3(xml);
 		}catch(Exception e){
 			e.printStackTrace();
 			log.error(e.getMessage());
