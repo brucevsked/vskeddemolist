@@ -84,5 +84,19 @@ public class StringToolsTest {
 		}
 		TraceUtils.endTrace();
 	}
+	
+	@Test
+	public void tourData(){
+		TraceUtils.beginTrace();
+		try{
+			String pathname="e:/pano.xml";
+			String xml=FileUtils.readFileToString(new File(pathname),"utf-8");
+			StringTools.tourData(xml);
+		}catch(Exception e){
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
+		TraceUtils.endTrace();
+	}
 
 }
