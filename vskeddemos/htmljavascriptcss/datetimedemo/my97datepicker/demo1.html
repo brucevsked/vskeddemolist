@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>模板页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+  .taa1{
+   }
+</style>
+
+</head>
+
+<body>
+
+单个元素绑定
+<input type="text" id="openTime1"><input type="text" id="openTime2">
+<br>
+多个元素绑定
+<input type="text" id="startTime1" class="taa1"><input type="text" id="endTime1" class="taa1">
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js" type="text/javascript"></script> 
+<script type="text/javascript" charset="UTF-8" src="WdatePicker.js"></script>
+
+<script type="text/javascript">
+$('#openTime1').on('click',function(){
+WdatePicker({el:'openTime1',dateFmt:'yyyy-MM-dd HH:mm:ss'});
+  });
+$('#openTime2').on('click',function(){
+WdatePicker({el:'openTime2',skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'});
+  });
+
+//同时绑定多个
+$('.taa1').each(function(){
+$('#'+this.id).on('click',function(){
+WdatePicker({el:this.id,dateFmt:'yyyy-MM-dd HH:mm:ss'});
+  });
+}); 
+</script>
+
+</body>
+</html>

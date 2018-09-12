@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>模板页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+  .taa1{
+   }
+</style>
+
+</head>
+
+<body>
+
+单个元素绑定
+<input type="text" id="openTime1"><input type="text" id="openTime2">
+<br>
+多个元素绑定
+<input type="text" id="startTime1" class="taa1"><input type="text" id="endTime1" class="taa1">
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js" type="text/javascript"></script> 
+<script type="text/javascript" charset="UTF-8" src="laydate.js"></script>
+
+<script type="text/javascript">
+//执行一个laydate实例
+laydate.render({
+  elem: '#openTime1' //指定元素
+});
+laydate.render({
+  elem: '#openTime2', //指定元素
+  type: 'datetime'
+});
+
+//同时绑定多个
+$('.taa1').each(function(){
+  //console.log(this.id)
+  laydate.render({
+    elem: this
+    ,trigger: 'click'
+  });
+}); 
+</script>
+
+</body>
+</html>
