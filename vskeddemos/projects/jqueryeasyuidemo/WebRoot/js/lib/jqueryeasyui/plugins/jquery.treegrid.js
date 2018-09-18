@@ -1,7 +1,7 @@
 /**
- * jQuery EasyUI 1.5.2
+ * EasyUI for jQuery 1.6.2
  * 
- * Copyright (c) 2009-2017 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -1010,6 +1010,9 @@ if(col.checkbox){
 cc.push("class=\"datagrid-cell-check ");
 }else{
 cc.push("class=\"datagrid-cell "+col.cellClass);
+}
+if(_103==opts.treeField){
+cc.push(" tree-node");
 }
 cc.push("\">");
 if(col.checkbox){

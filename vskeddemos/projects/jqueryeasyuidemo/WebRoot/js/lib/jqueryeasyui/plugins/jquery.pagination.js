@@ -1,7 +1,7 @@
 /**
- * jQuery EasyUI 1.5.2
+ * EasyUI for jQuery 1.6.2
  * 
- * Copyright (c) 2009-2017 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -80,7 +80,6 @@ $("<td class=\"pagination-links\"></td>").appendTo(tr);
 if(_8=="info"){
 if(_7==aa.length-1){
 $("<div class=\"pagination-info\"></div>").appendTo(_5);
-$("<div style=\"clear:both;\"></div>").appendTo(_5);
 }else{
 $("<td><div class=\"pagination-info\"></div></td>").appendTo(tr);
 }
@@ -115,6 +114,7 @@ var td=$("<td></td>").appendTo(tr);
 $(_4.buttons).appendTo(td).show();
 }
 }
+$("<div style=\"clear:both;\"></div>").appendTo(_5);
 function _9(_c){
 var _d=_4.nav[_c];
 var a=$("<a href=\"javascript:;\"></a>").appendTo(tr);

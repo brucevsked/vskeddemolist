@@ -1,7 +1,7 @@
 /**
- * jQuery EasyUI 1.5.2
+ * EasyUI for jQuery 1.6.2
  * 
- * Copyright (c) 2009-2017 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -862,7 +862,7 @@ nt.empty();
 var _e6=$("<input class=\"tree-editor\">").appendTo(nt);
 _e6.val(_e4.text).focus();
 _e6.width(_e5+20);
-_e6._outerHeight(18);
+_e6._outerHeight(_e3.editorHeight);
 _e6.bind("click",function(e){
 return false;
 }).bind("mousedown",function(e){
@@ -1122,7 +1122,7 @@ item.state="open";
 }
 item.domId="_easyui_tree_"+_11d++;
 cc.push("<li>");
-cc.push("<div id=\""+item.domId+"\" class=\"tree-node\">");
+cc.push("<div id=\""+item.domId+"\" class=\"tree-node"+(item.nodeCls?" "+item.nodeCls:"")+"\">");
 for(var j=0;j<_125;j++){
 cc.push("<span class=\"tree-indent\"></span>");
 }
@@ -1188,7 +1188,7 @@ return true;
 }
 return false;
 }};
-$.fn.tree.defaults={url:null,method:"post",animate:false,checkbox:false,cascadeCheck:true,onlyLeafCheck:false,lines:false,dnd:false,data:null,queryParams:{},formatter:function(node){
+$.fn.tree.defaults={url:null,method:"post",animate:false,checkbox:false,cascadeCheck:true,onlyLeafCheck:false,lines:false,dnd:false,editorHeight:26,data:null,queryParams:{},formatter:function(node){
 return node.text;
 },filter:function(q,node){
 var qq=[];

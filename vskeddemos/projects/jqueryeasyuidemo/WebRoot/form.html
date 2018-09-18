@@ -19,7 +19,7 @@
             <table cellpadding="5">
                 <tr>
                     <td>Name:</td>
-                    <td><input class="easyui-textbox" type="text" name="name" ></input></td>
+                    <td><input class="easyui-textbox" type="text" name="name" id="myName1" ></input></td>
                 </tr>
                 <tr>
                     <td>Email:</td>
@@ -48,15 +48,24 @@
         <div style="text-align:center;padding:5px">
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
+            <button type="button" id="test1bt" class="easyui-linkbutton" onclick="t1()">textbox取值</button>
+            <button type="button" id="test1bt" class="easyui-linkbutton" onclick="t2()">textbox焦点</button>
         </div>
         </div>
     </div>
+    <div id="rsMsg"></div>
     <script>
         function submitForm(){
             $('#ff').form('submit');
         }
         function clearForm(){
             $('#ff').form('clear');
+        }
+        function t1(){
+          $('#rsMsg').html('name:'+$("#myName1").textbox('getValue'));
+        }
+        function t2(){
+          $('#myName1').textbox('textbox').focus();
         }
     </script>
 </body>

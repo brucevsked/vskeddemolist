@@ -1,7 +1,7 @@
 /**
- * jQuery EasyUI 1.5.2
+ * EasyUI for jQuery 1.6.2
  * 
- * Copyright (c) 2009-2017 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -100,11 +100,11 @@ var _26=_24.switchbutton;
 var _27=_26.find(".switchbutton-value");
 if(_23){
 _25.disabled=true;
-$(_22).add(_27).attr("disabled","disabled");
+$(_22).add(_27)._propAttr("disabled",true);
 _26.addClass("switchbutton-disabled");
 }else{
 _25.disabled=false;
-$(_22).add(_27).removeAttr("disabled");
+$(_22).add(_27)._propAttr("disabled",false);
 _26.removeClass("switchbutton-disabled");
 }
 };
@@ -187,7 +187,7 @@ $.fn.switchbutton.parseOptions=function(_38){
 var t=$(_38);
 return $.extend({},$.parser.parseOptions(_38,["onText","offText","handleText",{handleWidth:"number",reversed:"boolean"}]),{value:(t.val()||undefined),checked:(t.attr("checked")?true:undefined),disabled:(t.attr("disabled")?true:undefined),readonly:(t.attr("readonly")?true:undefined)});
 };
-$.fn.switchbutton.defaults={handleWidth:"auto",width:60,height:26,checked:false,disabled:false,readonly:false,reversed:false,onText:"ON",offText:"OFF",handleText:"",value:"on",onChange:function(_39){
+$.fn.switchbutton.defaults={handleWidth:"auto",width:60,height:30,checked:false,disabled:false,readonly:false,reversed:false,onText:"ON",offText:"OFF",handleText:"",value:"on",onChange:function(_39){
 }};
 })(jQuery);
 
