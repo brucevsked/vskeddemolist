@@ -1,9 +1,12 @@
-
+﻿
 对象管理及依赖注入事务等
 spring framework
 
 mvc
 spring mvc
+
+数据库连接池
+HikariCP
 
 json处理
 jackson
