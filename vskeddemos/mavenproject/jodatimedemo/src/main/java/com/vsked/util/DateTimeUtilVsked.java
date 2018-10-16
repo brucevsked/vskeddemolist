@@ -7,12 +7,23 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
+import org.joda.time.format.DateTimeFormat;
 
 public class DateTimeUtilVsked {
     private static final String FORMATE_DATE = "yyyy-MM-dd";  
     private static final String FORMATE_SECONDS = "HH:mm:ss";  
-    private static final String FORMATE_FULL = FORMATE_DATE.concat(" ").concat(FORMATE_SECONDS); 
+    public static final String FORMATE_FULL = FORMATE_DATE.concat(" ").concat(FORMATE_SECONDS); 
     static DateTime dt=new DateTime();
+    
+    /**
+     * 字符串转日期
+     * @param d1 日期
+     * @param format 日期格式
+     * @return
+     */
+    public static DateTime strToDate(String d1,String format){
+    	return DateTime.parse(d1, DateTimeFormat.forPattern(format));
+    }
 	
 	/**
 	 * 获取当前日期 如2015-07-15
@@ -199,5 +210,19 @@ public class DateTimeUtilVsked {
 	public static String getTomorrow(String dateformat){
 		return LocalDate.now().plusDays(1).toString(dateformat);
 	}
-
+	
+/**
+ * // Joda-time 各种操作.....  
+dateTime = dateTime.plusDays(1) // 增加天  
+                    .plusYears(1)// 增加年  
+                    .plusMonths(1)// 增加月  
+                    .plusWeeks(1)// 增加星期  
+                    .minusMillis(1)// 减分钟  
+                    .minusHours(1)// 减小时  
+                    .minusSeconds(1);// 减秒数  
+//和系统时间比  
+boolean b1 = d1.isAfterNow();  
+boolean b2 = d1.isBeforeNow();  
+boolean b3 = d1.isEqualNow(); 
+ */
 }
