@@ -36,7 +36,7 @@ public class MyServiceNewTest {
 	/**
 	 * 无参数get测试
 	 */
-	@Test
+//	@Test
 	public void getTest1() throws Exception{
 		String baseUrl="http://localhost:8080/retrofitdemo/";
 		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
@@ -165,6 +165,99 @@ public class MyServiceNewTest {
 		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
 		MyService service=retrofit.create(MyService.class);
 		Call<ResponseBody> call=service.postTest2(myParMap);
+		Response<ResponseBody> response=call.execute();
+		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
+		if(responseBody!=null){
+			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
+		}
+		log.debug("|"+result+"|");
+		
+	}
+	
+	/**
+	 * 不固定参数个数post测试
+	 */
+//	@Test
+	public void postTest21()  throws Exception{
+		String baseUrl="http://localhost:8080/retrofitdemo/";
+        Map<String, Object> myParMap=new HashMap<String, Object>();
+        myParMap.put("a1", "6666");
+        myParMap.put("b2", "young666");
+        myParMap.put("c3", "girl666");
+        myParMap.put("d4", "youlove666");
+        myParMap.put("youcan", "seepost66");
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
+		MyService service=retrofit.create(MyService.class);
+		String tvid="test1proc1.jsp";
+		Call<ResponseBody> call=service.postTest21(tvid,myParMap);
+		Response<ResponseBody> response=call.execute();
+		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
+		if(responseBody!=null){
+			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
+		}
+		log.debug("|"+result+"|");
+		
+	}
+	
+	/**
+	 * 不固定参数个数post测试
+	 */
+//	@Test
+	public void postTest22()  throws Exception{
+		String baseUrl="http://localhost:8080/retrofitdemo/";
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
+		MyService service=retrofit.create(MyService.class);
+		String myContent="{\"key\":\"valkue\"}";
+		RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),myContent);
+		Call<ResponseBody> call=service.postTest22(body);
+		Response<ResponseBody> response=call.execute();
+		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
+		if(responseBody!=null){
+			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
+		}
+		log.debug("|"+result+"|");
+		
+	}
+	
+	/**
+	 * 不固定参数个数post测试
+	 */
+	@Test
+	public void postTest23()  throws Exception{
+		String baseUrl="http://localhost:8080/retrofitdemo/";
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
+		MyService service=retrofit.create(MyService.class);
+		String myContent="{\"key\":\"valkue\",\"name\":\"vsked\",\"id\":\"3701\"}";
+		String tvid="test1proc1.jsp";
+		RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),myContent);
+		Call<ResponseBody> call=service.postTest23(tvid,body);
 		Response<ResponseBody> response=call.execute();
 		String result="";
 		ResponseBody responseBody=response.body();

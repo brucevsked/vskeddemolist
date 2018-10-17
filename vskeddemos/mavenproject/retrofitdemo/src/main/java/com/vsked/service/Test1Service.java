@@ -1,6 +1,9 @@
 package com.vsked.service;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +48,23 @@ public class Test1Service extends BaseService{
 				log.error(e.getMessage());
 			}
 			System.out.println(getMyAppPath(req));
+		}
+		
+		if(contentType!=null && contentType.indexOf("json")>-1){
+			//get data from request stream for json
+			try{
+			InputStream is = req.getInputStream();  
+	        InputStreamReader isr = new InputStreamReader(is);  
+	        BufferedReader br = new BufferedReader(isr);  
+	        StringBuffer sb=new StringBuffer();
+	        String s="";
+	        while ((s = br.readLine()) != null) {  
+	            sb.append(s);  
+	        }  
+	       result= sb.toString();
+			}catch(Exception e){
+				log.error(e.getMessage());
+			}
 		}
 		log.debug(result);
 		return result;

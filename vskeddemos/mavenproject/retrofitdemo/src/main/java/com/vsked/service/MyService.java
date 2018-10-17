@@ -7,14 +7,17 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -37,6 +40,18 @@ public interface MyService {
 	@FormUrlEncoded
 	@POST("proc/test1proc1.jsp")
 	Call<ResponseBody> postTest2(@FieldMap Map<String, Object> parMap);
+	
+	@FormUrlEncoded
+	@POST("proc/{tvid}")
+	Call<ResponseBody> postTest21(@Path("tvid") String tvid, @FieldMap Map<String, Object> parMap);
+	
+	@Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
+	@POST("proc/test1proc1.jsp")
+	Call<ResponseBody> postTest22(@Body RequestBody info);
+	
+	@Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
+	@POST("proc/{tvid}")
+	Call<ResponseBody> postTest23(@Path("tvid") String tvid,@Body RequestBody info);
 	
 	@Multipart
 	@POST("proc/test1proc1.jsp")
