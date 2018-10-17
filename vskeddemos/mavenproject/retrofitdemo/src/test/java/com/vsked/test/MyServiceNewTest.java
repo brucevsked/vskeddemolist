@@ -249,7 +249,7 @@ public class MyServiceNewTest {
 	/**
 	 * 不固定参数个数post测试
 	 */
-	@Test
+//	@Test
 	public void postTest23()  throws Exception{
 		String baseUrl="http://localhost:8080/retrofitdemo/";
 		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
@@ -258,6 +258,37 @@ public class MyServiceNewTest {
 		String tvid="test1proc1.jsp";
 		RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),myContent);
 		Call<ResponseBody> call=service.postTest23(tvid,body);
+		Response<ResponseBody> response=call.execute();
+		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("|"+response.toString()+"|");
+		}
+		
+		if(responseBody!=null){
+			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("|"+result+"|");
+			}
+		}
+		log.debug("|"+result+"|");
+		
+	}
+	
+	/**
+	 * 不固定参数个数post测试
+	 */
+	@Test
+	public void postTest24()  throws Exception{
+		String baseUrl="http://localhost:8080/retrofitdemo/";
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
+		MyService service=retrofit.create(MyService.class);
+		String myContent="{\"key\":\"valkue\",\"name\":\"vsked\",\"id\":\"3701\"}";
+		String tvid="test1proc1.jsp";
+		String access_token="myaccesstokenisheygirl";
+		RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),myContent);
+		Call<ResponseBody> call=service.postTest24(tvid,access_token,body);
 		Response<ResponseBody> response=call.execute();
 		String result="";
 		ResponseBody responseBody=response.body();

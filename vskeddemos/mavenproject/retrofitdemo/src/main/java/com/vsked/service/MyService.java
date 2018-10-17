@@ -53,6 +53,10 @@ public interface MyService {
 	@POST("proc/{tvid}")
 	Call<ResponseBody> postTest23(@Path("tvid") String tvid,@Body RequestBody info);
 	
+	@Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
+	@POST("proc/{tvid}")
+	Call<ResponseBody> postTest24(@Path("tvid") String tvid,@Query("access_token") String access_token,@Body RequestBody info);
+	
 	@Multipart
 	@POST("proc/test1proc1.jsp")
 	Call<ResponseBody> postTest3(@Part("userName") RequestBody userName,@Part MultipartBody.Part myFile);
