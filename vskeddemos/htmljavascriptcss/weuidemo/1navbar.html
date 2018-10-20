@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>模板页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" type="text/css" href="css/lib/weui/weui.min.css">
+<link rel="stylesheet" type="text/css" href="css/lib/weui/weuiex1.css">
+
+</head>
+
+<body ontouchstart>
+<div class="container" id="container">
+      
+<div class="weui-tab">
+            <div class="weui-navbar">
+                <div class="weui-navbar__item weui-bar__item_on">
+                    选项一
+                </div>
+                <div class="weui-navbar__item">
+                    选项二
+                </div>
+                <div class="weui-navbar__item">
+                    选项三
+                </div>
+            </div>
+            <div class="weui-tab__panel">
+
+            </div>
+        </div>
+
+</div>
+<!-- 使用方向键试试 或拖动看看-->
+<script src="js/lib/wechat/zepto.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $('.weui-navbar__item').on('click', function () {
+            $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
+        });
+    });
+</script>
+
+</body>
+</html>

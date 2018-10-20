@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>模板页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" type="text/css" href="css/lib/weui/weui.min.css">
+<link rel="stylesheet" type="text/css" href="css/lib/weui/weuiex1.css">
+</head>
+
+<body ontouchstart>
+<div class="container" id="container">
+<div class="page toast js_show">
+    <div class="page__hd">
+        <h1 class="page__title">Toast</h1>
+        <p class="page__desc">弹出式提示</p>
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <a href="javascript:;" class="weui-btn weui-btn_default" id="showToast">成功提示</a>
+        <a href="javascript:;" class="weui-btn weui-btn_default" id="showLoadingToast">加载中提示</a>
+    </div>
+
+    <!--BEGIN toast-->
+    <div id="toast" style="opacity: 0; display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">已完成</p>
+        </div>
+    </div>
+    <!--end toast-->
+
+    <!-- loading toast -->
+    <div id="loadingToast" style="opacity: 0; display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">数据加载中</p>
+        </div>
+    </div>
+</div>
+
+</div>
+<!-- 使用方向键试试 或拖动看看-->
+<script src="js/lib/wechat/zepto.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    // toast
+    $(function(){
+        var $toast = $('#toast');
+        $('#showToast').on('click', function(){
+            if ($toast.css('display') != 'none') return;
+
+            $toast.fadeIn(100);
+            setTimeout(function () {
+                $toast.fadeOut(100);
+            }, 2000);
+        });
+    });
+
+    // loading
+    $(function(){
+        var $loadingToast = $('#loadingToast');
+        $('#showLoadingToast').on('click', function(){
+            if ($loadingToast.css('display') != 'none') return;
+
+            $loadingToast.fadeIn(100);
+            setTimeout(function () {
+                $loadingToast.fadeOut(100);
+            }, 2000);
+        });
+    });
+</script>
+
+</body>
+</html>
