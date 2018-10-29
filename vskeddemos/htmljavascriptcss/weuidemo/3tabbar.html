@@ -9,45 +9,75 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 <link rel="stylesheet" type="text/css" href="css/lib/weui/weui.min.css">
 <link rel="stylesheet" type="text/css" href="css/lib/weui/weuiex1.css">
+<link rel="stylesheet" type="text/css" href="css/lib/weui/weuix.css">
 
 </head>
 
 <body ontouchstart>
-<div class="container" id="container">
+
       
-<div class="weui-tabbar">
-                <a href="javascript:;" class="weui-tabbar__item">
+    <div class="page-hd">
+        <h1 class="page-hd-title">
+            tabbar
+        </h1>
+        <p class="page-hd-desc">底部工具菜单</p>
+    </div>
+
+    <div class="weui-tab tab-bottom " style="height:44px;">
+        
+        <div class="weui-tab__panel">
+               <div class="weui-tab__content">中国</div>
+            <div class="weui-tab__content">日本</div>
+            <div class="weui-tab__content">美国</div>
+            <div class="weui-tab__content">法国</div>
+        </div>
+
+        <div class="weui-tabbar">
+            <a href="javascript:;" class="weui-tabbar__item">
                     <span style="display: inline-block;position: relative;">
-                        <img src="img/wechat/images/icon_intro.png" alt="" class="weui-tabbar__icon">
+                        <i class="icon icon-27 f27 weui-tabbar__icon"></i>
                         <span class="weui-badge" style="position: absolute;top: -2px;right: -13px;">8</span>
                     </span>
-                    <p class="weui-tabbar__label">微信</p>
-                </a>
-                <a href="javascript:;" class="weui-tabbar__item">
-                    <img src="img/wechat/images/icon_nav_icons.png" alt="" class="weui-tabbar__icon">
-                    <p class="weui-tabbar__label">通讯录</p>
-                </a>
-                <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
+                <p class="weui-tabbar__label">微信</p>
+            </a>
+            <a href="javascript:;" class="weui-tabbar__item">
+                <i class="icon icon-28 f27 weui-tabbar__icon"></i>
+                <p class="weui-tabbar__label">通讯录</p>
+            </a>
+            <a href="javascript:;" class="weui-tabbar__item">
                     <span style="display: inline-block;position: relative;">
-                        <img src="img/wechat/images/icon_nav_search_bar.png" alt="" class="weui-tabbar__icon">
+                        <i class="icon icon-29 f27 weui-tabbar__icon"></i>
                         <span class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></span>
                     </span>
-                    <p class="weui-tabbar__label">发现</p>
-                </a>
-                <a href="javascript:;" class="weui-tabbar__item">
-                    <img src="img/wechat/images/icon_nav_toast.png" alt="" class="weui-tabbar__icon">
-                    <p class="weui-tabbar__label">我</p>
-                </a>
-            </div>
+                <p class="weui-tabbar__label">发现</p>
+            </a>
+            <a href="javascript:;" class="weui-tabbar__item ">
+                <i class="icon icon-30 f27 weui-tabbar__icon" ></i>
+                <p class="weui-tabbar__label f-green">我</p>
+            </a>
+        </div>
+    </div>
 
-</div>
-<!-- 使用方向键试试 或拖动看看-->
+
 <script src="js/lib/wechat/zepto.min.js" type="text/javascript"></script>
+<script src="js/lib/wechat/zepto.weui.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    $(function(){
 
-    });
+         $(function(){
+
+             $('.weui-tab').tab({
+                 defaultIndex: 0,
+                 activeClass: 'weui-bar__item_on',
+                 onToggle: function (index) {
+
+                         $.toast(index)
+
+                 }
+             })
+         })
+
+     
 </script>
 
 </body>
