@@ -64,5 +64,7 @@ public interface MyService {
 	@Multipart
 	@POST("proc/test1proc1.jsp")
 	Call<ResponseBody> postTest4(@PartMap() Map<String, RequestBody>  parmap, @Part List<MultipartBody.Part> myFileList);
-
+	
+	@GET("search")
+	Call<ResponseBody> testHttps1(@Query("q") String q);
 }

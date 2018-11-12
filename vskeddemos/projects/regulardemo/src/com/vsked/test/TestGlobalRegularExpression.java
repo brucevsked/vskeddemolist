@@ -7,7 +7,9 @@ public class TestGlobalRegularExpression {
 	public static void main(String[] args) {
 //		testIsNumber1();
 //		testIsNumber2();
-		testIsNumber3();
+//		testIsNumber3();
+//		startWithEndWith();
+		startWithEndWith1();
 
 	}
 	
@@ -48,6 +50,26 @@ public class TestGlobalRegularExpression {
 		number=".";
 		number="a";
 		System.out.println(GlobalRegularExpression.isNumber(GlobalRegularExpression.isNumber3, number));
+	}
+	
+	public static void startWithEndWith(){
+		String s1="jczq_s(2*1)3{181023_2001[s(0:1.68,1:8.11,2:9.99)],181023_2002[s(0:1.87)]}";
+		String start="\\{";
+		String end="\\}";
+		System.out.println(GlobalRegularExpression.startWithEndWith(s1, start, end));
+		
+		s1="{a}{b}{c}";
+		System.out.println(GlobalRegularExpression.startWithEndWith(s1, start, end));
+		
+	}
+	
+	public static void startWithEndWith1(){
+		String start="\\{";
+		String end="\\}";
+		
+		String s1="{a}{b}{c}";
+		System.out.println("fff|"+GlobalRegularExpression.startWithEndWith1(s1, start, end));
+		
 	}
 
 }

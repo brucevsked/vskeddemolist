@@ -21,11 +21,16 @@ public class TestRegular1 {
 		}
 		String s="1111a1";
 		System.out.println(isNumber(s));
+		st="{a}{b}{c}";
+		 al=getFormualKey(st);
+			for(int i=0;i<al.size();i++){
+				System.out.println(al.get(i));
+			}
 	}
 	
 	public static List<String> getFormualKey(String st){
 		String regx="\\{([^\\{]*)\\}";
-		
+		System.out.println("|"+regx+"|");
 		Matcher m = Pattern.compile(regx).matcher(st);
 		List<String> arList=new LinkedList<String>();
 		while(m.find()){
