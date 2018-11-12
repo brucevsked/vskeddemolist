@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>模板页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" type="text/css" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+<link rel="stylesheet" type="text/css" href="css/lib/weui/weuix.css">
+</head>
+
+<body ontouchstart>
+  
+    <div class="page-hd">
+        <h1 class="page-hd-title">
+            加载更多 分页
+        </h1>
+        <p class="page-hd-desc">向下无限加载</p>
+    </div>
+
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd" id="rank-list">  </div>
+        <script id="tpl" type="text/html">
+            <% for(var i in list) {   %>
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                <!--<div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="">
+                </div>-->
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">ID: <%=list[i].id%>姓名: <%=list[i].title%></h4>
+                    <p class="weui-media-box__desc"><%=list[i].phone%></p>
+                </div>
+            </a>
+            <% } %>
+        </script>
+
+        <div class="weui-panel__ft">
+            <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd" id="getmore">查看更多<i id="loading" class="weui-loading"></i></div>
+
+            </a>
+        </div>
+    </div>
+<!-- 使用方向键试试 或拖动看看-->
+
+<script src="js/lib/wechat/zepto.min.js" type="text/javascript"></script>
+<script src="js/lib/wechat/zepto.weui.js" type="text/javascript"></script>
+<script src="js/lib/wechat/php.js" type="text/javascript"></script>
+<script src="js/lib/mock-min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  
+        $('#loading').hide();
+        var pagesize=8;//每页数据条数
+        function ajaxpage(page){
+            $.ajax({
+                type:"post",
+                url:'http://localhost:8080/mypage.html',
+                data: {"page":page,"pagesize":pagesize,ajax:2},
+                dataType:'json',
+                timeout:10000,
+                beforeSend:function(xhr){
+                    $('#loading').show();
+                },
+                success:function(rs){
+                    $('#loading').hide();
+                    $("#rank-list").append(tpl(document.getElementById('tpl').innerHTML,rs));
+
+                   var maxpage = Math.ceil(rs.total / pagesize);
+                    sessionStorage['maxpage'] = maxpage;
+
+                    if(page==maxpage){
+                        $("#getmore").html("没有更多数据了");return false;
+                    }
+                },
+                error:function(xhr){
+                    alert('ajax出错');
+                },
+            });
+
+
+        }
+
+    $(function(){
+      
+      Mock.mock('http://localhost:8080/mypage.html','post',{
+        'list|10': [{'id|+1':6,'title':'@cname','phone':/^1[385][1-9]\d{8}/}],
+        msg: '请求成功',
+        total: '999'
+        });
+            var page = 2;
+            var maxpage;
+
+            $('#getmore').on('click', function() {
+                maxpage = sessionStorage['maxpage'];
+                if(page<=maxpage) {
+                    ajaxpage(page);
+                    page++;
+                }
+            });
+            ajaxpage(1);
+
+    });
+</script>
+
+</body>
+</html>
