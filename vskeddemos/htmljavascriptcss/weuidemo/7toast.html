@@ -21,6 +21,7 @@
     <div class="page__bd page__bd_spacing">
         <a href="javascript:;" class="weui-btn weui-btn_default" id="showToast">成功提示</a>
         <a href="javascript:;" class="weui-btn weui-btn_default" id="showLoadingToast">加载中提示</a>
+        <a href="javascript:;" class="weui-btn weui-btn_default" id="testa11">加载中提示1</a>
     </div>
 
     <!--BEGIN toast-->
@@ -46,6 +47,7 @@
 </div>
 <!-- 使用方向键试试 或拖动看看-->
 <script src="js/lib/wechat/zepto.min.js" type="text/javascript"></script>
+<script src="js/lib/wechat/zepto.weui.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     // toast
@@ -62,6 +64,7 @@
 
     // loading
     $(function(){
+      
         $('#showLoadingToast').on('click', function(){
             if ( $('#loadingToast').css('display') != 'none') return;
 
@@ -70,6 +73,15 @@
                  $('#loadingToast').fadeOut(100);
             }, 2000);
         });
+        
+        $('#testa11').on('click', function(){
+          $.showLoading('你倒是快点跑啊少年，已经休息了');
+            setTimeout(function () {
+              $('.weui_loading').parent().hide();//bugfixed for zepto
+              $.hideLoading();
+            }, 5000);
+        });
+        
     });
 </script>
 
