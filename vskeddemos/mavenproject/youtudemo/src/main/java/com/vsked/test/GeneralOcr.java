@@ -15,7 +15,7 @@ public class GeneralOcr {
 		try {
 			Youtu faceYoutu = new Youtu(GlobalSet.APP_ID, GlobalSet.SECRET_ID, GlobalSet.SECRET_KEY,Youtu.API_YOUTU_END_POINT,GlobalSet.USER_ID);
 			JSONObject respose;
-			respose=faceYoutu.GeneralOcr("d:/aa1n.jpg");
+			respose=faceYoutu.GeneralOcr("e:/ta2.png");
 //			System.out.println(respose.toString());
 			JSONArray items=respose.getJSONArray("items");
 			
