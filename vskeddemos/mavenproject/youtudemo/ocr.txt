@@ -1,3 +1,13 @@
 ﻿AppID:10008975
 SecretID:AKID1vdBXigT3ThmfMn8DYjiW8YpurDPqCnC
 SecretKey:KSRIxSmxwjKiy2tZ5RbZKyVt782kFYfZ
+
+
+
+
+AppID: 10159277 
+SecretID: AKIDmQwuhT9vDg4uZob0ylYFk43jnozzPU9c 
+SecretKey: zrcCC85drumv2464wdDb6cDdzAf3F90y
+应用平台: Web,IOS,Android,其他 应用类型: 工具 接入产品类型: 云服务,FaceIn人脸核身,离线SDK
+应用简介: 
+使用本服务识别票据或单据上手写及打印的地址，时间信息返回给前台显示。本应用仅限公司内部人员使用不对外发布
