@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>checkbox</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="js/lib/easyui/themes/default/easyui.css"/>
+
+</head>
+
+<body>
+   <input  class="easyui-checkbox" name="fruitAll" id="fruitAll1" value="allf1" label="全部:" data-options="onChange:tsa11">
+        <div style="margin-bottom:20px">
+            <input class="easyui-checkbox" name="fruit" value="Applea" label="Apple:">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-checkbox" name="fruit" value="Orangeb" label="Orange:">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-checkbox" name="fruit" value="Bananac" label="Banana:">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-checkbox" name="fruit" value="peachd" label="Peach:">
+            <input class="easyui-checkbox" name="fruit" value="dlt" label="老衲有香蕉:" labelWidth="100" >
+            <input class="easyui-checkbox" name="fruit" value="1005" label="叔叔有火腿:" labelWidth="100" >
+        </div>
+      <button id="bt1"  type="button">提交</button>
+      <button id="bt2"  type="button">设置2t</button>
+      <button id="bt3"  type="button">设置2f</button>
+<script src="js/lib/easyui/jquery.min.js"></script>
+<script src="js/lib/easyui/jquery.easyui.min.js"></script>
+<script src="js/lib/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script src="js/lib/mock-min.js"></script>
+<script type="text/javascript">
+  function tsa11(){
+    var ckSt1=$('input[name=fruitAll]').parent().prev().checkbox('options').checked;
+    console.log('ckSt1|'+ckSt1)
+    var ckSt=$('#fruitAll1').checkbox('options').checked;
+    
+    $('input[name=fruit]').parent().prev().checkbox(ckSt?'check':'uncheck');
+   
+  }
+    $(function(){
+      console.log('ok');
+      
+      $('#bt1').on('click',function(){
+        var myFruit=$('input[name="fruit"]:checked');
+        if(myFruit.length<=1){
+          if(myFruit[0]==undefined){
+            console.log('only 1|你没选|')
+          }else{
+            console.log('only 1|'+myFruit[0].value+'|')
+          }
+          
+        }else{
+          var rs1='';
+          for(var i=0;i<myFruit.length;i++){
+            if(i==myFruit.length-1){
+              rs1+=myFruit[i].value+'';
+            }else{
+              rs1+=myFruit[i].value+',';
+            }
+            //console.log(i+'|many|'+myFruit[i].value+'|')
+          }
+          console.log(rs1);
+        }
+        //console.log(myFruit);
+      });
+      
+      $('#bt2').on('click',function(){
+        var myFruit=$('input[name="fruit"]');
+        $.each(myFruit,function(index,el){
+          
+          if($(this).val()=='dlt' || $(this).val()=='1005'){
+            $(this).parent().prev().checkbox('check');
+          }
+          });
+      });
+      $('#bt3').on('click',function(){
+        var myFruit=$('input[name="fruit"]');
+        $.each(myFruit,function(index,el){
+          
+          if($(this).val()=='dlt' || $(this).val()=='1005'){
+           $(this).parent().prev().checkbox('uncheck');
+          }
+          });
+      });
+      /*
+      $('#fruitAll1').checkbox({
+        label: '全部:',
+        value: 'allf1',
+        hecked: true,
+        onChange:function(){
+          console.log(1988);
+        }
+        });
+      */
+      
+      //$('#fruitAll1').checkbox('check');//设置为选中
+      
+      //$('#fruitAll1').checkbox('uncheck');//设置为不选中      
+    });
+</script>
+
+</body>
+</html>

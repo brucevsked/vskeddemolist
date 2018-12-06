@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>模板页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="js/lib/easyui/themes/default/easyui.css"/>
+
+</head>
+
+<body>
+  
+  <div id="queryDiv">
+<input type="text" id="suName" name="suName" class="easyui-textbox" label="用户名">
+<input type="text" id="suNick" name="suNick" class="easyui-textbox" label="别名">
+<button type="button" id="query1Bt" class="easyui-linkbutton">查询</button> &nbsp;&nbsp;
+<button type="button" id="reset1Bt" class="easyui-linkbutton">清空</button>&nbsp;&nbsp;
+</div>
+  <table id="mytb1" toolbar="#queryDiv"> 
+    <thead> 
+        <tr>
+            <th field="suName" >用户名</th>
+            <th field="suNick" >别名</th>
+            <th field="suMobile" >手机号</th>
+            <th field="suRegTime" >添加时间</th>
+         </tr>
+    </thead> 
+</table>
+<script src="js/lib/easyui/jquery.min.js"></script>
+<script src="js/lib/easyui/jquery.easyui.min.js"></script>
+<script src="js/lib/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script src="js/lib/mock-min.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+      Mock.mock('http://localhost:8080/lostweek/datagrid1.html','post',{
+        'rows|10': [{'suName|+1':6,'suNick':'@cname','suMobile':/^1[385][1-9]\d{8}/}],
+        total: '999'
+        });
+		$('#mytb1').datagrid({ 
+	        title:'列表',
+	        height: 'auto', 
+	        nowrap: false, 
+	        striped: true, 
+	        border: true, 
+	        collapsible:false,//是否可折叠的 
+	        url:'http://localhost:8080/lostweek/datagrid1.html',
+	        idField:'suId', 
+	        singleSelect:true,//是否单选 
+	        rownumbers:true,//行号
+	        frozenColumns:[[ {field:'ck',checkbox:false}]]
+	    });
+	    
+    });
+</script>
+
+</body>
+</html>
