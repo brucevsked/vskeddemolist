@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>模板页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="js/lib/easyui/themes/default/easyui.css"/>
+
+</head>
+
+<body>
+  <form id="fma1">
+  <!-- 注意 使用radio要放到form中才会只能选择一个！！！ -->
+<input class="easyui-radiobutton" name="dispMode1" value="0"  checked label="不分票">
+<input class="easyui-radiobutton" name="dispMode1" value="1" label="手动分票"> 
+<input class="easyui-radiobutton" name="dispMode1" value="2" label="自动分票">
+<button type="button" id="changeDisMode1Bt" class="easyui-linkbutton">修改分票模式</button>&nbsp;&nbsp;
+</form>
+<script src="js/lib/easyui/jquery.min.js"></script>
+<script src="js/lib/easyui/jquery.easyui.min.js"></script>
+<script src="js/lib/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script src="js/lib/mock-min.js"></script>
+<script type="text/javascript">
+    $(function(){
+      console.log('ok');
+      $('#changeDisMode1Bt').on('click',function(){
+        var dispmode=$('input[name="dispMode1"]:checked').val();
+        console.log('|'+dispmode+'|')
+        });
+    });
+</script>
+
+</body>
+</html>
