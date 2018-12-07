@@ -111,6 +111,29 @@ public class JsoupTes {
 	}
 	
 //	@Test
+	public void t6a(){
+		//使用选择器语法来查找元素
+		try{
+			//解析和遍历一个HTML文档
+			String html = "<html><head><title>First parse</title></head>"
+					+ "<body><p>Parsed HTML into a doc.</p>";
+			html+="<a disabled>首页</a> ";
+			html+="<a disabled>上一页</a>&nbsp;";
+			html+="<a href=\"result_2.jspx\">下一页</a> ";
+//			html+="&nbsp;<a disabled=\"disabled\">下一页</a> ";
+			html+="<a href=\"result_2.jspx\">尾页</a>  ";
+			html+="</body></html>";
+		Document doc = Jsoup.parse(html);
+		Element links = doc.select("a:contains(下一页)").first(); //a标签中文本是下一页的抽出来第一个
+		log.debug(links.toString());
+		log.debug("attr|"+links.attr("href")+"|");
+		log.debug("attr|"+"".equals(links.attr("href"))+"|");
+		}catch(Exception e){
+			log.error(e.getMessage());
+		}
+	}
+	
+//	@Test
 	public void t7(){
 //		从元素抽取属性，文本和HTML
 		String html = "<p>An <a href='http://example.com/'><b>example</b></a> link.</p>";
@@ -173,5 +196,17 @@ public class JsoupTes {
 		// now: <div>First five > four Last</div>
 		log.debug(doc.toString());
 	}
+	
+//	@Test
+	public void t11(){
+		//只取文本
+		String html = "<table><tr><td height=\"35\" align=\"center\" bgcolor=\"#FFFFFF\"><span class=\"zhu\">南特</span><span class=\"vs\">VS</span><span class=\"ke\">马赛</span></td></tr></table>";
+		Document doc = Jsoup.parse(html);
+		Element td = doc.select("td").first(); // <div></div>
+		log.debug("|"+td.text()+"|");
+	}
+	
+	
+	
 
 }
