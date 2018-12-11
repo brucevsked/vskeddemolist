@@ -24,4 +24,5 @@ js日期时间选择
 layDate
 
 html解析
-jsoup
+jsoup[不能执行js及ajax]
+htmlunit[可执行ajax及js]
