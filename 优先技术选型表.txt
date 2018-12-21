@@ -27,7 +27,7 @@ js日期时间选择
 layDate
 
 js日期时间操作库
-Moment.js
+luxon.js
 
 html解析
 jsoup[不能执行js及ajax]
