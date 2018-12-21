@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>ES6</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<!--
+<link rel="stylesheet" href="js/lib/easyui/themes/default/easyui.css"/>
+-->
+</head>
+
+<body>
+  
+
+
+<script type="text/javascript">
+ "use strict";
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  say () {
+    console.log("say hi");
+  }
+  static say1 () {
+    console.log("say hi i va");
+  }
+  sing () {
+    console.log("lalalalala");
+  }
+ };
+new Person().say(); //控制台会输出say hi
+Person.say1();
+new Person().sing(); 
+ 
+</script>
+
+</body>
+</html>
