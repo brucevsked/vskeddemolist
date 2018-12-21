@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>模板页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<!--
+<link rel="stylesheet" href="js/lib/easyui/themes/default/easyui.css"/>
+-->
+</head>
+
+<body>
+  
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script src="js/lib/datetime/moment-with-locales.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function(){
+      console.log('ok');
+      //momentTest.t1();
+      //momentTest.t2();
+      //momentTest.t3();
+      //momentTest.t4();
+      //momentTest.t5();
+      //momentTest.t6();
+      //momentTest.t7();
+      //momentTest.t8();
+      momentTest.t9();
+    });
+    
+var momentTest=new Object({
+	t1: function(){
+	  var now = moment();
+	  console.log('now:'+now);
+	  var day = moment("1995-12-25");
+	  console.log('day:'+day);
+	},
+	t2:function(){
+	  var isDate1=moment("not a real date").isValid(); // false
+	  var isDate2=moment("2013-02-08 09:30:26.123").isValid(); // true
+	  console.log('isDate1:'+isDate1);
+	  console.log('isDate2:'+isDate2);
+	},
+	t3:function(){
+	  //字符串 + 格式 1
+	  /**
+moment(String, String);
+moment(String, String, String);
+moment(String, String, Boolean);
+moment(String, String, String, Boolean);
+	  */
+	  var m1=moment("12-25-2018", "MM-DD-YYYY");
+	  console.log('m1:'+m1);
+	  var m2=moment("12/25/2018", "MM-DD-YYYY");
+	  console.log('m2:'+m2);
+	},
+	t4:function(){
+	  var curWeek=moment().day();
+	  console.log('curWeek:'+curWeek);
+	  //moment().day(-7); // last Sunday (0 - 7)
+    //moment().day(7); // next Sunday (0 + 7)
+    //moment().day(10); // next Wednesday (3 + 7)
+    //moment().day(24); // 3 Wednesdays from now (3 + 7 + 7 + 7)
+	},
+	t5:function(){
+console.log(moment().get('year'));
+console.log(moment().get('month')+1);  // 0 to 11
+console.log(moment().get('date'));
+console.log(moment().get('hour'));
+console.log(moment().get('minute'));
+console.log(moment().get('second'));
+console.log(moment().get('millisecond'));
+//moment().set('year', 2013);
+//moment().set('month', 3);  // April
+//moment().set('date', 1);
+//moment().set('hour', 13);
+//moment().set('minute', 20);
+//moment().set('second', 30);
+//moment().set('millisecond', 123);
+	},
+	t6:function(){
+/*
+Key	Shorthand
+years	y
+quarters	Q
+months	M
+weeks	w
+days	d
+hours	h
+minutes	m
+seconds	s
+milliseconds	ms
+*/
+	  //加法
+	  var t1=moment().add(2, 'days');
+	  console.log(t1);
+	  //减法
+	  console.log(moment().subtract(3, 'days'));
+	},
+	t7:function(){
+	  console.log(moment().format());
+	  console.log(moment().format('YYYY-MM-DD'));
+	  console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
+	},
+	t8:function(){
+	  console.log(moment('2010-10-20').isBefore('2010-10-21'));// true
+	  //moment('2010-10-20').isSame('2010-10-20'); // true
+	  //moment('2010-10-20').isAfter('2010-01-01', 'year'); // false
+    //moment('2010-10-20').isAfter('2009-12-31', 'year'); // true
+    //moment('2010-10-20').isBetween('2010-10-19', '2010-10-25'); // true
+    //moment('2010-10-20').isBetween('2010-01-01', '2012-01-01', 'year'); // false
+    //moment('2010-10-20').isBetween('2009-12-31', '2012-01-01', 'year'); // true
+	  
+	},
+	t9:function(){
+	  moment.locale('zh-cn');
+	  console.log(moment.weekdays());
+	  console.log(moment.months());
+	}
+});
+</script>
+
+</body>
+</html>
