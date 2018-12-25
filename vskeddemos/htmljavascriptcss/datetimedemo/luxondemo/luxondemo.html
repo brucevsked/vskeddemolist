@@ -19,8 +19,40 @@
 
 <script type="text/javascript">
     $(function(){
-      console.log('ok')
+      console.log('ok');
+      var luxonDemo=new LuxonDemo();
+      luxonDemo.getCurTime()
+      luxonDemo.getTomorrow();
+      luxonDemo.sqlDate();
+      luxonDemo.compare1();
+      
     });
+class LuxonDemo{
+  getCurTime(){
+    var a=luxon.DateTime.local().toFormat('yyyy-MM-dd HH:mm:ss');
+    console.log(a);
+  }
+  getTomorrow(){
+    var b=luxon.DateTime.local().plus({ days: 1 }).toFormat('yyyy-MM-dd HH:mm:ss');
+    console.log(b);
+  }
+  sqlDate(){
+    var sqlDate1='2018-12-26 21:03:55';
+    var c=luxon.DateTime.fromSQL(sqlDate1);
+    console.log(c.toFormat('yyyy-MM-dd HH:mm:ss'));
+  }
+  compare1(){
+    var curTime=luxon.DateTime.local();
+    var sqlDate1='2018-12-25 12:10:20';
+    var c1=luxon.DateTime.fromSQL(sqlDate1);
+    console.log(c1.toFormat('yyyy-MM-dd HH:mm:ss'));
+    var sqlDate2='2018-12-26 00:04:01';
+    var c2=luxon.DateTime.fromSQL(sqlDate2);
+    console.log(c2.toFormat('yyyy-MM-dd HH:mm:ss'));
+    console.log(curTime>c1);
+    console.log(curTime<c2);
+  }
+}
 </script>
 
 </body>

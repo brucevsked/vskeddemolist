@@ -1,6 +1,5 @@
 package com.vsked.test;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,7 +41,7 @@ public class DateTimeUtilVkedTest {
 		log.debug("是否超过当前时间:"+b1+"|是否在当前时间之前:"+b2);
 	}
 	
-	@Test
+//	@Test
 	public void curDateTime(){
 		/**
 Instant - 不可变的类，用来表示时间轴上一个瞬时的点
@@ -68,6 +67,18 @@ LocalDateTime - 不可变的类，表示一个本地的日期－时间（没有�
 		log.debug("dt2:"+dt2);
 		DateTime dt3=dt2.toDateTime();
 		log.debug("dt3"+dt3+"|"+dt3.isAfterNow());
+	}
+	
+//	@Test
+	public void localTimeTest(){
+		String fmt1="HH:mm";
+		LocalTime lt1=LocalTime.now();
+		log.debug("|"+lt1.toString(fmt1)+"|");
+		String t2="00:50";
+		
+		LocalTime lt3=LocalTime.parse(t2);
+		log.debug("|"+lt3.toString(fmt1)+"|");
+		
 	}
 
 }

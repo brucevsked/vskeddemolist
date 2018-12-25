@@ -25,7 +25,7 @@
 </Appenders>
 
 <loggers>
-    <root level="ALL">
+    <root level="debug">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="outRollingFile" />
     </root>
