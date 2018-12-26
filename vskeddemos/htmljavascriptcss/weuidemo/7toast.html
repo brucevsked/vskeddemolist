@@ -54,7 +54,9 @@
 
 
             $(document).on("click", "#showToast", function() {
-                $.toast();
+               // $.toast();
+               $.toast.prototype.defaults.duration=10000;//10秒
+               $.toast("测试成功了10s", "forbidden");
 
               /*  说明:  默认已经完成,支持参数回调,以及时间
                 $.toast("取消操作", function() {
