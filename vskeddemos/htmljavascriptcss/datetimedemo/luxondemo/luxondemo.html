@@ -30,27 +30,35 @@
 class LuxonDemo{
   getCurTime(){
     var a=luxon.DateTime.local().toFormat('yyyy-MM-dd HH:mm:ss');
-    console.log(a);
+    console.log('a:'+a);
+    var curWeek=luxon.DateTime.local().weekday;
+    console.log('week:'+curWeek);
+    var b=luxon.DateTime.local().plus({ days: 1 });
+    console.log('week2:'+b.weekday);
   }
   getTomorrow(){
     var b=luxon.DateTime.local().plus({ days: 1 }).toFormat('yyyy-MM-dd HH:mm:ss');
-    console.log(b);
+    console.log('b:'+b);
   }
   sqlDate(){
     var sqlDate1='2018-12-26 21:03:55';
     var c=luxon.DateTime.fromSQL(sqlDate1);
-    console.log(c.toFormat('yyyy-MM-dd HH:mm:ss'));
+    console.log('c:'+c.toFormat('yyyy-MM-dd HH:mm:ss'));
+    var sqlDate2=1545902400000;
+    sqlDate2=sqlDate2-50400000;
+    var d=luxon.DateTime.fromMillis(sqlDate2);
+    console.log('d:'+d.toFormat('yyyy-MM-dd HH:mm:ss'));
   }
   compare1(){
     var curTime=luxon.DateTime.local();
     var sqlDate1='2018-12-25 12:10:20';
     var c1=luxon.DateTime.fromSQL(sqlDate1);
     console.log(c1.toFormat('yyyy-MM-dd HH:mm:ss'));
-    var sqlDate2='2018-12-26 00:04:01';
+    var sqlDate2='2019-12-26 00:04:01';
     var c2=luxon.DateTime.fromSQL(sqlDate2);
-    console.log(c2.toFormat('yyyy-MM-dd HH:mm:ss'));
-    console.log(curTime>c1);
-    console.log(curTime<c2);
+    console.log('c1:'+c2.toFormat('yyyy-MM-dd HH:mm:ss'));
+    console.log('c2:'+(c1<c2) );
+    console.log('c3:'+(curTime>c1) );
   }
 }
 </script>
