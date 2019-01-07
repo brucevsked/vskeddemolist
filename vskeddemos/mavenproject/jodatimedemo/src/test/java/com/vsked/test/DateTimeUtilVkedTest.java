@@ -80,5 +80,10 @@ LocalDateTime - 不可变的类，表示一个本地的日期－时间（没有�
 		log.debug("|"+lt3.toString(fmt1)+"|");
 		
 	}
+	
+	@Test
+	public void getWeek(){
+		log.debug(DateTimeUtilVsked.getWeek());
+	}
 
 }

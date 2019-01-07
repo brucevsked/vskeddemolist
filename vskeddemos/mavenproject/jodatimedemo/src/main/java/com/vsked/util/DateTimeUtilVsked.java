@@ -211,6 +211,14 @@ public class DateTimeUtilVsked {
 		return LocalDate.now().plusDays(1).toString(dateformat);
 	}
 	
+	/**
+	 * 获取当前周几
+	 * @return
+	 */
+	public static int getWeek(){
+		return LocalDate.now().getDayOfWeek();
+	}
+	
 /**
  * // Joda-time 各种操作.....  
 dateTime = dateTime.plusDays(1) // 增加天  
