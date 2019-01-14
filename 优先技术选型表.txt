@@ -1,34 +1,46 @@
 ﻿------------------------------------------------------------后端部分
 对象管理及依赖注入事务等
-spring framework
+spring framework 5
+
+单元测试
+junit5
 
 mvc
 spring mvc
 
 数据库连接池
-HikariCP
+HikariCP 3
 
 json处理
-jackson
+jackson2.9.8
 
 日志门面
-slf4j
+slf4j1.7.25
 
 日志处理
-log4j2
+log4j2 2.11.1
 
 orm
-mybatis
+mybatis3.4.6
+数据库分页
+pagehelper5.1.3
 
 日期时间处理库
 jodatime
+
+请求模拟
+retrofit2
+
+html解析
+jsoup[不能执行js及ajax]
+htmlunit[可执行ajax及js]
 ------------------------------------------------------------前端部分
+数据模拟
+mock.js
+
 js日期时间选择
 layDate
 
 js日期时间操作库
 luxon.js
 
-html解析
-jsoup[不能执行js及ajax]
-htmlunit[可执行ajax及js]
