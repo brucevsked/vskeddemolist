@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -29,7 +28,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import java.util.concurrent.TimeUnit;
 
-import javax.naming.Context;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
@@ -40,7 +38,6 @@ import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
-import okhttp3.Request;
 
 public class MyServiceNewTest {
 	
@@ -235,6 +232,41 @@ public class MyServiceNewTest {
 		log.debug("|"+result+"|");
 		
 	}
+	
+	/**
+	 * 动态url的post测试
+	 */
+//	@Test
+	public void postTest211()  throws Exception{
+		String baseUrl="http://localhost:8080/retrofitdemo/proc/";
+        Map<String, Object> myParMap=new HashMap<String, Object>();
+        myParMap.put("a1", "6666");
+        myParMap.put("b2", "young666");
+        myParMap.put("c3", "girl666");
+        myParMap.put("d4", "youlove666");
+        myParMap.put("youcan", "seepost66");
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).client(client).build();
+		MyService service=retrofit.create(MyService.class);
+		String tvid="test1proc1.jsp";
+		Call<ResponseBody> call=service.postTest211(tvid,myParMap);
+		Response<ResponseBody> response=call.execute();
+		String result="";
+		ResponseBody responseBody=response.body();
+		if(log.isDebugEnabled()){
+			log.debug("|"+response.isSuccessful()+"|");
+			log.debug("a|"+response.toString()+"|");
+		}
+		
+		if(responseBody!=null){
+			result=responseBody.string();
+			if(log.isDebugEnabled()){
+				log.debug("b|"+result+"|");
+			}
+		}
+		log.debug("c|"+result+"|");
+		
+	}
+	
 	
 	/**
 	 * 不固定参数个数post测试

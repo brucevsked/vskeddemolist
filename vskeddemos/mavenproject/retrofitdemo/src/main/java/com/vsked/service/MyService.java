@@ -45,6 +45,10 @@ public interface MyService {
 	@POST("proc/{tvid}")
 	Call<ResponseBody> postTest21(@Path("tvid") String tvid, @FieldMap Map<String, Object> parMap);
 	
+	@FormUrlEncoded
+	@POST("{tvid}")
+	Call<ResponseBody> postTest211(@Path("tvid") String tvid, @FieldMap Map<String, Object> parMap);
+	
 	@Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
 	@POST("proc/test1proc1.jsp")
 	Call<ResponseBody> postTest22(@Body RequestBody info);
