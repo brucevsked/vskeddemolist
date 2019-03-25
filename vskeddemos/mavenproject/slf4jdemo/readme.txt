@@ -1,4 +1,4 @@
-
+﻿
 添加MDC中mdc_trace_id
 
 
@@ -14,3 +14,6 @@ TraceUtils类中修改日志编号
 3使用
 Slf4jLogTest类中
 MDCTest1方法
+
+4异常日志打印到文件需要使用
+log.error("获取比赛结果异常"+e.getMessage(),e);
