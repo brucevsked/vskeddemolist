@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+
+	<Properties>
+	<!-- <Property name="logpath">${sys:catalina.home}/logs/activitidemo/</Property> -->
+	<Property name="logpath">/logs/activitidemo/</Property>
+		<Property name="logname">activitidemo</Property>
+	</Properties>
+<Appenders>
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout charset="utf-8" pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} traceId:[%X{mdc_trace_id}] %-5level %class{36} %L %M - %msg%xEx%n"/>
+    </Console>
+    <RollingFile name="outRollingFile" fileName="${logpath}/${logname}" 
+    filePattern="${logpath}/${logname}_%d{yyyy-MM-dd}_%i.log">
+        <PatternLayout charset="utf-8" pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} traceId:[%X{mdc_trace_id}] %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+               <!-- 每1天更新一次 -->
+                <TimeBasedTriggeringPolicy modulate="true" interval="1" />
+                <!-- 每个文件512MB -->
+                <SizeBasedTriggeringPolicy size="512MB"/>
+            </Policies>
+            <!-- 最多备份12个 -->
+            <DefaultRolloverStrategy max="12"/>
+    </RollingFile>
+</Appenders>
+
+	<loggers>
+		<!-- 指定包日志级别 -->
+		<logger name="org.springframework" level="error"></logger>
+		<logger name="com.mchange" level="error"></logger>
+		<logger name="org.mybatis" level="debug"></logger>
+		<logger name="com.zaxxer" level="error"></logger>
+		<!-- 不打印本项目sql语句,需要时请调整为debug -->
+		<logger name="com.custvs.dao" level="debug" additivity="true"></logger>
+		<root level="debug">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="outRollingFile" />
+		</root>
+	</loggers>
+
+</Configuration>
