@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.baiduren</groupId>
+		<artifactId>appserver</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+  <groupId>com.baiduren.appserveruser</groupId>
+  <artifactId>appserveruser</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>appserveruser</name>
+  <description>appserveruser</description>
+  <packaging>jar</packaging>
+  
+  	<dependencies>
+		<dependency>
+			<groupId>com.baiduren.appservercommon</groupId>
+			<artifactId>appservercommon</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+  
+  <build>
+    <plugins>
+        <!-- springboot 打包的插件 -->
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+                <!-- 打包的类型 -->
+                <mainClass>com.appserveruser.Application</mainClass>
+                <layout>ZIP</layout>
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests><!--默认关掉单元测试 -->
+				</configuration>
+			</plugin>
+    </plugins>
+  </build>
+</project>
