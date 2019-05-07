@@ -22,11 +22,11 @@ public class DataTables {
 //		System.out.println("-----"+m.get("draw"));
 //		System.out.println("-----"+m.get("length"));
 		
-		int startIndex=Integer.parseInt(m.get("start"));
-		int endIndex=startIndex+Integer.parseInt(m.get("length"));
+		int startIndex=Integer.parseInt(m.get("start"));//开始
+		int endIndex=startIndex+Integer.parseInt(m.get("length"));//长度
 		sb.append("{");
-		sb.append("\"draw\": "+m.get("draw")+",");
-		sb.append("\"recordsTotal\": 257,");
+		sb.append("\"draw\": "+m.get("draw")+",");//第几页
+		sb.append("\"recordsTotal\": 257,");//总数
 		sb.append("\"recordsFiltered\": 257,");
 		sb.append("\"data\":[");
 		for(int i=startIndex;i<endIndex;i++)
@@ -34,7 +34,7 @@ public class DataTables {
 		sb.setLength(sb.length()-1);
 		sb.append("]");
 		sb.append("}");
-//		System.out.println(sb.toString());
+		System.out.println(sb.toString());
 		return sb.toString();
 	}
 
