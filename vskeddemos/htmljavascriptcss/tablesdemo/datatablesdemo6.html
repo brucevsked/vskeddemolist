@@ -99,6 +99,7 @@ table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.or
 </head>
 
 <body>
+  code:<input id="code" name="code" /> &nbsp;phone:<input id="phone" name="phone" /><button id="testQueryBt1">query</button>
   <button id="testBt1">getSelected</button>
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
@@ -174,14 +175,27 @@ table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.or
   
 
   var myTable1=$('#dt0').DataTable({
-  	ajax:'http://localhost:8080/mypage',
+  	ajax:{
+  	url:'http://localhost:8080/mypage',
+  	data:function(d){
+  	  if($('#code').val()!=''){
+  	    d.code=$('#code').val();
+  	    console.log(d.code);
+  	  }
+  	  if($('#phone').val()!=''){
+  	  d.phone=$('#phone').val();
+  	  console.log(d.phone);
+  	  }
+  	}
+  	},
 	  columnDefs: [{
 	    targets: [0],
 	    visible: false,
 	    searchable: false
 	  }],
-	  searching: false, //隐藏搜索
+	  searching: true, //隐藏搜索
 	  pageLength:10,//每页显示10条
+	  bPaginate:true,//显示分页器
 	  //stripeClasses: ["odd", "even"],
 	  responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
@@ -228,7 +242,13 @@ table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.or
         console.log(mySelectedData.id+'|'+mySelectedData.code+'|'+mySelectedData.name+'|'+mySelectedData.phone);
 	      });
 	    
-	    
+
+
+    $('#testQueryBt1').on('click', function() {
+
+       myTable1.ajax.reload();  
+
+    } );
 	    
         });
 
