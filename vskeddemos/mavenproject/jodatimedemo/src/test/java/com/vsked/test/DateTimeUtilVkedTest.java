@@ -81,9 +81,16 @@ LocalDateTime - 不可变的类，表示一个本地的日期－时间（没有�
 		
 	}
 	
-	@Test
+//	@Test
 	public void getWeek(){
 		log.debug(DateTimeUtilVsked.getWeek());
+	}
+	
+	@Test
+	public void databaseTimeToStr(){
+		Long instant=new Long("1558041229000");
+		DateTime dt=new DateTime(instant);
+		log.debug(dt.minusHours(13).toString("yyyy-MM-dd HH:mm:ss"));
 	}
 
 }
