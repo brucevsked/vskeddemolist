@@ -12,7 +12,7 @@ public class MapTest {
 	
 	private static final Logger log = LoggerFactory.getLogger(MapTest.class);
 	
-//	@Test
+	@Test
 	public void putAll(){
 		Map<String, Object> dataMap1=new HashMap<String, Object>();
 		dataMap1.put("a", "a1");
