@@ -4,7 +4,7 @@
 <!-- must set here! -->
 <base href="">
 
-<title>datatables_ajax分页+mock</title>
+<title>区取选中测试</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 
@@ -14,92 +14,11 @@
     <link href="css/animate.css" rel="stylesheet">
 
     <link href="css/style.css" rel="stylesheet">
-<style>
-table.dataTable tbody tr.selected {
-  background-color: #B0BED9;
-}
-table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected {
-  background-color: #acbad4;
-}
-table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
-  background-color: #f6f6f6;
-}
-table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
-  background-color: #aab7d1;
-}
-table.dataTable.order-column tbody tr > .sorting_1,
-table.dataTable.order-column tbody tr > .sorting_2,
-table.dataTable.order-column tbody tr > .sorting_3, table.dataTable.display tbody tr > .sorting_1,
-table.dataTable.display tbody tr > .sorting_2,
-table.dataTable.display tbody tr > .sorting_3 {
-  background-color: #fafafa;
-}
-table.dataTable.order-column tbody tr.selected > .sorting_1,
-table.dataTable.order-column tbody tr.selected > .sorting_2,
-table.dataTable.order-column tbody tr.selected > .sorting_3, table.dataTable.display tbody tr.selected > .sorting_1,
-table.dataTable.display tbody tr.selected > .sorting_2,
-table.dataTable.display tbody tr.selected > .sorting_3 {
-  background-color: #acbad5;
-}
-table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
-  background-color: #f1f1f1;
-}
-table.dataTable.display tbody tr.odd > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd > .sorting_2 {
-  background-color: #f3f3f3;
-}
-table.dataTable.display tbody tr.odd > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd > .sorting_3 {
-  background-color: whitesmoke;
-}
-table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_1 {
-  background-color: #a6b4cd;
-}
-table.dataTable.display tbody tr.odd.selected > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_2 {
-  background-color: #a8b5cf;
-}
-table.dataTable.display tbody tr.odd.selected > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_3 {
-  background-color: #a9b7d1;
-}
-table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
-  background-color: #fafafa;
-}
-table.dataTable.display tbody tr.even > .sorting_2, table.dataTable.order-column.stripe tbody tr.even > .sorting_2 {
-  background-color: #fcfcfc;
-}
-table.dataTable.display tbody tr.even > .sorting_3, table.dataTable.order-column.stripe tbody tr.even > .sorting_3 {
-  background-color: #fefefe;
-}
-table.dataTable.display tbody tr.even.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_1 {
-  background-color: #acbad5;
-}
-table.dataTable.display tbody tr.even.selected > .sorting_2, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_2 {
-  background-color: #aebcd6;
-}
-table.dataTable.display tbody tr.even.selected > .sorting_3, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_3 {
-  background-color: #afbdd8;
-}
-table.dataTable.display tbody tr:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
-  background-color: #eaeaea;
-}
-table.dataTable.display tbody tr:hover > .sorting_2, table.dataTable.order-column.hover tbody tr:hover > .sorting_2 {
-  background-color: #ececec;
-}
-table.dataTable.display tbody tr:hover > .sorting_3, table.dataTable.order-column.hover tbody tr:hover > .sorting_3 {
-  background-color: #efefef;
-}
-table.dataTable.display tbody tr:hover.selected > .sorting_1, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_1 {
-  background-color: #a2aec7;
-}
-table.dataTable.display tbody tr:hover.selected > .sorting_2, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_2 {
-  background-color: #a3b0c9;
-}
-table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_3 {
-  background-color: #a5b2cb;
-}
-</style>
+    <link href="js/plugins/dataTables/Select-1.3.0/css/select.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body>
-  <button id="testBt1">getSelected</button>
+  <button id="testBt1">getSelected1</button> <button id="testBt2">getSelected2</button>
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
@@ -158,6 +77,7 @@ table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.or
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="js/plugins/dataTables/datatables.min.js"></script>
     <script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="js/plugins/dataTables/Select-1.3.0/js/select.bootstrap4.min.js"></script>
     <script src="js/inspinia.js"></script>
     
     <script src="js/mock-min.js" type="text/javascript"></script>
@@ -174,6 +94,7 @@ table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.or
 
   var myTable1=$('#dt0').DataTable({
   	ajax:'http://localhost:8080/mypage',
+  	select:true,//需要Select-1.3.0支持
 	  columnDefs: [{
 	    targets: [0],
 	    visible: false,
@@ -209,15 +130,6 @@ table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.or
   	]
   	});
 
-	    $('#dt0 tbody').on( 'click', 'tr', function () {
-	        if ( $(this).hasClass('selected') ) {
-	            $(this).removeClass('selected');
-	        }
-	        else {
-	        	myTable1.$('tr.selected').removeClass('selected');
-	            $(this).addClass('selected');
-	        }
-	    } );
 	    
 	    $('#testBt1').on('click',function(){
 	      var tbl = $("#dt0").dataTable();
@@ -229,6 +141,15 @@ table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.or
             }            
         }
         
+	      });
+	      
+	    $('#testBt2').on('click',function(){
+	      var selectData=myTable1.rows('.selected').data();
+	        //console.log(selectData.length);
+	        if(selectData.length>0){
+	          console.log(selectData[0].id+'|'+selectData[0].code+'|'+selectData[0].name);
+	        }
+	        //console.log(dataList);
 	      });
 	    
 	    
