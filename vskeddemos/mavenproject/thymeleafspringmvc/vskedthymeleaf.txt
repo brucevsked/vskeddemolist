@@ -1,3 +1,15 @@
+前缀说明
+${...} 变量引用模式
+
+*{...} 选择表达式，一般是th:object之后，直接取Object中的属性。当没有选取对象时，其功能等同于${...}。
+
+@{...} 链接url的表达式
+
+#{...} i18n， 国际化
+
+${mymap['keyaccess']} 读取map值
+
+
 定义模板
 <head th:fragment="webcss">
     <link href="/static/css/animate.css" rel="stylesheet">
@@ -8,7 +20,7 @@
 赋值
 th:field，用法：th:field="*{name}"，(用来绑定后台对象和表单数据)
 th:value，用法：th:value="${brand.name}"，(用对象对name值替换value属性)
-th:text, 文本显示
+th:text, 文本显示给div或span或input赋值
 th:checked 选中
 整数类型时th:checked="${oldstatus==1}"
 文本类型时th:checked="${oldstatus eq '1'}"
