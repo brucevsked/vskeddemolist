@@ -1,0 +1,8 @@
+1* 集成shiro注意
+在shiro的realm以及各操作类中不要注入service要注入dao(或mapper)
+
+2* 关闭事务防止验证码类取不到值
+spring boot+redis时要关闭redis事务
+
+        //开启事务
+//        redisTemplate.setEnableTransactionSupport(true); //验证码bug修正不要开启!!!
