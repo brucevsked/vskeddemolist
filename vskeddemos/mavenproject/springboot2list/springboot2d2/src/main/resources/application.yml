@@ -1,0 +1,35 @@
+server:
+  port: 9010 #端口号
+  tomcat:
+    uri-encoding: UTF-8
+  #servlet.context-path: /appserveruser  #项目名，如果不设定，默认是 /
+  
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/appserverdev?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: root
+    timeout: 10000
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+mybatis:
+  configuration:
+    call-setters-on-nulls: true #是null值也返回
+    cache-enabled: true #开启二级缓存
+
+logging:
+  config: classpath:log4j2.xml
+
+
