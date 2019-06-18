@@ -3,6 +3,12 @@ http://localhost:9010/api/v1/testadd
 
 基本spring boot框架+redis缓存开启+junit单元测试+log4j2日志+slf4j
 
+缓存使用请注意
+1 应用启动时要添加启用缓存注解
+@EnableCaching
+2service层添加缓存名称
+@Cacheable(cacheNames="getAppAdvertNew1ByTypeEx1")
+
 drop table if exists webUserT ;
 
 create table webUserT(
