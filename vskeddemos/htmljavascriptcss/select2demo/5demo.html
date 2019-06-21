@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>5</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link href="js/lib/select2/css/select2.min.css" rel="stylesheet">
+</head>
+
+<body>
+ <select id="videotype" name="videotype">
+
+</select>
+
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/mock-min.js" type="text/javascript"></script>
+    <script src="js/lib/select2/js/select2.full.min.js"></script>
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+
+$(function(){
+      Mock.mock(RegExp('http://localhost:8080/lostweek/hello.html.*'),'post',function(){
+        var rsArry=new Array();
+        for(var i=0;i<10;i++){
+          var Random = Mock.Random;
+          rsArry.push({
+        name: Random.cname(),
+        hometown: i
+        });
+        }
+        return rsArry;
+        });
+        
+
+$('#videotype').select2({
+  width: '20%',
+  ajax: {
+    url: 'http://localhost:8080/lostweek/hello.html',
+    method:'post',
+    processResults: function (dt) {
+		  var tmpArray=new Array();
+		  $.each(dt,function(index,el){
+		    tmpArray.push({id:el.hometown,text:el.name});
+		  });
+      return {results:tmpArray};
+    },
+    dataType: 'json'
+  }
+  });
+
+//详细用法参见 https://select2.org/getting-started/basic-usage
+  
+});
+
+</script>
+
+</body>
+</html>

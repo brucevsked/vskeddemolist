@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link href="js/lib/select2/css/select2.min.css" rel="stylesheet">
+</head>
+
+<body>
+ <select id="videotype" name="videotype">
+
+</select>
+
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/select2/js/select2.full.min.js"></script>
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+  
+$(function(){
+var dt = [
+    {
+        id: 0,
+        text: '类型1'
+    },
+    {
+        id: 1,
+        text: '类型2'
+    },
+    {
+        id: 2,
+        text: '类型3'
+    },
+    {
+        id: 3,
+        text: '类型4'
+    },
+    {
+        id: 4,
+        text: '类型5'
+    }
+];
+$('#videotype').select2({width: '20%',data: dt});
+
+//详细用法参见 https://select2.org/getting-started/basic-usage
+  
+});
+
+</script>
+
+</body>
+</html>

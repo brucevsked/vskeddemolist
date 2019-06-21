@@ -57,3 +57,25 @@ th:remove    删除某个属性    　　　　<tr th:remove="all">
 　　　　　　　　　　　　　　　　　　　　4.all-but-first:删除所有包含标签的孩子,除了第一个。
 　　　　　　　　　　　　　　　　　　　　5.none:什么也不做。这个值是有用的动态评估。
 th:attr    设置标签属性，多个属性可以用逗号分隔    比如 th:attr="src=@{/image/aa.jpg},title=#{logo}"，此标签不太优雅，一般用的比较少。
+
+判断
+比较运算符
+gt：great than（大于）>
+ge：great equal（大于等于）>=
+eq：equal（等于）==
+lt：less than（小于）<
+le：less equal（小于等于）<=
+ne：not equal（不等于）!=
+
+
+<p> 提现类型:
+  <span th:if="${data['cashtype']} eq 1">支付宝</span>
+  <span th:if="${data['cashtype']} eq 2">微信</span>
+  <span th:if="${data['cashtype']} eq 3">银行卡</span>
+  <span th:if="${data['cashtype']} eq 4">信用卡</span>						
+  &nbsp;&nbsp; 提现金额(单位分!):<span th:text="${data['consume']}"></span> </p>
+
+或
+<form id="fm" method="post" action="" th:if="${data ne null}">
+内容
+</form>

@@ -18,8 +18,14 @@
                 <!-- 每个文件512MB -->
                 <SizeBasedTriggeringPolicy size="512MB"/>
             </Policies>
-            <!-- 最多备份90个 -->
-            <DefaultRolloverStrategy max="90"/>
+            
+            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了90 默认保留7天-->
+            <DefaultRolloverStrategy max="50">
+            <Delete basePath="${logpath}/" maxDepth="1">
+            <IfFileName glob="*.log" />
+            <IfLastModified age="7d" />
+            </Delete>
+            </DefaultRolloverStrategy>
     </RollingFile>
     <JDBC name="databaseAppender" tableName="myLogsT">
       <ConnectionFactory class="com.vsked.util.ConnectionFactory" method="getDatabaseConnection" />

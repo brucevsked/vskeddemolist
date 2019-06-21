@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>html原型模板</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link href="js/lib/icheck/skins/all.css" rel="stylesheet">
+</head>
+
+<body>
+  <label>
+  <input type="checkbox" name="quux1" class="i-checks" value="1">
+  Foo
+</label>
+  <label>
+  <input type="checkbox" name="quux1" class="i-checks" value="2">
+  Foo
+</label>
+  <label>
+  <input type="checkbox" name="quux1" class="i-checks" value="3">
+  Foo
+</label>
+<hr>
+<label for="baz[1]">Bar1</label>
+<input type="radio" class="i-checks" name="quux2" id="baz[1]" value="1" checked>
+
+<label for="baz[2]">Bar2</label>
+<input type="radio" class="i-checks" name="quux2" id="baz[2]" value="2">
+
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/icheck/icheck.min.js"></script>
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+  
+$(function(){
+  
+  $('.i-checks').iCheck({
+    checkboxClass: 'icheckbox_square-green',
+    radioClass: 'iradio_square-green',
+  });
+  
+  
+$('input[name="quux1"]').on('ifClicked', function(event){
+  var obj=$(this);
+  console.log(obj.val());
+});
+
+$('input[name="quux2"]').on('ifChecked', function(event){
+  var obj=$(this);
+  console.log(obj.val());
+  if(obj.val()==1){
+  console.log('hello 111')  ;
+  }else{
+    console.log('save world')  ;
+  }
+});
+
+//详细用法参见 https://github.com/fronteed/iCheck
+  
+});
+
+</script>
+
+</body>
+</html>
