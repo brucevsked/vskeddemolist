@@ -4,7 +4,7 @@
 <!-- must set here! -->
 <base href="">
 
-<title>5取值与取文本</title>
+<title>6取值与取文本</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 <link href="js/lib/select2/css/select2.min.css" rel="stylesheet">
@@ -63,6 +63,7 @@ $('#getTxtBt').on('click',function(){
 $('#getValueBt').on('click',function(){
   var myData=$('#videotype').select2('val');
   $('#myRsDiv').html('hey:'+myData);
+  console.log(myData==null);
   });
   
 });

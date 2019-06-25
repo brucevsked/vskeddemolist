@@ -8,7 +8,7 @@ ${...} 变量引用模式
 #{...} i18n， 国际化
 
 ${mymap['keyaccess']} 读取map值
-
+<input type="text" class="form-control" name="vtname" id="vtname" th:value="${data['name']}" required>
 
 定义模板
 <head th:fragment="webcss">
@@ -24,6 +24,8 @@ th:text, 文本显示给div或span或input赋值
 th:checked 选中
 整数类型时th:checked="${oldstatus==1}"
 文本类型时th:checked="${oldstatus eq '1'}"
+
+
 
 
 常用th标签
@@ -79,3 +81,9 @@ ne：not equal（不等于）!=
 <form id="fm" method="post" action="" th:if="${data ne null}">
 内容
 </form>
+
+复选框或单选框
+                         <input type="radio" class="i-checks" value="1" name="leveltype" th:checked="${data['level']==1}"> 1级分类
+                         <input type="radio" class="i-checks" value="2" name="leveltype" th:checked="${data['level']==2}"> 2级分类
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="0" name="state" th:checked="${oldAppModule.state==0}"> 禁用
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="1" name="state" th:checked="${oldAppModule.state==1}"> 启用
