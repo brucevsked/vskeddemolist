@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>3取值</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link href="js/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="js/lib/duallistbox/bootstrap-duallistbox.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <button id="getValueBt">取值</button>
+            <select multiple="multiple" name="myHumanIds" id="myHumanIds">
+
+            </select>
+
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/mock-min.js" type="text/javascript"></script>
+    <script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/lib/duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+  
+$(function(){
+  
+      Mock.mock(RegExp('http://localhost:8080/lostweek/hello.html.*'),'post',function(){
+        var rsArry=new Array();
+        for(var i=0;i<10;i++){
+          var Random = Mock.Random;
+          rsArry.push({
+        name: Random.cname(),
+        hometown: i
+        });
+        }
+        return rsArry;
+        });
+        
+      Mock.mock(RegExp('http://localhost:8080/lostweek/ihasok.html.*'),'post',function(){
+        var rsArry=new Array();
+        for(var i=15;i<=20;i++){
+          var Random = Mock.Random;
+          rsArry.push({
+        name: Random.cname(),
+        hometown: i
+        });
+        }
+        return rsArry;
+        });
+    
+		$.post('http://localhost:8080/lostweek/hello.html',{a:1	},function (dtnoselected){
+		  //设置未选中的
+		  $.each(dtnoselected,function(index1,elnoselected){
+		    //console.log(elnoselected);
+		    $("#myHumanIds").append('<option value="'+elnoselected.hometown+'">'+elnoselected.name+'</option>');
+		    
+		    
+		  });
+		  
+		$.post('http://localhost:8080/lostweek/ihasok.html',{a:1	},function (dtselected){
+		  //设置已选中的
+		  $.each(dtselected,function(index2,elselected){
+		    //console.log(elselected);
+		    $("#myHumanIds").append('<option value="'+elselected.hometown+'" selected >'+elselected.name+'</option>');
+		    console.log( $("#myHumanIds"));
+		    
+		  });
+		  
+  $('#myHumanIds').bootstrapDualListbox({
+  nonSelectedListLabel: '未选中选项',//未选中list的label，默认false；
+  selectedListLabel: '已经选中选项',//已选中list的label，默认false；
+  showFilterInputs: true,//是否显示过滤的input输入框，默认true显示；为false则过滤相关的内容不起作用、不显示；
+  filterTextClear: '清空过滤条件',//清空过滤条件按钮的文本，默认'show all'，可替换为其他文本；
+  filterPlaceHolder: '过滤条件',//过滤条件input框的placeholder，可自定义内容，默认为'Filter',
+  nonSelectedFilter: '',//未选中option的过滤条件，默认为空字符串 '' ，也可用正则方式，例如：'ion ([7-9]|[1][0-2])' 过滤7、8、9、10、11、12；
+  selectedFilter: '',//已选中option的过滤条件，默认为空字符串 ''；参考：nonSelectedFilter；一般不设置已选中的过滤条件，会导致某些选中的项不在已选中option的过滤条件范围内，无法显示；
+  moveOnSelect: false,//是否移动选中的option；为false时，moveSelected和removeSelected的按钮显示、生效；默认为true；为true只能光标连续选取，松开鼠标，选中的项会移动；为false则可配合键盘的Ctrl和Shift使用，点击moveSelectedLabel和removeSelectedLabel的按钮，option才会移动；
+  moveAllLabel: '添加全部option',//添加全部option按钮的label，默认'Move all'
+  moveSelectedLabel: '添加选中的option',//添加选中option按钮的label，默认'Move selected'
+  removeAllLabel: '移除全部option',//移除全部option按钮的label，默认'Remove all'
+  removeSelectedLabel: '移除选中option',//移除选中option按钮的label，默认'Remove selected'
+  preserveSelectionOnMove: 'moved',//'moved'或'all'时，展示移动到target列表中的元素（背景色显示），默认false，不展示；没看到'moved'和'all'的区别；
+  helperSelectNamePostfix: '_ast',//为selector的name的后缀为'_helper'，未选中的list后面拼接1，已选中的拼接2；也可通过setHelperSelectNamePostfix(value, refresh)方法修改；
+  selectorMinimalHeight: 260,//selector的最小height，大概小于260px时，为默认值固定高度，更大值则selector高度会增大；不知道默认值的的大小及height的单位
+  infoText: '共选中 {0} 项',//不过滤时，选中/未选中option共几项；默认为'Showing all {0}'；
+  infoTextFiltered: '从 {1} 项 筛选 {0} 项',//过滤信息，默认'<span class="label label-warning">Filtered</span> {0} from {1}'。从m项中筛选n项；
+  infoTextEmpty: '列表为空',//当筛选条件为 '' ，且选中/未选中列表无option时显示的内容；默认为'Empty list'；
+  filterOnValues: false,//根据值过滤
+  });
+		  
+	    },'json');
+		  
+	    },'json');
+	    
+
+	    
+	  
+
+
+//详细用法参见 https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox
+
+$('#getValueBt').on('click',function(){
+  var mySelectedValue=$('#myHumanIds').val();
+  console.log('|'+mySelectedValue+'|');
+});
+  
+});
+
+</script>
+
+</body>
+</html>
