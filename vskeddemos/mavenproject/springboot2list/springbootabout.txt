@@ -6,3 +6,28 @@ spring boot+redis时要关闭redis事务
 
         //开启事务
 //        redisTemplate.setEnableTransactionSupport(true); //验证码bug修正不要开启!!!
+
+3*mybatis相关
+mybatis:
+  configuration:
+    call-setters-on-nulls: true #是null值也返回
+    local-cache-scope: SESSION #关闭一级缓存
+    #cache-enabled: true #开启二级缓存
+4* redis相关
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: mima
+    timeout: 10000
+
+5*数据库连按
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/appserverdev?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+6*开启热部署
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
