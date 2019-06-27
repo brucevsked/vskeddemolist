@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>1基本用法</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+</head>
+
+<body>
+
+<button type="button" id="test1Bt">基本用法1</button>
+<button type="button" id="test2Bt">标题</button>
+<button type="button" id="test3Bt">图标</button>
+<button type="button" id="test4Bt">按钮属性1</button>
+<button type="button" id="test5Bt">多个按钮</button>
+<hr>
+<button type="button" id="test6Bt">确认取消</button>
+<button type="button" id="test7Bt">输入框</button>
+<button type="button" id="test8Bt">点击外部关闭</button>
+<button type="button" id="test9Bt">确认弹窗与点击事件</button>
+<button type="button" id="test10Bt">计时消失</button>
+<button type="button" id="test11Bt">确认事件</button>
+
+
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/sweetalert/sweetalert.min.js"></script>
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+  
+$(function(){
+  
+$('#test1Bt').on('click',myDemo.baseUse1);
+$('#test2Bt').on('click',myDemo.baseUse2);
+$('#test3Bt').on('click',myDemo.baseUse3);
+$('#test4Bt').on('click',myDemo.baseUse4);
+$('#test5Bt').on('click',myDemo.baseUse5);
+$('#test6Bt').on('click',myDemo.baseUse6);
+$('#test7Bt').on('click',myDemo.baseUse7);
+$('#test8Bt').on('click',myDemo.baseUse8);
+$('#test9Bt').on('click',myDemo.baseUse9);
+$('#test10Bt').on('click',myDemo.baseUse10);
+$('#test11Bt').on('click',myDemo.baseUse11);
+
+//详细用法参见 https://sweetalert.js.org/docs/
+  
+});
+
+var myDemo=new Object({
+  baseUse1:function(){
+    swal({  text: 'here id my content'});
+  },
+  baseUse2:function(){
+    swal({
+      title:'this is title',
+      text: 'here is my content'
+    });
+  },
+  baseUse3:function(){
+    //warning,error,success,info
+    swal({
+      icon:'success',
+      title:'this is title',
+      text: 'here is my content'
+    });
+  },
+  baseUse4:function(){
+    //warning,error,success,info
+    swal({
+      icon:'success',
+      title:'this is title',
+      text: 'here is my content',
+      button:{
+        text: '点吧少年',
+        value: true,
+        visible: true,
+        className: "",
+        closeModal: true,
+      }
+    });
+  },
+  baseUse5:function(){
+    //warning,error,success,info
+    swal({
+      icon:'success',
+      title:'this is title',
+      text: 'here is my content',
+      buttons:[
+      {
+        text: '第一次',
+        value: true,
+        visible: true,
+        className: "",
+        closeModal: true
+      },
+      {
+        text: '握你的小手',
+        value: true,
+        visible: true,
+        className: '',
+        closeModal: true,
+      }
+    ]
+    });
+  },
+  baseUse6:function(){
+    //warning,error,success,info
+    swal({
+      icon:'success',
+      title:'this is title',
+      text: 'here is my content',
+      buttons: {
+        cancel: true,
+        confirm: true
+      }
+    });
+  },
+  baseUse7:function(){
+    var rs=swal({
+      icon:'success',
+      title:'this is title',
+      text: 'here is my text',
+      content:{
+        element: "input",
+        attributes: {
+          placeholder: "Type your password",
+          type: "password"
+        }
+      },
+      buttons: {
+        cancel: true,
+        confirm: true
+      }
+    }).then((yourValue)=>{
+      swal('You typed: '+yourValue);
+      });
+    
+  },
+  baseUse8:function(){
+    swal({
+      icon:'success',
+      title:'this is title',
+      text: 'here is my text',
+      closeOnClickOutside: true,//点击外部关闭
+      closeOnEsc: true //按esc关闭
+    });
+  },
+  baseUse9:function(){
+    swal('你确定晚上来么？',{
+      dangerMode: true,
+      buttons: true
+    }).then(willGo=>{
+      console.log('|'+willGo+'|');
+      if(willGo){
+        console.log('------------i has del-----------------');
+      }
+    });
+  },
+  baseUse10:function(){
+    swal('倒计时5秒关闭',{
+      buttons: false,
+      timer: 5000
+    });
+  },
+  baseUse11:function(){
+    swal({
+      title: '确定要删除么?',
+      text: '你这想法很危险啊少年!',
+    });
+  }
+  
+  
+  
+});
+
+</script>
+
+</body>
+</html>
