@@ -441,6 +441,26 @@ var luxon = (function (exports) {
 
     return normalized;
   }
+  function formatOffset(offset, format) {
+    var hours = Math.trunc(offset / 60),
+        minutes = Math.abs(offset % 60),
+        sign = hours >= 0 ? "+" : "-",
+        base = "" + sign + Math.abs(hours);
+
+    switch (format) {
+      case "short":
+        return "" + sign + padStart(Math.abs(hours), 2) + ":" + padStart(minutes, 2);
+
+      case "narrow":
+        return minutes > 0 ? base + ":" + minutes : base;
+
+      case "techie":
+        return "" + sign + padStart(Math.abs(hours), 2) + padStart(minutes, 2);
+
+      default:
+        throw new RangeError("Value format " + format + " is out of range for property format");
+    }
+  }
   function timeObject(obj) {
     return pick(obj, ["hour", "minute", "second", "millisecond"]);
   }
@@ -832,6 +852,19 @@ var luxon = (function (exports) {
       throw new ZoneIsAbstractError();
     }
     /**
+     * Returns the offset's value as a string
+     * @abstract
+     * @param {number} ts - Epoch milliseconds for which to get the offset
+     * @param {string} format - What style of offset to return.
+     *                          Accepts 'narrow', 'short', or 'techie'. Returning '+6', '+06:00', or '+0600' respectively
+     * @return {string}
+     */
+    ;
+
+    _proto.formatOffset = function formatOffset(ts, format) {
+      throw new ZoneIsAbstractError();
+    }
+    /**
      * Return the offset in minutes for this zone at the specified timestamp.
      * @abstract
      * @param {number} ts - Epoch milliseconds for which to compute the offset
@@ -925,6 +958,12 @@ var luxon = (function (exports) {
       var format = _ref.format,
           locale = _ref.locale;
       return parseZoneInfo(ts, format, locale);
+    }
+    /** @override **/
+    ;
+
+    _proto.formatOffset = function formatOffset$1(ts, format) {
+      return formatOffset(this.offset(ts), format);
     }
     /** @override **/
     ;
@@ -1085,12 +1124,12 @@ var luxon = (function (exports) {
      * @example IANAZone.isValidSpecifier("America/New_York") //=> true
      * @example IANAZone.isValidSpecifier("Fantasia/Castle") //=> true
      * @example IANAZone.isValidSpecifier("Sport~~blorp") //=> false
-     * @return {true}
+     * @return {boolean}
      */
     ;
 
     IANAZone.isValidSpecifier = function isValidSpecifier(s) {
-      return s && s.match(matchingRegex);
+      return !!(s && s.match(matchingRegex));
     }
     /**
      * Returns whether the provided string identifies a real zone
@@ -1150,6 +1189,12 @@ var luxon = (function (exports) {
       var format = _ref.format,
           locale = _ref.locale;
       return parseZoneInfo(ts, format, locale, this.name);
+    }
+    /** @override **/
+    ;
+
+    _proto.formatOffset = function formatOffset$1(ts, format) {
+      return formatOffset(this.offset(ts), format);
     }
     /** @override **/
     ;
@@ -1217,19 +1262,10 @@ var luxon = (function (exports) {
   }(Zone);
 
   var singleton$1 = null;
-
-  function hoursMinutesOffset(z) {
-    var hours = Math.trunc(z.fixed / 60),
-        minutes = Math.abs(z.fixed % 60),
-        sign = hours > 0 ? "+" : "-",
-        base = sign + Math.abs(hours);
-    return minutes > 0 ? base + ":" + padStart(minutes, 2) : base;
-  }
   /**
    * A zone with a fixed offset (i.e. no DST)
    * @implements {Zone}
    */
-
 
   var FixedOffsetZone =
   /*#__PURE__*/
@@ -1303,6 +1339,12 @@ var luxon = (function (exports) {
     /** @override **/
     ;
 
+    _proto.formatOffset = function formatOffset$1(ts, format) {
+      return formatOffset(this.fixed, format);
+    }
+    /** @override **/
+    ;
+
     /** @override **/
     _proto.offset = function offset() {
       return this.fixed;
@@ -1326,7 +1368,7 @@ var luxon = (function (exports) {
     }, {
       key: "name",
       get: function get() {
-        return this.fixed === 0 ? "UTC" : "UTC" + hoursMinutesOffset(this);
+        return this.fixed === 0 ? "UTC" : "UTC" + formatOffset(this.fixed, "narrow");
       }
     }, {
       key: "universal",
@@ -1370,6 +1412,12 @@ var luxon = (function (exports) {
     /** @override **/
     _proto.offsetName = function offsetName() {
       return null;
+    }
+    /** @override **/
+    ;
+
+    _proto.formatOffset = function formatOffset() {
+      return "";
     }
     /** @override **/
     ;
@@ -1787,24 +1835,7 @@ var luxon = (function (exports) {
           return "Z";
         }
 
-        var hours = Math.trunc(dt.offset / 60),
-            minutes = Math.abs(dt.offset % 60),
-            sign = hours >= 0 ? "+" : "-",
-            base = "" + sign + Math.abs(hours);
-
-        switch (opts.format) {
-          case "short":
-            return "" + sign + _this.num(Math.abs(hours), 2) + ":" + _this.num(minutes, 2);
-
-          case "narrow":
-            return minutes > 0 ? base + ":" + minutes : base;
-
-          case "techie":
-            return "" + sign + _this.num(Math.abs(hours), 2) + _this.num(minutes, 2);
-
-          default:
-            throw new RangeError("Value format " + opts.format + " is out of range for property format");
-        }
+        return dt.isValid ? dt.zone.formatOffset(dt.ts, opts.format) : "";
       },
           meridiem = function meridiem() {
         return knownEnglish ? meridiemForDateTime(dt) : string({
@@ -1907,11 +1938,17 @@ var luxon = (function (exports) {
 
           case "ZZZZ":
             // like EST
-            return dt.offsetNameShort;
+            return dt.zone.offsetName(dt.ts, {
+              format: "short",
+              locale: _this.loc.locale
+            });
 
           case "ZZZZZ":
             // like Eastern Standard Time
-            return dt.offsetNameLong;
+            return dt.zone.offsetName(dt.ts, {
+              format: "long",
+              locale: _this.loc.locale
+            });
           // zone
 
           case "z":
@@ -3001,13 +3038,21 @@ var luxon = (function (exports) {
         result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
     return [result, FixedOffsetZone.utcInstance];
   }
+
+  var isoYmdWithTimeExtensionRegex = combineRegexes(isoYmdRegex, isoTimeExtensionRegex);
+  var isoWeekWithTimeExtensionRegex = combineRegexes(isoWeekRegex, isoTimeExtensionRegex);
+  var isoOrdinalWithTimeExtensionRegex = combineRegexes(isoOrdinalRegex, isoTimeExtensionRegex);
+  var isoTimeCombinedRegex = combineRegexes(isoTimeRegex);
+  var extractISOYmdTimeAndOffset = combineExtractors(extractISOYmd, extractISOTime, extractISOOffset);
+  var extractISOWeekTimeAndOffset = combineExtractors(extractISOWeekData, extractISOTime, extractISOOffset);
+  var extractISOOrdinalDataAndTime = combineExtractors(extractISOOrdinalData, extractISOTime);
+  var extractISOTimeAndOffset = combineExtractors(extractISOTime, extractISOOffset);
   /**
    * @private
    */
 
-
   function parseISODate(s) {
-    return parse(s, [combineRegexes(isoYmdRegex, isoTimeExtensionRegex), combineExtractors(extractISOYmd, extractISOTime, extractISOOffset)], [combineRegexes(isoWeekRegex, isoTimeExtensionRegex), combineExtractors(extractISOWeekData, extractISOTime, extractISOOffset)], [combineRegexes(isoOrdinalRegex, isoTimeExtensionRegex), combineExtractors(extractISOOrdinalData, extractISOTime)], [combineRegexes(isoTimeRegex), combineExtractors(extractISOTime, extractISOOffset)]);
+    return parse(s, [isoYmdWithTimeExtensionRegex, extractISOYmdTimeAndOffset], [isoWeekWithTimeExtensionRegex, extractISOWeekTimeAndOffset], [isoOrdinalWithTimeExtensionRegex, extractISOOrdinalDataAndTime], [isoTimeCombinedRegex, extractISOTimeAndOffset]);
   }
   function parseRFC2822Date(s) {
     return parse(preprocessRFC2822(s), [rfc2822, extractRFC2822]);
@@ -3018,8 +3063,12 @@ var luxon = (function (exports) {
   function parseISODuration(s) {
     return parse(s, [isoDuration, extractISODuration]);
   }
+  var sqlYmdWithTimeExtensionRegex = combineRegexes(sqlYmdRegex, sqlTimeExtensionRegex);
+  var sqlTimeCombinedRegex = combineRegexes(sqlTimeRegex);
+  var extractISOYmdTimeOffsetAndIANAZone = combineExtractors(extractISOYmd, extractISOTime, extractISOOffset, extractIANAZone);
+  var extractISOTimeOffsetAndIANAZone = combineExtractors(extractISOTime, extractISOOffset, extractIANAZone);
   function parseSQL(s) {
-    return parse(s, [combineRegexes(sqlYmdRegex, sqlTimeExtensionRegex), combineExtractors(extractISOYmd, extractISOTime, extractISOOffset, extractIANAZone)], [combineRegexes(sqlTimeRegex), combineExtractors(extractISOTime, extractISOOffset, extractIANAZone)]);
+    return parse(s, [sqlYmdWithTimeExtensionRegex, extractISOYmdTimeOffsetAndIANAZone], [sqlTimeCombinedRegex, extractISOTimeOffsetAndIANAZone]);
   }
 
   var Invalid =
@@ -3268,11 +3317,12 @@ var luxon = (function (exports) {
 
     Duration.fromObject = function fromObject(obj) {
       if (obj == null || typeof obj !== "object") {
-        throw new InvalidArgumentError("Duration.fromObject: argument expected to be an object, got " + typeof obj);
+        throw new InvalidArgumentError("Duration.fromObject: argument expected to be an object, got " + (obj === null ? "null" : typeof obj));
       }
 
       return new Duration({
-        values: normalizeObject(obj, Duration.normalizeUnit, ["locale", "numberingSystem", "conversionAccuracy"]),
+        values: normalizeObject(obj, Duration.normalizeUnit, ["locale", "numberingSystem", "conversionAccuracy", "zone" // a bit of debt; it's super inconvenient internally not to be able to blindly pass this
+        ]),
         loc: Locale.fromObject(obj),
         conversionAccuracy: obj.conversionAccuracy
       });
@@ -4585,7 +4635,7 @@ var luxon = (function (exports) {
     ;
 
     Info.isValidIANAZone = function isValidIANAZone(zone) {
-      return !!IANAZone.isValidSpecifier(zone) && IANAZone.isValidZone(zone);
+      return IANAZone.isValidSpecifier(zone) && IANAZone.isValidZone(zone);
     }
     /**
      * Converts the input into a {@link Zone} instance.
@@ -6331,8 +6381,8 @@ var luxon = (function (exports) {
       return parseDataToDateTime(vals, parsedZone, opts, "HTTP", opts);
     }
     /**
-     * Create a DateTime from an input string and format string
-     * Defaults to en-US if no locale has been specified, regardless of the system's locale
+     * Create a DateTime from an input string and format string.
+     * Defaults to en-US if no locale has been specified, regardless of the system's locale.
      * @see https://moment.github.io/luxon/docs/manual/parsing.html#table-of-tokens
      * @param {string} text - the string to parse
      * @param {string} fmt - the format the string is expected to be in (see the link below for the formats)
@@ -6561,8 +6611,17 @@ var luxon = (function (exports) {
       } else if (!zone.isValid) {
         return DateTime.invalid(unsupportedZone(zone));
       } else {
-        var newTS = keepLocalTime || keepCalendarTime // keepCalendarTime is the deprecated name for keepLocalTime
-        ? this.ts + (this.o - zone.offset(this.ts)) * 60 * 1000 : this.ts;
+        var newTS = this.ts;
+
+        if (keepLocalTime || keepCalendarTime) {
+          var offsetGuess = this.o - zone.offset(this.ts);
+          var asObj = this.toObject();
+
+          var _objToTS3 = objToTS(asObj, offsetGuess, zone);
+
+          newTS = _objToTS3[0];
+        }
+
         return clone$1(this, {
           ts: newTS,
           zone: zone
@@ -6636,9 +6695,9 @@ var luxon = (function (exports) {
         }
       }
 
-      var _objToTS3 = objToTS(mixed, this.o, this.zone),
-          ts = _objToTS3[0],
-          o = _objToTS3[1];
+      var _objToTS4 = objToTS(mixed, this.o, this.zone),
+          ts = _objToTS4[0],
+          o = _objToTS4[1];
 
       return clone$1(this, {
         ts: ts,
@@ -6680,7 +6739,7 @@ var luxon = (function (exports) {
     }
     /**
      * "Set" this DateTime to the beginning of a unit of time.
-     * @param {string} unit - The unit to go to the beginning of. Can be 'year', 'month', 'day', 'hour', 'minute', 'second', or 'millisecond'.
+     * @param {string} unit - The unit to go to the beginning of. Can be 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', or 'millisecond'.
      * @example DateTime.local(2014, 3, 3).startOf('month').toISODate(); //=> '2014-03-01'
      * @example DateTime.local(2014, 3, 3).startOf('year').toISODate(); //=> '2014-01-01'
      * @example DateTime.local(2014, 3, 3, 5, 30).startOf('day').toISOTime(); //=> '00:00.000-05:00'
@@ -6857,7 +6916,13 @@ var luxon = (function (exports) {
     ;
 
     _proto.toISODate = function toISODate() {
-      return toTechFormat(this, "yyyy-MM-dd");
+      var format = "yyyy-MM-dd";
+
+      if (this.year > 9999) {
+        format = "+" + format;
+      }
+
+      return toTechFormat(this, format);
     }
     /**
      * Returns an ISO 8601-compliant string representation of this DateTime's week date

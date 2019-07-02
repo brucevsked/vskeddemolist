@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="origin" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>async4j 普通用法、整合spring用法 - 微信-大数据从业者 - 博客园</title>
+    <meta property="og:description" content="1.普通用法 asyn4j 是一个java异步方法调用框架，基于消费者与生产者模式。 async4j就是基于Executors线程池和反射机制实现的。 包括了异步方法执行，异步回调执行，异步工作缓存模" />
+    <link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=KOZafwuaDasEedEenI5aTy8aXH0epbm6VUJ0v3vsT_Q1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/Banlieue13/bundle-Banlieue13.css?v=-BwbBCgL4I6ev4eT0WChGlx86DuTjkHbdqzbBDeklxs1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/Banlieue13/bundle-Banlieue13-mobile.css?v=C7aAIzooqqafN7-nASHmRxKsmPNUcNkEEfqiLKchqBI1"/>
+    <link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/felixzh/rss"/>
+    <link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/felixzh/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/felixzh/wlwmanifest.xml"/>
+    <script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script>var currentBlogId=194920;var currentBlogApp='felixzh',cb_enable_mathjax=true;var isLogined=false;</script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: { 
+            equationNumbers: { autoNumber: ['AMS'], useLabelIds: true }, 
+            extensions: ['extpfeil.js'],
+            Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script><script src="//mathjax.cnblogs.com/2_7_2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/bundles/blog-common.js?v=smtcUT5dhdu_5eEO8CKHYoVc7DPLgEBGzp6zKkstlzg1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/felixzh/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/felixzh/">大数据从业者</a></h1>
+<h2>记录工作与学习，贵在坚持，加油！！
+微信公众号：大数据从业者</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+	<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/felixzh/">首页</a></li>
+	<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E5%BE%AE%E4%BF%A1-%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%BB%8E%E4%B8%9A%E8%80%85">联系</a></li>
+	<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+	<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/felixzh/rss">订阅</a>
+	<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/felixzh/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a></li>
+</ul>
+
+
+			<div class="blogStats">
+				
+				<div id="blog_stats">
+<!--done-->
+随笔- 686&nbsp;
+文章- 0&nbsp;
+评论- 49&nbsp;
+</div>
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		
+        <div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/felixzh/p/6029375.html">async4j 普通用法、整合spring用法</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p><span style="font-size: 18pt; background-color: #ff0000;"><strong>1.普通用法</strong></span></p>
+<p>asyn4j 是一个java异步方法调用框架，基于消费者与生产者模式。</p>
+<p>async4j就是基于Executors线程池和反射机制实现的。</p>
+<p>包括了异步方法执行，异步回调执行，异步工作缓存模块.支持Spring.<br />让我们写异步方法不再写很多的相关多线程代码。用asyn4j轻松搞定异步方法调用.提高程序的响应能力.</p>
+<p><span style="background-color: #ff0000;"><strong>主要接口：AsynService</strong></span>，具体方法如下：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:java;gutter:true;">　　　　　　　　　　　　　　@Override
+			public void setWorkQueueFullHandler(WorkQueueFullHandler arg0) {}
+			
+			@Override
+			public void setServiceHandler(AsynServiceHandler arg0) {}
+	
+			@Override
+			public void setErrorAsynWorkHandler(ErrorAsynWorkHandler arg0) {}
+			
+			@Override
+			public void init() {}
+			
+			@Override
+			public Map&lt;String, Long&gt; getRunStatMap() {
+				return null;
+			}
+			
+			@Override
+			public String getRunStatInfo() {
+				return null;
+			}
+			
+			@Override
+			public void close(long arg0) {}
+			
+			@Override
+			public void close() {}
+			
+			@Override
+			public void addWorkWithSpring(String arg0, String arg1, Object[] arg2, AsynCallBack arg3, WorkWeight arg4) {}
+			
+			@Override
+			public void addWork(Object arg0, String arg1, Object[] arg2, AsynCallBack arg3, WorkWeight arg4, boolean arg5) {}
+			
+			@Override
+			public void addWork(Object arg0, String arg1, Object[] arg2, AsynCallBack arg3, WorkWeight arg4) {}
+			
+			@Override
+			public void addWork(Object arg0, String arg1, Object[] arg2, AsynCallBack arg3) {}
+			
+			@Override
+			public void addWork(Object arg0, String arg1, Object[] arg2) {}
+			
+			@Override
+			public void addWork(Object arg0, String arg1) {}
+			
+			@Override
+			public void addAsynWork(AsynWork arg0) {} 
+</pre>
+</div>
+<p><strong><span style="background-color: #ff0000;">主要实现类：AsynServiceImpl</span></strong>。获得实例化对象的方法有四个：</p>
+<pre class="brush:java;gutter:true;"> 方法1：　　AsynService asynService=AsynServiceImpl.getService();
+ 方法2：　　AsynService asynService=AsynServiceImpl.getService(maxCacheWork, addWorkWaitTime, workThreadNum, callBackThreadNum, closeServiceWaitTime);<br /> 方法3：　　AsynService asynService=(AsynService) AsynServiceImpl.getCallBackExecutor();
+ 方法4：　　AsynService asynService=(AsynService) AsynServiceImpl.getWorkExecutor();&nbsp;</pre>
+<p>　　getService参数说明：</p>
+<pre class="brush:java;gutter:true;">maxCacheWork：最大工作队列缓存工作数 &ndash; 300(默认值)<br />addWorkWaitTime：当工作队列满时添加工作等待时间-- Long.MAX_VALUE(默认值)<br />workThreadNum：异步工作执行线程池大小 ---- CPU核数/2 +1(默认值)<br />callBackThreadNum：回调执行线程池大小 --- CPU核数/2(默认值)<br />closeServiceWaitTime：服务关闭等待时间 ---- 60000s(默认值)<br /><strong><span style="background-color: #ff0000;">普通方法实现（相对于整合spring而言）</span></strong><br />jar包：async4j-1.3.jar commoms-logging-1.2.jar<br /><strong>下载地址：<span style="background-color: #ff6600;">http://download.csdn.net/detail/u012373717/9673060</span></strong><br />async4j使用了commoms-logging，需自行导入<br />否则<br /><strong><img src="https://images2015.cnblogs.com/blog/663163/201611/663163-20161104104627424-1956335593.png" alt="" width="614" height="153" /></strong></pre>
+<pre class="brush:java;gutter:true;">方式1：异步工作内容在主线程类中</pre>
+<div class="cnblogs_Highlighter">
+<pre class="brush:java;gutter:true;">package Async4jDemo1;
+
+import com.googlecode.asyn4j.core.callback.AsynCallBack;
+import com.googlecode.asyn4j.service.AsynService;
+import com.googlecode.asyn4j.service.AsynServiceImpl;
+
+public class async4jDemo {
+
+	public static void main(String[] args) throws InterruptedException {
+		async4jDemo asy=new async4jDemo();
+		asy.doWork();
+	}
+	
+	public void doWork() throws InterruptedException {
+		// 初始化异步工作服务
+		AsynService asynService = AsynServiceImpl.getService();
+		// 启动服务
+		asynService.init();
+		// 异步回调对象
+		AsynCallBack back = new CallBackDemo1();
+		String string="this is a test";
+		for(int i=0;i&lt;3;i++) {
+			asynService.addWork(this, "test", new Object[] {string+"::"+i},back);//通过添加i，区别哪项异步工作进行了回调
+			Thread.sleep(1000);
+		}
+	}
+
+	public int test(String string){
+		String[] split = string.split("::");
+		System.out.println("异步工作中： "+ split[0]);
+		return Integer.valueOf(split[1]);
+	}
+}
+
+class CallBackDemo1 extends AsynCallBack {
+	
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void doNotify() {
+		 //输出异步方法调用返回结果   
+        System.out.println("CallBack's result: "+this.methodResult);  
+	}
+
+}
+</pre>
+</div>
+<p>　方法2：异步工作内容在单独类中</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:java;gutter:true;">package Async4jDemo2;
+
+import com.googlecode.asyn4j.core.callback.AsynCallBack;
+import com.googlecode.asyn4j.service.AsynService;
+import com.googlecode.asyn4j.service.AsynServiceImpl;
+
+public class Async4jDemo {
+
+	public static void main(String[] args) throws InterruptedException {
+		Async4jDemo asy = new Async4jDemo();
+		asy.doWork();
+	}
+
+	public void doWork() throws InterruptedException {
+		// 初始化异步工作服务
+		AsynService asynService = AsynServiceImpl.getService();
+		// 启动服务
+		asynService.init();
+
+		TargetServiceDemo targetService = new TargetServiceDemo();
+		String str = "this is a test";
+		for (int i = 0; i &lt; 3; i++) {
+			asynService.addWork(targetService, "test", new Object[] { str + "::" + i }, targetService.back);
+			Thread.sleep(1000);
+		}
+	}
+}
+
+class CallBackDemo extends AsynCallBack {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void doNotify() {
+		// 输出异步方法调用返回结果
+		System.out.println("CallBack: " + this.methodResult);
+	}
+
+}
+</pre>
+</div>
+<p>　　</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:java;gutter:true;">package Async4jDemo2;
+import com.googlecode.asyn4j.core.callback.AsynCallBack;
+
+public class TargetServiceDemo {
+	// 异步回调对象
+	AsynCallBack back = new CallBackDemo();
+
+	public int test(String string) {
+		String[] split = string.split("::");
+		System.out.println("异步工作中： " + split[0]);
+		return Integer.valueOf(split[1]);
+	}
+
+}
+</pre>
+</div>
+<p>　　<img src="https://images2015.cnblogs.com/blog/663163/201611/663163-20161104143725049-1151638838.png" alt="" width="633" height="133" /></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 18pt;"><strong><span style="background-color: #ff0000;">2.整合spring用法</span></strong></span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:java;gutter:true;">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"&gt;
+
+
+	&lt;bean id="asyncService" class="com.googlecode.asyn4j.spring.AsynServiceFactoryBean"&gt;
+		&lt;!--设置自定义相关参数 --&gt;
+		&lt;!--(maxCacheWork)最大工作队列缓存工作数 &ndash; 300(默认值) --&gt;
+		&lt;!--(addWorkWaitTime)当工作队列满时添加工作等待时间- Long.MAX_VALUE(默认值) --&gt;
+		&lt;!--(workThreadNum)异步工作执行线程池大小 - CPU核数/2 +1(默认值) --&gt;
+		&lt;!--(callBackThreadNum)回调执行线程池大小 - CPU核数/2(默认值) --&gt;
+		&lt;!--(closeServiceWaitTime) 服务关闭等待时间 - 60000s(默认值) --&gt;
+		&lt;property name="maxCacheWork" value="${maxCacheWork}"&gt;&lt;/property&gt;
+		&lt;property name="addWorkWaitTime" value="${addWorkWaitTime}"&gt;&lt;/property&gt;
+		&lt;property name="workThreadNum" value="${workThreadNum}"&gt;&lt;/property&gt;
+		&lt;property name="callbackThreadNum" value="${callbackThreadNum}"&gt;&lt;/property&gt;
+		&lt;property name="closeServiceWaitTime" value="${closeServiceWaitTime}"&gt;&lt;/property&gt;
+		&lt;!--添加相关处理器 --&gt;
+		&lt;property name="errorAsynWorkHandler"&gt;
+			&lt;bean
+				class="com.googlecode.asyn4j.core.handler.DefaultErrorAsynWorkHandler" /&gt;
+		&lt;/property&gt;
+		&lt;property name="workQueueFullHandler"&gt;
+			&lt;bean class="com.googlecode.asyn4j.core.handler.CacheAsynWorkHandler" /&gt;
+		&lt;/property&gt;
+	&lt;/bean&gt;
+
+	&lt;!-- spring的属性加载器，加载properties文件中的属性 --&gt;
+	&lt;bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"&gt;
+		&lt;property name="location"&gt;
+			&lt;value&gt;conf/sys_conf.properties&lt;/value&gt;
+		&lt;/property&gt;
+		&lt;property name="fileEncoding" value="utf-8" /&gt;
+	&lt;/bean&gt;
+
+&lt;/beans&gt;
+</pre>
+</div>
+<p>　　</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:java;gutter:true;">package Aysnc4jSpringDemo;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.googlecode.asyn4j.core.callback.AsynCallBack;
+import com.googlecode.asyn4j.service.AsynService;
+
+
+public class Async4jSpringDemo {
+
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+
+		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/applicationContext.xml");
+
+		AsynService asynService = (AsynService) ac.getBean("asyncService");
+
+		Async4jSpringDemo async4jSpringDemo = new Async4jSpringDemo();
+		async4jSpringDemo.DoWOrk(asynService);
+	}
+
+	public void DoWOrk(AsynService asynService) {
+		String str = "this is a test!";
+		for (int i = 0; i &lt; 3; i++) {
+			AsynCallBack callBack = new CallBack();
+			asynService.addWork(this, "test", new Object[] { str + "::" + i }, callBack);
+		}
+	}
+
+	public int test(String string) {
+		String[] split = string.split("::");
+		System.out.println("异步工作中： " + split[0]);
+		return Integer.valueOf(split[1]);
+	}
+}
+
+class CallBack extends AsynCallBack {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void doNotify() {
+
+		// 输出异步方法调用返回结果
+		System.out.println("CallBack's result: " + this.methodResult);
+
+	}
+
+}
+</pre>
+</div>
+<p>　　<img src="https://images2015.cnblogs.com/blog/663163/201611/663163-20161104163552393-2111361482.png" alt="" /></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 18pt; background-color: #ff0000;"><strong>&nbsp;3.相关处理器</strong></span></p>
+<p align="left">&nbsp; &nbsp; &nbsp; &nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;"> asynService.setErrorAsynWorkHandler(arg0);
+
+ asynService.setServiceHandler(arg0);
+
+ asynService.setWorkQueueFullHandler(arg0);</span></pre>
+</div>
+<p align="left">3.1 异步工作缓冲器--(当工作队列工作数超过maxCacheWork时由处理器处理)</p>
+<div class="cnblogs_code">
+<pre>anycService.setWorkQueueFullHandler(<span style="color: #0000ff;">new</span> CacheAsynWorkHandler(100));//顺序不能变 <br />anycService.init();</pre>
+</div>
+<p align="left">系统有一个默认的处理器 CacheAsynWorkHandler 。</p>
+<p align="left">建议实现自己的处理器,需实现 addAsynWork，process 方法 ；自定义处理器继承&nbsp;WorkQueueFullHandler&nbsp;抽象类。process建议启动一个守护线程监听。</p>
+<p align="left">当工作队列中的工作超过300个时，异步工作将由CacheAsynWorkHandler处理;</p>
+<p align="left">3.2服务启动和关闭处理器 --(当服务启动和关闭调用)</p>
+<p align="left">anycService.setCloseHander(new FileAsynServiceHandler("c:/asyn4j.data"));</p>
+<p align="left">设置c:/asyn4j.data为持久化文件 FileAsynServiceHandler 是 AsynServiceHandler 的一个例子将任务持久化到文件，当系统启动时加载文件内容到内存，关闭时将未执行的任务持久化到文件。</p>
+<p align="left">大家可以参考源码将任务持久化到别外的地方（memcached）。自定义处理器继承 AsynServiceHandler 抽象类</p>
+<p align="left">3.3异步工作执行异常处理器 --(当工作执行出现异常时处理器)</p>
+<p align="left">anycService.setErrorAsynWorkHandler(new DefaultErrorAsynWorkHandler());</p>
+<p align="left">自定义处理器继承 ErrorAsynWorkHandler 抽象类</p>
+<p align="left">3.4所有处理器为可选配置，建议根据自己的业务继承相关的类实现自己的处理器</p>
+<p align="left">3.5异步工作优级</p>
+<p align="left">分成三个等级WorkWeight.LOW,WorkWeight.MIDDLE, WorkWeight.HIGH 默认优先级为WorkWeight.MIDDLE 。</p>
+<p><span style="font-size: 18pt;"><strong><span style="background-color: #ff0000;">&nbsp;4.添加异步工作API</span></strong></span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">普通方法：<br /><br />asynService.addAsynWork(AsyncWork arg0);
+asynService.addWork(Object, String);
+asynService.addWork(Object, String, Object[]);
+asynService.addWork(Object, String, Object[], AsynCallBack);
+asynService.addWork(Object, String, Object[],AsynCallBack, WorkWeight );
+asynService.addWork(Object, String, Object[],AsynCallBack, WorkWeight, </span><span style="color: #0000ff;">boolean</span> );<br /><br />其中：</pre>
+<p align="left">&nbsp;* @param Object －－ 目标对象（可以是 Class,Object,String(spring)）</p>
+<p align="left">&nbsp;* @param String －－ 目标方法</p>
+<p align="left">&nbsp;* @param object[]－－ 目标方法参数</p>
+<p align="left">&nbsp;* @param AsynCallBack --回调对象</p>
+<p align="left">&nbsp;* @param WorkWeight －－ 工作权重</p>
+<p align="left">&nbsp;* @param boolean －－&nbsp; 如果目标对象为class，实例化后是否缓存</p>
+</div>
+<div class="cnblogs_code">
+<pre>整合spring方法：<br /><br />asynService.addWorkWithSpring(String, String, Object[], AsynCallBack, WorkWeight);<br />其中：</pre>
+<p align="left">&nbsp;* @param String－－ 目标对象BeanName</p>
+<p align="left">&nbsp;* @param String －－ 目标方法</p>
+<p align="left">&nbsp;* @param object[] －－ 目标方法参数</p>
+<p align="left">&nbsp;* @param AsynCallBack --回调对象</p>
+<p align="left">&nbsp;* @param WorkWeight －－ 工作权重</p>
+</div>
+<div class="cnblogs_code">
+<pre>获取运行状态信息<br />&nbsp;public Map getRunStatMap();<br /> Map key 说明：<br />       total: 累计接收异步工作数 <br />     execute: 执行异步工作数 <br />    callback: 执行回调数&nbsp;</pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">关闭服务等待 waitTime 秒<br />public</span> <span style="color: #0000ff;">void</span> close(<span style="color: #0000ff;">long</span> waitTime);</pre>
+</div>
+<p><span style="font-size: 18pt;"><strong><span style="background-color: #ff0000;">5.注意事项</span></strong></span></p>
+<p>&nbsp;添加异步工作时，对于目标方法，无法区分方法同名的并且参数是继承关系的方法。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>项目地址:<a href="http://asyn4j.googlecode.com/" target="_blank">http://asyn4j.googlecode.com</a>&nbsp;<br />源码SVN : http://asyn4j.googlecode.com/svn/branches/asyn4j&nbsp;<br />WIKI:&nbsp;<a href="http://code.google.com/p/asyn4j/wiki/user_guide" target="_blank">http://code.google.com/p/asyn4j/wiki/user_guide</a>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-11-04 16:36</span> <a href='https://www.cnblogs.com/felixzh/'>微信-大数据从业者</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=6029375" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(6029375);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=194920,cb_entryId=6029375,cb_blogApp=currentBlogApp,cb_blogUserGuid='1f830fd8-0023-e411-8d02-90b11c0b17d6',cb_entryCreatedDate='2016/11/4 16:36:00';loadViewCount(cb_entryId);var cb_postType=1;var isMarkdown=false;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+<script>
+  googletag.cmd.push(function() {
+        googletag.defineSlot('/1090369/C1', [300, 250], 'div-gpt-ad-1546353474406-0').addService(googletag.pubads());
+        googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+  });
+</script>
+<div id='cnblogs_c1' class='c_ad_block'>
+    <div id='div-gpt-ad-1546353474406-0' style='height:250px; width:300px;'></div>
+</div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'>
+    <div id='div-gpt-ad-1539008685004-0' style='height:60px; width:468px;'></div>
+</div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+ if(enablePostBottom()) {
+    codeHighlight();
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverT2();
+    deliverC1();
+    deliverC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);  
+}
+</script>
+</div>
+
+    
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2019 微信-大数据从业者
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+</body>
+</html>
