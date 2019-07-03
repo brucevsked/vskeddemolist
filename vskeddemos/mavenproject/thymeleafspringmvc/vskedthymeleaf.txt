@@ -4,6 +4,8 @@ ${...} 变量引用模式
 *{...} 选择表达式，一般是th:object之后，直接取Object中的属性。当没有选取对象时，其功能等同于${...}。
 
 @{...} 链接url的表达式
+动态加载src
+<script th:src="@{'/static/js/project/app/bus/appModuleAdd.js?id='+${#dates.createNow()}}"></script>
 
 #{...} i18n， 国际化
 
@@ -87,3 +89,64 @@ ne：not equal（不等于）!=
                          <input type="radio" class="i-checks" value="2" name="leveltype" th:checked="${data['level']==2}"> 2级分类
                          &nbsp;&nbsp;<input type="radio" class="i-checks" value="0" name="state" th:checked="${oldAppModule.state==0}"> 禁用
                          &nbsp;&nbsp;<input type="radio" class="i-checks" value="1" name="state" th:checked="${oldAppModule.state==1}"> 启用
+
+
+下拉列表框修改回显带ajax取数据方式回显
+				<input type="hidden" id="oldType1" name="oldType1" th:value="${data['type1']}" >
+				<input type="hidden" id="oldType2" name="oldType2" th:value="${data['type2']}" >
+		$.post('/webapi/v1/appvideotypelistbylevel',{token:$('#servertoken').val(),level:1},function (dt){
+			  var tmpArray=new Array();
+			  $.each(dt,function(index,el){
+				  var tmpDt={id:el.id,text:el.name};
+			      tmpArray.push(tmpDt);
+			      if(tmpDt.id==$('#oldType1').val()){
+			    	  appVideoUpdate.oldSelectedOptiont1=tmpDt;
+			      }
+			  });
+			  $('#type1').select2({width: '60%',data: tmpArray});
+			  if(appVideoUpdate.oldSelectedOptiont1!=null){
+				  $('#type1').val(appVideoUpdate.oldSelectedOptiont1.id,appVideoUpdate.oldSelectedOptiont1.text).trigger("change"); 
+			  }			  
+		    },'json');
+下拉列表框修改回显带固定下拉列表修改回显
+				<input type="hidden" id="oldTargetType" name="oldTargetType" th:value="${data['targettype']}" >
+		var tmpSelectOption2=null;
+		$.each($('#targettype option'),function (index,el){
+			if(el.value==$('#oldTargetType').val()){
+				tmpSelectOption2=el;
+			}
+		});
+		if(tmpSelectOption2!=null){
+			$('#targettype').val(tmpSelectOption2.value,tmpSelectOption2.text).trigger("change"); 
+		}	
+
+表达式实用程序对象
+#dates : 为 java.util.Date对象提供工具方法,比如：格式化,提取年月日等；
+
+#calendars : 类似于#dates , 但是只针对java.util.Calendar对象；
+
+#numbers : 为数值型对象提供工具方法；
+
+#strings :为String 对象提供工具方法。如: contains, startsWith, prepending/appending等；
+
+#objects : 为object 对象提供常用的工具方法；
+
+#bools : 为boolean 对象提供常用的工具方法；
+
+#arrays : 为arrays 对象提供常用的工具方法；
+
+#lists :为lists对象提供常用的工具方法；
+
+#sets : 为sets对象提供常用的工具方法；
+
+#maps : 为maps对象提供常用的工具方法；
+
+#aggregates :为创造一个arrays 或者 collections聚集函数提供常用的工具方法；
+
+#messages :用于在变量表达式中获得外部消息的实用方法，与使用#{...}语法获得的方式相同；
+
+#uris：用于在Thymeleaf标准表达式中执行URI / URL操作（特别是转义/消除转义）的实用对象；
+
+#conversions：允许在模板的任意位置执行转换服务的实用程序对象；
+
+#ids : 为可能需要循环的ID属性提供常用的工具方法。
