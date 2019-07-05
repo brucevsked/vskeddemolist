@@ -40,5 +40,13 @@ server:
     max-threads: 1000 #最大线程数
     max-connections: 20000 #最大连接数
   #servlet.context-path: /appserveruser  #项目名，如果不设定，默认是 /
+8* 开启spring boot+mybatis二级缓存
+application.yml
+    cache-enabled: true #开启二级缓存
+启动application添加注解
+@EnableCaching
+
+ service层方法上添加注解
+	@Cacheable(cacheNames="appModuleListExt1")
  
   

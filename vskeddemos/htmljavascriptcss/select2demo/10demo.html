@@ -4,7 +4,7 @@
 <!-- must set here! -->
 <base href="">
 
-<title>6取值与取文本</title>
+<title>10选项改变事件</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 <link href="js/lib/select2/css/select2.min.css" rel="stylesheet">
@@ -16,7 +16,6 @@
 </select>
 <button id="getTxtBt">getTxt</button>
 <button id="getValueBt">getValue</button>
-<button id="getValueBt1">getValue1</button>
 <div id="myRsDiv"></div>
 
     <script src="js/lib/jquery.min.js"></script>
@@ -24,11 +23,12 @@
     <script src="js/lib/select2/js/select2.full.min.js"></script>
 <!-- 使用方向键试试 或拖动看看-->
 <script>
-
+var mySelectedValue=5;        
+var mySelectedOption=null;
 $(function(){
       Mock.mock(RegExp('http://localhost:8080/lostweek/hello.html.*'),'post',function(){
         var rsArry=new Array();
-        for(var i=0;i<10;i++){
+        for(var i=0;i<30;i++){
           var Random = Mock.Random;
           rsArry.push({
         name: Random.cname(),
@@ -37,23 +37,22 @@ $(function(){
         }
         return rsArry;
         });
-        
 
-$('#videotype').select2({
-  width: '20%',
-  ajax: {
-    url: 'http://localhost:8080/lostweek/hello.html',
-    method:'post',
-    processResults: function (dt) {
+		$.post('http://localhost:8080/lostweek/hello.html',{a:1	},function (dt){
 		  var tmpArray=new Array();
 		  $.each(dt,function(index,el){
-		    tmpArray.push({id:el.hometown,text:el.name});
+		    var myDt={id:el.hometown,text:el.name};
+		    tmpArray.push(myDt);
+		    if(myDt.id==mySelectedValue){
+		      mySelectedOption=myDt;
+		    }
 		  });
-      return {results:tmpArray};
-    },
-    dataType: 'json'
-  }
-  });
+		  $('#videotype').select2({width: '20%',data: tmpArray});
+		  
+$('#videotype').append('<option value="" selected>请选择</option>');
+$('#videotype').trigger('change');
+		  
+	    },'json');
 
 //详细用法参见 https://select2.org/getting-started/basic-usage
 
@@ -65,15 +64,17 @@ $('#getTxtBt').on('click',function(){
 $('#getValueBt').on('click',function(){
   var myData=$('#videotype').select2('val');
   $('#myRsDiv').html('hey:'+myData);
-  console.log('第二种取值方式'+$('#videotype').val());
   });
-$('#getValueBt1').on('click',function(){
-  var myData=$('#videotype').val();
-  $('#myRsDiv').html('hey:'+myData);
-  });
+
+
+
+$('#videotype').on('select2:select',function(e){
+  var rsValue=$('#videotype').val();
+ $('#myRsDiv').html(rsValue);
+ });
+ 
   
 });
-
 </script>
 
 </body>
