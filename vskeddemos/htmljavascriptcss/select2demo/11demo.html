@@ -4,14 +4,23 @@
 <!-- must set here! -->
 <base href="">
 
-<title>2注入数组数据</title>
+<title>1个界面多个select</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 <link href="js/lib/select2/css/select2.min.css" rel="stylesheet">
 </head>
 
 <body>
- <select id="videotype" name="videotype"></select>
+  
+<div>0<select id="videotype0" name="videotype0"></select></div>
+<div>1<select id="videotype1" name="videotype0"></select></div>
+<div>2<select id="videotype2" name="videotype0"></select></div>
+<div>3<select id="videotype3" name="videotype0"></select></div>
+<div>4<select id="videotype4" name="videotype0"></select></div>
+ 
+  
+
+</select>
 
 
     <script src="js/lib/jquery.min.js"></script>
@@ -42,7 +51,14 @@ var dt = [
         text: '类型5'
     }
 ];
-$('#videotype').select2({width: '20%',data: dt});
+
+$('#videotype0').select2({width: '25%',data: dt});
+$('#videotype1').select2({width: '25%',data: dt});
+$('#videotype2').select2({width: '25%',data: dt});
+$('#videotype3').select2({width: '25%',data: dt});
+$('#videotype4').select2({width: '25%',data: dt});
+
+
 
 //详细用法参见 https://select2.org/getting-started/basic-usage
   
