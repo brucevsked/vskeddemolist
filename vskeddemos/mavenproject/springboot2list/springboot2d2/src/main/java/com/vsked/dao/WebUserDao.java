@@ -3,10 +3,14 @@ package com.vsked.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import com.vsked.cache.MybatisRedisCache;
+
+@CacheNamespace(implementation=MybatisRedisCache.class)
 @Repository
 public interface WebUserDao {
 	
@@ -27,7 +31,5 @@ public interface WebUserDao {
 	
 	@Insert("insert into webUserT(uid,username,userpass,phone,status) values(#{uid},#{username},#{userpass},#{phone},1)")
 	int add(Map<String, Object> m);
-	
-	
 
 }

@@ -1,3 +1,6 @@
+
+spring boot2默认redis连接池lettuce
+spring boot2默认数据库连接池hikari
 1* 集成shiro注意
 在shiro的realm以及各操作类中不要注入service要注入dao(或mapper)
 

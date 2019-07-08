@@ -1,4 +1,4 @@
-package com.vsked.configuration;
+package com.vsked.cache;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +26,8 @@ public class RedisConfig {
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 
         redisTemplate.setConnectionFactory(redisConnectionFactory);
+        
+        MybatisRedisCache.setRedisTemplate(redisTemplate);
         
         return redisTemplate;
     }

@@ -1,7 +1,6 @@
 package com.vsked.cache;
 
 import org.apache.ibatis.cache.Cache;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -19,8 +18,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class MybatisRedisCache implements Cache {
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock(true);
 
-	@Autowired
-    RedisTemplate<String, Object> redisTemplate;
+    static RedisTemplate<String, Object> redisTemplate;
+    
+    public static void setRedisTemplate(RedisTemplate<String, Object> c1){
+    	redisTemplate=c1;
+    }
 
     private String id;
 

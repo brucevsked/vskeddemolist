@@ -38,9 +38,13 @@ public class WebUserServiceTest extends BaseTest{
 		data.put("start", 1);
 		data.put("length", 5);
 		String s2=webUserService.list(data);
+		String s3=webUserService.list(data);
+		String s4=webUserService.list(data);
 		log.info("|"+s+"|");
 		log.info("|"+s1+"|");
 		log.info("|"+s2+"|");
+		log.info("|"+s3+"|");
+		log.info("|"+s4+"|");
 	}
 
 }

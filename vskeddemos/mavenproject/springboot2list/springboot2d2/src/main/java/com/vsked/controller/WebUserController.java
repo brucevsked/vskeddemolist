@@ -18,5 +18,10 @@ public class WebUserController {
 	public String testadd(HttpServletRequest req){
 		return webUserService.add1(req);
 	}
+	
+	@RequestMapping("/api/v1/testlist")
+	public String testlist(HttpServletRequest req){
+		return webUserService.list1(req);
+	}
 
 }

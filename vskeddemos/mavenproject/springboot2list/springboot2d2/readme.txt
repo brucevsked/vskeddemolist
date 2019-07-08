@@ -1,13 +1,19 @@
 
 http://localhost:9010/api/v1/testadd
 
+http://localhost:9010/api/v1/testlist?start=1&length=1
+http://localhost:9010/api/v1/testlist?start=1&length=5
+
 基本spring boot框架+redis缓存开启+junit单元测试+log4j2日志+slf4j
 
 缓存使用请注意
 1 应用启动时要添加启用缓存注解
 @EnableCaching
-2service层添加缓存名称
-@Cacheable(cacheNames="getAppAdvertNew1ByTypeEx1")
+2dao层添加实现类
+@CacheNamespace(implementation=MybatisRedisCache.class)
+3redis连接初始化类中(如RedisConfig)设置redis连接
+MybatisRedisCache.setRedisTemplate(redisTemplate);
+4查看redis中是否存在缓存
 
 drop table if exists webUserT ;
 

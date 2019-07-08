@@ -19,6 +19,10 @@ spring:
     port: 6379
     password: root
     timeout: 10000
+  cache:
+    type: redis
+    cache-names:
+      - rediscachea1
   http:
     encoding:
       charset: UTF-8

@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,7 +63,6 @@ public class WebUserService extends BaseService{
 		return result;
 	}
 	
-	@Cacheable(cacheNames="webUserList")
 	public String list(Map<String, Object> data){
 		String result="add is ok";
 		try{
