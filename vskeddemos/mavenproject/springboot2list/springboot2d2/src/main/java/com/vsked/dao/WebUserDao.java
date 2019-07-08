@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Options.FlushCachePolicy;
 import org.springframework.stereotype.Repository;
 
 import com.vsked.cache.MybatisRedisCache;
@@ -29,6 +31,7 @@ public interface WebUserDao {
 	@Select("<script>select * from webUserT <where> <if test=\"isagent!=null and isagent!='' \"> and isagent =#{isagent} </if> <if test=\"phone!=null\"> and phone like concat('%',#{phone},'%')  </if> <if test=\"username!=null\"> and username like concat('%',#{username},'%')  </if> </where> order by addtime desc </script>")
 	List<Map<String, Object>> list(Map<String, Object> m);
 	
+	@Options(flushCache=FlushCachePolicy.TRUE)
 	@Insert("insert into webUserT(uid,username,userpass,phone,status) values(#{uid},#{username},#{userpass},#{phone},1)")
 	int add(Map<String, Object> m);
 

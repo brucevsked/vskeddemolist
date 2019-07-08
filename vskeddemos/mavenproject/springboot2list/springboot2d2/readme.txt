@@ -13,7 +13,13 @@ http://localhost:9010/api/v1/testlist?start=1&length=5
 @CacheNamespace(implementation=MybatisRedisCache.class)
 3redis连接初始化类中(如RedisConfig)设置redis连接
 MybatisRedisCache.setRedisTemplate(redisTemplate);
-4查看redis中是否存在缓存
+4在添加，更新，删除操作上添加更新缓存注解
+@Options(flushCache=FlushCachePolicy.TRUE)
+
+如
+	@Options(flushCache=FlushCachePolicy.TRUE)
+	@Insert("insert into webUserT(uid,username,userpass,phone,status) values(#{uid},#{username},#{userpass},#{phone},1)")
+	int add(Map<String, Object> m);
 
 drop table if exists webUserT ;
 
