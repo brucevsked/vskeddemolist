@@ -1,6 +1,14 @@
 
 spring boot2默认redis连接池lettuce
 spring boot2默认数据库连接池hikari
+
+命令启动与关闭
+web模块,直接用jar包运行即可
+nohup java -jar appserverwebadmin.jar &
+
+ ps -ef|grep appserverwebadmin
+ kill -9 pid
+
 1* 集成shiro注意
 在shiro的realm以及各操作类中不要注入service要注入dao(或mapper)
 
@@ -51,5 +59,12 @@ application.yml
 
  service层方法上添加注解
 	@Cacheable(cacheNames="appModuleListExt1")
+9* thymeleaf相关
+  thymeleaf:
+    cache: false
+    prefix=classpath:/templates/
+    suffix=.html
+    mode=HTML5
+    encoding=UTF-8
  
   

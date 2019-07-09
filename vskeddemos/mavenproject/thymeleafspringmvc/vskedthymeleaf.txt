@@ -1,3 +1,8 @@
+
+base标签基地址
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
 前缀说明
 ${...} 变量引用模式
 
