@@ -6,6 +6,12 @@ spring boot2默认数据库连接池hikari
 web模块,直接用jar包运行即可
 nohup java -jar appserverwebadmin.jar &
 
+远程断点连接
+第一步启动参数中添加以下
+java -jar -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5505 appserverwebadmin.jar
+第二步myeclipse菜单中run->debug config->Remote Java Application
+第三步填写服务器ip与调试端口号
+
  ps -ef|grep appserverwebadmin
  kill -9 pid
 
