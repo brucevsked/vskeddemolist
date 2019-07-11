@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>更新</title>
+</head>
+<body class="pace-done">
+
+	<div class="col-lg-12">
+		<div class="ibox ">
+
+			<div class="ibox-title">
+				<h5>审核</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+                <p th:text="${errorcode}" class="font-bold text-danger"></p>
+                <p th:text="${errormsg}" class="font-bold text-danger"></p>
+				<form id="fm" method="post" action="" th:if="${data ne null}">
+				<input type="hidden" id="fid" name="fid" th:value="${fid}">
+				<input type="hidden" id="fuid" name="fuid" th:value="${data['uid']}">
+					<div class="form-group">
+						<div class="col-lg-10">
+						<p> 提现手机号:<span th:text="${data['phone']}"></span> &nbsp;&nbsp; 提现订单号:<span th:text="${data['orderid']}"></span> </p>
+						<p> 提现类型:
+						<span th:if="${data['cashtype']} eq 1">支付宝</span>
+						<span th:if="${data['cashtype']} eq 2">微信</span>
+						<span th:if="${data['cashtype']} eq 3">银行卡</span>
+						<span th:if="${data['cashtype']} eq 4">信用卡</span>
+						
+						&nbsp;&nbsp; 提现金额(单位分!):<span th:text="${data['consume']}"></span> </p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">收款账号</label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" name="cashaccount" id="cashaccount" th:value="${data['cashaccount']}" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">处理结果</label>
+						<div class="col-sm-10">
+                         <input type="radio" class="i-checks" value="1" name="cashstate"  > 已打款
+                         <input type="radio" class="i-checks" value="2" name="cashstate" checked> 拒绝
+						</div>
+					</div>
+					<div class="form-group" id="myAccountDiv">
+						<label class="col-sm-2 control-label">打款账号</label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" name="opaccount" id="opaccount" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button type="button" class="btn btn-primary" id="updateBt">更新</button>
+							<button type="reset" class="btn btn-warning" id="resetBt">重置</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+    <div th:replace="include/web/webjs :: webjs"></div>
+	<script src="/static/js/project/app/bus/appUserCashReView.js"></script>
+</body>
+</html>

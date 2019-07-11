@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>缓存</title>
+</head>
+<body class="pace-done">
+
+	<div class="col-lg-12">
+		<div class="ibox ">
+
+			<div class="ibox-title">
+				<h5>缓存</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+				<form id="fm" method="post" action="">
+					<div class="form-group">
+						<label class="col-lg-2 control-label">缓存类型</label>
+						<div class="col-lg-10">
+							<select id="cachetype" name="cachetype">
+							<option value="">请选择要清空的缓存</option>
+							<option value="1">全部</option>
+							<option value="2">首页模块</option>
+							<option value="3">广告</option>
+							<option value="4">影片分类</option>
+							<option value="5">banner</option>
+							<option value="6">影片</option>
+							<option value="7">影星</option>
+							<option value="8">vip价格</option>
+							<option value="9">用户</option>
+							<option value="10">公告</option>
+							<option value="11">用户角色</option>
+							<option value="12">影片评论</option>
+							<option value="13">用户权限</option>
+							<option value="14">影片评论重复</option>
+							<option value="15">角色</option>
+							<option value="16">服务器列表</option>
+							<option value="17">卡密</option>
+							<option value="18">播放地址</option>
+							<option value="19">版本</option>
+							<option value="20">系统参数</option>
+							<option value="21">用户购买影片</option>
+							<option value="22">用户余额记录</option>
+							<option value="23">广告类型</option>
+							<option value="24">影星类型</option>
+							<option value="25">影星影片关系</option>
+							<option value="26">模块类型</option>
+							<option value="27">app权限</option>
+							<option value="28">app角色权限</option>
+							<option value="29">用户收藏</option>
+							<option value="30">用户公告</option>
+							<option value="31">用户播放记录</option>
+							<option value="32">用户推广收益记录</option>
+							<option value="33">用户搜索</option>
+							<option value="34">用户站内信</option>
+							</select>
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button type="button" class="btn btn-primary" id="updateBt">清空</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+    <div th:replace="include/web/webjs :: webjs"></div>
+	<script src="/static/js/project/manager/user/cacheClean.js"></script>
+</body>
+</html>

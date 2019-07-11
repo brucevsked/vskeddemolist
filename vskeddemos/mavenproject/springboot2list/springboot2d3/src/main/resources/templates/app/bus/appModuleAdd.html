@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>模块添加</title>
+</head>
+<body class="pace-done">
+
+	<div class="col-lg-12">
+		<div class="ibox ">
+
+			<div class="ibox-title">
+				<h5>模块添加</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+			    <p th:text="${errorcode}" class="font-bold text-danger"></p>
+                <p th:text="${errormsg}" class="font-bold text-danger"></p>
+				<form id="fm" method="post" action="">
+					<div class="form-group">
+						<label class="col-lg-2 control-label">模块类型</label>
+						<div class="col-lg-10">
+                        <select class="form-control" id="appModuleTypeId">
+                        </select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">先选模板再修改参数</label>
+						<div class="col-sm-10">
+						<button type="button" class="btn btn-info btn-rounded" id="bannerModelBt">banner</button>
+						<button type="button" class="btn btn-info btn-rounded" id="videoHotModelBt">影片热播</button>
+						<button type="button" class="btn btn-info btn-rounded" id="humanCommandModelBt">影星推荐1</button>
+						<button type="button" class="btn btn-info btn-rounded" id="humanCommandModel2Bt">影星推荐2</button>
+						<button type="button" class="btn btn-info btn-rounded" id="humanCommandModel3Bt">影星推荐3</button>
+						<button type="button" class="btn btn-info btn-rounded" id="advertModelBt">广告</button>
+						<button type="button" class="btn btn-info btn-rounded" id="videoCommandModelBt">影片推荐1</button>
+						<button type="button" class="btn btn-info btn-rounded" id="videoCommandModel2Bt">影片推荐2</button>
+						<button type="button" class="btn btn-info btn-rounded" id="videoTypeModelBt">影片分类</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">模块名称</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="moduleName" id="moduleName" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">模块代号</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="moduleCode" id="moduleCode" readonly="readonly" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">模块样式</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="moduleStyle" id="moduleStyle" readonly="readonly" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">地址</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="api" id="api" readonly="readonly" required>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">表名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="tbname" id="tbname" readonly="readonly" required>
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-12 control-label">查询参数,参数说明热播ishot=1,推荐iscommend=1,起始页start=1,页大小length=4,请依照自己需要变更等号后面数字</label>
+						<span class="col-sm-4" id="paramExt1"></span>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name="tbparam" id="tbparam" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">序列</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" name="seq" id="seq" value="9" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">状态</label>
+						<div class="col-sm-8">
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="0" name="state" > 禁用
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="1" name="state" checked="true"> 启用
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">头部显示</label>
+						<div class="col-sm-8">
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="0" name="headviewstate" checked="true"> 全隐藏
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="1" name="headviewstate"> 名称
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="2" name="headviewstate"> 更多
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="3" name="headviewstate"> 名称更多
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button type="reset" class="btn btn-warning">重写</button>
+							<button type="button" class="btn btn-primary" id="addBt">增加</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+    <div th:replace="include/web/webjs :: webjs"></div>
+	<script th:src="@{'/static/js/project/app/bus/appModuleAdd.js?id='+${#dates.createNow()}}"></script>
+</body>
+</html>

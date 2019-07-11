@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>添加</title>
+</head>
+<body class="pace-done">
+
+	<div class="col-lg-12">
+		<div class="ibox ">
+
+			<div class="ibox-title">
+				<h5>添加</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+                <p th:text="${errorcode}" class="font-bold text-danger"></p>
+                <p th:text="${errormsg}" class="font-bold text-danger"></p>
+				<form id="fm" method="post" action="" th:if="${data ne null}">
+				<input type="hidden" id="fid" name="fid" th:value="${fid}" >
+				<input type="hidden" id="oldType1" name="oldType1" th:value="${data['type1']}" >
+				<input type="hidden" id="oldType2" name="oldType2" th:value="${data['type2']}" >
+
+					<div class="form-group" id="myParentLevelDiv">
+						<label class="col-sm-2 control-label">1级分类</label>
+						<div class="col-sm-10">
+						 <select id="type1" name="type1"></select>
+						</div>
+					</div>
+					<div class="form-group" id="myParentLevelDiv">
+						<label class="col-sm-2 control-label">2级分类</label>
+						<div class="col-sm-10">
+						 <select id="type2" name="type2"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">名称</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="vname" id="vname" th:value="${data['name']}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">描述</label>
+						<div class="col-sm-10">
+							<textarea rows="10" cols="100" name="vdescription" id="vdescription" th:text="${data['description']}"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-12 control-label">图片地址
+						<div class="custom-file">
+						    <input id="myFile" type="file" class="custom-file-input">
+						    <label for="myFile" class="custom-file-label">1选择文件...</label>
+						    <button type="button" class="btn btn-info btn-rounded" id="uploadFile1Bt">2上传文件</button>
+						</div> 
+						</label>
+						<div class="col-sm-12">
+							<input type="text" class="form-control" name="coverurls" id="coverurls" th:value="${data['coverurls']}"  required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">是否收费</label>
+						<div class="col-sm-10">
+                         <input type="radio" class="i-checks" value="0" name="isprice" th:checked="${data['isprice']==0}"> 免费
+                         <input type="radio" class="i-checks" value="1" name="isprice" th:checked="${data['isprice']==1}"> 收费
+						</div>
+					</div>
+					<div class="form-group" id="myPriceDiv">
+						<label class="col-sm-2 control-label">价格</label>
+						<div class="col-sm-10">
+                         <input type="text" class="form-control" name="price" id="price" th:value="${data['price']}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">是否热播</label>
+						<div class="col-sm-10">
+                         <input type="radio" class="i-checks" value="0" name="ishot" th:checked="${data['ishot']==0}"> 否
+                         <input type="radio" class="i-checks" value="1" name="ishot" th:checked="${data['ishot']==1}">是
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">是否推荐</label>
+						<div class="col-sm-10">
+                         <input type="radio" class="i-checks" value="0" name="iscommend" th:checked="${data['iscommend']==0}"> 否
+                         <input type="radio" class="i-checks" value="1" name="iscommend" th:checked="${data['iscommend']==1}"> 是
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button type="button" class="btn btn-primary" id="updateBt">更新</button>
+							<button type="reset" class="btn btn-warning" id="resetBt">重置</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+    <div th:replace="include/web/webjs :: webjs"></div>
+	<script src="/static/js/project/app/bus/appVideoUpdate.js"></script>
+</body>
+</html>

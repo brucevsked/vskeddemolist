@@ -1,0 +1,104 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation" th:fragment="webleftnav">
+	<div class="sidebar-collapse">
+	    <!-- start main menu -->
+		<ul class="nav metismenu" id="side-menu">
+		    <!-- start nav header -->
+			<li class="nav-header">
+				<div class="dropdown profile-element">
+					<!-- <img alt="image" class="rounded-circle" src="/static/img/profile_small.jpg" th:src="${curUser.avatar}">  -->
+					<img alt="image" class="rounded-circle" src="/static/img/profile_small.jpg">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
+					    <span class="block m-t-xs font-bold" id="userNameSpan" th:text="${curUser.username}">test</span> 
+						<span class="text-muted text-xs block" id="userRoleSpan" th:text="${curUser.rolename}">myrole <b class="caret"></b></span>
+					</a>
+					<ul class="dropdown-menu animated fadeInRight m-t-xs">
+						<li><a class="dropdown-item" href="javascript:void(0);" id="webUserInfoBt">个人信息</a></li>
+						<li class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="javascript:void(0);" id="webUserLogoutBt1">登出</a></li>
+					</ul>
+				</div>
+				<div class="logo-element">Hey</div>
+			</li>
+			<!-- end nav header -->
+            <!-- start menu  -->
+            <li>
+            <a href="javascript:void(0);"><i class="fa fa-sitemap"></i> <span class="nav-label">app用户管理 </span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="javascript:void(0);" id="appUserListBt">app用户列表</a></li>
+                    <li><a href="javascript:void(0);" id="appRoleListBt">app角色管理</a></li>
+                    <li><a href="javascript:void(0);" id="appPermissionListBt">app权限管理</a></li>
+                    <li><a href="javascript:void(0);" id="appUserPlayHisBt">用户播放列表</a></li>
+                    <li><a href="javascript:void(0);" id="appUseSearchHisBt">用户搜索列表</a></li>
+                    <li><a href="javascript:void(0);" id="appUserCollectBt">用户收藏</a></li>
+                    <li><a href="javascript:void(0);" id="appUserBuyBt">用户购买列表</a></li>
+                    <li><a href="javascript:void(0);" id="appUserFeedBackBt">意见反馈</a></li>
+                    <li><a href="javascript:void(0);" id="appUserChatHisBt">代理聊天记录</a></li>
+                </ul>
+            </li>
+            <!-- end menu  -->
+            <!-- start menu  -->
+            <li>
+            <a href="javascript:void(0);"><i class="fa fa-sitemap"></i> <span class="nav-label">广告管理 </span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="javascript:void(0);" id="appAdvertTypeListBt">app广告分类</a></li>
+                    <li><a href="javascript:void(0);" id="appAdvertInfoListBt">app广告</a></li>
+                    <li><a href="javascript:void(0);" id="appBannerTypeListBt">banner分类</a></li>
+                    <li><a href="javascript:void(0);" id="appBannerListBt">banner列表</a></li>
+                </ul>
+            </li>
+            <!-- end menu  -->
+            <!-- start menu  -->
+            <li>
+            <a href="javascript:void(0);"><i class="fa fa-sitemap"></i> <span class="nav-label">影视管理 </span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="javascript:void(0);" id="appHumanTypeBt">影星类型列表</a></li>
+                    <li><a href="javascript:void(0);" id="appVideoTypeBt">影片类型列表</a></li>
+                    <li><a href="javascript:void(0);" id="appHumanInfoBt">影星列表</a></li>
+                    <li><a href="javascript:void(0);" id="appVideoBt">影片列表</a></li>
+                    <li><a href="javascript:void(0);" id="appVideoCommentBt">评论</a></li>
+                </ul>
+            </li>
+            <!-- end menu  -->
+			<!-- start menu1  -->
+			<li>
+			<a href="javascript:void(0);"> <i class="fa fa-th-large"></i><span class="nav-label">财务管理</span><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse" aria-expanded="false">
+					<li><a href="javascript:void(0);" id="appVipPriceBt">vip价格列表</a></li>
+					<li><a href="javascript:void(0);" id="appCardCodeBt">卡密列表</a></li>
+					<li><a href="javascript:void(0);" id="appUserBalanceBt">消费记录</a></li>
+					<li><a href="javascript:void(0);" id="appUserPromotionBalanceBt">推广收益</a></li>
+					<li><a href="javascript:void(0);" id="appUserCashBt">提现申请</a></li>
+				</ul>
+		    </li>
+            <!-- end menu1  -->
+			<!-- start menu1  -->
+			<li>
+			<a href="javascript:void(0);"> <i class="fa fa-th-large"></i><span class="nav-label">文件管理</span><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse" aria-expanded="false">
+					<li><a href="javascript:void(0);" id="appFileListListBt">文件列表</a></li>
+				</ul>
+		    </li>
+            <!-- end menu1  -->
+			<!-- start menu1  -->
+			<li>
+			<a href="javascript:void(0);"> <i class="fa fa-th-large"></i><span class="nav-label">系统管理</span><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse" aria-expanded="false">
+				    <li><a href="javascript:void(0);" id="appSysParamListBt">app系统参数</a></li>
+					<li><a href="javascript:void(0);" id="webUserListBt">web用户</a></li>
+					<li><a href="javascript:void(0);" id="webRoleListBt">web角色</a></li>
+					<li><a href="javascript:void(0);" id="webPermissionListBt">web权限</a></li>
+                    <li><a href="javascript:void(0);" id="appModuleTypeListBt">app主页分类</a></li>
+                    <li><a href="javascript:void(0);" id="appModuleListBt">app模块列表</a></li>
+                    <li><a href="javascript:void(0);" id="appNoticeListBt">app公告</a></li>
+                    <li><a href="javascript:void(0);" id="appBalanceReportBt">平台余额报表</a></li>
+                    <li><a href="javascript:void(0);" id="appSiteMailBt">站内信列表</a></li>
+                    <li><a href="javascript:void(0);" id="appVersionBt">app版本管理</a></li>
+                    <li><a href="javascript:void(0);" id="appServerBt">服务器管理</a></li>
+                    <li><a href="javascript:void(0);" id="appCacheBt">缓存</a></li>
+				</ul>
+		    </li>
+            <!-- end menu1  -->
+		</ul>
+        <!-- end main menu -->
+	</div>
+</nav>

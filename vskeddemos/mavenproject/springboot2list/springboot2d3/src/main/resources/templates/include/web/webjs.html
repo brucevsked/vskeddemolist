@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- must set here! -->
+<base
+	th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body th:fragment="webjs">
+	<!-- Mainly scripts -->
+	<script src="/static/js/jquery-3.1.1.min.js"></script>
+	<script src="/static/js/popper.min.js"></script>
+	<script src="/static/js/bootstrap.js"></script>
+	<script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<script src="/static/js/plugins/dataTables/datatables.min.js"></script>
+	<script src="/static/js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="/static/js/plugins/dataTables/Select-1.3.0/js/dataTables.select.min.js"></script>
+    <script src="/static/js/plugins/dataTables/Buttons-1.5.6/js/buttons.bootstrap.min.js"></script>
+
+	<!-- Custom and plugin javascript -->
+	<script src="/static/js/inspinia.js"></script>
+	<script src="/static/js/plugins/pace/pace.min.js"></script>
+	
+    <!-- iCheck -->
+    <script src="/static/js/plugins/iCheck/icheck.min.js"></script>
+    
+    <!-- luxon -->
+    <script src="/static/js/plugins/luxon/luxon.min.js"></script>
+    
+	<!-- jQuery UI -->
+	<script src="/static/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+	<!-- Toastr -->
+	<script src="/static/js/plugins/toastr/toastr.min.js"></script>
+	<!-- luxon -->
+	<script src="/static/js/plugins/datetime/luxon/luxon.min.js"></script>
+	
+    <!-- Select2 -->
+    <script src="/static/js/plugins/select2/select2.full.min.js"></script>
+    
+    <!-- Dual Listbox -->
+    <script src="/static/js/plugins/dualListbox/jquery.bootstrap-duallistbox.js"></script>
+    
+    <!-- Sweet alert -->
+    <script src="/static/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- Jasny -->
+    <script src="/static/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    
+
+   <!-- Data picker -->
+   <script src="/static/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+   <script src="/static/js/plugins/datapicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+	
+    <script src="/static/js/project/manager/webCommon.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>添加</title>
+</head>
+<body class="pace-done">
+
+	<div class="col-lg-12">
+		<div class="ibox ">
+
+			<div class="ibox-title">
+				<h5>添加</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+                <p th:text="${errorcode}" class="font-bold text-danger"></p>
+                <p th:text="${errormsg}" class="font-bold text-danger"></p>
+				<form id="fm" method="post" action="" >
+					<div class="form-group">
+						<label class="col-sm-2 control-label">广告类型</label>
+						<div class="col-sm-10">
+							<select id="type1" name="type1"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">名称</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="avname" id="avname" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-12 control-label">图片地址
+						<div class="custom-file">
+						    <input id="myFile" type="file" class="custom-file-input">
+						    <label for="myFile" class="custom-file-label">1选择文件...</label>
+						    <button type="button" class="btn btn-info btn-rounded" id="uploadFile1Bt">2上传文件</button>
+						</div> 
+						</label>
+						<div class="col-sm-12">
+							<input type="text" class="form-control" name="storeurls" id="storeurls" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">目标类型</label>
+						<div class="col-sm-10">
+							<select id="targettype" name="targettype">
+							<option value="0">外链url</option>
+							<option value="1">播放影片</option>
+							<option value="2">影星详情</option>
+							<option value="3">充值</option>
+							<option value="4">推广</option>
+							<option value="5">浏览器</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">目标地址</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="target" id="target" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">序列</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" name="seq" id="seq" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button type="button" class="btn btn-primary" id="addBt">添加</button>
+							<button type="reset" class="btn btn-warning" id="resetBt">清空</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+    <div th:replace="include/web/webjs :: webjs"></div>
+	<script src="/static/js/project/app/bus/appAdvertAdd.js"></script>
+</body>
+</html>

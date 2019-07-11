@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>用户状态更新</title>
+</head>
+<body class="pace-done">
+
+	<div class="col-lg-12">
+		<div class="ibox ">
+
+			<div class="ibox-title">
+				<h5>用户状态更新</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+				<form id="fm" method="post" action="">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">用户状态
+						<input type="hidden" id="fuid" name="fuid" th:value="${fuid}">
+						</label>
+						<div class="col-sm-10">
+                         <input type="radio" class="i-checks" value="1" name="status" th:checked="${oldstatus==1}"> 正常
+                         <input type="radio" class="i-checks" value="2" name="status" th:checked="${oldstatus==2}"> 锁定
+                         <input type="radio" class="i-checks" value="3" name="status" th:checked="${oldstatus==3}"> 删除
+                         <input type="radio" class="i-checks" value="4" name="status" th:checked="${oldstatus==4}"> 非法
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button type="button" class="btn btn-primary" id="updateBt">更新</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+    <div th:replace="include/web/webjs :: webjs"></div>
+	<script src="/static/js/project/app/user/appUserStatusUpdate.js"></script>
+</body>
+</html>

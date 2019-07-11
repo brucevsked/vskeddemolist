@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:text="#{login.title}">app manager | 登录 V2</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+
+            <div class="col-md-6">
+                <h2 class="font-bold" th:text="#{login.title}">欢迎登录inspinia 2.9.2</h2>
+
+                <p th:text="${errormsg}">土地是以它的肥沃和收获而被估价的；才能也是土地，不过它生产的不是粮食，而是真理。如果只能滋生瞑想和幻想的话，即使再大的才能也只是砂地或盐池，那上面连小草也长不出来的。
+                </p>
+                <p th:text="${errorcode}">—— 别林斯基</p>
+
+            </div>
+            <div class="col-md-6">
+                <div class="ibox-content">
+                    <form class="m-t" role="form" action="webapi/v1/webuserlogin" method="post">
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" value="webadmin" class="form-control" th:placeholder="#{login.username}" placeholder="用户名"  required="true">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="userpass" name="userpass" value="000000" class="form-control" th:placeholder="#{login.userpass}" placeholder="密码" required="true">
+                        </div>
+                        <button type="submit" id="loginBt" class="btn btn-primary block full-width m-b" th:text="#{login.loginbt}">登录</button>
+                        <button type="reset" id="resetBt" class="btn btn-sm btn-white btn-block" th:text="#{login.resetbt}">重置</button>
+                    </form>
+                    <p class="m-t">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+               <small th:text="#{login.footleft}">Copyright inspinia 2.9.2 &copy; 2017-2018</small>
+            </div>
+            <div class="col-md-6 text-right" th:text="#{login.footright}">
+               cn.inspinia.cn
+            </div>
+        </div>
+    </div>
+	<script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/project/manager/user/webUserLogin.js"></script>
+</body>
+
+</html>

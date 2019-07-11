@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>app管理后台 | 主页</title>
+    <div th:replace="include/web/webcss :: webcss"></div>
+
+</head>
+
+<body class="pace-done">
+    <div id="wrapper">
+    	
+    <div th:replace="include/web/webleftnav :: webleftnav"></div>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        	
+            <div th:replace="include/web/webtop1 :: webtop1"></div>
+            <!-- 
+            <div class="row  border-bottom white-bg dashboard-header">
+
+header1
+
+            </div> 
+            -->
+            <div class="wrapper wrapper-content">
+                <div class="row" id="mainContent">
+                	<h1>Welcome to Save World app System<br/><br/>  欢迎使用app管理后台</h1>
+                	
+                </div>
+            </div>
+            
+            <div th:replace="include/web/webfooter :: webfooter"></div>
+            
+        </div>
+
+    </div>
+    <input type="hidden" id="servertoken" name="servertoken" th:value="${token}" />
+    <div th:replace="include/web/webjs :: webjs"></div>
+
+    <script src="/static/js/project/manager/webIndex.js"></script>
+    
+</body>
+</html>

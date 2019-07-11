@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>模块修改</title>
+</head>
+<body class="pace-done">
+
+	<div class="col-lg-12">
+		<div class="ibox ">
+
+			<div class="ibox-title">
+				<h5>模块修改</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+                <p th:text="${errorcode}" class="font-bold text-danger"></p>
+                <p th:text="${errormsg}" class="font-bold text-danger"></p>
+				<form id="fm" method="post" action="" th:if="${data ne null}">
+				<input type="hidden" id="fid" name="fid" th:value="${fid}" >
+				<input type="hidden" id="oldModuleType" name="oldModuleType" th:value="${data['type']}" >
+				
+					<div class="form-group">
+						<label class="col-lg-2 control-label">模块类型</label>
+						<div class="col-lg-10">
+                        <select class="form-control" id="appModuleTypeId">
+                        </select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">先选模板再修改参数</label>
+						<div class="col-sm-10">
+						<button type="button" class="btn btn-info btn-rounded" id="bannerModelBt">banner</button>
+						<button type="button" class="btn btn-info btn-rounded" id="videoHotModelBt">影片热播</button>
+						<button type="button" class="btn btn-info btn-rounded" id="humanCommandModelBt">影星推荐1</button>
+						<button type="button" class="btn btn-info btn-rounded" id="humanCommandModel2Bt">影星推荐2</button>
+						<button type="button" class="btn btn-info btn-rounded" id="humanCommandModel3Bt">影星推荐3</button>
+						<button type="button" class="btn btn-info btn-rounded" id="advertModelBt">广告</button>
+						<button type="button" class="btn btn-info btn-rounded" id="videoCommandModelBt">影片推荐1</button>
+						<button type="button" class="btn btn-info btn-rounded" id="videoCommandModel2Bt">影片推荐2</button>
+						<button type="button" class="btn btn-info btn-rounded" id="videoTypeModelBt">影片分类</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">模块名称</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="moduleName" id="moduleName" th:value="${data['name']}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">模块代号</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="moduleCode" id="moduleCode" th:value="${data['code']}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">模块样式</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="moduleStyle" id="moduleStyle" th:value="${data['style']}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">地址</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="api" id="api" th:value="${data['api']}" required>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">表名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="tbname" id="tbname" th:value="${data['tbname']}" required>
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-12 control-label">查询参数,参数说明热播ishot=1,推荐iscommend=1,起始页start=1,页大小length=4,请依照自己需要变更等号后面数字</label>
+						<span class="col-sm-4" id="paramExt1"></span>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name="tbparam" id="tbparam" th:value="${data['tbparam']}" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">序列</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" name="seq" id="seq" th:value="${data['seq']}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">状态</label>
+						<div class="col-sm-8">
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="0" name="state" th:checked="${data['state']==0}"> 禁用
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="1" name="state" th:checked="${data['state']==1}"> 启用
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">头部显示</label>
+						<div class="col-sm-8">
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="0" name="headviewstate"  th:checked="${data['headviewstate']==0}"> 全隐藏
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="1" name="headviewstate"  th:checked="${data['headviewstate']==1}"> 名称
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="2" name="headviewstate"  th:checked="${data['headviewstate']==2}"> 更多
+                         &nbsp;&nbsp;<input type="radio" class="i-checks" value="3" name="headviewstate"  th:checked="${data['headviewstate']==3}"> 名称更多
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button type="button" class="btn btn-primary" id="updateBt">更新</button>
+							<button type="reset" class="btn btn-warning" id="resetBt">重置</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+    <div th:replace="include/web/webjs :: webjs"></div>
+	<script src="/static/js/project/app/bus/appModuleUpdate.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>app主页分类添加</title>
+</head>
+<body class="pace-done">
+
+	<div class="col-lg-12">
+		<div class="ibox ">
+
+			<div class="ibox-title">
+				<h5>app主页分类添加</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+			    <p th:text="${errorcode}" class="font-bold text-danger"></p>
+                <p th:text="${errormsg}" class="font-bold text-danger"></p>
+				<form id="fm" method="post" action="">
+					<div class="form-group">
+						<label class="col-lg-2 control-label">分类名称</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" name="moduleTypeName" id="moduleTypeName" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">分类描述</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="moduleTypeDescript" id="moduleTypeDescript" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">分类序列</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" name="moduleTypeSeq" id="moduleTypeSeq" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">状态</label>
+						<div class="col-sm-8">
+                         <input type="radio" class="i-checks" value="1" name="moduleTypeState"> 启用
+                         <input type="radio" class="i-checks" checked="true" value="0" name="moduleTypeState"> 禁用
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button type="reset" class="btn btn-warning">重写</button>
+							<button type="button" class="btn btn-primary" id="addBt">增加</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+    <div th:replace="include/web/webjs :: webjs"></div>
+	<script src="/static/js/project/app/bus/appModuleTypeAdd.js"></script>
+</body>
+</html>

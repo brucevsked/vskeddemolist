@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- must set here! -->
+    <base th:href="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>更新</title>
+</head>
+<body class="pace-done">
+
+	<div class="col-lg-12">
+		<div class="ibox ">
+
+			<div class="ibox-title">
+				<h5>更新</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+                <p th:text="${errorcode}" class="font-bold text-danger"></p>
+                <p th:text="${errormsg}" class="font-bold text-danger"></p>
+				<form id="fm" method="post" action="" th:if="${data ne null}">
+				<input type="hidden" id="fid" name="fid" th:value="${fid}" >
+				<input type="hidden" id="oldType1" name="oldType1" th:value="${data['type1']}" >
+				<input type="hidden" id="oldTargetType" name="oldTargetType" th:value="${data['targettype']}" >
+					<div class="form-group">
+						<label class="col-sm-2 control-label">广告类型</label>
+						<div class="col-sm-10">
+							<select id="type1" name="type1"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">名称</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="avname" id="avname" th:value="${data['name']}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-12 control-label">图片地址
+						<div class="custom-file">
+						    <input id="myFile" type="file" class="custom-file-input">
+						    <label for="myFile" class="custom-file-label">1选择文件...</label>
+						    <button type="button" class="btn btn-info btn-rounded" id="uploadFile1Bt">2上传文件</button>
+						</div> 
+						</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="storeurls" id="storeurls" th:value="${data['storeurls']}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">目标类型</label>
+						<div class="col-sm-10">
+							<select id="targettype" name="targettype">
+							<option value="0">外链url</option>
+							<option value="1">播放影片</option>
+							<option value="2">影星详情</option>
+							<option value="3">充值</option>
+							<option value="4">推广</option>
+							<option value="5">浏览器</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">目标地址</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="target" id="target" th:value="${data['target']}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">序列</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" name="seq" id="seq" th:value="${data['seq']}" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button type="button" class="btn btn-primary" id="updateBt">更新</button>
+							<button type="reset" class="btn btn-warning" id="resetBt">重置</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+    <div th:replace="include/web/webjs :: webjs"></div>
+	<script src="/static/js/project/app/bus/appAdvertUpdate.js"></script>
+</body>
+</html>

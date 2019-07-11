@@ -1,0 +1,59 @@
+
+server:
+  port: 9010 #端口号
+  tomcat:
+    max-threads: 1000 #最大线程数
+    max-connections: 20000 #最大连接数
+  #servlet.context-path: /appserveruser  #项目名，如果不设定，默认是 /
+  
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/appserverdev?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 180000
+      maximum-pool-size: 980
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: select 1
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: root
+    timeout: 10000
+  cache:
+    type: redis
+    cache-names:
+      - rediscachea1
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB 
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  mvc:
+    static-path-pattern: /static/**
+
+mybatis:
+  configuration:
+    call-setters-on-nulls: true #是null值也返回
+    cache-enabled: false #开启二级缓存
+
+logging:
+  config: classpath:log4j2.xml
+
+
