@@ -34,6 +34,9 @@ retrofit2
 html解析
 jsoup[不能执行js及ajax]
 htmlunit[可执行ajax及js]
+
+xml解析
+
 ------------------------------------------------------------前端部分
 数据模拟
 mock.js
