@@ -1,0 +1,49 @@
+server:
+  port: 9010 #端口号
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000 #最大线程数
+    max-connections: 20000 #最大连接数
+  #servlet.context-path: /hwaapia  #项目名，如果不设定，默认是 /
+
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  datasource:
+    url: jdbc:postgresql://192.168.60.12:5432/coalmineh
+    username: coalmineh
+    password: Y4yhl9tbf110
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 180000
+      maximum-pool-size: 980
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: select 1
+  redis:
+    database: 0
+    host: 192.168.60.12
+    port: 6379
+    password: dZ_auc3b84sPNs!W
+    timeout: 10000
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+mybatis:
+  configuration:
+    call-setters-on-nulls: true #是null值也返回
+    cache-enabled: false #开启二级缓存
+
+logging:
+  config: classpath:log4j2.xml
+
