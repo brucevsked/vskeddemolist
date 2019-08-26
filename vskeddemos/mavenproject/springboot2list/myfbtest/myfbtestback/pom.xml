@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>myfbtestback</artifactId>
+    <packaging>jar</packaging>
+    <name>myfbtestback</name>
+    <description>myfbtestback</description>
+
     <dependencies>
         <!-- spring boot核心,包括自动配置支持，日志和YAML -->
         <dependency>
