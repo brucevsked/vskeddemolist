@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>post请求</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+
+<div id="testdiv"></div>
+
+<script src="js/lib/mock/mock-min.js"></script>  
+<script src="js/lib/axios/axios.min.js"></script>
+
+<script>
+axios.defaults.timeout = 15000;  //超时响应
+//axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'; // 配置请求头（推荐）
+// axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'; // 配置请求头
+//axios.defaults.baseURL = $core.use('http'); //确认协议和地址
+axios.defaults.withCredentials = true;   // axios 默认不发送cookie，需要全局设置true发送cookie
+
+  
+function t1(){
+  var url='http://localhost:8080/test/user/list.html';
+  
+  Mock.mock(url,'post',{
+    'results|10': [{'id|+1':1,'text':'@cname'}]
+  });
+        
+  axios.post(url, {
+　　//params: { id:1,name:'vsked',age:18 }
+  }).then(function (dt) {
+　　console.log(dt.data.results.length);
+    var rs='';
+    var data='';
+    for(var i=0;i<dt.data.results.length;i++){
+      //console.log(dt.data.results[i]);
+      data=dt.data.results[i];
+      rs+=i+data.id+'|'+data.text+'<br>';
+    }
+    document.getElementById('testdiv').innerHTML=rs;
+  }).catch(function (error) {
+　　alert(error);
+  });
+}
+t1();
+</script>
+
+</body>
+</html>
