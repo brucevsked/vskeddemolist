@@ -52,6 +52,8 @@ public class ShiroRealm extends AuthorizingRealm {
         // 为空则从数据库获取
         if (obj == null) {
             user=sysUserDao.getSysUserByUserName(sysusername);
+            //放入缓存
+            redisTemplate.opsForValue().set(SysConstant.REDIS_PERM + sysusername,user);
         } else {
             user = (Map<String, Object>) obj;
         }
@@ -64,7 +66,8 @@ public class ShiroRealm extends AuthorizingRealm {
             List<Map<String, Object>> permissionList=sysRolePermissionDao.getSysPermissionByRoleId(role.get("sysroleid"));
             for (Map<String, Object> permission : permissionList) {
                 // 添加权限
-                simpleAuthorizationInfo.addStringPermission((String) permission.get("code"));
+                simpleAuthorizationInfo.addStringPermission((String) permission.get("syspermissioncode"));
+                simpleAuthorizationInfo.addStringPermission((String) permission.get("syspermissionuri"));
             }
         }
         return simpleAuthorizationInfo;

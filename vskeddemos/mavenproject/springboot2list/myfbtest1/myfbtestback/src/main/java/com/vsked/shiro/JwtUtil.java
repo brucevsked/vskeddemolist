@@ -1,6 +1,5 @@
 package com.vsked.shiro;
 
-import com.alibaba.fastjson.JSONObject;
 import com.vsked.common.*;
 import com.vsked.dao.SysUserDao;
 import io.jsonwebtoken.*;
@@ -96,15 +95,15 @@ public class JwtUtil {
     public static String getSysUserNameFromToken(String token) {
     	String sysusername="";
         try{
-        	log.info("|"+token+"|");
             // 熟悉token的组成部分1:header 2:payload 3.signature
             String[] split = token.split("\\.");
             // 获取payload
             String payload = split[1];
+            String subStr=Base64Codec.BASE64URL.decodeToString(payload);
             // 解密payload获得原json信息,后解析为json对象
-            JSONObject jsonObject = JSONObject.parseObject(Base64Codec.BASE64URL.decodeToString(payload));
+            Map<String,Object> userMap=StringTool.jsonToMap(subStr);
             // 根据jsonObject获去User对象
-            Map<String, Object> user = StringTool.jsonToMap(jsonObject.getString("sub"));
+            Map<String, Object> user = StringTool.jsonToMap(userMap.get("sub")+"");
             sysusername=(String) user.get("sysusername");
         }catch(Exception e){
         	log.error(e.getMessage(),e);
@@ -188,7 +187,10 @@ public class JwtUtil {
      */
     public static Map<String, Object> procTokenMap(Map<String, Object> userData){
     	//去除token信息中未使用到的字段以缩短token长度
-    	userData.remove("birthday");
+    	userData.remove("sysusermobile");
+        userData.remove("sysuserpwd");
+        userData.remove("sysuseraddtime");
+        userData.remove("sysusermail");
     	log.info("|"+userData+"|");
     	return userData;
     	

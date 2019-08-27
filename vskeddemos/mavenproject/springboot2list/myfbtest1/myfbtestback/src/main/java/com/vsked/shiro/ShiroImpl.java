@@ -27,22 +27,28 @@ public class ShiroImpl {
      */
     public Map<String, String> loadFilterChainDefinitions() {
         List<Map<String, String>> permissions = sysUserPermissionDao.getPermissionUriAndRole();
-        // 权限控制map.从数据库获取
+        // 权限uri控制map.从数据库获取
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         for (Map<String, String> permission : permissions) {
             // noSessionCreation的作用是用户在操作session时会抛异常
-            filterChainDefinitionMap.put(permission.get("uri"), "jwt,perms[" + permission.get("needroles") + "]");
+            filterChainDefinitionMap.put(permission.get("uri"), "noSessionCreation,jwt[" + permission.get("needroles") + "]");
+        }
+        List<Map<String, String>> permissionscode = sysUserPermissionDao.getPermissionCodeAndRole();
+        // 权限code控制map.从数据库获取
+        for (Map<String, String> permission : permissionscode) {
+            // noSessionCreation的作用是用户在操作session时会抛异常
+            filterChainDefinitionMap.put(permission.get("code"), "noSessionCreation,jwt[" + permission.get("needroles") + "]");
         }
 
 
-        filterChainDefinitionMap.put("/apia/v1/sysuserlogin", "anon");//登录不拦截
-        filterChainDefinitionMap.put("/apia/v1/sysuserlogout", "anon");//退出
+        filterChainDefinitionMap.put("/apia/v1/user/login", "anon");//登录不拦截
+        filterChainDefinitionMap.put("/apia/v1/user/logout", "anon");//退出
 
-        filterChainDefinitionMap.put("/apia/**", "jwt");//指定app端过滤器
+        filterChainDefinitionMap.put("/apia/**", "noSessionCreation,jwt");//指定app端过滤器
         filterChainDefinitionMap.put("/static/**", "anon");//匿名访问静态资源
         
         // 配置全局过滤
-//        filterChainDefinitionMap.put("/**", "jwt");
+        filterChainDefinitionMap.put("/**", "jwt");
         return filterChainDefinitionMap;
     }
 

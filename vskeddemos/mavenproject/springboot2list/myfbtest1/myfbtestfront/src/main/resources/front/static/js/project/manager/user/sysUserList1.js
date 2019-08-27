@@ -1,6 +1,8 @@
 'use strict'
 
 $(function(){
+	
+	$('#testGetToken').on('click',sysUserList.getToken);
 	sysUserList.list();
 });
 
@@ -8,9 +10,23 @@ var sysUserList=new Object({
 	list: function(){
 		$('#dt0body tr').remove();//先清空原数据
 		
-  axios.post('http://localhost:9010//apia/v1/user/list', {
-　　//params: { id:1,name:'vsked',age:18 }
-  }).then(function (dt) {
+axios({
+  url: 'http://localhost:9010//apia/v1/user/list',
+  method: 'post',
+  data: {
+    token: $('#token').val()
+  },
+  transformRequest: [function (data) {
+    var ret = ''
+    for (var it in data) {
+      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+    }
+    return ret
+  }],
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+}).then(function(dt){
         console.log(dt.data);
 				var dataList=JSON.parse(JSON.stringify(dt.data));
 				var rowData="";
@@ -23,9 +39,12 @@ var sysUserList=new Object({
 				});
 
 				$('#dt0body').append(rowData);
-  }).catch(function (error) {
-　　alert(error);
-  });
+  }).catch(function (er){
+    alert(er);
+    });
 
+	},
+	getToken:function(){
+	  alert($('#token').val());
 	}
 });

@@ -54,8 +54,7 @@ public class SysUserService extends BaseService{
 
             if(sysuserpwd.equals(userMap.get("sysuserpwd"))){
 
-                userMap.remove("salt");
-                userMap.remove("userpass");
+                userMap=JwtUtil.procTokenMap(userMap);
 
                 String oldToken=(String) redisTemplate.opsForValue().get(SysConstant.REDIS_TOKEN + sysusername);
                 if(!StringTool.isBlank(oldToken)){

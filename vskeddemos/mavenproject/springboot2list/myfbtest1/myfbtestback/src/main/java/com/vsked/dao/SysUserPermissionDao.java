@@ -11,4 +11,7 @@ public interface SysUserPermissionDao {
 
     @Select("select a.syspermissionuri uri,array_to_string(ARRAY(SELECT unnest(array_agg(c.sysrolename)) order by a.syspermissionuri),',') needroles from syspermissiont a left join sysrolepermissiont b on a.syspermissionid=b.syspermissionid left join sysrolet c on b.sysroleid=c.sysroleid group by a.syspermissionuri,a.syspermissionid")
     List<Map<String, String>> getPermissionUriAndRole();
+
+    @Select("select a.syspermissioncode code,array_to_string(ARRAY(SELECT unnest(array_agg(c.sysrolename)) order by a.syspermissioncode),',') needroles from syspermissiont a left join sysrolepermissiont b on a.syspermissionid=b.syspermissionid left join sysrolet c on b.sysroleid=c.sysroleid group by a.syspermissioncode,a.syspermissionid")
+    List<Map<String, String>> getPermissionCodeAndRole();
 }

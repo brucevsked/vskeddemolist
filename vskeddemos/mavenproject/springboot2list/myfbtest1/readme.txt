@@ -36,10 +36,10 @@ comment on table sysPermissionT is '系统权限表';
 comment on column sysPermissionT.syspermissionid is '权限编号';
 
 
-insert into sysPermissionT(syspermissionid,syspermissionname,syspermissioncode,syspermissionuri) VALUES('10000000000000000000000000000001','查看用户列表','user:list','/user/list');
-insert into sysPermissionT(syspermissionid,syspermissionname,syspermissioncode,syspermissionuri) VALUES('10000000000000000000000000000002','添加用户数据','user:add','/user/add');
-insert into sysPermissionT(syspermissionid,syspermissionname,syspermissioncode,syspermissionuri) VALUES('10000000000000000000000000000003','修改用户数据','user:edit','/user/edit');
-insert into sysPermissionT(syspermissionid,syspermissionname,syspermissioncode,syspermissionuri) VALUES('10000000000000000000000000000004','删除用户数据','user:del','/user/del');
+insert into sysPermissionT(syspermissionid,syspermissionname,syspermissioncode,syspermissionuri) VALUES('10000000000000000000000000000001','查看用户列表','user:list','/apia/v1/user/list');
+insert into sysPermissionT(syspermissionid,syspermissionname,syspermissioncode,syspermissionuri) VALUES('10000000000000000000000000000002','添加用户数据','user:add','/apia/v1/user/add');
+insert into sysPermissionT(syspermissionid,syspermissionname,syspermissioncode,syspermissionuri) VALUES('10000000000000000000000000000003','修改用户数据','user:edit','/apia/v1/user/edit');
+insert into sysPermissionT(syspermissionid,syspermissionname,syspermissioncode,syspermissionuri) VALUES('10000000000000000000000000000004','删除用户数据','user:del','/apia/v1/user/del');
 
 select * from sysPermissionT;
 /********+*********+*********+*********+*********+*********+*/
@@ -80,7 +80,7 @@ insert into sysRolePermissionT(sysrolepermissionid,sysroleid,syspermissionid) VA
 insert into sysRolePermissionT(sysrolepermissionid,sysroleid,syspermissionid) VALUES('30000000000000000000000000000006','20000000000000000000000000000002','10000000000000000000000000000002');
 insert into sysRolePermissionT(sysrolepermissionid,sysroleid,syspermissionid) VALUES('30000000000000000000000000000007','20000000000000000000000000000002','10000000000000000000000000000003');
 
-insert into sysRolePermissionT(sysrolepermissionid,sysroleid,syspermissionid) VALUES('30000000000000000000000000000008','20000000000000000000000000000002','10000000000000000000000000000001');
+insert into sysRolePermissionT(sysrolepermissionid,sysroleid,syspermissionid) VALUES('30000000000000000000000000000008','20000000000000000000000000000003','10000000000000000000000000000001');
 
 
 select * from sysRolePermissionT;
@@ -94,6 +94,7 @@ sysuserpwd varchar(64) not null                   ,
 sysusermobile varchar(64)                         ,
 sysusernick  varchar(64)                          ,
 sysusermail varchar(64)                           ,
+sysuserstate smallint                             ,
 sysuseraddtime timestamp default CURRENT_TIMESTAMP
 );
 
@@ -101,9 +102,9 @@ comment on table sysUserT is '系统用户表';
 comment on column sysUserT.sysuserid is '用户编号';
 
 
-insert into sysUserT(sysuserid,sysusername,sysuserpwd) VALUES('40000000000000000000000000000001','superadmin','670b14728ad9902aecba32e22fa4f6bd');
-insert into sysUserT(sysuserid,sysusername,sysuserpwd) VALUES('40000000000000000000000000000002','commonadmin','670b14728ad9902aecba32e22fa4f6bd');
-insert into sysUserT(sysuserid,sysusername,sysuserpwd) VALUES('40000000000000000000000000000003','commonuser','670b14728ad9902aecba32e22fa4f6bd');
+insert into sysUserT(sysuserid,sysusername,sysuserpwd,sysuserstate) VALUES('40000000000000000000000000000001','superadmin','670b14728ad9902aecba32e22fa4f6bd',1);
+insert into sysUserT(sysuserid,sysusername,sysuserpwd,sysuserstate) VALUES('40000000000000000000000000000002','commonadmin','670b14728ad9902aecba32e22fa4f6bd',1);
+insert into sysUserT(sysuserid,sysusername,sysuserpwd,sysuserstate) VALUES('40000000000000000000000000000003','commonuser','670b14728ad9902aecba32e22fa4f6bd',1);
 
 select * from sysUserT;
 /********+*********+*********+*********+*********+*********+*/
