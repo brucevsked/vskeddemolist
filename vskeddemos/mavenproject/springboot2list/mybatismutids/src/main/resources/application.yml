@@ -1,0 +1,40 @@
+server:
+  port: 8080 #端口号
+  tomcat:
+    uri-encoding: UTF-8
+
+  
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  datasource:
+    postgredb1:
+      jdbc-url: jdbc:postgresql://192.168.60.12:5432/coalmineh
+      username: coalmineh
+      password: Y4yhl9tbf110
+      driver-class-name: org.postgresql.Driver
+      configuration:
+        connection-test-query: select 1
+
+    phoenixdb1:
+      jdbc-url: jdbc:postgresql://192.168.60.12:5432/postgres
+      username: postgres
+      password: xhg123456
+      driver-class-name: org.postgresql.Driver
+      configuration:
+        connection-test-query: select 1
+    
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+mybatis:
+  configuration:
+    call-setters-on-nulls: true
+
+logging:
+  config: classpath:log4j2.xml
+
+

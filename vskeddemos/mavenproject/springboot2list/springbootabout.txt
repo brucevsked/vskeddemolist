@@ -79,5 +79,13 @@ application.yml
       enabled: true
       max-file-size: 5000MB
       max-request-size: 5000MB
+
+11* 关闭自动配置
+第一种方式注解
+@EnableAutoConfiguration(exclude = {org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration})
  
-  
+第二种方式配置文件
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration

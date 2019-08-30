@@ -1,0 +1,83 @@
+第一步引入
+netty-websocket-spring-boot-starter
+
+第二步编写一个测试网页
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>client1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+</head>
+
+<body>
+  <!-- 测试使用命令
+  curl \
+  -H "Content-type: application/json" \
+  -d '{"name": "发送消息示例girl","age":18}' \
+  'http://42.51.201.144:80/im/pub?id=client1Token'
+  -->
+<div>this is client 1</div>
+<div>
+  serverurl:<input id="serverUrl" name="serverUrl" value="ws://42.51.201.144:890" /><br>
+  token:<input id="userToken" name="userToken" value="client1Token" /><br>
+  <button type="button" id="conBt">连接</button>
+  <button type="button" id="disBt">断开</button>
+</div>
+<div>
+  <textarea cols="100" rows="10" id="clientt">{"id":"hereismymessageida2","from":"client1Token","to":"client2Token","time":"2019-05-14 20:50:01","msg":"内容在这儿fff"}</textarea>
+</div>
+  <div>
+    <button type="button" id="sendBt">发送</button>
+  </div>
+  <div id="messages"></div>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+<script>
+'use strict'
+
+$(function(){
+	$('#conBt').on('click',client.connect);
+	$('#disBt').on('click',client.discon);
+	$('#sendBt').on('click',client.send);
+});
+
+var client=new Object({
+  server:null,
+  connect:function(){
+    var serverUrl=$('#serverUrl').val();
+    serverUrl=serverUrl+'?id='+$('#userToken').val();
+    client.server=new WebSocket(serverUrl);
+    client.server.onopen=function(){
+      //client.server.send('连接成功了hey');
+      console.log(client.server.readyState);//只读属性 readyState 表示连接状态0 - 表示连接尚未建立1 - 表示连接已建立，可以进行通信2 - 表示连接正在进行关闭3 - 表示连接已经关闭或者连接不能打开
+    };
+    console.log(client.server.readyState);//只读属性 readyState 表示连接状态0 - 表示连接尚未建立1 - 表示连接已建立，可以进行通信2 - 表示连接正在进行关闭3 - 表示连接已经关闭或者连接不能打开
+    client.server.onmessage=function(evt){
+      var reciveMsg=evt.data;
+      console.log('接收到消息:'+reciveMsg+'|');
+      $('#messages').html($('#messages').html()+event.data);
+    };
+    client.server.onclose=function(){
+       console.log(client.server.readyState);//只读属性 readyState 表示连接状态0 - 表示连接尚未建立1 - 表示连接已建立，可以进行通信2 - 表示连接正在进行关闭3 - 表示连接已经关闭或者连接不能打开
+    };
+  },
+  discon:function(){    
+    if(client.server!=null){
+      console.log(client.server.readyState);//只读属性 readyState 表示连接状态0 - 表示连接尚未建立1 - 表示连接已建立，可以进行通信2 - 表示连接正在进行关闭3 - 表示连接已经关闭或者连接不能打开
+      client.server.close();
+      console.log('dis');
+    }
+  },
+  send:function(){
+    client.server.send($('#clientt').val());
+  }
+  
+});
+</script>
+</body>
+</html>
