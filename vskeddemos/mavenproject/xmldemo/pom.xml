@@ -1,18 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
   <groupId>com.vsked</groupId>
   <artifactId>xmldemo</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <version>1.0</version>
   <name>xmldemo Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j2.version>2.11.0</log4j2.version>
+		<dom4j.version>2.1.1</dom4j.version>
+		<jackson.version>2.9.9</jackson.version>
 	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -77,19 +81,44 @@
     <version>3.7</version>
 </dependency>
 
-<!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
+<!-- https://mvnrepository.com/artifact/org.dom4j/dom4j -->
 <dependency>
-    <groupId>dom4j</groupId>
+    <groupId>org.dom4j</groupId>
     <artifactId>dom4j</artifactId>
-    <version>1.6.1</version>
+    <version>${dom4j.version}</version>
 </dependency>
+
 <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 <dependency>
     <groupId>commons-io</groupId>
     <artifactId>commons-io</artifactId>
     <version>2.6</version>
 </dependency>
-
+<!-- jackson start -->
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-core</artifactId>
+    <version>${jackson.version}</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>${jackson.version}</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-annotations</artifactId>
+    <version>${jackson.version}</version>
+</dependency>
+<dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-xml</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+<!-- jackson end -->
 
   </dependencies>
   <build>

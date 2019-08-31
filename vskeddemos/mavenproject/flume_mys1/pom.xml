@@ -98,6 +98,12 @@
     <artifactId>flume-ng-configuration</artifactId>
     <version>1.9.0</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.flume.flume-ng-sinks/flume-ng-kafka-sink -->
+<dependency>
+    <groupId>org.apache.flume.flume-ng-sinks</groupId>
+    <artifactId>flume-ng-kafka-sink</artifactId>
+    <version>1.9.0</version>
+</dependency>
 
 	</dependencies>
 

@@ -91,6 +91,7 @@ public class LineDeserializer implements EventDeserializer {
     for (int i = 0; i < numEvents; i++) {
       Event event = readEvent();
       if (event != null) {
+    	System.out.println("---------------|");
         events.add(event);
       } else {
         break;
@@ -132,6 +133,7 @@ public class LineDeserializer implements EventDeserializer {
     StringBuilder sb = new StringBuilder();
     int c;
     int readChars = 0;
+    
     while ((c = in.readChar()) != -1) {
       readChars++;
       sb.append((char)c);
