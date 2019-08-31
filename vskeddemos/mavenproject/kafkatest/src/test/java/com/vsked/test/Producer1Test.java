@@ -26,13 +26,14 @@ public class Producer1Test {
 		p.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 
 		try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(p)) {
-			while (true) {
+//			while (true) {
 				String msg = "Hello," + new Random().nextInt(100);
 				ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, msg);
+				record.headers().add("ss", "kkk".getBytes());
 				kafkaProducer.send(record);
-				log.info("消息发送成功:" + msg);
-				Thread.sleep(500);
-			}
+				log.info("消息发送成功hallo11:" + msg);
+				Thread.sleep(1500);
+//			}
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
