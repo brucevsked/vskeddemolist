@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class Producer1Test {
 	
-	public static String topic = "mytopica01a";// 定义主题
+	public static String topic = "pop1";// 定义主题
 
 	private final Logger log = LoggerFactory.getLogger(Producer1Test.class);
 

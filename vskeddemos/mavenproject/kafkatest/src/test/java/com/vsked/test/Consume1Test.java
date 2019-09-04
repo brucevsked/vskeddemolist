@@ -22,7 +22,7 @@ public class Consume1Test {
 	@Test
 	public void t1(){
         Properties p = new Properties();
-        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.127.129:9092");
+        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.60.10:9092");
         p.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.GROUP_ID_CONFIG, "test");

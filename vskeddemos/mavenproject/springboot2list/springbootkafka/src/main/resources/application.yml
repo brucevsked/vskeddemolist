@@ -2,6 +2,8 @@
 spring:
   kafka:
     bootstrap-servers:
-      - 192.168.127.129:9092
+      - 192.168.60.10:9092
     consumer:
+      auto-offset-reset: latest
+      enable-auto-commit: true
       group-id: sk01
