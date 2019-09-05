@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>不级联选中</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="js/lib/jsTree/themes/default/style.min.css" />
+</head>
+
+<body>
+<button id="test1Bt">初始化树</button>
+<button id="test2Bt">销毁树</button>
+<button id="test3Bt">销毁树1</button>
+<div id="myRoleList">	
+</div>
+
+<script src="js/jquery-3.4.1.min.js"></script>  
+<script src="js/lib/jsTree/jstree.js"></script>
+
+<script>
+
+$(function () {
+  $('#test1Bt').on('click',sysRoleList.initTree);
+  $('#test2Bt').on('click',sysRoleList.destroyTree);
+  $('#test3Bt').on('click',sysRoleList.destroyTree1);
+});
+
+var sysRoleList=new Object({
+	initTree: function(){
+	  var treeBody='';
+	  treeBody+='<ul>';
+	  treeBody+='<li data-jstree={"opened":true}>Root node';
+	  treeBody+='<ul>';
+	  treeBody+='<li>Child node 1</li>';
+	  treeBody+='<li>Child node 2</li>';
+	  treeBody+='<li>Child node 3</li>';
+	  treeBody+='<li>Child node 4</li>';
+	  treeBody+='<li>老衲1';
+	  	  treeBody+='<ul>';
+	      treeBody+='<li>Child node 1</li>';
+	      treeBody+='<li>Child node 2</li>';
+	      treeBody+='<li>Child node 3</li>';
+	      treeBody+='<li>Child node 4</li>';
+        treeBody+='<li>老衲2';
+	  	  treeBody+='<ul>';
+	      treeBody+='<li>Child node 1</li>';
+	      treeBody+='<li>Child node 2</li>';
+	      treeBody+='<li>Child node 3</li>';
+	      treeBody+='<li>Child node 4</li>';
+	      treeBody+='<li>Child node 4</li>';
+	      treeBody+='</ul>';
+	  treeBody+'</li>';
+	      treeBody+='</ul>';
+	  treeBody+'</li>';
+	  
+	  treeBody+='</ul>';
+	  treeBody+='</li>';
+	  treeBody+='</ul>';
+	  $("#myRoleList").html(treeBody);
+  $("#myRoleList").jstree({
+    "checkbox" : {
+      "keep_selected_style" : false,
+      "three_state": false //父子级别级联选择
+    },
+    "plugins" : [ "checkbox" ]
+  });
+	},
+	destroyTree:function(){
+	  $.jstree.destroy();
+	},
+	destroyTree1:function(){
+	  $("#myRoleList").jstree().destroy();
+	}
+});
+</script>
+
+</body>
+</html>
