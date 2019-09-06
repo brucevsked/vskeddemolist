@@ -1,0 +1,16 @@
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  redis:
+    database: 0
+    host: 192.168.60.12
+    port: 6379
+    password: dZ_auc3b84sPNs!W
+    timeout: 10000
+    
+    
+websocketservera:
+  host: 0.0.0.0
+  port: 9200
+  path: /servera

@@ -4,7 +4,7 @@
 <!-- must set here! -->
 <base href="">
 
-<title>动态数据绑定</title>
+<title>后台加载数据进行中.未完成,需要递归调用选择状态</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 <link rel="stylesheet" href="js/lib/jsTree/themes/default/style.min.css" />
@@ -22,6 +22,16 @@
 <script src="js/mock-min.js" ></script>
 
 <script>
+  
+  /**
+  
+      checkbox:{
+        undetermined:true,//半选中状态
+        three_state:false, //父子级别级联选择
+        tie_selection:false,
+        keep_selected_style:false //是否默认选中
+        }
+  */
 
 $(function () {
 
@@ -44,8 +54,11 @@ var sysRoleList=new Object({
           rsArry.push({id:'1c',parent:'1',text:'ccc',state:{opened:true,disabled:false,checked:true}  });
           rsArry.push({id:'1ca1',parent:'1c',text:'ccc1',state:{opened:true,disabled:false,checked:false}  });
           rsArry.push({id:'1ca2',parent:'1c',text:'ccc2',state:{opened:true,disabled:false,checked:true}  });
-          rsArry.push({id:'1ca3',parent:'1c',text:'ccc3',state:{opened:true,disabled:false,checked:false}  });
+          rsArry.push({id:'1ca3',parent:'1c',text:'ccc3',state:{opened:true,disabled:false,checked:true}  });
           rsArry.push({id:'2',parent:'0',text:'济南公司',state:{opened:true,disabled:false,checked:true}  });
+          rsArry.push({id:'2a',parent:'2',text:'济南公司1',state:{opened:true,disabled:false,checked:false}  });
+          rsArry.push({id:'2b',parent:'2',text:'济南公司2',state:{opened:true,disabled:false,checked:false}  });
+          rsArry.push({id:'2c',parent:'2',text:'济南公司3',state:{opened:true,disabled:false,checked:false}  });
           rsArry.push({id:'3',parent:'0',text:'上海公司',state:{opened:true,disabled:false,checked:false}  });
           rsArry.push({id:'4',parent:'0',text:'海南公司',state:{opened:true,disabled:false,checked:true}  });
           rsArry.push({id:'5',parent:'0',text:'月球公司' ,state:{opened:true,disabled:false,checked:false} });
@@ -53,26 +66,59 @@ var sysRoleList=new Object({
         });
         
     $('#myRoleList').jstree({
+      check_callback:true,
       checkbox:{
         tie_selection:false,//半选中状态
-      },
+        },
     core:{
       data:function(obj,cb){
 
         	$.post('http://localhost:8080/lostweek/hello',{ myName: 'ffa' },function (dt){
-        	  cb.call(this,dt);
+        	  var newDt=new Array();
+        	  var myNodeData='';
+        	  var isExistChilda=false;
+        	  var hasSelectedChilda=false;
+        	  for(var i=0;i<dt.length;i++){
+        	    myNodeData=dt[i];
+        	    isExistChilda=sysRoleList.isExistChild(myNodeData,dt);
+        	    hasSelectedChilda=sysRoleList.hasSelectedChild(myNodeData,dt);
+        	    if(isExistChilda){
+        	      if(hasSelectedChilda){
+        	        newDt.push({id:myNodeData.id,parent:myNodeData.parent,text:myNodeData.text,state:{opened:true,disabled:false}  });
+        	      }else{
+        	        console.log(myNodeData.state.checked)
+        	        newDt.push({id:myNodeData.id,parent:myNodeData.parent,text:myNodeData.text,state:{opened:true,disabled:false,checked:''}  });
+        	      }        	      
+        	    }else{
+        	      newDt.push(myNodeData);
+        	    }
+        	  }
+        	  cb.call(this,newDt);
 	},'json');
       }
     },
     plugins:['checkbox']
   });
   
+
 	},
 	destroyTree:function(){
 	  $.jstree.destroy();
 	},
 	destroyTree1:function(){
 	  $("#myRoleList").jstree().destroy();
+	},
+	isExistChild(cur,dataList){
+	  for(var i=0;i<dataList.length;i++){
+	    if(cur.id==dataList[i].parent) return true;
+	  }
+	  return false;
+	},
+	hasSelectedChild(cur,dataList){
+	  for(var i=0;i<dataList.length;i++){
+	    if(cur.id==dataList[i].parent && dataList[i].checked==true) return true;
+	  }
+	  return false;
 	}
 });
 </script>
