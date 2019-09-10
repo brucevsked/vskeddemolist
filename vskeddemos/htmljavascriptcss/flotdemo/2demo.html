@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>折线图</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link href="js/lib/flot//examples.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+		<div class="demo-container">
+			<div id="flot-line-chart" class="demo-placeholder"></div>
+		</div>
+
+
+	<script language="javascript" type="text/javascript" src="js/lib/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.canvaswrapper.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.colorhelpers.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.saturated.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.browser.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.drawSeries.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.uiConstants.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.time.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.hover.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.resize.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.selection.js"></script>
+	
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.tooltip.min.js"></script>
+	
+<script>
+	$(function() {
+
+    var barOptions = {
+        series: {
+            lines: {
+                show: true,
+                lineWidth: 2,
+                fill: true,
+                fillColor: {
+                    colors: [{
+                        opacity: 0.0
+                    }, {
+                        opacity: 0.0
+                    }]
+                }
+            }
+        },
+        xaxis: {
+            tickDecimals: 0
+        },
+        colors: ["#1ab394"],
+        grid: {
+            color: "#999999",
+            hoverable: true,
+            clickable: true,
+            tickColor: "#D4D4D4",
+            borderWidth:0
+        },
+        legend: {
+            show: false
+        },
+        tooltip: true,
+        tooltipOpts: {
+            content: "x: %x, y: %y"
+        }
+    };
+    var barData = {
+        label: "bar",
+        data: [
+            [1, 34],
+            [2, 25],
+            [3, 19],
+            [4, 34],
+            [5, 32],
+            [6, 44]
+        ]
+    };
+     $.plot($("#flot-line-chart"), [barData], barOptions);
+	});
+</script>
+
+</body>
+</html>

@@ -3,12 +3,14 @@ datetimedemo 日期时间选择，计算，显示等前端技术
 duallistboxdemo 多行下拉列表互相移动
 easyuidemo 前端界面技术的一种
 es6demo 在javascript中类的编写
+flotdemo 图表示例折线，饼，条型,活动
 fontawesomedemo 丰富的图标字体库，用来显示各种图标
 icheckdemo 单选钮与复选框美化
 mockdemo 前端数据模拟生成,ajax类数据模拟
 select2demo 下拉列表框美化
 sweetalertdemo 弹出框，确认框美化
 tablesdemo 表格示例
+touchspindemo 加减值控件一个文本左加右减
 treedemo 树控件示例
 weuidemo 移动端框架weui示例
 

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>饼图</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link href="js/lib/flot//examples.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+		<div class="demo-container">
+			<div id="flot-pie-chart" class="demo-placeholder"></div>
+		</div>
+
+
+	<script language="javascript" type="text/javascript" src="js/lib/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.canvaswrapper.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.colorhelpers.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.saturated.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.browser.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.drawSeries.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.uiConstants.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.hover.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.resize.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.selection.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.legend.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.pie.js"></script>
+	
+	<script language="javascript" type="text/javascript" src="js/lib/flot/jquery.flot.tooltip.min.js"></script>
+	
+<script>
+	$(function() {
+
+        var data = [{
+        label: "Sales 1",
+        data: 21,
+        color: "#d3d3d3",
+    }, {
+        label: "Sales 2",
+        data: 3,
+        color: "#bababa",
+    }, {
+        label: "Sales 3",
+        data: 15,
+        color: "#79d2c0",
+    }, {
+        label: "Sales 4",
+        data: 52,
+        color: "#1ab394",
+    }];
+
+    var plotObj = $.plot($("#flot-pie-chart"), data, {
+        series: {
+            pie: {
+                show: true
+            }
+        },
+        grid: {
+            hoverable: true
+        },
+        tooltip: true,
+        tooltipOpts: {
+            content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+            shifts: {
+                x: 20,
+                y: 0
+            },
+            defaultTheme: false
+        }
+    });
+	});
+</script>
+
+</body>
+</html>

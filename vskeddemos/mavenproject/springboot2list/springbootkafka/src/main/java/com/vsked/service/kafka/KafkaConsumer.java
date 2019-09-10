@@ -5,12 +5,16 @@ import java.util.Iterator;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.common.header.Header;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class KafkaConsumer {
+	
+	public static final String myListenerId="myListener1";
+
 	
 	/*
     @KafkaListener(topics = "mytopica01a")
@@ -38,7 +42,7 @@ public class KafkaConsumer {
       }
     }
     */
-    
+    /*
     @KafkaListener(topics = "pop1")
     public void onMessage1(ConsumerRecord<String, String> record) {
     	//方式2可以取到头信息
@@ -52,5 +56,13 @@ public class KafkaConsumer {
         	System.out.println(data1.key()+"|"+new String(data1.value()));
         }
     }
+    */
+	//  @KafkaListener(topics = "#{'${kafkalistenerlist.topiclist}'.split(',')}",id=KafkaConsumer.myListenerId)
+	
+    @KafkaListener(topics = "#{'${kafkalistenerlist.topiclist}'.split(',')}",id=KafkaConsumer.myListenerId)
+    public void onMessage1(ConsumerRecord<String, String> record) {
+    	System.out.println("当前主题是:"+record.topic());
+    }
+    
 
 }

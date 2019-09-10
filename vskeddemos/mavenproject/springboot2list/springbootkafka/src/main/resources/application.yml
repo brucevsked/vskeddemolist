@@ -1,4 +1,6 @@
-
+server:
+  port: 8080 #端口号
+  
 spring:
   kafka:
     bootstrap-servers:
@@ -7,3 +9,7 @@ spring:
       auto-offset-reset: latest
       enable-auto-commit: true
       group-id: sk01
+      
+
+kafkalistenerlist: 
+  topiclist: pop2,mytpoic1,mytpoic2,mytpoic3,mytpoic4,mytpoic5

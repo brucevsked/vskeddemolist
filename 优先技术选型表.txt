@@ -40,6 +40,9 @@ htmlunit[可执行ajax及js]
 
 xml解析
 jackson-dataformat-xml
+
+全文搜索引擎
+Elasticsearch
 ------------------------------------------------------------前端部分
 数据模拟
 mock.js
