@@ -6,7 +6,7 @@ com.vsked.controller.TestController
 
 
 http://localhost:8080/topicedit?tp=1
-http://localhost:8080/topicedit?tp=2
+http://localhost:8080/topicedit?tp=2&topicname=mytpoic3
 
 
 

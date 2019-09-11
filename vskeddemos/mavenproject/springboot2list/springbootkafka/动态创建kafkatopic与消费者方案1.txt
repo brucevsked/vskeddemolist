@@ -1,0 +1,199 @@
+
+第一步访问控制层
+http://localhost:8080/topicedit?tp=2&topicname=newtopica01
+
+第二步控制层取到主题并传入service,以下为控制层代码
+package com.vsked.controller;
+
+
+import java.util.Iterator;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.kafka.common.Metric;
+import org.apache.kafka.common.MetricName;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
+import org.springframework.kafka.listener.ContainerProperties;
+import org.springframework.kafka.listener.MessageListenerContainer;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.vsked.service.kafka.KafkaConsumer;
+import com.vsked.service.kafka.KafkaManagerService;
+
+@Controller
+public class TestController {
+	
+	@Autowired
+	KafkaListenerEndpointRegistry registry;
+	
+	@Autowired
+	KafkaManagerService kafkaManagerService;
+	
+	
+	@RequestMapping("/topicedit")
+	@ResponseBody
+	public String kafkatopicedit(HttpServletRequest req){
+		String rs="0000000";
+		String tp=req.getParameter("tp");
+		String topicname=req.getParameter("topicname");
+		if("1".equals(tp)){
+			System.out.println("修改主题为11");
+			rs="修改主题为11";			
+		}else{
+			System.out.println("修改主题为22");
+			//topics
+			ContainerProperties cp=registry.getListenerContainer(KafkaConsumer.myListenerId).getContainerProperties();
+			String[] topicArray=cp.getTopics();
+			for(String topic:topicArray){
+				System.out.println("主题有:"+topic);
+			}
+			rs="修改主题为22";
+			if(topicname==null || "".equals(topicname.trim())){
+				topicname="defaulttopic";
+			}
+			//根据请求参数动态创建,可以向里面传值
+			kafkaManagerService.createKafkaConsume1(topicname);
+
+		}
+		return rs;
+		
+	}
+
+}
+
+第三步service接收参数并创建消费者
+package com.vsked.service.kafka;
+
+import java.time.Duration;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import org.apache.kafka.clients.consumer.Consumer;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.common.header.Header;
+import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
+import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.stereotype.Service;
+
+
+@Service
+public class KafkaManagerService {
+	
+	/**
+	 * 用来管理kafka的监听器容器启动,停止等操作
+	 */
+	@Autowired
+	KafkaListenerEndpointRegistry registry;
+	
+	
+	public void createKafkaConsume1(String topicname){
+        // 创建另一个测试线程，启动后首先暂停10秒然后变更topic订阅
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    
+                	Thread.sleep(10000);//10秒后创建消费者
+                    
+            		Map<String,Object> configs=new HashMap();
+            		configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"192.168.60.10:9092");
+            		configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+            		configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+            		configs.put(ConsumerConfig.GROUP_ID_CONFIG, "mygrouptest1");
+            		configs.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+            		configs.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,  "true");
+            		
+            		DefaultKafkaConsumerFactory  kafkaConsumerFactory=new DefaultKafkaConsumerFactory(configs);
+            		
+            		Consumer consumer=kafkaConsumerFactory.createConsumer();
+            		consumer.subscribe(Collections.singletonList(topicname));// 订阅消息,多个主题中间用逗号分开
+            		
+                    Header data1=null;
+                    Iterator<Header> it=null;
+
+                    while (true) {
+                        ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(100));
+                        //这里可以根据参数来选择不同的service中方法来处理不同的主题,必须是事先写好的service处理方法
+                        for (ConsumerRecord<String, String> record : records) {
+                            System.out.println("---当前监听主题是:"+record.topic()+"|"+record.value()+"|"+record.key()+"|"+record.headers());
+                            it =record.headers().iterator();
+                            
+                            while(it.hasNext()){
+                            	data1=it.next();
+                            	System.out.println(data1.key()+"|"+new String(data1.value()));
+                            }
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    // swallow it.
+                }
+            }
+        };
+        
+        new Thread(runnable).start();
+
+
+	}
+	
+
+}
+
+第四步等待10秒以后生产消息测试,修改主题后运行单元测试生产消息
+package com.vsked.test;
+
+import java.util.Properties;
+import java.util.Random;
+
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringSerializer;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class Producer1Test {
+	
+	public static String topic = "pop99";// 定义主题,测试时需要修改这个主题
+
+	private final Logger log = LoggerFactory.getLogger(Producer1Test.class);
+
+	@Test
+	public void t1() {
+		
+		Properties p = new Properties();
+		p.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.60.10:9092");// kafka地址，多个地址用逗号分割
+		p.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+		p.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+
+		try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(p)) {
+//			while (true) {
+				String msg = "Hello 这里是我发的消息," + new Random().nextInt(100);
+				ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, msg);
+				record.headers().add("filename", "yellobook.txt".getBytes());
+				kafkaProducer.send(record);
+				log.info("消息发送成功hallo11:" + msg);
+				Thread.sleep(1500);
+//			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+
+}
+
+第五步验证控制台消费情况
+如果成功收到消费到对应主题说明成功
+
+第六步实际生产过程中需要将动态主题放入数据库，在项目初始化时将消费者重新创建一下

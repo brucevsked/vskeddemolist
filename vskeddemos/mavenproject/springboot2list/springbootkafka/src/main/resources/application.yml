@@ -12,4 +12,4 @@ spring:
       
 
 kafkalistenerlist: 
-  topiclist: pop2,mytpoic1,mytpoic2,mytpoic3,mytpoic4,mytpoic5
+  topiclist: mytpoic1,mytpoic2

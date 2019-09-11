@@ -17,15 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.vsked.service.config.KafkaTopicConfig;
 import com.vsked.service.kafka.KafkaConsumer;
 import com.vsked.service.kafka.KafkaManagerService;
 
 @Controller
 public class TestController {
-	
-	@Autowired
-	KafkaTopicConfig kafkaTopicConfig;
 	
 	@Autowired
 	KafkaListenerEndpointRegistry registry;
@@ -39,12 +35,11 @@ public class TestController {
 	public String kafkatopicedit(HttpServletRequest req){
 		String rs="0000000";
 		String tp=req.getParameter("tp");
+		String topicname=req.getParameter("topicname");
 		if("1".equals(tp)){
-			kafkaTopicConfig.setTopiclist("pop1,pop2");
 			System.out.println("修改主题为11");
 			rs="修改主题为11";			
 		}else{
-			kafkaTopicConfig.setTopiclist("pop1,pop2");
 			System.out.println("修改主题为22");
 			//topics
 			ContainerProperties cp=registry.getListenerContainer(KafkaConsumer.myListenerId).getContainerProperties();
@@ -53,8 +48,11 @@ public class TestController {
 				System.out.println("主题有:"+topic);
 			}
 			rs="修改主题为22";
-			
-			kafkaManagerService.createKafkaConsume1();
+			if(topicname==null || "".equals(topicname.trim())){
+				topicname="defaulttopic";
+			}
+			//根据请求参数动态创建,可以向里面传值
+			kafkaManagerService.createKafkaConsume1(topicname);
 
 		}
 		return rs;
