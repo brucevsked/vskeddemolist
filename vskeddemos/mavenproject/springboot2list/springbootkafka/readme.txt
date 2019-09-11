@@ -5,8 +5,9 @@
 com.vsked.controller.TestController
 
 
-http://localhost:8080/topicedit?tp=1
+http://localhost:8080/topicedit?tp=1&topicname=mytpoic3
 http://localhost:8080/topicedit?tp=2&topicname=mytpoic3
+http://localhost:8080/topicedit?tp=3
 
 
 

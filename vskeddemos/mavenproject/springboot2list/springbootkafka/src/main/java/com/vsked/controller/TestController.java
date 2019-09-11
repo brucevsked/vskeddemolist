@@ -36,17 +36,30 @@ public class TestController {
 		String rs="0000000";
 		String tp=req.getParameter("tp");
 		String topicname=req.getParameter("topicname");
+		
+		
+		//topics
+		ContainerProperties cp=registry.getListenerContainer(KafkaConsumer.myListenerId).getContainerProperties();
+		String[] topicArray=cp.getTopics();
+		for(String topic:topicArray){
+			System.out.println("当前主题有:"+topic);
+		}
+		MessageListenerContainer mlc=registry.getListenerContainer(KafkaManagerService.myListenerId);
+		if(mlc!=null){
+			cp=mlc.getContainerProperties();
+			topicArray=cp.getTopics();
+			for(String topic:topicArray){
+				System.out.println("新创建当前主题有:"+topic);
+			}
+		}
+
+		
 		if("1".equals(tp)){
 			System.out.println("修改主题为11");
-			rs="修改主题为11";			
-		}else{
+			rs="修改主题为11";
+			kafkaManagerService.createKafkaConsume2(topicname);
+		}else if("2".equals(tp)){
 			System.out.println("修改主题为22");
-			//topics
-			ContainerProperties cp=registry.getListenerContainer(KafkaConsumer.myListenerId).getContainerProperties();
-			String[] topicArray=cp.getTopics();
-			for(String topic:topicArray){
-				System.out.println("主题有:"+topic);
-			}
 			rs="修改主题为22";
 			if(topicname==null || "".equals(topicname.trim())){
 				topicname="defaulttopic";

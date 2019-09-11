@@ -28,7 +28,7 @@ public class Producer1Test {
 		try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(p)) {
 //			while (true) {
 				String msg = "Hello 这里是我发的消息," + new Random().nextInt(100);
-				ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, msg);
+				ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic,"aaa", msg);
 				record.headers().add("filename", "yellobook.txt".getBytes());
 				kafkaProducer.send(record);
 				log.info("消息发送成功hallo11:" + msg);
