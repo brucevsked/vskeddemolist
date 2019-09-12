@@ -1,0 +1,21 @@
+server:
+  port: 9010 #端口号
+  tomcat:
+    uri-encoding: UTF-8
+  #servlet.context-path: /appserveruser  #项目名，如果不设定，默认是 /
+  
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+    
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+
+logging:
+  config: classpath:log4j2.xml
+
+
