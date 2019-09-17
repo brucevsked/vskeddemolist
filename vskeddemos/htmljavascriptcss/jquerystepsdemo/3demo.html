@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>选项卡用法</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+  <link href="css/lib/jquerysteps/jquery.steps.css" rel="stylesheet" type="text/css" media="all">
+  <link href="css/lib/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+  <link href="css/lib/style.css" rel="stylesheet" type="text/css" media="all">
+  
+</head>
+
+<body>
+  <div class="ibox-content">
+<div id="example-tabs">
+    <h3>Keyboard</h3>
+    <section>
+        <p>What is needed to transform it to a tabs component? Not much. Just override some properties and done.</p>
+        <pre class="prettyprint linenums">
+          hey you give me one more try，那个大叔，在这个风冷的秋，抬头望天，转过身没入深色的雨夜。
+</pre>
+    </section>
+    <h3>Other demos</h3>
+    <section>
+        <p>Scroll down or up to see the other demos.</p>
+        <button type="button" id="testConnect" class="btn btn-w-m btn-danger">测试连接</button>
+    </section>
+    <h3>Documentation</h3>
+    <section>
+        <p>For more information <a href="https://github.com/rstaib/jquery-steps/wiki">check out the documentation</a>!</p>
+        <button type="button" id="testConnect1" class="btn btn-w-m btn-primary">测试连接2</button>
+    </section>
+    <h3>Download</h3>
+    <section>
+        <p>See on getting started!</p>
+    </section>
+</div>
+</div>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/jquerysteps/jquery.steps.min.js"></script>
+
+<script>
+$("#example-tabs").steps({
+    headerTag: "h3",
+    bodyTag: "section",
+    transitionEffect: "slideLeft",
+    enableFinishButton: false,
+    enablePagination: false,
+    enableAllSteps: true,
+    titleTemplate: "#title#",
+    cssClass: "tabcontrol"
+});
+
+
+$("#testConnect").on('click',function(){
+  alert(1);
+  });
+$("#testConnect1").on('click',function(){
+  alert(2);
+  });
+</script>
+
+</body>
+</html>

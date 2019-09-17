@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>基本用法</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+  <link href="css/lib/jquerysteps/jquery.steps.css" rel="stylesheet" type="text/css" media="all">
+  
+</head>
+
+<body>
+  
+                        <div id="myWizard1">
+                            <h1>第一步</h1>
+                            <div class="step-content">
+                                <div class="text-center m-t-md">
+                                <h2>这是第1步</h2>
+                                <p>
+                                    我是第一个内容                           
+                                    <input id="userName" name="userName" type="text" class="form-control"><br>
+                                    
+                                </p>
+                                </div>
+                            </div>
+
+                            <h1>第二步</h1>
+                            <div class="step-content">
+                                <div class="text-center m-t-md">
+                                    <h2>这是第2步</h2>
+                                    <p>
+                                        我是第二个内容<button id="testConnect" type="button">test connect</button>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <h1>第三步</h1>
+                            <div class="step-content">
+                                <div class="text-center m-t-md">
+                                    <h2>这是第3步</h2>
+                                    <p>
+                                        我是第三个内容<button id="testConnect1" type="button">test connect1</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+  
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/jquerysteps/jquery.steps.min.js"></script>
+
+<script>
+$("#myWizard1").steps();
+$("#testConnect").on('click',function(){
+  alert(1);
+  });
+$("#testConnect1").on('click',function(){
+  alert(2);
+  });
+</script>
+
+</body>
+</html>

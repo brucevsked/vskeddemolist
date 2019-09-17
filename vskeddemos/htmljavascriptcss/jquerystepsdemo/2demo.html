@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>表单用法</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+  <link href="css/lib/jquerysteps/jquery.steps.css" rel="stylesheet" type="text/css" media="all">
+  <link href="css/lib/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+  <link href="css/lib/style.css" rel="stylesheet" type="text/css" media="all">
+  
+</head>
+
+<body>
+  <div class="ibox-content">
+ <form id="myWizardForm" action="#">
+                                <h1>帐户</h1>
+                                <fieldset>
+                                    <h2>账户信息</h2>
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="form-group">
+                                                <label>用户名 *</label>
+                                                <input id="userName" name="userName" type="text" class="form-control required">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>密码 *</label>
+                                                <input id="password" name="password" type="text" class="form-control required">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>确认密码 *</label>
+                                                <input id="confirm" name="confirm" type="text" class="form-control required">
+                                            </div>
+                                            <div class="form-group">
+                                               <button type="button" id="testConnect" class="btn btn-w-m btn-danger">测试连接</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="text-center">
+                                                <div style="margin-top: 20px">
+                                                    <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 ">hey</i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                                <h1>信息</h1>
+                                <fieldset>
+                                    <h2>档案信息</h2>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>名字 *</label>
+                                                <input id="name" name="name" type="text" class="form-control required">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>姓 *</label>
+                                                <input id="surname" name="surname" type="text" class="form-control required">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                               <button type="button" id="testConnect1" class="btn btn-w-m btn-primary">测试连接2</button>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>地址 *</label>
+                                                <input id="address" name="address" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <h1>头像</h1>
+                                <fieldset>
+                                    <div class="text-center" style="margin-top: 120px">
+                                        <h2>头像上传</h2>
+                                    </div>
+                                </fieldset>
+
+                                <h1>结束</h1>
+                                <fieldset>
+                                    <h2>条款和条件</h2>
+                                    <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">我同意条款和条件。</label>
+                                </fieldset>
+                            </form>
+</div>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/jquerysteps/jquery.steps.min.js"></script>
+
+<script>
+$("#myWizardForm").steps({ headerTag: 'h1',bodyTag: 'fieldset'    });
+
+
+$("#testConnect").on('click',function(){
+  alert(1);
+  });
+$("#testConnect1").on('click',function(){
+  alert(2);
+  });
+</script>
+
+</body>
+</html>

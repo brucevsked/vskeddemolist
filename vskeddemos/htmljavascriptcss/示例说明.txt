@@ -9,6 +9,7 @@ fontawesomedemo 丰富的图标字体库，用来显示各种图标
 htmltemplate 前后端分离 js与css公用引入示例
 icheckdemo 单选钮与复选框美化
 javascript 基本js用法
+jquerystepsdemo 向导示例
 mockdemo 前端数据模拟生成,ajax类数据模拟
 select2demo 下拉列表框美化
 sweetalertdemo 弹出框，确认框美化
