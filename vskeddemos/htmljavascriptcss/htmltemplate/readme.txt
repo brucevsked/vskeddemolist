@@ -1,4 +1,7 @@
 
+特别注意！本示例必须放到tomcat中运行
+运行前先修改mainjs.js文件中basePath
+
 
 本示例解决前后端分离时js与css引入问题
 
@@ -25,5 +28,12 @@
 第六步，如果要添加新的项目公用javascript时，只需要修改main.js脚本即可
 
 第七步，如果模块界面中只用到某一个控件就只在那一个界面中引入，如向导，复选框美化，表格等插件。
+
+暂时使用ajax方案，也就是方案2 原因是方案1可能会失败
+
+
+tomcat中测试时
+http://127.0.0.1:8080/htmltemplate/userlist.html
+http://127.0.0.1:8080/htmltemplate/manager/userlist.html
 
 
