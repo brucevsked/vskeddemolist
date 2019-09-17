@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>base line</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<style type="text/css">
+html,body{
+width:99.5%;
+height:98.7%;
+}
+<!--以下设置全屏--> 
+body {
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+</style>
+
+</head>
+
+<body >
+  <div id="container" style="height: 100%"></div>
+
+
+	<script language="javascript" type="text/javascript" src="js/lib/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/echarts/echarts.min.js"></script>
+
+	
+<script>
+	$(function() {
+	  
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line'
+    }]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+	  
+	});
+</script>
+
+</body>
+</html>
