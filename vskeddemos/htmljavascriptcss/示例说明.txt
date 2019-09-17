@@ -6,6 +6,7 @@ echartsdemo 图表示例，条型，饼，雷达
 es6demo 在javascript中类的编写
 flotdemo 图表示例折线，饼，条型,活动
 fontawesomedemo 丰富的图标字体库，用来显示各种图标
+htmltemplate 前后端分离 js与css公用引入示例
 icheckdemo 单选钮与复选框美化
 javascript 基本js用法
 mockdemo 前端数据模拟生成,ajax类数据模拟

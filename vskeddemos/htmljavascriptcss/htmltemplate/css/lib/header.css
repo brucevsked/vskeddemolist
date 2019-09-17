@@ -1,0 +1,14 @@
+header{
+	float:right;
+	position:absolute;
+	overflow:hidden;
+	top:0;
+	left:0;
+	width:100%;
+	font:12px/1.6em Verdana, Lucida, Arial, Helvetica, 宋体,sans-serif;
+	background:#f0f7fc url() right top no-repeat;
+	color:#999;
+}
+header div{
+	float:right;
+}
