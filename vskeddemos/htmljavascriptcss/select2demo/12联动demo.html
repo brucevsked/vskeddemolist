@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>12连动</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link href="js/lib/select2/css/select2.min.css" rel="stylesheet">
+</head>
+
+<body>
+ <select id="videotype" name="videotype">
+</select>
+<button id="getTxtBt">getTxt</button>
+<button id="getValueBt">getValue</button>
+ <select id="videotype1" name="videotype1">
+</select>
+<div id="myRsDiv"></div>
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/mock-min.js" type="text/javascript"></script>
+    <script src="js/lib/select2/js/select2.full.min.js"></script>
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+var mySelectedValue=5;        
+var mySelectedOption=null;
+$(function(){
+      Mock.mock(RegExp('http://localhost:8080/lostweek/hello.html.*'),'post',function(){
+        var rsArry=new Array();
+        for(var i=0;i<30;i++){
+          var Random = Mock.Random;
+          rsArry.push({
+        name: Random.cname(),
+        hometown: i
+        });
+        }
+        return rsArry;
+        });
+
+		$.post('http://localhost:8080/lostweek/hello.html',{a:1	},function (dt){
+		  var tmpArray=new Array();
+		  $.each(dt,function(index,el){
+		    var myDt={id:el.hometown,text:el.name};
+		    tmpArray.push(myDt);
+		    if(myDt.id==mySelectedValue){
+		      mySelectedOption=myDt;
+		    }
+		  });
+		  $('#videotype').select2({width: '20%',data: tmpArray});
+		  
+$('#videotype').append('<option value="" selected>请选择</option>');
+$('#videotype').trigger('change');
+		  
+	    },'json');
+
+//详细用法参见 https://select2.org/getting-started/basic-usage
+
+$('#getTxtBt').on('click',function(){
+  var myData=$('#videotype').select2('data')[0].text;
+  $('#myRsDiv').html('hello:'+myData);
+  });
+  
+$('#getValueBt').on('click',function(){
+  var myData=$('#videotype').select2('val');
+  $('#myRsDiv').html('hey:'+myData);
+  });
+
+
+
+$('#videotype').on('select2:select',function(e){
+  var rsValue=$('#videotype').val();
+ $('#myRsDiv').html(rsValue);
+ rsValue=parseInt(rsValue);
+ $('#videotype1').empty();
+ if(rsValue<5){
+   
+  var tmpArray=new Array();
+  tmpArray.push({id:1,text:'这是小数1'});
+  tmpArray.push({id:2,text:'这是小数2'});
+  tmpArray.push({id:3,text:'这是小数3'});
+  tmpArray.push({id:4,text:'这是小数4'});
+  tmpArray.push({id:5,text:'这是小数5'});
+		  $('#videotype1').select2({width: '20%',data: tmpArray});
+		  
+      $('#videotype1').append('<option value="" selected>请选择</option>');
+      $('#videotype1').trigger('change');
+
+ }else{
+  var tmpArray=new Array();
+  tmpArray.push({id:6,text:'这是6'});
+  tmpArray.push({id:7,text:'这是7'});
+  tmpArray.push({id:8,text:'这是8'});
+  tmpArray.push({id:9,text:'这是9'});
+  tmpArray.push({id:10,text:'这是10'});
+  tmpArray.push({id:11,text:'这是11'});
+  tmpArray.push({id:12,text:'这是12'});
+		  $('#videotype1').select2({width: '20%',data: tmpArray});
+		  
+      $('#videotype1').append('<option value="" selected>请选择</option>');
+      $('#videotype1').trigger('change');
+ }
+  
+ });
+ 
+  
+});
+</script>
+
+</body>
+</html>
