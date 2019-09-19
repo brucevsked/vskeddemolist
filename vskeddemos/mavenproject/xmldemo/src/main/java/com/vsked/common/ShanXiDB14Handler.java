@@ -173,6 +173,7 @@ public class ShanXiDB14Handler extends DefaultHandler{
     }
     
     public List<Map<String, Object>> getDataList() {
+    	dataList.remove(dataList.size()-1);//移除最后一个不然会多加一个
 		return dataList;
 	}
 
