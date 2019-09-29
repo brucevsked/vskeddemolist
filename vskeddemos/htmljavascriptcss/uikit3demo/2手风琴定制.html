@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>bootstrap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/uikit/css/uikit.min.css" >
+
+<style>
+.uk-nav-parent-icon>.uk-parent>a::after {
+background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2014%2014%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolyline%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%221.1%22%20points%3D%221%208%207%201%2013%208%22%20%2F%3E%0A%3C%2Fsvg%3E");
+}
+</style>
+</head>
+
+<body >
+<div class="uk-width-1-2@s uk-width-2-5@m">
+    <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+        <li class="uk-active"><a href="#">Active</a></li>
+        <li class="uk-parent">
+            <a href="#">Parent</a>
+            <ul class="uk-nav-sub">
+                <li><a href="#">Sub item</a></li>
+                <li>
+                    <a href="#">Sub item</a>
+                    <ul>
+                        <li><a href="#">Sub item</a></li>
+                        <li><a href="#">Sub item</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="uk-parent">
+            <a href="#">Parent</a>
+            <ul class="uk-nav-sub">
+                <li><a href="#">Sub item</a></li>
+                <li><a href="#">Sub item</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+  <script language="javascript" type="text/javascript" src="js/jquery.min.js"></script>
+
+	<script language="javascript" type="text/javascript" src="js/lib/uikit/js/uikit.min.js" ></script>
+
+<script>
+'use strict'
+
+$(function(){
+
+});
+</script>
+	
+
+</body>
+</html>
