@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>toggle用法</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="">
+<meta http-equiv="description" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+  .ck{
+    border:3;
+    background-color:#ccc;
+  }
+</style>
+</head>
+
+<body>
+<button type="button" id="test1Bt">click显示隐藏</button>
+<button type="button" id="test2Bt">click显示隐藏进阶</button>
+<button type="button" id="test3Bt">toggleClass</button>
+<button type="button" id="test4Bt">toggleClass</button>
+<div id="test1Div">toggle第一种用法默认显示隐藏</div>
+
+  <script type="text/javascript" charset="UTF-8" src="js/lib/jquery.min.js"></script>
+  
+  <script>
+'use strict'
+
+$(function(){
+
+$('#test1Bt').on('click',function(){
+  $('#test1Div').toggle();  
+});
+
+
+$('#test2Bt').on('click',function(){
+  $('#test1Div').toggle(2000,function(){
+       console.log('回调1');
+    });  
+});
+
+$('#test3Bt').on('click',function(){
+  $(this).toggleClass('ck');//添加移除当前点击的样式
+});
+
+$('#test4Bt').on('click',function(){
+  $(this).toggleClass(function(){
+    var $curObj=$(this);
+    if($curObj.hasClass('ck')){
+      $curObj.removeClass('ck');
+      return '';
+    }else{
+      //注意这里返回的是样式名！
+      return 'ck';
+    }
+  });//添加移除当前点击的样式
+});
+
+
+});
+  </script>
+</body>
+</html>

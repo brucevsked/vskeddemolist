@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>bootstrap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/uikit/css/uikit.min.css" >
+
+<style>
+    .triangle-top {
+        display: inline-block;
+        margin: 10px;
+        border-top: 2px solid #007bff;
+        border-right: 2px solid #007bff;
+        width: 10px;
+        height: 10px;
+        transform: rotate(-45deg);
+    }
+
+    .triangle-bottom {
+        display: inline-block;
+        margin: 10px;
+        border-bottom: 2px solid #007bff;
+        border-right: 2px solid #007bff;
+        width: 10px;
+        height: 10px;
+        transform: rotate(45deg);
+    }
+</style>
+</head>
+
+<body >
+<div class="buttons" id="buttons-hbox" style="border: 1px solid #ced4da;background: white!important;width:424px;height:48px;">
+        <div class="uk-inline">
+            <div aria-expanded="false" class="">
+                <ul class="map-box-content-right">
+                    <li>
+                        <i class="iconfont3 icon-shengchanxitongsvg"></i>
+                        <a href="">生产系统</a>
+                        <em class="title" >
+                            <span class="triangle triangle-top" id="a"></span>
+                        </em>
+                    </li>
+                </ul>
+            </div>
+            <div uk-dropdown="mode: click" id="select_template_content1" class="down uk-dropdown">
+                内容更新中
+            </div>
+        </div>
+        <div class="uk-inline">
+            <div aria-expanded="false">
+                <ul class="map-box-content-right">
+                    <li>
+                        <i class="iconfont3 icon-tuceng"></i>
+                        <a href="">图层</a>
+                        <em class="title">
+                            <span class="triangle triangle-top" id="b"></span>
+                        </em>
+                    </li>
+                </ul>
+            </div>
+            <div uk-dropdown="mode: click" id="select_template_content" class="down uk-dropdown"><ul style="padding-left: 0px;padding-right: 0px">
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="01电力设备"><span class="checkbox-content-box">01电力设备</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="02风力设备"><span class="checkbox-content-box">02风力设备</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="04汽力设备"><span class="checkbox-content-box">04汽力设备</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="01综机设备"><span class="checkbox-content-box">01综机设备</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="02普机设备"><span class="checkbox-content-box">02普机设备</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="03提运设备"><span class="checkbox-content-box">03提运设备</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="04通风设备"><span class="checkbox-content-box">04通风设备</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="05洗选设备"><span class="checkbox-content-box">05洗选设备</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="06供排水设备"><span class="checkbox-content-box">06供排水设备</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="08监控系统"><span class="checkbox-content-box">08监控系统</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="09人员定位系统"><span class="checkbox-content-box">09人员定位系统</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="10产量系统"><span class="checkbox-content-box">10产量系统</span></label>
+        </li>
+        
+        <li style="margin-top: 5px">
+            <label><input class="uk-checkbox point " type="checkbox" checked="" value="工业视频监控"><span class="checkbox-content-box">工业视频监控</span></label>
+        </li>
+        
+        <li>
+            <label><input class="uk-checkbox line" type="checkbox" checked="" value="ventilation">
+                <span class="checkbox-content-box">风流</span>
+            </label>
+        </li>
+        <li>
+            <label><input class="uk-checkbox line" type="checkbox" checked="" value="transport">
+                <span class="checkbox-content-box">煤流 </span>
+            </label>
+        </li>
+    </ul></div>
+        </div>
+        <div class="uk-inline">
+            <div aria-expanded="false">
+                <ul class="map-box-content-right">
+                    <li>
+                        <i class="iconfont3 icon-gongju"></i>
+                        <a href="">工具</a>
+                        <em class="title" >
+                            <span class="triangle triangle-top" id="c"></span>
+                        </em>
+                    </li>
+                </ul>
+            </div>
+            <div uk-dropdown="mode: click" id="select_template_content2" class="down uk-dropdown">
+                内容更新中
+            </div>
+        </div>
+    </div>
+
+  <script language="javascript" type="text/javascript" src="js/jquery.min.js"></script>
+
+	<script language="javascript" type="text/javascript" src="js/lib/uikit/js/uikit.min.js" ></script>
+
+<script>
+'use strict'
+
+$(function(){
+
+$('.uk-inline').on('click',function(){
+  var $obj=$(this);
+  var emTag=$obj.find('.triangle');
+  if(emTag.hasClass('triangle-top')){
+    emTag.removeClass('triangle-top');
+    $obj.parent().find('.triangle-bottom').removeClass('triangle-bottom').addClass('triangle-top');
+    emTag.addClass('triangle-bottom');
+  }else{
+    emTag.removeClass('triangle-bottom');
+    emTag.addClass('triangle-top');
+  }
+  });
+
+});
+</script>
+	
+
+</body>
+</html>

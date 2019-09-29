@@ -17,14 +17,49 @@
 'use strict'
 
 $(function(){
-
+  jsonTest.baseJson1();
+  jsonTest.baseJson2();
+  jsonTest.jsonToStr();
+  jsonTest.strToJson();
 });
   
 var jsonTest=new Object({
-	addTest:function(){
-		console.log('addTest start------------------');
-		console.log('addTest end------------------');
+	baseJson1:function(){
+		console.log('baseJson1 start------------------');
+		//第一种形式json字符串
+		var obj1={'key':'f1','value':'v1'};
+		console.log('取值方式1:'+obj1.key);
+		console.log('取值方式2:'+obj1['key']);
+		var ar1=[1,2,3,4,5];
+		var t1={'str':'字符串','num':999,'obj':obj1,'array':ar1,'boolean':true,'n':null};
+		console.log(t1);
+		console.log('baseJson1 end------------------');
+	},
+	baseJson2:function(){
+		console.log('baseJson2 start------------------');
+		//第二种形式json数组
+		var obj1=[{'key':'f1','value':'v1'},{'key':'f2','value':'v2'},{'key':'f3','value':'v3'}];
+		console.log(obj1);
+		console.log('baseJson2 end------------------');
+	},
+	jsonToStr:function(){
+		console.log('jsonToStr start------------------');
+		//json转字符串
+		var obj1=[{'key':'f1','value':'v1'},{'key':'f2','value':'v2'},{'key':'f3','value':'v3'}];
+		var str1=JSON.stringify(obj1);
+		console.log(str1);
+		console.log('jsonToStr end------------------');
+	},
+	strToJson:function(){
+		console.log('strToJson start------------------');
+		//字符串转json
+		//特别注意这里面的json一定要用双引号！！
+		var str1='[{"key":"f1","value":"v1"},{"key":"f2","value":"v2"},{"key":"f3","value":"v3"}]';
+		var obj1=JSON.parse(str1);
+		console.log(obj1);
+		console.log('strToJson end------------------');
 	}
+	
 });
 </script>
 
