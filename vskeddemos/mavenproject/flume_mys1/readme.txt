@@ -1,3 +1,8 @@
+
+本示例解决了以下几个问题
+1 监控目录时以文件为单位送到kafka
+2 送到kafka时添加头信息 文件路径与文件名
+3 同名文件后面加下划线与三位数字字母组合防止异常中断
 本反序列化器实现了把目录里文件按整个文件读取的功能
 flume自定义反序列化器deserializer
 
@@ -17,7 +22,7 @@ agent.channels = c1
 agent.sinks = k1
 
 # For each one of the sources, the type is defined
-agent.sources.s1.type = spooldir
+agent.sources.s1.type = com.vsked.source.SpoolDirectorySource
 agent.sources.s1.spoolDir=/logs/app1/
 agent.sources.s1.fileHeader = true
 agent.sources.s1.fileHeaderKey = filePath
