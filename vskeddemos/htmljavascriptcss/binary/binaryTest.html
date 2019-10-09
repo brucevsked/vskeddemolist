@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="referrer" content="always" />
+<meta name="">
+<title>二进制</title>
+</head>
+<body>
+
+十进制基本<input type="text" id="decInp" value="1" /> <button type="button" id="calBt">计算</button> <br>
+二进制基本<input type="text" id="binInp" /> <br>
+二进制原码<input type="text" id="bin1Inp" /> <br>
+二进制反码<input type="text" id="bin2Inp" /> <br>
+二进制补码<input type="text" id="bin3Inp" /> <br>
+十进制转回<input type="text" id="decInp1"  /> 
+
+<script>
+'use strict'
+
+var binaryTest=new Object({
+	decimalToBinary:function(d1){
+		return d1.toString(2);
+	},
+	binaryToDecimal:function(b1){
+		var b1s=b1+'';
+		var head=b1.substring(0,1)==1?'-':'';
+		var body=b1.substring(1);
+		var result=body;
+		result=head==''?result:binaryTest.binarySub(result,1);//减1
+		result=result.replace(/0/g,'t');//先把0换成t
+		result=result.replace(/1/g,'0');//再把1替换成0
+		result=result.replace(/t/g,'1');//再把t换成1
+		result=head+parseInt(parseInt(result),2);
+		return result;
+	},
+	binaryToTrueCode:function(d1){
+		//原码传入的是十进制,原码数值前增加一位符号位（即最高位符号位）正数该位为0，负数该位为1
+		var result='';
+		var binNum=binaryTest.decimalToBinary(d1);
+		if(d1>0){
+			result=binaryTest.patchZeroAfter('0',binNum);
+		}else{
+			var binStr=binNum+'';			
+			binStr=binStr.replace('-','');
+			result=binaryTest.patchZeroAfter('1',binStr);
+		}		
+		return result;
+	},
+	binaryToComplement:function(d1){
+		var result='';
+		//反码传入的是十进制,正数的反码与其原码相同,负数的反码是对正数逐位取反,符号位保持为1
+		if(d1>0){
+			result=binaryTest.binaryToTrueCode(d1);
+		}else{
+			var binStr=binaryTest.binaryToTrueCode(d1);
+			binStr=binStr.substring(1);
+			result=binStr;
+			result=result.replace(/0/g,'t');//先把0换成t
+			result=result.replace(/1/g,'0');//再把1替换成0
+			result=result.replace(/t/g,'1');//再把t换成1
+			result=binaryTest.patchZeroAfter('1',result);
+		}		
+		return result;
+	},
+	binaryToComplemental:function(d1){
+		var result='';
+		var binNum=binaryTest.decimalToBinary(d1);
+		//补码传入的是十进制,在计算机系统中，数值一律用补码来表示和存储
+		//正整数的补码与原码相同,负整数的补码将其原码除符号位外的所有位取反（0变1，1变0，符号位为1不变）后加1
+		if(d1>0){
+			result=binaryTest.binaryToTrueCode(d1);
+		}else{			
+			result=binaryTest.binaryAdd(binaryTest.binaryToComplement(d1),1);
+		}
+		return result;
+	},
+	binaryAdd:function(b1,b2){
+		var result='';
+		var b1s=b1+'';
+		var b2s=b2+'';
+		//对齐数据长度
+		var b1IsMax=b1s.length>=b2s.length;
+		if(b1IsMax){
+			b2s=binaryTest.patchZero(b2s,b1s.length);
+		}else{
+			b1s=binaryTest.patchZero(b1s,b2s.length);
+		}
+		var b1Ary=b1s.split('');
+		var b2Ary=b2s.split('');
+		var carryFlag=false;//进位标志
+		var i=0;
+		var num1=0;
+		var num2=0;
+		var num3=0;
+		var maxLength=b1IsMax?b1Ary.length:b2Ary.length;
+		for(i=maxLength-1;i>=0;i--){			
+			num1=(b1Ary[i]==undefined)?0:parseInt(b1Ary[i]);
+			num2=(b2Ary[i]==undefined)?0:parseInt(b2Ary[i]);
+			num3=num1+num2;
+			if(carryFlag){
+				num3=num3+1;
+				if(num3==2){
+					carryFlag=true;
+					result='0'+result;
+				}else{
+					carryFlag=false;
+					result=num3+''+result;
+				}
+			}else{
+				if(num3==2){
+					carryFlag=true;
+					result='0'+result;
+				}else{
+					carryFlag=false;
+					result=num3+''+result;
+				}
+			}			
+		}
+		return result;
+	},
+	binarySub:function(b1,b2){
+		var result='';
+		var b1s=b1+'';
+		var b2s=b2+'';
+		//对齐数据长度
+		var b1IsMax=b1s.length>=b2s.length;
+		if(b1IsMax){
+			b2s=binaryTest.patchZero(b2s,b1s.length);
+		}else{
+			b1s=binaryTest.patchZero(b1s,b2s.length);
+		}
+		var b1Ary=b1s.split('');
+		var b2Ary=b2s.split('');
+		var carryFlag=false;//进位标志
+		var i=0;
+		var num1=0;
+		var num2=0;
+		var num3=0;
+		var maxLength=b1IsMax?b1Ary.length:b2Ary.length;
+		for(i=maxLength-1;i>=0;i--){			
+			num1=(b1Ary[i]==undefined)?0:parseInt(b1Ary[i]);
+			num2=(b2Ary[i]==undefined)?0:parseInt(b2Ary[i]);
+			num3=num1-num2;
+			if(carryFlag){
+				num3=num3-1;
+				if(num3==-1){
+					carryFlag=true;
+					result='1'+result;
+				}else{
+					carryFlag=false;
+					result=num3+''+result;
+				}
+			}else{
+				if(num3==-1){
+					carryFlag=true;
+					result='1'+result;
+				}else{
+					carryFlag=false;
+					result=num3+''+result;
+				}
+			}			
+		}
+		return result;
+	},
+	decimalToOctal:function(d1){
+		return d1.toString(8);
+	},
+	decimalToHexadecimal:function(d1){
+		return d1.toString(16);
+	},
+	formatNum:function(num){
+		//不足4位或8位或16位前面补0操作
+		var i=1;
+		var myNum=0;
+		var curNum=parseInt(num.length);
+		var tmpRs=0;
+		for(i=1;i<1000000000;i++){
+			tmpRs=i*4;
+			if(tmpRs>=curNum){
+				myNum=i*4;
+				break;
+			}
+		}
+		var result=(Array(myNum).join('0') + num).slice(-myNum);
+		return result;
+	},
+	patchZero:function(num,maxLength){
+		var result=(Array(maxLength).join('0') + num).slice(-maxLength);
+		return result;
+	},
+	patchZeroAfter:function(num1,num2){
+		var flag=true;
+		var s1=num1+'';
+		var s2=num2+'';
+		while(flag){
+			if((s1.length+s2.length)%4==0){				
+				flag=false;
+				return s1+num2;
+			}
+			s1=s1+'0';
+		}		
+	},
+	initUI:function(){
+		var calBt=document.getElementById('calBt');
+		calBt.addEventListener('click',function(){
+			var decInp=document.getElementById('decInp');
+			var binInp=document.getElementById('binInp');
+			var bin1Inp=document.getElementById('bin1Inp');
+			var bin2Inp=document.getElementById('bin2Inp');
+			var bin3Inp=document.getElementById('bin3Inp');
+			var decInp1=document.getElementById('decInp1');
+			
+			binInp.value=binaryTest.decimalToBinary(parseInt(decInp.value));
+			bin1Inp.value=binaryTest.binaryToTrueCode(parseInt(decInp.value));
+			bin2Inp.value=binaryTest.binaryToComplement(parseInt(decInp.value));
+			bin3Inp.value=binaryTest.binaryToComplemental(parseInt(decInp.value));
+			decInp1.value=binaryTest.binaryToDecimal(bin3Inp.value);
+			
+		},false);
+	}
+});
+
+binaryTest.initUI();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>提示框</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="css/animate.css" >
+</head>
+
+<body >
+<!-- 第一种用法 单独bootstrap -->
+
+<a id="ta0" href="#" data-toggle="popover" title="标题" data-content="内容" data-placement="right" data-trigger="hover">  请悬停在我的上面0</a>
+<br>
+
+<!-- 第二种用法 单独bootstrap -->
+<a id="ta1" href="#" >  请悬停在我的上面1 </a>
+<br>
+
+<a id="ta2" href="#" >  请悬停在我的上面2 </a>
+<br>
+
+
+  <script language="javascript" type="text/javascript" src="js/jquery.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/lib/popper/popper.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/lib/popper/tooltip.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+
+<script>
+'use strict'
+
+$(function(){
+  
+  
+  $("#ta0").popover();//第一种用法
+  
+  $("#ta1").popover({
+     trigger:'hover',     //触发方式
+     title:'kkkkkk'     
+    });//第一种用法
+    
+  $("#ta2").popover({
+     trigger:'hover',     //触发方式
+     html: true, // 为true的话，data-content里就能放html代码了
+     content:"这里只有内容哟哟哟" //这里可以直接写字符串，也可以 是一个函数，该函数返回一个字符串；  
+    });//第一种用法
+   
+
+
+});
+</script>
+
+</body>
+</html>

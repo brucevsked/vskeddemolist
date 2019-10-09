@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>提示框</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="css/animate.css" >
+</head>
+
+<body >
+
+<!-- 第二种用法 需要popper.js支持 -->
+<div class="container" style="padding: 100px 50px 10px;" >
+    <button type="button" class="btn btn-default" title="Popover title"
+            data-container="body" data-toggle="popover" data-placement="left"
+            data-content="左侧的 Popover 中的一些内容">
+        左侧的 Popover
+    </button>
+    <button type="button" class="btn btn-primary" title="Popover title"
+            data-container="body" data-toggle="popover" data-placement="top"
+            data-content="顶部的 Popover 中的一些内容">
+        顶部的 Popover
+    </button>
+    <button type="button" class="btn btn-success" title="Popover title"
+            data-container="body" data-toggle="popover" data-placement="bottom"
+            data-content="底部的 Popover 中的一些内容">
+        底部的 Popover
+    </button>
+    <button type="button" class="btn btn-warning" title="Popover title"
+            data-container="body" data-toggle="popover" data-placement="right"
+            data-content="右侧的 Popover 中的一些内容">
+        右侧的 Popover
+    </button>
+</div>
+
+
+<!-- 第三种用法 需要tooltip.js支持 -->
+这是一个 <a href="#" class="tooltip-test" data-toggle="tooltip" title="默认的 Tooltip">默认的 Tooltip</a>.
+这是一个 <a href="#" class="tooltip-test" data-toggle="tooltip" data-placement="left" title="左侧的 Tooltip">左侧的 Tooltip</a>.
+这是一个 <a href="#" data-toggle="tooltip" data-placement="top" title="顶部的 Tooltip">顶部的 Tooltip</a>.
+这是一个 <a href="#" data-toggle="tooltip" data-placement="bottom" title="底部的 Tooltip">底部的 Tooltip</a>.
+这是一个 <a href="#" data-toggle="tooltip" data-placement="right" title="右侧的 Tooltip">右侧的 Tooltip</a>
+
+  <script language="javascript" type="text/javascript" src="js/jquery.min.js"></script>
+	
+  <script language="javascript" type="text/javascript" src="js/lib/popper/popper.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/lib/popper/tooltip.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+
+<script>
+'use strict'
+
+$(function(){
+  
+  
+  $("[data-toggle='popover']").popover();//第一种用法
+  
+  $("[data-toggle='tooltip']").tooltip();//第三种用法
+   
+
+
+});
+</script>
+
+</body>
+</html>

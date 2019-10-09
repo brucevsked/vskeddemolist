@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="referrer" content="always" />
+<meta name="">
+<title>电子技术自学指南第3版</title>
+</head>
+<body>
+公式中物理量的单位：I：(电流）的单位是安培（A）、U：（电压）的单位是伏特（V）、R ：（电阻）的单位是欧姆（Ω）<br>
+欧姆定律原始:I=U÷R &nbsp;&nbsp;
+<input type="text" id="u1Inp" value="16" /> ÷
+<input type="text" id="r1Inp" value="2" />
+=
+<input type="text" id="i1Inp" value="" readonly="readonly" />
+<button type="button" id="cal1Bt">计算</button> <br>
+
+欧姆定律变形:U=I×R &nbsp;&nbsp;
+<input type="text" id="i2Inp" value="1" />
+ ×
+<input type="text" id="r2Inp" value="1" />
+=
+<input type="text" id="u2Inp" value="" readonly="readonly" />
+<button type="button" id="cal2Bt">计算</button> <br>
+
+欧姆定律变形:R=U÷I &nbsp;&nbsp;
+<input type="text" id="u3Inp" value="16" /> ÷
+<input type="text" id="i3Inp" value="2" />
+=
+<input type="text" id="r3Inp" value="" readonly="readonly" />
+<button type="button" id="cal3Bt">计算</button> <br>
+<hr>
+电阻串联:R总＝R1+R2+R3+Rn...<br>
+<div id="rsumDiv">
+电阻串联:
+<input type="text" id="rzInp" value="" readonly="readonly" />
+=
+<input type="text" name="ar1Inp" value="1" /> +
+<input type="text" name="ar1Inp" value="2" />
+</div>
+<button type="button" id="calar1Bt">计算</button> 
+<button type="button" id="addar1Bt">添加</button> 
+<hr>
+电阻并联:R总＝(1÷R1)+(1÷R2)+(1÷R3)+(1÷Rn)...<br>
+<div id="rsum1Div">
+电阻并联:
+<input type="text" id="rz1Inp" value="" readonly="readonly" />
+=
+<input type="text" name="ar2Inp" value="2" /> +
+<input type="text" name="ar2Inp" value="2" />
+</div>
+<button type="button" id="calar2Bt">计算</button> 
+<button type="button" id="addar2Bt">添加</button> 
+<hr>
+电功率:P表示单位瓦(W),U电压单位伏特(V),I电流单位安培(A),R电阻单位欧姆(Ω) <br>
+
+
+
+<script>
+'use strict'
+
+var electronic=new Object({
+	ohmsLaw1:function(){
+		var i1Inp=document.getElementById('i1Inp');
+		var u1Inp=document.getElementById('u1Inp');
+		var r1Inp=document.getElementById('r1Inp');
+		i1Inp.value=parseFloat(u1Inp.value)/parseFloat(r1Inp.value);
+	},
+	ohmsLaw2:function(){
+		var i2Inp=document.getElementById('i2Inp');
+		var u2Inp=document.getElementById('u2Inp');
+		var r2Inp=document.getElementById('r2Inp');
+		u2Inp.value=parseFloat(i2Inp.value)*parseFloat(r2Inp.value);
+	},
+	ohmsLaw3:function(){
+		var i3Inp=document.getElementById('i3Inp');
+		var u3Inp=document.getElementById('u3Inp');
+		var r3Inp=document.getElementById('r3Inp');
+		r3Inp.value=parseFloat(u3Inp.value)/parseFloat(i3Inp.value);
+	},
+	rsumAdd1:function(){
+		var rsumDiv=document.getElementById('rsumDiv');
+		var tmpLabel=document.createElement('label');
+		tmpLabel.innerText='+';
+		rsumDiv.appendChild(tmpLabel);
+		var tmpInput=document.createElement('input');
+		tmpInput.setAttribute('type','text');
+		tmpInput.setAttribute('name','ar1Inp');
+		tmpInput.setAttribute('value','1');
+		rsumDiv.appendChild(tmpInput);		
+	},
+	rsumCal1:function(){	
+		var ar1List=document.getElementById("rsumDiv");
+		var result=0;
+		var curObj=null;
+		for(var i=1;i<ar1List.children.length;i++){
+			curObj=ar1List.children[i];
+			if(curObj.type=='text'){
+				result+=parseFloat(curObj.value);
+			}
+		}
+		document.getElementById('rzInp').value=result;
+	},
+	rsumAdd2:function(){
+		var rsumDiv=document.getElementById('rsum1Div');
+		var tmpLabel=document.createElement('label');
+		tmpLabel.innerText='+';
+		rsumDiv.appendChild(tmpLabel);
+		var tmpInput=document.createElement('input');
+		tmpInput.setAttribute('type','text');
+		tmpInput.setAttribute('name','ar2Inp');
+		tmpInput.setAttribute('value','2');
+		rsumDiv.appendChild(tmpInput);		
+	},
+	rsumCal2:function(){	
+		var ar1List=document.getElementById("rsum1Div");
+		var result=0;
+		var curObj=null;
+		for(var i=1;i<ar1List.children.length;i++){
+			curObj=ar1List.children[i];
+			if(curObj.type=='text'){
+				result+=(1/parseFloat(curObj.value));
+			}
+		}
+		document.getElementById('rz1Inp').value=result;
+	},
+	initUI:function(){
+		
+		var cal1Bt=document.getElementById('cal1Bt');
+		cal1Bt.addEventListener('click',electronic.ohmsLaw1,false);
+		
+		var cal2Bt=document.getElementById('cal2Bt');
+		cal2Bt.addEventListener('click',electronic.ohmsLaw2,false);
+		
+		var cal3Bt=document.getElementById('cal3Bt');
+		cal3Bt.addEventListener('click',electronic.ohmsLaw3,false);
+		
+		var addar1Bt=document.getElementById('addar1Bt');
+		addar1Bt.addEventListener('click',electronic.rsumAdd1,false);
+		
+		var calar1Bt=document.getElementById('calar1Bt');
+		calar1Bt.addEventListener('click',electronic.rsumCal1,false);
+		
+		var addar2Bt=document.getElementById('addar2Bt');
+		addar2Bt.addEventListener('click',electronic.rsumAdd2,false);
+		
+		var calar2Bt=document.getElementById('calar2Bt');
+		calar2Bt.addEventListener('click',electronic.rsumCal2,false);
+		
+	}
+});
+
+electronic.initUI();
+/*
+
+
+直流电 direct current
+交流电 alternating current
+电压 voltage
+电流 current
+
+*/
+</script>
+</body>
+</html>

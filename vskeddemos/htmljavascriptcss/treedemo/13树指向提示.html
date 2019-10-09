@@ -4,7 +4,7 @@
 <!-- must set here! -->
 <base href="">
 
-<title>鼠标指向事件</title>
+<title>鼠标指向事件加点击事件</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 <link rel="stylesheet" href="js/lib/jsTree/themes/default/style.min.css" />
@@ -82,9 +82,10 @@ var sysRoleList=new Object({
   
 $('#myRoleList').bind("activate_node.jstree", function (obj, e) {
   //绑定点击事件
-    // 获取当前节点
-    var currentNode = e.node;
-    //console.log(currentNode);
+  var currentNode = e.node;
+  var myContent=currentNode.original.oldName;
+  //console.log(myContent)
+  $("li[id='"+e.node.id+"'] > a").popover(  { trigger: "hover",content:myContent,placement:'left',offset: '0 10px' });
 });
 
 $('#myRoleList').bind("hover_node.jstree", function (obj, e) {
@@ -96,11 +97,13 @@ $('#myRoleList').bind("hover_node.jstree", function (obj, e) {
 });
 
 
+$('.jstree-anchor').hover(function(){
+  console.log(1);
+  },function(){
+    console.log(2);
+  }) ;
 
 
-
-
-  
 	},
 	destroyTree:function(){
 	  $.jstree.destroy();
