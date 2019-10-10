@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>html原型模板</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="js/lib/toastr/toastr.min.css" >
+</head>
+
+<body>
+  
+<button type="button" id="test1Bt">点哟</button>
+  
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/lib/toastr/toastr.min.js"></script>
+
+
+<script>
+$(function(){
+	toastrTest.initUI();
+});
+
+    toastr.options = {
+    closeButton: true,
+    progressBar: true,
+    showMethod: 'slideDown',
+    timeOut: 4000
+    };
+    
+var toastrTest=new Object({
+  test1:function(){
+    toastr.info('内容放在这里就好了<br>可以多放一些东西b', '标题显示这个2');
+  },
+  initUI:function(){
+    $('#test1Bt').on('click',toastrTest.test1);
+  }
+});
+  
+
+</script>
+
+</body>
+</html>

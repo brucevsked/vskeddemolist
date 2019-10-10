@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>基本用法</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="js/lib/toastr/toastr.min.css" >
+</head>
+
+<body>
+  
+<button type="button" id="test1Bt">成功</button>
+<button type="button" id="test2Bt">信息</button>
+<button type="button" id="test3Bt">警告</button>
+<button type="button" id="test4Bt">异常</button>
+<button type="button" id="test5Bt">下弹</button>
+<button type="button" id="test6Bt">清空</button>
+  
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/lib/toastr/toastr.min.js"></script>
+
+
+<script>
+$(function(){
+	toastrTest.initUI();
+});
+
+    toastr.options = {
+    closeButton: true,
+    progressBar: true,
+    showMethod: 'slideDown',
+    timeOut: 3000
+    };
+    
+var toastrTest=new Object({
+  test1:function(){
+    toastr.success('内容放在这里就好了<br>可以多放一些东西a', '标题显示这个1');
+  },
+  test2:function(){
+    toastr.info('内容放在这里就好了<br>可以多放一些东西b', '标题显示这个2');
+  },
+  test3:function(){
+    toastr.warning('内容放在这里就好了<br>可以多放一些东西c', '标题显示这个3');
+  },
+  test4:function(){
+    toastr.error('内容放在这里就好了<br>可以多放一些东西d', '标题显示这个4');
+  },
+  test5:function(){
+		toastr.info('内容放在这里就好了<br>可以多放一些东西e', '标题显示这个5', {timeOut: 5000,
+			closeButton : true,
+			progressBar : true,
+			showMethod : 'slideDown',
+			positionClass : "toast-bottom-right"});
+  },
+  test6:function(){
+    toastr.clear();
+  },
+  initUI:function(){
+    $('#test1Bt').on('click',toastrTest.test1);
+    $('#test2Bt').on('click',toastrTest.test2);
+    $('#test3Bt').on('click',toastrTest.test3);
+    $('#test4Bt').on('click',toastrTest.test4);
+    $('#test5Bt').on('click',toastrTest.test5);
+    $('#test6Bt').on('click',toastrTest.test6);
+  }
+});
+  
+
+</script>
+
+</body>
+</html>
