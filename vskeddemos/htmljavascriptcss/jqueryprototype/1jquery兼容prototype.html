@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>html兼容1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+</head>
+
+<body>
+  特别注意!这个prototype.js中的$已经被修改为$p
+  
+<div id="jqueryTestDiv">this is test1 jquery content</div>
+<div id="propotypeTestDiv">this is test2 prototypeTest content</div>
+  
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+<script type="text/javascript" src="js/prototype.js"></script>
+
+
+<script>
+
+$(function(){
+	console.log('welcome jquery i am vsked');
+	var d1=$('#jqueryTestDiv').html();
+	console.log(d1);
+	var d2=$p('propotypeTestDiv').innerHTML;
+	console.log(d2);
+});
+</script>
+
+</body>
+</html>
