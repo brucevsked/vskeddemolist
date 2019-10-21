@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>ion.Range.Slider</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="js/lib/ionRangeSlider/ion.rangeSlider.min.css" >
+</head>
+
+<body>
+
+<input type="text" class="js-range-slider" name="my_range" value="" />
+
+  
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/lib/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<script>
+$(function(){
+	
+	
+	$(".js-range-slider").ionRangeSlider({
+	  onChange:function(dt){
+	    console.log('当前你选的值是:'+dt.from);
+	    console.log(dt);
+	  }
+	});
+	
+});
+</script>
+
+</body>
+</html>

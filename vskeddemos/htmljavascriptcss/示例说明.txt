@@ -10,6 +10,7 @@ fontawesomedemo 丰富的图标字体库，用来显示各种图标
 gritterdemo 弹框提示控件已经6年不更新
 htmltemplate 前后端分离 js与css公用引入示例
 icheckdemo 单选钮与复选框美化
+Ion.RangeSlider 范围选择框美化
 javascript 基本js用法
 jquerydemo 基本jquery用法
 jqueryprototype 兼容问题解决可以同时使用jquery与prototype将prototype$换成了$p
