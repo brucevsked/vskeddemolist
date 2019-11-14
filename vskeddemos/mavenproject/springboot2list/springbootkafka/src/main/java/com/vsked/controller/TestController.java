@@ -1,23 +1,14 @@
 package com.vsked.controller;
 
-
-import java.util.Iterator;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.kafka.common.Metric;
-import org.apache.kafka.common.MetricName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
 import org.springframework.kafka.listener.ContainerProperties;
+import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 import org.springframework.kafka.listener.MessageListenerContainer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.vsked.service.kafka.KafkaConsumer;
 import com.vsked.service.kafka.KafkaManagerService;
 
 @Controller
@@ -30,6 +21,7 @@ public class TestController {
 	KafkaManagerService kafkaManagerService;
 	
 	
+	@SuppressWarnings({ "static-access", "unused" })
 	@RequestMapping("/topicedit")
 	@ResponseBody
 	public String kafkatopicedit(HttpServletRequest req){
@@ -39,11 +31,8 @@ public class TestController {
 		
 		
 		//topics
-		ContainerProperties cp=registry.getListenerContainer(KafkaConsumer.myListenerId).getContainerProperties();
-		String[] topicArray=cp.getTopics();
-		for(String topic:topicArray){
-			System.out.println("当前主题有:"+topic);
-		}
+		ContainerProperties cp=null;
+		String[] topicArray=null;
 		MessageListenerContainer mlc=registry.getListenerContainer(KafkaManagerService.myListenerId);
 		if(mlc!=null){
 			cp=mlc.getContainerProperties();
@@ -55,18 +44,28 @@ public class TestController {
 
 		
 		if("1".equals(tp)){
-			System.out.println("修改主题为11");
-			rs="修改主题为11";
+			System.out.println("修改主题为|"+topicname);
+			rs="推荐方案修改主题为|"+topicname;
 			kafkaManagerService.createKafkaConsume2(topicname);
 		}else if("2".equals(tp)){
-			System.out.println("修改主题为22");
-			rs="修改主题为22";
-			if(topicname==null || "".equals(topicname.trim())){
-				topicname="defaulttopic";
-			}
-			//根据请求参数动态创建,可以向里面传值
-			kafkaManagerService.createKafkaConsume1(topicname);
+			System.out.println("修改主题为|"+topicname);
+			rs="此方案已不使用修改主题为|"+topicname;
+//			if(topicname==null || "".equals(topicname.trim())){
+//				topicname="defaulttopic";
+//			}
+//			//根据请求参数动态创建,可以向里面传值
+//			kafkaManagerService.createKafkaConsume1(topicname);
 
+		}else if("3".equals(tp)){
+			System.out.println("停止主题"+topicname);
+			rs="停止主题"+topicname;
+			MessageListenerContainer mlca=registry.getListenerContainer(KafkaManagerService.myListenerId);
+			
+			KafkaMessageListenerContainer<String, String> tmpList=kafkaManagerService.topicListenerList.get(topicname);
+			if(tmpList!=null){
+				tmpList.stop();
+				kafkaManagerService.topicListenerList.remove(topicname);				
+			}
 		}
 		return rs;
 		

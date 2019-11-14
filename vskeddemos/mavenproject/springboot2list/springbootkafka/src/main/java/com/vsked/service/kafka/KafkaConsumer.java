@@ -66,7 +66,7 @@ public class KafkaConsumer {
     }
     */
 	
-    @KafkaListener(topics = "#{'${kafkalistenerlist.topiclist}'.split(',')}",id=KafkaConsumer.myListenerId)
+   // @KafkaListener(topics = "#{'${kafkalistenerlist.topiclist}'.split(',')}",id=KafkaConsumer.myListenerId)
     public void onMessage1(ConsumerRecord<String, String> record) {
     	System.out.println("当前主题是:"+record.topic());
     }

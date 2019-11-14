@@ -1,13 +1,14 @@
 
 
 动态修改kafka监听
+动态停止kafka监听
 
 com.vsked.controller.TestController
 
-
+根据主题创建消费者组
 http://localhost:8080/topicedit?tp=1&topicname=mytpoic3
-http://localhost:8080/topicedit?tp=2&topicname=mytpoic3
-http://localhost:8080/topicedit?tp=3
+根据主题停止消息者组
+http://localhost:8080/topicedit?tp=3&topicname=mytpoic3
 
 
 
