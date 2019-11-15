@@ -20,6 +20,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 import org.springframework.kafka.listener.MessageListener;
+import org.springframework.kafka.listener.MessageListenerContainer;
 import org.springframework.stereotype.Service;
 
 
@@ -118,6 +119,17 @@ public class KafkaManagerService {
 		kafkaMessageListenerContainer.setAutoStartup(true);
 		kafkaMessageListenerContainer.start();
 		topicListenerList.put(topicname, kafkaMessageListenerContainer);
+		
+	}
+	
+	public String stopKafka(String topicname){
+		String rs="停止主题"+topicname;
+		KafkaMessageListenerContainer<String, String> tmpList=topicListenerList.get(topicname);
+		if(tmpList!=null){
+			tmpList.stop();
+			topicListenerList.remove(topicname);				
+		}
+		return rs;
 		
 	}
 }

@@ -1,7 +1,7 @@
 
 
-动态修改kafka监听
-动态停止kafka监听
+动态创建kafka消费者
+动态停止kafka消息者
 
 com.vsked.controller.TestController
 

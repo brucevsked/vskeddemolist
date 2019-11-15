@@ -58,14 +58,8 @@ public class TestController {
 
 		}else if("3".equals(tp)){
 			System.out.println("停止主题"+topicname);
-			rs="停止主题"+topicname;
-			MessageListenerContainer mlca=registry.getListenerContainer(KafkaManagerService.myListenerId);
-			
-			KafkaMessageListenerContainer<String, String> tmpList=kafkaManagerService.topicListenerList.get(topicname);
-			if(tmpList!=null){
-				tmpList.stop();
-				kafkaManagerService.topicListenerList.remove(topicname);				
-			}
+			rs=kafkaManagerService.stopKafka(topicname);
+
 		}
 		return rs;
 		
