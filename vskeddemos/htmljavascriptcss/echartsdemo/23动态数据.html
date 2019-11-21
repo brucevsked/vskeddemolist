@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>bar</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<style type="text/css">
+html,body{
+width:99.5%;
+height:98.7%;
+}
+<!--以下设置全屏--> 
+body {
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+</style>
+
+</head>
+
+<body >
+  <div id="container" style="height: 100%"></div>
+
+
+	<script language="javascript" type="text/javascript" src="js/lib/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/mock-min.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/echarts/echarts.min.js"></script>
+
+	
+<script>
+	$(function() {
+	  
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var option = {
+    title : {
+        text: '某地区蒸发量和降水量',
+        subtext: '纯属虚构'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['蒸发量','降水量']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'蒸发量',
+            type:'bar',
+            data:[],
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        },
+        {
+            name:'降水量',
+            type:'bar',
+            data:[],
+            markPoint : {
+                data : [
+                    {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
+                    {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name : '平均值'}
+                ]
+            }
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+
+
+
+      Mock.mock('http://localhost:8080/lostweek/hello.html','post',function(){
+        
+        var rsaArry=new Array();
+        var rsbArry=new Array();
+        for(var i=0;i<12;i++){
+          var Random = Mock.Random;
+          rsaArry.push( Random.integer(2,500));
+          rsbArry.push( Random.integer(2,500));
+        }
+        
+        return {'d1':rsaArry,'d2':rsbArry};
+        
+        });
+        
+        
+$.ajax({
+        type : "post",
+        async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+        url : "http://localhost:8080/lostweek/hello.html",    //请求发送到TestServlet处
+        data : {},
+        dataType : "json",        //返回数据形式为json
+        success : function(result) {
+          console.log(result)
+      var option = myChart.getOption();
+      option.series[0].data = result.d1;
+      option.series[1].data = result.d2;
+      myChart.setOption(option, true);
+        }
+    })
+	  
+	});
+</script>
+
+</body>
+</html>
