@@ -1,0 +1,356 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>bar</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+
+<style type="text/css">
+html,body{
+width:99.5%;
+height:98.7%;
+}
+<!--以下设置全屏--> 
+body {
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+</style>
+<style>
+
+#charta1,#charta2,#charta3{
+  height:500px;
+}
+
+</style>
+
+</head>
+
+<body >
+  
+ 
+<div class="container">
+  问题解决方案说明:<br>
+  第一步解决高度问题,我们给图表层写一个id并给id加上高度样式
+  #charta1,#charta2,#charta3{
+  height:500px;
+}
+<br>
+第二步解决窗口大小拖动时自适应
+javascript代码<br>
+	$(window).resize(function() {
+		for(var i = 0; i < echartTabTest.chartList.length; i++) {
+			echartTabTest.chartList[i].resize();
+		}
+	});
+<br>
+第三步解决图表隐藏与高度自适应
+先将初始化的图表放入一个数组中echartTabTest.chartList<br>
+点击切换选项卡时遍历本数组，调用图表改变尺寸事件<br>
+在初始化界面时调用每一个图表初始化方法;
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+     <div id="charta1" ></div>
+    </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+      <div id="charta2" ></div>
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+      <div id="charta3" ></div>
+    </div>
+  </div>
+</div>
+
+	<script language="javascript" type="text/javascript" src="js/lib/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+	<script language="javascript" type="text/javascript" src="js/lib/echarts/echarts.min.js"></script>
+
+	
+<script>
+
+var echartTabTest=new Object({
+  chartList:[],
+  initChart1:function(){
+	  	  
+var dom1 = document.getElementById("charta1");
+var myChart1 = echarts.init(dom1);
+var option1 = {
+    title : {
+        text: '哪儿有水呀',
+        subtext: '纯属虚构'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['蒸发量','降水量']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'蒸发量',
+            type:'bar',
+            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        },
+        {
+            name:'降水量',
+            type:'bar',
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            markPoint : {
+                data : [
+                    {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
+                    {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name : '平均值'}
+                ]
+            }
+        }
+    ]
+};
+;
+if (option1 && typeof option1 === "object") {
+    myChart1.setOption(option1, true);
+    echartTabTest.chartList.push(myChart1);    
+}
+  },
+  initChart2:function(){
+
+
+var dom2 = document.getElementById("charta2");
+var myChart2 = echarts.init(dom2);
+var option2 = {
+    title : {
+        text: '听说你有水',
+        subtext: '纯属虚构'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['蒸发量','降水量']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'蒸发量',
+            type:'bar',
+            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        },
+        {
+            name:'降水量',
+            type:'bar',
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            markPoint : {
+                data : [
+                    {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
+                    {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name : '平均值'}
+                ]
+            }
+        }
+    ]
+};
+;
+if (option2 && typeof option2 === "object") {
+    myChart2.setOption(option2, true);
+    echartTabTest.chartList.push(myChart2); 
+}
+  },
+  initChart3:function(){
+
+var dom3 = document.getElementById("charta3");
+var myChart3 = echarts.init(dom3);
+var option3 = {
+    title : {
+        text: '给俺口水吧',
+        subtext: '纯属虚构'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['蒸发量','降水量']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'蒸发量',
+            type:'bar',
+            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        },
+        {
+            name:'降水量',
+            type:'bar',
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            markPoint : {
+                data : [
+                    {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
+                    {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name : '平均值'}
+                ]
+            }
+        }
+    ]
+};
+;
+if (option3 && typeof option3 === "object") {
+    myChart3.setOption(option3, true);
+    echartTabTest.chartList.push(myChart3); 
+}
+  },
+  initEvent:function(){
+  }
+  });
+  
+  
+	$(function() {
+echartTabTest.initChart1();
+echartTabTest.initChart2();
+echartTabTest.initChart3();
+	  
+
+	$(window).resize(function() {
+		for(var i = 0; i < echartTabTest.chartList.length; i++) {
+			echartTabTest.chartList[i].resize();
+		}
+	});
+	//解决tab切换不显示问题 在加载窗口后重新渲染。
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+	    console.log('---------aaa');
+		for(var i = 0; i < echartTabTest.chartList.length; i++) {
+			echartTabTest.chartList[i].resize();
+		}
+	});
+
+
+	  
+	});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>daterangepicker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/daterangepicker/daterangepicker.css" >
+</head>
+
+<body >
+单个
+<input type="text" name="date1" id="date1" class="form-control" style="width: 20%;">
+<input type="hidden" id = "submitDate" name="submitDate" class="form-control" />
+
+<hr>
+区间用法
+<input type="text" name="date2" id="date2" class="form-control" style="width: 20%;">
+<input type="hidden" id = "startTime" name="startTime" class="form-control" />
+<input type="hidden" id = "endTime" name="endTime" class="form-control" />
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/moment/moment-with-locales.js"></script>
+  <script src="js/lib/daterangepicker/daterangepicker.js"></script>
+
+	
+
+<script>
+'use strict'
+
+$(function(){
+
+
+//单个时间插件
+$("input[name='date1']").daterangepicker(
+{
+singleDatePicker: true,//设置为单个的datepicker，而不是有区间的datepicker 默认false
+showDropdowns: true,//当设置值为true的时候，允许年份和月份通过下拉框的形式选择 默认false
+autoUpdateInput: false,//1.当设置为false的时候,不给与默认值(当前时间)2.选择时间时,失去鼠标焦点,不会给与默认值 默认true
+timePicker24Hour : true,//设置小时为24小时制 默认false
+timePicker : false,//可选中时分 默认false
+locale: {
+format: "YYYY-MM-DD",
+separator: " - ",
+daysOfWeek: ["日","一","二","三","四","五","六"],
+monthNames: ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+}
+
+}
+).on('cancel.daterangepicker', function(ev, picker) {
+$("#date1").val("请选择日期");
+$("#submitDate").val("");
+}).on('apply.daterangepicker', function(ev, picker) {
+$("#submitDate").val(picker.startDate.format('YYYY-MM-DD'));
+$("#date1").val(picker.startDate.format('YYYY-MM-DD'));
+});
+
+
+
+$("input[name='date2']").daterangepicker(
+{
+// autoApply: true,
+autoUpdateInput: false,
+// alwaysShowCalendars: true,
+ranges: {
+'今天': [moment(),moment()],
+'昨天': [moment().subtract(1, 'days'),moment().subtract(1, 'days')],
+'近7天': [moment().subtract(7, 'days'), moment()],
+'这个月': [moment().startOf('month'), moment().endOf('month')],
+'上个月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+},
+locale: {
+format: "YYYY/MM/DD HH:MM:SS",
+separator: " - ",
+applyLabel: "确认",
+cancelLabel: "清空",
+fromLabel: "开始时间",
+toLabel: "结束时间",
+customRangeLabel: "自定义",
+daysOfWeek: ["日","一","二","三","四","五","六"],
+monthNames: ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+}
+}
+).on('cancel.daterangepicker', function(ev, picker) {
+$("#date2").val("请选择日期范围");
+$("#startTime").val("");
+$("#endTime").val("");
+}).on('apply.daterangepicker', function(ev, picker) {
+$("#startTime").val(picker.startDate.format('YYYY-MM-DD'));
+$("#endTime").val(picker.endDate.format('YYYY-MM-DD'));
+$("#date2").val(picker.startDate.format('YYYY-MM-DD')+" 至 "+picker.endDate.format('YYYY-MM-DD'));
+});
+
+
+});
+</script>
+	
+
+</body>
+</html>
