@@ -1,0 +1,95 @@
+        ::-webkit-scrollbar
+        {
+            width: 9px;
+            height: 9px;
+        }
+        ::-webkit-scrollbar-track-piece
+        {
+            background-color: #ebebeb;
+            -webkit-border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:vertical
+        {
+            height: 32px;
+            background-color: #ccc;
+            -webkit-border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:horizontal
+        {
+            width: 32px;
+            background-color: #ccc;
+            -webkit-border-radius: 4px;
+        }
+        ul,li{padding: 0;margin: 0}
+
+
+
+        .mySelect{
+            position: relative;
+        }
+        .mySelect .inputWrap{
+            width:100%;
+            min-height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+        }
+        .mySelect ul{
+            padding:0 5px ;
+            margin: 0;
+            padding-right: 35px;
+        }
+        .mySelect ul,li{
+            list-style: none;
+        }
+        .mySelect li{
+            display: inline-block;
+            background: #eaeaea;
+            padding: 5px;
+            margin: 5px 5px 5px 0;
+            border-radius: 5px;
+        }
+        .mySelect .fa-close{
+            cursor: pointer;
+        }
+        .mySelect .fa-close:hover{
+            color: #237eff;
+        }
+        .mySelect .mySelect-option{
+            width: 100%;
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: scroll;
+            position: absolute;
+            height: 0;
+            opacity: 0;
+        }
+        .mySelect .mySelect-option div{
+            padding: 10px;
+        }
+        .mySelect .inputWrap>i{
+            position: absolute;
+            padding: 13px;
+            right: 0;
+            top: 0;
+        }
+        .mySelect-option div{
+            cursor: pointer;
+            border-bottom: 1px solid #e7e7e7;
+            margin: 5px;
+        }
+        .mySelect-option div i{
+            float: right;
+            color: #ffffff;
+        }
+        .mySelect-option div.selected{
+            background: #237eff;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+        .mySelect-option div:hover{
+            /*background: #9ec6ff;*/
+            color: #9ec6ff;
+            border-bottom: 1px solid #9ec6ff;
+        }

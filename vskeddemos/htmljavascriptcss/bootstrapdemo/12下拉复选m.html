@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>12下拉复选框</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="css/animate.css" >
+<link rel="stylesheet" href="js/lib/daterangepicker/daterangepicker.css" >
+<link rel="stylesheet" href="js/lib/mySelect/mySelect.css" >
+<link href="css/fontawesomeweb/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all"/>
+
+</head>
+
+<body >
+
+<div class="container">
+<div style="float: left;position: relative">&nbsp;&nbsp;多选&nbsp;&nbsp;</div>
+<div id="mySelect" class="mySelect" style="width: 250px;float: left"></div>
+<div style="float: left;position: relative">&nbsp;&nbsp;单选&nbsp;&nbsp;</div>
+<div id="mySelect2" class="mySelect" style="width: 250px;float: left;margin-left: 10px"></div>
+
+<button type="button" id="getValueBt">取值</button>
+</div>
+
+
+  <script src="js/jquery.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+  <script src="js/lib/mySelect/mySelect.js"></script>
+
+<script>
+'use strict'
+
+$(function(){
+  
+
+ var mySelect= $("#mySelect").mySelect({
+          mult:true,//true为多选,false为单选
+          option:[//选项数据
+              {label:"选项1",value:0},
+              {label:"选项2",value:1},
+              {label:"选项3",value:2},
+              {label:"选项4",value:3},
+              {label:"选项5",value:4},
+              {label:"选项6",value:5}
+          ],
+          onChange:function(res){//选择框值变化返回结果
+            console.log(res)
+          }
+      });
+      mySelect.setResult(["1","2"]);//默认选中
+      var mySelect2= $("#mySelect2").mySelect({
+          mult:false,
+          option:[
+              {label:"选项1",value:0},
+              {label:"选项2",value:1},
+              {label:"选项3",value:2},
+              {label:"选项4",value:3},
+              {label:"选项5",value:4},
+              {label:"选项6",value:5}
+          ],
+          onChange:function(res){
+              console.log(res)
+          }
+      });
+        mySelect2.setResult(3);
+
+$('#getValueBt').on('click',function(){
+  console.log(mySelect.getResult());
+  });
+
+});
+</script>
+
+</body>
+</html>

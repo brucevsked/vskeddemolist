@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>11下拉复选框</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="css/animate.css" >
+<link rel="stylesheet" href="js/lib/daterangepicker/daterangepicker.css" >
+<link rel="stylesheet" href="js/lib/fselect/fSelect.css" >
+
+</head>
+
+<body >
+
+<div class="container">
+<select class="demo" multiple="multiple">
+    <optgroup label="Languages">
+        <option value="cp">C++</option>
+        <option value="cs">C#</option>
+        <option value="oc">Object C</option>
+        <option value="c">C</option>
+    </optgroup>
+    <optgroup label="Scripts">
+        <option value="js">JavaScript</option>
+        <option value="php">PHP</option>
+        <option value="asp">ASP</option>
+        <option value="jsp">JSP</option>
+    </optgroup>
+</select>
+
+<button type="button" id="getValueBt">取值</button>
+</div>
+
+
+  <script src="js/jquery.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+  <script src="js/lib/fselect/fSelect.js"></script>
+
+<script>
+'use strict'
+
+$(function(){
+  
+
+$('.demo').fSelect();
+
+$('#getValueBt').on('click',function(){
+  var valueList=$('.selected');
+  $.each(valueList,function(elIndex,el){
+    var $obj=$(el);
+    console.log($obj.text()+'|'+$obj.attr('data-value'));
+    });
+  
+  });
+
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>下拉复选框</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="css/animate.css" >
+<link rel="stylesheet" href="js/lib/daterangepicker/daterangepicker.css" >
+<link rel="stylesheet" href="js/lib/ySelect/ySelect.css" >
+
+</head>
+
+<body >
+
+<div class="container">
+<select id='m1' class="demo" multiple="multiple">
+    <optgroup label="产品">
+        <option value="1">加多宝凉茶</option>
+        <option value="2">饮料</option>
+        <option value="3">太太乐鸡精</option>
+        <option value="4">嘉士伯啤酒</option>
+    </optgroup>
+    <optgroup label="字典">
+        <option value="5">成功图像类型</option>
+        <option value="6">门店类型</option>
+        <option value="7">终端类型</option>
+    </optgroup>
+</select>
+
+<select id='m2' class="demo1" multiple="multiple" >
+        <option value="1">加多宝凉茶</option>
+        <option value="2">饮料</option>
+        <option value="3">太太乐鸡精</option>
+        <option value="4">嘉士伯啤酒</option>
+        <option value="5">成功图像类型</option>
+        <option value="6">门店类型</option>
+</select>
+<br/>
+<button id="current" class="btn btn-primary btn-sm">查看值</button>
+</div>
+
+
+  <script src="js/jquery.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+  <script src="js/lib/ySelect/ySelect.js"></script>
+
+<script>
+'use strict'
+
+$(function(){
+  
+
+ $('.demo').ySelect();
+        $('.demo1').ySelect(
+          {
+            placeholder: '请先选择一些项目',
+            searchText: '搜索',
+            showSearch: true,
+            numDisplayed: 4,
+            overflowText: '已选中 {n}项',
+            isCheck:false
+          }
+        );
+
+      $("#current").click(function(){
+        alert($("#m1").ySelectedValues(","));
+        alert($("#m1").ySelectedTexts(","));
+      });
+
+
+});
+</script>
+
+</body>
+</html>
