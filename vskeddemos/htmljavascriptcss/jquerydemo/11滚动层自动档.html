@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>11滚动层自动档</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="">
+<meta http-equiv="description" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+html,body{ height:100%;}
+body,div{ margin:0; padding:0; color:#F00;}
+* html{ padding-top:100px;}/*for ie6*/
+.top{ background:#36C; height:100px;}
+* html .top{ background:#36C; height:100px; position:absolute; top:0; width:100%;}/*for ie6*/
+.main{ background:#F90; position:absolute; width:100%; top:100px; bottom:0; overflow:hidden;} /* overflow:auto; */
+* html .main{ background:#F90; position:static; height:90%;}/*for ie6*/
+</style>
+
+</head>
+
+<body>
+<button type="button" id="goLeftBt">向左</button>
+<button type="button" id="goTopBt">向上</button>
+<table style="width:40%">
+  <tr><td width="10%">名字</td><td width="10%">年龄</td></tr>
+</table>
+<div id="c1" style="width:40%;height:50%;overflow:hidden;border:2px solid #f00">
+<div style="width:100%;height:20%" >
+  <table id="mytb2">
+  <tr><td width="10%">老王1</td><td width="10%">31</td></tr>
+  <tr><td>老王2</td><td>3a</td></tr>
+  <tr><td>老王3</td><td>3b</td></tr>
+  <tr><td>老王4</td><td>3c</td></tr>
+  <tr><td>老王5</td><td>3d</td></tr>
+  <tr><td>老王6</td><td>3e</td></tr>
+  <tr><td>老王7</td><td>3f</td></tr>
+  <tr><td>老王8</td><td>3g</td></tr>
+  <tr><td>老王9</td><td>3h</td></tr>
+  <tr><td>老王10</td><td>3i</td></tr>
+  <tr><td>老王11</td><td>3j</td></tr>
+  <tr><td>老王12</td><td>31k</td></tr>
+  <tr><td>老王13</td><td>31l</td></tr>
+  <tr><td>老王14</td><td>31m</td></tr>
+  <tr><td>老王15</td><td>31n</td></tr>
+  <tr><td>老王16</td><td>31o</td></tr>
+  <tr><td>老王17</td><td>31p</td></tr>
+  </table>
+</div>
+</div>
+
+
+  <script type="text/javascript" charset="UTF-8" src="js/lib/jquery.min.js"></script>
+
+<script>
+var testObj=new Object({
+  scrollSpeed:1000,
+  scrollCount:1,
+  scroll1:function(){    
+    $('#c1').scrollLeft($('#c1').scrollLeft()+10);
+    console.log(1);
+  },
+  scroll2:function(){
+    $('#c1').scrollTop($('#c1').scrollTop()+10);
+     console.log(2);
+  },
+  autoTop1:function(){
+ var $parent = $('#c1');
+ var $first = $parent.find('tr:first');
+ var height = $first.height();
+ $first.animate({
+  height: 0 //或者改成： marginTop: -height + 'px'
+  }, 500, function() {// 动画结束后，把它插到最后，形成无缝
+  $first.css('height', height).appendTo($('#mytb2'));
+ });
+  },
+  autoScroll1:function(){
+    setInterval(testObj.autoTop1,testObj.scrollSpeed);
+  },
+  initBtEvent:function(){
+    $('#goLeftBt').on('click',testObj.scroll1);
+    $('#goTopBt').on('click',testObj.scroll2);
+  }
+  });
+  
+  testObj.initBtEvent();
+  testObj.autoScroll1();//自动档
+</script>
+</body>
+</html>
