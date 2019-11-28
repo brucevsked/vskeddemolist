@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>24datatables滚动显示</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+    <link href="js/plugins/dataTables/Select-1.3.0/css/select.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<body>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox ">
+  
+                      <div class="ibox-title">
+                        <h5>基本数据表示例与响应插件</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" class="dropdown-item">选项 1</a>
+                                </li>
+                                <li><a href="#" class="dropdown-item">选项 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+  
+  
+	<div class="ibox-content">
+      <div class="table table-striped table-bordered table-hover " id="mytbc1">
+      	
+  <table id="dt0" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>code</th>
+                <th>First name</th>
+                <th>phone</th>
+            </tr>
+        </thead>
+
+    </table>
+      	
+      </div>
+	</div>
+	
+	
+</div>
+</div>
+</div>
+</div>
+<!-- 使用方向键试试 或拖动看看-->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/plugins/dataTables/datatables.min.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="js/plugins/dataTables/Select-1.3.0/js/select.bootstrap4.min.js"></script>
+    <script src="js/inspinia.js"></script>
+    
+    <script src="js/mock-min.js" type="text/javascript"></script>
+    <!-- Page-Level Scripts -->
+    <script>
+      
+      var tmpCount=5;
+      
+      
+        $(document).ready(function(){
+        	
+      Mock.mock(RegExp('http://localhost:8080/mypage.*'),'get',{
+      	draw:1,
+      	recordsTotal:257,
+        'data|4': [{'id|+1':1,'code':/\d{3}/,'name':'@cname','phone':/^1[385][1-9]\d{8}/}]
+        });
+  
+
+  var myTable1=$('#dt0').DataTable({
+  	ajax:'http://localhost:8080/mypage',
+  	select:true,//需要Select-1.3.0支持
+  	paging:false,//不分页
+	  searching: false, //隐藏搜索
+	  pageLength:5,//每页显示10条
+	  responsive: true,
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [
+                    { extend: 'copy'},
+                    {extend: 'csv'},
+                    {extend: 'excel', title: 'ExampleFile'},
+                    {extend: 'pdf', title: 'ExampleFile'},
+
+                    {extend: 'print',
+                     customize: function (win){
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                    }
+                    }
+                ],
+  	columns:[
+  	{data:'id'},
+  	{data:'code',orderable:true},//显示排序
+  	{data:'name',orderable:false}, //隐藏排序
+  	{data:'phone',orderable:false}
+  	]
+  	});
+  	
+  	
+  	
+  	
+  	setInterval(function(){ 
+  	  console.log(new Date());
+  	  var row1=$('#dt0').find('tr')[1];
+  	  if(row1!=undefined){
+  	    row1.remove();//删除行
+  	  }
+  	  
+  	  var rowNew1='<tr>';
+  	  rowNew1+='<td>'+tmpCount+'</td>';
+  	  rowNew1+='<td>'+tmpCount+'is mycode</td>';
+  	  rowNew1+='<td>helloname'+tmpCount+'</td>';
+  	  rowNew1+='<td>13155126'+tmpCount+'</td>';
+  	  rowNew1+='</tr>';
+  	  $('#dt0').append(rowNew1);//添加行
+  	  tmpCount=tmpCount+1;
+  	  
+  	  }, 2000);
+  	
+  	
+  	
+  	
+  	
+
+        });
+
+    </script>
+
+
+</body>
+</html>

@@ -117,6 +117,7 @@ public class KafkaManagerService {
 		KafkaMessageListenerContainer<String, String> kafkaMessageListenerContainer=new KafkaMessageListenerContainer<String, String>(kafkaConsumerFactory,containerProperties);
 		kafkaMessageListenerContainer.setBeanName(myListenerId);//这里就是@KafkaListener中的id也就是
 		kafkaMessageListenerContainer.setAutoStartup(true);
+		
 		kafkaMessageListenerContainer.start();
 		topicListenerList.put(topicname, kafkaMessageListenerContainer);
 		

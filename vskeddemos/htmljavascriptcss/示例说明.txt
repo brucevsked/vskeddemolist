@@ -1,4 +1,5 @@
 axiosdemo ajax技术替代品优于fetch,ajax等技术
+binary 二进制转十进制及摩尔斯电码示例
 bootstrapdemo 样式显示技术如模态对话框
 datetimedemo 日期时间选择，计算，显示等前端技术
 duallistboxdemo 多行下拉列表互相移动
@@ -18,10 +19,13 @@ jquerystepsdemo 向导示例
 metisMenudemo 菜单示例
 mockdemo 前端数据模拟生成,ajax类数据模拟
 select2demo 下拉列表框美化
+svg 使用js操作svg画上下箭头
 sweetalertdemo 弹出框，确认框美化
 tablesdemo 表格示例
 toastrdemo 通知插件基于jquery
 touchspindemo 加减值控件一个文本左加右减
 treedemo 树控件示例
+ukit3demo 手风琴与下拉层示例
+ukitdemo 手风琴示例
 weuidemo 移动端框架weui示例
 
