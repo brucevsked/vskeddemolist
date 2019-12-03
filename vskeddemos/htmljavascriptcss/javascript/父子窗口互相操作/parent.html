@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>父窗口</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+</head>
+
+<body>
+
+<input id="tokenaa" name="tokenaa" value="thisis my test value">
+<br>
+<button type="button" id="testBt" onclick="openChildren()" >开子窗口</button>
+<button type="button" id="test2Bt" onclick="getChildrenEl()" >改取子窗口值(父窗口操作子窗口元素)</button>
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+  var myNewWin1=null;
+  function openChildren(){
+   myNewWin1= window.open('children.html','newwindow','height=500,width=500,toolbar=no,menubar=no,scrollbars=no,resizable=no, location=no,status=no');    
+  }
+  
+  function getChildrenEl(){
+    myNewWin1.document.getElementById('parentTestInput1').value=999;
+    console.log(myNewWin1.document.getElementById('parentTestInput1').value);
+    }
+</script>
+
+</body>
+</html>

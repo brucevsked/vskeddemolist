@@ -1,0 +1,23 @@
+1Tomcat CORS跨域支持
+Tomcat CORS跨域支持也可以参考https://tomcat.apache.org/tomcat-9.0-doc/config/filter.html
+Tomcat的conf目录下web.xml文件
+
+Default Session Configuration一行前面添加
+<filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+  <init-param>
+    <param-name>cors.allowed.origins</param-name>
+    <param-value>*</param-value>
+  </init-param>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+2将本文件夹放到tomcat的webapp中访问
+
+注意要将文件夹改名成英文再访问
+
+http://localhost:8080/cc/parent.html

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>html原型模板</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+</head>
+
+<body>
+<input id="parentTestInput1" value="mychildrenisaa"><br>
+<button type="button" id="testBt" onclick="testA1()" >取父窗口值(子窗口操作父窗口元素)</button>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+
+function testA1(){
+  alert(11);
+  alert(window.opener.document.getElementById("tokenaa").value);
+  alert('1|'+$('#tokenaa',window.opener.document).val());
+  
+}
+</script>
+
+</body>
+</html>

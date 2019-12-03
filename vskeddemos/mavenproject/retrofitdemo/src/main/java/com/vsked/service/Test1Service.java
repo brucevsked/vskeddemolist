@@ -60,8 +60,8 @@ public class Test1Service extends BaseService{
 	        String s="";
 	        while ((s = br.readLine()) != null) {  
 	            sb.append(s);  
-	        }  
-	       result= sb.toString();
+	        }
+	        result= req.getMethod()+"|"+contentType+"|test1 back|"+sb.toString();
 			}catch(Exception e){
 				log.error(e.getMessage());
 			}
