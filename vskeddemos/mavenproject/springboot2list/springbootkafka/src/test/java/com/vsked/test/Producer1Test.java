@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class Producer1Test {
 	
-	public static String topic = "mytpoic3";// 定义主题,测试时需要修改这个主题
+	public static String topic = "testFlink";// 定义主题,测试时需要修改这个主题
 
 	private final Logger log = LoggerFactory.getLogger(Producer1Test.class);
 
@@ -21,13 +21,13 @@ public class Producer1Test {
 	public void t1() {
 		
 		Properties p = new Properties();
-		p.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.111.52:9092");// kafka地址，多个地址用逗号分割
+		p.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.111.95:9092,192.168.111.96:9092,192.168.111.97:9092");// kafka地址，多个地址用逗号分割
 		p.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		p.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 
 		try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(p)) {
 //			while (true) {
-				String msg = "Hello 这里是我发的消息," + new Random().nextInt(100);
+				String msg = "Hello,hello,hello,hey,hey,这里是我发的消息," + new Random().nextInt(100);
 				ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic,"aaa", msg);
 				record.headers().add("filename", "yellobook.txt".getBytes());
 				kafkaProducer.send(record);

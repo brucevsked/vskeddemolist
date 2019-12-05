@@ -10,7 +10,8 @@ import org.apache.flink.util.Collector;
 
 public class TestFlink1 {
 
-	 public static void main(String[] args) throws Exception {
+	 @SuppressWarnings("serial")
+	public static void main(String[] args) throws Exception {
 	        //定义socket的端口号
 	        int port;
 	        try{
@@ -30,7 +31,7 @@ public class TestFlink1 {
 	        //计算数据
 	        DataStream<WordWithCount> windowCount = text.flatMap(new FlatMapFunction<String, WordWithCount>() {
 	            public void flatMap(String value, Collector<WordWithCount> out) throws Exception {
-	                String[] splits = value.split("\\s");
+	                String[] splits = value.split("\\s");//以空格作为分隔符号
 	                for (String word:splits) {
 	                    out.collect(new WordWithCount(word,1L));
 	                }
@@ -46,27 +47,6 @@ public class TestFlink1 {
 	        //注意：因为flink是懒加载的，所以必须调用execute方法，上面的代码才会执行
 	        env.execute("streaming word count");
 
-	    }
-
-	    /**
-	     * 主要为了存储单词以及单词出现的次数
-	     */
-	    public static class WordWithCount{
-	        public String word;
-	        public long count;
-	        public WordWithCount(){}
-	        public WordWithCount(String word, long count) {
-	            this.word = word;
-	            this.count = count;
-	        }
-
-	        @Override
-	        public String toString() {
-	            return "WordWithCount{" +
-	                    "word='" + word + '\'' +
-	                    ", count=" + count +
-	                    '}';
-	        }
 	    }
 
 

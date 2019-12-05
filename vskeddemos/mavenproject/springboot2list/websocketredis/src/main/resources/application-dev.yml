@@ -4,9 +4,9 @@ spring:
       enabled: true #设置开启热部署
   redis:
     database: 0
-    host: 192.168.60.12
+    host: 192.168.111.95
     port: 6379
-    password: dZ_auc3b84sPNs!W
+    password: Y4yhl9tbf110_
     timeout: 10000
     
     

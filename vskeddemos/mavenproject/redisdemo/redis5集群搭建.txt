@@ -1,0 +1,575 @@
+
+1* 启动客户端
+redis-cli
+
+如果不知道在哪儿可以查找下
+whereis redis-cli
+
+/usr/bin/redis-cli
+2* 显示所有key
+keys *
+
+3* 获取key值
+get keyname
+
+4* 设置key的value
+
+set key value 
+
+set cp:mode 3
+
+5* 放数据 Lpush 命令将一个或多个值插入到列表头部
+
+lpush key value
+
+6* 删除key
+del key
+del cp:error
+
+7* 输入密码
+auth 密码
+
+8* 正常关闭redis
+redis-cli
+(如果有密码需要先输入密码)
+auth 密码
+shutdown
+
+9* 查看redis版本
+redis-cli --version
+
+10* 清空整个 Redis 服务器的数据
+flushall
+
+11* 清空当前库中的所有 key
+flushdb
+
+12* 模糊查询key
+*任意多个
+?单个
+[]括号内的1个
+
+keys *
+keys token:*
+keys token:???????????
+
+13* 查看key超时时间
+ttl key
+
+
+
+
+
+------------------------------------------------------------
+redis安装 tar包版本
+tar -zxvf redis-5.0.7.tar.gz
+rm -rf redis-5.0.7.tar.gz
+mv redis-5.0.7/ redis
+mkdir -p /opt/redis-5.0.7
+
+yum install -y gcc
+yum install gcc-c++
+
+cd redis
+make MALLOC=libc
+make install PREFIX=/opt/redis-5.0.7/
+rm -rf /opt/redis
+
+前台启
+/opt/redis-5.0.7/bin/redis-server /data/redis/redis6379/config/redis.conf
+/opt/redis-5.0.7/bin/redis-server /data/redis/redis6380/config/redis.conf
+后台启
+nohup /opt/redis-5.0.7/bin/redis-server /data/redis/redis6379/config/redis.conf >/dev/null 2>&1 &
+nohup /opt/redis-5.0.7/bin/redis-server /data/redis/redis6380/config/redis.conf >/dev/null 2>&1 &
+
+创建集群
+/opt/redis-5.0.7/bin/redis-cli --cluster create 192.168.111.95:6379 192.168.111.96:6379 192.168.111.97:6379 192.168.111.95:6380 192.168.111.96:6380 192.168.111.97:6380 --cluster-replicas 1 -a Y4yhl9tbf110_
+注意上一句中间要输入yes
+/opt/redis-5.0.7/bin/redis-cli --cluster info 192.168.111.95:6379 -a Y4yhl9tbf110_
+
+配置文件6379示例
+protected-mode no
+bind 0.0.0.0
+port 6379
+cluster-config-file /data/redis/redis6379/data/nodes-10.conf
+pidfile /data/redis/redis6379/data/redis10.pid
+logfile /data/redis/redis6379/data/redis10.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data/redis/redis6379/data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump10.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly10.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+
+配置文件6380示例
+protected-mode no
+bind 0.0.0.0
+port 6380
+cluster-config-file /data/redis/redis6379/data/nodes-11.conf
+pidfile /data/redis/redis6379/data/redis11.pid
+logfile /data/redis/redis6379/data/redis11.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data/redis/redis6379/data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump11.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly11.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+------------------------------------------------------------
+redis安装yum 版本
+
+安装redis5
+
+yum install -y gcc
+yum install gcc-c++
+
+
+yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+yum --enablerepo=remi install redis
+yum install redis
+
+vi /etc/redis.conf
+
+requirepass dZ_auc3b84sPNs!W
+pidfile /var/run/redis_6379.pid
+logfile /var/log/redis/redis.log
+dir /var/lib/redis
+appendfilename "appendonly.aof"
+
+dbfilename dump.rdb
+protected-mode yes
+port 6379
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly no
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+------------------------------------------------------------
+redis安装 docker版本
+
+
+docker安装
+安装储存设备映射包
+yum install -y yum-utils device-mapper-persistent-data lvm2
+添加docker软件镜像
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+安装dockerCE
+yum install -y docker-ce
+启动docker
+systemctl start docker
+自动启动docker
+systemctl enable docker
+
+
+重启docker服务
+systemctl daemon-reload
+systemctl restart docker.service
+
+安装redis
+参数参考
+https://hub.docker.com/_/redis/
+
+搜索组件
+docker search redis
+拉取redis镜像
+docker pull redis:latest
+准备redis.conf
+mkdir -p /data/redis/redis6379
+mkdir -p /data/redis/redis6380
+mkdir -p /data/redis/redis6381
+mkdir -p /data/config/redis6379
+mkdir -p /data/config/redis6380
+mkdir -p /data/config/redis6381
+
+创建并启动redis集群
+机器1
+docker run --net host -v /data/redis/redis6379:/data -v /data/config/redis6379/redis.conf:/usr/local/etc/redis/redis.conf --name redis10 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+docker run --net host -v /data/redis/redis6380:/data -v /data/config/redis6380/redis.conf:/usr/local/etc/redis/redis.conf --name redis11 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+docker run --net host -v /data/redis/redis6381:/data -v /data/config/redis6381/redis.conf:/usr/local/etc/redis/redis.conf --name redis12 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+机器2
+docker run --net host -v /data/redis/redis6379:/data -v /data/config/redis6379/redis.conf:/usr/local/etc/redis/redis.conf --name redis13 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+docker run --net host -v /data/redis/redis6380:/data -v /data/config/redis6380/redis.conf:/usr/local/etc/redis/redis.conf --name redis14 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+docker run --net host -v /data/redis/redis6381:/data -v /data/config/redis6381/redis.conf:/usr/local/etc/redis/redis.conf --name redis15 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+
+
+停止容器
+得到容器id
+docker ps -a
+docker stop 容器id
+
+docker exec -i -t redis10 /bin/bash
+
+redis-cli --cluster create 192.168.111.81:6379 192.168.111.82:6379 192.168.111.81:6380 192.168.111.81:6381 192.168.111.82:6380 192.168.111.82:6381 --cluster-replicas 1 -a Y4yhl9tbf110_
+redis-cli --cluster info 192.168.111.81:6379 -a Y4yhl9tbf110_
+
+
+配置文件示例6379
+protected-mode no
+bind 0.0.0.0
+port 6379
+cluster-config-file /data/nodes-10.conf
+pidfile /data/redis10.pid
+logfile /data/redis10.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+
+配置文件示例6380
+protected-mode no
+bind 0.0.0.0
+port 6380
+cluster-config-file /data/nodes-11.conf
+pidfile /data/redis11.pid
+logfile /data/redis11.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+
+配置文件示例6381
+protected-mode no
+bind 0.0.0.0
+port 6381
+cluster-config-file /data/nodes-12.conf
+pidfile /data/redis12.pid
+logfile /data/redis12.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+
+
+
