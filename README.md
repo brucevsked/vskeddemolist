@@ -13,3 +13,5 @@ vskeddemolist/vskeddemos/mavenproject/
 技术相关介绍位于
 vskeddemos/documents/
 文件夹中
+
+项目大多数用myeclipse2017或myeclipse2019
