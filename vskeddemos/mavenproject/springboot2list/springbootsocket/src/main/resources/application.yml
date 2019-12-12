@@ -1,0 +1,10 @@
+server:
+  port: 8080 #端口号
+  
+logging:
+  config: classpath:log4j2.xml
+  
+socketconfig:
+  hostname: 192.168.111.71
+  port: 9333                
+
