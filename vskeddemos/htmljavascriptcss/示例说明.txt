@@ -24,7 +24,7 @@ sweetalertdemo 弹出框，确认框美化
 tablesdemo 表格示例
 toastrdemo 通知插件基于jquery
 touchspindemo 加减值控件一个文本左加右减
-treedemo 树控件示例
+treedemo 树控件示例,jstree,ztree
 ukit3demo 手风琴与下拉层示例
 ukitdemo 手风琴示例
 weuidemo 移动端框架weui示例
