@@ -12,3 +12,6 @@ https://www.cnblogs.com/ALittleMoreLove/archive/2018/08/09/9449992.html
 
 flink run -m yarn-cluster -yn 2 -yjm 1024 /tmp/flink1-1.0.jar
 
+修改正默认主机名为bigdata1
+修正端口默认为64000
+

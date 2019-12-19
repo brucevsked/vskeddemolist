@@ -18,15 +18,15 @@ public class TestFlink1 {
 	            ParameterTool parameterTool = ParameterTool.fromArgs(args);
 	            port = parameterTool.getInt("port");
 	        }catch (Exception e){
-	            System.err.println("没有指定port参数，使用默认值9000");
-	            port = 9000;
+	            System.err.println("没有指定port参数，使用默认值64000");
+	            port = 64000;
 	        }
 
 	        //获取运行环境
 	        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-	        //连接socket获取输入的数据
-	        DataStreamSource<String> text = env.socketTextStream("10.0.192.31", port, "\n");
+	        //连接socket获取输入的数据 这里可以写ip也可以写主机名
+	        DataStreamSource<String> text = env.socketTextStream("bigdata1", port, "\n");
 
 	        //计算数据
 	        DataStream<WordWithCount> windowCount = text.flatMap(new FlatMapFunction<String, WordWithCount>() {
