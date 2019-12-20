@@ -21,7 +21,7 @@ public class Producer1Test {
 	public void t1() {
 		
 		Properties p = new Properties();
-		p.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.111.95:9092,192.168.111.96:9092,192.168.111.97:9092");// kafka地址，多个地址用逗号分割
+		p.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "bigdata1:9092,bigdata2:9092,bigdata3:9092");// kafka地址，多个地址用逗号分割
 		p.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		p.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 

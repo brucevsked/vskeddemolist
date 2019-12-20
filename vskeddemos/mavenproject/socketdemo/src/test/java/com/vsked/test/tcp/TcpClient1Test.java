@@ -14,8 +14,8 @@ public class TcpClient1Test {
 	
 	@Test
 	public void startServer() throws Exception{
-		String host="localhost";
-		int port=10015;
+		String host="bigdata3";
+		int port=64000;
 		Socket socket = new Socket(host, port);
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		PrintWriter out = new PrintWriter(socket.getOutputStream());

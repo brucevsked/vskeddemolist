@@ -25,7 +25,7 @@ public class TestFlink2 {
 		env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 		
 		Properties props = new Properties();
-        props.setProperty("bootstrap.servers", "192.168.111.95:9092,192.168.111.96:9092,192.168.111.97:9092");
+        props.setProperty("bootstrap.servers", "bigdata1:9092,bigdata2:9092,bigdata3:9092");
         props.setProperty("group.id", "flink-group");
         
         String topicName="testFlink";
