@@ -4,6 +4,8 @@ http://jsfiddle.net/
 http://tool.chacuo.net/commonxunlei
 在线工具大全2
 https://tool.lu/
+在线识别与转换类pdf word
+https://ocr.wdku.net/
 
 软件下载网站
 http://www.dayanzai.me/
@@ -69,14 +71,10 @@ http://tool.lu/regex/
 在线工具大全
 http://tool.lu/
 
-张鑫旭 web前端
-http://www.zhangxinxu.com/wordpress/
 
 电子 书教程下载网站
 http://www.chnxp.com.cn/
 
-阮一峰的网络日志
-http://www.ruanyifeng.com/blog/archives.html
 
 google project
 https://github.com/google
@@ -84,9 +82,6 @@ https://github.com/google
 
 慧都控件
 https://www.evget.com/
-
-破解软件下载
-http://www.0daydown.com/
 
 加密解密
 http://www.seacha.com/tools/aes.html

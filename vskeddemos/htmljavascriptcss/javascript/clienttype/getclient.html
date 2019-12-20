@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>获取手机端与pc端</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+
+<div id="clientTypeDiv"></div>
+
+<p>
+  navigator为Window对象的一个属性，指向了一个包含浏览器相关信息的对象。navigatot中包含了一些常用到的属性
+</p>
+<p>
+  navigator.appVersion 浏览器的版本号<br>
+  navigator.appName 浏览器的名称<br>
+  navigator.language 浏览器使用的语言 <br>
+  navigator.platform 浏览器使用的平台<br>
+  navigator.userAgent 浏览器的user-agent信息<br>
+  <br>
+  <br>
+  <br>
+</p>
+
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+  //window.location.href = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ? "https://www.baidu.com/" :  "http://news.baidu.com/";
+  if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    document.getElementById('clientTypeDiv').innerHTML='你使用了移动设备登录'+navigator.userAgent;
+} else {
+    document.getElementById('clientTypeDiv').innerHTML='你使用了pc端登录'+navigator.userAgent;
+}
+</script>
+
+</body>
+</html>
