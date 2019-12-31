@@ -16,6 +16,7 @@ javascript 基本js用法
 jquerydemo 基本jquery用法
 jqueryprototype 兼容问题解决可以同时使用jquery与prototype将prototype$换成了$p
 jquerystepsdemo 向导示例
+jwttoken 使用javascript解析jwttoekn
 metisMenudemo 菜单示例
 mockdemo 前端数据模拟生成,ajax类数据模拟
 select2demo 下拉列表框美化

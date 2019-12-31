@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>html原型模板</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+
+</head>
+
+<body>
+  
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/lib/code/base64.min.js"></script>
+
+<script>
+'use strict'
+
+$(function(){
+	console.log('this is test token');
+	
+	var token='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJzeXN1c2VyaWRcIjpcIjQwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxXCIsXCJtaW5lY29kZVwiOlwiMDEyMDAwMDMwXCIsXCJzeXN1c2Vyc3RhdGVcIjoxLFwic3lzdXNlcm5hbWVcIjpcIkFkbWluaXN0cmF0b3JcIn0iLCJuYmYiOjE1Nzc2NjkzMzIsInVzZXJfbmFtZSI6ImpjZHoiLCJuaWNrX25hbWUiOiJ4aWFvaHVpZ291IiwiZXhwIjoxNTc4OTY1MzMyLCJpYXQiOjE1Nzc2NjkzMzIsImp0aSI6IjlmNTM0YWM2LTZjOGQtNDM4MC04ZjVhLTVlZTkxMGJiNWQ3ZiJ9.OiG64kSIBH6jhrXIPMCc-wR0Vo9WREkwLXNs9TCUr-c';
+	var tokenArray=token.split('.');
+	var mySub=Base64.decode(tokenArray[1]);
+	var mySubJson=$.parseJSON(mySub);
+	console.log(mySubJson.sub);
+	var userJson=$.parseJSON(mySubJson.sub);
+	console.log(userJson.sysuserid);
+	console.log(userJson.minecode);
+	console.log(userJson.sysusername);
+	
+});
+</script>
+
+</body>
+</html>
