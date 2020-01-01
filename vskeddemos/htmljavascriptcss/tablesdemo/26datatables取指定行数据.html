@@ -4,7 +4,7 @@
 <!-- must set here! -->
 <base href="">
 
-<title>取指定行</title>
+<title>26取指定行</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 
@@ -158,7 +158,7 @@
 	  //stripeClasses: ["odd", "even"],
 		fnRowCallback:function(nRow,aData,iDataIndex,iDisplayIndexFull){
 		  //行创建后回调
-		  console.log(nRow+'|'+iDataIndex+'|'+aData.code+'|'+$('td', nRow).eq(0).text());
+		  //console.log(nRow+'|'+iDataIndex+'|'+aData.code+'|'+$('td', nRow).eq(0).text());
 		    return nRow;
 		},
 	  responsive: true,
@@ -197,6 +197,10 @@
 
 	    $('#testBt1').on('click',function(){
 	      var myTable=$('#dt0').DataTable();
+	      console.log(myTable.row(1).data())
+	      var nRow=myTable.row(1).node();//取指定行的nRow也就是tr标签
+	      $('td', nRow).eq(0).html('------------老衲做到了---------')
+	      
 	      var mySelectedDataList=myTable.rows(3).data();
 
 	      $.each(mySelectedDataList,function(indexa,ela){
