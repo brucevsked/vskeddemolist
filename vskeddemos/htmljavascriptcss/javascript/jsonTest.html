@@ -21,6 +21,7 @@ $(function(){
   jsonTest.baseJson2();
   jsonTest.jsonToStr();
   jsonTest.strToJson();
+  jsonTest.jsonKeyCount();
 });
   
 var jsonTest=new Object({
@@ -58,6 +59,18 @@ var jsonTest=new Object({
 		var obj1=JSON.parse(str1);
 		console.log(obj1);
 		console.log('strToJson end------------------');
+	},
+	jsonKeyCount:function(){
+	  console.log('jsonKeyCount start------------------');
+	  var testJson={'aa':'bb','testKey':{'a1':'b','a2':'b2','a3':'b3'},'ab':'bb','ac':'bc'};
+	  var ct=0;//第一种方式遍历
+	  for(var tmpKey in testJson){
+	    ct++;
+	  }
+		console.log('key数量:'+ct);
+		var ct2=Object.keys(testJson.testKey).length;//第二种方式
+		console.log('子元素key数量:'+ct2);
+		console.log('jsonKeyCount end------------------');
 	}
 	
 });
