@@ -1,5 +1,6 @@
 //子页面不用iframe，用div展示
 var closableTab = {
+  tabList:[],
 	
     //添加tab
 	addTab:function(tabItem){ //tabItem = {id,name,url,closable}
@@ -13,7 +14,8 @@ var closableTab = {
 		if(!$('#'+id)[0]){
 			var li_tab = '<li class="nav-item" id="'+id+'"><a class="nav-link" data-toggle="tab" href="#'+container+'" >'+tabItem.name;
 			if(tabItem.closable){
-				li_tab = li_tab + '<i class="glyphicon glyphicon-remove small" tabclose="'+id+'" style="position: relative;right:-6px;top: -6px;"  onclick="closableTab.closeTab(this)">×</i></a></li> ';
+				li_tab = li_tab + '<i class="glyphicon glyphicon-remove small" id="x'+id+'" tabclose="'+id+'" style="position: relative;right:-6px;top: -6px;"  onclick="closableTab.closeTab(this)">×</i></a></li> ';
+				closableTab.tabList.push('x'+id);
 			}else{
 				li_tab = li_tab + '</a></li>';
 			}
@@ -48,5 +50,15 @@ var closableTab = {
 
 		$("#"+val).remove();
 		$("#"+containerId).remove();
+
+		closableTab.tabList.splice(closableTab.tabList.indexOf('x'+val),1);
+
+
+	},
+	closeAllTab:function(){
+    var i=0;
+		for(i=closableTab.tabList.length-1;i>=0;i--){
+		  closableTab.closeTab(document.getElementById(''+closableTab.tabList[i]));
+		}
 	}
 }

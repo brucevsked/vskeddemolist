@@ -17,6 +17,7 @@
   需要添加closable-tab-div.js文件,这个文件可以根据自己的bootstrap版本修改样式
   <h4>选项卡切换
     <button type="button" id="save1Bt">添加</button>   
+    <button type="button" id="closeAll1Bt">关所有</button>   
     </h4>
   <br>
   <!-- Nav tabs -->
@@ -69,6 +70,10 @@ $('#save1Bt').click(function(){
   ct=ct+1;
   var item = {'id':'test'+ct,'name':'新选项卡'+ct,'url':'4提示框1.html','closable':true};
     closableTab.addTab(item);
+  });
+  
+$('#closeAll1Bt').click(function(){
+  closableTab.closeAllTab();
   });
 
 });
