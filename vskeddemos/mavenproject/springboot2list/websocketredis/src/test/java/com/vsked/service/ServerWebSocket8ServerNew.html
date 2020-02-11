@@ -1,0 +1,257 @@
+	<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+
+<title>新服务端推送示例带心跳</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+</head>
+
+<body>
+<div>模拟服务端推送给客户端示例,注意这里是模拟的服务端!!</div>
+<div>服务端推送示例</div>
+<div>
+  serverToken:<input type="text" size="150"  id="serverToken" name="serverToken" value="serverToken" /><br>
+  serverUrl :<input type="text" size="150"  id="serverUrl" name="serverUrl" value="ws://127.0.0.1:9200/servera" /><br>
+  推送主题 :<input type="text" size="150"  id="subTopic" name="subTopic" value="myTopic1" /><br>
+  <button type="button" id="conBt">连接</button>
+  <button type="button" id="disBt">断开</button>
+  <button type="button" id="sendBt">发送1时爽</button>
+  <button type="button" id="sendAlwaysBt">1直发送1直爽</button>
+</div>
+  <div id="messages"></div>
+  
+  
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js" ></script>
+<script>
+'use strict'
+
+$(function(){
+	$('#conBt').on('click',wsclient.connectTest);
+	$('#disBt').on('click',wsclient.discon);
+  $('#sendBt').on('click',wsclient.sendTest);
+  $('#sendAlwaysBt').on('click',wsclient.sendAlways1Test);
+});
+
+var wsclient=new Object({
+  serverCountId:1,
+  heartRate:30, //心跳间隔单位秒
+  reConnectInterval:60, //重连接间隔单位秒
+  token:$('#serverToken').val(), //用户唯一标识
+  serverUrl: $('#serverUrl').val(), //服务器连接地址
+  subTopic: $('#subTopic').val(),//订阅主题多个用英文,分隔
+  server:null, //连接成功后websocket对象有属性readyState参考getConState方法
+  checkServerThread:null, //检查服务端状态进程
+  heartBeatThread:null, //心跳进程
+  connect:function(){
+    var serverUrl=wsclient.serverUrl;
+    serverUrl=serverUrl+'?token='+wsclient.token;
+    console.log('当前连接服务器地址:'+serverUrl+'|'+wsclient.getCurrentTime());//控制台显示服务端连接地址
+    wsclient.server=new WebSocket(serverUrl);
+    
+    wsclient.server.onopen=function(){//连接websocket服务器
+      console.log('连接打开后websocket连接状态'+wsclient.server.readyState+':'+wsclient.getConState(wsclient.server.readyState)+'|'+wsclient.getCurrentTime());//控制台打印连接状态
+    };
+
+    wsclient.server.onmessage=function(evt){
+      //第三步 客户端解析数据并前台显示
+      //不同业务需要实现不同服务器返回消息解析
+      var reciveMsg=evt.data;
+      console.log('接收到消息:'+reciveMsg+'|'+wsclient.getCurrentTime());
+      var myData=JSON.parse(reciveMsg);
+      console.log('接收到消息code:'+myData.code+'|'+wsclient.getCurrentTime());
+      if(myData.code=='0000'){
+        //服务端返回成功
+        $('#messages').html(event.data+'|'+wsclient.getCurrentTime());
+      }else{
+        //服务端返回失败 关闭连接
+        $('#messages').html(event.data+'|'+wsclient.getCurrentTime());
+        wsclient.discon();//关闭连接
+      }
+    };
+    
+    wsclient.server.onclose=function(){
+      console.log('连接关闭后websocket连接状态'+wsclient.server.readyState+':'+wsclient.getConState(wsclient.server.readyState)+'|'+wsclient.getCurrentTime());//控制台打印连接状态
+    };
+  },
+  publish:function(){
+    console.log('-----')
+    //只发送心跳包,不考虑断线情况
+    var userToken=wsclient.token;
+    var topic=wsclient.subTopic;
+    console.log('准备推送主题'+topic+'|'+wsclient.getCurrentTime());
+    
+    var clientMsgTemplate=wsclient.getServerMsgTemplate(userToken,'3',topic);
+    if(wsclient.server!=null){
+      if (wsclient.server.readyState==1){
+        wsclient.server.send(JSON.stringify(clientMsgTemplate));
+        console.log('推送主题成功'+'|'+wsclient.getCurrentTime());
+      }else{
+        console.log('推送主题失败服务端连接状态不正确'+'|'+wsclient.getCurrentTime());
+      }
+
+    }else{
+      console.log('推送主题失败服务端未正确连接'+'|'+wsclient.getCurrentTime());
+    }
+  },
+  discon:function(){    
+    if(wsclient.server!=null){
+      wsclient.server.close();
+      console.log('连接已关闭'+'|'+wsclient.getCurrentTime());
+    }
+  },
+  send:function(msg){
+    wsclient.server.send(msg);
+  },
+  getConState:function(st){
+    //只读属性 readyState 表示连接状态0 - 表示连接尚未建立1 - 表示连接已建立，可以进行通信2 - 表示连接正在进行关闭3 - 表示连接已经关闭或者连接不能打开
+    if (st ==0){
+      return 'websocket连接尚未建立';
+    }else if (st ==1){
+      return 'websocket连接建立成功可以通讯';
+    }else if (st ==2){
+      return 'websocket正在关闭连接';
+    }else if (st ==3){
+      return 'websocket连接已关闭';
+    }else{
+      return '未识别websocket连接状态';
+    }
+  },
+  getServerMsgTemplate:function(serverToken,dtype,topic){
+    wsclient.serverCountId=wsclient.serverCountId+1;
+    var serverMsgTemplate={
+      code:'0000',//0000表示成功其他为失败
+      from:serverToken,
+      to:'client', //接收方server客户端发给服务端,alluser发给所有用户,client服务端发给客户端,user发给指定用户
+      type:'3', //消息类型,1用户对用户2用户对服务器3服务器对用户4暂未使用
+      time:wsclient.getCurrentTime(),//发送时间预留字段
+      data:{
+        dtype:dtype ,//连接类型,1客户端推送服务端主题,2客户端取消服务端推送,3服务端推送给客户端对应主题数据,4心跳连接
+        dvalue:topic , //连接类型为1或2时主题 连接类型为4时固定值ping
+        ddata:[{'myid':'testid'+wsclient.serverCountId,'curtime':wsclient.getCurrentTime(),'myData':Math.floor(Math.random()*100000 + 1)}] //服务端给客户端的数据
+      }
+    };
+    return serverMsgTemplate;
+    
+  },
+  getCurrentTime:function(){
+    var curDate=new Date();
+    var m=(curDate.getMonth()+1);
+    var d=curDate.getDate();
+    var h=curDate.getHours();
+    var mi=curDate.getMinutes();
+    var s=curDate.getSeconds();
+    var sss=curDate.getMilliseconds();
+    var sssStr='000';
+    if(sss<10){
+      sssStr='00'+sss;
+    }else if(sss>=10 && sss<100){
+      sssStr='0'+sss;
+    }else{
+      sssStr=sss+'';
+    }
+    
+    var curTime=curDate.getFullYear()+'';
+    curTime+=(m<10?'0'+m:m)+'';
+    curTime+=(d<10?'0'+d:d)+'';
+    curTime+=(h<10?'0'+h:h)+'';
+    curTime+=(mi<10?'0'+mi:mi)+'';
+    curTime+=(s<10?'0'+s:s)+'';
+    curTime+=sssStr;
+    
+    return curTime;
+  },
+  startCheckServerState:function(){
+    wsclient.checkServerThread=setInterval(wsclient.checkServerState,wsclient.reConnectInterval*1000);
+  },
+  checkServerState:function(){
+    if(wsclient.server!=null ){
+      console.log('服务端连接已启动'+'|'+wsclient.getCurrentTime());
+      if(wsclient.server.readyState!=1){
+        //连接不稳定第二种情况服务器连接状态不对
+        console.log('服务端连接状态不对应当为1但现在是:'+wsclient.server.readyState+'|'+wsclient.getCurrentTime());
+      }
+    }else{
+      console.log('服务端连接未启动'+wsclient.getCurrentTime());
+      //连接不稳定第一种情况服务端连接未正常建立
+    }
+  },
+  startHeartBeat:function(){
+    wsclient.heartBeatThread=setInterval(wsclient.heartBeat,wsclient.heartRate*1000);
+  },
+  heartBeat:function(){
+    console.log('准备发送心跳包'+'|'+wsclient.getCurrentTime());
+    //只发送心跳包,不考虑断线情况
+    var userToken=wsclient.token;
+    var topic='ping';
+    var clientMsgTemplate=wsclient.getClientMsgTemplate(userToken,4,topic);
+    if(wsclient.server!=null){
+      if (wsclient.server.readyState==1){
+        wsclient.server.send(JSON.stringify(clientMsgTemplate));
+        console.log('发送心跳包成功'+'|'+wsclient.getCurrentTime());
+      }else{
+        console.log('发送心跳包失败服务端连接状态不正确'+'|'+wsclient.getCurrentTime());
+      }
+
+    }else{
+      console.log('发送心跳包失败服务端未正确连接'+'|'+wsclient.getCurrentTime());
+    }
+
+  },
+  connectTest:function(){
+    wsclient.connect();//1连接
+  },
+  sendTest:function(){
+    wsclient.publish();//2向指定主题推送数据
+  },
+  sendAlways1Test:function(){
+    setInterval(wsclient.publish,1*1000);//2向指定主题推送数据
+  },
+});
+
+var wsclientTest=new Object({
+  testAll:function(){
+    console.log('----------开始测试getCurrentTime----------');
+    wsclientTest.getCurrentTime();
+    console.log('----------结束测试getCurrentTime----------');
+    console.log('----------开始测试getClientMsgTemplate----------');
+    wsclientTest.getClientMsgTemplate();
+    console.log('----------结束测试getClientMsgTemplate----------');    
+    console.log('----------开始测试startCheckServerState----------');
+    wsclientTest.startCheckServerState();
+    console.log('----------结束测试startCheckServerState----------');
+    
+    console.log('----------开始测试startHeartBeat----------');
+    wsclientTest.startHeartBeat();
+    console.log('----------结束测试startHeartBeat----------');
+    
+    console.log('----------开始测试----------');
+    
+    console.log('----------结束测试----------');
+  },
+  getCurrentTime:function(){
+    var curTime=wsclient.getCurrentTime();
+    console.log('当前时间是(yyyyMMddHHmmss):'+curTime);
+  },
+  getClientMsgTemplate:function(){
+    var userToken=wsclient.token;
+    var topic=wsclient.subTopic;
+    var clientMsgTemplate=wsclient.getClientMsgTemplate(userToken,1,topic);
+    console.log('当前客户端推送或取消推送模板');
+    console.log(clientMsgTemplate);
+    topic='ping';
+    clientMsgTemplate=wsclient.getClientMsgTemplate(userToken,4,topic);
+    console.log('当前客户端心跳模板');
+    console.log(clientMsgTemplate);
+  },
+  startCheckServerState:function(){
+    wsclient.startCheckServerState();
+  },
+  startHeartBeat:function(){
+    wsclient.startHeartBeat();
+  }
+});
+</script>
+</body>
+</html>

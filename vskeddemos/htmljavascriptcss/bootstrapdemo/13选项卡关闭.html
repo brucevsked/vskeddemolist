@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>选项卡关闭</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+</head>
+
+<body >
+  
+<div class="container">
+  需要添加closable-tab-div.js文件,这个文件可以根据自己的bootstrap版本修改样式
+  <h4>选项卡切换
+    <button type="button" id="save1Bt">添加</button>   
+    </h4>
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <p><input type="text" value="aa11" /></p>
+    </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p><input type="text" value="bb11" /></p>
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+      <p><input type="text" value="cc11" /></p>
+    </div>
+  </div>
+</div>
+
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="js/lib/bootstrap/js/closable-tab-div.js" ></script>
+
+<script>
+'use strict'
+
+var ct=0;
+
+
+$(function(){
+
+$('#save1Bt').click(function(){
+  ct=ct+1;
+  var item = {'id':'test'+ct,'name':'新选项卡'+ct,'url':'4提示框1.html','closable':true};
+    closableTab.addTab(item);
+  });
+
+});
+</script>
+	
+
+</body>
+</html>
