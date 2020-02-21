@@ -18,6 +18,8 @@
   <h4>选项卡切换
     <button type="button" id="save1Bt">添加</button>   
     <button type="button" id="closeAll1Bt">关所有</button>   
+    <button type="button" id="slideLeftBt">左</button>
+    <button type="button" id="slideRightBt">右</button>
     </h4>
   <br>
   <!-- Nav tabs -->
@@ -74,6 +76,14 @@ $('#save1Bt').click(function(){
   
 $('#closeAll1Bt').click(function(){
   closableTab.closeAllTab();
+  });
+  
+$('#slideLeftBt').click(function(){
+  closableTab.slideLeft();
+  });
+  
+$('#slideRightBt').click(function(){
+  closableTab.slideRight();
   });
 
 });
