@@ -9,6 +9,8 @@ com.vsked.controller.TestController
 http://localhost:8080/topicedit?tp=1&topicname=mytpoic3
 根据主题停止消息者组
 http://localhost:8080/topicedit?tp=3&topicname=mytpoic3
+多个不同类型消费者同时消费一个主题下同一条消费
+http://localhost:8080/topicedit?tp=4&topicname=vskedtesttopic1
 
 
 

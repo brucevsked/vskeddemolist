@@ -20,7 +20,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 import org.springframework.kafka.listener.MessageListener;
-import org.springframework.kafka.listener.MessageListenerContainer;
 import org.springframework.stereotype.Service;
 
 
@@ -29,6 +28,8 @@ public class KafkaManagerService {
 	private final Logger log = LoggerFactory.getLogger(KafkaManagerService.class);
 	public static final String myListenerId="myListeneraaa";
 	public static Map<String,KafkaMessageListenerContainer<String, String>> topicListenerList=new HashMap<String, KafkaMessageListenerContainer<String,String>>();
+	
+	public static String kafkaServerIp="192.168.111.52:9092";
 	
 	/**
 	 * 用来管理kafka的监听器容器启动,停止等操作
@@ -48,7 +49,7 @@ public class KafkaManagerService {
                 	Thread.sleep(10000);//10秒后创建消费者
                     
             		Map<String,Object> configs=new HashMap<String, Object>();
-            		configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"192.168.60.10:9092");
+            		configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,kafkaServerIp);
             		configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
             		configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
             		configs.put(ConsumerConfig.GROUP_ID_CONFIG, "mygrouptest1");
@@ -95,7 +96,7 @@ public class KafkaManagerService {
 		//推荐这种方案
         // 创建另一个测试线程，启动后首先暂停10秒然后变更topic订阅
 		Map<String,Object> configs=new HashMap<String, Object>();
-		configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"192.168.111.52:9092");
+		configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,kafkaServerIp);
 		configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		configs.put(ConsumerConfig.GROUP_ID_CONFIG, "mygrouptest1");
@@ -132,5 +133,77 @@ public class KafkaManagerService {
 		}
 		return rs;
 		
+	}
+	
+	public String dynamicCreateMutiConsumer(String topicname) {
+		String rs="动态创建多消费者同时消费"+topicname;
+		//推荐这种方案
+        // 创建另一个测试线程，启动后首先暂停10秒然后变更topic订阅
+		Map<String,Object> configs1=new HashMap<String, Object>();
+		configs1.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,kafkaServerIp);
+		configs1.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+		configs1.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+		configs1.put(ConsumerConfig.GROUP_ID_CONFIG, "mygrouptest1lastest");
+		configs1.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+		configs1.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,  "true");
+		
+		DefaultKafkaConsumerFactory<String, String>  kafkaConsumerFactory1=new DefaultKafkaConsumerFactory<String, String>(configs1);
+		
+		ContainerProperties containerProperties1=new ContainerProperties(topicname.split(","));
+		MessageListener<String, String> myMsgListner1=new MessageListener<String, String>() {
+
+			@Override
+			public void onMessage(ConsumerRecord<String, String> record) {
+				log.debug("|第1个最晚的消费:||当前监听主题是:"+record.topic()+"|"+record.value()+"|"+record.key()+"|"+record.headers());
+				try {
+					Thread.sleep(5000);
+					log.info("第1个休息中...");
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		containerProperties1.setMessageListener(myMsgListner1);
+		
+		KafkaMessageListenerContainer<String, String> kafkaMessageListenerContainer1=new KafkaMessageListenerContainer<String, String>(kafkaConsumerFactory1,containerProperties1);
+		kafkaMessageListenerContainer1.setBeanName(myListenerId+1);//这里就是@KafkaListener中的id也就是
+		kafkaMessageListenerContainer1.setAutoStartup(true);
+		
+		kafkaMessageListenerContainer1.start();
+		topicListenerList.put(topicname, kafkaMessageListenerContainer1);
+		
+		Map<String,Object> configs2=new HashMap<String, Object>();
+		configs2.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,kafkaServerIp);
+		configs2.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+		configs2.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+		configs2.put(ConsumerConfig.GROUP_ID_CONFIG, "mygrouptest2earliest");
+		configs2.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+		configs2.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,  "true");
+		
+		DefaultKafkaConsumerFactory<String, String>  kafkaConsumerFactory2=new DefaultKafkaConsumerFactory<String, String>(configs2);
+		
+		ContainerProperties containerProperties2=new ContainerProperties(topicname.split(","));
+		MessageListener<String, String> myMsgListner2=new MessageListener<String, String>() {
+
+			@Override
+			public void onMessage(ConsumerRecord<String, String> record) {
+				log.debug("|第2个最早的消费:||当前监听主题是:"+record.topic()+"|"+record.value()+"|"+record.key()+"|"+record.headers());
+				try {
+					Thread.sleep(5000);
+					log.info("第2个休息中...");
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		containerProperties2.setMessageListener(myMsgListner2);
+		
+		KafkaMessageListenerContainer<String, String> kafkaMessageListenerContainer2=new KafkaMessageListenerContainer<String, String>(kafkaConsumerFactory2,containerProperties2);
+		kafkaMessageListenerContainer2.setAutoStartup(true);
+		kafkaMessageListenerContainer2.setBeanName(myListenerId+2);//这里就是@KafkaListener中的id也就是
+		kafkaMessageListenerContainer2.start();
+		topicListenerList.put(topicname, kafkaMessageListenerContainer2);
+		
+		return rs;
 	}
 }

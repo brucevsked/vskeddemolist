@@ -1,6 +1,9 @@
 package com.vsked.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
 import org.springframework.kafka.listener.ContainerProperties;
@@ -12,6 +15,8 @@ import com.vsked.service.kafka.KafkaManagerService;
 
 @Controller
 public class TestController {
+	
+	private static final Logger log = LoggerFactory.getLogger(TestController.class);
 	
 	@Autowired
 	KafkaListenerEndpointRegistry registry;
@@ -36,17 +41,17 @@ public class TestController {
 			cp=mlc.getContainerProperties();
 			topicArray=cp.getTopics();
 			for(String topic:topicArray){
-				System.out.println("新创建当前主题有:"+topic);
+				log.info("新创建当前主题有:"+topic);
 			}
 		}
 
 		
 		if("1".equals(tp)){
-			System.out.println("修改主题为|"+topicname);
+			log.info("修改主题为|"+topicname);
 			rs="推荐方案修改主题为|"+topicname;
 			kafkaManagerService.createKafkaConsume2(topicname);
 		}else if("2".equals(tp)){
-			System.out.println("修改主题为|"+topicname);
+			log.info("修改主题为|"+topicname);
 			rs="此方案已不使用修改主题为|"+topicname;
 //			if(topicname==null || "".equals(topicname.trim())){
 //				topicname="defaulttopic";
@@ -55,10 +60,14 @@ public class TestController {
 //			kafkaManagerService.createKafkaConsume1(topicname);
 
 		}else if("3".equals(tp)){
-			System.out.println("停止主题"+topicname);
+			log.info("停止主题"+topicname);
 			rs=kafkaManagerService.stopKafka(topicname);
 
+		}else if("4".equals(tp)) {
+			log.info("多个不同类型消费者同时消费一个主题下一条消息"+topicname);
+			rs=kafkaManagerService.dynamicCreateMutiConsumer(topicname);
 		}
+		
 		return rs;
 		
 	}

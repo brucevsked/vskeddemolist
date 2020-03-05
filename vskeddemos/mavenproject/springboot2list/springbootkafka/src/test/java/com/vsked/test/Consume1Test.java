@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vsked.service.kafka.KafkaManagerService;
+
 public class Consume1Test {
 	
 	private final Logger log = LoggerFactory.getLogger(Consume1Test.class);
@@ -22,7 +24,7 @@ public class Consume1Test {
 	@Test
 	public void t1(){
         Properties p = new Properties();
-        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.60.10:9092");
+        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaManagerService.kafkaServerIp);
         p.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.GROUP_ID_CONFIG, "test");

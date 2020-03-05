@@ -13,3 +13,6 @@ spring:
 
 kafkalistenerlist: 
   topiclist: mytpoic1,mytpoic2
+  
+logging:
+  config: classpath:log4j2.xml
