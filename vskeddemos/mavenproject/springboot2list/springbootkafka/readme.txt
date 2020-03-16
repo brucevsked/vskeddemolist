@@ -6,7 +6,7 @@
 com.vsked.controller.TestController
 
 根据主题创建消费者组
-http://localhost:8080/topicedit?tp=1&topicname=mytpoic3
+http://localhost:8080/topicedit?tp=1&topicname=mytpoics6012
 根据主题停止消息者组
 http://localhost:8080/topicedit?tp=3&topicname=mytpoic3
 多个不同类型消费者同时消费一个主题下同一条消费

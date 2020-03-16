@@ -70,7 +70,7 @@
     <loggers>
         <!--过滤掉spring和hibernate的一些无用的debug信息-->
         <logger name="org.springframework" level="ERROR"></logger>
-        <logger name="org.hibernate" level="ERROR"></logger>
+        <logger name="org.apache.kafka.common" level="ERROR"></logger>
         <logger name="com.zaxxer" level="ERROR"></logger>
         <logger name="org.apache.kafka.clients" level="ERROR"></logger>
         <logger name="io.netty" level="ERROR"></logger>

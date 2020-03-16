@@ -23,6 +23,7 @@ public class RedisReceiver {
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
 
+    @SuppressWarnings("unchecked")
     public void receiveMessage(String message)  {
         String from="";
         String curTopic="";//当前处理的主题
@@ -42,13 +43,18 @@ public class RedisReceiver {
                 String dtype = (String) dataMap.get("dtype");//连接类型,1客户端订阅服务端主题,2客户端取消服务端订阅,3服务端推送给客户端对应主题数据,4心跳连接
                 String dvalue = (String) dataMap.get("dvalue");//主题
                 String[] dataArray = dvalue.split(",");
-                boolean isExistTopic = false;
-                boolean isExistSub = false;
-                String redisData = "";
+                boolean isExistTopic;
+                boolean isExistSub;
+                String redisData;
                 String[] redisDataArray;
-                List<String> myTmpList = new LinkedList<>();
+                List<String> myTmpList;
                 if ("1".equals(dtype)) { //1客户端订阅服务端主题
                     for (String data : dataArray) {
+                        if(data==null || data.isEmpty() || data.trim().isEmpty()){
+                            log.error("data is null|please check input value");
+                            //如果拆分出的这个主题为空则不处理
+                            continue;
+                        }
                         curTopic=data;
                         //判断redis中是否有这个主题
                         isExistTopic = redisTemplate.opsForHash().hasKey(SysConstant.webSocketTopicToken, data);
@@ -74,6 +80,11 @@ public class RedisReceiver {
                             message=StringTool.mapToJson(msgTemplateMap);
                             //给单个用户发
                             for (Map.Entry<String, Session> toDataMap : SysConstant.webSocketSessionMap.entrySet()) {
+                                if(toDataMap==null || toDataMap.getKey()==null){
+                                    //如果拿到的会话是空会话则继续
+                                    log.error("toDataMap is null|please check input value");
+                                    continue;
+                                }
                                 if (toDataMap.getKey().equals(from)) {
                                     toDataMap.getValue().sendText(message);
                                 }
@@ -81,10 +92,21 @@ public class RedisReceiver {
                         } else {
                             //取出原来的主题token列表
                             redisData = (String) redisTemplate.opsForHash().get(SysConstant.webSocketTopicToken, data);
+
+                            if(redisData==null){
+                                //如果取出来的是null给他一个空串
+                                redisData="";
+                            }
+
                             redisDataArray = redisData.split(",");
 
                             isExistSub = false;
                             for (String redisDataTmp : redisDataArray) {
+                                if(redisDataTmp==null || redisDataTmp.isEmpty() || redisDataTmp.trim().isEmpty() || from==null){
+                                    //如果拆分出的这个token为空则不处理
+                                    log.error("redisDataTmp is null or from is null|please check input value|redisDataTmp:"+redisDataTmp+"|from:"+from+"|");
+                                    continue;
+                                }
                                 if (from.equals(redisDataTmp)) {
                                     isExistSub = true;//已经存在订阅不处理
                                 }
@@ -95,7 +117,12 @@ public class RedisReceiver {
                                 myTmpList.add(from);
                                 StringBuilder stringBuilder = new StringBuilder();
                                 for (String myTmp : myTmpList) {
-                                    stringBuilder.append(myTmp + ",");
+                                    if(myTmp==null || myTmp.isEmpty() || myTmp.trim().isEmpty()){
+                                        log.error("myTmp is null ");
+                                        //如果拆分出的这个主题为空则不处理
+                                        continue;
+                                    }
+                                    stringBuilder.append(myTmp).append(",");
                                 }
                                 stringBuilder.setLength(stringBuilder.length() - 1);
                                 redisTemplate.opsForHash().put(SysConstant.webSocketTopicToken, data, stringBuilder.toString());
@@ -106,6 +133,11 @@ public class RedisReceiver {
 
                 } else if ("2".equals(dtype)) { //2客户端取消服务端订阅
                     for (String data : dataArray) {
+                        if(data==null || data.isEmpty() || data.trim().isEmpty()){
+                            log.error("data is null ");
+                            //如果拆分出的这个主题为空则不处理
+                            continue;
+                        }
                         curTopic=data;
                         //判断redis中是否有这个主题
                         isExistTopic = redisTemplate.opsForHash().hasKey(SysConstant.webSocketTopicToken, data);
@@ -113,11 +145,19 @@ public class RedisReceiver {
                             //存在这个主题
                             //取出原来的主题token列表
                             redisData = (String) redisTemplate.opsForHash().get(SysConstant.webSocketTopicToken, data);
+                            if(redisData==null){
+                                //如果取出来的是null给他一个空串
+                                redisData="";
+                            }
                             redisDataArray = redisData.split(",");
                             myTmpList = new LinkedList<>(Arrays.asList(redisDataArray));
                             Iterator<String> iterator = myTmpList.iterator();
                             while (iterator.hasNext()) {
                                 String oldToken = iterator.next();
+                                if(oldToken==null){
+                                    log.error("oldToken is null ");
+                                    continue;
+                                }
                                 if (oldToken.equals(from)) {
                                     iterator.remove();
                                 }
@@ -128,7 +168,12 @@ public class RedisReceiver {
                             } else {
                                 StringBuilder stringBuilder = new StringBuilder();
                                 for (String myTmp : myTmpList) {
-                                    stringBuilder.append(myTmp + ",");
+                                    if(myTmp==null || myTmp.isEmpty() || myTmp.trim().isEmpty()){
+                                        log.error("myTmp is null ");
+                                        //如果拆分出的这个主题为空则不处理
+                                        continue;
+                                    }
+                                    stringBuilder.append(myTmp).append(",");
                                 }
                                 stringBuilder.setLength(stringBuilder.length() - 1);
                                 redisTemplate.opsForHash().put(SysConstant.webSocketTopicToken, data, stringBuilder.toString());//放入新订阅列表
@@ -155,6 +200,11 @@ public class RedisReceiver {
                     message=StringTool.mapToJson(msgTemplateMap);
                     //给单个用户发
                     for (Map.Entry<String, Session> toDataMap : SysConstant.webSocketSessionMap.entrySet()) {
+                        if(toDataMap==null || toDataMap.getKey()==null ||toDataMap.getValue()==null){
+                            log.error("toDataMap is null or key is null or value is null");
+                            //如果拿到的会话是空会话则继续
+                            continue;
+                        }
                         if (toDataMap.getKey().equals(from)) {
                             toDataMap.getValue().sendText(message);
                         }
@@ -164,6 +214,11 @@ public class RedisReceiver {
             } else if ("alluser".equals(to)) {
                 //给所有用户发
                 for (Map.Entry<String, Session> toDataMap : SysConstant.webSocketSessionMap.entrySet()) {
+                    if(toDataMap==null || toDataMap.getValue()==null){
+                        //如果拿到的会话是空会话则继续
+                        log.error("toDataMap is null or value is null");
+                        continue;
+                    }
                     toDataMap.getValue().sendText(message);
                 }
             } else if ("client".equals(to)) {
@@ -175,13 +230,18 @@ public class RedisReceiver {
                 String dvalue = (String) dataMap.get("dvalue");//主题
                 log.info("当前主题|" + dvalue);
                 String[] dataArray = dvalue.split(",");
-                boolean isExistTopic = false;
-                String redisData = "";
+                boolean isExistTopic;
+                String redisData;
                 String[] redisDataArray;
-                List<String> myTmpList = new LinkedList<>();
+                List<String> myTmpList ;
                 if ("3".equals(dtype)) {
                     //向客户端发送订阅数据
                     for (String data : dataArray) {
+                        if(data==null || data.isEmpty() || data.trim().isEmpty()){
+                            log.error("data is null ");
+                            //如果拆分出的这个主题为空则不处理
+                            continue;
+                        }
                         curTopic=data;
                         //判断redis中是否有这个主题
                         isExistTopic = redisTemplate.opsForHash().hasKey(SysConstant.webSocketTopicToken, data);
@@ -192,12 +252,25 @@ public class RedisReceiver {
                         }
                         if (isExistTopic) {  //存在这个主题
                             redisData = (String) redisTemplate.opsForHash().get(SysConstant.webSocketTopicToken, data); //取出原来的主题token列表
+                            if(redisData==null){
+                                //如果取出来的是null给他一个空串
+                                redisData="";
+                            }
                             redisDataArray = redisData.split(",");
                             myTmpList = new LinkedList<>(Arrays.asList(redisDataArray));
                             Iterator<String> iterator = myTmpList.iterator();
                             while (iterator.hasNext()) {
                                 String oldToken = iterator.next();
+                                if(oldToken==null){
+                                    log.error("oldToken is null ");
+                                    continue;
+                                }
                                 for (Map.Entry<String, Session> toDataMap : SysConstant.webSocketSessionMap.entrySet()) {
+                                    if(toDataMap==null || toDataMap.getKey()==null ||toDataMap.getValue()==null){
+                                        //如果拿到的会话是空会话则继续
+                                        log.error("toDataMap is null ");
+                                        continue;
+                                    }
                                     if (toDataMap.getKey().equals(oldToken)) {
                                         toDataMap.getValue().sendText(message); //发送消息给用户
                                     }
@@ -209,6 +282,11 @@ public class RedisReceiver {
             } else {
                 //给单个用户发
                 for (Map.Entry<String, Session> toDataMap : SysConstant.webSocketSessionMap.entrySet()) {
+                    if(toDataMap==null || toDataMap.getKey()==null ||toDataMap.getValue()==null){
+                        log.error("toDataMap is null ");
+                        //如果拿到的会话是空会话则继续
+                        continue;
+                    }
                     if (toDataMap.getKey().equals(to)) {
                         toDataMap.getValue().sendText(message);
                     }
@@ -235,7 +313,12 @@ public class RedisReceiver {
                 msgTemplateMap.put("data", clientDataMap);
                 message = StringTool.mapToJson(msgTemplateMap);
                 //给单个用户发
-                for (Map.Entry<String, Session> toDataMap : SysConstant.webSocketSessionMap.entrySet()) {
+                for (Map.Entry<String, Session> toDataMap :SysConstant.webSocketSessionMap.entrySet()) {
+                    if(toDataMap==null || toDataMap.getKey()==null || toDataMap.getValue()==null){
+                        log.error("toDataMap is null ");
+                        //如果拿到的会话是空会话则继续
+                        continue;
+                    }
                     if (toDataMap.getKey().equals(from)) {
                         toDataMap.getValue().sendText(message);
                     }

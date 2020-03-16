@@ -31,11 +31,18 @@ public class KafkaManagerService {
 	
 	public static String kafkaServerIp="192.168.111.52:9092";
 	
+	public static int taskCount=1;
+	
 	/**
 	 * 用来管理kafka的监听器容器启动,停止等操作
 	 */
 	@Autowired
 	KafkaListenerEndpointRegistry registry;
+	
+	@Autowired
+	PersonalService personalService;
+	@Autowired
+	FootBallService footBallService;
 	
 	
 	public void createKafkaConsume1(String topicname){
@@ -111,6 +118,17 @@ public class KafkaManagerService {
 			@Override
 			public void onMessage(ConsumerRecord<String, String> record) {
 				log.debug("|11||当前监听主题是:"+record.topic()+"|"+record.value()+"|"+record.key()+"|"+record.headers());
+				Map<String, Object> inputData=new HashMap<String, Object>();
+				inputData.put("count", taskCount);
+				inputData.put("value", record.value());
+				if(taskCount%2==0) {
+					new Thread(new TaskDispatch(personalService, inputData)).start();
+				}else {
+					new Thread(new TaskDispatch(footBallService, inputData)).start();
+				}
+				
+				log.info("------------------------finish-----------------------------------"+taskCount);
+				taskCount++;
 			}
 		};
 		containerProperties.setMessageListener(myMsgListner);

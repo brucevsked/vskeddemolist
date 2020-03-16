@@ -15,7 +15,7 @@ import com.vsked.service.kafka.KafkaManagerService;
 
 public class Producer1Test {
 	
-	public static String topic = "vskedtesttopic1";// 定义主题,测试时需要修改这个主题
+	public static String topic = "mytpoics6012";// 定义主题,测试时需要修改这个主题
 
 	private final Logger log = LoggerFactory.getLogger(Producer1Test.class);
 
@@ -29,7 +29,7 @@ public class Producer1Test {
 
 		try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(p)) {
 //			while (true) {
-			for(int i=0;i<3;i++) {
+			for(int i=0;i<1;i++) {
 				String msg = i+"Hello,hello,hello,hey,hey,这里是我发的消息," + new Random().nextInt(100);
 				ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic,"aaa", msg);
 				record.headers().add("filename"+i, ("yellobook.txt"+i).getBytes());
