@@ -34,24 +34,22 @@ margin-bottom: 0px;
 <div class="container" >
  <div class="row">
     <div class="col-sm">
-      <div id="testa1"></div>
     </div>
     <div class="col-sm">
       One of three columnsa
     </div>
     <div class="col-sm">
-      <div id="myChart2"></div>
     </div>
   </div>
  <div class="row">
     <div class="col-sm" >
-      <div id="testa2"></div>
+
     </div>
     <div class="col-sm">
       <div id="myChart1"></div>
     </div>
     <div class="col-sm">
-       <div id="myChart3"></div>
+
     </div>
   </div>
 </div>
@@ -61,13 +59,10 @@ margin-bottom: 0px;
   <script type="text/javascript" src="js/apexcharts.min.js"></script>
   <script>
 'use strict'
+
+$(function(){
 var chart ;
 var options;
-$(function(){
-  console.log($(window).height());
-  $('#testa1').css('height',parseInt($(window).height()/3));
-  $('#testa2').css('height',parseInt($(window).height()/3));
-console.log($(window).height());
        options = {
           series: [{
           data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
@@ -75,7 +70,7 @@ console.log($(window).height());
           chart: {
           type: 'bar',
           redrawOnParentResize: true,
-          height: parseInt($(window).height()/2.5)
+          height: parseInt($(window).height()/1.5)
         },
         plotOptions: {
           bar: {
@@ -95,19 +90,12 @@ console.log($(window).height());
         chart = new ApexCharts(document.querySelector("#myChart1"), options);
         chart.render();
 
-        //var chart1 = new ApexCharts(document.querySelector("#myChart2"), options);
-        //chart1.render();
-       // var chart2 = new ApexCharts(document.querySelector("#myChart3"), options);
-       // chart2.render();
+
         
          window.onresize = function(){
-          console.log('resize.....');  
-  $('#testa1').css('height',parseInt($(window).height()/3));
-  $('#testa2').css('height',parseInt($(window).height()/3));     
+   
          chart.destroy();
-         //$('#myChart1').html('');
-         // $('#myChart2').html('');
-         // $('#myChart3').html('');
+
        options = {
           series: [{
           data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
@@ -115,7 +103,7 @@ console.log($(window).height());
           chart: {
           type: 'bar',
           redrawOnParentResize: true,
-          height: parseInt($(window).height()/2.5)
+          height: parseInt($(window).height()/1.5)
         },
         plotOptions: {
           bar: {
@@ -133,12 +121,7 @@ console.log($(window).height());
         };
         chart = new ApexCharts(document.querySelector("#myChart1"), options);
         chart.render();
-        /*
-        var chart1 = new ApexCharts(document.querySelector("#myChart2"), options);
-        chart1.render();
-        var chart2 = new ApexCharts(document.querySelector("#myChart3"), options);
-        chart2.render();*/
-        //console.log('resize.....');
+
           };
 
 
