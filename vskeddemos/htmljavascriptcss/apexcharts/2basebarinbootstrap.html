@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>高度自适应条形图</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="css/apexcharts.css" >
+<link rel="stylesheet" href="../bootstrapdemo/js/lib/bootstrap/css/bootstrap.min.css" >
+<style type="text/css">
+html,body{
+width:99.5%;
+height:98.7%;
+}
+<!--以下设置全屏--> 
+body {
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+</style>
+
+</head>
+
+<body>
+<div class="container" >
+ <div class="row">
+    <div class="col-sm">
+      <div id="testa1"></div>
+    </div>
+    <div class="col-sm">
+      One of three columnsa
+    </div>
+    <div class="col-sm">
+      <div id="myChart2"></div>
+    </div>
+  </div>
+ <div class="row">
+    <div class="col-sm" >
+      <div id="testa2"></div>
+    </div>
+    <div class="col-sm">
+      <div id="myChart1"></div>
+    </div>
+    <div class="col-sm">
+       <div id="myChart3"></div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="../bootstrapdemo/js/lib/bootstrap/js/bootstrap.min.js" ></script>
+  <script type="text/javascript" src="js/apexcharts.min.js"></script>
+  <script>
+'use strict'
+var chart ;
+var options;
+$(function(){
+  console.log($(window).height());
+  $('#testa1').css('height',parseInt($(window).height()/3));
+  $('#testa2').css('height',parseInt($(window).height()/3));
+console.log($(window).height());
+       options = {
+          series: [{
+          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        }],
+          chart: {
+          type: 'bar',
+          redrawOnParentResize: true,
+          height: parseInt($(window).height()/2.5)
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+          }
+        },
+        dataLabels: {
+          enabled: true
+        },
+        xaxis: {
+          categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+            'United States', 'China', 'Germany'
+          ],
+        }
+        };
+
+        chart = new ApexCharts(document.querySelector("#myChart1"), options);
+        chart.render();
+
+        //var chart1 = new ApexCharts(document.querySelector("#myChart2"), options);
+        //chart1.render();
+       // var chart2 = new ApexCharts(document.querySelector("#myChart3"), options);
+       // chart2.render();
+        
+         window.onresize = function(){
+          console.log('resize.....');  
+  $('#testa1').css('height',parseInt($(window).height()/3));
+  $('#testa2').css('height',parseInt($(window).height()/3));     
+         chart.destroy();
+         //$('#myChart1').html('');
+         // $('#myChart2').html('');
+         // $('#myChart3').html('');
+       options = {
+          series: [{
+          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        }],
+          chart: {
+          type: 'bar',
+          redrawOnParentResize: true,
+          height: parseInt($(window).height()/2.5)
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+          }
+        },
+        dataLabels: {
+          enabled: true
+        },
+        xaxis: {
+          categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+            'United States', 'China', 'Germany'
+          ],
+        }
+        };
+        chart = new ApexCharts(document.querySelector("#myChart1"), options);
+        chart.render();
+        /*
+        var chart1 = new ApexCharts(document.querySelector("#myChart2"), options);
+        chart1.render();
+        var chart2 = new ApexCharts(document.querySelector("#myChart3"), options);
+        chart2.render();*/
+        //console.log('resize.....');
+          };
+
+
+});
+  </script>
+
+</body>
+</html>
