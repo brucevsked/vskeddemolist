@@ -26,6 +26,7 @@ public class Producer1Test {
 		p.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaManagerService.kafkaServerIp);// kafka地址，多个地址用逗号分割
 		p.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		p.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+		p.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, 999999000);
 
 		try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(p)) {
 //			while (true) {

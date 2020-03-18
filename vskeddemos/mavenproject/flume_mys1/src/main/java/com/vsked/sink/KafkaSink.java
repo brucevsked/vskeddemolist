@@ -414,7 +414,7 @@ public class KafkaSink extends AbstractSink implements Configurable, BatchSizeSu
     kafkaProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, DEFAULT_VALUE_SERIAIZER);
     kafkaProps.putAll(context.getSubProperties(KAFKA_PRODUCER_PREFIX));
     kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers);
-
+    kafkaProps.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, 999999000);
     KafkaSSLUtil.addGlobalSSLParameters(kafkaProps);
   }
 

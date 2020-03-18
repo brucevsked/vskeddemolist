@@ -59,70 +59,44 @@ margin-bottom: 0px;
   <script type="text/javascript" src="js/apexcharts.min.js"></script>
   <script>
 'use strict'
+var chart ;
+
+function initChart(c){
+var options = {
+          series: [{
+          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        }],
+          chart: {
+          type: 'bar',
+          redrawOnParentResize: true,
+          height: parseInt($(window).height()/1.5)
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+          }
+        },
+        dataLabels: {
+          enabled: true
+        },
+        xaxis: {
+          categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+            'United States', 'China', 'Germany'
+          ],
+        }
+        };
+
+        chart = new ApexCharts(document.querySelector("#myChart1"), options);
+        chart.render();
+}
 
 $(function(){
-var chart ;
-var options;
-       options = {
-          series: [{
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }],
-          chart: {
-          type: 'bar',
-          redrawOnParentResize: true,
-          height: parseInt($(window).height()/1.5)
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-          }
-        },
-        dataLabels: {
-          enabled: true
-        },
-        xaxis: {
-          categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-            'United States', 'China', 'Germany'
-          ],
-        }
-        };
-
-        chart = new ApexCharts(document.querySelector("#myChart1"), options);
-        chart.render();
-
-
+  initChart(chart);
         
-         window.onresize = function(){
-   
-         chart.destroy();
-
-       options = {
-          series: [{
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }],
-          chart: {
-          type: 'bar',
-          redrawOnParentResize: true,
-          height: parseInt($(window).height()/1.5)
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-          }
-        },
-        dataLabels: {
-          enabled: true
-        },
-        xaxis: {
-          categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-            'United States', 'China', 'Germany'
-          ],
-        }
-        };
-        chart = new ApexCharts(document.querySelector("#myChart1"), options);
-        chart.render();
-
-          };
+  window.onresize = function(){
+    chart.destroy();
+    initChart(chart);
+  };
 
 
 });

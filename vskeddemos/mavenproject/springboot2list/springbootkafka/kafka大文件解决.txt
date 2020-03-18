@@ -1,0 +1,32 @@
+参考
+https://www.jianshu.com/p/6018bf6d84e8?from=groupmessage
+1、 kafka topic
+/bin/kafka-topics.sh --zookeeper 192.168.6.102:2181 --alter --topic testTopic --config max.message.bytes=999990000
+
+2、server.properties中添加
+message.max.bytes=5242880（5M）
+replica.fetch.max.bytes=6291456（6M）每个分区试图获取的消息字节数。要大于等于message.max.bytes
+
+3、producer.properties中添加
+max.request.size = 5242880 （5M）请求的最大大小为字节。要小于 message.max.bytes
+4、consumer.properties中添加
+fetch.message.max.bytes=6291456（6M）每个提取请求中为每个主题分区提取的消息字节数。要大于等于message.max.bytes
+
+5、在生产端使用java发送消息
+public static void main(String[] args) {
+        Properties props = new Properties();
+        props.put("metadata.broker.list", "node1:9092");
+        props.put("serializer.class", "kafka.serializer.StringEncoder");
+        // key.serializer.class默认为serializer.class
+        props.put("key.serializer.class", "kafka.serializer.StringEncoder");
+        props.put("request.required.acks", "1");
+        props.put("max.request.size", "52428800");
+        ProducerConfig config = new ProducerConfig(props);
+        Producer<String, String> producer = new Producer<String, String>(config);
+            producer.send(new KeyedMessage<String, String>(
+                    "testkafka", "jack",
+                    "rose"));
+        producer.close();
+    }
+
+6更改完配置要重启kafka server才能生效
