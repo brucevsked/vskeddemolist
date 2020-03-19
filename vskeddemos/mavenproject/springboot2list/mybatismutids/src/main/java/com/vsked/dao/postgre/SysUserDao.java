@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Select;
 @Repository
 public interface SysUserDao {
 
-    @Select("select * from sysUserT")
+    @Select("select * from sysusert")
     List<Map<String, Object>> list();
 }

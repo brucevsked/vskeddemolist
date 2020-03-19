@@ -1,4 +1,4 @@
-package com.vsked.dao;
+package com.vsked.test;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

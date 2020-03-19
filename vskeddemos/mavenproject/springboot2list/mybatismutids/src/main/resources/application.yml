@@ -10,18 +10,18 @@ spring:
       enabled: true #设置开启热部署
   datasource:
     postgredb1:
-      jdbc-url: jdbc:postgresql://192.168.60.12:5432/coalmineh
-      username: coalmineh
+      jdbc-url: jdbc:postgresql://192.168.111.45:5432/testaa
+      username: postgres
       password: Y4yhl9tbf110
       driver-class-name: org.postgresql.Driver
       configuration:
         connection-test-query: select 1
 
     phoenixdb1:
-      jdbc-url: jdbc:postgresql://192.168.60.12:5432/postgres
-      username: postgres
-      password: xhg123456
-      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:phoenix:demoevn1:2181
+      username: 
+      password: 
+      driver-class-name: org.apache.phoenix.jdbc.PhoenixDriver
       configuration:
         connection-test-query: select 1
     
