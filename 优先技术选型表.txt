@@ -1,15 +1,46 @@
 ﻿------------------------------------------------------------后端部分
 
+版本控制
+gitlab
+
+项目管理
+jira
+
 基础框架
-spring boot 2.1.7
+spring boot 2.X.X
 对象管理及依赖注入事务等
 spring framework 5
+
+mvc 老了
+spring mvc 老了
+
+项目建模
+领域驱动(DDD)
+
+持续集成
+jenkins
+
+分布式跟踪
+Zipkin
+
+消息与队列
+rabbitmq
+kafka
+
+缓存
+redis
+
+容器化
+docker
+
+项目构建
+gradle
 
 单元测试
 junit5
 
-mvc
-spring mvc
+api测试
+Rest Assured
 
 数据库连接池
 HikariCP 3
@@ -43,6 +74,8 @@ jackson-dataformat-xml
 
 全文搜索引擎
 Elasticsearch
+
+
 ------------------------------------------------------------前端部分
 数据模拟
 mock.js
