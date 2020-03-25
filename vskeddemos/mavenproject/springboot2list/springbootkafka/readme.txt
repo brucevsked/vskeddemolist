@@ -3,6 +3,8 @@
 动态创建kafka消费者
 动态停止kafka消息者
 
+添加手动确认消息示例Consume2Test
+
 com.vsked.controller.TestController
 
 根据主题创建消费者组

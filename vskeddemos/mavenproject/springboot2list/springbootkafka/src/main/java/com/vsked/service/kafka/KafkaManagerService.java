@@ -29,7 +29,7 @@ public class KafkaManagerService {
 	public static final String myListenerId="myListeneraaa";
 	public static Map<String,KafkaMessageListenerContainer<String, String>> topicListenerList=new HashMap<String, KafkaMessageListenerContainer<String,String>>();
 	
-	public static String kafkaServerIp="192.168.111.52:9092";
+	public static String kafkaServerIp="192.168.1.133:9092";
 	
 	public static int taskCount=1;
 	

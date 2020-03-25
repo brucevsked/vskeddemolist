@@ -15,7 +15,7 @@ import com.vsked.service.kafka.KafkaManagerService;
 
 public class Producer1Test {
 	
-	public static String topic = "mytpoics6012";// 定义主题,测试时需要修改这个主题
+	public static String topic = "vskedtopic1";// 定义主题,测试时需要修改这个主题
 
 	private final Logger log = LoggerFactory.getLogger(Producer1Test.class);
 
