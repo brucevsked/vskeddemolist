@@ -54,7 +54,7 @@ slf4j1.7.25
 日志处理
 log4j2 2.11.1
 
-orm
+orm(以后研究jpa吧那个更适合DDD)
 mybatis3.4.6
 数据库分页
 pagehelper5.1.3
