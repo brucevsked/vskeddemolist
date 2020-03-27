@@ -3,6 +3,9 @@
 版本控制
 gitlab
 
+项目构建
+gradle
+
 项目管理
 jira
 
@@ -32,9 +35,6 @@ redis
 
 容器化
 docker
-
-项目构建
-gradle
 
 单元测试
 junit5
