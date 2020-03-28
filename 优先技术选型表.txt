@@ -10,7 +10,8 @@ gradle
 jira
 
 代码评审
-Review Board
+优先用gitlab自带的
+其次Review Board
 
 基础框架
 spring boot 2.X.X
