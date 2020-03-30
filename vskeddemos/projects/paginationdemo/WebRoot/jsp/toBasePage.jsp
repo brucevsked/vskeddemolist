@@ -1,7 +1,7 @@
 <%@page import="com.vsked.util.BasicServlet"%>
 <%@page import="com.vsked.util.Page"%>
 <%@page import="com.vsked.util.ConnectOracle"%>
-<%@page import="com.vsked.dao.impl.BasicDaoImpl"%>
+<%@page import="com.vsked.service.BasicDaoImpl"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
