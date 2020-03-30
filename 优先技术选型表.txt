@@ -9,6 +9,10 @@ gradle
 项目管理
 jira
 
+代码评审
+优先用gitlab自带的
+其次Review Board
+
 基础框架
 spring boot 2.X.X
 对象管理及依赖注入事务等
