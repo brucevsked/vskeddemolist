@@ -6,7 +6,7 @@
 	<version>1.0</version>
 	<name>manamountain</name>
 	<description>manamountain</description>
-    <packaging>jar</packaging>
+	<packaging>jar</packaging>
 
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
@@ -51,7 +51,17 @@
 			<optional>true</optional>
 			<scope>runtime</scope>
 		</dependency>
-
+		<!-- spring boot核心,包括自动配置支持，日志和YAML -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -62,6 +72,13 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.vsked.Application</mainClass>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

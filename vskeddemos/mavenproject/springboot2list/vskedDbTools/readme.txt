@@ -1,0 +1,2 @@
+phoenix的连接与服务端/etc/hosts文件有关
+还与客户机hosts文件配置有关
