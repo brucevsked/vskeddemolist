@@ -7,6 +7,8 @@ spring:
   devtools:
     restart:
       enabled: true #设置开启热部署
+  jpa:    hibernate:      ddl-auto: update
+    show-sql: true
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/testaa
     username: postgres

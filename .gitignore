@@ -3,3 +3,4 @@ classes/
 
 vskeddemos/mavenproject/vskedtool/target/m2e-jee/web-resources/META-INF/maven/com.vsked/vskedtool/pom.properties
 vskeddemos/mavenproject/springboot2list/springdatajpa/.project
+*.class
