@@ -1,84 +1,325 @@
 package com.vsked.service;
 
-import java.util.concurrent.TimeUnit;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.HttpHost;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.delete.DeleteRequest;
+import org.elasticsearch.action.delete.DeleteResponse;
+import org.elasticsearch.action.get.GetRequest;
+import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
-import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.RangeQueryBuilder;
-import org.elasticsearch.index.query.TermQueryBuilder;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.script.Script;
+import org.elasticsearch.script.ScriptType;
 import org.junit.Test;
+
 import com.vsked.test.BaseTest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ElasticSearchService extends BaseTest{
+public class ElasticSearchService extends BaseTest {
+
+
 	
-	@Test
-	public void query() {
+//	@Test
+	public void addBatchTest() {
 		try {
-		log.info("start query elastic search");
-		//构造查询客户端
-		RestHighLevelClient highLevelClient = new RestHighLevelClient(
-				RestClient.builder(
-						new HttpHost("192.168.111.45", 9222, "http")));
-		//新建查询请求
-		SearchRequest searchRequest = new SearchRequest();
-		//设置索引
-        searchRequest.indices(".kibana_1");
-        //设置索引类型
-        searchRequest.types("_doc");
-        
-        // 查询条件=
-        MatchQueryBuilder matchQuery = QueryBuilders.matchQuery("type", "ui-metric");
-        TermQueryBuilder termQuery = QueryBuilders.termQuery("count", "1");
-        // 查询范围查询
-        RangeQueryBuilder timeFilter = QueryBuilders.rangeQuery("updated_at").gt("2020-01-28").lt("2020-04-01");
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        //构造查询条件
-        QueryBuilder totalFilter = QueryBuilders.boolQuery()
-                .filter(matchQuery)
-                .filter(timeFilter)
-                .mustNot(termQuery);
-
-        int size = 200;
-        int from = 0;
-        long total = 0;
-        
-        //绑定查询条件与返回页大小
-        sourceBuilder.query(totalFilter).from(from).size(size);
-        //设置超时
-        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
-        //设置查询条件源
-        searchRequest.source(sourceBuilder);
-        //设置查询头 默认
-        RequestOptions headers = RequestOptions.DEFAULT;
-        //通过查询客户端发送查询请求
-		SearchResponse response = highLevelClient.search(searchRequest, headers);
-		//获取响应结果
-        SearchHit[] hits = response.getHits().getHits();
-        //输入出命中结果
-        for (SearchHit hit : hits) {
-        	log.info(hit.getSourceAsString());
-        }
-
-        total = response.getHits().totalHits;
-
-        log.info("测试:[" + total + "][" + from + "-" + (from + hits.length) + ")");
-        highLevelClient.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-			log.error(e.getMessage(),e);
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+			BulkRequest request = new BulkRequest(); 
+			request.add(new IndexRequest("posts").id("1")  
+			        .source(XContentType.JSON,"field", "foo"));
+			request.add(new IndexRequest("posts").id("2")  
+			        .source(XContentType.JSON,"field", "bar"));
+			request.add(new IndexRequest("posts").id("3")  
+			        .source(XContentType.JSON,"field", "baz"));
+			request.timeout(TimeValue.timeValueMinutes(2)); 
+			request.timeout("2m"); 
+			BulkResponse bulkResponse = client.bulk(request, RequestOptions.DEFAULT);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 		}
 	}
 
+	@Test
+	public void getRequestTest() {
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+			GetRequest getRequest = new GetRequest(
+			        "posts", 
+			        "9");  
+			GetResponse getResponse = client.get(getRequest, RequestOptions.DEFAULT);
+			String message = getResponse.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void indexRequest1Test() {//json
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+
+			IndexRequest indexRequest = new IndexRequest("posts"); 
+			indexRequest.id("2"); 
+			String jsonString = "{" +
+			        "\"user\":\"kimchy\"," +
+			        "\"postDate\":\"2013-01-30\"," +
+			        "\"message\":\"trying out Elasticsearch\"," +
+			        "\"count\":8" +
+			        "}";
+			indexRequest.source(jsonString, XContentType.JSON);
+			IndexResponse indexResponse=client.index(indexRequest, RequestOptions.DEFAULT);
+			String message = indexResponse.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void indexRequest2Test() {//map
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+
+			IndexRequest indexRequest = new IndexRequest("posts"); 
+			indexRequest.id("5"); 
+			Map<String, Object> jsonMap = new HashMap<String, Object>();
+			jsonMap.put("user", "kimchymap");
+			jsonMap.put("postDate", new Date());
+			jsonMap.put("message", "trying out Elasticsearchmap");
+			indexRequest.source(jsonMap);
+			IndexResponse indexResponse=client.index(indexRequest, RequestOptions.DEFAULT);
+			String message = indexResponse.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void indexRequest3Test() {//ContentBuilder
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+
+			IndexRequest indexRequest = new IndexRequest("posts"); 
+			indexRequest.id("6"); 
+			XContentBuilder builder = XContentFactory.jsonBuilder();
+			builder.startObject();
+			{
+			    builder.field("user", "kimchyContentBuilder");
+			    builder.timeField("postDate", new Date());
+			    builder.field("message", "trying out ElasticsearchContentBuilder");
+			}
+			builder.endObject();
+			indexRequest.source(builder);
+			IndexResponse indexResponse=client.index(indexRequest, RequestOptions.DEFAULT);
+			String message = indexResponse.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void deleteRequest1Test() {
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+
+			DeleteRequest request = new DeleteRequest(
+			        "posts",    
+			        "2");  
+			DeleteResponse response=client.delete(request, RequestOptions.DEFAULT) ;
+			String message = response.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void updateRequest1Test() { //script update
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+
+			UpdateRequest request = new UpdateRequest(
+			        "posts", 
+			        "1"); 
+			Map<String, Object> parameters = new HashMap<String, Object>();
+			parameters.put("ct", 4);
+
+			Script inline = new Script(ScriptType.INLINE, "painless",
+			        "ctx._source.count += params.ct", parameters);  
+			request.script(inline);  
+			UpdateResponse response=client.update(request, RequestOptions.DEFAULT) ;
+			String message = response.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void updateRequest2Test() {//json update
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+
+			UpdateRequest request = new UpdateRequest(
+			        "posts", 
+			        "2"); 
+			String jsonString = "{" +
+			        "\"user\":\"newuserforyou\"," +
+			        "\"count\":1" +
+			        "}";
+			//只会更新存在的
+			request.doc(jsonString, XContentType.JSON);
+			UpdateResponse response=client.update(request, RequestOptions.DEFAULT) ;
+			String message = response.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void updateRequest3Test() {//map update
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+
+			UpdateRequest request = new UpdateRequest(
+			        "posts", 
+			        "5"); 
+			Map<String, Object> jsonMap = new HashMap<String, Object>();
+			jsonMap.put("user", "kimchymap666");
+			jsonMap.put("postDate", new Date());
+			jsonMap.put("message", "================");
+			request.doc(jsonMap);
+			UpdateResponse response=client.update(request, RequestOptions.DEFAULT) ;
+			String message = response.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void updateRequest4Test() {//ContentBuilder update
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+
+			UpdateRequest request = new UpdateRequest(
+			        "posts", 
+			        "6"); 
+			XContentBuilder builder = XContentFactory.jsonBuilder();
+			builder.startObject();
+			{
+			    builder.timeField("postDate", new Date());
+			    builder.field("message", "daily update");
+			}
+			builder.endObject();
+			request.doc(builder);
+			UpdateResponse response=client.update(request, RequestOptions.DEFAULT) ;
+			String message = response.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void updateRequest5Test() {//key-pairs update
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+
+			UpdateRequest request = new UpdateRequest(
+			        "posts", 
+			        "6").doc("postDate",new Date(),"message","good luck girl"); 
+			UpdateResponse response=client.update(request, RequestOptions.DEFAULT) ;
+			String message = response.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void upsertRequest1Test() {//upsert
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+			UpdateRequest request = new UpdateRequest(
+			        "posts", 
+			        "9"); 
+			String jsonString = "{" +
+			        "\"user\":\"newuserforyou\"," +
+			        "\"count\":1" +
+			        "}";
+			//只会更新存在的
+			request.doc(jsonString, XContentType.JSON);
+			IndexRequest indexRequest = new IndexRequest("posts"); 
+			indexRequest.id("9"); 
+			jsonString = "{" +
+			        "\"user\":\"kimchyaaaaaaa\"," +
+			        "\"postDate\":\"2013-01-30\"," +
+			        "\"message\":\"trying out Elasticsearch\"," +
+			        "\"count\":8" +
+			        "}";
+			indexRequest.source(jsonString, XContentType.JSON);
+			request.upsert(indexRequest);
+			UpdateResponse response=client.update(request, RequestOptions.DEFAULT) ;
+			String message = response.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
 }

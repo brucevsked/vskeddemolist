@@ -8,6 +8,11 @@ spring:
   devtools:
     restart:
       enabled: true #设置开启热部署
+  elasticsearch:
+    rest:
+      uris:
+      - http://10.0.193.10:9222
+  
 
 logging:
   config: classpath:log4j2.xml
