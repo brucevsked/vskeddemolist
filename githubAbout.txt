@@ -1,0 +1,44 @@
+github搜索技巧
+
+1. 明确搜索仓库标题、仓库描述、README
+只想查找仓库名称包含
+in:name  关键词
+如果想查找描述的内容
+in:descripton 关键词
+
+2. 明确搜索 star、fork 数大于多少的
+stars: > 数字  关键字
+
+3. 明确搜索仓库大小的这里注意下，这个数字代表K, 5000代表着5M。
+size:>=5000 关键词
+
+4. 明确仓库是否还在更新维护,你是想找指定时间之前或之后创建的仓库也是可以的，
+把 pushed 改成 created  就行
+
+pushed:>2019-01-03 关键词
+created:>2019-01-03 关键词
+
+5. 明确搜索仓库的 LICENSE
+
+license:apache-2.0 关键词
+
+6. 明确搜索仓库的语言
+
+language:java  关键词
+
+1. 在name\readme\descriptiond等关键词内容中条件查找
+#单个条件
+in:name spring boot
+#多个条件直接在上一个条件中追加即可
+in:name spring boot in:readme redis
+
+2搜索满足条件的pushed时间，stars数目的项目
+in:name spring boot stars:>1000
+stars指定
+stars: 10..20 
+user:joshlong language:java size:>=500
+
+
+3. 仓库大小、语言、用户
+user:language:java size:>5000
+

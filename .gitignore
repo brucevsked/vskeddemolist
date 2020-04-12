@@ -5,3 +5,13 @@ vskeddemos/mavenproject/vskedtool/target/m2e-jee/web-resources/META-INF/maven/co
 vskeddemos/mavenproject/springboot2list/springdatajpa/.project
 *.class
 vskeddemos/mavenproject/vskedtool/target/m2e-jee/web-resources/META-INF/maven/com.vsked/vskedtool/pom.properties
+vskeddemos/mavenproject/**/.classpath
+vskeddemos/mavenproject/**/.project
+vskeddemos/mavenproject/**/.settings/*.*
+vskeddemos/mavenproject/**/target
+vskeddemos/mavenproject/**/*.class
+vskeddemos/mavenproject/designmode/.classpath
+vskeddemos/mavenproject/designmode/.settings/org.eclipse.jdt.core.prefs
+vskeddemos/mavenproject/designmode/.classpath
+vskeddemos/mavenproject/designmode/.settings/org.eclipse.jdt.core.prefs
+vskeddemos/mavenproject/designmode/.settings/org.eclipse.wst.common.component

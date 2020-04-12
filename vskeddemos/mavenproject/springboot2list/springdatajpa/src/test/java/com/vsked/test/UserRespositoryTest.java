@@ -21,7 +21,7 @@ public class UserRespositoryTest extends BaseTest{
 	@Resource
 	UserRepository userRepository;
 	
-//	@Test
+	@Test
 	public void save() {
 		User user=new User(7,"username7","thisis7");
 		userRepository.save(user);
@@ -73,7 +73,7 @@ public class UserRespositoryTest extends BaseTest{
 		}
 	}
 	
-	@Test
+//	@Test
 	public void page2() {
 		String sortColumn="uid";
 		Pageable pageable=PageRequest.of(0, 10,Sort.Direction.ASC,sortColumn);

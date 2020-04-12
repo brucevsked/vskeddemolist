@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.vsked</groupId>
-	<artifactId>springdatajpa</artifactId>
+	<artifactId>cqrsdemo</artifactId>
 	<version>1.0</version>
-	<name>springdatajpa</name>
-	<description>springdatajpa</description>
+	<name>cqrsdemo</name>
+	<description>cqrsdemo</description>
 	<packaging>jar</packaging>
 
 	<properties>
