@@ -6,7 +6,7 @@
 	<version>1.0</version>
 	<name>manamountain</name>
 	<description>manamountain</description>
-    <packaging>jar</packaging>
+  <packaging>jar</packaging>
 
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
