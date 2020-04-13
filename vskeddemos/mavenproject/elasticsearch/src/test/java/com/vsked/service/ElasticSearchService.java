@@ -4,7 +4,6 @@ package com.vsked.service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -14,6 +13,8 @@ import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -51,6 +52,7 @@ public class ElasticSearchService extends BaseTest {
 			request.timeout(TimeValue.timeValueMinutes(2)); 
 			request.timeout("2m"); 
 			BulkResponse bulkResponse = client.bulk(request, RequestOptions.DEFAULT);
+			log.info(bulkResponse.toString());
 			client.close();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -68,6 +70,22 @@ public class ElasticSearchService extends BaseTest {
 			        "9");  
 			GetResponse getResponse = client.get(getRequest, RequestOptions.DEFAULT);
 			String message = getResponse.toString();
+			log.info(message);
+			client.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+//	@Test
+	public void getAllRequestTest() {
+		try {
+			// 构造查询客户端 for elastic search 7.6.2
+			RestHighLevelClient client = new RestHighLevelClient(
+					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
+			SearchRequest searchRequest=new SearchRequest("VSKEDTEST2");
+			SearchResponse searchResponse=client.search(searchRequest, RequestOptions.DEFAULT);
+			String message = searchResponse.toString();
 			log.info(message);
 			client.close();
 		} catch (Exception e) {
