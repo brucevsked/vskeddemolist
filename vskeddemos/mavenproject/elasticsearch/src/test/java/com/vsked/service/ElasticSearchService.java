@@ -59,7 +59,7 @@ public class ElasticSearchService extends BaseTest {
 		}
 	}
 
-	@Test
+//	@Test
 	public void getRequestTest() {
 		try {
 			// 构造查询客户端 for elastic search 7.6.2
@@ -77,7 +77,7 @@ public class ElasticSearchService extends BaseTest {
 		}
 	}
 	
-//	@Test
+	@Test
 	public void getAllRequestTest() {
 		try {
 			// 构造查询客户端 for elastic search 7.6.2

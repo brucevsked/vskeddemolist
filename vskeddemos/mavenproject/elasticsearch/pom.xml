@@ -31,7 +31,7 @@
 		<version>2.2.6.RELEASE</version>
 	</parent>
 	<dependencies>
-		<!-- spring boot devtools 第一步添加依赖-->
+		<!-- spring boot devtools 第一步添加依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -91,17 +91,17 @@
 		</dependency>
 		<!-- junit5 test end -->
 		<!-- elastic search -->
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+		</dependency>
 
-        <!-- Java High Level REST Client -->
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-        </dependency>
-		
+		<!-- Java High Level REST Client -->
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>elasticsearch-rest-high-level-client</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -122,7 +122,7 @@
 					<skipTests>true</skipTests><!--默认关掉单元测试 -->
 				</configuration>
 			</plugin>
-			<!-- spring boot devtools 第二步添加maven插件-->
+			<!-- spring boot devtools 第二步添加maven插件 -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
