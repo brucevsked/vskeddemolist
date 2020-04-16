@@ -1,0 +1,5 @@
+
+
+使用java代码连接ftp或centos系统执行命令
+
+BashTools为连接centos系统并执行命令
