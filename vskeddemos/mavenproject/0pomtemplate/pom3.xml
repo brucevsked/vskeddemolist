@@ -36,13 +36,11 @@
 	</parent>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
-			<scope>provided</scope>
-		</dependency>
+    <!-- 对web开发的支持，包含了spring webmvc和tomcat等web开发的特性 -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
 
 		<!-- spring boot devtools 第一步添加依赖-->
 		<dependency>

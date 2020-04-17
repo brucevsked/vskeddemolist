@@ -10,12 +10,13 @@ spring:
       enabled: true #设置开启热部署
   datasource:
     postgredb1:
-      jdbc-url: jdbc:postgresql://192.168.111.45:5432/testaa
+      jdbc-url: jdbc:postgresql://10.0.192.251:5432/risk
       username: postgres
       password: Y4yhl9tbf110
       driver-class-name: org.postgresql.Driver
-      configuration:
-        connection-test-query: select 1
+      maximumPoolSize: 20 #hikria配置
+      connection-test-query: select 1 #hikria配置
+
 
     phoenixdb1:
       jdbc-url: jdbc:phoenix:demoevn1:2181

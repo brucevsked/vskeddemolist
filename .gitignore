@@ -17,3 +17,5 @@ vskeddemos/mavenproject/designmode/.settings/org.eclipse.jdt.core.prefs
 vskeddemos/mavenproject/designmode/.settings/org.eclipse.wst.common.component
 vskeddemos/mavenproject/designmode/.settings/*.*
 vskeddemos/mavenproject/designmode/.settings/org.eclipse.wst.common.component
+vskeddemos/mavenproject/vskedtool/target/m2e-jee/web-resources/META-INF/maven/com.vsked/vskedtool/pom.properties
+vskeddemos/mavenproject/vskedtool/.myeclipse/profiler/UrlDecode.xml
