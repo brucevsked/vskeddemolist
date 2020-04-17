@@ -11,6 +11,7 @@ gitlab
 
 项目构建
 gradle
+maven
 
 项目管理
 jira
@@ -18,6 +19,23 @@ jira
 代码评审
 优先用gitlab自带的
 其次Review Board
+
+代码覆盖率测试
+Jacoco
+
+自动化验收测试
+JBehave
+Cucumber
+
+数据模拟mock
+Mockito
+EasyMock
+PowerMock
+
+web测试
+Selenium
+Selenide
+
 
 基础框架
 spring boot 2.X.X
@@ -47,7 +65,10 @@ redis
 docker
 
 单元测试
+TestNG
 junit5
+Hamcrest
+
 
 api测试
 Rest Assured

@@ -1,0 +1,25 @@
+
+在那之前请先
+规范你的开发环境
+规范你的开发流程
+规范你的持续集成
+规范你的持续部署
+
+
+规范的开发环境
+jdk
+tomcat
+idea myeclipse
+gradle maven
+vagrant
+virtualbox
+
+规范你的开发流程
+参考TDD测试驱动开发
+并编写自己的流程
+
+持续集成环境
+docker+git+jenkins
+
+持续部署环境
+docker+git+jenkins
