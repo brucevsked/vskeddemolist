@@ -1,0 +1,46 @@
+server:
+  port: 8080 #端口号
+  tomcat:
+    uri-encoding: UTF-8
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  boot:
+    admin:
+      client:
+        url: http://0.0.0.0:8080
+  datasource:
+    tomcat:
+      jmx-enabled: true
+    url: jdbc:postgresql://10.0.192.251:5432/risk
+    username: postgres
+    password: Y4yhl9tbf110
+    driver-class-name: org.postgresql.Driver
+    hikari:      connection-test-query: select 1
+      maximum-pool-size: 20
+    
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+mybatis:
+  configuration:
+    call-setters-on-nulls: true #是null值也返回
+    cache-enabled: false #开启二级缓存
+    
+logging:
+  config: classpath:log4j2.xml
+
+jmx.host: 0.0.0.0
+jmx.port: 44642
+
+

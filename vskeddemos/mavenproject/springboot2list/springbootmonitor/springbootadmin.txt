@@ -1,0 +1,35 @@
+本方案测试完成 可以简单使用
+1 pom
+		<!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-server -->
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-server</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		
+2 yml
+server:
+  port: 8080 #端口号
+  tomcat:
+    uri-encoding: UTF-8
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  boot:
+    admin:
+      client:
+        url: http://0.0.0.0:8080

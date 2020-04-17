@@ -1,0 +1,8 @@
+本方案只有文字版本 需要其他组件配合 未测试完成
+1 pom
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+2

@@ -1,0 +1,9 @@
+
+本方案不单独使用 需要其他方案配合使用 未测试完成
+
+1 pom
+<!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus -->
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-registry-prometheus</artifactId>
+</dependency>
