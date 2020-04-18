@@ -23,3 +23,27 @@ docker+git+jenkins
 
 持续部署环境
 docker+git+jenkins
+
+
+开发环境搭建
+安装jdk，修改jdk默认安装位置
+配置环境变量，验证环境变量生效
+配置gradle环境变量，验证gradle是否生效
+安装IDE，eclipse 配置eclipse中gradle参数与jdk参数
+
+
+
+
+
+
+开发流程
+vagrant开启一个virtualbox虚拟机
+这个虚拟机是centos系统虚拟机中安装的软件有
+docker 容器管理
+gitlab 版本控制docker镜像(为方便本地演示，团队开发时会独立出来)
+jenkins 持续集成docker镜像(为方便流程演示，团队开发时也会独立出来）
+
+构建一个新的gradle项目
+
+
+
