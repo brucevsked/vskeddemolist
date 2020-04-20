@@ -53,7 +53,7 @@ public class SysUserDaoTest extends BaseDaoTest {
 		
 	}
 	
-	@Test
+//	@Test
 	public void testInsertBatch() {
 		long begin = System.nanoTime();
 		//开启批量开启手动提交模式
@@ -73,6 +73,22 @@ public class SysUserDaoTest extends BaseDaoTest {
         long end = System.nanoTime();
 		
 		log.error("b|"+(TimeUnit.NANOSECONDS.toSeconds(end-begin))+"|s");
+		
+	}
+	
+	@Test
+	public void saveOrUpdateTest() {
+		long begin = System.nanoTime();
+		Map<String, Object> userMap=new HashMap<String, Object>();
+		userMap.put("sysuserid", "10003");
+		userMap.put("sysusername", "vsked=======");
+		userMap.put("sysuserpwd", "abc12346");
+		int c=sysUserDao.saveOrUpdate(userMap);
+		log.info("|"+c+"|");
+		
+		long end = System.nanoTime();
+		
+		log.error("a|"+(TimeUnit.NANOSECONDS.toSeconds(end-begin))+"|s");
 		
 	}
 

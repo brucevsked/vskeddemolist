@@ -1,5 +1,7 @@
 ﻿注解版本mybatis使用
 
+注意:条件表达式中大于号小于号用 gt(大于),lt(小于),gte(大于等于),lte(小于等于)
+
 1* 同时删除多个 注意需要连接字符串中&allowMutiQueries=true支持
 service层
 List<String> tmpDataList=Arrays.asList(id.split(","));
@@ -56,5 +58,14 @@ java代码dao里这样写
             Map<String,Object> parMap=new HashMap<>();
             parMap.put("sql","select * from sysrolet");
             List<Map<String,Object>> dataList=sysUserDao.listvsked(parMap);
+
+10* selectKey使用
+    @SelectKey(statement="select count(1) from sysusert where sysuserid=#{sysuserid}", before=true, keyProperty = "suid", resultType = Integer.class)
+
+11* 插入或更新saveOrUpdate
+    @SelectKey(statement="select count(1) from sysusert where sysuserid=#{sysuserid}", before=true, keyProperty = "suid", resultType = Integer.class)
+    @Update("<script>  <if test=\"suid gte 1\">update sysusert set sysusername=#{sysusername}, sysuserpwd=#{sysuserpwd} where sysuserid=#{sysuserid} </if> <if test=\"suid lt 1 \"> INSERT INTO sysusert(sysuserid, sysusername, sysuserpwd) VALUES (#{sysuserid}, #{sysusername}, #{sysuserpwd})</if></script>")
+    int saveOrUpdate(Map<String, Object> m);
+
 
 
