@@ -1,0 +1,60 @@
+﻿注解版本mybatis使用
+
+1* 同时删除多个 注意需要连接字符串中&allowMutiQueries=true支持
+service层
+List<String> tmpDataList=Arrays.asList(id.split(","));
+m.put("id", tmpDataList);
+mapper层
+@Delete("<script>delete from appUseSearchHisT where id in <foreach collection=\"id\" item=\"item\" open=\"(\" close=\")\" separator=\",\" >#{item} </foreach> and uid=#{uid}</script>")
+int appUserSearchDel(Map<String, Object> m);
+
+2* 判断条件
+@Select("<script>select * from appUseSearchHisT <where> <if test=\"uid!=null and uid!='' \"> and uid =#{uid}  </if> </where> order by addtime desc </script>")
+List<Map<String, Object>> getAppUserSearchHisList(Map<String, Object> m);
+	
+
+3* 模糊查询
+@Select("<script>select * from appVideoInfoT <where> <if test=\"name!=null and name!='' \"> and name like concat('%',#{name},'%')  </if> <if test=\"type1!=null and type1!='' \"> and type1 =#{type1}  </if> <if test=\"type2!=null and type2!='' \"> and type2 =#{type2}  </if><if test=\"type3!=null and type3!='' \"> and type3 =#{type3}  </if><if test=\"isHot!=null and isHot!='' \"> and isHot =#{isHot}  </if> <if test=\"isCommend!=null and isCommend!='' \"> and isCommend =#{isCommend}  </if> <if test=\"isVipOnly!=null and isVipOnly!='' \"> and isVipOnly =#{isVipOnly}  </if><if test=\"isPrice!=null and isPrice!='' \"> and isPrice =#{isPrice}  </if> </where> order by addtime desc </script>")
+List<Map<String, Object>> getAppVideoInfoByType(Map<String, Object> m);
+
+4* 时间段查询
+@Select("<script>select a.*,b.id tid,b.`name` tname from appModuleT a left join appModuleTypeT b on a.type=b.id  <where> <if test=\"state!=null and state!='' \"> and a.state =#{state}  </if> <if test=\"startdate!=null and startdate!='' \"> and a.addtime <![CDATA[ >= ]]> #{startdate}  </if><if test=\"enddate!=null and enddate!='' \"> and a.addtime <![CDATA[ <= ]]>#{enddate}  </if></where> order by a.addtime desc </script>")
+List<Map<String, Object>> getAppModuleList(Map<String, Object> m);
+
+5*批量插入  注意需要连接字符串中&allowMutiQueries=true支持
+需要先将连接字符串中添加参数allowMutiQueries=true
+@Insert("<script> insert into appUserT(uid,phone,userpass,createsource) values <foreach collection=\"myList\" item=\"emp\" separator=\",\">(#{emp.uid},#{emp.phone},#{emp.userpass},#{emp.createsource}) </foreach> </script>")
+int testAdd(Map<String, Object> dataMap);
+
+6* 正确时区(时间不准确时使用)
+useTimezone=true&serverTimezone=GMT%2B8
+
+7* 操作数据时指定数据类型JdbcType注意类型要全大写
+@Update("<script>update appUserT set videocountext=videocountext+#{videocountext,jdbcType=INTEGER} where invitationcode=#{invitationcode}</script>")
+int appUserVideoCountExtUpdate(Map<String, Object> m);
+jdbcType=VARCHAR
+jdbcType=INTEGER
+jdbcType=CHAR
+jdbcType=DATE
+jdbcType=BLOB
+jdbcType=CLOB
+jdbcType=TIMESTAMP
+
+8* mybatis缓存操作 关闭缓存并强制刷新
+	@Options(useCache=false,flushCache=FlushCachePolicy.TRUE)
+	@Select("<script>select * from appModuleT <where> <if test=\"type!=null and type!='' \"> and type =#{type}  </if> </where> order by seq asc </script>")
+	List<Map<String, Object>> getAppModuleList(Map<String, Object> m);
+与springboot合用时关闭1级缓存
+local-cache-scope: SESSION #关闭一级缓存
+
+9* 动态构造sql
+
+java代码dao里这样写
+    @Select("${sql}")
+    List<Map<String,Object>> listvsked(Map<String, Object> m);
+调用的时候
+            Map<String,Object> parMap=new HashMap<>();
+            parMap.put("sql","select * from sysrolet");
+            List<Map<String,Object>> dataList=sysUserDao.listvsked(parMap);
+
+

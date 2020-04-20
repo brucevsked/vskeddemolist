@@ -1,0 +1,1161 @@
+﻿
+1 设置用户名与密码永不过期并检查
+2 创建数据量大的表时使用时间或其他方式进行分区
+3 表空间设置空无限并自动扩展
+
+在数据库用户下相关命令
+dba用户登录
+sqlplus / as sysdba
+启动监听
+lsnrctl start
+停止监听
+lsnrctl stop
+查看监听状态
+lsnrctl status
+数据库配置助手
+dbca
+监听配置助手
+netca
+
+启动数据库
+startup
+先停再启或叫强制启动
+startup force
+关闭数据库
+shutdown immediate;
+使用指定配置文件启动oracle
+startup pfile='/u01/app/oracle/product/11.2.0/db1/dbs/init.ora';
+-----------------------------------------------------------
+
+oracle默认需要手工打commit才可以将修改写入数据库
+
+1*设置自动提交选项
+set autocommit on/off
+
+
+2* 创建表
+Create table 表名 tb_XXXX
+(
+字段名称 字段类型,
+
+);
+
+create table as select * from XXX;
+3* 创建视图 view
+Create View 视图名vi_XXx
+
+4*索引 index
+Create Index 索引名
+
+5*序列 sequence 
+create sequence seq_myseq1
+
+6*创建临时表空间
+create temporary tablespace XXP_TEMP 
+  tempfile '/opt/oracle/oradata/xxp/XXP_TEMP.dbf' 
+  size 500M 
+  autoextend on 
+  next 200M 
+  extent management local;
+
+6*创建数据表空间
+create tablespace XXP_DATA 
+  logging 
+  datafile '/opt/oracle/oradata/xxp/XXP_DATA.dbf' 
+  size 800M 
+  autoextend on 
+  next 500M 
+  extent management local;
+
+7*创建用户指定临时表空间与数据表空间 (注意修改密码过期为无限制！)
+
+create user XXWAP identified by 密码 default tablespace XXP_DATA  temporary tablespace XXP_TEMP;
+
+8*只创建用户不指定表空间
+create user 用户名 identified by 密码 
+
+开启CDB后创建用户
+create user c##用户名 identified by 密码 
+
+
+9*锁定账户
+alter user 用户名 account lock
+
+10*解锁账户
+alter user 用户名 account unlock
+
+11*修改用户密码
+alter user 用户名 identified by 新密码
+
+12*给用户授权
+grant connect,resource,dba to 用户名
+
+
+开启CDB后授权
+
+grant connect,resource,dba to c##用户名
+
+13*删除用户
+drop user 用户名 cascade;
+
+14*查看用户默认表空间
+select username,default_tablespace,temporary_tablespace from dba_users
+
+15*删除表空间包括物理文件
+drop tablespace XXP_DATA including contents and datafiles;
+
+16*导出全库 要在命令提示符下进行!并不在sqlplus中! 任何导入导出前一定先检查权限参考AS888
+复制前先tar包再拉回本地! full=y可以不用 当要导出所有用户数据时才用单用户不使 expdp需要10G以上才支持
+exp xxwap/密码 file=/tmp/dbbf/data.dmp full=N owner=(system,sys) tables=(table1,table2)
+
+1创建逻辑目录
+sqlplus中运行
+create directory dpdata1 as '/tmp/dbbf'
+2查看管理员目录
+select * from dba_directories 
+3给scott用户赋予在指定目录的操作权限最好以system等管理员赋予
+grant read,write on directory dpdata1 to scott
+导出数据
+1)按用户导
+expdp scott/tiger@orcl schemas=scott dumpfile=expdp.dmp DIRECTORY=dpdata1;
+2)并行进程parallel
+expdp scott/tiger@orcl directory=dpdata1 dumpfile=scott3.dmp parallel=40 job_name=scott3
+3)按表名导
+expdp scott/tiger@orcl TABLES=emp,dept dumpfile=expdp.dmp DIRECTORY=dpdata1;
+4)按查询条件导
+expdp scott/tiger@orcl directory=dpdata1 dumpfile=expdp.dmp Tables=emp query='WHERE deptno=20'
+5)按表空间导
+expdp system/manager DIRECTORY=dpdata1 DUMPFILE=tablespace.dmp TABLESPACES=temp,example
+6)导整个数据库
+expdp system/manager DIRECTORY=dpdata1 DUMPFILE=full.dmp FULL=y
+
+密码带特殊字符时导出！
+./expdp \''savesunappserver/"Vjcsn&Ocw&2o&y7N"'@orcl\' DIRECTORY=oraclebackup DUMPFILE=savesmoon.dmp FULL=y
+
+expdp xxwap/密码 file=/tmp/dbbf/data.dmp full=N owner=(system,sys) tables=(table1,table2)
+
+还原数据
+1)导到指定用户下
+impdp 导入用户名/导入用户密码 DIRECTORY=dpdata1 DUMPFILE=expdp.dmp SCHEMAS=scott
+2)改变表的owner
+impdp system/manager DIRECTORY=dpdata1 DUMPFILE=expdp.dmp TABLES=scott.dept REMAP_SCHEMA=scott:system
+3)导入表空间
+impdp system/manager DIRECTORY=dpdata1 DUMPFILE=tablespace.dmp TABLESPACES=example
+4)导入数据库
+impdb system/manager DIRECTORY=dump_dir DUMPFILE=full.dmp FULL=y;
+5)追加数据
+impdp system/manager DIRECTORY=dpdata1 DUMPFILE=expdp.dmp SCHEMAS=system TABLE_EXISTS_ACTION
+
+从一个用户导到另一个用户AS888
+sqlplus中运行
+create or replace directory expdp_dir as '/expdp';
+然后去根目录创建expdp文件夹并授权给相关用户
+mkdir expdp
+chown oracle:oinstall expdp
+shell或cmd命令运行
+
+授权导出目录
+GRANT READ,WRITE ON DIRECTORY expdp_dir to savesunapptest;
+grant read,write on directory oraclebackup to savesunappserver;
+授权导出表
+grant exp_full_database to savesunapptest;
+grant exp_full_database to savesunappserver;
+授权导入表
+grant imp_full_database to savesunapptest;
+grant imp_full_database to savesunappserver;
+expdp savesunapptest/j0tj9Sx1OUt6IA^n DIRECTORY=expdp_dir DUMPFILE=full.dmp SCHEMAS=scott
+
+授权给导入用户目录读取权限
+GRANT READ,WRITE ON DIRECTORY expdp_dir to savesunappserver;
+
+impdp savesunappserver/Y4yhl9tbf110 DIRECTORY=expdp_dir DUMPFILE=full.dmp SCHEMAS=savesunapptest
+impdp 新用户名/新用户密码 DIRECTORY=expdp_dir DUMPFILE=full.dmp REMAP_SCHEMA=老用户名:新用户名  remap_tablespace=老表空间:新表空间,老临时表空间:新临时表空间
+impdp savesunappserver/Y4yhl9tbf110 DIRECTORY=expdp_dir DUMPFILE=full.dmp REMAP_SCHEMA=savesunapptest:savesunappserver  remap_tablespace=savesunapptest_data:savesunappserver_data,savesunapptest_temp:savesunappserver_temp
+
+17*导入全库 impdp需要10G以上支持
+imp xxwap/密码 file=/tmp/dbdata/bf/data.dmp full=N
+impdp xxwap/密码 file=/tmp/dbdata/bf/data.dmp full=N
+
+impdp 'savesunappserver/"Vjcsn&Ocw&2o&y7N"' DIRECTORY=oraclebackup DUMPFILE=savesmoon.dmp SCHEMAS=savesunappserver
+
+18*查看用户序列
+select * from user_sequences;
+
+19*查看所有触发器
+select * from all_triggers;
+
+20*查看用户所有表
+select * from user_tables order by table_name;
+
+21*查看表字段与数据类型
+select * from cols where table_name='BASEUSERT';
+
+22*查看数据库安装字符集
+select * from nls_database_parameters;
+
+23*查看数据库版本
+select * from v$instance;
+select * from v$version;
+
+24*查看所有用户列表
+select * from dba_users;
+
+25*查看某一用户下所有表
+select * from ALL_TABLES where OWNER='POWERPROJECT';
+
+26*查询所有触发器
+select * from all_triggers;
+
+27*查询某张表触发器
+select * from all_triggers where table_name='J_TS_PROJECT';
+
+28*给表与字段加注释
+comment on table  sysUserT              is '系统用户表'    ;
+comment on column sysUserT.usId         is '用户ID'        ;
+
+29*执行过的sql语句
+select b.SQL_TEXT,b.FIRST_LOAD_TIME,b.SQL_FULLTEXT from v$sqlarea b where b.FIRST_LOAD_TIME between '2016-01-12/16:24:47' 
+and '2016-01-12/18:24:47' order by b.FIRST_LOAD_TIME
+
+30* 设置密码永不过期
+
+查看用户的proifle是哪个，一般是default：
+sql>SELECT username,PROFILE FROM dba_users;
+查看指定概要文件（如default）的密码有效期设置：
+sql>SELECT * FROM dba_profiles s WHERE s.profile='DEFAULT' AND resource_name='PASSWORD_LIFE_TIME';
+将密码有效期由默认的180天修改成“无限制”：
+ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED;
+修改之后不需要重启动数据库，会立即生效。
+4
+修改后，还没有被提示ORA-28002警告的帐户不会再碰到同样的提示；
+已经被提示的帐户必须再改一次密码，举例如下：
+ $sqlplus / as sysdba
+sql> alter user smsc identified by <原来的密码> ----不用换新密码
+
+31* 查询数据文件所在位置
+select FILE_NAME,TABLESPACE_NAME from dba_data_files 
+
+32*从动态视图v$sga_dynamic_components获取SGA的相关信息
+SELECT component, current_size, min_size FROM v$sga_dynamic_components;
+
+33* 查看sga池
+select pool ,sum(bytes) bytes from v$sgastat group by pool;
+
+34* 修改共享池大小
+ALTER SYSTEM SET SHARED_POOL_SIZE = 64M; 
+
+select(sum(pins-reloads))/sum(pins) "Library cache" from v$librarycache;--动态性能表查看共享SQL区的使用率
+这个使用率应该在90％以上，否则需要增加共享池的大小
+select (sum(gets-getmisses-usage-fixed))/sum(gets) "Data dictionary cache" from v$rowcache;
+--动态性能表查看数据字典缓冲区的使用率
+这个使用率也应该在90％以上，否则需要增加共享池的大小。 
+
+35* 修改SGA与PGA
+
+alter system set sga_max_size=6544M scope=spfile;
+alter system set sga_target=6544M scope=spfile;
+
+alter system set workarea_size_policy=auto scope=both; 
+alter system set pga_aggregate_target=4096m scope=both; 
+
+show parameter sga;
+show parameter pga;
+
+SGA与操作系统、内存大小、cpu、同时登录的用户数有关。可占OS系统物理内存的1/3到1/2。
+PGA一般占SGA的50%左右不要超过70%
+如系统内存32G分配给SGA 16G 分配给PGA 4G就可以了
+
+如果修改完以后启不来可以这样做
+过程如下：
+
+a1，先用备用的pfile启动oracle
+
+c:/>sqlplus /nolog
+
+注意这里要用sys用户登录
+SQL>conn sys/Password@orcl as sysdba 
+
+SQL>startup pfile='D:\oracle12c\admin\orcl\pfile\init.ora.9292015142851'
+
+这一步注意pfile的位置，一般11g的都是以数字结尾，应该能在上述目录找到，这个文件本来就是备用的。
+
+通过上述方式应该能启动起来。
+
+a2，重新创建spfile
+SQL>create spfile from pfile='D:\oracle12c\admin\orcl\pfile\init.ora.9292015142851'; 
+
+a3，重启数据库
+
+SQL>shutdown  immediate;
+
+SQL>startup
+
+这一步能启动就好了
+
+36* 缩小数据文件DBF文件
+select file_name,e.file_id, sum(e.bytes)/1024/1024 as MB from dba_extents e join dba_data_files f 
+on e.file_id=f.file_id group by file_name,e.file_id; 
+alter database datafile 11 resize 1485m;
+
+37* 截取字符串
+substr(字段名,起始位置,截取长度)
+select substr("PHONENUM",0,7),substr("PHONENUM",8,4) phoneseg from DETAIL
+
+38* indexof类似命令
+insrt(源字符串,要搜索的字符串) 返回字符所在位置坐标
+可以用这个来查找手机号中带4的号码
+select instr(substr('17186084001',8,4),'4') from dual;
+--速度快2.7s
+select * from AGENTSIMV where substr("phoneNum",8,4) like '%4%' and ROWNUM<10000;
+--速度慢6.4s
+select * from AGENTSIMV where instr(substr("phoneNum",8,4),'4')>=0 and ROWNUM<10000;
+
+39* 表误删恢复
+
+恢复单表
+------------------------------------------------cc1
+第一步查询删除的表名导出xls名称cc1
+select object_name,original_name,partition_name,type,ts_name,createtime,droptime from recyclebin order by droptime desc;
+
+select object_name,original_name,droptime from recyclebin order by droptime desc;
+
+第二步，如果你不小心重建表了要再重新删除一次,如果这张表已经不存在了就别执行这句了!!!如果这张表已经不存在了就别执行这句了!!!如果这张表已经不存在了就别执行这句了!!!
+drop table test purge;
+
+第三步 闪回表，这个标识就是object_name对应的名
+flashback table "BIN$j22lkRq0cWzgUzrWEqxUFg==$0" to before drop;
+第四步 查询表数据
+select * from test where ROWNUM<10;
+
+------------------------------------------------cc1
+ORACLE恢复删除表或表记录
+ 
+一：表的恢复
+     对误删的表，只要没有使用PURGE永久删除选项，那么从flash back区恢复回来希望是挺大的。一般步骤有：
+1、从flash back里查询被删除的表
+    select * from recyclebin
+2.执行表的恢复
+   flashback table  tb  to before drop,这里的tb代表你要恢复的表的名称。
+二：表数据恢复
+    对误删的表记录，只要没有truncate语句，就可以根据事务的提交时间进行选择恢复，一般步骤有：
+     1、先从flashback_transaction_query视图里查询，视图提供了供查询用的表名称、事务提交时间、UNDO_SQL等字段。
+     如：select * from flashback_transaction_query where table_name='TEST';
+     2、执行表记录恢复
+     一般先根据时间进行查询，查询语句模式为select * from tb as of timestamp to_timestamp(time,'yyyy-mm-dd hh24:mi:ss'); tb指表名称，time指某个时间点
+      如select * from scott.test as of timestamp to_timestamp('2009-12-11 20:53:57','yyyy-mm-dd hh24:mi:ss');
+    若有数据，恢复极为简单了，语句为flashback table tb to timestamp to_timestamp(time,'yyyy-mm-dd hh24:mi:ss');
+   如flashback table scott.test to timestamp to_timestamp('2009-12-11 20:47:30','yyyy-mm-dd hh24:mi:ss');
+ 
+注意:alter table testvarchar enable row movement;
+    这个命令的作用是，允许Oracle 修改分配给行的rowid。在Oracle 中，插入一行时就会为它分配一个rowid，
+而且这一行永远拥有这个rowid。闪回表处理会对EMP 完成DELETE，并且重新插入行，这样就会为这些行分配一个新的rowid。
+要支持闪回就必须允许Oracle 执行这个操作
+
+
+SELECT * FROM tablename AS OF TIMESTAMP  TO_TIMESTAMP('2016-01-25 14:30:17', 'YYYY-MM-DD HH:MI:SS')
+
+select * from recyclebin ORDER BY DROPTIME DESC
+
+
+select * from flashback_transaction_query where table_name='NEWORDER';
+
+
+Oracle恢复误删数据
+http://www.2cto.com/database/201309/245745.html
+--给表格列空间操作权限
+alter table NEWORDER enable row movement;
+--恢复表格数据到该时间段
+flashback table NEWORDER to timestamp to_timestamp('2016-01-25 11:20:10','yyyy-mm-dd hh24:mi:ss');
+
+
+40* 分析sql执行效率
+EXPLAIN PLAN FOR select * from SIM20170404ALLT where ROWNUM<1000;
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+
+41* 替换字符串
+replace(源字符串,旧子串,新子串)
+select replace('2016.12.23','.','') from dual;
+
+
+42* 获取uuid
+select rawtohex(sys_guid()) as "myuuid" from dual;
+
+43* 连接两个或多个字符串 在mybatis中或许会用
+select 'aa'||'bb'||'cc' from dual;
+
+44* 查询表结构（表中列）（表字段）
+select * from user_tab_columns where table_name='大写表名'
+查看表中列
+select * from user_tab_columns where table_name='表名' and COLUMN_NAME='列名大写'
+
+
+45* ora-00054:resource busy and acquire with nowait specified解决方法
+select object_name,machine,s.sid,s.serial# 
+from v$locked_object l,dba_objects o ,v$session s
+where l.object_id　=　o.object_id and l.session_id=s.sid;
+
+alter system kill session 'sid,serial';  --上面查出的sid,serial
+
+46* 正则表达式 regexp_substr
+select regexp_substr('17174394321','(\d)\1{2}$',9) from dual;
+select regexp_substr('17174394333','(\d)\1{2}$',9) from dual;
+select regexp_substr('17174394444','(\d)\1{2}$',9) from dual;
+
+select REGEXP_SUBSTR('26-首笔预存外0.15分12%-120月', '[[:digit:]]+%', 1) from dual;
+
+47* 添加数据文件
+
+alter tablespace HYFDPROTO_DATA add datafile 'F:\Oracle12C\product\12.1.0\dbhome_1\database\HYFDT3.BDF' 
+size 500M autoextend on next 200M ;
+
+48* 误删除数据恢复 错误的执行了delete操作恢复
+第一步确定删除数据时间把时间定位在删除前
+select * from PARTOF71 as of timestamp to_timestamp('2017-11-20 11:00:00','yyyy-mm-dd hh24:mi:ss')
+第二步查看原表数据结构
+select * from PARTOF71 where ROWNUM<5;
+第三步恢复数据到原表中
+insert into PARTOF71 
+select * from PARTOF71 as of timestamp to_timestamp('2017-11-20 11:00:00','yyyy-mm-dd hh24:mi:ss')
+
+49* 字符串转日期
+to_date(原始数据,格式)
+select to_date('2018-01-01 13:14:20','yyyy-MM-dd HH24:mi:ss') as c1 from dual;
+
+50* 行转列(行列转换)
+pivot
+语法
+SELECT ....  
+FROM <table-expr>  
+   PIVOT  
+     (  
+      aggregate-function(<column>)  
+      FOR <pivot-column> IN (<value1>, <value2>,..., <valuen>)  
+        ) AS <alias>  
+WHERE .....  
+
+示例
+create table testColumnToRow(
+cMonth varchar2(32), --月份
+cName  varchar2(32), --名称
+cSum number(10,0) --数量
+);
+
+insert into testColumnToRow(cMonth,cName,cSum) values('1月','远特普通号卡',300);
+insert into testColumnToRow(cMonth,cName,cSum) values('1月','远特普通号卡',10);
+insert into testColumnToRow(cMonth,cName,cSum) values('1月','国美普通号卡',200);
+insert into testColumnToRow(cMonth,cName,cSum) values('1月','迪加普通号卡',100);
+
+insert into testColumnToRow(cMonth,cName,cSum) values('2月','远特普通号卡',320);
+insert into testColumnToRow(cMonth,cName,cSum) values('2月','国美普通号卡',220);
+insert into testColumnToRow(cMonth,cName,cSum) values('2月','迪加普通号卡',120);
+
+select * from testColumnToRow;
+
+select * from testColumnToRow t pivot ( sum(cSum) for(cMonth) in('1月','2月')) ;
+
+drop table testColumnToRow;
+
+51* 列转行(行列转换)
+unpivot
+
+create table testRowToColumn(
+cMonth varchar2(32), --月份
+cYuanteSum number(10,0), --远特数量
+cDijiaSum number(10,0), --迪加数量
+cGuoMeiSum number(10,0) --国美数量
+);
+
+insert into testRowToColumn(cMonth,cYuanteSum,cDijiaSum,cGuoMeiSum) values('1月',300,200,100);
+insert into testRowToColumn(cMonth,cYuanteSum,cDijiaSum,cGuoMeiSum) values('2月',320,220,120);
+insert into testRowToColumn(cMonth,cYuanteSum,cDijiaSum,cGuoMeiSum) values('3月',30,20,10);
+
+select * from testRowToColumn;
+
+select * from testRowToColumn t unpivot ( cSum for(cName) in(cYuanteSum as '远特普通号卡',
+cDijiaSum as '迪加普通号卡',cGuoMeiSum as'国美普通号卡')) ;
+
+drop table testRowToColumn;
+
+52* 查询表建立时间
+select  * from user_objects order by created desc;
+
+53* 查询表相关SCN 用来恢复数据用
+SELECT *  FROM flashback_transaction_query  where ROWNUM<10 and table_name='TA1';
+查询某个时间点表数据
+select * from "NotACustomer_Account" as of scn 244608257;
+select * from "NotACustomer_Account" as of timestamp to_timestamp('2018-04-28 9:29:00','yyyy-mm-dd hh24:mi:ss'); 
+
+54* 查看当前用户被授予权限(grant给的权限)
+select * from user_role_privs;
+
+54* 查看所有用户被授予权限(grant给的权限)
+select * from dba_role_privs;
+select * from dba_role_privs where GRANTED_ROLE='DBA';
+
+55* 取消授权(grant给的权限)
+
+revoke connect, resource from 用户名;
+
+revoke DBA from BCDATA;
+
+56* inner join 只返回两个表中联结字段相等的行
+表A记录如下：
+aID　　　　　aNum
+1　　　　　a20050111
+2　　　　　a20050112
+3　　　　　a20050113
+4　　　　　a20050114
+5　　　　　a20050115
+
+表B记录如下:
+bID　　　　　bName
+1　　　　　2006032401
+2　　　　　2006032402
+3　　　　　2006032403
+4　　　　　2006032404
+8　　　　　2006032408
+
+.inner join
+sql语句如下: 
+select * from A
+innerjoin B 
+on A.aID = B.bID
+
+结果如下:
+aID　　　　　aNum　　　　　bID　　　　　bName
+1　　　　　a20050111　　　　1　　　　　2006032401
+2　　　　　a20050112　　　　2　　　　　2006032402
+3　　　　　a20050113　　　　3　　　　　2006032403
+4　　　　　a20050114　　　　4　　　　　2006032404
+
+结果说明:
+很明显,这里只显示出了 A.aID = B.bID的记录.这说明inner join并不以谁为基础,它只显示符合条件的记录.
+
+57* left join 数据见inner join数据
+left join
+sql语句如下: 
+select * from A
+left join B 
+on A.aID = B.bID
+
+结果如下:
+aID　　　　　aNum　　　　　bID　　　　　bName
+1　　　　　a20050111　　　　1　　　　　2006032401
+2　　　　　a20050112　　　　2　　　　　2006032402
+3　　　　　a20050113　　　　3　　　　　2006032403
+4　　　　　a20050114　　　　4　　　　　2006032404
+5　　　　　a20050115　　　　NULL　　　　　NULL
+
+（所影响的行数为 5 行）
+结果说明:
+left join是以A表的记录为基础的,A可以看成左表,B可以看成右表,left join是以左表为准的.
+换句话说,左表(A)的记录将会全部表示出来,而右表(B)只会显示符合搜索条件的记录(例子中为: A.aID = B.bID).
+B表记录不足的地方均为NULL.
+
+58* right join 数据见inner join数据
+right join
+sql语句如下: 
+select * from A
+right join B 
+on A.aID = B.bID
+
+结果如下:
+aID　　　　　aNum　　　　　bID　　　　　bName
+1　　　　　a20050111　　　　1　　　　　2006032401
+2　　　　　a20050112　　　　2　　　　　2006032402
+3　　　　　a20050113　　　　3　　　　　2006032403
+4　　　　　a20050114　　　　4　　　　　2006032404
+NULL　　　　　NULL　　　　　8　　　　　2006032408
+
+（所影响的行数为 5 行）
+结果说明:
+仔细观察一下,就会发现,和left join的结果刚好相反,这次是以右表(B)为基础的,A表不足的地方用NULL填充.
+
+
+58* 为表增加列
+alter table 表名 add (字段名 字段类型 默认值 是否为空);
+
+alter table sf_users add (HeadPIC blob);
+alter table sf_users add (userName varchar2(30) default '空' not null);
+检查是否增加
+select * from user_tab_columns where table_name='大写表名'
+
+59* 查看被锁的表
+
+--查看被锁的表
+select b.owner,b.object_name,a.session_id,a.locked_mode from v$locked_object a,dba_objects b where b.object_id = a.object_id;
+
+--查看那个用户那个进程照成死锁
+select b.username,b.sid,b.serial#,logon_time from v$locked_object a,v$session b where a.session_id = b.sid order by b.logon_time;
+
+--查看连接的进程 
+SELECT sid, serial#, username, osuser FROM v$session;
+
+--3.查出锁定表的sid, serial#,os_user_name, machine_name, terminal，锁的type,mode
+SELECT s.sid, s.serial#, s.username, s.schemaname, s.osuser, s.process, s.machine,
+s.terminal, s.logon_time, l.type
+FROM v$session s, v$lock l
+WHERE s.sid = l.sid
+AND s.username IS NOT NULL
+ORDER BY sid;
+
+这个语句将查找到数据库中所有的DML语句产生的锁，还可以发现，
+任何DML语句其实产生了两个锁，一个是表锁，一个是行锁。
+
+--杀掉进程 sid,serial#
+alter system kill session'210,11562';
+
+
+60* 设置行显示列数
+set linesize 800
+show linesize
+
+61* 开启脱机 结束脱机
+spool \tmp\vskedsql.txt
+
+spool off
+
+
+
+--------------------------------------------------------------------------------
+
+开启Oracle命令
+sqlplus
+sqlplus /w
+连接oracle
+conn
+断开oracle
+disc
+
+查看oracle当前用户下所有用户表
+select table_name from user_tables;
+
+查看当前表结构
+desc 表名;
+
+执行外部sql 脚本
+@C:\a.sql
+
+开启脱机
+spool c:\11.txt
+
+结束脱机
+spool off
+
+
+查看命令缓存
+ed 回车
+修改完命令缓存后/回车执行
+默认用户 Oracle 9i默认开启 oracle10G以上默认锁定需要解锁后才能登陆
+scott 密码tiger
+
+--测试脚本 请使用sys用户登陆 登陆时要使用dba权限登陆
+--创建用户
+create user monitor identified by keme;
+--授权连接,资源,给用户
+grant connect,resource,sysdba to monitor;
+--授权无限表空间
+grant unlimited tablespace to monitor;
+--不限表空间
+alter user monitor quota unlimited on users;
+
+
+/**
+*vsked 20130325
+*/
+--测试脚本 请使用monitor用户登陆 登陆时可以使用normal或dba权限登陆
+
+--测试删除过程及函数 8
+drop procedure testprocedure;
+drop function testfunction;
+--测试删除表 9
+drop table testtable;
+--测试建表 1
+create table testtable(
+testids number,
+testname varchar2(200)
+);
+--测试插入数据 2
+insert into testtable values(1,'ss1');
+insert into testtable values(2,'ss2');
+insert into testtable values(3,'ss3');
+--测试更新数据 3
+update testtable set testname='ssk' where testids=2;
+--测试删除数据 4
+delete from testtable where testids=1;
+--测试查询 5
+select * from testtable;
+
+--测试过程 6
+CREATE OR REPLACE PROCEDURE testprocedure AS
+begin
+  select * from testtable;
+end;
+
+--测试函数 7
+CREATE OR REPLACE function testfunction
+Return number
+Is 
+  v_sum number(10,2);
+begin
+  select count(*) into v_sum from user_tables;
+  Return v_sum;
+end;
+
+
+
+
+
+
+
+
+
+
+CREATE user vskedtest IDENTIFIED by keme1806
+grant connect,resource to vskedtest
+------------------------------------------------------------------------------
+DECLARE
+  cursor tblist IS SELECT * from all_tab_comments WHERE owner='MONITORTEST';
+BEGIN
+FOR tb IN tblist loop
+    dbms_output.put_line('select * from '||tb.table_name);
+end loop;
+END;
+
+------------------------------------------------------------------------------
+DECLARE
+  v_sql VARCHAR2(2000);
+  cursor tblist IS SELECT * from all_tab_comments WHERE owner='VSKEDTEST';
+BEGIN
+FOR tb IN tblist loop
+   v_sql:='delete from ' || tb.table_name
+    execute IMMEDIATE v_sql;
+end loop;
+END;
+
+
+------------------------------------------------------------------------------
+
+表空间查看
+select
+b.file_name fileName,
+b.tablespace_name myTableSpace,
+b.bytes/1024/1024 sizeM,
+(b.bytes-sum(nvl(a.bytes,0)))/1024/1024 HasUsedM,
+substr((b.bytes-sum(nvl(a.bytes,0)))/(b.bytes)*100,1,5) useda
+from dba_free_space a,dba_data_files b
+where a.file_id=b.file_id
+group by b.tablespace_name,b.file_name,b.bytes
+order by b.tablespace_name;
+
+
+select tablespace_name ,sum(bytes)/1024/1024 from dba_data_files group by tablespace_name;
+select tablespace_name ,sum(bytes)/1024/1024 from dba_free_space group by tablespace_name;
+
+select FILE_NAME,TABLESPACE_NAME from dba_data_files 
+
+
+
+------------------------------------------------------------------------------
+drop table testTableInfo;
+
+create table testTableInfo(
+testIds number(5) primary key,
+testNumberA number(7,2),
+testVarchar varchar(50),
+testVarchar2 varchar2(50),
+testNVarchar2 nvarchar2(50),
+testDate date default (sysdate),
+testTimeStamp timestamp default (sysdate),
+testChar char(50),
+testNChar nchar(50)
+);
+
+insert into testTableInfo(testIds,testNumberA,testVarchar,testVarchar2,testNVarchar2,testChar,testNChar) 
+values (1, 98.12, 'abcdefg中文在这儿', 'hijklmn三师兄不是来打酱油的吃货', 'opqrstuvw师傅说不会数据库不让吃','aabbccdd传说不在这儿', 'eeffhhii没人听说过这个么' );
+
+select * from testTableInfo;
+
+------------------------------------------------------------------------------
+
+drop table testMainT;
+create table testMainT(
+tmId int primary key,
+tmName varchar(50),
+tmAge int 
+);
+
+select * from testMainT;
+
+drop table testSubT;
+create table testSubT(
+tsId int primary key,
+tsName varchar(50),
+tmId int ,
+constraint uni_tsName unique(tsName),
+constraint fk_tmId foreign key (tmId) references testMainT(tmId)  
+);
+
+select * from testSubT;
+
+------------------------------------------------------------------------------
+drop table areaT;
+CREATE TABLE areaT (
+areaId number(10) ,
+areaName varchar2(200),
+areaNickName varchar2(200),
+areaCode varchar2(200),
+areaSeq number(10),
+areaLevel number(10),
+parentId number(10),
+areaMemo varchar2(500)
+);
+alter table areaT add constraint pk_areaT primary key(areaId);
+alter table areaT add constraint FK_areaT_parentId foreign key(parentId) references areaT(areaId);
+
+
+
+insert into AREAT (AREAID, AREANAME, AREANICKNAME, AREACODE, AREASEQ, AREALEVEL, PARENTID, AREAMEMO) 
+values (1, '中国', '中华', '86', 1, 0,null , '备注');
+insert into AREAT (AREAID, AREANAME, AREANICKNAME, AREACODE, AREASEQ, AREALEVEL, PARENTID, AREAMEMO) 
+values (110000, '北京', '北京市', '010', 110000, 1,1 , '备注');
+insert into AREAT (AREAID, AREANAME, AREANICKNAME, AREACODE, AREASEQ, AREALEVEL, PARENTID, AREAMEMO) 
+values (110101, '东城区', '东城区', '01001', 110101, 2,110000 , '备注');
+insert into AREAT (AREAID, AREANAME, AREANICKNAME, AREACODE, AREASEQ, AREALEVEL, PARENTID, AREAMEMO) 
+values (370000, '山东', '山东省', '0531', 370000, 1,1 , '备注');
+insert into AREAT (AREAID, AREANAME, AREANICKNAME, AREACODE, AREASEQ, AREALEVEL, PARENTID, AREAMEMO) 
+values (370100, '济南', '济南市', '05318', 370100, 2,370000 , '备注');
+
+select * from areaT;
+
+------------------------------------------------------------------------------
+drop TABLE tableInfoT;
+CREATE TABLE tableInfoT (
+tbName varchar2(2000),
+tbColumnS varchar2(3900)
+);
+select * from tableInfoT;
+create or replace procedure getAllTableInfoP AS
+
+ v_tbName varchar2(2000);
+ v_columnInfo varchar2(3900);
+begin
+  
+for tb in(select TABLE_NAME from USER_TABLES) loop
+v_tbName:=tb.TABLE_NAME;
+v_columnInfo:='[';
+
+    for c in (select * from cols where table_name= v_tbName ) loop
+      if length(v_columnInfo)> 3800 then
+        exit;
+      end if;
+      v_columnInfo:= v_columnInfo || '["'|| c.column_name|| '","' || c.data_type || '"],';     
+    end loop;
+    
+    v_columnInfo:=substr(v_columnInfo,1,length(v_columnInfo)-1);
+    v_columnInfo:= v_columnInfo || ']';
+    
+    if length(v_columnInfo)< 3800 then    
+      execute immediate 'insert into tableInfoT(tbName,tbColumnS) values('|| chr(39) || v_tbName || chr(39) || ','|| chr(39) || v_columnInfo || chr(39) || ')';
+    end if;
+    
+end loop;
+
+end;
+
+
+------------------------------------------------------------------------------
+select substr('123456789',1,length('123456789')-1) from dual;  
+------------------------------------------------------------------------------
+
+
+SQL state [60000]; error code [600]; ORA-00600: 内部错误代码, 参数: [kpp_concatq:2], [6], [5], [0], [], [], [], [], [], [], [], []
+; nested exception is java.sql.SQLException: ORA-00600: 内部错误代码, 参数: [kpp_concatq:2], [6], [5], [0], [], [], [], [], [], [], [], []
+
+
+解决方案
+alter system set result_cache_mode=manual; 
+alter system set result_cache_max_size=0; 
+alter system set "_optimizer_ads_use_result_cache"=false;
+
+
+Oracle 12c 查询时字符时遇到的一个bug报告ora-00600 kpp_concatq:2]，该bug由于result cache相关代码引起的，可以临时关闭result cache解决。
+alter system set result_cache_mode=manual; 
+alter system set result_cache_max_size=0; 
+alter system set "_optimizer_ads_use_result_cache"=false;
+
+
+-----------------------------------
+
+alter system set result_cache_mode=auto; 
+alter system set result_cache_max_size=8192; 
+alter system set "_optimizer_ads_use_result_cache"=true;
+
+-----------------------------------
+alter system set result_cache_mode=force; 
+alter system set result_cache_max_size=8192; 
+alter system set "_optimizer_ads_use_result_cache"=true;
+
+--------------------------------------------------------------
+
+select *,case t.name when 1 then '男' when 2 then '女' end as sex from tt t
+
+---------------------------------------------
+时间相关
+
+-- 今天年月日时分秒
+select SYSDATE from dual;
+-- 今天年月日
+select "TO_CHAR"(SYSDATE,'yyyy-MM-dd') from dual;
+
+-- 昨天年月日时分秒
+select SYSDATE - interval '1' day from dual;
+-- 昨天年月日
+select "TO_CHAR"(SYSDATE - interval '1' day,'yyyy-MM-dd')from dual;
+--------------------------------------------------------------------------
+表分区测试
+drop table agentConsume;
+create table agentConsume(
+agentName nvarchar2(32),
+mobileNum nvarchar2(11),
+outdate date
+)
+partition by range (outdate)
+(
+partition p1  values less than (to_date('2017-01-1', 'yyyy-mm-dd')),
+partition p2  values less than (to_date('2017-02-1', 'yyyy-mm-dd')),
+partition p3  values less than (to_date('2017-03-1', 'yyyy-mm-dd')),
+partition p4  values less than (to_date('2017-04-1', 'yyyy-mm-dd')),
+partition p5  values less than (to_date('2017-05-1', 'yyyy-mm-dd')),
+partition p6  values less than (to_date('2017-06-1', 'yyyy-mm-dd')),
+partition p7  values less than (to_date('2017-07-1', 'yyyy-mm-dd')),
+partition p8  values less than (to_date('2017-08-1', 'yyyy-mm-dd')),
+partition p9  values less than (to_date('2017-09-1', 'yyyy-mm-dd')),
+partition p10 values less than (to_date('2017-10-1', 'yyyy-mm-dd')),
+partition p11 values less than (to_date('2017-11-1', 'yyyy-mm-dd')),
+partition p12 values less than (to_date('2017-12-1', 'yyyy-mm-dd')),
+partition p13 values less than (to_date('2018-01-1', 'yyyy-mm-dd')),
+partition p14 values less than (to_date('2018-02-1', 'yyyy-mm-dd')),
+partition p15 values less than (to_date('2018-03-1', 'yyyy-mm-dd')),
+partition p16 values less than (to_date('2018-04-1', 'yyyy-mm-dd')),
+partition p17 values less than (to_date('2018-05-1', 'yyyy-mm-dd')),
+partition p18 values less than (to_date('2018-06-1', 'yyyy-mm-dd')),
+partition p19 values less than (to_date('2018-07-1', 'yyyy-mm-dd')),
+partition p20 values less than (to_date('2018-08-1', 'yyyy-mm-dd')),
+partition p21 values less than (to_date('2018-09-1', 'yyyy-mm-dd')),
+partition p22 values less than (to_date('2018-10-1', 'yyyy-mm-dd')),
+partition p23 values less than (to_date('2018-11-1', 'yyyy-mm-dd')),
+partition p24 values less than (to_date('2018-12-1', 'yyyy-mm-dd')),
+partition p25 values less than (to_date('2019-01-1', 'yyyy-mm-dd')),
+partition p26 values less than (to_date('2019-02-1', 'yyyy-mm-dd')),
+partition p27 values less than (to_date('2019-03-1', 'yyyy-mm-dd')),
+partition p28 values less than (to_date('2019-04-1', 'yyyy-mm-dd')),
+partition p29 values less than (to_date('2019-05-1', 'yyyy-mm-dd')),
+partition p30 values less than (to_date('2019-06-1', 'yyyy-mm-dd')),
+partition p31 values less than (to_date('2019-07-1', 'yyyy-mm-dd')),
+partition p32 values less than (to_date('2019-08-1', 'yyyy-mm-dd')),
+partition p33 values less than (to_date('2019-09-1', 'yyyy-mm-dd')),
+partition p34 values less than (to_date('2019-10-1', 'yyyy-mm-dd')),
+partition p35 values less than (to_date('2019-11-1', 'yyyy-mm-dd')),
+partition p36 values less than (to_date('2019-12-1', 'yyyy-mm-dd'))
+);
+
+insert into agentConsume(agentName,mobileNum,outdate) values('a1','17000001110',to_date('2017-01-01','yyyy-mm-dd'));
+insert into agentConsume(agentName,mobileNum,outdate) values('a2','17000001111',to_date('2017-01-01','yyyy-mm-dd'));
+insert into agentConsume(agentName,mobileNum,outdate) values('a3','17000001112',to_date('2017-01-01','yyyy-mm-dd'));
+
+insert into agentConsume(agentName,mobileNum,outdate) values('b1','17000001120',to_date('2017-02-01','yyyy-mm-dd'));
+insert into agentConsume(agentName,mobileNum,outdate) values('b2','17000001121',to_date('2017-02-01','yyyy-mm-dd'));
+insert into agentConsume(agentName,mobileNum,outdate) values('b3','17000001122',to_date('2017-02-01','yyyy-mm-dd'));
+insert into agentConsume(agentName,mobileNum,outdate) values('b4','17000001123',to_date('2017-02-01','yyyy-mm-dd'));
+
+insert into agentConsume(agentName,mobileNum,outdate) values('c1','17000001130',to_date('2017-03-01','yyyy-mm-dd'));
+
+insert into agentConsume(agentName,mobileNum,outdate) values('d1','17000001140',to_date('2017-04-01','yyyy-mm-dd'));
+insert into agentConsume(agentName,mobileNum,outdate) values('d2','17000001141',to_date('2017-04-01','yyyy-mm-dd'));
+
+select count(1) from agentConsume;
+/*分区表查询*/
+select count(1) from agentConsume partition(p2);  -- 2017年1月份以前数据
+select * from agentConsume partition(p2);   -- 2017年1月份以前数据
+
+select count(1) from agentConsume partition(p3);  -- 2017年2月份以前数据
+select * from agentConsume partition(p3);   -- 2017年2月份以前数据
+
+select count(1) from agentConsume partition(p4);  -- 2017年3月份以前数据
+select * from agentConsume partition(p4);   -- 2017年3月份以前数据
+
+
+--------------------------------------------------------------------------
+更新日期列 只保留年月日去掉时分秒
+UPDATE TMPACTIVEDATA set ACTIVEDATE="TO_DATE"("TO_CHAR"(ACTIVEDATE,'yyyy-MM-dd'),'yyyy-MM-dd') ;
+
+--------------------------------------------------------------------------
+大数据量插入先关闭日志再打开
+alter table tmpActiveData NOLOGGING;
+alter table tmpActiveData LOGGING;
+--------------------------------------------------------------------------
+查找重复数据
+select "phoneNum",sum(1) from "agentT" group by "phoneNum" HAVING sum(1)>1;
+--------------------------------------------------------------------------
+查找重复数据找出日期最大的那条数据
+select * from vskedtestdata va1 where va1.mydate=(select max(mydate) from vskedtestdata va2 where va1.PHONENUMBER= va2.PHONENUMBER)
+
+
+--------------------------------------------------------------------------
+A表某字段出现在B表中次数
+create table testA1
+(
+tid varchar(32),
+tname varchar(32)
+);
+insert into testA1 values('a1','a11');
+insert into testA1 values('a2','a22');
+insert into testA1 values('a3','a33');
+select * from testA1;
+create table testA2
+(
+tid varchar(32),
+vaxv varchar(32)
+);
+insert into testA2 values('a1','b11');
+insert into testA2 values('a1','b21');
+insert into testA2 values('a1','b31');
+insert into testA2 values('a1','b31');
+insert into testA2 values('a2','b11');
+insert into testA2 values('a2','b21');
+select * from testA2;
+
+select TID,sum(1) from (
+select testA1.TID,vaxv from testA1 LEFT JOIN testA2 on testA1.tid=testA2.tid 
+) v1 group by TID ;
+
+select TID,sum(1) from (
+select testA1.TID,vaxv from testA1 LEFT JOIN testA2 on testA1.tid=testA2.tid 
+) v1 group by TID HAVING sum(1)>1;
+--------------------------------------------------------------------------
+
+抽取后三位手机号一样的数据
+select * from DETAIL_IN where "SUBSTR"(PHONENUM,9,3) in(111,222,333,444,555,666,777,888,999,000) 
+and "SUBSTR"(PHONENUM,9,1) <>  "SUBSTR"(PHONENUM,8,1);
+抽取后三位手机号一样的数据正则表达式版本速度会慢一些但可以处理复杂情况
+select * from DETAIL_IN where regexp_substr(PHONENUM,'(\d)\1{2}',9) is not null 
+and "SUBSTR"(PHONENUM,9,1) <>  "SUBSTR"(PHONENUM,8,1);
+
+
+--------------------------------------------------------------------------
+根据一张表数据更新另一张表
+
+drop table testp1;
+drop table testp2;
+
+create table testp1(
+phoneNum varchar2(32),
+phoneSim varchar2(32)
+);
+
+insert into testp1 values('1','2a');
+insert into testp1 values('2','3a');
+insert into testp1 values('3','9a');
+insert into testp1 values('5','5a');
+
+select * from testp1;
+
+create table testp2(
+phoneNum varchar2(32),
+phoneSim varchar2(32)
+);
+
+insert into testp2 values('1','1a');
+insert into testp2 values('2','2a');
+insert into testp2 values('3','3a');
+
+select * from testp2;
+
+update testp1 set phoneSim=(select phoneSim from testp2 where testp1.phoneNum=testp2.phoneNum ) 
+where testp1.phoneNum in(select phoneNum from testp2) ;
+--------------------------------------------------------------------------
+drop table vskedtestgroup;
+create table vskedtestgroup(
+phoneseg varchar2(32),
+agentname varchar2(32),
+area varchar2(32),
+monthprice number(10)
+);
+
+insert into vskedtestgroup values('1710911','王四','济南',1);
+insert into vskedtestgroup values('1710911','王四','济南',2);
+insert into vskedtestgroup values('1710911','王四','青岛',3);
+insert into vskedtestgroup values('1710911','王四','青岛',1);
+
+select phoneseg,agentname,area,sum(monthprice) mymonthprice from vskedtestgroup group by phoneseg,agentname,area ;
+--------------------------------------------------------------------------
+取分组后前三条记录
+select * from (
+SELECT b,c,row_number() OVER(PARTITION BY b ORDER BY c desc) e FROM test_abc) t where e <= 3
+
+--------------------------------------------------------------------------
+分组后取前五条数据
+drop table testmiddles1;
+create table testmiddles1 as 
+select * from (
+SELECT CUSTOMERNAME,TO_CHAR (ADDTIME, 'yyyy-mm-dd') mydate,"NUMBER"  FROM A 
+LEFT JOIN NEWORDER ON A .A1 = NEWORDER.CUSTOMERNAME GROUP BY CUSTOMERNAME, TO_CHAR (ADDTIME, 'yyyy-mm-dd'),"NUMBER" 
+ORDER BY CUSTOMERNAME,TO_CHAR (ADDTIME, 'yyyy-mm-dd') );
+
+
+select * from testmiddles1;
+
+select * from (
+SELECT CUSTOMERNAME,mydate,"NUMBER",row_number() OVER(PARTITION BY CUSTOMERNAME ORDER BY mydate asc) e FROM testmiddles1) t where e <= 5;
+
+
+--------------------------------------------------------------------------
+删除表前判断
+create or replace procedure dropObject(ObjName varchar2,ObjType varchar2)
+is
+ v_counter number := 0;   
+begin    
+  if upper(ObjType) = 'TABLE' then
+    select count(*) into v_counter from user_tables where table_name = upper(ObjName);
+    if v_counter > 0 then          
+      execute immediate 'drop table ' || ObjName || ' cascade constraints';        
+    end if;   
+  end if;
+  if upper(ObjType) = 'PROCEDURE' then
+    select count(*) into v_counter from User_Objects where object_type = 'PROCEDURE' and OBJECT_NAME = upper(ObjName);
+      if v_counter > 0 then          
+        execute immediate 'DROP PROCEDURE ' || ObjName;        
+      end if; 
+  end if;
+  if upper(ObjType) = 'FUNCTION' then
+    select count(*) into v_counter from User_Objects where object_type = 'FUNCTION' and OBJECT_NAME = upper(ObjName);
+      if v_counter > 0 then          
+        execute immediate 'DROP FUNCTION ' || ObjName;        
+      end if; 
+  end if;
+  if upper(ObjType) = 'TRIGGER' then
+    select count(*) into v_counter from User_Triggers where TRIGGER_NAME = upper(ObjName);
+      if v_counter > 0 then          
+        execute immediate 'DROP TRIGGER ' || ObjName;
+      end if; 
+  end if;
+  if upper(ObjType) = 'VIEW' then
+    select count(*) into v_counter from User_Views where VIEW_NAME = upper(ObjName);
+      if v_counter > 0 then          
+        execute immediate 'DROP VIEW ' || ObjName;        
+      end if; 
+  end if;
+  if upper(ObjType) = 'SEQUENCE' then
+    select count(*) into v_counter from user_sequences where sequence_name = upper(ObjName);
+      if v_counter > 0 then          
+        execute immediate 'DROP SEQUENCE ' || ObjName;        
+      end if; 
+  end if;
+end;
+
+
+调用示例
+exec dropObject('temp_table','table');
+
+--------------------------------------------------------------------------

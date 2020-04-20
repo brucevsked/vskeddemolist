@@ -1,0 +1,69 @@
+
+1* 连接数据库
+sqlline.py 192.168.127.129:2181
+
+2* 查看帮助
+!help
+
+3* 创建表
+!sql create table vskedtest(id bigint primary key,testname varchar(200),userid bigint);
+
+create table vskedtest(id bigint primary key,testname varchar(200),userid bigint) COMPRESSION='GZ'
+create table vskedtest(id bigint primary key,testname varchar(200),userid bigint) SALT_BUCKETS=16
+
+4* 查看表
+!tables
+
+5* 插入数据
+upsert into vskedtest(id,testname,userid) values(1,'halloaa',1);
+upsert into vskedtest(id,testname,userid) values(2,'newtestphoenix',2);
+upsert into vskedtest(id,testname,userid) values(3,'lovegirl',3);
+upsert into vskedtest(id,testname,userid) values(4,'justphoenix',4);
+
+6* 查询数据
+select * from vskedtest;
+
+7* 退出
+!q
+
+8* 二级索引创建与删除For Phoenix 4.12 and later
+hbase-site.xml
+<property>
+  <name>hbase.regionserver.wal.codec</name>
+  <value>org.apache.hadoop.hbase.regionserver.wal.IndexedWALEditCodec</value>
+</property>
+
+create index mytestindex1 on vskedtest(testname) include(id,userid);
+drop index mytestindex1 on vskedtest;
+
+
+9* 查看执行计划，用于优化sql语句
+EXPLAIN 要执行的语句
+
+10* 分页
+LIMIT  偏移量 OFFSET 起始数据行
+查询第11条到第20条数据
+SELECT title, author, isbn, description FROM library WHERE published_date > 2010 LIMIT 10 OFFSET 10
+
+11* 删除数据
+delete from vskedtest;
+
+12* ALTER 修改语句
+Alters an existing table by adding or removing columns or updating table options. 
+When a column is dropped from a table, the data in that column is deleted as well. PK columns may not be dropped, and only nullable PK columns may be added. For a view, the data is not affected when a column is dropped. Note that creating or dropping columns only affects subsequent queries and data modifications. Snapshot queries that are connected at an earlier timestamp will still use the prior schema that was in place when the data was written.
+
+Example:
+
+ALTER TABLE my_schema.my_table ADD d.dept_id char(10) VERSIONS=10
+ALTER TABLE my_table ADD dept_name char(50), parent_id char(15) null primary key
+ALTER TABLE my_table DROP COLUMN d.dept_id, parent_id;
+ALTER VIEW my_view DROP COLUMN new_col;
+ALTER TABLE my_table SET IMMUTABLE_ROWS=true,DISABLE_WAL=true;
+
+
+为表vskedtest添加一列newnick数据类型char长度50
+ALTER TABLE vskedtest ADD newnick char(50)
+
+
+
+

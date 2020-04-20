@@ -1,0 +1,346 @@
+安装参考
+https://www.postgresql.org/download/linux/redhat/
+https://www.jianshu.com/p/b4a759c2208f
+
+如果不行配置上网易的yum源安装少的包
+
+centos 系统安装
+yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+yum install postgresql11
+yum install postgresql11-server
+
+
+/usr/pgsql-11/bin/postgresql-11-setup initdb
+systemctl enable postgresql-11
+systemctl start postgresql-11
+
+默认会创建一个名为postgres的linux登录用户，这里进行密码修改
+对postgresql.conf文件进行编辑
+cd /var/lib/pgsql/11/data/
+vi postgresql.conf 
+
+listen_addresses = '*'	
+
+vi pg_hba.conf
+# IPv4 local connections:
+host    all             all             0.0.0.0/0            md5
+
+
+systemctl restart postgresql-11
+
+用postgres账号登录centos服务器，并修改数据库用户密码（或者直接 su postgres 切换过去）
+su postgres
+psql -U postgres
+\password
+输入新密码
+Y4yhl9tbf110
+
+查看版本号
+ select version();
+
+默认用户名
+默认端口5432
+postgres
+Y4yhl9tbf110
+
+
+1*创建用户
+create user username with password '****';
+
+2*创建数据库
+create database dbtest owner username; -- 创建数据库指定所属者
+CREATE DATABASE "jcdzframe1" WITH OWNER = "jcdzframe1" TEMPLATE = "template0" ENCODING = 'UTF8';
+
+3*将数据库得权限，全部赋给某个用户
+grant all on database dbtest to username; -- 将dbtest所有权限赋值给username
+
+4*切换数据库
+\c 库名;
+
+5*切换用户
+\c - 用户名;
+
+6* 建表
+drop table if exists sysUserT ;
+
+create table sysUserT(
+sysuserid varchar(32)  primary key                ,
+sysusername varchar(64) unique not null           ,
+sysuserpwd varchar(64) not null                   ,
+sysusermobile varchar(64)                         ,
+sysusernick  varchar(64)                          ,
+sysusermail varchar(64)                           ,
+sysuseraddtime timestamp default CURRENT_TIMESTAMP 
+);
+
+comment on table sysUserT is '系统用户表';
+comment on column sysUserT.sysuserid is '用户编号';
+
+
+insert into sysUserT(sysuserid,sysusername,sysuserpwd) VALUES('40000000000000000000000000000001','superadmin','670b14728ad9902aecba32e22fa4f6bd');
+insert into sysUserT(sysuserid,sysusername,sysuserpwd) VALUES('40000000000000000000000000000002','commonadmin','670b14728ad9902aecba32e22fa4f6bd');
+insert into sysUserT(sysuserid,sysusername,sysuserpwd) VALUES('40000000000000000000000000000003','commonuser','670b14728ad9902aecba32e22fa4f6bd');
+
+select * from sysUserT;
+
+7* 查看数据库列表
+\l
+
+8* 查看扩展
+select * from pg_extension;
+
+9* 修改最大连接数
+shared_buffers：这是最重要的参数，postgresql通过shared_buffers和内核和磁盘打交道，因此应该尽量大，让更多的数据缓存在shared_buffers中。通常设置为实际RAM的10％是合理的，比如50000(400M)
+work_mem：在pgsql8.0之前叫做sort_mem。postgresql在执行排序操作时，会根据work_mem的大小决定是否将一个大的结果集拆分为几个小的和work_mem查不多大小的临时文件。显然拆分的结果是降低了排序的速度。因此增加work_mem有助于提高排序的速度。通常设置为实际RAM的2%-4%，根据需要排序结果集的大小而定，比如81920(80M)
+effective_cache_size：是postgresql能够使用的最大缓存，这个数字对于独立的pgsql服务器而言应该足够大，比如4G的内存，可以设置为3.5G(437500)
+maintenance_work_mem：这里定义的内存只是在CREATE INDEX, VACUUM等时用到，因此用到的频率不高，但是往往这些指令消耗比较多的资源，因此应该尽快让这些指令快速执行完毕：给maintenance_work_mem大的内存，比如512M(524288)
+max_connections：通常，max_connections的目的是防止max_connections *work_mem超出了实际内存大小。比如，如果将work_mem设置为实际内存的2%大小，则在极端情况下，如果有50个查询都有排序要求，而且都使用2％的内存，则会导致swap的产生，系统性能就会大大降低。当然，如果有4G的内存，同时出现50个如此大的查询的几率应该是很小的。不过，要清楚max_connections和work_mem的关系。
+
+/var/lib/pgsql/11/data/postgresql.conf
+max_connections = 8000
+shared_buffers=1024MB
+work_mem=327MB
+effective_cache_size = 4GB
+maintenance_work_mem=512MB
+
+10* 导入导出
+导出
+pg_dump -h 127.0.0.1 -U postgres databasename > /opt/databasename.bak
+导入
+psql -h 127.0.0.1 -U postgres -d databasename < databasename.bak
+
+11* 添加字段
+alter table dev_device add column if not exists isimportantdev bool default FALSE ;
+alter table dev_device alter column "isimportantdev" set NOT NULL;
+comment on column dev_device.isimportantdev is '是否重大设备';
+
+12* 获取数据库中所有表
+select * from pg_tables where schemaname = 'public';
+
+13* 获取数据库中表的所有列
+
+SELECT col_description(a.attrelid,a.attnum) as comment,format_type(a.atttypid,a.atttypmod) as type,a.attname as name, a.attnotnull as notnull
+FROM pg_class as c,pg_attribute as a where c.relname = '表名' and a.attrelid = c.oid and a.attnum>0
+
+SELECT col_description(a.attrelid,a.attnum) as comment,format_type(a.atttypid,a.atttypmod) as type,a.attname as name, a.attnotnull as notnull
+FROM pg_class as c,pg_attribute as a where c.relname = 'sysmenut' and a.attrelid = c.oid and a.attnum>0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+测试查询加插入
+
+create table t1(
+tid smallint primary key,
+tname varchar(32),
+tvalue varchar(32)
+);
+insert into t1 values(1,'test1','testvalue1');
+insert into t1 values(2,'test2','testvalue2');
+insert into t1 values(3,'test3','testvalue3');
+select * from t1;
+
+create table t2(
+tid smallint primary key,
+tname varchar(32),
+tvalue varchar(32)
+);
+
+select * from t2;
+
+insert into t2(tid,tvalue) select tid,tvalue from t1;
+
+
+
+----------------------------------------------------------------
+优化
+The default maximum segment size is 32 MB, and the default maximum total size is 2097152 pages. A page is almost always 4096 bytes except in unusual kernel configurations with “huge pages” (use getconf PAGE_SIZE to verify).
+
+The shared memory size settings can be changed via the sysctl interface. For example, to allow 16 GB:
+sysctl -w kernel.shmmax=17179869184
+$ sysctl -w kernel.shmall=4194304
+In addition these settings can be preserved between reboots in the file /etc/sysctl.conf. Doing that is highly recommended.
+
+Ancient distributions might not have the sysctl program, but equivalent changes can be made by manipulating the /proc file system:
+$ echo 17179869184 >/proc/sys/kernel/shmmax
+$ echo 4194304 >/proc/sys/kernel/shmall
+
+at file vi /etc/sysctl.conf
+kernel.shmmax=135497418752
+kernel.shmall = 4294967296
+kernel.shmmni = 4096
+kernel.sem = 250 32000 100 128
+fs.file-max = 65536
+net.ipv4.ip_local_port_range = 1024 65000
+net.core.rmem_default = 262144
+net.core.rmem_max = 262144
+net.core.wmem_default = 262144
+net.core.wmem_max = 262144
+vm.dirty_background_bytes = 102400000
+vm.dirty_ratio = 80
+vm.nr_hugepages = 102352
+
+
+/etc/security/limits.conf
+* soft nofile 655360
+* hard nofile 655360
+* soft nproc 655360
+* hard nproc 655360
+* soft stack unlimited
+* hard stack unlimited
+* soft   memlock    250000000
+* hard   memlock    250000000
+
+postgres 性能优化
+系统优化
+修改 /etc/grub.conf
+关闭 numa=off ，修改磁盘IO调度方式 elevator=deadline
+
+修改方法：
+
+grubby --update-kernel=ALL --args="transparent_hugepage=never" --args="elevator=deadline"
+验证：
+grubby --info=ALL
+返回
+args="ro crashkernel=auto rhgb quiet numa=off elevator=deadline"
+关闭内存大页 hugepage
+验证是否开启方法1： 
+如果以下文件不存在，则是THP已经从内核中移除。
+/sys/kernel/mm/transparent_hugepage or /sys/kernel/mm/redhat_transparent_hugepage
+验证是否开启方法2： 
+cat /sys/kernel/mm/transparent_hugepage/enabled
+[always] madvise never
+
+[always] == 》表示开启
+禁用内存大页
+方法：
+修改 /etc/rc.local
+
+# vi /etc/rc.local #追加，禁用大页
+
+if test -f /sys/kernel/mm/transparent_hugepage/enabled; then
+  echo never > /sys/kernel/mm/transparent_hugepage/enabled
+fi
+if test -f /sys/kernel/mm/transparent_hugepage/defrag; then
+  echo never > /sys/kernel/mm/transparent_hugepage/defrag
+fi
+内核优化
+vi /etc/sysctl.conf  
+添加内容如下：
+
+vm.swappiness = 0
+kernel.shmmax=135497418752
+net.core.rmem_max = 4194304
+net.core.wmem_max = 4194304
+net.core.rmem_default = 262144
+net.core.wmem_default = 262144
+net.ipv4.ip_local_port_range = 9000 65535
+kernel.sem = 50100 64128000 50100 1280
+vm.dirty_background_bytes = 102400000
+vm.dirty_ratio = 80
+vm.nr_hugepages = 102352
+
+/etc/security/limits.conf
+* soft nofile 655360
+* hard nofile 655360
+* soft nproc 655360
+* hard nproc 655360
+* soft stack unlimited
+* hard stack unlimited
+* soft   memlock    250000000
+* hard   memlock    250000000
+块设备预读
+blockdev --setra 16384 /dev/sda
+
+设置开机启动生效：
+
+echo "blockdev --setra 16384 /dev/sda" >> /etc/rc.local 
+postgres 数据层面优化
+涉及命令令
+ALTER SYSTEM SET
+ALTER SYSTEM SET configuration_parameter { TO | = } { value | 'value' | DEFAULT }
+Case：
+
+alter system set max_connections='50';
+SHOW configuration_parameter
+Case：
+
+show max_connections
+实现原理：
+调用该命令的用户必须具有超级用户权限。修改系统配置文件postgresql.conf，通过系统信号，重新加载该配置文件.
+
+查询postgresql配置选项生效级别和默认值信息；
+select name, context,setting,unit,source,sourcefile from pg_settings;
+internal: 编译期间的设置，只有重新编译才能生效。
+postmaster: 只有服务重启才能生效。
+sighup: 给服务器发送HUP信号会是服务器重新加载postgresql.conf配置，可以立即生效。
+backend: 与sighup类似，但是不影响正在运行的会话，只在新会话中生效
+superuser: 使用superuser(如postgres)才能更改，不用重新加载所有配置即可生效。
+user: 单个会话用户可以在任意时间做修改，只会影响该会话。
+优化数据库主机配置
+系统
+more /etc/redhat-release 
+CentOS Linux release 7.5.1804 (Core) 
+内核
+uname  -a
+Linux jp33e506-3-22.ptengine.com 3.10.0-862.2.3.el7.x86_64 #1 SMP Wed May 9 18:05:47 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+内存
+Mem:         128763   
+核心优化选项：
+postmaster: 只有服务重启才能生效。
+alter system set max_connections='50';
+alter system set shared_buffers='30GB';
+alter system set wal_buffers='64MB';
+sighup: 给服务器发送HUP信号会是服务器重新加载postgresql.conf配置，可以立即生效。
+alter system set checkpoint_completion_target='0.9';
+alter system set checkpoint_timeout='15min';
+alter system set fsync='off';
+superuser: 使用superuser(如postgres)才能更改，不用重新加载所有配置即可生效。
+alter system set commit_delay='10';
+user: 单个会话用户可以在任意时间做修改，只会影响该会话。
+alter system set autovacuum_work_mem='1GB';
+alter system set commit_siblings='6';
+alter system set effective_cache_size='50GB';
+alter system set maintenance_work_mem='1GB';
+alter system set work_mem='16MB';
+查看 优化结果
+show max_connections;
+show shared_buffers;
+show wal_buffers;
+show checkpoint_completion_target;
+show checkpoint_timeout;
+show fsync;
+show commit_delay;
+show autovacuum_work_mem;
+show commit_siblings;
+show effective_cache_size;
+show maintenance_work_mem;
+show work_mem;
+
+----------------------------------------------------------------
+问题解决
+windows版本postgresql如果无法启动需要配置一下环境变量
+POSTGRESQL_HOME
+PATH
+再使用
+pg_ctl -D "d:\Program Files\PostgreSQL\11\data" start
+查看
+pg_ctl -D "d:\Program Files\PostgreSQL\11\data" status
+1命令行 启动服务
+
+ pg_ctl -D "C:\Program Files\PostgreSQL\9.1\data" start
+2 查看状态
+ pg_ctl -D "C:\Program Files\PostgreSQL\9.1\data" status 
+3 如果收到的错误是 1063 , 很可能是没有权限 执行下面的命令
+ cacls "C:\Program Files\PostgreSQL\9.1\data" /E /T /C /G postgres:F
+4 重新执行start/status 命令 来回执行几次 可能就正常了

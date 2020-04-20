@@ -1,0 +1,27 @@
+
+1* 格式化 namenode
+hadoop namenode -format
+
+2* 查看目录列表
+hadoop fs -ls /
+
+3* 删除文件 生产环境不要用!!
+hadoop fs -rm -r /hbase
+
+4* 查看文件内容
+hadoop fs -cat /input.txt
+
+5* 上传文件到hdfs
+hadoop fs -put 本地文件系统(宿主机文件) hdfs文件系统
+hadoop fs -put /tmp/test.txt /mytext.txt
+
+6* 删除目录 生产环境不要用!!
+hadoop fs -rm -r /hbase
+
+hadoop fs -rm -r /hbase/data/default/RYWZ
+
+7* 创建目录
+hadoop fs -mkdir /hbase/WALs/pc2p30,16020,1574733126459-splitting
+
+8* 创建文件
+fs -touchz /hbase/WALs/pc2p30,16020,1574733126459-splitting/pc2p30,16020,1574733126459.meta.1574733131034.meta
