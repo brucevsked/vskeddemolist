@@ -76,7 +76,7 @@ public class SysUserDaoTest extends BaseDaoTest {
 		
 	}
 	
-	@Test
+//	@Test
 	public void saveOrUpdateTest() {
 		long begin = System.nanoTime();
 		Map<String, Object> userMap=new HashMap<String, Object>();
@@ -90,6 +90,28 @@ public class SysUserDaoTest extends BaseDaoTest {
 		
 		log.error("a|"+(TimeUnit.NANOSECONDS.toSeconds(end-begin))+"|s");
 		
+	}
+	
+	@Test
+	public void saveOrUpdateBatchTest() {
+		long begin = System.nanoTime();
+		//开启批量开启手动提交模式
+		SqlSession sqlSession=sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
+		//设置提交的dao
+		sysUserDao=sqlSession.getMapper(SysUserDao.class);
+		for(int i=0;i<5;i++) {
+		Map<String, Object> userMap=new HashMap<String, Object>();
+		userMap.put("sysuserid", "1000"+i);
+		userMap.put("sysusername", "vsked1001"+i);
+		userMap.put("sysuserpwd", "abc12346"+i);
+		int c=sysUserDao.saveOrUpdate(userMap);
+		log.info("|"+c+"|");
+		}
+		
+		sqlSession.commit();//手动提交
+        long end = System.nanoTime();
+		
+		log.error("b|"+(TimeUnit.NANOSECONDS.toSeconds(end-begin))+"|s");
 	}
 
 }
