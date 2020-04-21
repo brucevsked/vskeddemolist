@@ -21,3 +21,34 @@ InitializingBean接口为bean提供了初始化方法的方式，它只包括aft
 4、使用@PostConstruct 注解
 
 5、实现InitializingBean接口
+
+
+6、应用启动类添加任务注解
+@EnableScheduling
+@ComponentScan({"com.vsked.autostart","com.vsked.task"})
+再编写一个类 放到com.vsked.task包里面
+package com.vsked.task;
+
+import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyTask {
+	
+	private static final Logger log = LoggerFactory.getLogger(MyTask.class);
+	
+	@Scheduled(cron = "0 */1 * * * ?")
+	public void cleanLog1DataTask() {
+		log.info("one minute|"+new Date()+"|");
+	}
+	
+	@Scheduled(cron = "*/10 * * * * ?")
+	public void cleanLog2DataTask() {
+		log.info("ten seconds|"+new Date()+"|");
+	}
+
+}

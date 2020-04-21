@@ -13,7 +13,7 @@ public class ApplicationListenerAutoStart implements ApplicationListener<Applica
 
 	@Override
 	public void onApplicationEvent(ApplicationEvent arg0) {
-		log.debug("ApplicationListenerAutoStart----------3------many times,启动了很多次,第3个启动");
+		log.debug("ApplicationListenerAutoStart----------3------many times,启动了很多次,第3个启动 stop will run it");
 	}
 
 }
