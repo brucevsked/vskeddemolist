@@ -1,0 +1,32 @@
+﻿1*按天统计
+select 日期时间=convert(char(10), 日期字段A , 120), 数量=sum(1) from 表名 group by convert(char(10), 日期字段A, 120) 
+例
+select 日期时间=convert(char(10), addTime, 120), 数量=sum(1) from mobileInfoT group by convert(char(10), addTime, 120) 
+
+2*按周统计
+select 日期时间=datepart(week, 日期字段A), 数量=sum(1) from 表名  where year(日期字段A)=year(getdate())  group by datepart(week, 日期字段A)
+例
+select 日期时间=datepart(week, addTime), 数量=sum(1) from mobileInfoT  where year(addTime)=year(getdate())  group by datepart(week, addTime) 
+
+3*按月统计
+select 日期时间=convert(char(7), 日期字段A, 120), 数量=sum(1) from 表名 group by convert(char(7), 日期字段A, 120) 
+例
+select 日期时间=convert(char(7), addTime, 120), 数量=sum(1) from mobileInfoT group by convert(char(7), addTime, 120) 
+
+4*按年统计
+SELECT DATENAME(year,日期字段A) 年,COUNT(1) 数量 FROM 表名 t(NOLOCK) WHERE 日期字段A BETWEEN '2014-1-1' AND '2018-1-1' GROUP BY DATENAME(year,日期字段A) ORDER BY CONVERT(INT,DATENAME(year,日期字段A));
+例
+SELECT DATENAME(year,addTime) 年,COUNT(1) 数量 FROM mobileInfoT t(NOLOCK) WHERE addTime BETWEEN '2014-1-1' AND '2018-1-1' GROUP BY DATENAME(year,addTime) ORDER BY CONVERT(INT,DATENAME(year,addTime));
+
+5* 查询所有数据库名
+
+SELECT Name FROM Master..SysDatabases ORDER BY Name;
+
+
+
+
+
+
+--------------------------------------------------------------
+
+select *,case t.name when 1 then '男' when 2 then '女' end as sex from tt t

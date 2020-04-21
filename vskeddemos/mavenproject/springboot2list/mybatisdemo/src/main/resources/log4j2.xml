@@ -72,13 +72,13 @@
         <logger name="org.springframework" level="ERROR"></logger>
         <logger name="org.hibernate" level="ERROR"></logger>
         <logger name="com.zaxxer" level="ERROR"></logger>
-        <logger name="org.mybatis" level="ERROR"></logger>
+        <logger name="org.mybatis" level="DEBUG"></logger>
         <logger name="io.netty" level="ERROR"></logger>
         <logger name="io.lettuce" level="ERROR"></logger>
         <logger name="springfox.documentation" level="ERROR"></logger>
         <logger name="org.apache" level="ERROR"></logger>
         <logger name="reactor.util" level="ERROR"></logger>
-        <root level="error">
+        <root level="ALL">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
             <appender-ref ref="RollingFileWarn"/>

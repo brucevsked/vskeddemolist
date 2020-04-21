@@ -1,0 +1,113 @@
+
+1* open cmd window
+db2cmd
+
+2* open control center
+db2cmd db2cc
+
+3* open command edit
+db2cmd db2ce
+
+database operate command
+
+4* start db2
+db2start
+
+5* stop db2
+db2stop
+
+db2 force application all
+db2stop force
+
+6* create db
+db2 create db [dbname]
+
+7* connect database
+db2 connect to [dbname] user [username] using [password]
+
+8* break connect
+db2 connect reset
+
+9* list all db
+db2 list db directory
+
+10* list all active db
+db2 list active databases
+
+11* list all db config
+db2 get db cfg
+
+12* delete db
+db2 drop database [dbname]
+
+
+operate table command
+
+13* list all user tables
+db2 list tables
+
+14* list all system tables
+db2 list tables for system
+
+15* list all tables
+db2 list tables for all
+
+16* list all user tables
+db2 list tables for user
+
+17* list for especially user tables 
+db2 list tables for schema [user]
+
+18* create new table same old table
+db2 create table [t1] like [t2]
+
+19* copy data to another table
+db2 "insert into [t1] select * from [t2]"
+
+20* select table data
+db2 "select * from  [tablename] "
+
+21* view table construct
+db2 describe table [tablename]
+
+22* modify column
+db2 alter table [tablename] alter column [columnname] set data type varchar(500)
+
+execute script command
+
+23* execute script
+db2 -tvf "c:\script.sql"
+
+24* view command help
+db2 ? db2start
+
+25* view error code
+db2 ? 22001
+
+26* backup database
+db2 backup db [dbname]
+
+27* online backup db
+db2 -v "BACKUP DATABASE [dbname] ONLINE TO [path] WITH 2 BUFFERS BUFFER10 24 INCLUDE LOGS WITHOUT PROMPTING"
+
+28* restore db
+db2 restore db [source db name]
+
+29* online restore db
+db2 "RESTORE DB [db name ] TO [db path] LOGTARGET [logpath] WITHOUT PROMPTING"
+
+db2 "ROLLFORWARD DB [dbname] TO END OF LOGS AND STOP"
+
+30* export data files
+db2move [dbname] export
+
+(-sn [schema name])
+(-tn [tablename,tablename])
+
+31* import data file
+db2move [dbname] import
+
+
+
+31* 
+
