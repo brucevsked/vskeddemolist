@@ -12,9 +12,9 @@ vskeddemos/mavenproject/springboot2list/springdatajpa/.project
 *.component
 pom.properties
 
-vskeddemos/mavenproject/**/.classpath
-vskeddemos/mavenproject/**/.project
-vskeddemos/mavenproject/**/.settings/*.*
+vskeddemos/mavenproject/**/*.classpath
+vskeddemos/mavenproject/**/*.project
+vskeddemos/**/.settings/*.*
 vskeddemos/mavenproject/**/target
 vskeddemos/mavenproject/**/*.class
 vskeddemos/mavenproject/designmode/.classpath
@@ -26,4 +26,3 @@ vskeddemos/mavenproject/designmode/.settings/*.*
 vskeddemos/mavenproject/designmode/.settings/org.eclipse.wst.common.component
 vskeddemos/mavenproject/vskedtool/.myeclipse/**/*.*
 vskeddemos/mavenproject/vskedtool/target/**/*.*
-
