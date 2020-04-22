@@ -118,13 +118,16 @@ comment on column dev_device.isimportantdev is '是否重大设备';
 select * from pg_tables where schemaname = 'public';
 
 13* 获取数据库中表的所有列
-
 SELECT col_description(a.attrelid,a.attnum) as comment,format_type(a.atttypid,a.atttypmod) as type,a.attname as name, a.attnotnull as notnull
 FROM pg_class as c,pg_attribute as a where c.relname = '表名' and a.attrelid = c.oid and a.attnum>0
 
 SELECT col_description(a.attrelid,a.attnum) as comment,format_type(a.atttypid,a.atttypmod) as type,a.attname as name, a.attnotnull as notnull
 FROM pg_class as c,pg_attribute as a where c.relname = 'sysmenut' and a.attrelid = c.oid and a.attnum>0
 
+14* saveOrUpdate实现，保存或更新
+9.5 版本支持 “UPSERT” 特性
+insert into sysusert(sysuserid,sysusername,sysuserpwd) values('1000','vskeda','0000') ON CONFLICT(sysuserid) 
+do update set sysusername='kkkkkkkkj',sysuserpwd='oooooooooo';
 
 
 

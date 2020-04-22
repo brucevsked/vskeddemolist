@@ -1,0 +1,52 @@
+1* 查看flume版本
+flume-ng version
+
+2* 使用配置文件启动flume
+前台启动
+flume-ng agent -n agent -c conf -f /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dflume.root.logger=ALL,console
+
+后台启动
+nohup flume-ng agent -n agent -c conf -f /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dflume.root.logger=console  >/logs/flume.log 2>&1 &"
+
+3* 不在/tmp目录下生成flume.log日志
+删除/opt/apache-flume-1.9.0-bin/lib目录中
+slf4j-log4j12-1.7.25.jar
+log4j-1.2.17.jar
+两个jar包
+
+4* 使用zookeeper存储配置启动
+nohup /opt/testevn1/apache-flume-1.9.0-bin/bin/flume-ng agent --conf conf -z 192.168.111.52:2181 -p /flumeConfig -name a107684481115660288 -Dflume.root.logger=INFO,console >/logs/flumevskedtest1.log 2>&1 &
+
+5* 开启http监控
+通过添加以下两个参数可以监控flume情况未测试
+-Dflume.monitoring.type=http -Dflume.monitoring.port=34545 
+
+
+
+
+
+
+
+
+
+
+通过添加以下两个参数可以监控flume情况未测试
+-Dflume.monitoring.type=http -Dflume.monitoring.port=34545 
+启动flume
+flume-ng agent -n agent -c conf -f /opt/testevn1/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dflume.root.logger=ALL,console
+后台启动flume
+nohup flume-ng agent -n agent -c conf -f /opt/testevn1/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dflume.root.logger=ALL,console &
+flume使用zookeeper保存配置文件启动
+flume-ng agent --conf conf -z 192.168.60.10:2181 -p /flume_config -name flume2Kafka -Dflume.root.logger=INFO,console
+
+
+flume使用zookeeper保存配置文件启动
+flume-ng agent --conf conf -z 192.168.60.10:2181 -p /flume_config -name flume2Kafka -Dflume.root.logger=INFO,console
+
+nohup flume-ng agent --conf conf -z 192.168.60.10:2181 -p /flumeConfig -name a3 -Dflume.root.logger=INFO,console &
+
+远程启flume
+ssh -p22 root@192.168.60.10 "nohup /home/hadoop/app/apache-flume-1.9.0-bin/bin/flume-ng agent --conf conf -z 192.168.60.10:2181 -p /flumeConfig -name a3 -Dflume.root.logger=INFO,console >/logs/flume.log 2>&1 &"
+
+ssh root@127.0.0.1 "nohup /opt/testevn1/apache-flume-1.9.0-bin/bin/flume-ng agent --conf conf -z 192.168.111.52:2181 -p /flumeConfig -name a107684481115660288 -Dflume.root.logger=INFO,console >/logs/flumevskedtest1.log 2>&1 &"
+

@@ -8,10 +8,19 @@
   <name>vskedtool Maven Webapp</name>
   <url>http://maven.apache.org</url>
 	<properties>
+		<!-- 声明项目配置依赖编码格式为 utf-8 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
 		<java.version>1.8</java.version>
-		<slf4j.version>1.7.25</slf4j.version>
-		<log4j2.version>2.11.0</log4j2.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<jackson.version>2.9.8</jackson.version>
+		<!-- 解决pom头部unkonow错误 -->
+		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		
+		<slf4j.version>1.7.30</slf4j.version>
+		<log4j2.version>2.13.1</log4j2.version>
 	</properties>
 	<dependencies>
 		<dependency>
