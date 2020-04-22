@@ -1,0 +1,151 @@
+
+
+1* 查看git版本号
+git --version
+
+2* 克隆远程仓库
+git clone git://git.kernel.org/pub/scm/git/git.git
+
+3* 查看git配置信息
+git config --list --show-origin
+检查git配置信息
+git config --list
+查看单个git配置信息
+git config user.name
+
+4* 修改git配置信息
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+如修改文本编辑器示例
+git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+
+5* 查看帮助
+git help
+还可以通过
+git -h
+查看命令相关帮助
+git help push
+git push -h
+
+6* 添加文件到暂存区
+git add
+
+7* 提交
+git commit -m "<改动日志说明>"
+
+8* 拉取到本地
+下拉指定主机的指定分支，并与本地的指定分支合并：
+        git pull <origin> <远程master>:<本地master>
+
+    下拉指定主机的指定分支，并与本地的当前分支合并：
+        git pull <origin> <master>
+
+9* 推送到远程
+推送本地指定分支到指定远程主机的指定分支上：
+        git push <origin> <本地master>:<远程master>
+
+    推送本地指定分支到远程同名分支上,如果远程没有同名分支，则会新建同名分支：
+        git push <origin> <本地master>
+
+    推送空的分支到远程指定分支，相当于删除远程分支：
+        git push <origin> :<远程master>
+
+    推送当前分支到指定主机的指定分支：
+        git push <origin> HEAD:<远程master>
+
+    推送当前分支到指定主机的同名分支：
+        git push <origin> HEAD
+
+    推送本地分支到远程同名分支上，并建立追踪关系（建立追踪关系后可直接使用git push推送）：
+        git push -u <origin> <master>
+
+    推送本地所有分支到指定主机上：
+        git push --all <origin>
+
+10* 分支
+查看分支列表：
+        git branch [--list]
+
+    查看本地和远程所有分支：
+        git branch -a
+
+    新建分支:
+        git branch <next>
+
+    删除远程分支：
+        git push <origin> --delete <next>
+
+    删除分支（当前分支不能在被删除的分支上）：
+        git branch -D <next>
+11* 合并
+合并某个分支到当前分支下，并自动进行新的提交：
+        git merge <next>
+
+    合并某个分支到当前分支下，不进行新的提交：
+        git merge --no-commit <next>
+
+    合并master分支和next分支到当前分支顶部：
+        git merge <master> <next>
+
+10.git checkout
+    切换到<master>分支的head版本：
+        git checkout <master>
+
+    取出当前分支的tag_name版本：
+        git checkout <tag_name>
+
+    放弃指定分支对file_name的修改：
+        git checkout <master> <file_name.txt>
+
+    在当前分支上创建新分支并将工作区设置为该分支上：
+        git checkout -b <next>
+
+12* 版本回退，还原
+回退文件，将文件从暂存区回退到工作区:
+        git reset [HEAD] <file_name.txt>
+
+    向前回退多个版本:
+        git reset HEAD~n
+
+    回退到指定某个版本：
+        git reset <commit_id>
+
+    将版本库软回退n个版本，所谓软回退表示将本地版本库的头指针全部重置到指定版本，且将这次提交之后的所有变更都移动到暂存区：
+        git reset --soft HEAD~n
+
+    将版本库回退n个版本，将本地版本库的头指针全部重置到指定版本，且会重置暂存区，即这次提交之后的所有变更都移动到未暂存阶段:
+        git reset [--mixed] HEAD~n
+
+    将版本库回退n个版本，但是不仅仅是将本地版本库的头指针全部重置到指定版本，也会重置暂存区，并且会将工作区代码也回退到这个版本:
+        git reset --hard HEAD~n
+
+13* 删除
+删除git仓库管理系统以及本地中的某个文件：
+        git rm <file_name.txt>
+
+    删除git仓库管理系统以及本地中的某个文件夹：
+        git rm -r <path>
+
+    删除git仓库管理系统中的文件，但是保留本地文件：
+        git rm --cached <file_name.txt>
+
+14* 移动
+移动某个文件到指定文件夹下：
+        git mv <file> <path>
+
+    重命名某个文件：
+        git mv <file_name> <new_file_name>
+
+14.git rebase
+    把当前分支衍合到指定分支上：
+        git rebase <master>
+
+    如果有冲突需要先解决冲突，解决完冲突之后执行:
+        git rebase --continue
+
+    放弃本次衍合操作：
+        git rebase --abort
+
+    直接使用master分支取代此分支
+        git rebase --skip
+
