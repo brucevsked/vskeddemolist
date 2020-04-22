@@ -1,10 +1,17 @@
 bin/
 classes/
+target/
 
-vskeddemos/mavenproject/vskedtool/target/m2e-jee/web-resources/META-INF/maven/com.vsked/vskedtool/pom.properties
+
 vskeddemos/mavenproject/springboot2list/springdatajpa/.project
 *.class
-vskeddemos/mavenproject/vskedtool/target/m2e-jee/web-resources/META-INF/maven/com.vsked/vskedtool/pom.properties
+*.log
+*.classpath
+*.project
+*.prefs
+*.component
+pom.properties
+
 vskeddemos/mavenproject/**/.classpath
 vskeddemos/mavenproject/**/.project
 vskeddemos/mavenproject/**/.settings/*.*
@@ -17,6 +24,6 @@ vskeddemos/mavenproject/designmode/.settings/org.eclipse.jdt.core.prefs
 vskeddemos/mavenproject/designmode/.settings/org.eclipse.wst.common.component
 vskeddemos/mavenproject/designmode/.settings/*.*
 vskeddemos/mavenproject/designmode/.settings/org.eclipse.wst.common.component
-vskeddemos/mavenproject/vskedtool/target/m2e-jee/web-resources/META-INF/maven/com.vsked/vskedtool/pom.properties
-vskeddemos/mavenproject/vskedtool/.myeclipse/profiler/UrlDecode.xml
-vskeddemos/mavenproject/vskedtool/target/m2e-jee/web-resources/META-INF/maven/com.vsked/vskedtool/pom.properties
+vskeddemos/mavenproject/vskedtool/.myeclipse/**/*.*
+vskeddemos/mavenproject/vskedtool/target/**/*.*
+
