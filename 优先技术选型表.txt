@@ -35,6 +35,9 @@ Jacoco
 JBehave
 Cucumber
 
+接口测试
+Rest Assured
+
 本地数据模拟mock
 Mockito
 EasyMock
