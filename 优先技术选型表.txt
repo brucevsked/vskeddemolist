@@ -16,6 +16,14 @@ maven
 项目管理
 jira
 
+静态代码扫描
+PMD
+checkstyle
+findbugs
+
+类库安全检查
+Dependency check：OWASP提供的Java类库安全性检查
+
 代码评审
 优先用gitlab自带的
 其次Review Board
@@ -27,10 +35,18 @@ Jacoco
 JBehave
 Cucumber
 
-数据模拟mock
+本地数据模拟mock
 Mockito
 EasyMock
 PowerMock
+
+第三方数据模拟mock server
+Mountebank
+WireMock
+Stubby4j
+VCR
+betamax
+Hoverfly
 
 web测试
 Selenium
@@ -48,11 +64,17 @@ spring mvc 老了
 项目建模
 领域驱动(DDD)
 
-持续集成
+持续集成与持续部署
 jenkins
+gocd(ThoughtWorks)
 
 分布式跟踪
-Zipkin
+PinPoint 韩国开源的一个功能完备的 APM 系统，支持 JVM 性能数据采集、服务 Trace、告警等功能。它具有应用程序无侵入的应用特性。
+ZipKin 是 Twitter 开源的 Trace 工具，通过 Java 程序中引入客户端，可隐式拦截 Http、Thrift 等形式服务调用。
+SkyWalking 是一个开源 APM 系统，为微服务架构和云原生架构系统设计。它通过探针自动收集所需的指标，并进行分布式追踪。
+Prometheus 是一个开源的系统监控和报警工具。
+CAT 是基于 Java 开发的实时应用监控平台，为美团点评提供了全面的实时监控告警服务。
+Hawkular 一个功能完备的 APM 系统，应用程序中嵌入 Hawkular 客户端，主动将采集数据通过 Http 或者 Kafka 传递给 Hawkular。
 
 消息与队列
 rabbitmq

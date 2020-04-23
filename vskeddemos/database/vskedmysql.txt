@@ -1,43 +1,43 @@
-ÌØ±ğ×¢Òâ!
-mysqlÔÚ½¨Êı¾İ¿âÊ±Ó¦µ±Ê¹ÓÃutf8mb4×Ö·û¼¯ÒÔ·ÀÖ¹emoji±íÇéµÈ4×Ö½Ú²åÈëÊ§°Ü
+ç‰¹åˆ«æ³¨æ„!
+mysqlåœ¨å»ºæ•°æ®åº“æ—¶åº”å½“ä½¿ç”¨utf8mb4å­—ç¬¦é›†ä»¥é˜²æ­¢emojiè¡¨æƒ…ç­‰4å­—èŠ‚æ’å…¥å¤±è´¥
 CREATE DATABASE appserverdev DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-»Ö¸´Êı¾İÇ°Ìá
-ÔÚ/etc/my.cnfÎÄ¼şÀïµÄ[mysqld]Çø¿éÌí¼Ó£º
+æ¢å¤æ•°æ®å‰æ
+åœ¨/etc/my.cnfæ–‡ä»¶é‡Œçš„[mysqld]åŒºå—æ·»åŠ ï¼š
 log-bin=mysql-bin
-È»ºóÖØÆômysql·şÎñ
-²é¿´ÈÕÖ¾×´Ì¬
+ç„¶åé‡å¯mysqlæœåŠ¡
+æŸ¥çœ‹æ—¥å¿—çŠ¶æ€
 show variables like 'log_%'; 
 
 
-²é¿´µ±Ç°±íĞĞ´æ´¢¸ñÊ½
-SHOW TABLE STATUS LIKE '±íÃû'
-InnoDBĞĞ´æ´¢¸ñÊ½ËµÃ÷ ×öËÑË÷²éÑ¯Á¿´óµÄ±íÒ»°ã¶¼ÒÔ¿Õ¼äÀ´»»È¡Ê±¼ä£¬Éè¼Æ³É¾²Ì¬±í
-[ÎÄ¼ş¸ñÊ½]ĞĞ´æ´¢¸ñÊ½ ËµÃ÷
-[Antelope]Redundant Îª¼æÈİ5.1°æ±¾Ç°Éè¼Æ ²»½¨Òé
-[Antelope]Compact ¸ßĞ§´æ·ÅÊı¾İ Ò»¸öÒ³ÖĞ´æ·ÅµÄĞĞÊı¾İÔ½¶à£¬ÆäĞÔÄÜ¾ÍÔ½¸ß
-[Barracuda]Compressed ¶ÔÓÚBLOB¡¢TEXT¡¢VARCHARÕâÀà´ó³¤¶ÈÀàĞÍµÄÊı¾İÄÜ½øĞĞ·Ç³£ÓĞĞ§µÄ´æ´¢£¨´æ´¢µÄĞĞÊı¾İ»áÒÔzlibËã·¨½øĞĞÑ¹Ëõ£©½«data¡¢index¡¢pages½øĞĞÑ¹Ëõ£¬µ«buffer poolÖĞµÄpagesÔò²»Ñ¹Ëõ
-[Barracuda]Dynamic ÈôÒ»ÕÅ±íÀïÃæ´æÔÚvarchar¡¢textÒÔ¼°Æä±äĞÎ¡¢blobÒÔ¼°Æä±äĞÎµÄ×Ö¶ÎµÄ»°£¬ÄÇÃ´ÕÅÕâ¸ö±íÆäÊµÒ²½Ğ¶¯Ì¬±í
-Fixed ¹ÌÌ¬Ò»ÕÅ±íÀïÃæ²»´æÔÚvarchar¡¢textÒÔ¼°Æä±äĞÎ¡¢blobÒÔ¼°Æä±äĞÎµÄ×Ö¶ÎµÄ»°£¬ÄÇÃ´ÕÅÕâ¸ö±íÆäÊµÒ²½Ğ¾²Ì¬±íÆäÓÅµã¶ÁÈ¡¿ì£¬È±µãÀË·Ñ¶îÍâÒ»²¿·Ö¿Õ¼ä
+æŸ¥çœ‹å½“å‰è¡¨è¡Œå­˜å‚¨æ ¼å¼
+SHOW TABLE STATUS LIKE 'è¡¨å'
+InnoDBè¡Œå­˜å‚¨æ ¼å¼è¯´æ˜ åšæœç´¢æŸ¥è¯¢é‡å¤§çš„è¡¨ä¸€èˆ¬éƒ½ä»¥ç©ºé—´æ¥æ¢å–æ—¶é—´ï¼Œè®¾è®¡æˆé™æ€è¡¨
+[æ–‡ä»¶æ ¼å¼]è¡Œå­˜å‚¨æ ¼å¼ è¯´æ˜
+[Antelope]Redundant ä¸ºå…¼å®¹5.1ç‰ˆæœ¬å‰è®¾è®¡ ä¸å»ºè®®
+[Antelope]Compact é«˜æ•ˆå­˜æ”¾æ•°æ® ä¸€ä¸ªé¡µä¸­å­˜æ”¾çš„è¡Œæ•°æ®è¶Šå¤šï¼Œå…¶æ€§èƒ½å°±è¶Šé«˜
+[Barracuda]Compressed å¯¹äºBLOBã€TEXTã€VARCHARè¿™ç±»å¤§é•¿åº¦ç±»å‹çš„æ•°æ®èƒ½è¿›è¡Œéå¸¸æœ‰æ•ˆçš„å­˜å‚¨ï¼ˆå­˜å‚¨çš„è¡Œæ•°æ®ä¼šä»¥zlibç®—æ³•è¿›è¡Œå‹ç¼©ï¼‰å°†dataã€indexã€pagesè¿›è¡Œå‹ç¼©ï¼Œä½†buffer poolä¸­çš„pagesåˆ™ä¸å‹ç¼©
+[Barracuda]Dynamic è‹¥ä¸€å¼ è¡¨é‡Œé¢å­˜åœ¨varcharã€textä»¥åŠå…¶å˜å½¢ã€blobä»¥åŠå…¶å˜å½¢çš„å­—æ®µçš„è¯ï¼Œé‚£ä¹ˆå¼ è¿™ä¸ªè¡¨å…¶å®ä¹Ÿå«åŠ¨æ€è¡¨
+Fixed å›ºæ€ä¸€å¼ è¡¨é‡Œé¢ä¸å­˜åœ¨varcharã€textä»¥åŠå…¶å˜å½¢ã€blobä»¥åŠå…¶å˜å½¢çš„å­—æ®µçš„è¯ï¼Œé‚£ä¹ˆå¼ è¿™ä¸ªè¡¨å…¶å®ä¹Ÿå«é™æ€è¡¨å…¶ä¼˜ç‚¹è¯»å–å¿«ï¼Œç¼ºç‚¹æµªè´¹é¢å¤–ä¸€éƒ¨åˆ†ç©ºé—´
 
 
 
-1*view all database ²é¿´ËùÓĞÊı¾İ¿â
+1*view all database æŸ¥çœ‹æ‰€æœ‰æ•°æ®åº“
 show databases
 
-2* enter database ÇĞ»»µ±Ç°Ê¹ÓÃµÄ¿â
+2* enter database åˆ‡æ¢å½“å‰ä½¿ç”¨çš„åº“
 use [databasename]
 
-3* login mysql µÇÂ½mysql
-mysql -uÓÃ»§Ãû -pÃÜÂë
+3* login mysql ç™»é™†mysql
+mysql -uç”¨æˆ·å -på¯†ç 
 mysql -uroot -p666666
 
 
-4* view mysql user host ²é¿´ÓÃ»§ÓëÖ÷»ú
+4* view mysql user host æŸ¥çœ‹ç”¨æˆ·ä¸ä¸»æœº
 select host,user from mysql.user
 
-5* modify root password ĞŞ¸ÄÃÜÂë
-mysql 5.6ÒÔÇ°
+5* modify root password ä¿®æ”¹å¯†ç 
+mysql 5.6ä»¥å‰
  UPDATE mysql.user SET password=PASSWORD('newpassword') WHERE User='root';
  FLUSH PRIVILEGES;
 
@@ -47,150 +47,150 @@ mysql 5.6ÒÔÇ°
 mysql 8.x
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass4!';
 
-6* view all tables ²é¿´ËùÓĞ±í
+6* view all tables æŸ¥çœ‹æ‰€æœ‰è¡¨
 show tables;
 
-7* view table construct ²é¿´±í½á¹¹
+7* view table construct æŸ¥çœ‹è¡¨ç»“æ„
 desc [tablename]
 
-8* set remote access ÉèÖÃÔ¶³Ì·ÃÎÊ
+8* set remote access è®¾ç½®è¿œç¨‹è®¿é—®
 use mysql;
 update user set host = '%' where user = 'root';
 select host from user where user = 'root';
 grant all  on *.* to 'root'@'%' ;
 flush privileges; 
 
-9* create database ´´½¨Êı¾İ¿â
+9* create database åˆ›å»ºæ•°æ®åº“
 create database [databaseName]
 
 CREATE DATABASE appserverdev DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-10* show mysql engine  ÏÔÊ¾Êı¾İ¿âÒıÇæ
+10* show mysql engine  æ˜¾ç¤ºæ•°æ®åº“å¼•æ“
 show engines;
 
-11* show process ÏÔÊ¾½ø³ÌÁĞ±í
+11* show process æ˜¾ç¤ºè¿›ç¨‹åˆ—è¡¨
 show full processlist
 show processlist
 
-12* alter column name in table ĞŞ¸ÄÁĞ
+12* alter column name in table ä¿®æ”¹åˆ—
 alter table [tablename] change [oldColumnName] [newColumnName]
 
 alter table userT change usName userName
 alter table userT change usName userName varchar(200);
 
-13* insert one table to another table ½«Ò»¸ö±íÊı¾İ²åÈëÁíÒ»ÕÅ±í
+13* insert one table to another table å°†ä¸€ä¸ªè¡¨æ•°æ®æ’å…¥å¦ä¸€å¼ è¡¨
 insert into t2(name,age) select myName,myId from t1
 
-14* ²é¿´°æ±¾
+14* æŸ¥çœ‹ç‰ˆæœ¬
 show variables like 'version'
 
-15* ´´½¨ÓÃ»§
+15* åˆ›å»ºç”¨æˆ·
 CREATE USER 'test'@'%' IDENTIFIED BY 'test'; 
 
-16* ÊÚÈ¨ÓÃ»§·ÃÎÊËùÓĞ
+16* æˆæƒç”¨æˆ·è®¿é—®æ‰€æœ‰
 GRANT ALL ON *.* TO 'test'@'localhost' identified by 'Y4yhl9tbf110'; 
 GRANT ALL ON *.* TO 'test'@'%' identified by 'Y4yhl9tbf110'; 
 grant all privileges on birdeggproto1 to 'birdeggproto1t'@'%' ;
 grant all  on helthmanager.* to 'helthmanager'@'%' ;
 
-17* ÏÔÊ¾½¨±íÓï¾ä
-show create table ±íÃû
+17* æ˜¾ç¤ºå»ºè¡¨è¯­å¥
+show create table è¡¨å
 
-18* ÏÔÊ¾±íË÷Òı
-show index from ±íÃû
+18* æ˜¾ç¤ºè¡¨ç´¢å¼•
+show index from è¡¨å
 
-19* ´´½¨Ë÷Òı
-ALTER TABLE `±íÃû` ADD INDEX Ë÷ÒıÃû ( `ÁĞÃû` )
+19* åˆ›å»ºç´¢å¼•
+ALTER TABLE `è¡¨å` ADD INDEX ç´¢å¼•å ( `åˆ—å` )
 
-´´½¨ÁªºÏÎ¨Ò»Ë÷Òı²¢Çå³ıÖØ¸´¼ÇÂ¼
+åˆ›å»ºè”åˆå”¯ä¸€ç´¢å¼•å¹¶æ¸…é™¤é‡å¤è®°å½•
 alter ignore table user add unique index(user_id,user_name);
-Ëü»áÉ¾³ıÖØ¸´µÄ¼ÇÂ¼£¨±ğÅÂ£¬»á±£ÁôÒ»Ìõ£©£¬È»ºó½¨Á¢Î¨Ò»Ë÷Òı£¬¸ßĞ§¶øÇÒÈËĞÔ»¯.
-½¨±íÊ±Ìí¼Ó
+å®ƒä¼šåˆ é™¤é‡å¤çš„è®°å½•ï¼ˆåˆ«æ€•ï¼Œä¼šä¿ç•™ä¸€æ¡ï¼‰ï¼Œç„¶åå»ºç«‹å”¯ä¸€ç´¢å¼•ï¼Œé«˜æ•ˆè€Œä¸”äººæ€§åŒ–.
+å»ºè¡¨æ—¶æ·»åŠ 
 CONSTRAINT uidvideoid UNIQUE (uid ,videoid )
 
 
-20* ÏÔÊ¾ÁËmysqlÈçºÎÊ¹ÓÃË÷ÒıÀ´´¦ÀíselectÓï¾äÒÔ¼°Á¬½Ó±í
+20* æ˜¾ç¤ºäº†mysqlå¦‚ä½•ä½¿ç”¨ç´¢å¼•æ¥å¤„ç†selectè¯­å¥ä»¥åŠè¿æ¥è¡¨
 
-explain ÒªÖ´ĞĞµÄsqlÓï¾ä
+explain è¦æ‰§è¡Œçš„sqlè¯­å¥
 
-explainÁĞµÄ½âÊÍ
-table£ºÏÔÊ¾ÕâÒ»ĞĞµÄÊı¾İÊÇ¹ØÓÚÄÄÕÅ±íµÄ
+explainåˆ—çš„è§£é‡Š
+tableï¼šæ˜¾ç¤ºè¿™ä¸€è¡Œçš„æ•°æ®æ˜¯å…³äºå“ªå¼ è¡¨çš„
 
-type£ºÕâÊÇÖØÒªµÄÁĞ£¬ÏÔÊ¾Á¬½ÓÊ¹ÓÃÁËºÎÖÖÀàĞÍ¡£´Ó×îºÃµ½×î²îµÄÁ¬½ÓÀàĞÍÎªconst¡¢eq_reg¡¢ref¡¢range¡¢indexheºÍall
+typeï¼šè¿™æ˜¯é‡è¦çš„åˆ—ï¼Œæ˜¾ç¤ºè¿æ¥ä½¿ç”¨äº†ä½•ç§ç±»å‹ã€‚ä»æœ€å¥½åˆ°æœ€å·®çš„è¿æ¥ç±»å‹ä¸ºconstã€eq_regã€refã€rangeã€indexheå’Œall
 
-possible_keys£ºÏÔÊ¾¿ÉÄÜÓ¦ÓÃÔÚÕâÕÅ±íÖĞµÄË÷Òı¡£Èç¹ûÎª¿Õ£¬Ã»ÓĞ¿ÉÄÜµÄË÷Òı¡£¿ÉÒÔÎªÏà¹ØµÄÓò´ÓwhereÓï¾äÖĞÑ¡ÔñÒ»¸öºÏÊÊµÄÓï¾ä
+possible_keysï¼šæ˜¾ç¤ºå¯èƒ½åº”ç”¨åœ¨è¿™å¼ è¡¨ä¸­çš„ç´¢å¼•ã€‚å¦‚æœä¸ºç©ºï¼Œæ²¡æœ‰å¯èƒ½çš„ç´¢å¼•ã€‚å¯ä»¥ä¸ºç›¸å…³çš„åŸŸä»whereè¯­å¥ä¸­é€‰æ‹©ä¸€ä¸ªåˆé€‚çš„è¯­å¥
 
-key£º Êµ¼ÊÊ¹ÓÃµÄË÷Òı¡£Èç¹ûÎªnull£¬ÔòÃ»ÓĞÊ¹ÓÃË÷Òı¡£ºÜÉÙµÄÇé¿öÏÂ£¬mysql»áÑ¡ÔñÓÅ»¯²»×ãµÄË÷Òı¡£ÕâÖÖÇé¿öÏÂ£¬¿ÉÒÔÔÚselectÓï¾äÖĞÊ¹ÓÃuse index£¨indexname£©À´Ç¿ÖÆÊ¹ÓÃÒ»¸öË÷Òı»òÕßÓÃignore index£¨indexname£©À´Ç¿ÖÆmysqlºöÂÔË÷Òı
+keyï¼š å®é™…ä½¿ç”¨çš„ç´¢å¼•ã€‚å¦‚æœä¸ºnullï¼Œåˆ™æ²¡æœ‰ä½¿ç”¨ç´¢å¼•ã€‚å¾ˆå°‘çš„æƒ…å†µä¸‹ï¼Œmysqlä¼šé€‰æ‹©ä¼˜åŒ–ä¸è¶³çš„ç´¢å¼•ã€‚è¿™ç§æƒ…å†µä¸‹ï¼Œå¯ä»¥åœ¨selectè¯­å¥ä¸­ä½¿ç”¨use indexï¼ˆindexnameï¼‰æ¥å¼ºåˆ¶ä½¿ç”¨ä¸€ä¸ªç´¢å¼•æˆ–è€…ç”¨ignore indexï¼ˆindexnameï¼‰æ¥å¼ºåˆ¶mysqlå¿½ç•¥ç´¢å¼•
 
-key_len£ºÊ¹ÓÃµÄË÷ÒıµÄ³¤¶È¡£ÔÚ²»ËğÊ§¾«È·ĞÔµÄÇé¿öÏÂ£¬³¤¶ÈÔ½¶ÌÔ½ºÃ
+key_lenï¼šä½¿ç”¨çš„ç´¢å¼•çš„é•¿åº¦ã€‚åœ¨ä¸æŸå¤±ç²¾ç¡®æ€§çš„æƒ…å†µä¸‹ï¼Œé•¿åº¦è¶ŠçŸ­è¶Šå¥½
 
-ref£ºÏÔÊ¾Ë÷ÒıµÄÄÄÒ»ÁĞ±»Ê¹ÓÃÁË£¬Èç¹û¿ÉÄÜµÄ»°£¬ÊÇÒ»¸ö³£Êı
+refï¼šæ˜¾ç¤ºç´¢å¼•çš„å“ªä¸€åˆ—è¢«ä½¿ç”¨äº†ï¼Œå¦‚æœå¯èƒ½çš„è¯ï¼Œæ˜¯ä¸€ä¸ªå¸¸æ•°
 
-rows£ºmysqlÈÏÎª±ØĞë¼ì²éµÄÓÃÀ´·µ»ØÇëÇóÊı¾İµÄĞĞÊı
+rowsï¼šmysqlè®¤ä¸ºå¿…é¡»æ£€æŸ¥çš„ç”¨æ¥è¿”å›è¯·æ±‚æ•°æ®çš„è¡Œæ•°
 
-extra£º¹ØÓÚmysqlÈçºÎ½âÎö²éÑ¯µÄ¶îÍâĞÅÏ¢¡£½«ÔÚ±í4.3ÖĞÌÖÂÛ£¬µ«ÕâÀï¿ÉÒÔ¿´µ½µÄ»µµÄÀı×ÓÊÇusing temporaryºÍusing filesort£¬ÒâË¼mysql¸ù±¾²»ÄÜÊ¹ÓÃË÷Òı£¬½á¹ûÊÇ¼ìË÷»áºÜÂı
+extraï¼šå…³äºmysqlå¦‚ä½•è§£ææŸ¥è¯¢çš„é¢å¤–ä¿¡æ¯ã€‚å°†åœ¨è¡¨4.3ä¸­è®¨è®ºï¼Œä½†è¿™é‡Œå¯ä»¥çœ‹åˆ°çš„åçš„ä¾‹å­æ˜¯using temporaryå’Œusing filesortï¼Œæ„æ€mysqlæ ¹æœ¬ä¸èƒ½ä½¿ç”¨ç´¢å¼•ï¼Œç»“æœæ˜¯æ£€ç´¢ä¼šå¾ˆæ…¢
 
 
-extraÁĞ·µ»ØµÄÃèÊöµÄÒâÒå
+extraåˆ—è¿”å›çš„æè¿°çš„æ„ä¹‰
 
-distinct:Ò»µ©mysqlÕÒµ½ÁËÓëĞĞÏàÁªºÏÆ¥ÅäµÄĞĞ£¬¾Í²»ÔÙËÑË÷ÁË
+distinct:ä¸€æ—¦mysqlæ‰¾åˆ°äº†ä¸è¡Œç›¸è”åˆåŒ¹é…çš„è¡Œï¼Œå°±ä¸å†æœç´¢äº†
 
-not exists: mysqlÓÅ»¯ÁËleft join£¬Ò»µ©ËüÕÒµ½ÁËÆ¥Åäleft join±ê×¼µÄĞĞ£¬¾Í²»ÔÙËÑË÷ÁË
+not exists: mysqlä¼˜åŒ–äº†left joinï¼Œä¸€æ—¦å®ƒæ‰¾åˆ°äº†åŒ¹é…left joinæ ‡å‡†çš„è¡Œï¼Œå°±ä¸å†æœç´¢äº†
 
-range checked for each record£¨index map:#£©:Ã»ÓĞÕÒµ½ÀíÏëµÄË÷Òı£¬Òò´Ë¶ÔÓÚ´ÓÇ°Ãæ±íÖĞÀ´µÄÃ¿Ò»¸öĞĞ×éºÏ£¬mysql¼ì²éÊ¹ÓÃÄÄ¸öË÷Òı£¬²¢ÓÃËüÀ´´Ó±íÖĞ·µ»ØĞĞ¡£ÕâÊÇÊ¹ÓÃË÷ÒıµÄ×îÂıµÄÁ¬½ÓÖ®Ò»
+range checked for each recordï¼ˆindex map:#ï¼‰:æ²¡æœ‰æ‰¾åˆ°ç†æƒ³çš„ç´¢å¼•ï¼Œå› æ­¤å¯¹äºä»å‰é¢è¡¨ä¸­æ¥çš„æ¯ä¸€ä¸ªè¡Œç»„åˆï¼Œmysqlæ£€æŸ¥ä½¿ç”¨å“ªä¸ªç´¢å¼•ï¼Œå¹¶ç”¨å®ƒæ¥ä»è¡¨ä¸­è¿”å›è¡Œã€‚è¿™æ˜¯ä½¿ç”¨ç´¢å¼•çš„æœ€æ…¢çš„è¿æ¥ä¹‹ä¸€
 
-using filesort: ¿´µ½Õâ¸öµÄÊ±ºò£¬²éÑ¯¾ÍĞèÒªÓÅ»¯ÁË¡£mysqlĞèÒª½øĞĞ¶îÍâµÄ²½ÖèÀ´·¢ÏÖÈçºÎ¶Ô·µ»ØµÄĞĞÅÅĞò¡£Ëü¸ù¾İÁ¬½ÓÀàĞÍÒÔ¼°´æ´¢ÅÅĞò¼üÖµºÍÆ¥ÅäÌõ¼şµÄÈ«²¿ĞĞµÄĞĞÖ¸ÕëÀ´ÅÅĞòÈ«²¿ĞĞ
+using filesort: çœ‹åˆ°è¿™ä¸ªçš„æ—¶å€™ï¼ŒæŸ¥è¯¢å°±éœ€è¦ä¼˜åŒ–äº†ã€‚mysqléœ€è¦è¿›è¡Œé¢å¤–çš„æ­¥éª¤æ¥å‘ç°å¦‚ä½•å¯¹è¿”å›çš„è¡Œæ’åºã€‚å®ƒæ ¹æ®è¿æ¥ç±»å‹ä»¥åŠå­˜å‚¨æ’åºé”®å€¼å’ŒåŒ¹é…æ¡ä»¶çš„å…¨éƒ¨è¡Œçš„è¡ŒæŒ‡é’ˆæ¥æ’åºå…¨éƒ¨è¡Œ
 
-using index: ÁĞÊı¾İÊÇ´Ó½ö½öÊ¹ÓÃÁËË÷ÒıÖĞµÄĞÅÏ¢¶øÃ»ÓĞ¶ÁÈ¡Êµ¼ÊµÄĞĞ¶¯µÄ±í·µ»ØµÄ£¬Õâ·¢ÉúÔÚ¶Ô±íµÄÈ«²¿µÄÇëÇóÁĞ¶¼ÊÇÍ¬Ò»¸öË÷ÒıµÄ²¿·ÖµÄÊ±ºò
+using index: åˆ—æ•°æ®æ˜¯ä»ä»…ä»…ä½¿ç”¨äº†ç´¢å¼•ä¸­çš„ä¿¡æ¯è€Œæ²¡æœ‰è¯»å–å®é™…çš„è¡ŒåŠ¨çš„è¡¨è¿”å›çš„ï¼Œè¿™å‘ç”Ÿåœ¨å¯¹è¡¨çš„å…¨éƒ¨çš„è¯·æ±‚åˆ—éƒ½æ˜¯åŒä¸€ä¸ªç´¢å¼•çš„éƒ¨åˆ†çš„æ—¶å€™
 
-using temporary ¿´µ½Õâ¸öµÄÊ±ºò£¬²éÑ¯ĞèÒªÓÅ»¯ÁË¡£ÕâÀï£¬mysqlĞèÒª´´½¨Ò»¸öÁÙÊ±±íÀ´´æ´¢½á¹û£¬ÕâÍ¨³£·¢ÉúÔÚ¶Ô²»Í¬µÄÁĞ¼¯½øĞĞorder byÉÏ£¬¶ø²»ÊÇgroup byÉÏ
+using temporary çœ‹åˆ°è¿™ä¸ªçš„æ—¶å€™ï¼ŒæŸ¥è¯¢éœ€è¦ä¼˜åŒ–äº†ã€‚è¿™é‡Œï¼Œmysqléœ€è¦åˆ›å»ºä¸€ä¸ªä¸´æ—¶è¡¨æ¥å­˜å‚¨ç»“æœï¼Œè¿™é€šå¸¸å‘ç”Ÿåœ¨å¯¹ä¸åŒçš„åˆ—é›†è¿›è¡Œorder byä¸Šï¼Œè€Œä¸æ˜¯group byä¸Š
 
-where used Ê¹ÓÃÁËwhere´Ó¾äÀ´ÏŞÖÆÄÄĞ©ĞĞ½«ÓëÏÂÒ»ÕÅ±íÆ¥Åä»òÕßÊÇ·µ»Ø¸øÓÃ»§¡£Èç¹û²»Ïë·µ»Ø±íÖĞµÄÈ«²¿ĞĞ£¬²¢ÇÒÁ¬½ÓÀàĞÍall»òindex£¬Õâ¾Í»á·¢Éú£¬»òÕßÊÇ²éÑ¯ÓĞÎÊÌâ²»Í¬Á¬½ÓÀàĞÍµÄ½âÊÍ£¨°´ÕÕĞ§ÂÊ¸ßµÍµÄË³ĞòÅÅĞò£©
+where used ä½¿ç”¨äº†whereä»å¥æ¥é™åˆ¶å“ªäº›è¡Œå°†ä¸ä¸‹ä¸€å¼ è¡¨åŒ¹é…æˆ–è€…æ˜¯è¿”å›ç»™ç”¨æˆ·ã€‚å¦‚æœä¸æƒ³è¿”å›è¡¨ä¸­çš„å…¨éƒ¨è¡Œï¼Œå¹¶ä¸”è¿æ¥ç±»å‹allæˆ–indexï¼Œè¿™å°±ä¼šå‘ç”Ÿï¼Œæˆ–è€…æ˜¯æŸ¥è¯¢æœ‰é—®é¢˜ä¸åŒè¿æ¥ç±»å‹çš„è§£é‡Šï¼ˆæŒ‰ç…§æ•ˆç‡é«˜ä½çš„é¡ºåºæ’åºï¼‰
 
-system ±íÖ»ÓĞÒ»ĞĞ£ºsystem±í¡£ÕâÊÇconstÁ¬½ÓÀàĞÍµÄÌØÊâÇé¿ö
+system è¡¨åªæœ‰ä¸€è¡Œï¼šsystemè¡¨ã€‚è¿™æ˜¯constè¿æ¥ç±»å‹çš„ç‰¹æ®Šæƒ…å†µ
 
-const:±íÖĞµÄÒ»¸ö¼ÇÂ¼µÄ×î´óÖµÄÜ¹»Æ¥ÅäÕâ¸ö²éÑ¯£¨Ë÷Òı¿ÉÒÔÊÇÖ÷¼ü»òÎ©Ò»Ë÷Òı£©¡£ÒòÎªÖ»ÓĞÒ»ĞĞ£¬Õâ¸öÖµÊµ¼Ê¾ÍÊÇ³£Êı£¬ÒòÎªmysqlÏÈ¶ÁÕâ¸öÖµÈ»ºó°ÑËüµ±×ö³£ÊıÀ´¶Ô´ı
+const:è¡¨ä¸­çš„ä¸€ä¸ªè®°å½•çš„æœ€å¤§å€¼èƒ½å¤ŸåŒ¹é…è¿™ä¸ªæŸ¥è¯¢ï¼ˆç´¢å¼•å¯ä»¥æ˜¯ä¸»é”®æˆ–æƒŸä¸€ç´¢å¼•ï¼‰ã€‚å› ä¸ºåªæœ‰ä¸€è¡Œï¼Œè¿™ä¸ªå€¼å®é™…å°±æ˜¯å¸¸æ•°ï¼Œå› ä¸ºmysqlå…ˆè¯»è¿™ä¸ªå€¼ç„¶åæŠŠå®ƒå½“åšå¸¸æ•°æ¥å¯¹å¾…
 
-eq_ref:ÔÚÁ¬½ÓÖĞ£¬mysqlÔÚ²éÑ¯Ê±£¬´ÓÇ°ÃæµÄ±íÖĞ£¬¶ÔÃ¿Ò»¸ö¼ÇÂ¼µÄÁªºÏ¶¼´Ó±íÖĞ¶ÁÈ¡Ò»¸ö¼ÇÂ¼£¬ËüÔÚ²éÑ¯Ê¹ÓÃÁËË÷ÒıÎªÖ÷¼ü»òÎ©Ò»¼üµÄÈ«²¿Ê±Ê¹ÓÃ
+eq_ref:åœ¨è¿æ¥ä¸­ï¼Œmysqlåœ¨æŸ¥è¯¢æ—¶ï¼Œä»å‰é¢çš„è¡¨ä¸­ï¼Œå¯¹æ¯ä¸€ä¸ªè®°å½•çš„è”åˆéƒ½ä»è¡¨ä¸­è¯»å–ä¸€ä¸ªè®°å½•ï¼Œå®ƒåœ¨æŸ¥è¯¢ä½¿ç”¨äº†ç´¢å¼•ä¸ºä¸»é”®æˆ–æƒŸä¸€é”®çš„å…¨éƒ¨æ—¶ä½¿ç”¨
 
-ref:Õâ¸öÁ¬½ÓÀàĞÍÖ»ÓĞÔÚ²éÑ¯Ê¹ÓÃÁË²»ÊÇÎ©Ò»»òÖ÷¼üµÄ¼ü»òÕßÊÇÕâĞ©ÀàĞÍµÄ²¿·Ö£¨±ÈÈç£¬ÀûÓÃ×î×ó±ßÇ°×º£©Ê±·¢Éú¡£¶ÔÓÚÖ®Ç°µÄ±íµÄÃ¿Ò»¸öĞĞÁªºÏ£¬È«²¿¼ÇÂ¼¶¼½«´Ó±íÖĞ¶Á³ö¡£Õâ¸öÀàĞÍÑÏÖØÒÀÀµÓÚ¸ù¾İË÷ÒıÆ¥ÅäµÄ¼ÇÂ¼¶àÉÙ¡ªÔ½ÉÙÔ½ºÃ
+ref:è¿™ä¸ªè¿æ¥ç±»å‹åªæœ‰åœ¨æŸ¥è¯¢ä½¿ç”¨äº†ä¸æ˜¯æƒŸä¸€æˆ–ä¸»é”®çš„é”®æˆ–è€…æ˜¯è¿™äº›ç±»å‹çš„éƒ¨åˆ†ï¼ˆæ¯”å¦‚ï¼Œåˆ©ç”¨æœ€å·¦è¾¹å‰ç¼€ï¼‰æ—¶å‘ç”Ÿã€‚å¯¹äºä¹‹å‰çš„è¡¨çš„æ¯ä¸€ä¸ªè¡Œè”åˆï¼Œå…¨éƒ¨è®°å½•éƒ½å°†ä»è¡¨ä¸­è¯»å‡ºã€‚è¿™ä¸ªç±»å‹ä¸¥é‡ä¾èµ–äºæ ¹æ®ç´¢å¼•åŒ¹é…çš„è®°å½•å¤šå°‘â€”è¶Šå°‘è¶Šå¥½
 
-range:Õâ¸öÁ¬½ÓÀàĞÍÊ¹ÓÃË÷Òı·µ»ØÒ»¸ö·¶Î§ÖĞµÄĞĞ£¬±ÈÈçÊ¹ÓÃ>»ò<²éÕÒ¶«Î÷Ê±·¢ÉúµÄÇé¿ö
+range:è¿™ä¸ªè¿æ¥ç±»å‹ä½¿ç”¨ç´¢å¼•è¿”å›ä¸€ä¸ªèŒƒå›´ä¸­çš„è¡Œï¼Œæ¯”å¦‚ä½¿ç”¨>æˆ–<æŸ¥æ‰¾ä¸œè¥¿æ—¶å‘ç”Ÿçš„æƒ…å†µ
 
-index: Õâ¸öÁ¬½ÓÀàĞÍ¶ÔÇ°ÃæµÄ±íÖĞµÄÃ¿Ò»¸ö¼ÇÂ¼ÁªºÏ½øĞĞÍêÈ«É¨Ãè£¨±Èall¸üºÃ£¬ÒòÎªË÷ÒıÒ»°ãĞ¡ÓÚ±íÊı¾İ£©
+index: è¿™ä¸ªè¿æ¥ç±»å‹å¯¹å‰é¢çš„è¡¨ä¸­çš„æ¯ä¸€ä¸ªè®°å½•è”åˆè¿›è¡Œå®Œå…¨æ‰«æï¼ˆæ¯”allæ›´å¥½ï¼Œå› ä¸ºç´¢å¼•ä¸€èˆ¬å°äºè¡¨æ•°æ®ï¼‰
 
-all:Õâ¸öÁ¬½ÓÀàĞÍ¶ÔÓÚÇ°ÃæµÄÃ¿Ò»¸ö¼ÇÂ¼ÁªºÏ½øĞĞÍêÈ«É¨Ãè£¬ÕâÒ»°ã±È½ÏÔã¸â£¬Ó¦¸Ã¾¡Á¿±ÜÃâ
+all:è¿™ä¸ªè¿æ¥ç±»å‹å¯¹äºå‰é¢çš„æ¯ä¸€ä¸ªè®°å½•è”åˆè¿›è¡Œå®Œå…¨æ‰«æï¼Œè¿™ä¸€èˆ¬æ¯”è¾ƒç³Ÿç³•ï¼Œåº”è¯¥å°½é‡é¿å…
 
 explain select * from statuses_status where id=11;
 
-21*Ê¹ÓÃÊı¾İ¿â
-use[Êı¾İ¿âÃû]
+21*ä½¿ç”¨æ•°æ®åº“
+use[æ•°æ®åº“å]
 
 use helthmanager;
 
-22* Ìí¼ÓÁĞ
-alter table ±íÃû add column ÁĞÃû varchar(30);
+22* æ·»åŠ åˆ—
+alter table è¡¨å add column åˆ—å varchar(30);
 alter table oa_journal add column workRole varchar(64);
 
-23* É¾³ıÁĞ
-alter table ±íÃû drop column ÁĞÃû;
+23* åˆ é™¤åˆ—
+alter table è¡¨å drop column åˆ—å;
 alter table oa_journal drop column workRole;
 
-24* Ê¹ÓÃÂı²éÑ¯
+24* ä½¿ç”¨æ…¢æŸ¥è¯¢
 
-ÔÚmy.iniÖĞ£º
+åœ¨my.iniä¸­ï¼š
 
 long_query_time=3
 
 log-slow-queries=d:\mysql5\logs\mysqlslow.log
 
-°Ñ³¬¹ı3ÃëµÄ¼ÇÂ¼ÔÚÂı²éÑ¯ÈÕÖ¾ÖĞ
+æŠŠè¶…è¿‡3ç§’çš„è®°å½•åœ¨æ…¢æŸ¥è¯¢æ—¥å¿—ä¸­
 
-¿ÉÒÔÓÃmysqlslaÀ´·ÖÎöÖ®¡£Ò²¿ÉÒÔÔÚmysqlreportÖĞ£¬ÓĞÈç
+å¯ä»¥ç”¨mysqlslaæ¥åˆ†æä¹‹ã€‚ä¹Ÿå¯ä»¥åœ¨mysqlreportä¸­ï¼Œæœ‰å¦‚
 
-DMS·Ö±ğ·ÖÎöÁËselect ,update,insert,delete,replaceµÈËùÕ¼µÄ°Ù·İ±È
+DMSåˆ†åˆ«åˆ†æäº†select ,update,insert,delete,replaceç­‰æ‰€å çš„ç™¾ä»½æ¯”
 
-25* ²é¿´·ÖÇøÓëÊı¾İ
+25* æŸ¥çœ‹åˆ†åŒºä¸æ•°æ®
 SELECT 
   partition_name part,  
   partition_expression expr,  
@@ -200,78 +200,78 @@ FROM
   INFORMATION_SCHEMA.partitions  
 WHERE 
   TABLE_SCHEMA = schema()  
-  AND TABLE_NAME='±íÃû';  
+  AND TABLE_NAME='è¡¨å';  
 
 
-26* »ñÈ¡UUID
+26* è·å–UUID
 select replace(uuid(),'-','') as myuuid from dual;
 
-27* Á¬½ÓÁ½ÁĞ»ò¶à¸ö×Ö·û´® ÓĞÊ±»áÔÚmybatisÖĞÓÃ
-CONCAT(str1,str2,¡­)
+27* è¿æ¥ä¸¤åˆ—æˆ–å¤šä¸ªå­—ç¬¦ä¸² æœ‰æ—¶ä¼šåœ¨mybatisä¸­ç”¨
+CONCAT(str1,str2,â€¦)
 select concat('a','b','c');
 
 
-28* ÕıÔò±í´ïÊ½
+28* æ­£åˆ™è¡¨è¾¾å¼
 
 select * from testphone where phoneNum REGEXP '2$';
 
-29* ÎóÉ¾³ıÊı¾İ»Ö¸´ Îódelete»Ö¸´
-µÚÒ»²½ÏÈ½«µ±Ç°Êı¾İ¿âÍ¬²½µ½±¾µØÒ»·İÈ¡Ãû¸úÏßÉÏÃû×ÖÒ»Ñù
-µÚ¶ş²½ÏÂÔØbinlogÎÄ¼ş
-µÚÈı²½½âÑ¹
-ÕÒµ½±¾µØmysqlµÄbinÄ¿Â¼²¢ÓÃcmd½øÈë
+29* è¯¯åˆ é™¤æ•°æ®æ¢å¤ è¯¯deleteæ¢å¤
+ç¬¬ä¸€æ­¥å…ˆå°†å½“å‰æ•°æ®åº“åŒæ­¥åˆ°æœ¬åœ°ä¸€ä»½å–åè·Ÿçº¿ä¸Šåå­—ä¸€æ ·
+ç¬¬äºŒæ­¥ä¸‹è½½binlogæ–‡ä»¶
+ç¬¬ä¸‰æ­¥è§£å‹
+æ‰¾åˆ°æœ¬åœ°mysqlçš„binç›®å½•å¹¶ç”¨cmdè¿›å…¥
 c:
 cd C:\Program Files\MySQL\MySQL Server 5.6\bin>
 mysqlbinlog.exe --no-defaults --database=bosspay_bill --start-datetime="2018-01-02 6:13:00" --stop-datetime="2018-01-02 12:13:00" --skip-gtids=true f:\vskedtestmysql\mysql-bin.000270 > f:\vskedtestmysql\resultvsa1.sql
-mysql.exe -uroot -pÃÜÂë < f:\vskedtestmysql\resultvsa1.sql
+mysql.exe -uroot -på¯†ç  < f:\vskedtestmysql\resultvsa1.sql
 
-±¾µØ²é¿´
-»ùÓÚ¿ªÊ¼/½áÊøÊ±¼ä
-mysqlbinlog --start-datetime='2013-09-10 00:00:00' --stop-datetime='2013-09-10 01:01:01' -d ¿âÃû ¶ş½øÖÆÎÄ¼ş
+æœ¬åœ°æŸ¥çœ‹
+åŸºäºå¼€å§‹/ç»“æŸæ—¶é—´
+mysqlbinlog --start-datetime='2013-09-10 00:00:00' --stop-datetime='2013-09-10 01:01:01' -d åº“å äºŒè¿›åˆ¶æ–‡ä»¶
 
-»ùÓÚposÖµ
-mysqlbinlog --start-postion=107 --stop-position=1000 -d ¿âÃû ¶ş½øÖÆÎÄ¼ş
+åŸºäºposå€¼
+mysqlbinlog --start-postion=107 --stop-position=1000 -d åº“å äºŒè¿›åˆ¶æ–‡ä»¶
 
-×ª»»Îª¿É¶ÁÎÄ±¾
-mysqlbinlog ¨Cbase64-output=DECODE-ROWS -v -d ¿âÃû ¶ş½øÖÆÎÄ¼ş >d:/cc.sql
+è½¬æ¢ä¸ºå¯è¯»æ–‡æœ¬
+mysqlbinlog â€“base64-output=DECODE-ROWS -v -d åº“å äºŒè¿›åˆ¶æ–‡ä»¶ >d:/cc.sql
 
 
-30* ×Ö·û´®×ªÈÕÆÚ
+30* å­—ç¬¦ä¸²è½¬æ—¥æœŸ
 
 select str_to_date('2018-04-02 15:3:28','%Y-%m-%d %H:%i:%s');
 
-31* ÏÔÊ¾ËùÓĞÓÃ»§
+31* æ˜¾ç¤ºæ‰€æœ‰ç”¨æˆ·
  select user,host from mysql.user;
 
-32* ÈÕÆÚ¸ñÊ½»¯
+32* æ—¥æœŸæ ¼å¼åŒ–
 DATE_FORMAT(date,format)
 select DATE_FORMAT(NOW(),'%Y-%m-%d');
 select DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%S');
 select * from appUserBalanceHisT where DATE_FORMAT(CURRENT_TIMESTAMP,'%Y-%m-%d')=DATE_FORMAT(addtime,'%Y-%m-%d');
 
-33* ²é¿´ÊÇ·ñ¿ªÆô»Ö¸´ÈÕÖ¾bin-logÈÕÖ¾
+33* æŸ¥çœ‹æ˜¯å¦å¼€å¯æ¢å¤æ—¥å¿—bin-logæ—¥å¿—
  show variables like 'log_bin';
-flush logs; »á¶àÒ»¸ö×îĞÂµÄbin-logÈÕÖ¾
-show master status; ²é¿´×îºóÒ»¸öbin-logÈÕÖ¾µÄÏà¹ØĞÅÏ¢
-reset master; Çå¿ÕËùÓĞµÄbin-logÈÕÖ¾
+flush logs; ä¼šå¤šä¸€ä¸ªæœ€æ–°çš„bin-logæ—¥å¿—
+show master status; æŸ¥çœ‹æœ€åä¸€ä¸ªbin-logæ—¥å¿—çš„ç›¸å…³ä¿¡æ¯
+reset master; æ¸…ç©ºæ‰€æœ‰çš„bin-logæ—¥å¿—
 
-34* ĞĞÁĞ×ª»»£¬ÁĞ×ªĞĞ
+34* è¡Œåˆ—è½¬æ¢ï¼Œåˆ—è½¬è¡Œ
 
 
 create table testColumnToRow(
-cMonth varchar(32), -- ÔÂ·İ
-cName  varchar(32), -- Ãû³Æ
-cSum int  -- ÊıÁ¿
+cMonth varchar(32), -- æœˆä»½
+cName  varchar(32), -- åç§°
+cSum int  -- æ•°é‡
 );
 
-insert into testColumnToRow(cMonth,cName,cSum) values('1ÔÂ','Ô¶ÌØÆÕÍ¨ºÅ¿¨',300);
-insert into testColumnToRow(cMonth,cName,cSum) values('1ÔÂ','Ô¶ÌØÆÕÍ¨ºÅ¿¨',10);
-insert into testColumnToRow(cMonth,cName,cSum) values('1ÔÂ','¹úÃÀÆÕÍ¨ºÅ¿¨',200);
-insert into testColumnToRow(cMonth,cName,cSum) values('1ÔÂ','µÏ¼ÓÆÕÍ¨ºÅ¿¨',100);
+insert into testColumnToRow(cMonth,cName,cSum) values('1æœˆ','è¿œç‰¹æ™®é€šå·å¡',300);
+insert into testColumnToRow(cMonth,cName,cSum) values('1æœˆ','è¿œç‰¹æ™®é€šå·å¡',10);
+insert into testColumnToRow(cMonth,cName,cSum) values('1æœˆ','å›½ç¾æ™®é€šå·å¡',200);
+insert into testColumnToRow(cMonth,cName,cSum) values('1æœˆ','è¿ªåŠ æ™®é€šå·å¡',100);
 
-insert into testColumnToRow(cMonth,cName,cSum) values('2ÔÂ','Ô¶ÌØÆÕÍ¨ºÅ¿¨',320);
-insert into testColumnToRow(cMonth,cName,cSum) values('2ÔÂ','¹úÃÀÆÕÍ¨ºÅ¿¨',220);
-insert into testColumnToRow(cMonth,cName,cSum) values('2ÔÂ','µÏ¼ÓÆÕÍ¨ºÅ¿¨',120);
+insert into testColumnToRow(cMonth,cName,cSum) values('2æœˆ','è¿œç‰¹æ™®é€šå·å¡',320);
+insert into testColumnToRow(cMonth,cName,cSum) values('2æœˆ','å›½ç¾æ™®é€šå·å¡',220);
+insert into testColumnToRow(cMonth,cName,cSum) values('2æœˆ','è¿ªåŠ æ™®é€šå·å¡',120);
 
 select * from testColumnToRow;
 
@@ -279,43 +279,51 @@ SELECT cName,cMonth ,sum(cSum)  AS "mysum" FROM   testColumnToRow GROUP  BY cNam
 
 drop table testColumnToRow;
 
-34* ĞĞÁĞ×ª»»£¬ĞĞ×ªÁĞ
+34* è¡Œåˆ—è½¬æ¢ï¼Œè¡Œè½¬åˆ—
 create table testRowToColumn(
-cMonth varchar(32), -- ÔÂ·İ
-cYuanteSum int, -- Ô¶ÌØÊıÁ¿
-cDijiaSum int, -- µÏ¼ÓÊıÁ¿
-cGuoMeiSum int -- ¹úÃÀÊıÁ¿
+cMonth varchar(32), -- æœˆä»½
+cYuanteSum int, -- è¿œç‰¹æ•°é‡
+cDijiaSum int, -- è¿ªåŠ æ•°é‡
+cGuoMeiSum int -- å›½ç¾æ•°é‡
 );
 
-insert into testRowToColumn(cMonth,cYuanteSum,cDijiaSum,cGuoMeiSum) values('1ÔÂ',300,200,100);
-insert into testRowToColumn(cMonth,cYuanteSum,cDijiaSum,cGuoMeiSum) values('2ÔÂ',320,220,120);
-insert into testRowToColumn(cMonth,cYuanteSum,cDijiaSum,cGuoMeiSum) values('3ÔÂ',30,20,10);
+insert into testRowToColumn(cMonth,cYuanteSum,cDijiaSum,cGuoMeiSum) values('1æœˆ',300,200,100);
+insert into testRowToColumn(cMonth,cYuanteSum,cDijiaSum,cGuoMeiSum) values('2æœˆ',320,220,120);
+insert into testRowToColumn(cMonth,cYuanteSum,cDijiaSum,cGuoMeiSum) values('3æœˆ',30,20,10);
 
 select * from testRowToColumn;
 
-select cYuanteSum,cDijiaSum,cGuoMeiSum ,max(case cMonth when '1ÔÂ' then cYuanteSum end) cYuanteSum,
-       max(case cMonth when '2ÔÂ' then cYuanteSum end) cYuanteSum,
-			 max(case cMonth when '3ÔÂ' then cYuanteSum end) cYuanteSum,
-			 max(case cMonth when '1ÔÂ' then cDijiaSum end) cDijiaSum,
-       max(case cMonth when '2ÔÂ' then cDijiaSum end) cDijiaSum,
-			 max(case cMonth when '3ÔÂ' then cDijiaSum end) cDijiaSum,
-			 max(case cMonth when '1ÔÂ' then cGuoMeiSum end) cGuoMeiSum,
-       max(case cMonth when '2ÔÂ' then cGuoMeiSum end) cGuoMeiSum,
-			 max(case cMonth when '3ÔÂ' then cGuoMeiSum end) cGuoMeiSum
+select cYuanteSum,cDijiaSum,cGuoMeiSum ,max(case cMonth when '1æœˆ' then cYuanteSum end) cYuanteSum,
+       max(case cMonth when '2æœˆ' then cYuanteSum end) cYuanteSum,
+			 max(case cMonth when '3æœˆ' then cYuanteSum end) cYuanteSum,
+			 max(case cMonth when '1æœˆ' then cDijiaSum end) cDijiaSum,
+       max(case cMonth when '2æœˆ' then cDijiaSum end) cDijiaSum,
+			 max(case cMonth when '3æœˆ' then cDijiaSum end) cDijiaSum,
+			 max(case cMonth when '1æœˆ' then cGuoMeiSum end) cGuoMeiSum,
+       max(case cMonth when '2æœˆ' then cGuoMeiSum end) cGuoMeiSum,
+			 max(case cMonth when '3æœˆ' then cGuoMeiSum end) cGuoMeiSum
 			 from testRowToColumn group by cYuanteSum,cDijiaSum,cGuoMeiSum;
 
-35* ÏÔÊ¾Êı¾İ¿âÊ±Çø
+35* æ˜¾ç¤ºæ•°æ®åº“æ—¶åŒº
 show variables like "%time_zone%";
 
-javaÁ¬½ÓÊı¾İ¿â²ÎÊı
+javaè¿æ¥æ•°æ®åº“å‚æ•°
 ?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&&useTimezone=true&serverTimezone=GMT%2B8
 
+36* ä¿å­˜æˆ–æ›´æ–°saveOrUpdate(ä¸å­˜åœ¨å°±æ’å…¥ï¼Œå­˜åœ¨å°±æ›´æ–°)
+INSERT INTO tablename(field1,field2, field3, ...) VALUES(value1, value2, value3, ...) ON DUPLICATE KEY UPDATE field1=value1,field2=value2, field3=value3, ...;
+Insert into testtb (id2, name) values(b, 'bb') ON DUPLICATE KEY UPDATE name='bb'
+
+INSERT INTO t1 (a,b,c) VALUES (1,2,3)
+  ON DUPLICATE KEY UPDATE c=c+1;
+å…¶ä¸­updateç›¸å½“äºæ‰§è¡Œäº†
+UPDATE t1 SET c=c+1 WHERE a=1;
 
 
 --------------------------------
 problem
 
-°²×°Íêmysql8.0ÒÔºóÁÙÊ±ÃÜÂëÕÒ·¨
+å®‰è£…å®Œmysql8.0ä»¥åä¸´æ—¶å¯†ç æ‰¾æ³•
 grep "A temporary password" /var/log/mysqld.log
 
 1*Too many connections
@@ -324,66 +332,66 @@ grep "A temporary password" /var/log/mysqld.log
 max_connections=1000
 
 
-Í¨³££¬mysqlµÄ×î´óÁ¬½ÓÊıÄ¬ÈÏÊÇ100, ×î´ó¿ÉÒÔ´ïµ½16384¡£
-1¡¢²é¿´×î´óÁ¬½ÓÊı:
+é€šå¸¸ï¼Œmysqlçš„æœ€å¤§è¿æ¥æ•°é»˜è®¤æ˜¯100, æœ€å¤§å¯ä»¥è¾¾åˆ°16384ã€‚
+1ã€æŸ¥çœ‹æœ€å¤§è¿æ¥æ•°:
 show variables like '%max_connections%';
-2¡¢ĞŞ¸Ä×î´óÁ¬½ÓÊı
-·½·¨Ò»£ºĞŞ¸ÄÅäÖÃÎÄ¼ş¡£ÍÆ¼ö·½·¨Ò»
-½øÈëMySQL°²×°Ä¿Â¼ ´ò¿ªMySQLÅäÖÃÎÄ¼ş my.ini »ò my.cnf²éÕÒ max_connections=100 ĞŞ¸ÄÎª 
+2ã€ä¿®æ”¹æœ€å¤§è¿æ¥æ•°
+æ–¹æ³•ä¸€ï¼šä¿®æ”¹é…ç½®æ–‡ä»¶ã€‚æ¨èæ–¹æ³•ä¸€
+è¿›å…¥MySQLå®‰è£…ç›®å½• æ‰“å¼€MySQLé…ç½®æ–‡ä»¶ my.ini æˆ– my.cnfæŸ¥æ‰¾ max_connections=100 ä¿®æ”¹ä¸º 
 max_connections=1000
 SET PERSIST max_connections = 500;
 SET PERSIST mysqlx_max_connections = 500;
- ·şÎñÀïÖØÆğMySQL¼´¿É.
-·½·¨¶ş£ºÃüÁîĞĞĞŞ¸Ä¡£²»ÍÆ¼ö·½·¨¶ş
-ÃüÁîĞĞµÇÂ¼MySQLºó¡£ÉèÖÃĞÂµÄMySQL×î´óÁ¬½ÓÊıÎª200£º
-MySQL> set global max_connections=200¡£
-ÕâÖÖ·½Ê½ÓĞ¸öÎÊÌâ£¬¾ÍÊÇÉèÖÃµÄ×î´óÁ¬½ÓÊıÖ»ÔÚmysqlµ±Ç°·şÎñ½ø³ÌÓĞĞ§£¬Ò»µ©mysqlÖØÆô£¬ÓÖ»á»Ö¸´µ½³õÊ¼×´Ì¬¡£ÒòÎªmysqlÆô¶¯ºóµÄ³õÊ¼»¯¹¤×÷ÊÇ´ÓÆäÅäÖÃÎÄ¼şÖĞ¶ÁÈ¡Êı¾İµÄ£¬¶øÕâÖÖ·½Ê½Ã»ÓĞ¶ÔÆäÅäÖÃÎÄ¼ş×ö¸ü¸Ä¡£
+ æœåŠ¡é‡Œé‡èµ·MySQLå³å¯.
+æ–¹æ³•äºŒï¼šå‘½ä»¤è¡Œä¿®æ”¹ã€‚ä¸æ¨èæ–¹æ³•äºŒ
+å‘½ä»¤è¡Œç™»å½•MySQLåã€‚è®¾ç½®æ–°çš„MySQLæœ€å¤§è¿æ¥æ•°ä¸º200ï¼š
+MySQL> set global max_connections=200ã€‚
+è¿™ç§æ–¹å¼æœ‰ä¸ªé—®é¢˜ï¼Œå°±æ˜¯è®¾ç½®çš„æœ€å¤§è¿æ¥æ•°åªåœ¨mysqlå½“å‰æœåŠ¡è¿›ç¨‹æœ‰æ•ˆï¼Œä¸€æ—¦mysqlé‡å¯ï¼Œåˆä¼šæ¢å¤åˆ°åˆå§‹çŠ¶æ€ã€‚å› ä¸ºmysqlå¯åŠ¨åçš„åˆå§‹åŒ–å·¥ä½œæ˜¯ä»å…¶é…ç½®æ–‡ä»¶ä¸­è¯»å–æ•°æ®çš„ï¼Œè€Œè¿™ç§æ–¹å¼æ²¡æœ‰å¯¹å…¶é…ç½®æ–‡ä»¶åšæ›´æ”¹ã€‚
 
 
-2* transaction manager ĞŞ¸ÄÄ¬ÈÏÒıÇæÊ¹ÆäÖ§³ÖÊÂÎñ
+2* transaction manager ä¿®æ”¹é»˜è®¤å¼•æ“ä½¿å…¶æ”¯æŒäº‹åŠ¡
 
-a²é¿´mysql´æ´¢ÒıÇæÃüÁî£¬ÔÚmysql>ÌáÊ¾·ûÏÂ¸ãÈëshow engines;×Ö¶Î SupportÎª:Default±íÊ¾Ä¬ÈÏ´æ´¢ÒıÇæ  
-bÉèÖÃInnoDBÎªÄ¬ÈÏÒıÇæ£ºÔÚÅäÖÃÎÄ¼şmy.cnfÖĞµÄ [mysqld] ÏÂÃæ¼ÓÈëdefault-storage-engine=INNODB Ò»¾ä
-cÖØÆômysql·şÎñÆ÷£ºmysqladmin -u root -p shutdown»òÕßservice mysqld restart µÇÂ¼mysqlÊı¾İ¿â£¬
+aæŸ¥çœ‹mysqlå­˜å‚¨å¼•æ“å‘½ä»¤ï¼Œåœ¨mysql>æç¤ºç¬¦ä¸‹æå…¥show engines;å­—æ®µ Supportä¸º:Defaultè¡¨ç¤ºé»˜è®¤å­˜å‚¨å¼•æ“  
+bè®¾ç½®InnoDBä¸ºé»˜è®¤å¼•æ“ï¼šåœ¨é…ç½®æ–‡ä»¶my.cnfä¸­çš„ [mysqld] ä¸‹é¢åŠ å…¥default-storage-engine=INNODB ä¸€å¥
+cé‡å¯mysqlæœåŠ¡å™¨ï¼šmysqladmin -u root -p shutdownæˆ–è€…service mysqld restart ç™»å½•mysqlæ•°æ®åº“ï¼Œ
 
-3* ÂÒÂëÉèÖÃ
-1³ÌĞòÖĞmy.iniÅäÖÃ
+3* ä¹±ç è®¾ç½®
+1ç¨‹åºä¸­my.inié…ç½®
 default-character-set=utf-8
-2Êı¾İ¿â±àÂë
-3Êı¾İ¿â±í±àÂë
-4Êı¾İ¿â×Ö¶Î±àÂë
-5Êı¾İ¿â×Ö¶ÎÖĞ´æ´¢ÄÚÈİ±àÂë
+2æ•°æ®åº“ç¼–ç 
+3æ•°æ®åº“è¡¨ç¼–ç 
+4æ•°æ®åº“å­—æ®µç¼–ç 
+5æ•°æ®åº“å­—æ®µä¸­å­˜å‚¨å†…å®¹ç¼–ç 
 
-4* 2059 - authentication plugin 'caching_sha2_password' -navicatÁ¬½ÓÒì³£ÎÊÌâ½â¾ö
-ÕÒµ½ÅäÖÃÎÄ¼şmy.ini
-½«default_authentication_plugin=caching_sha2_password¸ÄÎªdefault_authentication_plugin=mysql_native_password
+4* 2059 - authentication plugin 'caching_sha2_password' -navicatè¿æ¥å¼‚å¸¸é—®é¢˜è§£å†³
+æ‰¾åˆ°é…ç½®æ–‡ä»¶my.ini
+å°†default_authentication_plugin=caching_sha2_passwordæ”¹ä¸ºdefault_authentication_plugin=mysql_native_password
 
-ÓÃÃüÁîĞĞµÇÂ½
+ç”¨å‘½ä»¤è¡Œç™»é™†
 alter user 'root'@'%' identified with mysql_native_password by 'Y4yhl9tbf110**';
 
-5* 1067 - Invalid default value for ÈÕÆÚ×Ö¶Î
+5* 1067 - Invalid default value for æ—¥æœŸå­—æ®µ
 show variables like 'sql_mode';
-¼ÇÏÂµ±Ç°ÖµÈç
+è®°ä¸‹å½“å‰å€¼å¦‚
 ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
-È¥µôNO_ZERO_IN_DATE,NO_ZERO_DATE
+å»æ‰NO_ZERO_IN_DATE,NO_ZERO_DATE
 
 ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
 
 set session sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
-¼ì²éÏÂµ±Ç°Öµ
+æ£€æŸ¥ä¸‹å½“å‰å€¼
 show variables like 'sql_mode';
-ÓÀ¾ÃĞŞ¸ÄÔÚmy.cnfÖĞÌí¼Ó
+æ°¸ä¹…ä¿®æ”¹åœ¨my.cnfä¸­æ·»åŠ 
 sql_mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
-Ìí¼ÓÍêÒÔºóÖØÆômysql
+æ·»åŠ å®Œä»¥åé‡å¯mysql
 
 
 6* 1153 - Got a packet bigger than 'max_allowed_packet' bytes
-ÔÚMySQL°²×°Ä¿Â¼ÏÂÕÒµ½ÎÄ¼şmy.cnf£¬ËÑË÷[mysqld]£¬ÔÚÆäÏÂÃæÌí¼ÓÒ»¾ä»°
+åœ¨MySQLå®‰è£…ç›®å½•ä¸‹æ‰¾åˆ°æ–‡ä»¶my.cnfï¼Œæœç´¢[mysqld]ï¼Œåœ¨å…¶ä¸‹é¢æ·»åŠ ä¸€å¥è¯
 max_allowed_packet=400M
 
-7* emoji±íÇé²åÈëÊ§°Ü
-ĞŞ¸ÄÊı¾İ¿â£¬±í£¬×Ö¶Î×Ö·û¼¯Îªutf8mb4
-my.cnfÎÄ¼ş
+7* emojiè¡¨æƒ…æ’å…¥å¤±è´¥
+ä¿®æ”¹æ•°æ®åº“ï¼Œè¡¨ï¼Œå­—æ®µå­—ç¬¦é›†ä¸ºutf8mb4
+my.cnfæ–‡ä»¶
 [mysqld]
 character-set-server=utf8mb4
 
@@ -396,15 +404,15 @@ default-character-set=utf8mb4
 
 
 
-Ä³Ò»×Ö¶ÎÉèÖÃ³ÉÒ»¸öÖµ
+æŸä¸€å­—æ®µè®¾ç½®æˆä¸€ä¸ªå€¼
 SELECT a.userId,(@rowNum:=@rowNum) userName,a.userNickName,a.userPass,a.regTime,a.lastLoginTime from userT a,(select (@rowNum:=111)) b 
 
 
-»ñÈ¡ĞĞºÅrowid
+è·å–è¡Œå·rowid
 SELECT (@rowNum:=@rowNum+1) rowId ,a.* from scoreT a,(select (@rowNum:=0)) b ORDER BY a.scoreValue desc
 
 
-ºóÒ»Ìõ¼õÇ°Ò»Ìõ¼ÇÂ¼
+åä¸€æ¡å‡å‰ä¸€æ¡è®°å½•
 
 
 CREATE TABLE testNuma
@@ -413,7 +421,7 @@ testName varchar(200) unique NOT NULL ,
 testNum int    
 );
 
---Çå¿ÕÊı¾İÇøÓò
+--æ¸…ç©ºæ•°æ®åŒºåŸŸ
 delete from  testNuma   ;
 
 insert into testNuma(testName,testNum) values('aaa',1);
@@ -434,25 +442,25 @@ Select *,(@rowNumb:=@rowNumb+1) rowNo From testNuma btn, (Select (@rowNumb :=0) 
 ) testb where testb.rowNo=testa.rowNo+1;
 
 
-ÕÒ³öÖØ¸´´ÎÊı
+æ‰¾å‡ºé‡å¤æ¬¡æ•°
 select phone,SUM(1) from testT1 group by phone HAVING SUM(1)>1
 
 select CONCAT(fgid,fgname,awayname),SUM(1) from footballGameCT group by CONCAT(fgid,fgname,awayname) HAVING SUM(1)>1 
 
-ÕÒ³ö¶àÁĞÖØ¸´´ÎÊı
+æ‰¾å‡ºå¤šåˆ—é‡å¤æ¬¡æ•°
 select *,CONCAT(username,userpass) myisRepeat,sum(1) from usertest group by myisRepeat
-Ö»ÕÒÖØ¸´µÄÊı¾İ
+åªæ‰¾é‡å¤çš„æ•°æ®
 select *,CONCAT(username,userpass) myisRepeat,sum(1) mycount from usertest group by myisRepeat HAVING mycount>1
 
 
 
-É¾³ıÖØ¸´Êı¾İ oracle sqlserver
+åˆ é™¤é‡å¤æ•°æ® oracle sqlserver
 delete from SIM_Account 
 where   ICCID in (select ICCID    from SIM_Account group by ICCID      having count(ICCID) > 1) 
 and   ID not in (select min(ID) from SIM_Account group by ICCID     having count(ICCID)>1) 
 
 
-É¾³ıÖØ¸´Êı¾İ mysql°æ±¾
+åˆ é™¤é‡å¤æ•°æ® mysqlç‰ˆæœ¬
 delete from `mysqltesttablea1` where `userid` not in (select minid from (
 select min(`userid`) as minid from `mysqltesttablea1` group by `username`
 ) b);
@@ -467,24 +475,24 @@ and   ID not in (select min(ID) from SIM_Account group by ICCID     having count
 
 --------------------------------------------------------------
 
-ºÅ¶ÎÄÚÓĞ¶àÉÙ¸öÊÖ»úºÅ
+å·æ®µå†…æœ‰å¤šå°‘ä¸ªæ‰‹æœºå·
 select MYP,"SUM"(1) from (select "SUBSTR"("phoneNum",4,4) MYP,"agentT".* from "agentT"  ) 
 group by MYP HAVING "SUM"(1)>=1
 
-²éÑ¯ÓĞ¶àÉÙÊÖ»úºÅ¶Î
+æŸ¥è¯¢æœ‰å¤šå°‘æ‰‹æœºå·æ®µ
 select DISTINCT MYP from (select "SUBSTR"("phoneNum",4,4) MYP from "agentT"  ) 
 
-°´Ê±¼ä²é
+æŒ‰æ—¶é—´æŸ¥
 SELECT * FROM "agentT" WHERE "tmpAddTime" > TO_DATE('2015-11-11 09:30:12', 'YYYY-MM-DD HH24:MI:SS') and ROWNUM<5000
 
 
 
 --------------------------------------------------------------
 
-select *,case t.name when 1 then 'ÄĞ' when 2 then 'Å®' end as sex from tt t
+select *,case t.name when 1 then 'ç”·' when 2 then 'å¥³' end as sex from tt t
 
 -----------------------------------------------------------------
-·Ö×éÇóºÍ
+åˆ†ç»„æ±‚å’Œ
 select sum(age),`name` from t2 WHERE `level`=1 GROUP BY `name`
 
 
@@ -543,7 +551,7 @@ INSERT INTO `mysqltesttablea1` VALUES ('24', 'user4', 'user4', '30');
 INSERT INTO `mysqltesttablea1` VALUES ('25', 'guest5', 'guest5', '18');
 INSERT INTO `mysqltesttablea1` VALUES ('26', 'guest6', 'guest6', '19');
 
---Í¨¹ı´¥·¢Æ÷¼ì²éÖØ¸´Êı¾İ
+--é€šè¿‡è§¦å‘å™¨æ£€æŸ¥é‡å¤æ•°æ®
 select * from `mysqltesttablea1` ;
 delete from `mysqltesttablea1` where `userid`='7';
 
@@ -561,7 +569,7 @@ BEGIN
 END;
 
 -----------------------------------------------------------------
-ÕıÔò±í´ïÊ½
+æ­£åˆ™è¡¨è¾¾å¼
 create table testphone(
 phoneNum varchar(32)
 );
@@ -579,18 +587,18 @@ select * from testphone;
 select * from testphone where phoneNum REGEXP '2$';
 
 -----------------------------------------------------------------
-¶àÁĞºÏ²¢ÏÔÊ¾
+å¤šåˆ—åˆå¹¶æ˜¾ç¤º
 drop table if exists studentT ;
 create table studentT(
 id varchar(32) primary key,
 stname varchar(500)
 );
 
-insert into studentT(id,stname) values(1,'Ëæ¿ÚÒ»Ëµ');
-insert into studentT(id,stname) values(2,'ÀÏñÄ');
-insert into studentT(id,stname) values(3,'Ğ¡æ¤');
-insert into studentT(id,stname) values(4,'°×ÀÇ');
-insert into studentT(id,stname) values(5,'ËÉÊó');
+insert into studentT(id,stname) values(1,'éšå£ä¸€è¯´');
+insert into studentT(id,stname) values(2,'è€è¡²');
+insert into studentT(id,stname) values(3,'å°å¦');
+insert into studentT(id,stname) values(4,'ç™½ç‹¼');
+insert into studentT(id,stname) values(5,'æ¾é¼ ');
 
 select * from studentT;
 
@@ -600,11 +608,11 @@ id varchar(32) primary key,
 cname varchar(500)
 );
 
-insert into courseT(id,cname) values(11,'¿ÕÊÖµÀ');
-insert into courseT(id,cname) values(22,'°ËØÔÕÆ');
-insert into courseT(id,cname) values(33,'Ğı·çÌÚÔÆ');
-insert into courseT(id,cname) values(44,'Íâ¹úÍ¶×Ê');
-insert into courseT(id,cname) values(55,'ÌåÓı¿Î');
+insert into courseT(id,cname) values(11,'ç©ºæ‰‹é“');
+insert into courseT(id,cname) values(22,'å…«å¦æŒ');
+insert into courseT(id,cname) values(33,'æ—‹é£è…¾äº‘');
+insert into courseT(id,cname) values(44,'å¤–å›½æŠ•èµ„');
+insert into courseT(id,cname) values(55,'ä½“è‚²è¯¾');
 
 select * from courseT;
 
@@ -628,11 +636,11 @@ select b.stname stname,GROUP_CONCAT(cname,",") course from studentCourseT a
 left join studentT b on a.sid=b.id 
 left join courseT c on a.cid=c.id group by a.sid;
 -----------------------------------------------------------------
-×óÁª»òÓÒÁªÊ±´øÌõ¼ş
+å·¦è”æˆ–å³è”æ—¶å¸¦æ¡ä»¶
 select case when sourcetype=1 then b.username when sourcetype=2 then c.username end username,a.* from appFileListT a 
 left join appUserT b on a.opuid=b.uid and sourcetype=1 left join webUserT c on a.opuid=c.uid and sourcetype=2
 -----------------------------------------------------------------
-×óÁª»òÓÒÁª´øÌõ¼ş£¬Í³Ò»¶àÕÅ±í×Ö¶ÎÎªÒ»¸ö×Ö¶Î²éÑ¯Ìõ¼ş
+å·¦è”æˆ–å³è”å¸¦æ¡ä»¶ï¼Œç»Ÿä¸€å¤šå¼ è¡¨å­—æ®µä¸ºä¸€ä¸ªå­—æ®µæŸ¥è¯¢æ¡ä»¶
 select * from (select case when sourcetype=1 then b.phone when sourcetype=2 then c.phone end phone,
 case when sourcetype=1 then b.username when sourcetype=2 then c.username end username,a.* from appFileListT a 
 left join appUserT b on a.opuid=b.uid and sourcetype=1 left join webUserT c on a.opuid=c.uid and sourcetype=2 ) r1 where r1.phone='15555555555';
@@ -640,11 +648,11 @@ left join appUserT b on a.opuid=b.uid and sourcetype=1 left join webUserT c on a
 
 
 
-mysqlÓÅ»¯Ö¸ÄÏ
+mysqlä¼˜åŒ–æŒ‡å—
 
-1ĞŞ¸Ä×î´óÁ¬½ÓÊı
-½øÈëMySQL°²×°Ä¿Â¼ ´ò¿ªMySQLÅäÖÃÎÄ¼ş my.ini »ò my.cnf²éÕÒ max_connections=100 ĞŞ¸ÄÎª 
+1ä¿®æ”¹æœ€å¤§è¿æ¥æ•°
+è¿›å…¥MySQLå®‰è£…ç›®å½• æ‰“å¼€MySQLé…ç½®æ–‡ä»¶ my.ini æˆ– my.cnfæŸ¥æ‰¾ max_connections=100 ä¿®æ”¹ä¸º 
 max_connections=11210
 
-2¶ÔÊı¾İÁ¿´óµÄ±íÌí¼Ó·ÖÇø£¬²¢¶Ô²éÑ¯²ÎÊıÌí¼ÓË÷Òı
+2å¯¹æ•°æ®é‡å¤§çš„è¡¨æ·»åŠ åˆ†åŒºï¼Œå¹¶å¯¹æŸ¥è¯¢å‚æ•°æ·»åŠ ç´¢å¼•
 
