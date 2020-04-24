@@ -1,0 +1,869 @@
+﻿secure crt保存会话日志
+options->global options->default session->edit default settings->logfile->指定保存路径->Change ALL Sessions(no undo)
+1. Session Options --> Terminal 中将Anti-idle下的 Sending String选项打钩，并且在后面输入框中随意输入几个空格。用处是防止你在停止操作几分钟后操作会被断开，设置之后，每隔五分钟客户端会自动向服务器端发送几个空格，从而保活连接。
+2. Session Options --> Terminal --> Emulation界面中，将Emulation下的Terminal下拉条选为Linux，并且勾选ANSI color，会让你的文件和文件夹显示Linux支持的各种颜色，很容易分辨
+3. Session Options --> Terminal --> Appearance中，颜色模式white/black,将Fonts下的Normal Font调整为Consolas 14pt， 下面的Character Encoding设置为UTF-8，防止出现中文乱码。
+
+start log upon connect*
+raw log*
+append to file *
+
+
+
+https://mirrors.tuna.tsinghua.edu.cn/centos/7.7.1908/isos/x86_64/
+最小化安装时
+
+设置网络参数
+nmtui
+设置参数
+service network restart
+
+cd /mnt
+mkdir cdrom
+mount /dev/cdrom /mnt/cdrom
+cd cdrom/Packages
+rpm -ivh yum-*
+rpm -ivh net-tools*
+
+
+vi /etc/sysconfig/network-scirpts/ifcfg-ens33
+
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=no
+IPV6_AUTOCONF=no
+IPV6_DEFROUTE=no
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens33
+UUID=7eaa88dd-2e2d-4a29-bb8e-b13c9ea78dff
+DEVICE=ens33
+ONBOOT=yes
+IPADDR=192.168.111.82
+NETMASK=255.255.255.0
+GATEWAY=192.168.111.1
+DNS1=192.168.111.1
+
+yum -y install wget
+关闭防火墙
+systemctl stop firewalld
+开机禁用
+systemctl disable firewalld
+
+
+yum install -y wget
+
+
+
+1*只能上内网不能访问外网(最小化安装时用) 添加静态路由
+route add default gw 192.168.128.2 dev eth0
+
+
+2*切换为阿里云的yum源添加网易源
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo
+yum makecache
+
+3* yum系列
+yum相关
+-y参数为默认选yes
+查看源列表
+yum repolist
+yum repolist all
+清理
+yum clean all
+更新缓存
+yum makecache
+安装软件包
+yum -y install clamav*
+本地目录安装
+yum -y localinstall
+更新系统包括内核!
+yum -y update
+卸载
+yum -y remove epel-release
+搜索
+yum search 软件名称
+检查更新
+yum check-update
+查看组
+yum grouplist
+安装组
+yum groupinstall GNOME Desktop
+列出已安装软件
+yum list installed 
+
+
+yum-config-manager: command not found
+yum -y install yum-utils
+
+yum install -y cronolog httpd
+
+
+本地源配置：cdiso.repo
+将iso镜像文件中所有内容复制到/public/software/cdrom 中，节点将本地yum指向此处
+vim /etc/yum.repos.d/cdiso.repo
+[cd1]
+name=cd1
+baseurl=file:///public/software/cdrom
+enabled=1
+gpgcheck=0
+
+本地源配置：file.repo
+mount -o loop xxxx.iso /mnt/iso
+
+如果/etc/yum.repos.d/下面有其它的*.repo文件，先创建个备份文件夹，将这些repo先转移到文件夹中，自己写一个新的.repo的文件
+
+
+vi /etc/yum.repos.d/file.repo
+
+添加如下内容：
+[base]
+name=rhel6repo
+baseurl=file:///mnt/iso
+enabled=1
+gpgckeck=0
+gpgkey=file:///mnt/iso/RPM-GPG-KEY-redhat-release
+5.清除cache
+yum clean all
+6.验证是否成功
+yum -y install tree
+tree
+
+4* 免密码秘钥登录(信任远程主机)
+原理就是公钥的使用，A,B两机器如果A要免密码登录B就把B上的公钥复制到A的authorized_keys文件中即可
+如果已经存在文件就用cat追加
+自己信任自己
+第一步生成公钥与私钥
+ssh-keygen -t  rsa
+第二步生成authorized_keys文件
+cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
+第三步使用ssh命令测试本机多个不同地址
+ssh localhost
+ssh 127.0.0.1
+ssh 192.168.111.81
+
+机器1与机器2互相信任并自己信任自己
+第一步在A机生成证书
+ssh-keygen -t  rsa
+第二步A对B建立信任关系
+scp id_rsa.pub root@192.168.111.82:/root/.ssh/authorized_keys
+
+ssh 192.168.111.82
+
+第三步 B对A建立信任关系 并且B对自己建立信任 机器B上执行
+在B上生成证书
+ssh-keygen -t  rsa
+cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+scp authorized_keys root@192.168.111.81:/root/.ssh/authorized_keys
+
+第四步A对自己建立信任 机器A上执行
+cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+
+第五步互相测试
+ssh localhost
+ssh 127.0.0.1
+ssh 0.0.0.0
+ssh 192.168.111.82
+ssh 192.168.111.81
+ssh pc2p30
+ssh pc1p10
+
+
+5* 修改主机名
+centos7 
+hostnamectl set-hostname 主机名
+vi /etc/hosts
+127.0.0.1 localhost centos77.magedu.com
+
+vi /etc/hostname
+
+
+6 安装firewall
+yum -y install firewall-config
+
+7 安装apache
+yum install httpd
+
+8 安装apache的svn模块
+yum -y install mod_dav_svn
+
+9 显示yum仓库列表
+yum repolist
+
+10 centos开机自动启动SVN服务的方法
+
+vi /etc/rc.d/rc.local
+加入如下启动命令 
+/usr/bin/svnserve -d -r /home/svn
+
+不知道svnserve安装到哪里了？ 
+可以使用 whereis 命令查找一下
+
+112.230.203.118
+
+11 安装日志分割工具
+yum install -y cronolog httpd
+
+12 设置时间服务器并同步互联网时间
+yum install yum-downloadonly ntp
+ntpdate cn.ntp.org.cn
+
+yum -y install utp ntpdate
+ntpdate cn.pool.ntp.org
+hwclock --systohc
+验证当前时间
+date
+
+13 查看带宽
+先安装工具
+yum install iftop -y
+查看网卡
+iftop -i eth1
+
+14 设置网络参数
+nmtui
+
+15 关闭防火墙
+启动： systemctl start firewalld
+关闭： systemctl stop firewalld
+查看状态： systemctl status firewalld 
+开机禁用  ： systemctl disable firewalld
+开机启用  ： systemctl enable firewalld
+配置firewalld-cmd
+
+16* 安装字体
+yum -y groupinstall Fonts
+yum -y install fontconfig
+这时在/usr/shared目录就可以看到fonts和fontconfig目录了（之前是没有的）
+cd /usr/share/fonts
+mkdir chinese
+将本地windows中字体复制进去
+simhei.ttf
+simsun.ttc
+chmod -R 755 /usr/share/fonts/chinese
+
+vi /etc/fonts/fonts.conf
+ <dir>/usr/share/fonts/chinese</dir>
+
+fc-cache
+要重启tomcat才生效
+
+17* 查看公共语言环境
+locale -a
+
+18* centos配置中文显示
+yum install kde-l10n-Chinese
+
+vi /etc/sysconfig/i18n
+添加
+LANG="zh_CN.UTF-8"
+LC_ALL="zh_CN.UTF-8"
+ source    /etc/sysconfig/i18n
+
+vi /etc/locale.conf
+LANG="zh_CN.UTF-8"
+source   /etc/locale.conf
+yum install kde-l10n-Chinese
+
+19* nc(netcat)工具
+yum install nc -y
+
+nc -help
+usage: nc [-46DdhklnrStUuvzC] [-i interval] [-p source_port]
+          [-s source_ip_address] [-T ToS] [-w timeout] [-X proxy_version]
+          [-x proxy_address[:port]] [hostname] [port[s]]
+        Command Summary:
+                -4              Use IPv4
+                -6              Use IPv6
+                -D              Enable the debug socket option
+                -d              Detach from stdin
+                -h              This help text
+                -i secs         Delay interval for lines sent, ports scanned
+                -k              Keep inbound sockets open for multiple connects
+                -l              Listen mode, for inbound connects
+                -n              Suppress name/port resolutions
+                -p port         Specify local port for remote connects
+                -r              Randomize remote ports
+                -S              Enable the TCP MD5 signature option
+                -s addr         Local source address
+                -T ToS          Set IP Type of Service
+                -C              Send CRLF as line-ending
+                -t              Answer TELNET negotiation
+                -U              Use UNIX domain socket
+                -u              UDP mode
+                -v              Verbose
+                -w secs         Timeout for connects and final net reads
+                -X proto        Proxy protocol: "4", "5" (SOCKS) or "connect"
+                -x addr[:port]  Specify proxy address and port
+                -z              Zero-I/O mode [used for scanning]
+        Port numbers can be individual or ranges: lo-hi [inclusive]
+
+20* 查看端口占用
+netstat -lntp
+
+21* 动态生成文件
+追加模式
+echo "文件内容" >> 文件路径
+echo "uuu 999 lkk" >> cc.txt
+覆盖模式
+echo "文件内容" > 文件路径
+echo "opp kkk" > cc.txt
+
+22* 循环与延时
+interval=6
+
+while : 
+  do
+echo "666"
+sleep $interval
+echo "here is 666"
+sleep $interval
+echo "good idea"
+
+done
+
+23* 制作shell脚本为服务
+
+第一步
+准备一个可执行的脚本 datadisp.sh
+#!/bin/bash
+
+#set -x #open script debug
+
+interval=6
+
+logFile=/opt/mydatalog.txt
+
+sourceFolderom="/opt/testsh/om/"
+flumeFolderom="/data/flume/om/"
+dtsFolderom="10.0.192.12:/DTSData/om/"
+
+while :
+  do
+  echo "current runing"$(date "+%Y-%m-%d_%H:%M:%S")  > $logFile
+  sleep $interval
+#---------------------------------------------------------------
+for omFile in `ls $sourceFolderom`
+  do    
+    echo $(date "+%Y-%m-%d_%H:%M:%S"),om,$omFile > $logFile
+    # echo $(date "+%Y-%m-%d_%H:%M:%S"),om,$omFile
+    cp $sourceFolderom/$omFile $flumeFolderom/$omFile
+    scp $sourceFolderom/$omFile $dtsFolderom
+    rm -rf $sourceFolderom/$omFile
+done
+
+done
+
+如果里面有while死循环还需要写一个启动脚本datadispstart.sh
+#!/bin/bash
+nohup /opt/coalmine/datadisp.sh >/dev/null 2>&1 &
+
+第二步编写服务配置文件
+[Unit]
+Description=datadisp service
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+User=root
+PIDFile=/opt/coalmine/datadisp.pid
+ExecStart=/opt/coalmine/datadispstart.sh
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+
+第三步添加系统服务
+mv /opt/coalmine/datadisp.service /lib/systemd/system/datadisp.service
+第四步设置脚本开机启动
+systemctl daemon-reload
+systemctl enable datadisp.service
+第五步启动数据分发服务
+systemctl start datadisp.service
+systemctl stop datadisp.service
+
+
+24* 禁用ipv6
+vi /etc/sysctl.conf
+net.ipv6.conf.all.disable_ipv6=1
+NETWORKING_IPV6=no
+网卡配置文件/etc/sysconfig/network-scripts/ifcfg-ethX
+IPV6INIT=no
+
+chkconfig ip6tables off
+
+sysctl -p
+
+
+25* 在Linux下查看FC HBA卡的速率和状态 查看光纤卡信息
+查看FC HBA卡的WWN号
+cat  /sys/class/fc_host/host1/port_name
+cat  /sys/class/fc_host/host1/node_name
+cat  /sys/class/fc_host/host1/fabric_name
+
+查看当前port的状态(online是对的)
+cat  /sys/class/fc_host/host1/port_state
+
+查看PORT的端口ID
+cat  /sys/class/fc_host/host1/port_id
+0x000001
+
+查看port支持的速率
+cat  /sys/class/fc_host/host1/supported_speeds
+cat  /sys/class/fc_host/host1/supported_classes
+
+给FC HBA卡插上光纤线，和其他HBA卡相连时
+cat  /sys/class/fc_host/host2/speed
+cat  /sys/class/fc_host/host2/port_type
+
+26* 清理未知pv
+pvscan --cache
+pvs
+
+27* 查看文件占用可查看端口占用
+查看文件占用
+lsof 文件名
+查看端口占用
+lsof -i:20
+
+28* 路由操作
+显示路由表
+ip route show
+添加静态路由
+ ip route add 10.15.150.0/24 via 192.168.150.253 dev enp0s3
+ ip route add 76.10.2.0/24 via 12.126.140.254 dev ens192
+ ip route show|column -t
+删除静态路由
+ip route del 10.15.150.0/24
+
+29* 挂载相关命令 
+
+挂载iso文件
+mkdir -p /mnt/cdrom
+mount -o loop /opt/cdrom/CentOS-7-x86_64-DVD-1908.iso  /mnt/cdrom/
+
+挂载光驱
+mount /dev/cdrom /mnt/cdrom
+
+ 挂载u盘mount U disk
+First Use fdisk -l view which disk is U disk and sure your u disk is fat32 or ntfs or msdos
+cd /mnt
+mkdir vsku
+mount -t [disk file system type] [diskpath] [target folder]
+mount -t msdos /dev/sdb1 /mnt/vsku
+mount -t ntfs-3g /dev/sdb /mnt/myu1
+
+挂载samba也就是共享目录
+mount -t smbfs -o username=user,password=foobar,ip=2.2.2.3//HOSTMACHINE_NAME/Tinix /mnt/smb/Tinix
+
+mount -t cifs -l //192.168.1.100/test /home/user/folder1
+
+yum install cifs-utils
+mount -o user=hary,pass=123 //IP/common /mnt/test
+
+
+
+
+--------------------------------------------------------------------------------
+lvm扩容管理
+给第一块磁盘添加新分区
+fdisk /dev/sda
+新建分区
+n
+主分区
+p
+其他参数默认
+写入
+w
+查看磁盘分区列表
+fdisk -l
+格式化新分区sda3
+mkfs -t ext4 /dev/sda3
+创建物理卷
+pvcreate /dev/sda3
+查看逻辑卷组(主要看VG Name)
+vgdisplay
+将新磁盘添加到逻辑卷组centos(VG Name)
+vgextend centos /dev/sda3
+查看可扩充磁盘空间(其中 Free PE / Size 就是可供分配的自由空间，最多有 24.99G，在扩展时输入小于该值 )
+vgdisplay 
+为逻辑卷扩展24G空间
+lvextend -L +24G /dev/mapper/centos-root /dev/sda3
+重新分配磁盘空间
+resize2fs /dev/mapper/centos-root
+如果不行就用(下面与上面只选一个)
+xfs_growfs /dev/mapper/centos-root
+检查扩容结果
+df -lh
+
+示例
+
+[root@localhost ~]# pvcreate /dev/sda3
+WARNING: ext4 signature detected on /dev/sda3 at offset 1080. Wipe it? [y/n]: y
+  Wiping ext4 signature on /dev/sda3.
+  Physical volume "/dev/sda3" successfully created.
+[root@localhost ~]# df -lh
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G  380K   16G   1% /dev/shm
+tmpfs                     16G  8.8M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root  266G  6.2G  247G   3% /
+/dev/sda1                2.0G  123M  1.7G   7% /boot
+tmpfs                    3.2G     0  3.2G   0% /run/user/0
+[root@localhost ~]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G  380K   16G   1% /dev/shm
+tmpfs                     16G  8.8M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root  266G  6.2G  247G   3% /
+/dev/sda1                2.0G  123M  1.7G   7% /boot
+tmpfs                    3.2G     0  3.2G   0% /run/user/0
+[root@localhost ~]# vgextend centos-root /dev/sda3
+  Volume group "centos-root" not found
+  Cannot process volume group centos-root
+[root@localhost ~]# vgdisplay
+  --- Volume group ---
+  VG Name               centos
+  System ID             
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  3
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                2
+  Open LV               2
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <277.72 GiB
+  PE Size               4.00 MiB
+  Total PE              71096
+  Alloc PE / Size       71095 / 277.71 GiB
+  Free  PE / Size       1 / 4.00 MiB
+  VG UUID               34pBnO-ZSpw-CMQs-1PLG-7HId-PVF3-Ya44hH
+   
+[root@localhost ~]# vgextend centos /dev/sda3
+  Volume group "centos" successfully extended
+[root@localhost ~]# df -lh
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G  380K   16G   1% /dev/shm
+tmpfs                     16G  8.8M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root  266G  6.2G  247G   3% /
+/dev/sda1                2.0G  123M  1.7G   7% /boot
+tmpfs                    3.2G     0  3.2G   0% /run/user/0
+[root@localhost ~]# vgdisplay
+  --- Volume group ---
+  VG Name               centos
+  System ID             
+  Format                lvm2
+  Metadata Areas        2
+  Metadata Sequence No  4
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                2
+  Open LV               2
+  Max PV                0
+  Cur PV                2
+  Act PV                2
+  VG Size               307.99 GiB
+  PE Size               4.00 MiB
+  Total PE              78846
+  Alloc PE / Size       71095 / 277.71 GiB
+  Free  PE / Size       7751 / <30.28 GiB
+  VG UUID               34pBnO-ZSpw-CMQs-1PLG-7HId-PVF3-Ya44hH
+   
+[root@localhost ~]# lvextend -L+24G /dev/mapper/centos-root /dev/sda3
+  Size of logical volume centos/root changed from <270.09 GiB (69142 extents) to <294.09 GiB (75286 extents).
+  Logical volume centos/root successfully resized.
+[root@localhost ~]# df -lh
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G  380K   16G   1% /dev/shm
+tmpfs                     16G  8.8M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root  266G  6.2G  247G   3% /
+/dev/sda1                2.0G  123M  1.7G   7% /boot
+tmpfs                    3.2G     0  3.2G   0% /run/user/0
+[root@localhost ~]# resize2fs /dev/mapper/centos-root
+resize2fs 1.42.9 (28-Dec-2013)
+Filesystem at /dev/mapper/centos-root is mounted on /; on-line resizing required
+old_desc_blocks = 34, new_desc_blocks = 37
+The filesystem on /dev/mapper/centos-root is now 77092864 blocks long.
+
+[root@localhost ~]# df -lh
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G  380K   16G   1% /dev/shm
+tmpfs                     16G  8.8M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root  290G  6.2G  269G   3% /
+/dev/sda1                2.0G  123M  1.7G   7% /boot
+tmpfs                    3.2G     0  3.2G   0% /run/user/0
+
+
+
+
+--------------------------------------------------------------------------------
+ftp服务器搭建
+vsftpd
+
+
+有网环境用这个
+yum install vsftpd
+无网环境用这个
+rpm -ivh vsftpd-3.0.2-25.el7.x86_64.rpm
+
+/etc/vsftpd/vsftpd.conf
+/etc/vsftpd/chroot_list
+/etc/vsftpd/user_list
+/etc/vsftpd/ftpusers
+/etc/shells
+
+
+vi /etc/pam.d/vsftpd 
+#%PAM-1.0
+session    optional     pam_keyinit.so    force revoke
+auth       required     pam_listfile.so item=user sense=deny file=/etc/vsftpd/ftpusers onerr=succeed
+#auth       required     pam_shells.so
+auth       include      password-auth
+account    include      password-auth
+session    required     pam_loginuid.so
+session    include      password-auth
+
+添加ftp用户ftpuser1
+useradd -d /home/ftpuser1 -g ftp -s /sbin/nologin ftpuser1
+设置用户密码 
+passwd ftpuser1
+
+mkdir -p /home/ftpuser1/data
+chmod 777 /home/ftpuser1/data
+chmod -R 777 /home/ftpuser1/data/
+chown ftpuser1:ftp /home/ftpuser1/data/
+
+systemctl start vsftpd
+systemctl enable vsftpd
+systemctl restart vsftpd
+
+chroot_list
+root
+ftpuser1
+ftpuser2
+
+user_list清空
+ftpusers清空
+
+/etc/shells
+/bin/sh
+/bin/bash
+/usr/bin/sh
+/usr/bin/bash
+/sbin/nologin
+/bin/false
+
+vsftpd.conf
+# Example config file /etc/vsftpd/vsftpd.conf
+#
+# The default compiled in settings are fairly paranoid. This sample file
+# loosens things up a bit, to make the ftp daemon more usable.
+# Please see vsftpd.conf.5 for all compiled in defaults.
+#
+# READ THIS: This example file is NOT an exhaustive list of vsftpd options.
+# Please read the vsftpd.conf.5 manual page to get a full idea of vsftpd's
+# capabilities.
+#
+# Allow anonymous FTP? (Beware - allowed by default if you comment this out).
+anonymous_enable=YES
+#
+# Uncomment this to allow local users to log in.
+# When SELinux is enforcing check for SE bool ftp_home_dir
+local_enable=YES
+#
+# Uncomment this to enable any form of FTP write command.
+write_enable=YES
+#
+# Default umask for local users is 077. You may wish to change this to 022,
+# if your users expect that (022 is used by most other ftpd's)
+local_umask=022
+#
+# Uncomment this to allow the anonymous FTP user to upload files. This only
+# has an effect if the above global write enable is activated. Also, you will
+# obviously need to create a directory writable by the FTP user.
+# When SELinux is enforcing check for SE bool allow_ftpd_anon_write, allow_ftpd_full_access
+anon_upload_enable=YES
+#
+# Uncomment this if you want the anonymous FTP user to be able to create
+# new directories.
+anon_mkdir_write_enable=YES
+#
+# Activate directory messages - messages given to remote users when they
+# go into a certain directory.
+dirmessage_enable=YES
+#
+# Activate logging of uploads/downloads.
+xferlog_enable=YES
+#
+# Make sure PORT transfer connections originate from port 20 (ftp-data).
+connect_from_port_20=YES
+#
+# If you want, you can arrange for uploaded anonymous files to be owned by
+# a different user. Note! Using "root" for uploaded files is not
+# recommended!
+#chown_uploads=YES
+#chown_username=whoever
+#
+# You may override where the log file goes if you like. The default is shown
+# below.
+xferlog_file=/var/log/xferlog
+#
+# If you want, you can have your log file in standard ftpd xferlog format.
+# Note that the default log file location is /var/log/xferlog in this case.
+xferlog_std_format=YES
+#
+# You may change the default value for timing out an idle session.
+idle_session_timeout=600000
+#
+# You may change the default value for timing out a data connection.
+data_connection_timeout=120000
+#
+# It is recommended that you define on your system a unique user which the
+# ftp server can use as a totally isolated and unprivileged user.
+#nopriv_user=ftpsecure
+#
+# Enable this and the server will recognise asynchronous ABOR requests. Not
+# recommended for security (the code is non-trivial). Not enabling it,
+# however, may confuse older FTP clients.
+#async_abor_enable=YES
+#
+# By default the server will pretend to allow ASCII mode but in fact ignore
+# the request. Turn on the below options to have the server actually do ASCII
+# mangling on files when in ASCII mode. The vsftpd.conf(5) man page explains
+# the behaviour when these options are disabled.
+# Beware that on some FTP servers, ASCII support allows a denial of service
+# attack (DoS) via the command "SIZE /big/file" in ASCII mode. vsftpd
+# predicted this attack and has always been safe, reporting the size of the
+# raw file.
+# ASCII mangling is a horrible feature of the protocol.
+#ascii_upload_enable=YES
+#ascii_download_enable=YES
+#
+# You may fully customise the login banner string:
+#ftpd_banner=Welcome to blah FTP service.
+#
+# You may specify a file of disallowed anonymous e-mail addresses. Apparently
+# useful for combatting certain DoS attacks.
+#deny_email_enable=YES
+# (default follows)
+#banned_email_file=/etc/vsftpd/banned_emails
+#
+# You may specify an explicit list of local users to chroot() to their home
+# directory. If chroot_local_user is YES, then this list becomes a list of
+# users to NOT chroot().
+# (Warning! chroot'ing can be very dangerous. If using chroot, make sure that
+# the user does not have write access to the top level directory within the
+# chroot)
+#chroot_local_user=YES
+chroot_list_enable=YES
+# (default follows)
+chroot_list_file=/etc/vsftpd/chroot_list
+#
+# You may activate the "-R" option to the builtin ls. This is disabled by
+# default to avoid remote users being able to cause excessive I/O on large
+# sites. However, some broken FTP clients such as "ncftp" and "mirror" assume
+# the presence of the "-R" option, so there is a strong case for enabling it.
+#ls_recurse_enable=YES
+#
+# When "listen" directive is enabled, vsftpd runs in standalone mode and
+# listens on IPv4 sockets. This directive cannot be used in conjunction
+# with the listen_ipv6 directive.
+listen=YES
+#
+# This directive enables listening on IPv6 sockets. By default, listening
+# on the IPv6 "any" address (::) will accept connections from both IPv6
+# and IPv4 clients. It is not necessary to listen on *both* IPv4 and IPv6
+# sockets. If you want that (perhaps because you want to listen on specific
+# addresses) then you must run two copies of vsftpd with two configuration
+# files.
+# Make sure, that one of the listen options is commented !!
+listen_ipv6=NO
+
+pam_service_name=vsftpd
+userlist_enable=YES
+tcp_wrappers=NO
+
+
+anon_other_write_enable=YES
+anon_root=/home/ftpuser1/
+local_root=/home/ftpuser1/
+
+allow_writeable_chroot=YES
+
+
+
+
+--------------------------------------------------------------------------------
+网络相关
+查看ip相关信息
+ip a
+查看网卡uuid
+nmcli conn
+启动网卡
+ifconfig up
+关闭网卡
+ifconfig down
+
+添加静态路由(一台机器访问两个网段或vpn时使用)
+ip route add 指定下一跳网段/24 via 本地所在网段 dev ens192
+ip route add 76.10.2.0/24 via 12.126.140.254 dev ens192
+
+端口转发
+#先检查是否安装了iptables
+service iptables status
+#安装iptables
+yum install -y iptables
+#升级iptables
+yum update iptables 
+#安装iptables-services
+yum install iptables-services
+
+机器A 10.0.192.11 上面启了tomcat
+机器B 10.0.192.12 上面没启tomcat
+机器C 想通过机器B访问机器A上的tomcat
+
+机器B开启端口转发
+vi /etc/sysctl.conf
+net.ipv4.ip_forward = 1
+
+sysctl -p（使之立即生效）
+
+
+假设用户访问10.0.192.12:18080时我想让它转发到10.0.192.11:8080
+
+iptables -t nat -A PREROUTING -p tcp --dport 18080 -j DNAT --to-destination 10.0.192.11:8080
+iptables -t nat -A POSTROUTING -d 10.0.192.11 -p tcp --dport 8080 -j SNAT --to 10.0.192.12
+
+# service iptables save（将当前规则保存到 /etc/sysconfig/iptables）
+
+或者，你也可以直接修改/etc/sysconfig/iptables文件：
+-A PREROUTING -p tcp -m tcp --dport 18080 -j DNAT --to-destination 10.0.192.11:8080
+-A POSTROUTING -d 10.0.192.11/32 -p tcp -m tcp --dport 8080 -j SNAT --to-source 10.0.192.12
+
+配置完成后，记得重启防火墙：
+# service iptables restart
+本机端口转发
+如果只需要在本机间不同的端口转发就比较容易了，比如 访问 http://ip:729 我想返回 http://ip:80 的内容，配置如下：
+
+[root@localhost sbin]# iptables -t nat -A PREROUTING -p tcp --dport 729 -j REDIRECT --to-ports 80
+[root@localhost sbin]# service iptables save
+[root@localhost sbin]# service iptables restart

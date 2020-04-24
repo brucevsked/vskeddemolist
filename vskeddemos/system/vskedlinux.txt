@@ -1,0 +1,1559 @@
+﻿secure crt保存会话日志
+options->global options->default session->edit default settings->logfile->指定保存路径->Change ALL Sessions(no undo)
+
+start log upon connect*
+raw log*
+append to file *
+
+转换linux时间格式
+date -d "Apr 27 08:30 2019" +%s
+1556325000
+
+!!!don't input []
+
+1* 修改网卡配置modify networkcard configruation：
+vi /etc/sysconfig/network-scirpts/ifcfg-eth0
+Content like down:
+
+DEVICE=eth0
+BOOTPROTO=static
+HWADDR=68:B5:99:B8:97:C4
+ONBOOT=yes
+NETMASK=255.255.255.0
+IPADDR=10.0.198.21
+GATEWAY=10.0.198.1
+TYPE=Ethernet
+USERCTL=no
+IPV6INIT=no
+PEERDNS=yes
+
+2* 查看IP地址 View IP Configure
+Base:ifconfig
+View a networkcard configure:
+ifconfig [eth0]
+
+如果提示命令不能用
+yum upgrade
+yum install net-tools
+
+3* 添加可执行权限 add executeable right
+chmod -R +x [folder name or file name]
+
+4* 修改redhat版本号 modify RedHat version
+vi /etc/redhat-release
+
+
+5* 修改主机名称modify hostname
+hostname yourHostName
+vi /etc/sysconfig/network
+vi /etc/hosts
+
+
+6* 查看文件内容view fileContent
+cat [filename or file full path]
+more [fileName]
+less [fileName]
+head [fileName]
+
+
+7* 修改文件所有者change file or folder owner
+chown -R [username]:[group] [folderName or fileName]
+
+
+8* 修改文件或文件夹权限change file or folder right
+chmod 777 -R [/oradata/]
+
+
+9* 添加用户组add usergroup
+groupadd -g [GroupID] [yourGroupName]
+eg:
+groupadd oinstall
+groupadd -g 501 dba
+
+
+10* 添加用户add user
+useradd -g [oinstall] -G [dba] [oracle]
+useradd -g oinstall -G dba -u 503 oracle
+
+删除用户
+userdel ftpuser1
+
+11* 修改文件夹权限change folder for user right
+chown -R [oracle]:[oinstall] [/opt/oracle]
+chmod -R 755 /opt/oracle
+chmod -R 755 *
+
+
+12* 打tar压缩包compress a gz bag
+tar -zccf [fileName].tar.gz [fileOrFolderName]
+
+
+13* 解tar压缩包uncompress a gz bag
+tar -zxvf [fileName].tar.gz
+
+
+14* 安装rpm包install rpm package
+rpm -ivh [packageName]
+
+
+15* 创建文件夹create folder 
+mkdir [folderName]
+create mutilevel folder
+mkdir -p [1/2/3/4]
+
+
+16* 删除文件delete file
+rm [fileOrFolderName]
+rm -rf [fileOrFolderName]
+
+find . -not -name "*.sh"|xargs rm -rf
+
+
+17* 移动文件move file or folder
+mv [source] [target]
+
+
+18* 修改用户密码change user password
+passwd [userName]
+
+
+19* 关机close computer
+shutdown -h
+shutdown -h now
+init 0
+halt
+poweroff
+
+
+20* 重启restart computer
+shutdown -r
+reboot
+
+
+21* 清屏clean screen
+ctrl+l
+clear
+
+
+22* init about
+shutdown: init 0
+singleUserModel: init 1
+mutiUserNoNetWork:init 2
+allFunctionModel: init 3
+defaultKeep: init 4
+xwindowModel: init5
+reboot: init 6
+
+
+23* 查看服务列表view services list
+chkconfig --list
+systemctl list-unit-files --type=service
+
+24* 查看服务状态view a service state
+chkconfig --list serviceName
+service [servicesName] status
+
+
+25* 重启服务restart service
+service [serviceName] restart
+
+
+26* 启动或停止服务start/stop service
+service [serviceName] start/stop
+
+
+27* 设置服务开机启动set service on/off
+chkconfig [servicename] [on/off]
+
+
+28* 查看linux内核版本号search linux Version :
+#uname –i
+uname -a
+
+
+29* find linux rpm
+rpm –qa | grep libaio* 
+
+
+30* 远程复制copy localfile to other equipment
+scp sourceFileName UserName@IPAddress:Directory
+#scp /home/administrator/news.txt root@192.168.6.129:/etc/squid
+
+
+31* linux访问windows文件 linux access windows file
+mount -t smbfs -o username=user,password=foobar,ip=2.2.2.3//HOSTMACHINE_NAME/Tinix /mnt/smb/Tinix
+
+mount -t cifs -l //192.168.1.100/test /home/user/folder1
+
+yum install cifs-utils
+mount -o user=hary,pass=123 //IP/common /mnt/test
+
+设置开机自动挂载:vim /etc/fstab
+//IP/devops /mnt/dop cifs defaults,user=hiro,pass=123,_netdev 0 0
+//192.168.111.81/tomcat /opt/apache-tomcat-9.0.26/webapp/coalminehwaui cifs defaults,user=root,pass=Y4yhl9tbf110,_netdev 0 0
+mount -a
+
+
+32* 挂载u盘mount U disk
+First Use fdisk -l view which disk is U disk and sure your u disk is fat32 or ntfs or msdos
+cd /mnt
+mkdir vsku
+mount -t [disk file system type] [diskpath] [target folder]
+mount -t msdos /dev/sdb1 /mnt/vsku
+mount -t ntfs-3g /dev/sdb /mnt/myu1
+
+
+33* mount CDROM or 硬盘
+cd /mnt
+mkdir cdrom
+mount /dev/cdrom /mnt/cdrom
+mount 分区 文件夹路径
+mount /dev/vdb2 /disk2
+
+mount iso file
+cd /mnt
+mkdir iso1
+mount -o loop test.iso /mnt/iso1
+
+mkdir -p /mnt/cdrom
+mount -o loop /opt/cdrom/CentOS-7-x86_64-DVD-1908.iso  /mnt/cdrom/
+
+34* 查看mount列表
+mount -l
+
+
+
+35* copy file from cdrom to localdisk复制命令
+cp 源文件名或目录 新文件名或目录
+cp test1.txt text2.txt
+
+cp -rf /mnt/cdrom /tmp/ha
+
+
+36* umount cdrom or U disk
+cd /
+umount /mnt/cdrom
+
+
+37* uninstall rpm package
+rpm -e [package name]
+
+
+38* in vi editor save and quit
+ZZ
+
+
+39* delete a line in vi editor
+press ESC then move cursor to line which you wanna delete
+press dd
+
+
+40* view system use port or network stat,查看系统端口占用
+netstat -an
+netstat -an |more
+netstat -lnp | grep 8080
+再用ps 进程号来查看
+
+
+41* change current user
+su - [username]
+
+
+42* View disk about information
+df
+
+
+43* View current login user
+who
+
+
+44* View current process list
+ps -ef | grep oracle
+ps -auxef
+
+
+45* End process 结束进程
+kill [pid]
+kill -9 [pid]
+
+关闭多个进程
+ps aux|grep 进程名|grep -v grep |awk '{print $2}'|xargs kill -9
+ps aux|grep tomcat|grep -v grep |awk '{print $2}'|xargs kill -9
+ps aux|grep redis|grep -v grep |awk '{print $2}'|xargs kill -9
+
+
+46* list current directory file list文件或目录列表
+ls 
+ll
+按照时间升序
+-l     use a long listing format  以长列表方式显示（详细信息方式）
+-t     sort by modification time 按修改时间排序（最新的在最前面）
+-r     reverse order while sorting （反序）
+ll -lrt
+按照时间降序
+-l     use a long listing format  以长列表方式显示（详细信息方式）
+-t     sort by modification time 按修改时间排序（最新的在最前面）
+ll -lt
+
+
+47* change current directory 
+cd 
+
+
+48* view Disk space use 查看磁盘空间
+df -lh
+
+
+49* view Disk patition磁盘分区相关,添加新硬盘
+fdisk -l
+fdisk -l |grep Disk
+
+创建磁盘分区
+fdisk /dev/vdb
+输入m可看帮助
+n 新建
+p 查看分区表
+q 退出
+w 写入
+
+c新建分区
+输入分区编号1
+w写入
+
+格式化分区
+mkfs -t ext3 /dev/vdb1
+
+挂载分区
+mkdir /disk2
+mount /dev/vdb1 /disk2
+
+vi /etc/fstab
+加入
+/dev/vdb1 /disk1 ext3 auto 0 0
+
+
+查看分区格式
+查看未挂载的文件系统类型
+lsblk -f
+查看未挂载的文件系统类型，以及哪些分区尚未格式化
+parted -l
+查看已经挂载的分区和文件系统类型
+df -T
+
+50* execute the root command
+sudo [command] 
+
+
+51* user another user
+login
+
+
+52* exit current user
+logout
+
+
+53* add /etc/init.d/[filename] to service
+chkconfig --add filename
+ps:remember the file right and own
+
+54* view folder size (查看文件夹大小,磁盘空间不足时使用此命令配合)
+du -sh [foldername]
+du -ms *
+du -sh *
+
+55* compress zip file
+zip -r [filename].zip [foldername]
+
+56* compress jar file
+jar -cfv [filename].jar [foldername]
+
+57* add file to jar
+jar -uf [filename].jar [addfilenameOrPath]
+
+
+58* view Linux version
+cat /etc/issue
+cat /proc/version
+
+59* uncompress bz2 file
+tar -vxjf [filename].tar.bz2 
+
+60* list open file
+lsof [options] filename
+lsof -i TCP:80 -n
+
+61* view file content use tail
+tail [options] filename
+
+tail logsa
+tail -n 20 logsa
+tail -c +200 logsa | pg
+tail -f logsa
+
+此时要想暂停刷新，使用ctrl+s暂停终端。
+若想继续终端，使用ctrl+q。
+
+若想退出tail命令，直接使用ctrl+c。
+
+62* view current path
+pwd
+
+63*view current environment variable
+env
+
+64* environment is all right
+source /etc/profile
+
+65* find command path like java or ls
+whereis [commandName]
+
+whereis java
+whereis ls
+
+66* find the file location of execuate file
+which [fileName]
+which java
+
+67* find file in system
+find [path] [parameter]
+find / -name java
+find / -name '*java*'
+
+68*view memory size
+cat /proc/meminfo | grep MemTotal
+
+69*view cpu info
+cat /proc/cpuinfo 
+
+70* uncompress zip file
+unzip [fileName]
+
+unzip test.zip
+
+71* install package for debpackage
+apt-get install packagename
+apt-get install openssh-server openssh-client
+sudo apt-get install curl
+
+72* open firewall port
+方法一：
+# iptables -I INPUT -i eth0 -p tcp --dport 3306 -j ACCEPT
+# iptables  -I OUTPUT -o eth0 -p tcp --sport 3306 -j ACCEPT
+方法二：
+vi /etc/sysconfig/iptables
+1、修改/etc/sysconfig/iptables文件，增加如下一行：
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+或
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 9888 -j ACCEPT
+
+service iptables start
+
+73* firewalld 防火墙
+1、firewalld的基本使用
+启动： systemctl start firewalld
+关闭： systemctl stop firewalld
+查看状态： systemctl status firewalld 
+开机禁用  ： systemctl disable firewalld
+开机启用  ： systemctl enable firewalld
+配置firewalld-cmd
+
+查看版本： firewall-cmd --version
+查看帮助： firewall-cmd --help
+显示状态： firewall-cmd --state
+查看所有打开的端口： firewall-cmd --zone=public --list-ports
+更新防火墙规则： firewall-cmd --reload
+查看区域信息:  firewall-cmd --get-active-zones
+查看指定接口所属区域： firewall-cmd --get-zone-of-interface=eth0
+拒绝所有包：firewall-cmd --panic-on
+取消拒绝状态： firewall-cmd --panic-off
+查看是否拒绝： firewall-cmd --query-panic
+
+那怎么开启一个端口呢
+添加
+firewall-cmd --zone=public --add-port=80/tcp --permanent 
+firewall-cmd --zone=public --add-port=9888/tcp --permanent 
+（--permanent永久生效，没有此参数重启后失效）
+重新载入
+firewall-cmd --reload
+查看
+firewall-cmd --zone= public --query-port=80/tcp
+删除
+firewall-cmd --zone= public --remove-port=80/tcp --permanent
+
+
+
+74 view route查看经过路由
+traceroute [host]
+traceroute [ip]
+
+75* 查看当前机器运行时间，启动时间，登录用户平均负载
+uptime
+当前时间、系统已经运行了多长时间、目前有多少登陆用户、系统在过去的1分钟、5分钟和15分钟内的平均负载
+17:02:51 up 35 days, 17:48,  1 user,  load average: 0.00, 0.01, 0.05
+
+76* 查看端口使用方式
+lsof -i:[端口号]
+lsof -i:3306
+
+77* curl访问网站信息
+查看http响应头
+curl -i http://www.baidu.com
+查看交互过程
+curl -v http://www.baidu.com
+GET请求
+curl -X GET http://www.baidu.com
+POST请求
+curl -d "param1=value1&param2=value2" "http://www.baidu.com"
+json格式的post请求
+curl -l -H "Content-type: application/json" -X POST -d '{"phone":"13521389587","password":"test"}' 
+http://domain/apis/users.json
+只显示头部信息
+curl -l "http://www.baidu.com" 
+
+
+78* 启动svn服务器
+svnserve -d -r /home/svn
+
+重启
+ps -aux|grep svnserve
+kill -9 pid
+svnserve -d -r /home/svn
+
+79* iptables防火墙存在于centos7以前
+
+# 查看防火墙状态
+service iptables status
+# 停止防火墙
+service iptables stop
+# 启动防火墙
+service iptables start
+# 重启防火墙
+service iptables restart
+# 永久关闭防火墙
+chkconfig iptables off
+
+80* 软连接创建(通过软链接解决目录空间不足的问题)
+
+ln -s 源目录(有内容的目录或文件) 新名称(软链接)
+
+ln -s /home/svn/closeproject/ closeproject
+注意目标目录会自动创建不需要手动新建文件夹！！
+ln -s /disk2/logs /logs
+ln -s /disk2/tomcatlogs/tomcat80log /opt/tomcat80/logs
+ln -s /disk2/tomcatlogs/tomcat8080log /opt/tomcat8080/logs
+ln -s /disk2/savemoonappserver /opt/savemoonappserver
+
+ln -s /disk2/tomcatlogs/tomcat_gx_posp/logs /home/tomcat_gx_posp/logs
+
+最后 删除符号链接，有创建就有删除(删除软链接目录)
+rm -rf   testDir
+注意不是rm -rf   testDir/
+删除软链接文件
+rm testfile
+
+81* vi查找字符串
+
+先按esc再输入/查找的字符串
+要找下一个按n
+
+82* 查询指定行数据 查询第480行到第500行数据
+cat catalina.2018-07-09.out |head -n 500|tail -n +480
+
+83* vi 跳转到指定行
+:n n代表行号
+:set number
+:set nonumber
+
+84* vi 复制一行，粘贴一行，删除一行
+x 删除光标所在字符
+移动光标到指定行 按yy复制
+移动光标到指定位置按p粘贴一行
+移动光标到指定位置 按dd删除一行
+删除所有先用G移到最后一行然后输入:1,.d
+删除所有内容还可以输入:1,$d
+
+85* vi移动光标
+上:k nk:向上移动n行 9999k或gg可以移到第一行 G移到最后一行
+下:j nj:向下移动n行
+左:h nh:向左移动n列
+右:l nl:向右移动n列
+
+86* yum安装cronolog
+yum install cronolog
+
+87* 安装杀毒软件 clamav
+http://www.clamav.net/downloads
+yum install epel-release
+yum clean all 
+yum makecache
+yum -y install clamav*
+启动
+service clamd restart 
+更新病毒库
+freshclam
+查看版本号
+clamscan --version
+
+扫描并删除
+clamscan --remove /root
+帮助
+clamscan -h
+扫描指定目录并写日志
+clamscan -r /etc -l /logs/etcclamav.log
+clamscan -r /bin -l /logs/binclamav.log
+clamscan -r /usr -l /logs/usrclamav.log
+
+clamscan -r / -l /logs/myclamav.log
+
+88* 切换yum源为阿里源
+
+cd /etc/yum.repos.d
+mv CentOS-Base.repo CentOS-Base.repo_bak
+这个用版本7的源
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+yum clean all
+yum makecache
+
+89* 查找并删除(atime[access time] 访问时间 mtime[modify time] 修改时间 ctime[change time] 变化时间)
+find /logs/lotteryman1/ -name "*.log" -mtime -1 -exec rm {} \;
+查找 路径 根据名称 名称 修改时间 一天前 执行 删除命令
+
+
+90* 查找大文件
+找出当前目录下大于100M的文件
+find . -type f -size +100000k  -print0 | xargs -0 du -h | sort -nr
+
+91* 查看执行过的命令
+history
+将执行过的命令生成文件
+history >>/logs/myhis.txt
+
+92* 关闭ipv6
+vi /etc/sysctl.conf
+
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+
+sudo sysctl -p
+
+93* 查找文件中相关字符串前后内容 文本搜索工具
+-A -B -C 后面都跟阿拉伯数字 
+-A是显示匹配后和它后面的n行。 
+-B是显示匹配行和它前面的n行。 
+-C是匹配行和它前后各n行。 
+grep -A 100 -B 100 -i 'test12345678' catalina.out
+grep -A 100 -B 100 -i 'test12345678' lotteryman1
+grep -C 120 -i 'test12345678' lotteryman1
+grep -A 50 -i 'tawz201901221732' lotteryman1
+grep -A 10 -i 'sourceid=33319032300000371474700004839' /opt/tomcat8080/logs/catalina.2019-03-23.out
+正则表达式
+grep -zoe grep -oze "<Connector[^<]*/>" server.xml
+
+
+94* 关闭控制台后台服务仍可运行 关闭终端后服务依旧可以运行
+nohup 命令行 &
+
+nohup java -jar appserveruser-1.0.0.jar &
+不生成文件
+nohup java -jar /xxx/xxx/xxx.jar >/dev/null 2>&1 &
+生成日志到指定文件
+nohup java -jar appserverwebadmin.jar >/logs/weblog.log &
+
+95* 时间同步
+yum -y install utp ntpdate
+ntpdate cn.pool.ntp.org
+hwclock --systohc
+验证当前时间
+date
+
+96* 查看服务状态
+systemctl list-unit-files --type=service|grep mysqld
+systemctl list-unit-files --type=service|grep nginx
+
+systemctl status postgresql-11
+
+97*查看内存占用情况
+free -m
+
+98* 免密码秘钥登录(信任远程主机)
+A要和B通讯
+A通过RSA算法生成公钥(.pub)和私钥(公钥用于加密，私钥用于解密)
+B将A的公钥文件(.pub)内容加入到/root/.ssh/authorized_keys中
+此时A便可以向B进行通讯，而B不能向A进行通讯
+
+自己信任自己
+第一步生成公钥与私钥
+ssh-keygen -t  rsa
+第二步生成authorized_keys文件
+cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
+第三步使用ssh命令测试本机多个不同地址
+ssh localhost
+ssh 127.0.0.1
+ssh 192.168.111.81
+
+机器1与机器2互相信任并自己信任自己
+第一步在A机生成证书
+ssh-keygen -t  rsa
+第二步A对B建立信任关系
+scp id_rsa.pub root@192.168.111.82:/root/.ssh/authorized_keys
+
+ssh 192.168.111.82
+
+第三步 B对A建立信任关系 并且B对自己建立信任 机器B上执行
+在B上生成证书
+ssh-keygen -t  rsa
+cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+scp authorized_keys root@192.168.111.81:/root/.ssh/authorized_keys
+
+第四步A对自己建立信任 机器A上执行
+cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+
+第五步互相测试
+ssh localhost
+ssh 127.0.0.1
+ssh 0.0.0.0
+ssh 192.168.111.82
+ssh 192.168.111.81
+ssh pc2p30
+ssh pc1p10
+
+
+99* 命令执行顺序
+command1 & command2 & command3  
+三个命令同时执行
+
+command1;command2;command3
+不管前面命令执行成功没有，后面的命令继续执行
+
+command1 && command2
+只有前面命令执行成功，后面命令才继续执行
+
+command1 || command2
+如果||左边的命令（命令1）未执行成功，那么就执行||右边的命令
+
+100* 查看系统最大句柄
+ulimit -a
+
+/etc/security/limits.conf
+
+101* 登录远程主机
+ssh 主机IP或主机名
+ssh -p端口 主机名
+ssh 主机名 "命令1;命令2"
+ssh -p22 omd@192.168.25.137
+
+102* 查看block设备的信息（如磁阵硬件,硬盘）
+lsblk
+lsblk -s
+lsblk --help
+
+Usage:
+ lsblk [options] [<device> ...]
+
+List information about block devices.
+
+选项：
+ -a, --all            print all devices
+ -b, --bytes          print SIZE in bytes rather than in human readable format
+ -d, --nodeps         don't print slaves or holders
+ -D, --discard        print discard capabilities
+ -e, --exclude <list> exclude devices by major number (default: RAM disks)
+ -f, --fs             output info about filesystems
+ -i, --ascii          use ascii characters only
+ -I, --include <list> show only devices with specified major numbers
+ -J, --json           use JSON output format
+ -l, --list           use list format output
+ -m, --perms          output info about permissions
+ -n, --noheadings     don't print headings
+ -o, --output <list>  output columns
+ -O, --output-all     output all columns
+ -p, --paths          print complete device path
+ -P, --pairs          use key="value" output format
+ -r, --raw            use raw output format
+ -s, --inverse        inverse dependencies
+ -S, --scsi           output info about SCSI devices
+ -t, --topology       output info about topology
+ -x, --sort <column>  sort output by <column>
+
+ -h, --help     display this help and exit
+ -V, --version  output version information and exit
+
+
+103*修正清理规则
+/tmp目录的清理规则主要取决于/usr/lib/tmpfiles.d/tmp.conf文件的设定，默认的配置内容为：
+我们可以配置这个文件，比如你不想让系统自动清理/tmp下以tomcat开头的目录，那么增加下面这条内容到配置文件中即可：
+vi /usr/lib/tmpfiles.d/tmp.conf
+x /tmp/vskedtest.*
+x /tmp/vsked.*
+
+104* 在Linux下查看FC HBA卡的速率和状态 查看光纤卡信息
+查看FC HBA卡的WWN号
+cat  /sys/class/fc_host/host1/port_name
+cat  /sys/class/fc_host/host1/node_name
+cat  /sys/class/fc_host/host1/fabric_name
+
+查看当前port的状态(online是对的)
+cat  /sys/class/fc_host/host1/port_state
+
+查看PORT的端口ID
+cat  /sys/class/fc_host/host1/port_id
+0x000001
+
+查看port支持的速率
+cat  /sys/class/fc_host/host1/supported_speeds
+cat  /sys/class/fc_host/host1/supported_classes
+
+给FC HBA卡插上光纤线，和其他HBA卡相连时
+cat  /sys/class/fc_host/host2/speed
+cat  /sys/class/fc_host/host2/port_type
+
+105* 清理未知pv
+pvscan --cache
+pvs
+
+106* 查看文件占用可查看端口占用
+查看文件占用
+lsof 文件名
+查看端口占用
+lsof -i:20
+
+
+
+--------------------------------------------------------------------------------
+
+About oracleG
+
+1* set TNSlistener please use oracle user
+export LC_ALL=en_US
+netca
+
+2* sqlplus by sysdba
+sqlplus '/as sysdba'
+
+3* start TNSlistener
+lsnrctl start
+
+4* stop TNSlistener
+lsnrctl stop
+
+5* open database assistant
+dbca
+
+6*startup database
+first connect as sysdba 2*
+startup
+
+7*test database is okey
+select * from user_tables;
+
+8* add update or del database
+dbca
+
+
+9* 使用指定配置文件启动oracle
+startup pfile='/u01/app/oracle/product/11.2.0/db1/dbs/init.ora';
+startup spfile='/u01/app/oracle/product/11.2.0/db1/dbs/initorcl.ora';
+
+10* 关闭数据库
+shutdown immediate;
+
+11* 启动数据库
+startup;
+startup force 关闭再启动
+redhat about
+1*environment set
+vi /etc/profile
+
+2* dynamic file name [here ` is the key at ~ ]
+tail -f /opt/apache-tomcat/logs/localhost_access_log.`date -d today +"%Y-%m-%d"`.txt
+
+
+
+
+software
+
+Nagios
+-------------------------------------------------
+about svn
+
+启动svn
+svnserve -d -r /home/svn
+
+创建新svn项目
+cd /home/svn/
+svnadmin create 项目英文代号
+svnadmin create QRCodeSys_gx
+
+创建完成后在globaluser中复制svnserve.conf到新conf目录
+
+添加http访问密码
+htpasswd -b /home/svn/globaluser/conf/passwdhttp vsked bufu110
+
+
+
+
+-------------------------------------------------
+yum相关
+-y参数为默认选yes
+查看源列表
+yum repolist
+yum repolist all
+清理
+yum clean all
+更新缓存
+yum makecache
+安装软件包
+yum -y install clamav*
+本地目录安装
+yum -y localinstall
+更新系统包括内核!
+yum -y update
+卸载
+yum -y remove epel-release
+搜索
+yum search 软件名称
+检查更新
+yum check-update
+查看组
+yum grouplist
+安装组
+yum groupinstall GNOME Desktop
+列出已安装软件
+yum list installed 
+
+
+yum-config-manager: command not found
+yum -y install yum-utils
+
+yum install -y cronolog httpd
+
+本地源配置：cdiso.repo
+将iso镜像文件中所有内容复制到/public/software/cdrom 中，节点将本地yum指向此处
+vim /etc/yum.repos.d/cdiso.repo
+[cd1]
+name=cd1
+baseurl=file:///public/software/cdrom
+enabled=1
+gpgcheck=0
+
+本地源配置：file.repo
+mount -o loop xxxx.iso /mnt/iso
+
+如果/etc/yum.repos.d/下面有其它的*.repo文件，先创建个备份文件夹，将这些repo先转移到文件夹中，自己写一个新的.repo的文件
+
+
+vi /etc/yum.repos.d/file.repo
+
+添加如下内容：
+[base]
+name=rhel6repo
+baseurl=file:///mnt/iso
+enabled=1
+gpgckeck=0
+gpgkey=file:///mnt/iso/RPM-GPG-KEY-redhat-release
+5.清除cache
+yum clean all
+6.验证是否成功
+yum -y install tree
+tree
+
+-------------------------------------------------
+Windows上将linux目录映射网络驱动器
+
+service smb start
+service smb stop
+service smb status
+
+yum install samba samba-client samba-swat
+yum install cifs-utils
+
+创建windows与centos共享目录
+mkdir -p /data/pc1/env/flume/data
+chmod 777 /data/pc1/env/flume/data/
+
+停止防火墙
+systemctl stop firewalld
+
+关闭防火墙
+systemctl disable firewalld
+
+关闭SELINUX
+ vi /etc/selinux/config
+
+#SELINUX=enforcing
+#SELINUXTYPE=targeted
+SELINUX=disabled
+
+setenforce 0
+
+修改系统限制(end of file前面加)
+vi /etc/security/limits.conf
+
+* soft nofile 65535
+* hard nofile 65535
+
+vi /etc/samba/smb.conf
+
+
+[global]
+	workgroup = SAMBA
+	security = user
+  netbios name=Vma
+	map to guest = Bad User
+
+[public]
+writeable=yes
+browseable=yes
+guest ok = yes
+path=/data/pc1/env/flume/data
+public =yes
+
+
+设置开机启动
+systemctl enable smb
+或
+chkconfig smb on
+
+测试模板正确性
+testparm
+
+服务启动
+systemctl start smb
+systemctl stop smb
+systemctl restart smb
+或
+service smb start
+service smb stop
+service smb restart
+
+
+配置完以后要重启
+
+使用方式为
+\\ip\\public
+\\192.168.111.52\public
+
+如果不能写入重启再测试即可
+-------------------------------------------------
+ 查看当前有几个HBA卡，该目录下host数量就是HBA卡数量
+cd /sys/class/fc_host
+ls |wc -l
+# 查看命令所在的工具包并安装命令
+yum provides */systool
+yum -y install sysfsutils
+
+
+查看wwn
+systool -v -c fc_host|grep 'node_name'
+
+查看IQN
+
+
+pv
+pvcreate /dev/sdc
+pvs
+pvremove  /dev/sdc
+--------------
+vg
+vgcreate vg1 /dev/sdc
+vgdisplay
+vgremove vg1
+--------------
+lv
+lvdisplay
+lvscan
+lvcreate -L 1000G -n lv1 vg1
+
+lvremove /dev/vg1/lv1
+
+mount  /dev/vg1/lv1  /HPMSA1040/lv1
+umount /HPMSA1040/lv1
+--------------
+mkfs.ext4 /dev/vg1/lv1
+
+磁盘阵列硬件相关
+
+显示磁盘阵列相关容量
+lsblk -s
+查看系统下磁盘的文件系统
+lsblk -fp
+
+[root@10-111-10-202 device]# pvcreate /dev/sdc
+  Device /dev/sdc excluded by a filter.
+[root@10-111-10-202 device]# pvs
+  PV         VG     Fmt  Attr PSize    PFree
+  /dev/sda3  centos lvm2 a--  <278.17g    0 
+
+[root@10-111-10-202 device]# pvcreate /dev/sdc
+WARNING: dos signature detected on /dev/sdc at offset 510. Wipe it? [y/n]: y
+  Wiping dos signature on /dev/sdc.
+  Physical volume "/dev/sdc" successfully created.
+[root@10-111-10-202 device]# pvs
+  PV         VG     Fmt  Attr PSize    PFree 
+  /dev/sda3  centos lvm2 a--  <278.17g     0 
+  /dev/sdc          lvm2 ---    <3.63t <3.63t
+[root@10-111-10-202 device]# vgdisplay
+  --- Volume group ---
+  VG Name               centos
+  System ID             
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  4
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                3
+  Open LV               3
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <278.17 GiB
+  PE Size               4.00 MiB
+  Total PE              71211
+  Alloc PE / Size       71211 / <278.17 GiB
+  Free  PE / Size       0 / 0   
+  VG UUID               FMXMxM-h68U-Dcox-pEMk-RAFY-CKhc-Cx9Rdi
+   
+[root@10-111-10-202 device]# vgcreate vg1 /dev/sdc
+  Volume group "vg1" successfully created
+[root@10-111-10-202 device]# lvdisplay
+  --- Logical volume ---
+  LV Path                /dev/centos/swap
+  LV Name                swap
+  VG Name                centos
+  LV UUID                4eIYEM-lbsP-3Efj-5bcd-CNu1-VdLz-f2B9Dr
+  LV Write Access        read/write
+  LV Creation host, time localhost, 2019-09-26 15:21:26 +0800
+  LV Status              available
+  # open                 2
+  LV Size                <27.94 GiB
+  Current LE             7152
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           253:1
+   
+  --- Logical volume ---
+  LV Path                /dev/centos/home
+  LV Name                home
+  VG Name                centos
+  LV UUID                WmbdWa-1EzZ-GZZz-BXcv-DNqN-sTCw-DMzvR4
+  LV Write Access        read/write
+  LV Creation host, time localhost, 2019-09-26 15:21:26 +0800
+  LV Status              available
+  # open                 1
+  LV Size                200.23 GiB
+  Current LE             51259
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           253:2
+   
+  --- Logical volume ---
+  LV Path                /dev/centos/root
+  LV Name                root
+  VG Name                centos
+  LV UUID                dcdPia-Boj6-dEeJ-nrHt-UdtF-HFTO-2glxKn
+  LV Write Access        read/write
+  LV Creation host, time localhost, 2019-09-26 15:21:29 +0800
+  LV Status              available
+  # open                 1
+  LV Size                50.00 GiB
+  Current LE             12800
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           253:0
+   
+
+[root@10-111-10-202 device]# lvscan
+  ACTIVE            '/dev/centos/swap' [<27.94 GiB] inherit
+  ACTIVE            '/dev/centos/home' [200.23 GiB] inherit
+  ACTIVE            '/dev/centos/root' [50.00 GiB] inherit
+[root@10-111-10-202 device]# lvcreate -L 1000G -n lv1 vg1
+  Logical volume "lv1" created.
+[root@10-111-10-202 device]# lvcreate -L 1000G -n lv2 vg1
+  Logical volume "lv2" created.
+[root@10-111-10-202 device]# lvcreate -L 1000G -n lv3 vg1
+  Logical volume "lv3" created.
+[root@10-111-10-202 device]# lvcreate -L 90G -n lv4 vg1
+  Logical volume "lv4" created.
+Logical volume "lv4" created.
+[root@10-111-10-202 device]# lvscan
+  ACTIVE            '/dev/vg1/lv1' [1000.00 GiB] inherit
+  ACTIVE            '/dev/vg1/lv2' [1000.00 GiB] inherit
+  ACTIVE            '/dev/vg1/lv3' [1000.00 GiB] inherit
+  ACTIVE            '/dev/vg1/lv4' [90.00 GiB] inherit
+  ACTIVE            '/dev/centos/swap' [<27.94 GiB] inherit
+  ACTIVE            '/dev/centos/home' [200.23 GiB] inherit
+  ACTIVE            '/dev/centos/root' [50.00 GiB] inherit
+[root@10-111-10-202 device]# mkfs.ext4 /dev/vg1/lv1
+mke2fs 1.42.9 (28-Dec-2013)
+文件系统标签=
+OS type: Linux
+块大小=4096 (log=2)
+分块大小=4096 (log=2)
+Stride=0 blocks, Stripe width=256 blocks
+65536000 inodes, 262144000 blocks
+13107200 blocks (5.00%) reserved for the super user
+第一个数据块=0
+Maximum filesystem blocks=2409627648
+8000 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables: 完成                            
+正在写入inode表: 完成                            
+Creating journal (32768 blocks): 完成
+Writing superblocks and filesystem accounting information: 完成     
+
+[root@10-111-10-202 device]# mkfs.ext4 /dev/vg1/lv2
+mke2fs 1.42.9 (28-Dec-2013)
+文件系统标签=
+OS type: Linux
+块大小=4096 (log=2)
+分块大小=4096 (log=2)
+Stride=0 blocks, Stripe width=256 blocks
+65536000 inodes, 262144000 blocks
+13107200 blocks (5.00%) reserved for the super user
+第一个数据块=0
+Maximum filesystem blocks=2409627648
+8000 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables: 完成                            
+正在写入inode表: 完成                            
+Creating journal (32768 blocks): 完成
+Writing superblocks and filesystem accounting information: 完成     
+
+[root@10-111-10-202 device]# mkfs.ext4 /dev/vg1/lv3
+mke2fs 1.42.9 (28-Dec-2013)
+文件系统标签=
+OS type: Linux
+块大小=4096 (log=2)
+分块大小=4096 (log=2)
+Stride=0 blocks, Stripe width=256 blocks
+65536000 inodes, 262144000 blocks
+13107200 blocks (5.00%) reserved for the super user
+第一个数据块=0
+Maximum filesystem blocks=2409627648
+8000 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables: 完成                            
+正在写入inode表: 完成                            
+Creating journal (32768 blocks): 完成
+Writing superblocks and filesystem accounting information: 完成     
+
+[root@10-111-10-202 device]# mkfs.ext4 /dev/vg1/lv4
+mke2fs 1.42.9 (28-Dec-2013)
+文件系统标签=
+OS type: Linux
+块大小=4096 (log=2)
+分块大小=4096 (log=2)
+Stride=0 blocks, Stripe width=256 blocks
+5898240 inodes, 23592960 blocks
+1179648 blocks (5.00%) reserved for the super user
+第一个数据块=0
+Maximum filesystem blocks=2172649472
+720 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000
+
+Allocating group tables: 完成                            
+正在写入inode表: 完成                            
+Creating journal (32768 blocks): 完成
+Writing superblocks and filesystem accounting information: 完成 
+
+
+lsblk -fp
+
+vi /etc/fstab
+
+192.168.6.241
+UUID="ab3a3fd1-d906-4e28-9172-6f31f7551b0b" /HPMSA1040/lv1 ext4 defaults 0 0
+UUID="c8380071-8e7c-42a5-820a-caef2502a1d5" /HPMSA1040/lv2 ext4 defaults 0 0
+UUID="d3791a0e-7d56-44b6-99a9-6bf6b56d8f12" /HPMSA1040/lv3 ext4 defaults 0 0
+UUID="660d71c3-4c39-44f8-977c-40985d413bde" /HPMSA1040/lv4 ext4 defaults 0 0
+
+192.168.6.242
+UUID="867e554b-afd2-422c-ad3e-03f3520bc348" /HPMSA1040/lv1 ext4 defaults 0 0
+UUID="8e70da24-9948-408a-a176-4d68580bb2d2" /HPMSA1040/lv2 ext4 defaults 0 0
+UUID="467ed7a8-0bad-4cff-8e07-feef823d4459" /HPMSA1040/lv3 ext4 defaults 0 0
+UUID="cf22a7e1-061f-48c1-b45d-56500addf255" /HPMSA1040/lv4 ext4 defaults 0 0
+
+手动刷新  
+mount -a
+
+
+-------------------------------------------------
+
+设置虚拟机中centos共享目录
+tar -zxvf VMwareTools.tar.gz
+rm -rf VMwareTools.tar.gz
+cd VMwareTools/
+tar -zxvf VMwareTools-10.3.10-13959562.tar.gz
+rm -rf VMwareTools-10.3.10-13959562.tar.gz
+cd vmware-tools-distrib/
+./vmware-install.pl
+
+
+然后一路回车即可
+
+测试VMtools
+查看是否安装成功
+df -h
+设置共享
+vmhgfs-fuse -o subtype=vmhgfs-fuse,allow_other /mnt/hgfs/
+cd /mnt/hgfs
+
+/etc/fstab
+.host:/shared     /mnt/hgfs       vmhgfs     defaults  0  0 
+
+-------------------------------------------------
+误删数据恢复
+
+extundelete 不能应用于lvm不建议使用
+
+yum -y install e2fsprogs-devel gcc
+yum -y install bzip2
+yum -y install gcc+ gcc-c++
+
+tar jxf extundelete-0.2.4.tar.bz2
+cd extundelete-0.2.4
+./configure
+make
+make install
+
+常用参数
+--after dtime            时间参数，表示在某段时间之后被删除的文件或目录
+--before dtime           时间参数，表示在某段时间之前被删除的文件或目录
+--inode ino              显示节点 ino 的信息
+--block blk              显示数据块 blk 的信息
+--restore-inode ino      表示恢复节点 ino 的文件，用来恢复单个文件
+--restore-file path      表示恢复指定路径下的文件，用来恢复目录下所有文件
+--restore-all            表示恢复所有被删除的目录跟文件
+
+查找被删除文件所在目录 id
+[root@bigdata3 ~]# ls -id /root
+33574977 /root
+
+extundelete /dev/sda --inode 33574977
+
+
+恢复数据、恢复指定目录下所有删除的数据
+extundelete /dev/sdb1 --restore-directory /xxx/xxx/xxx/
+恢复数据后，会把恢复数据送到当前路径的RECOVERED_FILES/内，再把恢复的数据拿回原处
+cp RECOVERED_FILES/xxx/xxx/* /xxx/xxx/xxx/
+
+--------------------------------------------------------------------------------
+lvm扩容管理
+给第一块磁盘添加新分区
+fdisk /dev/sda
+新建分区
+n
+主分区
+p
+其他参数默认
+写入
+w
+查看磁盘分区列表
+fdisk -l
+格式化新分区sda3
+mkfs -t ext4 /dev/sda3
+创建物理卷
+pvcreate /dev/sda3
+查看逻辑卷组(主要看VG Name)
+vgdisplay
+将新磁盘添加到逻辑卷组centos(VG Name)
+vgextend centos /dev/sda3
+查看可扩充磁盘空间(其中 Free PE / Size 就是可供分配的自由空间，最多有 24.99G，在扩展时输入小于该值 )
+vgdisplay 
+为逻辑卷扩展24G空间
+lvextend -L +24G /dev/mapper/centos-root /dev/sda3
+重新分配磁盘空间
+resize2fs /dev/mapper/centos-root
+如果不行就用(下面与上面只选一个)
+xfs_growfs /dev/mapper/centos-root
+检查扩容结果
+df -lh
+
+示例
+
+[root@localhost ~]# pvcreate /dev/sda3
+WARNING: ext4 signature detected on /dev/sda3 at offset 1080. Wipe it? [y/n]: y
+  Wiping ext4 signature on /dev/sda3.
+  Physical volume "/dev/sda3" successfully created.
+[root@localhost ~]# df -lh
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G  380K   16G   1% /dev/shm
+tmpfs                     16G  8.8M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root  266G  6.2G  247G   3% /
+/dev/sda1                2.0G  123M  1.7G   7% /boot
+tmpfs                    3.2G     0  3.2G   0% /run/user/0
+[root@localhost ~]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G  380K   16G   1% /dev/shm
+tmpfs                     16G  8.8M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root  266G  6.2G  247G   3% /
+/dev/sda1                2.0G  123M  1.7G   7% /boot
+tmpfs                    3.2G     0  3.2G   0% /run/user/0
+[root@localhost ~]# vgextend centos-root /dev/sda3
+  Volume group "centos-root" not found
+  Cannot process volume group centos-root
+[root@localhost ~]# vgdisplay
+  --- Volume group ---
+  VG Name               centos
+  System ID             
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  3
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                2
+  Open LV               2
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <277.72 GiB
+  PE Size               4.00 MiB
+  Total PE              71096
+  Alloc PE / Size       71095 / 277.71 GiB
+  Free  PE / Size       1 / 4.00 MiB
+  VG UUID               34pBnO-ZSpw-CMQs-1PLG-7HId-PVF3-Ya44hH
+   
+[root@localhost ~]# vgextend centos /dev/sda3
+  Volume group "centos" successfully extended
+[root@localhost ~]# df -lh
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G  380K   16G   1% /dev/shm
+tmpfs                     16G  8.8M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root  266G  6.2G  247G   3% /
+/dev/sda1                2.0G  123M  1.7G   7% /boot
+tmpfs                    3.2G     0  3.2G   0% /run/user/0
+[root@localhost ~]# vgdisplay
+  --- Volume group ---
+  VG Name               centos
+  System ID             
+  Format                lvm2
+  Metadata Areas        2
+  Metadata Sequence No  4
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                2
+  Open LV               2
+  Max PV                0
+  Cur PV                2
+  Act PV                2
+  VG Size               307.99 GiB
+  PE Size               4.00 MiB
+  Total PE              78846
+  Alloc PE / Size       71095 / 277.71 GiB
+  Free  PE / Size       7751 / <30.28 GiB
+  VG UUID               34pBnO-ZSpw-CMQs-1PLG-7HId-PVF3-Ya44hH
+   
+[root@localhost ~]# lvextend -L+24G /dev/mapper/centos-root /dev/sda3
+  Size of logical volume centos/root changed from <270.09 GiB (69142 extents) to <294.09 GiB (75286 extents).
+  Logical volume centos/root successfully resized.
+[root@localhost ~]# df -lh
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G  380K   16G   1% /dev/shm
+tmpfs                     16G  8.8M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root  266G  6.2G  247G   3% /
+/dev/sda1                2.0G  123M  1.7G   7% /boot
+tmpfs                    3.2G     0  3.2G   0% /run/user/0
+[root@localhost ~]# resize2fs /dev/mapper/centos-root
+resize2fs 1.42.9 (28-Dec-2013)
+Filesystem at /dev/mapper/centos-root is mounted on /; on-line resizing required
+old_desc_blocks = 34, new_desc_blocks = 37
+The filesystem on /dev/mapper/centos-root is now 77092864 blocks long.
+
+[root@localhost ~]# df -lh
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                  16G     0   16G   0% /dev
+tmpfs                     16G  380K   16G   1% /dev/shm
+tmpfs                     16G  8.8M   16G   1% /run
+tmpfs                     16G     0   16G   0% /sys/fs/cgroup
+/dev/mapper/centos-root  290G  6.2G  269G   3% /
+/dev/sda1                2.0G  123M  1.7G   7% /boot
+tmpfs                    3.2G     0  3.2G   0% /run/user/0
+
+
+
+--------------------------------------------------------------------------------
+cpu占用排查 postgresql
+
+检查postgresql配置文件是否正确
+查找出占用系统内存&CPU排名前10的进程
+ps aux|head -1;ps aux|grep -v PID|sort -rn -k +3|head
+
+切换到postgres用户，执行psql，进入数据库终端：指定上述命令找到的系统进程号
+SELECT procpid, START, now() - START AS lap, current_query  FROM ( 
+    SELECT backendid, pg_stat_get_backend_pid (S.backendid) AS procpid,
+    pg_stat_get_backend_activity_start (S.backendid) AS START,pg_stat_get_backend_activity (S.backendid) AS current_query  
+FROM (SELECT pg_stat_get_backend_idset () AS backendid) AS S) AS S 
+    WHERE current_query <> '<IDLE>' and procpid=15874
+ORDER BY lap DESC;
+
+定位到SQL，确认该SQL完成的业务查询功能，查看执行计划，增加索引or 修改代码。
+SELECT "******_edoc_queue".id 
+    FROM "******_edoc_queue" 
+        WHERE (("*******_edoc_queue"."edoc_id" = '521300000004TCS60515001FV-960157.pdf')  
+        AND  ("*****_edoc_queue"."active" = true)) 
+        ORDER BY "*****_edoc_queue"."id"
+查询该条SQL的执行计划：（Postgresql使用explain analyze + sql语法的格式）
+postgres=# \c ***你的实际模式schema
+You are now connected to database "stbg" as user "postgres".
+stbg=# explain analyze SELECT "cus_center_new_edoc_queue".id FROM "cus_center_new_edoc_queue" WHERE (("cus_center_new_edoc_queue"."edoc_id" = '521300000008TCS60417066FV-960101.pdf')  AND  ("cus_center_new_edoc_queue"."active" = true)) ORDER BY "cus_center_new_edoc_queue"."id";
+
+---得到如下执行计划：
+stbg= BY "cus_center_new_edoc_queue"."id";ter_new_edoc_queue"."active" = true)) ORDER QUERY PLAN         -----------------------------------------------------------------------------
+Sort  (cost=21044.85..21044.85 rows=1 width=4) (actual time=109.905..109.905 ro
+ws=0 loops=1)
+   Sort Key: id
+   Sort Method: quicksort  Memory: 25kB
+   ->  Seq Scan on cus_center_new_edoc_queue  (cost=0.00..21044.84 rows=1 width=4) (actual time=109.880..109.880 rows=0 loops=1)
+         Filter: (active AND ((edoc_id)::text = '521300000008TCS60417066FV-960101.pdf'::text))
+         Rows Removed by Filter: 583348
+ Planning time: 0.468 ms
+ Execution time: 109.952 ms
+(8 rows)
+
+----可以看出执行查询时间：109.952 ms
+
+
+

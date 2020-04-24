@@ -77,13 +77,13 @@ public class ElasticSearchService extends BaseTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void getAllRequestTest() {
 		try {
 			// 构造查询客户端 for elastic search 7.6.2
 			RestHighLevelClient client = new RestHighLevelClient(
 					RestClient.builder(new HttpHost("10.0.193.10", 9222, "http")));
-			SearchRequest searchRequest=new SearchRequest("VSKEDTEST2");
+			SearchRequest searchRequest=new SearchRequest("posts");
 			SearchResponse searchResponse=client.search(searchRequest, RequestOptions.DEFAULT);
 			String message = searchResponse.toString();
 			log.info(message);
@@ -177,7 +177,7 @@ public class ElasticSearchService extends BaseTest {
 
 			DeleteRequest request = new DeleteRequest(
 			        "posts",    
-			        "2");  
+			        "3");  
 			DeleteResponse response=client.delete(request, RequestOptions.DEFAULT) ;
 			String message = response.toString();
 			log.info(message);
