@@ -1,0 +1,29 @@
+
+快捷键
+
+锁定屏幕     win+L
+控制面板     win+i
+资源管理器  win+e
+操作中心     win+a
+搜索            win+s
+搜索            win+q
+查看外连设备win+k
+云剪贴板      win+v
+显示桌面      win+d
+截图             win+shift+s
+Emoji表情     win+;
+运行              win+r
+显示设置       win+u
+投影连接          win+p
+焦点任务栏图标 win+b
+xbox录制  win+g
+焦点桌面图标 win+m
+焦点任务栏 win+t
+白板和草图 win+w
+快捷菜单大全 win+x
+
+虚拟桌面篇
+创建虚拟桌面win+ctrl+d
+关闭当前虚拟桌面 win+ctrl+f4
+向左切换虚拟桌面 win+ctrl+向左箭头
+向右切换虚拟桌面 win+ctrl+向右箭头

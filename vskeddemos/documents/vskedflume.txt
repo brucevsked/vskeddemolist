@@ -2,8 +2,16 @@
 flume-ng version
 
 2* 使用配置文件启动flume
+
+/opt/apache-flume-1.9.0-bin/bin/flume-ng agent -n agent1 --conf /opt/apache-flume-9.0-bin/conf -f /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties
+只在控制台打印日志不生成日志文件
+/opt/apache-flume-1.9.0-bin/bin/flume-ng agent -n agent1 --conf /opt/apache-flume-1.9.0-bin/conf -f /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dflume.root.logger=info,console
+生成日志info级存储位置由conf目录中log4j配置文件决定
+/opt/apache-flume-1.9.0-bin/bin/flume-ng agent -n agent1 --conf /opt/apache-flume-1.9.0-bin/conf -f /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dflume.root.logger=INFO,console,LOGFILE
+生成日志error级存储位置由conf目录中log4j配置文件决定
+/opt/apache-flume-1.9.0-bin/bin/flume-ng agent -n agent1 --conf /opt/apache-flume-1.9.0-bin/conf -f /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dflume.root.logger=ERROR,LOGFILE
 前台启动
-flume-ng agent -n agent -c conf -f /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dflume.root.logger=ALL,console
+flume-ng agent -n a1 -c conf -f /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dflume.root.logger=ALL,console
 
 后台启动
 nohup flume-ng agent -n agent -c conf -f /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dflume.root.logger=console  >/logs/flume.log 2>&1 &"
@@ -20,6 +28,11 @@ nohup /opt/testevn1/apache-flume-1.9.0-bin/bin/flume-ng agent --conf conf -z 192
 5* 开启http监控
 通过添加以下两个参数可以监控flume情况未测试
 -Dflume.monitoring.type=http -Dflume.monitoring.port=34545 
+
+6* 生成日志到指定目录
+-Dflume.root.logger=ERROR,console -Dorg.apache.flume.log.printconfig=false -Dorg.apache.flume.log.rawdata=false
+java.io.tmpdir
+flume-ng agent -n agent -c conf -f /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dorg.apache.flume.log.printconfig=false -Dorg.apache.flume.log.rawdata=false
 
 
 
@@ -50,3 +63,6 @@ ssh -p22 root@192.168.60.10 "nohup /home/hadoop/app/apache-flume-1.9.0-bin/bin/f
 
 ssh root@127.0.0.1 "nohup /opt/testevn1/apache-flume-1.9.0-bin/bin/flume-ng agent --conf conf -z 192.168.111.52:2181 -p /flumeConfig -name a107684481115660288 -Dflume.root.logger=INFO,console >/logs/flumevskedtest1.log 2>&1 &"
 
+
+
+flume-ng agent -n agent --conf-file /opt/apache-flume-1.9.0-bin/conf/flume-conf.properties -Dproperty=java.io.tmpdir=/myflumelog

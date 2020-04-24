@@ -1,0 +1,209 @@
+
+查看vagrant版本信息
+vagrant -v
+
+Vagrant命令详解
+命令	作用
+vagrant box add	添加box的操作
+vagrant init	初始化box的操作，会生成vagrant的配置文件Vagrantfile
+vagrant up	启动本地环境
+vagrant ssh	通过 ssh 登录本地环境所在虚拟机
+vagrant halt	关闭本地环境
+vagrant suspend	暂停本地环境
+vagrant resume	恢复本地环境
+vagrant reload	修改了 Vagrantfile 后，使之生效（相当于先 halt，再 up）
+vagrant destroy	彻底移除本地环境
+vagrant box list	显示当前已经添加的box列表
+vagrant box remove	删除相应的box
+vagrant package	打包命令，可以把当前的运行的虚拟机环境进行打包
+vagrant plugin	用于安装卸载插件
+vagrant status	获取当前虚拟机的状态
+vagrant global-status	显示当前用户Vagrant的所有环境状态
+
+安装快照插件(windows不用安自带了)
+vagrant plugin install vagrant-vbox-snapshot
+创建快照
+vagrant snapshot save "dev1centos7ss1"
+查看快照列表
+vagrant snapshot list
+从指定快照中恢复
+vagrant snapshot restore "dev1centos7ss1"
+删除一个快照
+vagrant snapshot delete "dev1centos7ss1"
+
+1* 查看box列表
+vagrant box list
+
+2* 删除box
+vagrant box remove base1
+
+3* 修改了 Vagrantfile 后，使之生效（相当于先 halt，再 up）
+vagrant reload
+
+4* 打包为新box镜像
+先进入有Vagrantfile的目录里面再执行
+vagrant package --vagrantfile Vagrantfile
+
+5* 导入box镜像(base1为box名字)
+vagrant box add base1 i:\vagrantdisk\dev1centos7\dev1centos7.box
+vagrant box add base i:\vagrantdisk\dev1centos7\dev1centos7.box
+
+6* 启动镜像
+vagrant up
+
+7* 进入虚拟机ssh
+vagrant ssh
+
+8* 关闭虚拟机
+vagrant halt
+
+
+Vagrantfile配置文件说明
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "base" #box名称
+  config.vm.hostname = "centos7" # 主机名
+  # 登录用户名（默认有vagrant这个用户、在未设置之前root可能登录不了）
+  config.ssh.username = 'vagrant' 
+  config.ssh.password = "vagrant" # 默认的登录密码 （root用户的默认密码也是这个密码）
+  # 是否使用秘钥、公钥登录（默认为true,如果设为true那么上面的账号密码是无效的，建议设为true）
+  config.ssh.insert_key = false 
+  # 为虚拟机分配内网IP地址。 SSH可以直接通过192.168.1.10连接
+  config.vm.network "public_network", ip:"192.168.1.10"
+  config.vm.provision:puppet #支持puppet
+  config.vm.forward_port 8080,8081 #端口映射
+  config.vm.network "forwarded_port", guest: 80, host: 80
+  config.vm.network "forwarded_port", guest: 443, host: 443
+  config.vm.network "forwarded_port", guest: 3306, host: 3306
+  # 需要共享的目录（即我们可在本机修改"D:/WWW"的文件，而在虚拟机环境中运行"/wwwroot"的代码）
+  config.vm.synced_folder "D:/WWW", "/wwwroot"
+  config.memory = 4096 #内存
+  config.cpus = 2 #cpu设置
+end
+
+
+官网下载方法
+https://app.vagrantup.com/boxes/search
+第二步搜索
+第三步进入结果
+第四步点版本号链接得到下载前缀
+https://app.vagrantup.com/geerlingguy/boxes/centos7/versions/1.2.21
+第五步拼上providers/virtualbox.box得到下载地址
+https://app.vagrantup.com/geerlingguy/boxes/centos7/versions/1.2.21/providers/virtualbox.box
+
+
+
+
+
+
+vagrant box命令
+用于管理boxes的命令，比如添加、删除等等。
+
+此命令的功能主要通过以下子命令完成：
+
+add
+list
+outdated
+prune
+remove
+repackage
+update
+Box Add
+用法：vargant box add ADDRESS
+
+通过地址添加一个vagrant box，地址可是如下几咱：
+
+来自可用Vagrant镜像公共目录中的速记名。
+文件路径或者可用Vagrant镜像公共目录中提供的URL。
+一个直接指向box的URL，此种情况下，需要指定–name标志，另处版本管理与升级服务将不可用。
+如果在下载过程中出现了错误或者通过Ctrl C出现了中断，下次请求时Vagrant会继续下载，仅在最初下载后24小时之内有效。
+
+Options：
+
+–box-version VALUE：想要添加的box版本，默认情况下添加最新版本。可以是明确的版本号，也可以是一种比如">=1.0,<2.0"这样的区间集。
+–cacert CERTFILE：指定用于CA认证的证书，此选项在远程端不是使用标准CA的情况下使用。
+–capath CERTDIR：指定用于CA认证的证书所在的目录，同样用于远程端不是使用标准CA的情况下。
+–cert CERTFILE：当下载时如果需要，指定一个客户端证书。
+–clean：如果使用，Vagrant将会删除原先使用相同URL下载的老的临时文件。此选项在你不想继续原来的下载（比如原先下载的资源内容改变了）时非常有用。
+–force：如果使用，将覆盖存在的同名的box。
+–insecure：如果使用，使用HTTPS的URL时，不验证SSL证书。
+–provider PROVIDER：如果使用，Vagrant将验证你要添加的box的提供者，默认情况下，Vagrant自动检测合适的提供者使用。
+Box List
+用法：vagrant add list
+
+展示所有安装到Vagrant的boxes。
+
+Box Outdated
+用法：vagrant box outdated
+
+此命令告知你你当前所使用的box是否需要更新。如果在其后面添加–global选项，将会检查所有已安装box是否需要更新。
+
+此命令需要网络连接。
+
+Box Prune
+用法：vagrant box prune
+
+此命令用于删除已安装box的老旧版本，如果是正在使用的则提示是否确定删除。
+
+可用选项：
+
+–provider PROVIDER：通过指定提供者删除。
+–dry-run：打印将被删除的boxes。
+–name NAME：指令检查老旧版本的box名称。
+–force：强制删除，正在使用也不提示。
+Box Remove
+用法：vagrant box remove NAME
+
+从Vagrant中删除匹配指定名字的box。
+
+如果一个box有多个providers，需要使用–provider明确指定提供者。如果一个box有多个版本，可以通过使用–box-version指定要删除的版本，也可以使用–all删除所有。
+
+可用选项：
+
+–box-version VALUE：指定要删除的box版本。
+–all：表示要删除box的所有版本。
+–force：强制删除，正在使用也不提示。
+–provider VALUE：删除指定提供者对应的box。
+Box Repackage
+用法：vagrant box repackage NAME PROVIDER VERSION
+
+打包指定的box到当前文件夹，可用于重新发布。指定box的名字、提供者、版本号需要可通过vagrant box list命令检索到。
+
+当你添加一个box时，Vagrant会打开它并内部存储，原始的.box文件是不被保留的。此命令是用于将已安装的box重新打包为.box文件。
+
+Box Update
+用法：vagrant box update
+
+此命令用于存在可用更新时更新当前Vagrant环境中的box，也可以通过–box指定单独要更新的box。
+
+如果你只是想查看可用更新，使用 box outdated命令。
+
+可用选项：
+
+–box VALUE：指定要更新box的名称。
+–provider VALUE：如果使用了–box，此选项控制更新指定提供者的box。只用多个提供者时才使用，不使用–box时此选项无效。
+ 
+
+$ vagrant init      # 初始化
+
+ 
+
+$ vagrant up        # 启动虚拟机
+$ vagrant halt      # 关闭虚拟机
+$ vagrant reload    # 重启虚拟机
+$ vagrant ssh       # SSH 至虚拟机
+$ vagrant suspend   # 挂起虚拟机
+$ vagrant resume    # 唤醒虚拟机
+$ vagrant status    # 查看虚拟机运行状态
+$ vagrant destroy   # 销毁当前虚拟机
+
+
+ 
+
+#box管理命令
+$ vagrant box list    # 查看本地box列表
+$ vagrant box add     # 添加box到列表
+
+ 
+
+$ vagrant box remove  # 从box列表移除 
