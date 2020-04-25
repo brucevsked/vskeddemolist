@@ -1,3 +1,10 @@
+--------------------------------------------------------------------------------
+排除包
+configurations {
+    //remove default logger
+    all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+--------------------------------------------------------------------------------
 
 引入大于版本号
 implementation 'org.mockito:mockito-core:3.+'

@@ -1,0 +1,4 @@
+gradledemo1 slf4j+log4j2+testNG
+gradledemo2 slf4j+log4j2+testNG
+gradledemo3 slf4j+log4j2+testNG+mockito+hamcrest+jbehave
+gradledemo4 springboot+jpa+testNG+slf4j+log4j2+mysql

@@ -3,7 +3,7 @@
  *
  * This generated file contains a sample Java Library project to get you started.
  * For more details take a look at the Java Libraries chapter in the Gradle
- * User Manual available at https://docs.gradle.org/6.0/userguide/java_library_plugin.html
+ * User Manual available at https://docs.gradle.org/6.3/userguide/java_library_plugin.html
  */
 
 plugins {
@@ -31,5 +31,3 @@ test{
     reports.html.enabled = true
     testLogging.showStandardStreams = true
 }
-
-mainClassName="com.vsked.Application"

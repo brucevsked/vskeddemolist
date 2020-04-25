@@ -1,0 +1,43 @@
+
+plugins {
+    id "java"
+}
+
+group "com.vsked"
+version "1.0"
+
+project.ext{
+    slfejVersion="1.+"
+    log4j2Version="2.+"
+    mockitoVersion="3.+"
+    hamcrestVersion="2.+"
+    jbehaveVersion="4.+"
+    testngVersion="7.+"
+}
+
+
+
+repositories {
+    jcenter()
+}
+
+
+dependencies {
+    implementation "org.slf4j:slf4j-api:$rootProject.slfejVersion"
+    implementation "org.apache.logging.log4j:log4j-core:$rootProject.log4j2Version"
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:$rootProject.log4j2Version"
+    implementation "org.apache.logging.log4j:log4j-api:$rootProject.log4j2Version"
+    implementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+    implementation "org.hamcrest:hamcrest:$rootProject.hamcrestVersion"
+    implementation "org.jbehave:jbehave-core:$rootProject.jbehaveVersion"
+    implementation "org.testng:testng:$rootProject.testngVersion"
+}
+
+test{
+    useTestNG()
+    reports.html.enabled = true
+    testLogging.showStandardStreams = true
+}
+
+
+
