@@ -1,0 +1,135 @@
+
+软件的本质在于解决业务问题，以辅助业务而生存。
+公司的业务创建的利润，所以合理解决业务问题才是关键。
+这里的业务就是指一种领域
+每一种业务都会涉及到一种知识体系，软件就是将这个知识体系表达出来。
+
+3个基本用途决定模型选择
+1 模型和设计核心互相影响
+2 模型是团队所有成员使用通用语言的中枢
+3 模型是浓缩的知识
+
+有效建模的要素
+1 模型和实现的绑定
+2 建立了一种基于模型的语言
+3 开发一个蕴含丰富知识的模型
+4 提炼模型
+5 头脑风暴和实验
+
+规则类的处理可以使用策略模式来解决
+要找出模型中隐藏概念（如允许超订10%）
+示例代码允许 10%超订
+原始代码
+public int makeBooking(Cargo cargo,Voyage voyage){
+  double maxBooking=voyage.capacity()*1.1;
+  if((voyage.bookedCargoSize()+cargo.size())>maxBooking)
+      return -1;
+  int confirmation=orderConfirmationSequence.next();
+  voyage.addCargo(cargo,confirmation);
+  return confirmation;
+}
+
+修改后代码，把这条规则抽象出来
+public boolean isAllowed(Cargo cargo,Voyage voyage){
+  return (cargo.size()+voyage.bookedCargoSize())<=
+            (voyage.capacity()*1.1);
+}
+
+public int makeBooking(Cargo cargo,Voyage voyage){
+  if(!overbookingpolicy.isAllowed(cargo,voyage))
+      return -1;
+  int confirmation=orderConfirmationSequence.next();
+  voyage.addCargo(cargo,confirmation);
+  return confirmation;
+}
+
+
+模式 Ubiquitous Language统一语言
+一个团队 一个项目 一种语言
+将交流需求中用到的词语写到一个专门的文档中
+并不断更新这个文档中的词语与意思
+每一个词语不应当有歧义，需要精确描述
+对统一语言的修改就是对领域模型的修改
+
+模式 Model-Driven Design 领域驱动设计
+
+模式 Hands-On Modeler
+
+模式 Layered Architecture
+
+模式 Entity(Reference Objecct)
+
+模式 Value Object
+
+模式  Service
+
+模式 Module(Package)
+
+模式 Aggregate
+
+模式 Factory
+
+模式 Repository
+
+模式 Intention-Revealing Interfaces
+
+模式 Side-Effect-Free function 
+
+模式 Assertion
+
+模式 Conceptual Contour 
+
+模式 Standalone Class 
+
+模式 Closure of Operation
+
+模式 Strategy(Policy)
+
+模式 Composite
+
+模式 Bounded Context
+
+模式 Continuous Integration
+
+模式 Context Map
+
+模式 Shared Kernel
+
+模式 Customer/Supplier Development Team
+
+模式 Conformist
+
+模式 Anticorruption Layer
+
+模式 Separate Way
+
+模式 Open Host Service
+
+模式 Published Language
+
+模式 Core Domain
+
+模式 Generic Subdomain
+
+模式 Domain Vision Statement
+
+模式 Highlighted Core
+
+模式 Cohesive Mechanism
+
+模式 Segregated Core
+
+模式 Abstract Core
+
+模式 Evolving Order
+
+模式 System Metaphor
+
+模式 Responsibility Layer
+
+模式 Knowledge Level
+
+模式 Pluggable Component Framework
+
+
+
