@@ -8,7 +8,8 @@ start log upon connect*
 raw log*
 append to file *
 
-
+特别注意，如果是图形化的centos7界面卡死了，
+那先top下看看gnome-shell进程号，再用kill -9 杀那进程号即可恢复
 
 https://mirrors.tuna.tsinghua.edu.cn/centos/7.7.1908/isos/x86_64/
 最小化安装时
@@ -613,8 +614,52 @@ tmpfs                     16G     0   16G   0% /sys/fs/cgroup
 tmpfs                    3.2G     0  3.2G   0% /run/user/0
 
 
+--------------------------------------------------------------------------------
+虚拟机lvm扩容
+CentOS7，LVM根分区扩容步骤
+1.查看现有分区大小
+df -TH
+2.关机增加大小为30G(测试环境使用的Vmware Workstation)
+3.查看扩容后磁盘大小
+df -TH
+lsblk
+4.创建分区
+fdisk /dev/sda
+5.刷新分区并创建物理卷
+partprobe /dev/sda
+pvcreate /dev/sda3
+6.查看卷组名称，以及卷组使用情况
+vgdisplay
+7.将物理卷扩展到卷组
+vgextend centos /dev/sda3
+8.查看当前逻辑卷的空间状态
+lvdisplay
+9.将卷组中的空闲空间扩展到根分区逻辑卷
+lvextend -l +100%FREE /dev/centos_c202pc1/root
+10.刷新根分区
+xfs_growfs /dev/centos_c202pc1/root
+11.查看磁盘使用情况，扩展之前和之后是不一样的
+df -TH
 
 
+
+CentOS7，非LVM根分区扩容步骤：
+1.查看现有的分区大小
+df -TH
+2.关机增加磁盘大小为30G
+3.查看磁盘扩容后状态
+lsblk
+dh -TH
+4.进行分区扩展磁盘，记住根分区起始位置和结束位置 start,end
+5.删除根分区，切记不要保存
+6.创建分区，箭头位置为分区起始位置填入刚才的起始位置
+7.保存退出并刷新分区
+partpeobe /dev/sda
+8.查看分区状态
+lsblk
+dh -TH
+9.刷新根分区并查看状态
+xfs_growfs /dev/sda3
 --------------------------------------------------------------------------------
 ftp服务器搭建
 vsftpd
