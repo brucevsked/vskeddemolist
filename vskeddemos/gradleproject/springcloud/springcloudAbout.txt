@@ -1,0 +1,35 @@
+服务注册/发现：Service Registry/Discovery。spring-cloud-commons 模块对服务注册/发现模型进行统一；
+分布式配置：Configuration Management。spring-core 模块对配置有 Environment 和 PropertySource 抽象，各个配置中心可以添加各自实现的 PropertySource；
+服务熔断：Circuit Breaker。spring-cloud-commons 模块对熔断器模式客户端调用模型进行统一（早期有个单独的项目 spring-cloud-circuit-breaker，后来合并到 spring-cloud-commons 模块）；
+消息总线：Message Bus。spring-cloud-bus 模块定义远程事件，用来连接分布式系统上的各个节点，bus 强依赖 spring-cloud-stream 项目。
+分布式消息：Distributed Messaging。spring-cloud-stream 项目对消息编程模型统一；
+客户端负载均衡：Client Load Balancing。早期依赖 Netflix Ribbon 项目，目前可选择 spring-cloud-loadbanacer 模块（后续 Netflix Ribbon 不再维护）；
+服务调用：Service-to-service calls。OpenFeign 提供声明式接口的方式进行服务调用；RestTemplate 提供基于服务名方式的服务调用；
+网关：Gateway。早期使用 Netflix Zuul，现在推荐使用 Spring Cloud Gateway；网关总体来说并不算是一个共用的模式，只是一个实现功能的组件；
+链路追踪：Tracing。Spring Cloud Sleuth 对 Spring Cloud 各个客户端埋点进行链路追踪，可以跟 Zipkin 整合；
+连接器：Spring Cloud Connectors。Connectors 表示跟 IaaS 厂商的连接器，如果本地开发使用本地 Eureka 和 MySQL，部署到云上（Cloud Foundry）这些地址会被自动替换成云上的地址（前期是购买这些服务）。这是 Cloud Foundry 的 Spring Cloud Connectors，当然还有其他 IaaS 厂商的实现比如 IBM、AWS；
+FaaS：Spring Cloud Function。Spring Cloud 与 Serverless 集成关键的一个项目；
+任务调度：Spring Cloud Task 用于任务运行，可以在本地、云端甚至 Kubernetes 上运行；
+数据流：Spring Cloud Data Flow 可以配合 Spring Cloud Stream 完成流处理，配合 Spring Cloud Task 完成批处理，使用 Spring Cloud Deployer 进行应用的部署。
+
+
+
+
+第一篇： SpringCloud服务发现注册Eureka +Ribbon + Feign教程
+
+第二篇：使用Netflix Hystrix的Spring Cloud断路器
+
+第三篇：使用Jenkins、Artifactory和Spring Cloud Contract持续集成测试REST/JSON
+
+第四篇：Spring Cloud Zuul作为API网关实现请求路由转发教程
+
+第五篇：使用Spring Cloud Zuul实现过滤器或拦截器功能案例
+
+第六篇：使用Spring Cloud Config基于本地文件实现微服务配置管理
+
+第七篇：Spring Cloud Config使用Oracle数据库作为后端配置存储
+
+第八篇：Spring Cloud Config Server和Spring Cloud Bus以及Kafka和数据库动态刷新配置
+
+
+先写个服务注册与发现的例子使用hoxton
