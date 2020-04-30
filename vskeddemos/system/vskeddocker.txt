@@ -4,6 +4,7 @@ C:\Users\Public\Documents\Hyper-V\Virtual hard disks
 
 centos7安装docker
 
+docker安装
 安装储存设备映射包
 yum install -y yum-utils device-mapper-persistent-data lvm2
 添加docker软件镜像
@@ -12,8 +13,24 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum install -y docker-ce
 启动docker
 systemctl start docker
-自动启动socker
+自动启动docker
 systemctl enable docker
+查看状态
+systemctl status docker
+重启docker服务
+systemctl daemon-reload
+systemctl restart docker.service
+
+加快拉取镜像
+vi /etc/docker/daemon.json
+{
+    "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"]
+}
+如果需要添加一个私有的仓库reg.docker.tb以同样的方法
+{
+    "insecure-registries":["reg.docker.tb"],
+    "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"]
+}
 
 安装docker-compose(集群管理)Compose 是用于定义和运行多容器 Docker 应用程序的工具
 yum install -y epel-release
@@ -344,4 +361,26 @@ bridge模式是Docker默认的网络设置，此模式会为每一个容器分�
 
 
 docker run --name consul1 -d -p 8500:8500 -p 8600:8600 -v /data/consul:/consul/data consul:latest
+
+docker run -p 389:389 --name openldap --restart=always --env LDAP_ORGANISATION="vskedtest" --env LDAP_DOMAIN="vskedtest.com" --env LDAP_ADMIN_PASSWORD="Y4yhl9tbf110" --detach osixia/openldap
+可以看到启动命令中都是以ENV环境把变量注入到容器中的。
+
+389端口：默认ldap服务是使用389端口
+LDAP_ORGANISATION 表示ldap的机构组织
+LDAP_DOMAIN 配置LDAP域
+LDAP_ADMIN_PASSWORD 配置LDAP管理员(admin)的密码
+默认用登陆用户名admin
+
+docker pull ldapaccountmanager/lam
+
+docker run -d --restart=always --name ldap-account-manager -p 80:80 \
+        --link openldap:ldap-host \
+        --env PHPLDAPADMIN_LDAP_HOSTS=ldap-host \
+        --env PHPLDAPADMIN_HTTPS=false \
+        --detach ldapaccountmanager/lam
+
+--link这里连接到openldap容器并起了一个别名ldap-host
+PHPLDAPADMIN_LDAP_HOSTS这里直接通过别名指向openldap容器，这样不需要写死IP地址
+PHPLDAPADMIN_HTTPS 不使用443协议
+--restart=always加入此参数是防止系统重启了容器未启动。[需要把docker服务开机启动]
 

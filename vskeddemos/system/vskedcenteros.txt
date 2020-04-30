@@ -211,12 +211,11 @@ vi /etc/rc.d/rc.local
 yum install -y cronolog httpd
 
 12 设置时间服务器并同步互联网时间
-yum install yum-downloadonly ntp
-ntpdate cn.ntp.org.cn
-
-yum -y install utp ntpdate
-ntpdate cn.pool.ntp.org
-hwclock --systohc
+yum install ntp -y
+启动自动同步时间
+timedatectl set-ntp yes  #此处可用yes,no,1或0
+配置时区
+timedatectl set-timezone Asia/Shanghai
 验证当前时间
 date
 

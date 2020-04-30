@@ -664,9 +664,11 @@ nohup java -jar /xxx/xxx/xxx.jar >/dev/null 2>&1 &
 nohup java -jar appserverwebadmin.jar >/logs/weblog.log &
 
 95* 时间同步
-yum -y install utp ntpdate
-ntpdate cn.pool.ntp.org
-hwclock --systohc
+yum install ntp -y
+启动自动同步时间
+timedatectl set-ntp yes  #此处可用yes,no,1或0
+配置时区
+timedatectl set-timezone Asia/Shanghai
 验证当前时间
 date
 
