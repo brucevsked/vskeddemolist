@@ -1,0 +1,10 @@
+关键字          |英文全称                    |含义
+dc                |domain component   |域名的部分，其格式是将完整域名分成几部分，如域名为example.com变成dc=example,dc=com
+uid               |user id                       |用户ID，如lostwind
+ou                |organization unit       |组织单位，类似于linux文件系统中子目录，它是一个容器对象，组织单位可以包含其他各种对象（包括其他组织单元），如tech
+cn                |common name          |公共名称，如thomas johansson
+sn                |surename                  |姓，如johansson
+dn                |distinguished name   |惟一辨别名，类似于linux文件系统中绝对路径，每一个对象都有一个惟一的名称，如uid=tom,ou=market,dc=example,dc=com,在一个目录中DN总是唯一的
+rdn               |relative dn                  |相对辨别名，类似于文件系统中的相对路径，它是与目录结构无关的部分，如uid=tom或cn=tomas johansson
+c                  |country                      |国家
+o                  |organization               |组织名 如example,inc.
