@@ -61,6 +61,14 @@ spring boot 2.X.X
 对象管理及依赖注入事务等
 spring framework 5
 
+LDAP服务器
+openLDAP
+LDAP web管理
+ldap-account-manager
+
+CAS服务器
+Apereo CAS 
+
 mvc 老了
 spring mvc 老了
 
@@ -144,3 +152,10 @@ layDate
 js日期时间操作库
 luxon.js
 
+
+
+
+
+oauth2 第三方与我方集成授权用
+CAS 我方客户端服务端用
+LDAP 企业中多系统用户角色及组织架构管理
