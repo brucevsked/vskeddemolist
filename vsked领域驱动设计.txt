@@ -47,9 +47,11 @@ public int makeBooking(Cargo cargo,Voyage voyage){
 模式 Ubiquitous Language统一语言
 一个团队 一个项目 一种语言
 将交流需求中用到的词语写到一个专门的文档中
+词汇包括类与主要操作的名称
 并不断更新这个文档中的词语与意思
 每一个词语不应当有歧义，需要精确描述
 对统一语言的修改就是对领域模型的修改
+
 
 模式 Model-Driven Design 领域驱动设计
 

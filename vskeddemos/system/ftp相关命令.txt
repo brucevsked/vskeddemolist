@@ -1,0 +1,236 @@
+1*进入ftp命令行
+ftp
+
+如果没有安装
+yum install ftp
+
+会显示
+ftp>
+
+2* 连接ftp服务器
+open IP地址
+
+open 76.10.2.24
+
+3* 关闭连接
+close
+
+4* 退出ftp命令行
+bye
+
+5* 查看目录
+dir
+
+6* 新建目录
+mkdir  文件夹名
+mkdir testa
+
+7* 改变当前目录
+
+cd 相对路径或绝对路径
+
+8* 上传文件
+put  本地路径
+put /path/file
+上传多个文件
+mput *.xml
+
+9* 下载文件
+get myfile
+mget *.xml
+
+10* 查看帮助
+help
+
+11* 查看本地路径
+!dir
+
+
+
+
+
+正常登录与测试写权限示例
+[root@bigdata4 ~]# ftp
+ftp> open 172.22.90.46
+Connected to 172.22.90.46 (172.22.90.46).
+220 (vsFTPd 3.0.2)
+Name (172.22.90.46:root): ftpuser1
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> dir
+227 Entering Passive Mode (172,22,90,46,154,112).
+150 Here comes the directory listing.
+drwxrwxrwx   13 0        0            4096 Dec 27 05:45 data
+226 Directory send OK.
+ftp> cd data
+250 Directory successfully changed.
+ftp> dir
+227 Entering Passive Mode (172,22,90,46,168,98).
+150 Here comes the directory listing.
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 gaoyang
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 hexi
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 liangdu
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 liuwan
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 nanguan
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 shuangliu
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 shuguang
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 shuiyu
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 xiangyuan
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 yixing
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 zhongxing
+226 Directory send OK.
+ftp> mkdir testa
+257 "/data/testa" created
+ftp> dir
+227 Entering Passive Mode (172,22,90,46,217,132).
+150 Here comes the directory listing.
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 gaoyang
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 hexi
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 liangdu
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 liuwan
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 nanguan
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 shuangliu
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 shuguang
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 shuiyu
+drwxr-xr-x    2 1000     50           4096 Jan 03 00:49 testa
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 xiangyuan
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 yixing
+drwxrwxrwx    5 0        0            4096 Dec 27 05:45 zhongxing
+226 Directory send OK.
+ftp> 
+
+其他参考
+FTP命令是Internet用户使用最频繁的命令之一，不论是在DOS还是UNIX操作系统下使用FTP，都会遇到大量的FTP内部命令。熟悉并灵活应用FTP的内部命令，
+可以大大方便使用者，并收到事半功倍之效。
+FTP的命令行格式为：ftp -v -d -i -n -g [主机名]，其中
+-v显示远程服务器的所有响应信息；
+-n限制ftp的自动登录，即不使用；
+.n etrc文件；
+-d使用调试方式；
+-g取消全局文件名。
+ftp使用的内部命令如下(中括号表示可选项):
+1.![cmd[args]]：在本地机中执行交互shell，exit回到ftp环境，如：!ls*.zip.
+2.$ macro-ame[args]：执行宏定义macro-name.
+3.account[password]：提供登录远程系统成功后访问系统资源所需的补充口令。
+4.append local-file[remote-file]：将本地文件追加到远程系统主机，若未指定远程系统文件名，则使用本地文件名。
+5.ascii：使用ascii类型传输方式。
+6.bell：每个命令执行完毕后计算机响铃一次。
+7.bin：使用二进制文件传输方式。
+8.bye：退出ftp会话过程。
+9.case：在使用mget时，将远程主机文件名中的大写转为小写字母。
+10.cd remote-dir：进入远程主机目录。
+11.cdup：进入远程主机目录的父目录。
+12.chmod mode file-name：将远程主机文件file-name的存取方式设置为mode，如：chmod 777 a.out。
+13.close：中断与远程服务器的ftp会话(与open对应)。
+14.cr：使用asscii方式传输文件时，将回车换行转换为回行。
+15.delete remote-file：删除远程主机文件。
+16.debug[debug-value]：设置调试方式，显示发送至远程主机的每条命令，如：deb up 3，若设为0，表示取消debug。
+17.dir[remote-dir][local-file]：显示远程主机目录，并将结果存入本地文件local-file。
+18.disconnection：同close。
+19.form format：将文件传输方式设置为format，缺省为file方式。
+20.get remote-file[local-file]：将远程主机的文件remote-file传至本地硬盘的local-file。
+21.glob：设置mdelete，mget，mput的文件名扩展，缺省时不扩展文件名，同命令行的-g参数。
+22.hash：每传输1024字节，显示一个hash符号(#)。
+23.help[cmd]：显示ftp内部命令cmd的帮助信息，如：help get。
+24.idle[seconds]：将远程服务器的休眠计时器设为[seconds]秒。
+25.image：设置二进制传输方式(同binary)。
+26.lcd[dir]：将本地工作目录切换至dir。
+27.ls[remote-dir][local-file]：显示远程目录remote-dir，并存入本地文件local-file。
+28.macdef macro-name：定义一个宏，遇到macdef下的空行时，宏定义结束。
+29.mdelete[remote-file]：删除远程主机文件。
+30.mdir remote-files local-file：与dir类似，但可指定多个远程文件，如：mdir *.o.*.zipoutfile
+31.mget remote-files：传输多个远程文件。
+32.mkdir dir-name：在远程主机中建一目录。
+33.mls remote-file local-file：同nlist，但可指定多个文件名。
+34.mode[modename]：将文件传输方式设置为modename，缺省为stream方式。
+35.modtime file-name：显示远程主机文件的最后修改时间。
+36.mput local-file：将多个文件传输至远程主机。
+37.newer file-name：如果远程机中file-name的修改时间比本地硬盘同名文件的时间更近，则重传该文件。
+38.nlist[remote-dir][local-file]：显示远程主机目录的文件清单，并存入本地硬盘的local-file。
+39.nmap[inpattern outpattern]：设置文件名映射机制，使得文件传输时，文件中的某些字符相互转换，如：nmap $1.$2.$3[$1，$2].[$2，$3]，则传输文件a1.a2.a3时，文件名变为a1，a2。该命令特别适用于远程主机为非UNIX机的情况。
+40.ntrans[inchars[outchars]]：设置文件名字符的翻译机制，如ntrans 1R，则文件名LLL将变为RRR。
+41.open host[port]：建立指定ftp服务器连接，可指定连接端口。
+42.passive：进入被动传输方式。
+43.prompt：设置多个文件传输时的交互提示。
+44.proxy ftp-cmd：在次要控制连接中，执行一条ftp命令，该命令允许连接两个ftp服务器，以在两个服务器间传输文件。第一条ftp命令必须为open，以首先建立两个服务器间的连接。
+45.put local-file[remote-file]：将本地文件local-file传送至远程主机。
+46.pwd：显示远程主机的当前工作目录。
+47.quit：同bye，退出ftp会话。
+48.quote arg1，arg2...：将参数逐字发至远程ftp服务器，如：quote syst.
+49.recv remote-file[local-file]：同get。
+50.reget remote-file[local-file]：类似于get，但若local-file存在，则从上次传输中断处续传。
+51.rhelp[cmd-name]：请求获得远程主机的帮助。
+52.rstatus[file-name]：若未指定文件名，则显示远程主机的状态，否则显示文件状态。
+53.rename[from][to]：更改远程主机文件名。
+54.reset：清除回答队列。
+55.restart marker：从指定的标志marker处，重新开始get或put，如：restart 130。
+56.rmdir dir-name：删除远程主机目录。
+57.runique：设置文件名唯一性存储，若文件存在，则在原文件后加后缀..1，.2等。
+58.send local-file[remote-file]：同put。
+59.sendport：设置PORT命令的使用。
+60.site arg1，arg2...：将参数作为SITE命令逐字发送至远程ftp主机。
+61.size file-name：显示远程主机文件大小，如：site idle 7200。
+62.status：显示当前ftp状态。
+63.struct[struct-name]：将文件传输结构设置为struct-name，缺省时使用stream结构。
+64.sunique：将远程主机文件名存储设置为唯一(与runique对应)。
+65.system：显示远程主机的操作系统类型。
+66.tenex：将文件传输类型设置为TENEX机的所需的类型。
+67.tick：设置传输时的字节计数器。
+68.trace：设置包跟踪。
+69.type[type-name]：设置文件传输类型为type-name，缺省为ascii，如：type binary，设置二进制传输方式。
+70.umask[newmask]：将远程服务器的缺省umask设置为newmask，如：umask 3。
+71.user user-name[password][account]：向远程主机表明自己的身份，需要口令时，必须输入口令，如：user anonymous my@email。
+72.verbose：同命令行的-v参数，即设置详尽报告方式，ftp服务器的所有响应都将显示给用户，缺省为on.
+73.?[cmd]：同help。
+
+      假设FTP地址为“ 61.129.83.39”（大家试验的时候不要以这个FTP去试，应该可能密码要改掉。）
+      1：“开始”-“运行”-输入“FTP”进去cmd界面
+      2.open    61.129.83.39
+      如果你的FTP服务器不是用的21默认端口，假如端口是9900，那么此步的命令应在后面空格加9900，即为 open 61.129.83.39    9900
+      3：它会提示输入用户名 username
+      4: 它会提示你输入密码：password　　　　　
+      注意密码不显示出来，打完密码后回车即可。如果你的密码输入错误，将不会提示你重新输入，这时你只要键入“user”命令，你就可以重新输入用户名和密码。
+      5：成功登陆后就可以用dir查看命令查看FTP服务器中的文件及目录，用ls命令只可以查看文件。
+      6：使用cd 命令转目录,delete删文件，用法跟DOS差不多。呵呵！！
+      7：lcd d:dianying 定位本地默认文件夹（本人理解这里的L是local当地英文的缩写，很好理解和记忆）
+      8：下面就是上传和下载文件的命令了，上传用put 文件名.下载用get 文件名
+      当然下载到当前目录了，就是上面定义的"d:dianying"
+      9：最后就退出了
+      用bye命令。
+ftp [-v][-d][-i][-n][-g][-s:FileName][-a][-w:WindowSize][-A][Host]
+
+参数
+-v 
+   禁止显示 FTP 服务器响应。 
+/d 
+   启用调试、显示在 FTP 客户端和 FTP 服务器之间传递的所有命令。 
+-i 
+   传送多个文件时禁用交互提示。 
+-n 
+   在建立初始连接后禁止自动登录功能。 
+-g 
+   禁用文件名组合。Glob 允许使用星号 (*) 和问号 (?) 作为本地文件和路径名
+的通配符字符。
+-s:filename 
+   指定包含 ftp 命令的文本文件。这些命令在启动 ftp 后自动运行。该参数不
+允许带有空格。使用该参数而不是重定向 (<)。 
+-a 
+   指定绑定 FTP 数据连接时可以使用任何本地接口。 
+-w:windowsize 
+   指定传输缓冲的大小。默认窗口大小为 4096 字节。 
+-A 
+   匿名登录到 FTP 服务器。 
+Host 
+   指定要连接的计算机名、IP 地址或 FTP 服务器的 IPv6 地址。如果指定了主
+机名或地址，则其必须是命令行的最后一个参数。 
+/? 
+   在命令提示符下显示帮助。
+　常用命令:    　　　
+1. open：与ftp服务器相连接； 
+2. send(put)：上传文件； 
+3. get：下载文件； 
+4. mget：下载多个文件； 
+5. cd：切换目录；
