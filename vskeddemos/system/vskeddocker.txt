@@ -384,3 +384,6 @@ PHPLDAPADMIN_LDAP_HOSTS这里直接通过别名指向openldap容器，这样不�
 PHPLDAPADMIN_HTTPS 不使用443协议
 --restart=always加入此参数是防止系统重启了容器未启动。[需要把docker服务开机启动]
 
+当多个容器依赖时，只需要给依赖尾部添加开机启动即可
+如b容器需要连接a容器,a<-b 这时候只需要给b添加开机启动即会自动启动a容器
+
