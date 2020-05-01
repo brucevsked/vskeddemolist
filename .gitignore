@@ -26,3 +26,4 @@ vskeddemos/mavenproject/designmode/.settings/*.*
 vskeddemos/mavenproject/designmode/.settings/org.eclipse.wst.common.component
 vskeddemos/mavenproject/vskedtool/.myeclipse/**/*.*
 vskeddemos/mavenproject/vskedtool/target/**/*.*
+todo/springsecurity/.idea/*.*

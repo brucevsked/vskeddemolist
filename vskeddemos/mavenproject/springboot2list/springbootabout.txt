@@ -89,3 +89,36 @@ application.yml
 spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+12* spring boot devtools热部署
+开启idea自动make功能 
+第一步
+gradle是这个
+CTRL + SHIFT + A --> 查找 make project automatically --> 选中
+maven是这个
+CTRL + SHIFT + A --> 查找 build project automatically --> 选中
+第二步
+CTRL + SHIFT + A --> 查找 Registry --> 找到并勾选 compiler.automake.allow.when.app.running
+第三步添加maven插件
+            <!-- spring boot devtools 第二步添加maven插件-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+第四步添加maven依赖
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>runtime</scope>
+        </dependency>
+并开启application.yml中配置
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+第五步重启idea
