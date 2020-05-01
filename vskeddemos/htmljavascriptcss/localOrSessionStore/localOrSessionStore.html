@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+	<!-- must set here! -->
+	<base href="">
+
+	<title>localstore sesion store test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+	<!-- 全屏模式,不显示工具栏和菜单栏 -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- 关闭iphone电话号码链接 -->
+	<meta name="format-detection" content="telephone=no" />
+
+</head>
+
+<body>
+
+
+	<script>
+
+		var storeTest = new Object({
+			sessionStoreTest: function () {
+				//关闭浏览器会消失，只会在开着浏览器时有效
+				var name = "code.net.cn"
+
+				// 设置值方法1
+				window.sessionStorage.setItem('name3', name + '666');
+				//设置值方法2
+				window.sessionStorage['name4'] = name + 'ooo';
+
+				// 读取值方法1
+				console.log(window.sessionStorage.getItem('name3'));
+				// 读取值方法2
+				console.log(window.sessionStorage['name4']);
+
+				var userEntity = {
+					name: 'code.net.cn',
+					skill: 'web'
+				};
+
+				// 存储值：将对象转换为Json字符串
+				sessionStorage.setItem('user', JSON.stringify(userEntity));
+
+				// 取值时：把获取到的Json字符串转换回对象
+				let userJsonStr = sessionStorage.getItem('user');
+				userEntity = JSON.parse(userJsonStr);
+				console.log(userEntity.name); // => 'code.net.cn'
+
+				//sessionStorage.clear();   //清除所有
+
+				sessionStorage.removeItem('name4');  // 删除特定名称的数据
+			},
+			localStoreTest: function () {
+				//关闭浏览器不会消失
+
+				if (!window.localStorage) {
+					alert("浏览器支持localstorage");
+				} else {
+					var storage = window.localStorage;
+					var data = {
+						name: 'code.net.cn',
+						sex: 'man',
+						hobby: 'program'
+					};
+					var d = JSON.stringify(data);
+					storage.setItem("data", d);
+					console.log(storage.data);
+				}
+
+				var storage = window.localStorage;
+				var data = {
+					name: 'code.net.cn',
+					sex: 'man',
+					hobby: 'program'
+				};
+				var d = JSON.stringify(data);
+				storage.setItem("data", d);
+				//将JSON字符串转换成为JSON对象输出
+				var json = storage.getItem("data");
+				var jsonObj = JSON.parse(json);
+				console.log(typeof jsonObj);
+
+
+				// 设置值方法1
+				window.localStorage.name1 = 'code1';
+				// 设置值方法2
+				window.localStorage["name2"] = "code2";
+				// 设置方法3
+				window.localStorage.setItem("name3", "code3");
+
+				// 读取值方法1
+				console.log(window.localStorage.name1); // code1
+
+				// 读取值方法2
+				console.log(window.localStorage["name2"]); // code2
+				// 读取值方法3
+				console.log(window.localStorage.getItem("name3")); // code3
+
+				// 将localStorage的所有内容清除
+				//window.localStorage.clear();;
+
+				// 将localStorage中的某个键值对删除
+
+				window.localStorage.removeItem("name");
+
+			}
+		});
+
+
+		storeTest.localStoreTest();
+		storeTest.sessionStoreTest();
+	</script>
+
+</body>
+
+</html>
