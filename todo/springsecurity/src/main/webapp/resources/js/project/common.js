@@ -10,13 +10,13 @@ var common=new Object({
     getBaseInfo:function(){
         if(common.evnType==1){
             return {
-                baseFrontPath:'http://localhost:8080/myui/',
-                baseBackPath:'https://127.0.0.1:8080/yourback/'
+                baseFrontPath:'http://127.0.0.1:8080/myui/',
+                baseBackPath:'http://127.0.0.1:8181/'
             };
         }else{
             return {
-                baseFrontPath:'http://localhost:8181/lovecode/',
-                baseBackPath:'https://127.0.0.1:8181/authhere/'
+                baseFrontPath:'http://127.0.0.1:8080/myui/',
+                baseBackPath:'http://127.0.0.1:8181/'
             };
         }
     },

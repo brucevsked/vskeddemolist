@@ -19,7 +19,7 @@ public class AjaxAuthenticationEntryPoint implements AuthenticationEntryPoint {
         AjaxResponseBody responseBody = new AjaxResponseBody();
 
         responseBody.setStatus("000");
-        responseBody.setMsg("Need Authorities!");
+        responseBody.setMsg("2Need Authorities!");
 
         httpServletResponse.getWriter().write(responseBody.toString());
     }

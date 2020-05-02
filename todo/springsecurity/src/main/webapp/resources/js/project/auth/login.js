@@ -6,7 +6,7 @@ $(function(){
 
 var login=new Object({
     username:'admin',
-    password:'admin',
+    password:'123',
     validate:function(){
         login.username=$('#username').val();
         login.password=$('#password').val();
@@ -23,12 +23,16 @@ var login=new Object({
         if(validateResult==true){
             console.log('success login'+common.getBaseInfo().baseBackPath);
             var loginPath='';
-            loginPath+=common.getBaseInfo().baseFrontPath+'SysUserController/webUserLoginPc.html';
+            loginPath+=common.getBaseInfo().baseBackPath+'authentication/form';
             $.post(loginPath,{ username: login.username,password: login.password },function (dt){
                 if(dt.code!='0'){
-                    $('#showMsg').html(dt.msg);
+                    console.log(dt);
+                    console.log('login fail please check');
                 }else{
-                    $(location).prop('href', common.getBaseInfo().baseFrontPath+'index.html');
+                    console.log(dt);
+                    console.log(commo.getBaseInfo().baseFrontPath);
+                    console.log('login success')
+                    //$(location).prop('href', common.getBaseInfo().baseFrontPath+'index.html');
                 }
             },"json");
         }else{

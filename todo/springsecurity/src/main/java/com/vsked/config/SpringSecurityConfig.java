@@ -1,5 +1,7 @@
 package com.vsked.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,8 +13,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private static final Logger log = LoggerFactory.getLogger(SpringSecurityConfig.class);
 
     @Autowired
     AjaxAuthenticationEntryPoint authenticationEntryPoint;  //  未登陆时返回 JSON 格式的数据给前端（否则为 html）
@@ -34,6 +39,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter; // JWT 拦截器
+
+    @Autowired
+    MyLoginUrlAuthenticationEntryPoint myLoginUrlAuthenticationEntryPoint;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -59,11 +67,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 
+
                 .anyRequest()
                 .access("@rbacauthorityservice.hasPermission(request,authentication)") // RBAC 动态 url 认证
 
                 .and()
-                .formLogin()  //开启登录
+                .formLogin().usernameParameter("username").passwordParameter("password")  //开启登录
                 .successHandler(authenticationSuccessHandler) // 登录成功
                 .failureHandler(authenticationFailureHandler) // 登录失败
                 .permitAll()
@@ -77,7 +86,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.rememberMe().rememberMeParameter("remember-me")
                 .userDetailsService(userDetailsService).tokenValiditySeconds(300);
 
-        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler); // 无权访问 JSON 格式的数据
+        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler)   // 无权访问 JSON 格式的数据
+        .authenticationEntryPoint(myLoginUrlAuthenticationEntryPoint)       //没授权不返回html返回json
+        ;
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class); // JWT Filter
 
     }
@@ -85,6 +96,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         //对这个地址不进行拦截
         web.ignoring().antMatchers("/test");
+        web.ignoring().antMatchers("/authentication/form");
+        web.ignoring().antMatchers("/loginproc");
         //可以仿照上面一句忽略静态资源
     }
+
 }
