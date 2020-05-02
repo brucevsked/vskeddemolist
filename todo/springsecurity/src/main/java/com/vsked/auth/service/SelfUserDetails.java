@@ -1,4 +1,4 @@
-package com.vsked.config;
+package com.vsked.auth.service;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,5 +1,6 @@
 package com.vsked.config;
 
+import com.vsked.auth.service.SelfUserDetailsService;
 import com.vsked.common.JwtTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
         String myToken=request.getParameter("token");
-log.debug("================>"+myToken+"<==============");
+        log.debug("requestUrl|"+request.getRequestURI()+"|token|"+myToken+"|");
 
         String authHeader = request.getHeader("Authorization");
 

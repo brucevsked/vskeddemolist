@@ -8,7 +8,7 @@ http://127.0.0.1:8181/test
 需要权限过滤访问测试
 http://127.0.0.1:8181/hello
 默认登录处理后台地址，也就是登录界面提交地址
-http://127.0.0.1:8181/authentication/form
+http://127.0.0.1:8181/login
 
 前后端分离的前端登录地址在tomcat里，要先启tomcat
 http://127.0.0.1:8080/myui/auth/login.html

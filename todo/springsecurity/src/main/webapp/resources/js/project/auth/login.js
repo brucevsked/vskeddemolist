@@ -23,7 +23,33 @@ var login=new Object({
         if(validateResult==true){
             console.log('success login'+common.getBaseInfo().baseBackPath);
             var loginPath='';
-            loginPath+=common.getBaseInfo().baseBackPath+'authentication/form';
+            loginPath+=common.getBaseInfo().baseBackPath+'login';
+            $.ajax({
+                url:loginPath,
+                data:{
+                    "username": login.username,
+                    "password": login.password
+                },
+                async:false,
+                dataType:"json",
+                type:'post',
+                success:function (data) {
+                    console.log(data);
+                    console.log(data.code)
+                    if (data.code == 401){
+                        console.log('error');
+                    }
+                    if(data.code == 200){
+                        console.log('login ok');
+
+                    }
+
+                }
+            }).fail(function(dt){
+                console.log(dt.responseText)
+
+            });
+            /*
             $.post(loginPath,{ username: login.username,password: login.password },function (dt){
                 if(dt.code!='0'){
                     console.log(dt);
@@ -34,7 +60,7 @@ var login=new Object({
                     console.log('login success')
                     //$(location).prop('href', common.getBaseInfo().baseFrontPath+'index.html');
                 }
-            },"json");
+            },"json");*/
         }else{
             console.log(validateResult);
         }

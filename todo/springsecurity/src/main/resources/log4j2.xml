@@ -69,7 +69,7 @@
     <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
         <!--过滤掉spring和hibernate的一些无用的debug信息-->
-        <logger name="org.springframework" level="ALL"></logger>
+        <logger name="org.springframework" level="ERROR"></logger>
         <logger name="org.hibernate" level="ERROR"></logger>
         <logger name="com.zaxxer" level="ERROR"></logger>
         <logger name="org.mybatis" level="ERROR"></logger>
