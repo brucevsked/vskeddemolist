@@ -38,7 +38,7 @@
         <hamcrest.version>2.2</hamcrest.version>
 
         <postgresql.version>42.2.12</postgresql.version>
-        <jjwt.version>0.9.1</jjwt.version>
+        <jjwt.version>0.10.6</jjwt.version>
     </properties>
 
     <dependencies>
@@ -161,6 +161,25 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
+
+        <!-- start jjwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <!-- end jjwt -->
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
