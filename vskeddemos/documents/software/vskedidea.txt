@@ -45,3 +45,6 @@ files->settings->Editor->Inspections->Spring->Spring Core->Core->Field Injection
 
 13* 跳转到指定行
 ctrl+g
+
+14* 停止自在调试或运行的应用
+ctrl+f2
