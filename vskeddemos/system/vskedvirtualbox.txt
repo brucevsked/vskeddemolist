@@ -1,0 +1,875 @@
+
+特别注意使用前请检查环境变量是否被配置在path中
+如windows安装目录为(也就是VBoxManage.exe所在目录)
+E:\Program Files\Oracle\VirtualBox
+添加完环境变量后用管理员重开cmd
+
+1* 查看虚拟机列表
+VBoxManage list vms
+查看正在运行的虚拟机
+VBoxManage list runningvms
+语法
+VBoxManage list [--long|-l] [--sorted|-s]          vms|runningvms|ostypes|hostdvds|hostfloppies|
+                            intnets|bridgedifs|hostonlyifs|natnets|dhcpservers|
+                            hostinfo|hostcpuids|hddbackends|hdds|dvds|floppies|
+                            usbhost|usbfilters|systemproperties|extpacks|
+                            groups|webcams|screenshotformats|cloudproviders|
+                            cloudprofiles
+
+2* 查看virtualbox版本
+VBoxManage -v
+
+3* 查看虚拟机详细信息，配合list使用
+VBoxManage showvminfo 2fb3e09b-a32d-4773-914e-d8e91278e622
+
+VBoxManage  showvminfo                <uuid|vmname> [--details] [--machinereadable]
+VBoxManage  showvminfo                <uuid|vmname> --log <idx>
+
+4* 注销并删除，配合list使用
+
+只注销不删除（不会删除镜像文件）
+VBoxManage unregistervm 205c273b-a520-4165-a18f-2402d51158c5
+注销并删除(会将镜像文件一起删除)
+VBoxManage unregistervm 205c273b-a520-4165-a18f-2402d51158c5 --delete
+
+VBoxManage unregistervm <uuid|vmname> [--delete]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Oracle VM VirtualBox Command Line Management Interface Version 6.1.4
+(C) 2005-2020 Oracle Corporation
+All rights reserved.
+
+Usage:
+
+  VBoxManage [<general option>] <command>
+ 
+ 
+General Options:
+ 
+  [-v|--version]            print version number and exit
+  [-q|--nologo]             suppress the logo
+  [--settingspw <pw>]       provide the settings password
+  [--settingspwfile <file>] provide a file containing the settings password
+  [@<response-file>]        load arguments from the given response file (bourne style)
+ 
+ 
+Commands:
+ 
+  list [--long|-l] [--sorted|-s]          vms|runningvms|ostypes|hostdvds|hostfloppies|
+                            intnets|bridgedifs|hostonlyifs|natnets|dhcpservers|
+                            hostinfo|hostcpuids|hddbackends|hdds|dvds|floppies|
+                            usbhost|usbfilters|systemproperties|extpacks|
+                            groups|webcams|screenshotformats|cloudproviders|
+                            cloudprofiles
+
+  showvminfo                <uuid|vmname> [--details]
+                            [--machinereadable]
+  showvminfo                <uuid|vmname> --log <idx>
+
+  registervm                <filename>
+
+  unregistervm              <uuid|vmname> [--delete]
+
+  createvm                  --name <name>
+                            [--groups <group>, ...]
+                            [--ostype <ostype>]
+                            [--register]
+                            [--basefolder <path>]
+                            [--uuid <uuid>]
+                            [--default]
+
+  modifyvm                  <uuid|vmname>
+                            [--name <name>]
+                            [--groups <group>, ...]
+                            [--description <desc>]
+                            [--ostype <ostype>]
+                            [--iconfile <filename>]
+                            [--memory <memorysize in MB>]
+                            [--pagefusion on|off]
+                            [--vram <vramsize in MB>]
+                            [--acpi on|off]
+                            [--ioapic on|off]
+                            [--hpet on|off]
+                            [--triplefaultreset on|off]
+                            [--apic on|off]
+                            [--x2apic on|off]
+                            [--paravirtprovider none|default|legacy|minimal|
+                                                hyperv|kvm]
+                            [--paravirtdebug <key=value> [,<key=value> ...]]
+                            [--hwvirtex on|off]
+                            [--nestedpaging on|off]
+                            [--largepages on|off]
+                            [--vtxvpid on|off]
+                            [--vtxux on|off]
+                            [--pae on|off]
+                            [--longmode on|off]
+                            [--ibpb-on-vm-exit on|off]
+                            [--ibpb-on-vm-entry on|off]
+                            [--spec-ctrl on|off]
+                            [--l1d-flush-on-sched on|off]
+                            [--l1d-flush-on-vm-entry on|off]
+                            [--mds-clear-on-sched on|off]
+                            [--mds-clear-on-vm-entry on|off]
+                            [--nested-hw-virt on|off]
+                            [--cpu-profile "host|Intel 80[86|286|386]"]
+                            [--cpuid-portability-level <0..3>]
+                            [--cpuid-set <leaf[:subleaf]> <eax> <ebx> <ecx> <edx>]
+                            [--cpuid-remove <leaf[:subleaf]>]
+                            [--cpuidremoveall]
+                            [--hardwareuuid <uuid>]
+                            [--cpus <number>]
+                            [--cpuhotplug on|off]
+                            [--plugcpu <id>]
+                            [--unplugcpu <id>]
+                            [--cpuexecutioncap <1-100>]
+                            [--rtcuseutc on|off]
+                            [--graphicscontroller none|vboxvga|vmsvga|vboxsvga]
+                            [--monitorcount <number>]
+                            [--accelerate3d on|off]
+                            [--accelerate2dvideo on|off]
+                            [--firmware bios|efi|efi32|efi64]
+                            [--chipset ich9|piix3]
+                            [--bioslogofadein on|off]
+                            [--bioslogofadeout on|off]
+                            [--bioslogodisplaytime <msec>]
+                            [--bioslogoimagepath <imagepath>]
+                            [--biosbootmenu disabled|menuonly|messageandmenu]
+                            [--biosapic disabled|apic|x2apic]
+                            [--biossystemtimeoffset <msec>]
+                            [--biospxedebug on|off]
+                            [--system-uuid-le on|off]
+                            [--boot<1-4> none|floppy|dvd|disk|net>]
+                            [--nic<1-N> none|null|nat|bridged|intnet|hostonly|
+                                        generic|natnetwork]
+                            [--nictype<1-N> Am79C970A|Am79C973|Am79C960|
+                                            82540EM|82543GC|82545EM|
+                                            virtio]
+                            [--cableconnected<1-N> on|off]
+                            [--nictrace<1-N> on|off]
+                            [--nictracefile<1-N> <filename>]
+                            [--nicproperty<1-N> name=[value]]
+                            [--nicspeed<1-N> <kbps>]
+                            [--nicbootprio<1-N> <priority>]
+                            [--nicpromisc<1-N> deny|allow-vms|allow-all]
+                            [--nicbandwidthgroup<1-N> none|<name>]
+                            [--bridgeadapter<1-N> none|<devicename>]
+                            [--hostonlyadapter<1-N> none|<devicename>]
+                            [--intnet<1-N> <network name>]
+                            [--nat-network<1-N> <network name>]
+                            [--nicgenericdrv<1-N> <driver>]
+                            [--natnet<1-N> <network>|default]
+                            [--natsettings<1-N> [<mtu>],[<socksnd>],
+                                                [<sockrcv>],[<tcpsnd>],
+                                                [<tcprcv>]]
+                            [--natpf<1-N> [<rulename>],tcp|udp,[<hostip>],
+                                          <hostport>,[<guestip>],<guestport>]
+                            [--natpf<1-N> delete <rulename>]
+                            [--nattftpprefix<1-N> <prefix>]
+                            [--nattftpfile<1-N> <file>]
+                            [--nattftpserver<1-N> <ip>]
+                            [--natbindip<1-N> <ip>]
+                            [--natdnspassdomain<1-N> on|off]
+                            [--natdnsproxy<1-N> on|off]
+                            [--natdnshostresolver<1-N> on|off]
+                            [--nataliasmode<1-N> default|[log],[proxyonly],
+                                                         [sameports]]
+                            [--macaddress<1-N> auto|<mac>]
+                            [--mouse ps2|usb|usbtablet|usbmultitouch]
+                            [--keyboard ps2|usb]
+                            [--uart<1-N> off|<I/O base> <IRQ>]
+                            [--uartmode<1-N> disconnected|
+                                             server <pipe>|
+                                             client <pipe>|
+                                             tcpserver <port>|
+                                             tcpclient <hostname:port>|
+                                             file <file>|
+                                             <devicename>]
+                            [--uarttype<1-N> 16450|16550A|16750]
+                            [--lpt<1-N> off|<I/O base> <IRQ>]
+                            [--lptmode<1-N> <devicename>]
+                            [--guestmemoryballoon <balloonsize in MB>]
+                            [--vm-process-priority default|flat|low|normal|high]
+                            [--audio none|null|dsound]
+                            [--audioin on|off]
+                            [--audioout on|off]
+                            [--audiocontroller ac97|hda|sb16]
+                            [--audiocodec stac9700|ad1980|stac9221|sb16]
+                            [--clipboard-mode disabled|hosttoguest|guesttohost|
+                                              bidirectional]
+                            [--draganddrop disabled|hosttoguest|guesttohost|
+                                           bidirectional]
+                            [--vrde on|off]
+                            [--vrdeextpack default|<name>]
+                            [--vrdeproperty <name=[value]>]
+                            [--vrdeport <hostport>]
+                            [--vrdeaddress <hostip>]
+                            [--vrdeauthtype null|external|guest]
+                            [--vrdeauthlibrary default|<name>]
+                            [--vrdemulticon on|off]
+                            [--vrdereusecon on|off]
+                            [--vrdevideochannel on|off]
+                            [--vrdevideochannelquality <percent>]
+                            [--usbohci on|off]
+                            [--usbehci on|off]
+                            [--usbxhci on|off]
+                            [--usbrename <oldname> <newname>]
+                            [--snapshotfolder default|<path>]
+                            [--teleporter on|off]
+                            [--teleporterport <port>]
+                            [--teleporteraddress <address|empty>]
+                            [--teleporterpassword <password>]
+                            [--teleporterpasswordfile <file>|stdin]
+                            [--tracing-enabled on|off]
+                            [--tracing-config <config-string>]
+                            [--tracing-allow-vm-access on|off]
+                            [--usbcardreader on|off]
+                            [--autostart-enabled on|off]
+                            [--autostart-delay <seconds>]
+                            [--recording on|off]
+                            [--recordingscreens all|<screen ID> [<screen ID> ...]]
+                            [--recordingfile <filename>]
+                            [--recordingvideores <width> <height>]
+                            [--recordingvideorate <rate>]
+                            [--recordingvideofps <fps>]
+                            [--recordingmaxtime <s>]
+                            [--recordingmaxsize <MB>]
+                            [--recordingopts <key=value> [,<key=value> ...]]
+                            [--defaultfrontend default|<name>]
+
+  movevm                    <uuid|vmname>
+                            --type basic
+                            [--folder <path>]
+
+  import                    <ovfname/ovaname>
+                            [--dry-run|-n]
+                            [--options keepallmacs|keepnatmacs|importtovdi]
+                            [--vmname <name>]
+                            [--cloud]
+                            [--cloudprofile <cloud profile name>]
+                            [--cloudinstanceid <instance id>]
+                            [--cloudbucket <bucket name>]
+                            [more options]
+                            (run with -n to have options displayed
+                             for a particular OVF. It doesn't work for the Cloud import.)
+
+  export                    <machines> --output|-o <name>.<ovf/ova/tar.gz>
+                            [--legacy09|--ovf09|--ovf10|--ovf20|--opc10]
+                            [--manifest]
+                            [--iso]
+                            [--options manifest|iso|nomacs|nomacsbutnat]
+                            [--vsys <number of virtual system>]
+                                    [--vmname <name>]
+                                    [--product <product name>]
+                                    [--producturl <product url>]
+                                    [--vendor <vendor name>]
+                                    [--vendorurl <vendor url>]
+                                    [--version <version info>]
+                                    [--description <description info>]
+                                    [--eula <license text>]
+                                    [--eulafile <filename>]
+                            [--cloud <number of virtual system>]
+                                    [--vmname <name>]
+                                    [--cloudprofile <cloud profile name>]
+                                    [--cloudbucket <bucket name>]
+                                    [--cloudkeepobject <true/false>]
+                                    [--cloudlaunchmode EMULATED|PARAVIRTUALIZED]
+                                    [--cloudlaunchinstance <true/false>]
+                                    [--clouddomain <domain>]
+                                    [--cloudshape <shape>]
+                                    [--clouddisksize <disk size in GB>]
+                                    [--cloudocivcn <OCI vcn id>]
+                                    [--cloudocisubnet <OCI subnet id>]
+                                    [--cloudpublicip <true/false>]
+                                    [--cloudprivateip <ip>]
+
+  startvm                   <uuid|vmname>...
+                            [--type gui|sdl|headless|separate]
+                            [-E|--putenv <NAME>[=<VALUE>]]
+
+  controlvm                 <uuid|vmname>
+                            pause|resume|reset|poweroff|savestate|
+                            acpipowerbutton|acpisleepbutton|
+                            keyboardputscancode <hex> [<hex> ...]|
+                            keyboardputstring <string1> [<string2> ...]|
+                            keyboardputfile <filename>|
+                            setlinkstate<1-N> on|off |
+                            nic<1-N> null|nat|bridged|intnet|hostonly|generic|
+                                     natnetwork [<devicename>] |
+                            nictrace<1-N> on|off |
+                            nictracefile<1-N> <filename> |
+                            nicproperty<1-N> name=[value] |
+                            nicpromisc<1-N> deny|allow-vms|allow-all |
+                            natpf<1-N> [<rulename>],tcp|udp,[<hostip>],
+                                        <hostport>,[<guestip>],<guestport> |
+                            natpf<1-N> delete <rulename> |
+                            guestmemoryballoon <balloonsize in MB> |
+                            usbattach <uuid>|<address>
+                                      [--capturefile <filename>] |
+                            usbdetach <uuid>|<address> |
+                            audioin on|off |
+                            audioout on|off |
+                            clipboard mode disabled|hosttoguest|guesttohost|
+                                           bidirectional |
+                            draganddrop disabled|hosttoguest|guesttohost|
+                                        bidirectional |
+                            vrde on|off |
+                            vrdeport <port> |
+                            vrdeproperty <name=[value]> |
+                            vrdevideochannelquality <percent> |
+                            setvideomodehint <xres> <yres> <bpp>
+                                            [[<display>] [<enabled:yes|no> |
+                                              [<xorigin> <yorigin>]]] |
+                            setscreenlayout <display> on|primary <xorigin> <yorigin> <xres> <yres> <bpp> | off
+                            screenshotpng <file> [display] |
+                            recording on|off |
+                            recording screens all|none|<screen>,[<screen>...] |
+                            recording filename <file> |
+                            recording videores <width>x<height> |
+                            recording videorate <rate> |
+                            recording videofps <fps> |
+                            recording maxtime <s> |
+                            recording maxfilesize <MB> |
+                            setcredentials <username>
+                                           --passwordfile <file> | <password>
+                                           <domain>
+                                           [--allowlocallogon <yes|no>] |
+                            teleport --host <name> --port <port>
+                                     [--maxdowntime <msec>]
+                                     [--passwordfile <file> |
+                                      --password <password>] |
+                            plugcpu <id> |
+                            unplugcpu <id> |
+                            cpuexecutioncap <1-100>
+                            webcam <attach [path [settings]]> | <detach [path]> | <list>
+                            addencpassword <id>
+                                           <password file>|-
+                                           [--removeonsuspend <yes|no>]
+                            removeencpassword <id>
+                            removeallencpasswords
+                            changeuartmode<1-N> disconnected|
+                                                server <pipe>|
+                                                client <pipe>|
+                                                tcpserver <port>|
+                                                tcpclient <hostname:port>|
+                                                file <file>|
+                                                <devicename>
+                            vm-process-priority default|flat|low|normal|high
+
+  discardstate              <uuid|vmname>
+
+  adoptstate                <uuid|vmname> <state_file>
+
+  closemedium               [disk|dvd|floppy] <uuid|filename>
+                            [--delete]
+
+  storageattach             <uuid|vmname>
+                            --storagectl <name>
+                            [--port <number>]
+                            [--device <number>]
+                            [--type dvddrive|hdd|fdd]
+                            [--medium none|emptydrive|additions|
+                                      <uuid|filename>|host:<drive>|iscsi]
+                            [--mtype normal|writethrough|immutable|shareable|
+                                     readonly|multiattach]
+                            [--comment <text>]
+                            [--setuuid <uuid>]
+                            [--setparentuuid <uuid>]
+                            [--passthrough on|off]
+                            [--tempeject on|off]
+                            [--nonrotational on|off]
+                            [--discard on|off]
+                            [--hotpluggable on|off]
+                            [--bandwidthgroup <name>]
+                            [--forceunmount]
+                            [--server <name>|<ip>]
+                            [--target <target>]
+                            [--tport <port>]
+                            [--lun <lun>]
+                            [--encodedlun <lun>]
+                            [--username <username>]
+                            [--password <password>]
+                            [--passwordfile <file>]
+                            [--initiator <initiator>]
+                            [--intnet]
+
+  storagectl                <uuid|vmname>
+                            --name <name>
+                            [--add ide|sata|scsi|floppy|sas|usb|pcie|virtio]
+                            [--controller LSILogic|LSILogicSAS|BusLogic|
+                                          IntelAHCI|PIIX3|PIIX4|ICH6|I82078|
+                            [             USB|NVMe|VirtIO]
+                            [--portcount <1-n>]
+                            [--hostiocache on|off]
+                            [--bootable on|off]
+                            [--rename <name>]
+                            [--remove]
+
+  bandwidthctl              <uuid|vmname>
+                            add <name> --type disk|network
+                                --limit <megabytes per second>[k|m|g|K|M|G] |
+                            set <name>
+                                --limit <megabytes per second>[k|m|g|K|M|G] |
+                            remove <name> |
+                            list [--machinereadable]
+                            (limit units: k=kilobit, m=megabit, g=gigabit,
+                                          K=kilobyte, M=megabyte, G=gigabyte)
+
+  showmediuminfo            [disk|dvd|floppy] <uuid|filename>
+
+  createmedium              [disk|dvd|floppy] --filename <filename>
+                            [--size <megabytes>|--sizebyte <bytes>]
+                            [--diffparent <uuid>|<filename>]
+                            [--format VDI|VMDK|VHD] (default: VDI)]
+                            [--variant Standard,Fixed,Split2G,Stream,ESX,
+                                       Formatted]
+                            [[--property <name>=<value>] --property <name>=<value]...
+
+  modifymedium              [disk|dvd|floppy] <uuid|filename>
+                            [--type normal|writethrough|immutable|shareable|
+                                    readonly|multiattach]
+                            [--autoreset on|off]
+                            [--property <name=[value]>]
+                            [--compact]
+                            [--resize <megabytes>|--resizebyte <bytes>]
+                            [--move <path>]
+                            [--setlocation <path>]
+                            [--description <description string>]
+  clonemedium               [disk|dvd|floppy] <uuid|inputfile> <uuid|outputfile>
+                            [--format VDI|VMDK|VHD|RAW|<other>]
+                            [--variant Standard,Fixed,Split2G,Stream,ESX]
+                            [--existing]
+
+  mediumproperty            [disk|dvd|floppy] set <uuid|filename>
+                            <property> <value>
+
+                            [disk|dvd|floppy] get <uuid|filename>
+                            <property>
+
+                            [disk|dvd|floppy] delete <uuid|filename>
+                            <property>
+
+  encryptmedium             <uuid|filename>
+                            [--newpassword <file>|-]
+                            [--oldpassword <file>|-]
+                            [--cipher <cipher identifier>]
+                            [--newpasswordid <password identifier>]
+
+  checkmediumpwd            <uuid|filename>
+                            <pwd file>|-
+
+  convertfromraw            <filename> <outputfile>
+                            [--format VDI|VMDK|VHD]
+                            [--variant Standard,Fixed,Split2G,Stream,ESX]
+                            [--uuid <uuid>]
+  convertfromraw            stdin <outputfile> <bytes>
+                            [--format VDI|VMDK|VHD]
+                            [--variant Standard,Fixed,Split2G,Stream,ESX]
+                            [--uuid <uuid>]
+
+  getextradata              global|<uuid|vmname>
+                            <key>|[enumerate]
+
+  setextradata              global|<uuid|vmname>
+                            <key>
+                            [<value>] (no value deletes key)
+
+  setproperty               machinefolder default|<folder> |
+                            hwvirtexclusive on|off |
+                            vrdeauthlibrary default|<library> |
+                            websrvauthlibrary default|null|<library> |
+                            vrdeextpack null|<library> |
+                            autostartdbpath null|<folder> |
+                            loghistorycount <value>
+                            defaultfrontend default|<name>
+                            logginglevel <log setting>
+                            proxymode system|noproxy|manual
+                            proxyurl <url>
+
+  usbfilter                 add <index,0-N>
+                            --target <uuid|vmname>|global
+                            --name <string>
+                            --action ignore|hold (global filters only)
+                            [--active yes|no] (yes)
+                            [--vendorid <XXXX>] (null)
+                            [--productid <XXXX>] (null)
+                            [--revision <IIFF>] (null)
+                            [--manufacturer <string>] (null)
+                            [--product <string>] (null)
+                            [--remote yes|no] (null, VM filters only)
+                            [--serialnumber <string>] (null)
+                            [--maskedinterfaces <XXXXXXXX>]
+
+  usbfilter                 modify <index,0-N>
+                            --target <uuid|vmname>|global
+                            [--name <string>]
+                            [--action ignore|hold] (global filters only)
+                            [--active yes|no]
+                            [--vendorid <XXXX>|""]
+                            [--productid <XXXX>|""]
+                            [--revision <IIFF>|""]
+                            [--manufacturer <string>|""]
+                            [--product <string>|""]
+                            [--remote yes|no] (null, VM filters only)
+                            [--serialnumber <string>|""]
+                            [--maskedinterfaces <XXXXXXXX>]
+
+  usbfilter                 remove <index,0-N>
+                            --target <uuid|vmname>|global
+
+  sharedfolder              add <uuid|vmname>
+                            --name <name> --hostpath <hostpath>
+                            [--transient] [--readonly] [--automount]
+
+  sharedfolder              remove <uuid|vmname>
+                            --name <name> [--transient]
+
+  guestproperty             get <uuid|vmname>
+                            <property> [--verbose]
+
+  guestproperty             set <uuid|vmname>
+                            <property> [<value> [--flags <flags>]]
+
+  guestproperty             delete|unset <uuid|vmname>
+                            <property>
+
+  guestproperty             enumerate <uuid|vmname>
+                            [--patterns <patterns>]
+
+  guestproperty             wait <uuid|vmname> <patterns>
+                            [--timeout <msec>] [--fail-on-timeout]
+
+  guestcontrol              <uuid|vmname> [--verbose|-v] [--quiet|-q]
+                              [--username <name>] [--domain <domain>]
+                              [--passwordfile <file> | --password <password>]
+
+                              run [common-options]
+                              [--exe <path to executable>] [--timeout <msec>]
+                              [-E|--putenv <NAME>[=<VALUE>]] [--unquoted-args]
+                              [--ignore-operhaned-processes] [--profile]
+                              [--no-wait-stdout|--wait-stdout]
+                              [--no-wait-stderr|--wait-stderr]
+                              [--dos2unix] [--unix2dos]
+                              -- <program/arg0> [argument1] ... [argumentN]]
+
+                              start [common-options]
+                              [--exe <path to executable>] [--timeout <msec>]
+                              [-E|--putenv <NAME>[=<VALUE>]] [--unquoted-args]
+                              [--ignore-operhaned-processes] [--profile]
+                              -- <program/arg0> [argument1] ... [argumentN]]
+
+                              copyfrom [common-options]
+                              [--follow] [-R|--recursive]
+                              <guest-src0> [guest-src1 [...]] <host-dst>
+
+                              copyfrom [common-options]
+                              [--follow] [-R|--recursive]
+                              [--target-directory <host-dst-dir>]
+                              <guest-src0> [guest-src1 [...]]
+
+                              copyto [common-options]
+                              [--follow] [-R|--recursive]
+                              <host-src0> [host-src1 [...]] <guest-dst>
+
+                              copyto [common-options]
+                              [--follow] [-R|--recursive]
+                              [--target-directory <guest-dst>]
+                              <host-src0> [host-src1 [...]]
+
+                              mkdir|createdir[ectory] [common-options]
+                              [--parents] [--mode <mode>]
+                              <guest directory> [...]
+
+                              rmdir|removedir[ectory] [common-options]
+                              [-R|--recursive]
+                              <guest directory> [...]
+
+                              removefile|rm [common-options] [-f|--force]
+                              <guest file> [...]
+
+                              mv|move|ren[ame] [common-options]
+                              <source> [source1 [...]] <dest>
+
+                              mktemp|createtemp[orary] [common-options]
+                              [--secure] [--mode <mode>] [--tmpdir <directory>]
+                              <template>
+
+                              stat [common-options]
+                              <file> [...]
+
+  guestcontrol              <uuid|vmname> [--verbose|-v] [--quiet|-q]
+
+                              list <all|sessions|processes|files> [common-opts]
+
+                              closeprocess [common-options]
+                              <   --session-id <ID>
+                                | --session-name <name or pattern>
+                              <PID1> [PID1 [...]]
+
+                              closesession [common-options]
+                              <  --all | --session-id <ID>
+                                | --session-name <name or pattern> >
+
+                              updatega|updateguestadditions|updateadditions
+                              [--source <guest additions .ISO>]
+                              [--wait-start] [common-options]
+                              [-- [<argument1>] ... [<argumentN>]]
+
+                              watch [common-options]
+
+  metrics                   list [*|host|<vmname> [<metric_list>]]
+                                                 (comma-separated)
+
+  metrics                   setup
+                            [--period <seconds>] (default: 1)
+                            [--samples <count>] (default: 1)
+                            [--list]
+                            [*|host|<vmname> [<metric_list>]]
+
+  metrics                   query [*|host|<vmname> [<metric_list>]]
+
+  metrics                   enable
+                            [--list]
+                            [*|host|<vmname> [<metric_list>]]
+
+  metrics                   disable
+                            [--list]
+                            [*|host|<vmname> [<metric_list>]]
+
+  metrics                   collect
+                            [--period <seconds>] (default: 1)
+                            [--samples <count>] (default: 1)
+                            [--list]
+                            [--detach]
+                            [*|host|<vmname> [<metric_list>]]
+
+  natnetwork                add --netname <name>
+                            --network <network>
+                            [--enable|--disable]
+                            [--dhcp on|off]
+                            [--port-forward-4 <rule>]
+                            [--loopback-4 <rule>]
+                            [--ipv6 on|off]
+                            [--port-forward-6 <rule>]
+                            [--loopback-6 <rule>]
+
+  natnetwork                remove --netname <name>
+
+  natnetwork                modify --netname <name>
+                            [--network <network>]
+                            [--enable|--disable]
+                            [--dhcp on|off]
+                            [--port-forward-4 <rule>]
+                            [--loopback-4 <rule>]
+                            [--ipv6 on|off]
+                            [--port-forward-6 <rule>]
+                            [--loopback-6 <rule>]
+
+  natnetwork                start --netname <name>
+
+  natnetwork                stop --netname <name>
+
+  natnetwork                list [<pattern>]
+
+  hostonlyif                ipconfig <name>
+                            [--dhcp |
+                            --ip<ipv4> [--netmask<ipv4> (def: 255.255.255.0)] |
+                            --ipv6<ipv6> [--netmasklengthv6<length> (def: 64)]]
+                            create |
+                            remove <name>
+
+  usbdevsource              add <source name>
+                            --backend <backend>
+                            --address <address>
+  usbdevsource              remove <source name>
+
+ Manage Oracle VM VirtualBox virtual machine snapshots:
+
+  VBoxManage snapshot <uuid|vmname>
+
+  VBoxManage snapshot <uuid|vmname> take <snapshot-name> [--description=description] [--live]
+      [--uniquename Number,Timestamp,Space,Force]
+
+  VBoxManage snapshot <uuid|vmname> delete <snapshot-name>
+
+  VBoxManage snapshot <uuid|vmname> restore <snapshot-name>
+
+  VBoxManage snapshot <uuid|vmname> restorecurrent
+
+  VBoxManage snapshot <uuid|vmname> edit <snapshot-name | --current> [--description=description] [--name=new-name]
+
+  VBoxManage snapshot <uuid|vmname> list [--details | --machinereadable]
+
+  VBoxManage snapshot <uuid|vmname> showvminfo <snapshot-name>
+
+ Create a clone of an existing Oracle VM VirtualBox virtual machine:
+
+  VBoxManage clonevm <vmname|uuid> [--basefolder=basefolder] [--group=group,...] [--mode=machine | --mode=machinechildren |
+      --mode=all] [--name=name] [--options=option,...] [--register] [--snapshot=snapshot-name] [--uuid=uuid]
+
+ Medium content access:
+
+  VBoxManage mediumio <--disk=uuid|filename | --dvd=uuid|filename | --floppy=uuid|filename> [--password-file=-|filename] formatfat
+      [--quick]
+
+  VBoxManage mediumio <--disk=uuid|filename | --dvd=uuid|filename | --floppy=uuid|filename> [--password-file=-|filename] cat
+      [--hex] [--offset=byte-offset] [--size=bytes] [--output=-|filename]
+
+  VBoxManage mediumio <--disk=uuid|filename | --dvd=uuid|filename | --floppy=uuid|filename> [--password-file=-|filename] stream
+      [--format=image-format] [--variant=image-variant] [--output=-|filename]
+
+ DHCP server management:
+
+  VBoxManage dhcpserver add <--network=netname | --interface=ifname> <--server-ip=address> <--netmask=mask> <--lower-ip=address>
+      <--upper-ip=address> <--enable | --disable>
+       [[--global]  [--set-opt=dhcp-opt-no value...]  [--set-opt-hex=dhcp-opt-no hexstring...]  [--force-opt=dhcp-opt-no...] 
+           [--supress-opt=dhcp-opt-no...]  [--min-lease-time=seconds]  [--default-lease-time=seconds]  [--max-lease-time=seconds]
+           ...]
+       [<--group=name>  [--set-opt=dhcp-opt-no value...]  [--set-opt-hex=dhcp-opt-no hexstring...]  [--force-opt=dhcp-opt-no...] 
+           [--supress-opt=dhcp-opt-no...]  [--incl-mac=address...]  [--excl-mac=address...]  [--incl-mac-wild=pattern...] 
+           [--excl-mac-wild=pattern...]  [--incl-vendor=string...]  [--excl-vendor=string...]  [--incl-vendor-wild=pattern...] 
+           [--excl-vendor-wild=pattern...]  [--incl-user=string...]  [--excl-user=string...]  [--incl-user-wild=pattern...] 
+           [--excl-user-wild=pattern...]  [--min-lease-time=seconds]  [--default-lease-time=seconds]  [--max-lease-time=seconds]
+           ...]
+       [<--vm=name|uuid>  [--nic=1-N]  [--set-opt=dhcp-opt-no value...]  [--set-opt-hex=dhcp-opt-no hexstring...] 
+           [--force-opt=dhcp-opt-no...]  [--supress-opt=dhcp-opt-no...]  [--min-lease-time=seconds]  [--default-lease-time=seconds]
+            [--max-lease-time=seconds]  [--fixed-address=address] ...]
+       [<--mac-address=address>  [--set-opt=dhcp-opt-no value...]  [--set-opt-hex=dhcp-opt-no hexstring...] 
+           [--force-opt=dhcp-opt-no...]  [--supress-opt=dhcp-opt-no...]  [--min-lease-time=seconds]  [--default-lease-time=seconds]
+            [--max-lease-time=seconds]  [--fixed-address=address] ...]
+
+  VBoxManage dhcpserver modify <--network=netname | --interface=ifname> [--server-ip=address] [--lower-ip=address]
+      [--upper-ip=address] [--netmask=mask] [--enable | --disable]
+       [[--global]  [--del-opt=dhcp-opt-no...]  [--set-opt=dhcp-opt-no value...]  [--set-opt-hex=dhcp-opt-no hexstring...] 
+           [--force-opt=dhcp-opt-no...]  [--unforce-opt=dhcp-opt-no...]  [--supress-opt=dhcp-opt-no...] 
+           [--unsupress-opt=dhcp-opt-no...]  [--min-lease-time=seconds]  [--default-lease-time=seconds]  [--max-lease-time=seconds]
+            [--remove-config] ...]
+       [<--group=name>  [--set-opt=dhcp-opt-no value...]  [--set-opt-hex=dhcp-opt-no hexstring...]  [--force-opt=dhcp-opt-no...] 
+           [--unforce-opt=dhcp-opt-no...]  [--supress-opt=dhcp-opt-no...]  [--unsupress-opt=dhcp-opt-no...]  [--del-mac=address...]
+            [--incl-mac=address...]  [--excl-mac=address...]  [--del-mac-wild=pattern...]  [--incl-mac-wild=pattern...] 
+           [--excl-mac-wild=pattern...]  [--del-vendor=string...]  [--incl-vendor=string...]  [--excl-vendor=string...] 
+           [--del-vendor-wild=pattern...]  [--incl-vendor-wild=pattern...]  [--excl-vendor-wild=pattern...]  [--del-user=string...]
+            [--incl-user=string...]  [--excl-user=string...]  [--del-user-wild=pattern...]  [--incl-user-wild=pattern...] 
+           [--excl-user-wild=pattern...]  [--zap-conditions]  [--min-lease-time=seconds]  [--default-lease-time=seconds] 
+           [--max-lease-time=seconds]  [--remove-config] ...]
+       [<--vm=name|uuid>  [--nic=1-N]  [--del-opt=dhcp-opt-no...]  [--set-opt=dhcp-opt-no value...]  [--set-opt-hex=dhcp-opt-no
+           hexstring...]  [--force-opt=dhcp-opt-no...]  [--unforce-opt=dhcp-opt-no...]  [--supress-opt=dhcp-opt-no...] 
+           [--unsupress-opt=dhcp-opt-no...]  [--min-lease-time=seconds]  [--default-lease-time=seconds]  [--max-lease-time=seconds]
+            [--fixed-address=address]  [--remove-config] ...]
+       [<--mac-address=address>  [--del-opt=dhcp-opt-no...]  [--set-opt=dhcp-opt-no value...]  [--set-opt-hex=dhcp-opt-no
+           hexstring...]  [--force-opt=dhcp-opt-no...]  [--unforce-opt=dhcp-opt-no...]  [--supress-opt=dhcp-opt-no...] 
+           [--unsupress-opt=dhcp-opt-no...]  [--min-lease-time=seconds]  [--default-lease-time=seconds]  [--max-lease-time=seconds]
+            [--fixed-address=address]  [--remove-config] ...]
+
+  VBoxManage dhcpserver remove <--network=netname | --interface=ifname>
+
+  VBoxManage dhcpserver restart <--network=netname | --interface=ifname>
+
+  VBoxManage dhcpserver findlease <--network=netname | --interface=ifname> <--mac-address=mac>
+
+ Introspection and guest debugging:
+
+  VBoxManage debugvm <uuid|vmname> dumpvmcore [--filename=name]
+
+  VBoxManage debugvm <uuid|vmname> info <item> [args...]
+
+  VBoxManage debugvm <uuid|vmname> injectnmi
+
+  VBoxManage debugvm <uuid|vmname> log [--release | --debug] [group-settings...]
+
+  VBoxManage debugvm <uuid|vmname> logdest [--release | --debug] [destinations...]
+
+  VBoxManage debugvm <uuid|vmname> logflags [--release | --debug] [flags...]
+
+  VBoxManage debugvm <uuid|vmname> osdetect
+
+  VBoxManage debugvm <uuid|vmname> osinfo
+
+  VBoxManage debugvm <uuid|vmname> osdmesg [--lines=lines]
+
+  VBoxManage debugvm <uuid|vmname> getregisters [--cpu=id] [reg-set.reg-name...]
+
+  VBoxManage debugvm <uuid|vmname> setregisters [--cpu=id] [reg-set.reg-name=value...]
+
+  VBoxManage debugvm <uuid|vmname> show [--human-readable | --sh-export | --sh-eval | --cmd-set] [settings-item...]
+
+  VBoxManage debugvm <uuid|vmname> stack [--cpu=id]
+
+  VBoxManage debugvm <uuid|vmname> statistics [--reset] [--descriptions] [--pattern=pattern]
+
+ Extension package management:
+
+  VBoxManage extpack install [--replace] <tarball>
+
+  VBoxManage extpack uninstall [--force] <name>
+
+  VBoxManage extpack cleanup
+
+ Unattended guest OS installation:
+
+  VBoxManage unattended detect <--iso=install-iso> [--machine-readable]
+
+  VBoxManage unattended install <uuid|vmname> <--iso=install-iso> [--user=login] [--password=password] [--password-file=file]
+      [--full-user-name=name] [--key=product-key] [--install-additions] [--no-install-additions] [--additions-iso=add-iso]
+      [--install-txs] [--no-install-txs] [--validation-kit-iso=testing-iso] [--locale=ll_CC] [--country=CC] [--time-zone=tz]
+      [--hostname=fqdn] [--package-selection-adjustment=keyword] [--dry-run] [--auxiliary-base-path=path] [--image-index=number]
+      [--script-template=file] [--post-install-template=file] [--post-install-command=command]
+      [--extra-install-kernel-parameters=params] [--language=lang] [--start-vm=session-type]
+
+ Manage the cloud profiles:
+
+  VBoxManage cloudprofile <--provider=name> <--profile=name> add [--clouduser=unique id] [--fingerprint=MD5 string]
+      [--keyfile=path] [--passphrase=string] [--tenancy=unique id] [--compartment=unique id] [--region=string]
+
+  VBoxManage cloudprofile <--provider=name> <--profile=name> update [--clouduser=unique id] [--fingerprint=MD5 string]
+      [--keyfile=path] [--passphrase=string] [--tenancy=unique id] [--compartment=unique id] [--region=string]
+
+  VBoxManage cloudprofile <--provider=name> <--profile=name> delete
+
+  VBoxManage cloudprofile <--provider=name> <--profile=name> show
+
+ The cloud list command gives information about some standard entities in the every Cloud and which can be represented by the list like the list of instances/disk images/networks and etc:
+
+  VBoxManage cloud <--provider=name> <--profile=name> list instances [--state=string] [--compartment-id=string]
+
+  VBoxManage cloud <--provider=name> <--profile=name> list images [--state=string] [--compartment-id=string]
+
+ Manage the cloud instances:
+
+  VBoxManage cloud <--provider=name> <--profile=name> instance create <--domain-name=name> <--image-id=id | --boot-volume-id=id>
+      <--display-name=name> <--shape=type> <--subnet=id> [--boot-disk-size=size in GB] [--publicip=true/false] [--privateip=IP
+      address] [--public-ssh-key=key string...] [--launch-mode=NATIVE/EMULATED/PARAVIRTUALIZED]
+
+  VBoxManage cloud <--provider=name> <--profile=name> instance info <--id=unique id>
+
+  VBoxManage cloud <--provider=name> <--profile=name> instance terminate <--id=unique id>
+
+  VBoxManage cloud <--provider=name> <--profile=name> instance start <--id=unique id>
+
+  VBoxManage cloud <--provider=name> <--profile=name> instance pause <--id=unique id>
+
+ Manage the cloud images:
+
+  VBoxManage cloud <--provider=name> <--profile=name> image create <--display-name=name> [--bucket-name=name] [--object-name=name]
+      [--instance-id=unique id]
+
+  VBoxManage cloud <--provider=name> <--profile=name> image info <--id=unique id>
+
+  VBoxManage cloud <--provider=name> <--profile=name> image delete <--id=unique id>
+
+  VBoxManage cloud <--provider=name> <--profile=name> image import <--id=unique id> [--bucket-name=name] [--object-name=name]
+
+  VBoxManage cloud <--provider=name> <--profile=name> image export <--id=unique id> <--display-name=name> [--bucket-name=name]
+      [--object-name=name]
