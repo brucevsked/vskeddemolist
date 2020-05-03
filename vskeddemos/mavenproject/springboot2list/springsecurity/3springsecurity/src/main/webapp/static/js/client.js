@@ -2,6 +2,7 @@
  * Created by stephan on 20.03.16.
  */
 
+
 $(function () {
    // VARIABLES =============================================================
    var TOKEN_KEY = "jwtToken"
@@ -10,6 +11,7 @@ $(function () {
    var $response = $("#response");
    var $login = $("#login");
    var $userInfo = $("#userInfo").hide();
+   var backUrl='http://127.0.0.1:8181/';
 
    // FUNCTIONS =============================================================
    function getJwtToken() {
@@ -26,7 +28,7 @@ $(function () {
 
    function doLogin(loginData) {
       $.ajax({
-         url: "/api/authenticate",
+         url: backUrl+"api/authenticate",
          type: "POST",
          data: JSON.stringify(loginData),
          contentType: "application/json; charset=utf-8",
@@ -41,10 +43,10 @@ $(function () {
          error: function (jqXHR, textStatus, errorThrown) {
             if (jqXHR.status === 401) {
                $('#loginErrorModal')
-                  .modal("show")
-                  .find(".modal-body")
-                  .empty()
-                  .html("<p>" + jqXHR.responseJSON.message + "</p>");
+                   .modal("show")
+                   .find(".modal-body")
+                   .empty()
+                   .html("<p>" + jqXHR.responseJSON.message + "</p>");
             } else {
                throw new Error("an unexpected error occured: " + errorThrown);
             }
@@ -56,12 +58,12 @@ $(function () {
       removeJwtToken();
       $login.show();
       $userInfo
-         .hide()
-         .find("#userInfoBody").empty();
+          .hide()
+          .find("#userInfoBody").empty();
       $loggedIn
-         .hide()
-         .attr("title", "")
-         .empty();
+          .hide()
+          .attr("title", "")
+          .empty();
       $notLoggedIn.show();
    }
 
@@ -76,7 +78,7 @@ $(function () {
 
    function showUserInformation() {
       $.ajax({
-         url: "/api/user",
+         url: backUrl+"api/user",
          type: "GET",
          contentType: "application/json; charset=utf-8",
          dataType: "json",
@@ -104,19 +106,19 @@ $(function () {
 
    function showTokenInformation() {
       $loggedIn
-         .text("Token: " + getJwtToken())
-         .attr("title", "Token: " + getJwtToken())
-         .show();
+          .text("Token: " + getJwtToken())
+          .attr("title", "Token: " + getJwtToken())
+          .show();
    }
 
    function showResponse(statusCode, message) {
       $response
-         .empty()
-         .text(
-            "status code: "
-            + statusCode + "\n-------------------------\n"
-            + (typeof message === "object" ? JSON.stringify(message) : message)
-         );
+          .empty()
+          .text(
+              "status code: "
+              + statusCode + "\n-------------------------\n"
+              + (typeof message === "object" ? JSON.stringify(message) : message)
+          );
    }
 
    // REGISTER EVENT LISTENERS =============================================================
@@ -136,7 +138,7 @@ $(function () {
 
    $("#exampleServiceBtn").click(function () {
       $.ajax({
-         url: "/api/person",
+         url: backUrl+"api/person",
          type: "GET",
          contentType: "application/json; charset=utf-8",
          dataType: "json",
@@ -152,7 +154,7 @@ $(function () {
 
    $("#adminServiceBtn").click(function () {
       $.ajax({
-         url: "/api/hiddenmessage",
+         url: backUrl+"api/hiddenmessage",
          type: "GET",
          contentType: "application/json; charset=utf-8",
          dataType: "json",
@@ -168,8 +170,8 @@ $(function () {
 
    $loggedIn.click(function () {
       $loggedIn
-         .toggleClass("text-hidden")
-         .toggleClass("text-shown");
+          .toggleClass("text-hidden")
+          .toggleClass("text-shown");
    });
 
    // INITIAL CALLS =============================================================

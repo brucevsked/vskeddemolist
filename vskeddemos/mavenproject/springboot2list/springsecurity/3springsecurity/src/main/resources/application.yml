@@ -1,5 +1,5 @@
 server:
-  port: 8080 #端口号
+  port: 8181 #端口号
   tomcat:
     uri-encoding: UTF-8
 

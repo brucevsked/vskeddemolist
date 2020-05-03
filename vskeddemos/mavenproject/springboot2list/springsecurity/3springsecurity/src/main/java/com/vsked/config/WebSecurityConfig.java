@@ -2,10 +2,15 @@ package com.vsked.config;
 
 import com.vsked.auth.JwtAccessDeniedHandler;
 import com.vsked.auth.JwtAuthenticationEntryPoint;
+import com.vsked.auth.RoleBasedVoter;
 import com.vsked.auth.jwt.JWTConfigurer;
 import com.vsked.auth.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.vote.AuthenticatedVoter;
+import org.springframework.security.access.vote.UnanimousBased;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -14,8 +19,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.expression.WebExpressionVoter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 @EnableWebSecurity
@@ -96,17 +105,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          // .antMatchers("/api/activate").permitAll()
          // .antMatchers("/api/account/reset-password/init").permitAll()
          // .antMatchers("/api/account/reset-password/finish").permitAll()
-
+         .accessDecisionManager(accessDecisionManager())  //动态权限过滤
          .antMatchers("/api/person").hasAuthority("ROLE_USER")
          .antMatchers("/api/hiddenmessage").hasAuthority("ROLE_ADMIN")
 
-         .anyRequest().authenticated()
-
+         .anyRequest()
+         .authenticated()
          .and()
          .apply(securityConfigurerAdapter());
    }
 
    private JWTConfigurer securityConfigurerAdapter() {
       return new JWTConfigurer(tokenProvider);
+   }
+
+   @Bean
+   public AccessDecisionManager accessDecisionManager() {
+      List<AccessDecisionVoter<? extends Object>> decisionVoters
+              = Arrays.asList(
+              new WebExpressionVoter(),
+              // new RoleVoter(),
+              new RoleBasedVoter(),
+              new AuthenticatedVoter());
+      return new UnanimousBased(decisionVoters);
    }
 }

@@ -5,24 +5,8 @@
    <title>JWT Spring Security Demo</title>
 
    <!-- Latest compiled and minified CSS -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-         integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+   <link rel="stylesheet" crossorigin="anonymous" href="resources/css/bootstrap/css/bootstrap.min.css" >
 
-   <!-- Optional theme -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-         integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-   <style type="text/css">
-      .text-hidden {
-         text-overflow: ellipsis;
-         overflow: hidden;
-         white-space: nowrap;
-      }
-
-      .text-shown {
-         word-wrap: break-word;
-      }
-   </style>
 </head>
 <body>
 <div class="container">
@@ -34,11 +18,11 @@
 
    <div class="row">
       <div class="col-md-6">
-         <div class="panel panel-default" id="login">
-            <div class="panel-heading">
-               <h3 class="panel-title">Login</h3>
+         <div class="card card-default" id="login">
+            <div class="card-header">
+               Login
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                <form id="loginForm">
                   <div class="form-group">
                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="username"
@@ -56,19 +40,19 @@
                         <li>disabled & password</li>
                      </ul>
                   </div>
-                  <button type="submit" class="btn btn-default">login</button>
+                  <button type="submit" class="btn btn-primary">login</button>
                </form>
             </div>
          </div>
 
          <div id="userInfo">
-            <div class="panel panel-default">
-               <div class="panel-heading">
-                  <h3 class="panel-title">Authenticated user</h3>
+            <div class="card card-default">
+               <div class="card-header">
+                  Authenticated user
                </div>
-               <div class="panel-body">
+               <div class="card-body">
                   <div id="userInfoBody"></div>
-                  <button type="button" class="btn btn-default" id="logoutButton">logout</button>
+                  <button type="button" class="btn btn-primary" id="logoutButton">logout</button>
                </div>
             </div>
          </div>
@@ -76,14 +60,14 @@
 
       <div class="col-md-6">
          <div class="btn-group" role="group" aria-label="..." style="margin-bottom: 16px;">
-            <button type="button" class="btn btn-default" id="exampleServiceBtn">call example service</button>
-            <button type="button" class="btn btn-default" id="adminServiceBtn">call admin protected service</button>
+            <button type="button" class="btn btn-secondary" id="exampleServiceBtn">call example service</button>
+            <button type="button" class="btn btn-success" id="adminServiceBtn">call admin protected service</button>
          </div>
-         <div class="panel panel-default">
-            <div class="panel-heading">
-               <h3 class="panel-title">Response:</h3>
+         <div class="card card-default">
+            <div class="card-header">
+               Response:
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                <pre id="response"></pre>
             </div>
          </div>
@@ -107,11 +91,10 @@
    </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE="
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
-<script src="js/client.js"></script>
+<script type="text/javascript" crossorigin="anonymous" src="resources/js/jquery.min.js" ></script>
+<script type="text/javascript" crossorigin="anonymous" src="resources/js/popper/popper.min.js" ></script>
+<script type="text/javascript" crossorigin="anonymous" src="resources/js/bootstrap/js/bootstrap.min.js" ></script>
+
+<script type="text/javascript" crossorigin="anonymous" src="js/client.js" ></script>
 </body>
 </html>
