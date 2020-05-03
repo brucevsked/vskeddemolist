@@ -1,0 +1,353 @@
+﻿DOS与cmd
+
+默认以管理员方式运行，先建一个快捷方式，右击->属性->高级->以管理员方式运行 即可
+
+1*多个命令同时执行
+
+[命令1] && [命令2] && [命令3]
+dir && d: && dir
+
+
+2*将命令生成的内容写成文件
+[命令] >> [c:\1.txt]
+dir /b 只显示文件名
+dir /b >> c:\1.txt
+
+一闪而过的dos窗口查看异常可以
+
+test.bat >>e:/mylog.txt
+
+3*显示进程列表
+tasklist
+
+
+4*使用ntsd杀进程
+ntsd -c q -p [pid]
+ntsd -c q -p 1131 (配合tasklist使用)
+
+ntsd -c q -pn [*.exe]
+ntsd -c q -pn explorer.exe
+
+5*taskkill杀进程
+taskkill /pid [pid]
+taskkill /pid 1131
+taskkill /pid 1131 /pid 1136 /pid2213 /T
+
+taskkill /F /IM [*.exe] /T
+taskkill /F /IM notepad.exe /T
+
+按进程名杀进程
+taskkill /F /im frontpg.exe
+
+
+6*开启win服务
+net start 服务名 (如果有空格用双引引起来)
+
+7*关闭win服务
+net stop 服务名(如果有空格用双引引起来)
+
+8*删除系统服务
+sc delete 服务名
+
+9*调用关机重启列表
+shutdown -i
+
+10* 立即关机
+shutdown -s -t 0
+
+11* 列出当前目录所有文件与文件夹
+dir 
+dir /b
+
+12* 修改文件属性+代表给-代表去s系统 h隐藏 a存档 r只读
+attrib 文件名
+attrib +s +h 文件名
+attrib -h 文件名
+
+13* 列出目录树
+tree
+
+14* 改变当前目录
+cd 目录名
+cd ..
+
+15* 清空命令列表
+cls
+
+16* 改变控制台颜色1-0 A-F可选
+color [背景色][文字色]
+color f1
+color 1f
+color f
+
+17* 删除文件
+del [文件名]
+
+18* 在控制台显示文字或变量
+echo 文字内容
+echo helloword
+echo %path%
+
+19* 停止显示
+pause
+
+20* 退出命令提示
+exit
+
+21*创建目录
+md [目录名]
+
+22*创建目录
+mkdir [目录名]
+创建多级目录(这样要从根目录开始写)
+md\data\redis\redis6379\data
+
+mkdir a\b\c\d
+
+23*创建链接 写入源的文件或文件夹会放到目标路径节省c盘空间用
+mklink [参数d或j] [软链接没实体内容虚拟的] [有具体文件的目录实体内容]
+mklink /j 目标目录 源目录
+mklink /d "c:\temp1\test1" "d:\temp\test1"
+mklink /j "c:\temp1\test1" "d:\temp\test1"
+mklink /j "C:\Users\brucevsked\AppData\Local\Google" "D:\softlink\Google"
+mklink /j "C:\Program Files (x86)\Google" "D:\softlink\Google1\Google"
+mklink /j "C:\Users\brucevsked\AppData\Roaming\kingsoft" "D:\softlink\kingsoft"
+
+mklink /j "C:\Users\brucevsked\.m2\repository" "E:\mavenLocalRepository"
+mklink /j "D:\apacheTomcat\apache-tomcat-9.0.30\webapps\coalminehwaui" "D:\vskedjcdz\project\企业风险事故分析平台\00主线产品\开发库\src\coalmineh\coalminehwa\coalminehwaui\src\main\resources\coalminehwaui"
+
+需要软件转换才可以用ftp研究中
+mklink /j "e:\testfoldera" "ftp://172.22.90.45/data/zhongxing/cljk/"
+
+24* 查看远程主机IP通不通
+ping [ip地址]
+
+25* 延时设置
+ping -n [时间(秒)] 127.0.0.1 >nul
+ping -n 5 127.0.0.1 > nul
+
+26* 不输出
+> nul
+dir > nul
+
+27* 删除目录
+rd [目录名]
+rd testD
+
+28* 注解
+rem [注解内容]
+rem this is comment
+
+29* 重命名
+ren [原文件或文件夹名] [新文件或文件夹名]
+ren t1 t2
+rename [原文件或文件夹名] [新文件或文件夹名]
+rename t1 t2
+
+30* 设置控制台标题
+title [标题名]
+title helloWord
+
+31* 显示系统版本
+ver
+
+32* 创建硬链接
+mklink /d 目标目录 源目录
+mklink /d d:\apacheTomcat\apache-tomcat-8.0.21\webapps\cccmobile\uploadfile d:\apacheTomcat\apache-tomcat-8.0.21\webapps\ccc\uploadfile
+
+33* 查看端口被哪个程序占用
+netstat -ano >>c:/port.txt
+tasklist |findstr "那个端口号"
+或可能通过tasklist >>c:/task.txt然后手工查找
+
+34* 新建文件 f6或ctrl+z停止输入
+copy con 文件名
+
+copy con this.txt回车然后输入任意字符F6终止
+notepad this.txt打开这文件
+
+
+35* 打开便签
+stikynot
+
+36* 打开记事本
+notepad
+
+37* 打开画图
+mspaint
+
+38* 清理日志
+cleanmgr /sageset:99
+
+39* 清理磁盘
+cleanmgr /sagerun:99
+
+40* 端口被占用
+netstat -ano |findstr 3306
+tasklist |findstr 3036
+taskkill /T /F /PID 查到的pid
+
+41* 显示路由
+route print
+
+
+42* 跟踪路由
+tracert www.baidu.com
+tracert IP
+
+43* 显示IP地址
+ipconfig | findstr IP
+
+44* 查看开机时间
+
+net statistics WORKSTATION
+也可以用
+systeminfo
+
+45* 按行读取文件
+写成.bat或.cmd文件时用两个百分号
+for /f "tokens=*" %%a in (a.txt) do echo %%a
+直接输入命令时用一个百分号
+for /f "tokens=*" %a in (a.txt) do echo %a
+
+46* 删除指定列表中文件
+将文件放入a.txt文件中
+for /f "tokens=*" %%a in (a.txt) do (del %%a_1.jpg del %%a_2.jpg del %%a_3.jpg)
+
+47* for 基本用法显示1到10
+for /l %%i in (1,1,10) do (
+echo %%i
+)
+
+示例快速生成文件
+for /l %%i in (1,1,10) do (
+echo %%i >> %%i.txt
+)
+
+48* 批量重命名脚本
+@echo ON
+rem 批量重命名能够将本目录下jpg文件中-替换为_
+
+setlocal enabledelayedexpansion
+for /f "delims=" %%a in ('dir /b *.jpg') do (
+    echo %%a
+    set file="%%a"
+    set file="!file:-=_!"
+    ren "%%a" "!file!"
+)
+
+48* 批量重命名脚本重命名计数+1
+@echo ON
+rem 批量重命名能够将本目录下jpg文件按序列命名
+
+setlocal enabledelayedexpansion
+set count=0
+for /f "delims=" %%a in ('dir /b *.jpg') do (
+    set /a count = !count! + 1
+    ren "%%a" "!count!.jpg"
+)
+
+48* 去掉文件名中空格
+
+@echo ON
+rem 批量重命名能够去掉当前目录文件中空格
+
+setlocal enabledelayedexpansion
+for /f "delims=" %%a in ('dir /b') do (
+    echo %%a
+    set file="%%a"
+    set file="!file: =!"
+    ren "%%a" "!file!"
+)
+
+
+49* 查看文件被哪个进程占用
+
+任务管理器->性能->资源监视器
+找到cpu选项卡，在关联句柄里输入文件名就可以看到被哪个进程占用了
+
+50* 查看端口是否开放
+
+telnet ip 端口号
+telnet 112.230.203.115 8080
+
+51* 隐藏盘符
+
+mountvol n: /d
+
+52* 查看一下当前的http服务状态
+netsh http show servicestate
+
+53* win10自带ssh远程连接linux
+ssh 用户名@IP
+ssh hadoop@192.168.60.10
+
+54* 远程桌面
+mstsc
+
+远程桌面ctrl+alt+del
+可以用ctrl+alt+end代替
+
+55* 移动文件到共享 需要先手动访问一次输入密码
+title=test upload
+
+:start
+ping 127.0.0.1 -n 3 >nul
+move  d:\data1\* \\192.168.111.45\public\
+:end
+ping 127.0.0.1 -n 7 >nul
+
+goto start
+
+56* 获取日期与时间
+日期
+echo %date%
+
+echo %date:~5,2%%date:~8,2%
+echo %date:~0,4%%date:~5,2%%date:~8,2%
+时间
+echo %time%
+
+echo %time:~0,2%%time:~3,2%
+
+echo %date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%
+
+57* 比较大小
+EQU 等于
+NEQ 不等于
+LSS 小于
+LEQ大于或等于
+GTR 大于
+GEQ 大于等于
+
+58* 条件判断
+1、if exist d:\test.txt (echo D盘下有test.txt存在) else (echo D盘下不存在test.txt)
+2、if "abc"=="xyz" (echo 字符串abc等于字符串xyz) else (echo 字符串abc不等于字符串xyz)
+3、if 1 equ 2 (echo 1等于2) else (echo 1不等于2)
+4、if defined str (echo 变量str已经被赋值，其值为%str%) else (echo 变量str的值为空)
+
+59* 字符串截取
+
+echo 截取前5个字符：
+echo %ifo:~0,5%
+echo 截取最后5个字符：
+echo %ifo:~-5%
+echo 截取第一个到倒数第6个字符：
+echo %ifo:~0,-5%
+echo 从第4个字符开始，截取5个字符：
+echo %ifo:~3,5%
+echo 从倒数第14个字符开始，截取5个字符：
+echo %ifo:~-14,5%
+
+
+
+
+
+
+
+
+
+
+
+
+

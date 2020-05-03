@@ -1,0 +1,300 @@
+添加用户登陆 可以看session
+
+CVE-2020-1938 漏洞Ghostcat Tomcat Ajp
+----------------------------------------------------------------------------------------
+开启远程访问用户
+tomcat-users.xml
+
+  <role rolename="manager-gui"/>
+  <user username="admin" password="Y4yhl9tbf110" roles="manager-gui"/>
+
+开启后如果仍然不能访问需要修改webapps\manager\META-INF\context.xml
+  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|\d+\.\d+\.\d+\.\d+" />
+
+----------------------------------------------------------------------------------------
+添加jmx远程连接
+catalina.bat
+
+在if "%TITLE%" == "" set TITLE=Tomcat上一行加
+
+set JMX_REMOTE_CONFIG=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=44440 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false
+set CATALINA_OPTS=%CATALINA_OPTS% %JMX_REMOTE_CONFIG%
+
+----------------------------------------------------------------------------------------
+修改端口号
+默认端口号 
+8005 8080 8443 8009
+
+server.xml
+----------------------------------------------------------------------------------------
+setclasspath.bat
+修改tomcat中使用jdk的路径
+set JAVA_HOME=C:\Program Files (x86)\Java\jdk1.7.0_79
+
+----------------------------------------------------------------------------------------
+通过service.bat install安装服务后 修改 tomcat 的内存方式
+regedit打开注册表找到类似
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Apache Software Foundation\Procrun 2.0\Tomcat_8092\Parameters\Java
+修改JvmMs与JvmMx
+
+再修改options中添加
+
+-Xmx16384m
+-Xms4096m
+-Xmn2048m
+-XX:PermSize=128m
+-XX:MaxPermSize=256m
+-XX:ReservedCodeCacheSize=256m
+centos 或linux系统中
+catalina.sh文件中16G的建议配置
+export JAVA_OPTS="-server -Xms4096m -Xmx4096m -Xss256k -XX:NewSize=512m -XX:MaxNewSize=2048m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSParallelRemarkEnabled -XX:LargePageSizeInBytes=128m -Djava.awt.headless=true"
+
+catalina.bat文件
+set JAVA_OPTS=-server -Xms4096m -Xmx4096m -Xss256k -XX:NewSize=512m -XX:MaxNewSize=2048m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSParallelRemarkEnabled -XX:LargePageSizeInBytes=128m -Djava.awt.headless=true
+----------------------------------------------------------------------------------------
+版本选择
+
+安装版本的tomcat8会生成stdout与stuerr日志文件 使用bat启动时并不生成所以服务器部署时应当使用安装版本
+
+----------------------------------------------------------------------------------------
+将日志输出到指定文件
+不在控制台显示输出内容
+catalina.bat run >../logs/stdout.log 2>&1
+
+在控制台显示输出内容
+catalina.bat run >../logs/stdout.log
+
+----------------------------------------------------------------------------------------
+
+catalina.bat文件，搜索    %CATALINA_OPTS%   ，在其之前单独起一行    
+set CATALINA_OPTS=-server -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8888
+
+在catalina.sh中的首行添加
+CATALINA_OPTS="-Xdebug  -Xrunjdwp:transport=dt_socket,address=7004,server=y,suspend=n"
+
+8888是远程监听端口，然后启动tomcat；
+第二部，myeclipse添加远程debug，右键---DeBug as --- Debug Configurations..
+选择remote java application 设置刚才的IP地址与端口号
+----------------------------------------------------------------------------------------
+tomcat使用线程池配置高并发连接
+
+1：配置executor属性
+打开/conf/server.xml文件，在Connector之前配置一个线程池：
+[html] view plain copy
+<Executor name="tomcatThreadPool"   
+        namePrefix="tomcatThreadPool-"   
+        maxThreads="1000"   
+        maxIdleTime="300000"  
+        maxQueueSize="300"   
+        minSpareThreads="200" 
+        prestartminSpareThreads="true" />  
+重要参数说明：
+name：共享线程池的名字。这是Connector为了共享线程池要引用的名字，该名字必须唯一。默认值：None；
+namePrefix:在JVM上，每个运行线程都可以有一个name 字符串。这一属性为线程池中每个线程的name字符串设置了一个前缀，Tomcat将把线程号追加到这一前缀的后面。默认值：tomcat-exec-；
+maxThreads：该线程池可以容纳的最大线程数。默认值：200；
+maxIdleTime：在Tomcat关闭一个空闲线程之前，允许空闲线程持续的时间(以毫秒为单位)。只有当前活跃的线程数大于minSpareThread的值，才会关闭空闲线程。默认值：60000(一分钟)。
+minSpareThreads：Tomcat应该始终打开的最小不活跃线程数。默认值：25。
+
+2：配置Connector
+[html] view plain copy
+<Connector executor="tomcatThreadPool" 
+           port="8080" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               maxConnections="10000" 
+               enableLookups="false" 
+               maxPostSize="10485760" 
+               maxHttpHeaderSize="65535" 
+               compression="on" 
+               compressionMinSize="2048" 
+               disableUploadTimeout="true" 
+               acceptorThreadCount="2" 
+               processorCache="20000" 
+               tcpNoDelay="true" 
+               connectionLinger="5" 
+               redirectPort="8443" 
+               URIEncoding="UTF-8" 
+               compressableMineType="text/html,text/xml,text/plain,application/javascript,text/css,text/javascript"  
+               minProcessors="5"  
+               maxProcessors="75"  
+               acceptCount="1000"/>  
+重要参数说明：
+executor：表示使用该参数值对应的线程池；
+minProcessors：服务器启动时创建的处理请求的线程数；
+maxProcessors：最大可以创建的处理请求的线程数；
+acceptCount：指定当所有可以使用的处理请求的线程数都被使用时，可以放到处理队列中的请求数，超过这个数的请求将不予处理。
+----------------------------------------------------------------------------------------
+
+线上模式使用原理跟开发模式一样
+1. 把springloaded-1.2.6.RELEASE.jar放到tomcat的bin文件夹下
+2. 打开bin下的catalina.bat(linux中为catalina.sh),添加如下一句
+set JAVA_OPTS=-javaagent:springloaded-1.2.6.RELEASE.jar -noverify
+这样就完成了spring-loaded的安装，能够检测tomcat下部署的webapp，在不重启tomcat的情况下，实现应用的热部署。
+
+
+#windows
+#set JAVA_OPTS=-javaagent:/Users/pollyduan/springloaded-1.2.7.RELEASE.jar -noverify
+#linux
+export JAVA_OPTS="-javaagent:/Users/pollyduan/springloaded-1.2.7.RELEASE.jar -noverify"
+
+作为windows服务启动时在tomcat8w.exe中添加java选项卡中option但本版本未成功！！！不要使用
+-javaagent:D:/apacheTomcat/apache-tomcat-8.0.33/bin/springloaded-1.2.6.RELEASE.jar
+----------------------------------------------------------------------------------------
+
+只允许内网访问tomcat
+server.xml文件中修改Host标签中name属性为内网IP重启tomcat即可
+
+----------------------------------------------------------------------------------------
+
+将tomcat安装为服务
+以超级管理员模式运行cmd!!
+运行service install 服务名即可
+在这之前一定要配置好jdk的环境变量
+
+----------------------------------------------------------------------------------------
+部分乱码问题解决方案
+使用service install安装服务的可以这样改
+注册表或批处理中添加-Dfile.encoding=UTF-8
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Apache Software Foundation\Procrun 2.0\tomcat8880\Parameters\Java
+options选项中
+-Dfile.encoding=UTF-8
+
+使用bat 或sh启动的可以这样改
+windows
+  修改catalina.bat
+  set "JAVA_OPTS=%JAVA_OPTS% %LOGGING_CONFIG% -Dfile.encoding=UTF-8"
+
+Linux
+  修改catalina.sh 
+  JAVA_OPTS="-Dfile.encoding=UTF-8"
+----------------------------------------------------------------------------------------
+linux系统日志拆分
+安装cronolog
+yum install cronolog
+第一处
+修改
+CLASSPATH="$CLASSPATH""$CATALINA_HOME"/bin/bootstrap.jar
+下方
+
+if [ -z "$CATALINA_OUT" ] ; then
+  CATALINA_OUT="$CATALINA_BASE"/logs/catalina.%Y-%m-%d.out
+fi
+
+
+第二处
+这句修改
+touch "$CATALINA_OUT"
+改为
+#touch "$CATALINA_OUT"
+
+第三处与第四处
+      org.apache.catalina.startup.Bootstrap "$@" start 2>&1 \
+      |/usr/sbin/cronolog "$CATALINA_OUT" >> /dev/null &
+----------------------------------------------------------------------------------------
+强化高并发
+
+<Server port="-1" shutdown="SHUTDOWN">
+
+<!--
+ <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
+ maxThreads="150" minSpareThreads="4"/>
+ -->
+# 修改为
+<Executor
+ name="tomcatThreadPool"
+ namePrefix="catalina-exec-"
+ maxThreads="500"
+ minSpareThreads="30"
+ maxIdleTime="60000"
+ prestartminSpareThreads = "true"
+ maxQueueSize = "100"
+/>
+
+参数解释：
+
+maxThreads：最大并发数，默认设置 200，一般建议在 500 ~ 800，根据硬件设施和业务来判断
+minSpareThreads：Tomcat 初始化时创建的线程数，默认设置 25
+maxIdleTime：如果当前线程大于初始化线程，那空闲线程存活的时间，单位毫秒，默认60000=60秒=1分钟。
+prestartminSpareThreads：在 Tomcat 初始化的时候就初始化 minSpareThreads 的参数值，如果不等于 true，minSpareThreads 的值就没啥效果了
+
+<Connector 
+ port="8080" 
+ protocol="HTTP/1.1" 
+ connectionTimeout="20000" 
+ redirectPort="8443" 
+ />
+# 修改为
+<Connector
+ executor="tomcatThreadPool"
+ port="8080"
+ protocol="org.apache.coyote.http11.Http11Nio2Protocol"
+ connectionTimeout="60000"
+ maxConnections="10000"
+ redirectPort="8443"
+ enableLookups="false"
+ acceptCount="100"
+ maxPostSize="10485760"
+ maxHttpHeaderSize="8192"
+ compression="on"
+ disableUploadTimeout="true"
+ compressionMinSize="2048"
+ acceptorThreadCount="2"
+ compressableMimeType="text/html,text/plain,text/css,application/javascript,application/json,application/x-font-ttf,application/x-font-otf,image/svg+xml,image/jpeg,image/png,image/gif,audio/mpeg,video/mp4"
+ URIEncoding="utf-8"
+ processorCache="20000"
+ tcpNoDelay="true"
+ connectionLinger="5"
+ server="Server Version 11.0"
+ />
+
+protocol：Tomcat 7 设置 nio2 更好：org.apache.coyote.http11.Http11Nio2Protocol
+protocol：Tomcat 6 设置 nio 更好：org.apache.coyote.http11.Http11NioProtocol
+protocol：Tomcat 8 设置 APR 性能飞快：org.apache.coyote.http11.Http11AprProtocol  具体配置 : <CentOS 7 Tomcat 8.5 基于APR库性能优化>
+
+connectionTimeout：Connector接受一个连接后等待的时间(milliseconds)，默认值是60000。
+maxConnections：这个值表示最多可以有多少个socket连接到tomcat上
+enableLookups：禁用DNS查询
+acceptCount：当tomcat起动的线程数达到最大时，接受排队的请求个数，默认值为100。
+maxPostSize：设置由容器解析的URL参数的最大长度，-1(小于0)为禁用这个属性，默认为2097152(2M) 请注意， FailedRequestFilter 过滤器可以用来拒绝达到了极限值的请求。
+maxHttpHeaderSize：http请求头信息的最大程度，超过此长度的部分不予处理。一般8K。
+compression：是否启用GZIP压缩 on为启用（文本数据压缩） off为不启用， force 压缩所有数据
+disableUploadTimeout：这个标志允许servlet容器使用一个不同的,通常长在数据上传连接超时。 如果不指定,这个属性被设置为true,表示禁用该时间超时。
+compressionMinSize：当超过最小数据大小才进行压缩
+acceptorThreadCount：用于接受连接的线程数量。增加这个值在多CPU的机器上,尽管你永远不会真正需要超过2。 也有很多非维持连接,您可能希望增加这个值。默认值是1。
+compressableMimeType：配置想压缩的数据类型
+URIEncoding：网站一般采用UTF-8作为默认编码。
+processorCache：协议处理器缓存的处理器对象来提高性能。 该设置决定多少这些对象的缓存。-1意味着无限的,默认是200。 如果不使用Servlet 3.0异步处理,默认是使用一样的maxThreads设置。 如果使用Servlet 3.0异步处理,默认是使用大maxThreads和预期的并发请求的最大数量(同步和异步)。
+tcpNoDelay：如果设置为true,TCP_NO_DELAY选项将被设置在服务器套接字,而在大多数情况下提高性能。这是默认设置为true。
+connectionLinger：秒数在这个连接器将持续使用的套接字时关闭。默认值是 -1,禁用socket 延迟时间。
+server：隐藏Tomcat版本信息，首先隐藏HTTP头中的版本信息
+
+maxQueueSize：最大的等待队列数，超过则拒绝请求
+----------------------------------------------------------------------------------------
+
+tomcat上传war包部署时超大小限制解决
+修改${tomcat_root}/webapps/manager/WEB-INF/web.xml中的
+    <multipart-config>
+      <!-- 500MB max -->
+      <max-file-size>999999000</max-file-size>
+      <max-request-size>999999000</max-request-size>
+      <file-size-threshold>0</file-size-threshold>
+    </multipart-config>
+
+----------------------------------------------------------------------------------------
+Tomcat CORS跨域支持也可以参考https://tomcat.apache.org/tomcat-9.0-doc/config/filter.html
+Tomcat的conf目录下web.xml文件
+
+Default Session Configuration一行前面添加
+<filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+  <init-param>
+    <param-name>cors.allowed.origins</param-name>
+    <param-value>*</param-value>
+  </init-param>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+----------------------------------------------------------------------------------------

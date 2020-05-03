@@ -1,0 +1,59 @@
+1* 初始时加载
+$(function(){
+  // 文档就绪
+});
+
+$(function(){
+	console.log('welcome jquery i am vsked');
+});
+
+2* 选择所有元素
+$('*')
+
+$("body *").css("background-color","#B2E0FF");
+
+3* 根据ID选择
+$('#ID')
+
+$('#usName')
+
+4* 取选择元素的值
+$('#ID').val();
+
+$('#usName').val();
+
+5* 设置选择元素的值
+$('#ID').val('新值');
+
+$('#usName').val('this is new');
+
+6* 取选择元素HTML内容
+$('#ID').html();
+
+$('#myDiv').html();
+
+7* 设置选择元素的HTML
+$('#ID').html('新值');
+
+$('#myDiv').html('this is new');
+
+8* 根据样式选择
+
+$(".样式名")
+
+$(".myStyleA1")
+
+$(".myStyleA3.myStyleA4").css("background-color","#CCE");
+
+9* 选择元素集合中第一个
+$("p:first")
+
+$("p:first").html('a'+$("p:first").html());
+
+10* 选择元素集合中最后一个
+$("p:last")
+
+$("p:last").html('b'+$("p:last").html());
+
+
+

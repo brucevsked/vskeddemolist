@@ -1,0 +1,115 @@
+
+
+模拟器大全
+https://blog.csdn.net/noahgeek/article/details/78041651
+
+先模拟出一个4位cpu
+
+1* 4004cpu 组成
+运算器、ug
+
+2* 4004运算器组成
+算术逻辑单元（ALU）、累加器、状态寄存器、通用寄存器组等组成
+
+3* intel4004
+一个4位cpu有16个引脚
+
+4* 4004寄存器组
+说明              |名称                    |大小
+                  | Accumulator( AC or A ) |4
+                  | Carry/Link( C )        |1
+SCRATCH PAD       |Index Registers( IR )   |(4+4)×8
+ADDRESS STACK     |Program Counter( PC )   |12
+ADDRESS STACK     |Stack Pointer( Stack )  |12×3
+INTERNAL内部寄存器|TEMP.REG                |4
+INTERNAL内部寄存器|INSTRUCTION REGISTER    |8
+
+5*4004指令集
+（带*号的是双字指令，需要两个指令周期（1指令周期=8时钟周期））
+基础指令
+HEX  |助记符|指令字1  |指令字2   |功能
+00   |NOP   |0000 0000|-         |无
+1- --|*JCN  |0001 CCCC|AAAA AAAA |当条件C成立，跳转到当前ROM页的A地址
+2- --|*FIM  |0010 RRR0|DDDD DDDD |取当前ROM页D地址处的数据，送至IR的R号寄存器对内
+3-   |FIN   |0011 RRR0|-         |取IR中第0寄存器对数据作为ROM页内地址，将数据送至IR寄存器的R号寄存器对内
+3-   |JIN   |0011 RRR1|-         |将IR中R号寄存器对内数据作为间接跳转地址进行跳转
+4- --|*JUN  |0100 AAAA|AAAA AAAA |无条件跳转至地址A
+5- --|*JMS  |0101 AAAA|AAAA AAAA |无条件跳转至地址A，将原地址保存在堆栈SP中
+6-   |INC   |0110 RRRR|-         |RRRR寄存器+1
+7- --|*ISZ  |0111 RRRR|AAAA AAAA |RRRR寄存器+1，如果结果不为0，跳转至页内地址A
+8-   |ADD   |1000 RRRR|-         |AC=AC+RRRR+C
+9-   |SUB   |1001 RRRR|-         |AC=AC-RRRR-C
+A-   |LD    |1010 RRRR|-         |AC=RRRR
+B-   |XCH   |1011 RRRR|-         |AC与RRRR交换
+C-   |BBL   |1100 DDDD|-         |借助堆栈地址返回,AC=DDDD
+D-   |LDM   |1101 DDDD|-         |AC=DDDD
+F0   |CLB   |1111 0000|-         |AC=0，C=0
+F1   |CLC   |1111 0001|-         |C=0
+F2   |IAC   |1111 0010|-         |AC=AC+1
+F3   |CMC   |1111 0011|-         |C=~C
+F4   |CMA   |1111 0100|-         |AC=~AC
+F5   |RAL   |1111 0101|-         |{C,AC}向左循环平移一位
+F6   |RAR   |1111 0110|-         |{C,AC}向右循环平移一位
+F7   |TCC   |1111 0111|-         |AC=C， C=0
+F8   |DAC   |1111 1000|-         |AC=AC-1
+F9   |TCS   |1111 1001|-         |当C=0，AC=1001当C=1，AC=1010
+FA   |STC   |1111 1010|-         |C=1
+FB   |DAA   |1111 1011|-         |对AC执行BCD修正
+FC   |KBP   |1111 1100|-         |对AC进行独热码到二进制转换若输入非法值，AC=1111
+FD   |DCL   |1111 1101|-         |使用AC的低3位进行换页AC=000 时选择CM0其它情况以三位分别控制CM1~3
+4001/4002/4008/4009/4289
+I/O 与 RAM 指令
+HEX  |助记符|指令字1  |指令字2   |功能
+2-   |SRC   |0010 RRR1|-         |分别在指令周期的X2与X3处将R寄存器保存的页内地址送至ROM和RAM
+E0   |WRM   |1110 0000|-         |将AC写入选中的RAM主字符( 4位 )中
+E1   |WMP   |1110 0001|-         |将AC写入选中的RAM端口中( 注：MCS-4中，RAM/ROM亦用作IO端口 )
+E2   |WRR   |1110 0010|-         |将AC写入选中的ROM端口中
+E3   |WPM   |1110 0011|-         |将AC写入选中的可读写程序存储器中( 搭配4008/4009/4289使用 )
+E4   |WR0   |1110 0100|-         |将AC写入选中的RAM的0号状态字符中
+E5   |WR1   |1110 0101|-         |将AC写入选中的RAM的1号状态字符中
+E6   |WR2   |1110 0110|-         |将AC写入选中的RAM的2号状态字符中
+E7   |WR3   |1110 0111|-         |将AC写入选中的RAM的3号状态字符中
+E8   |SBM   |1110 1000|-         |{C,AC}=AC-C-选中的RAM主字符
+E9   |RDM   |1110 1001|-         |将选中的RAM主字符写入AC
+EA   |RDR   |1110 1010|-         |将选中的ROM输入端口数据写入AC
+EB   |ADM   |1110 1011|-         |{C,AC}=AC+C+选中的RAM主字符
+EC   |RD0   |1110 1100|-         |将选中的RAM的0号状态字符写入AC
+ED   |RD1   |1110 1101|-         |将选中的RAM的1号状态字符写入AC
+EE   |RD2   |1110 1110|-         |将选中的RAM的2号状态字符写入AC
+EF   |RD3   |1110 1111|-         |将选中的RAM的3号状态字符写入AC
+
+
+6* 4004基本信息
+intel 4004
+产品系列	MCS-4
+发布日期	1971
+最大时钟频率	740kHz
+工艺	10μm PMOS
+指令数	46
+通用寄存器宽度	4
+地址总线宽度	4*3=12
+数据总线宽度	4
+字长 ( Word )	指令：8     数据：4
+
+封装/引脚
+
+16脚DIP封装，有白色陶瓷+金色散热器 ( C4004 )、黑色陶瓷 ( D4004 )、黑色塑料 ( P4004 ) 等封装形式
+
+D0-D3 双向总线：担任数据与地址的IO
+
+RESET 复位：该引脚保持高电平64个时钟周期（8个机器周期）时4004发生复位 在复位发生时，所有寄存器都被清0
+TEST 测试输入：见JCN指令
+SYNC 同步信号输出：在一个指令周期的开始，该信号被送至ROM和RAM芯片，以确保移位寄存器正常工作（这里的ROM与RAM为MCS-4系列特制芯片）
+CM-ROM CM-ROM输出：用于ROM芯片组的片选
+CM-RAM0 - CM-RAM3 CM-RAM输出：用于4002RAM芯片组的片选
+Φ1，Φ2 双相时钟信号输入
+Vss，Vdd 电源
+
+
+
+加法器
+减法器
+
+
+穿越计算机的迷雾
+编码：隐匿在计算机软硬件背后的语言

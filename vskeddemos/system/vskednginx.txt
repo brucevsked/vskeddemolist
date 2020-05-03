@@ -1,0 +1,41 @@
+
+--------------------------------------------------------------------------------linux版本
+1* 查看版本号
+/usr/local/nginx/sbin/nginx -V
+
+2* 启动
+systemctl start nginx.service
+默认配置文件启动nginx
+/usr/local/nginx/sbin/nginx
+指定配置文件启动nginx
+/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+
+3* 停止
+systemctl stop nginx.service 
+/usr/local/nginx/sbin/nginx -s stop
+
+4* 平滑重启
+/usr/local/nginx/sbin/nginx -s reload
+
+--------------------------------------------------------------------------------windows版本
+1* 查看版本号
+nginx.exe -V
+
+2* 启动
+进入cmd中
+d:
+cd D:\env\nginx-1.16.0
+
+默认配置文件启动nginx
+nginx.exe
+指定配置文件启动nginx
+nginx.exe -c D:\env\nginx-1.16.0\conf\nginxtest.conf
+
+3* 停止
+进入cmd中
+d:
+cd D:\env\nginx-1.16.0
+nginx.exe -s stop
+
+4* 平滑重启
+nginx.exe -s reload

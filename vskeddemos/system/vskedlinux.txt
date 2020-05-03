@@ -1,4 +1,4 @@
-﻿secure crt保存会话日志
+secure crt保存会话日志
 options->global options->default session->edit default settings->logfile->指定保存路径->Change ALL Sessions(no undo)
 
 start log upon connect*

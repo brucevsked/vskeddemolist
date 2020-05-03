@@ -1,0 +1,47 @@
+lombok注解插件可以方便打日志
+Maven Helper项目中maven依赖查找插件
+.​ignore插件忽略提交插件如果是git可以用这个
+
+idea中maven一定要用自己安装的不要用idea自带的!
+
+1* 查看方法调用
+右击要查看调用的方法->find usages
+alt+f7
+
+2* 查看类或接口的继承关系
+ctrl+h
+
+3* 复制当前行到下一行
+ctrl+d
+
+4*卸载插件
+file->settings->plugins->installed->找到插件后uninstall或禁用
+
+5*设置maven路径
+file->settings->build,execution,deployment->maven
+
+6*手动编译
+Ctrl+Shift+F9
+
+7*自动编译的修改配置
+File-Settings-Compiler-Build Project automatically
+
+8*全局查找
+ctrl+shift+a
+
+9* 查看实现类
+ctrl+alt+b
+或右击接口->goto->implements
+
+10*全局替换
+通过快捷键 Ctrl+Shift+r 或这点击 Edit 》Find 》Replace In Path
+替换时候注意scope范围
+
+11*IntelliJ IDEA “duplicated code fragment(5 lines long)”提示如何关闭
+files->settings->editor-> Inspections->General ->Duplicated Code去掉后面对号
+
+12*intellij idea关闭field injection is not recommended警告
+files->settings->Editor->Inspections->Spring->Spring Core->Core->Field Injection warning
+
+13* 跳转到指定行
+ctrl+g

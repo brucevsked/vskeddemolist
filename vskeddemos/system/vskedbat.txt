@@ -1,0 +1,16 @@
+1* on or off request
+echo on
+echo off
+
+2* @ don't show the command after @
+@echo on
+@dir
+
+3* rem this is comment command
+rem this is something u want write
+rem 这是你想显示的注释
+
+4* pause stop the command
+pause
+
+5* 

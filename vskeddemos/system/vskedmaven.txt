@@ -1,0 +1,183 @@
+1* 创建项目
+mvn archetype:generate -DgroupId=包名 -DartifactId=工程名
+mvn archetype:generate -DgroupId=com.vsked -DartifactId=vskedtest1 -DinteractiveMode=false
+创建web项目(-X参数为调试模式)
+mvn archetype:generate -X -DgroupId=com.vsked -DartifactId=mavendemo0 -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false -DarchetypeCatalog=internal
+
+2* 生成eclipse项目
+mvn eclipse:eclipse
+
+3* 编译项目中源代码
+mvn compile
+
+4* 编译测试代码
+mvn test-compile
+
+5* 运行测试
+mvn test
+
+6* 产生站点
+mvn site
+
+7* 打包
+mvn package
+
+8* 在本地仓库(Repository)中安装jar
+mvn install
+
+9* 清除产生的项目
+mvn clean
+强制更新
+mvn clean install -U
+
+10* 生成idea项目
+mvn idea:idea
+
+14* 只打jar包
+mvn jar:jar
+
+15* 清除eclipse系统设置
+mvn eclipse:clean
+
+16* 修改本地仓库存储路径
+在maven安装目录下conf目录中setting.xml中
+ <localRepository>E:\repository</localRepository>
+
+17* 添加国内镜像(为了更快下载jar包)
+    <mirror>
+      <id>alimaven</id>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+      <mirrorOf>central</mirrorOf>        
+    </mirror>
+
+18* 引入项目内自定义jar包
+<scope>system</scope>
+<systemPath>${project.basedir}/documents/localJar/vip-md5-1.0.jar</systemPath>
+
+19* Maven内置属性及使用
+Maven共有6类属性：
+
+内置属性(Maven预定义,用户可以直接使用)
+${basedir}表示项目根目录,即包含pom.xml文件的目录;
+${version}表示项目版本;
+${project.basedir}同${basedir};
+${project.baseUri}表示项目文件地址;
+${maven.build.timestamp}表示项目构件开始时间;
+
+${maven.build.timestamp.format}表示属性${maven.build.timestamp}的展示格式,默认值为yyyyMMdd-HHmm,可自定义其格式,其类型可参考java.text.SimpleDateFormat。
+用法如下：
+<properties>
+<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+</properties>
+POM属性(使用pom属性可以引用到pom.xml文件对应元素的值)
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.install.skip>true</maven.install.skip>
+${project.build.directory}表示主源码路径;
+${project.build.sourceEncoding}表示主源码的编码格式;
+${project.build.sourceDirectory}表示主源码路径;
+${project.build.finalName}表示输出文件名称;
+${project.version}表示项目版本,与${version}相同;
+自定义属性(在pom.xml文件的<properties>标签下定义的Maven属性)
+<project>
+  <properties>
+    <my.pro>abc</my.pro>
+  </properties>
+</project>
+在其他地方使用${my.pro}使用该属性值
+
+20* 手工安装jar包(ojdbc.jar可以使用绝对路径)
+mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0.2.0 -Dpackaging=jar -Dfile=ojdbc7.jar 
+    <dependency>
+        <groupId>com.oracle</groupId>
+        <artifactId>ojdbc7</artifactId>
+        <version>12.1.0.2.0</version>
+    </dependency>
+
+21*输出工程依赖关系
+mvn dependency:tree
+生成到文件
+mvn dependency:tree>>d:/mytreea.txt
+
+22*指定maven仓库
+	<repositories>
+		<repository>
+			<id>repo1</id>
+			<name>central1</name>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>repo2</id>
+			<name>central2</name>
+			<url>https://repo.maven.apache.org/maven2/</url>
+		</repository>
+	</repositories>
+
+23* 将依赖打进jar包中
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass></mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+24* 打包成可执行jar并且将依赖jar包打进lib目录
+            <plugin>  
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-jar-plugin</artifactId>  
+                <version>2.6</version>  
+                <configuration>  
+                    <archive>  
+                        <manifest>  
+                            <addClasspath>true</addClasspath>  
+                            <classpathPrefix>lib/</classpathPrefix>  
+                            <mainClass>com.vsked.test.TestRunJar</mainClass>  
+                        </manifest>  
+                    </archive>  
+                </configuration>  
+            </plugin>
+            <plugin>  
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-dependency-plugin</artifactId>  
+                <version>2.10</version>  
+                <executions>  
+                    <execution>  
+                        <id>copy-dependencies</id>  
+                        <phase>package</phase>  
+                        <goals>  
+                            <goal>copy-dependencies</goal>  
+                        </goals>  
+                        <configuration>  
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>  
+                        </configuration>  
+                    </execution>  
+                </executions>  
+            </plugin>  
+
+
+
+
+--------------------------------------------------------------------------------
+idea依赖解决插件
+Maven Helper
+在插件安装好之后，我们打开pom.xml文件，在底部会多出一个Dependency Analyzer选项
+找到红色的右击exclude即可
+
+

@@ -1,0 +1,39 @@
+
+1* 安装依赖
+pip install 名称
+pip install requests
+pip install web.py
+pip install redis
+pip install picamera
+pip install svn
+pip install supervisor
+pip install pyserial
+pip install pdf417gen
+
+升级pip
+python2 -m pip install --upgrade pip
+
+如果同时有两版本用
+python3 -m pip install ooo
+python2 -m pip install xxx
+
+
+
+raw_input('Enter an integer : ')    取得控制台用户输入 
+print 'sss' 控制台输出
+
+2*查看python版本
+python --version
+
+3* 运行python文件
+python vskedp1.py
+
+4* 微秒级
+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
+
+5* 退出python控制台
+ctrl+d
+
+
+
+

@@ -1,0 +1,103 @@
+nchan是nginx的一个模块，它的作用跟nginx-push-stream-module一样，
+也是结合nginx搭建websocket服务器，不过相比于nginx-push-stream-module，
+它更为强大。
+
+1* 默认配置
+
+upstream my_redis_server{
+nchan_redis_server redis://:redispassword@127.0.0.1:6379/0;
+}
+
+   location = /im/sub {
+      nchan_subscriber;
+      nchan_channel_id $arg_id;
+      nchan_use_redis on;
+      nchan_redis_pass my_redis_server;
+    }
+    
+    location = /im/pub {
+      nchan_publisher;
+      nchan_channel_id $arg_id;
+      nchan_use_redis on;
+      nchan_redis_pass my_redis_server;
+    }
+
+2* 默认消息条数(单位条)
+    nchan_message_buffer_length 50;
+设置消息缓存200条
+    nchan_message_buffer_length 200;
+3* 默认超时时间(可用单位s秒m分钟h小时)
+    nchan_message_timeout 5m;
+设置超时为3天
+    nchan_message_timeout 72h;
+4* 回调接口 订阅与取消订阅时触发
+
+    location = /upstream/unsub {
+    proxy_pass http://42.51.203.25/unsub?id=$nchan_channel_id;
+    proxy_ignore_client_abort on;  #!!!important!!!!
+    proxy_set_header X-Subscriber-Type $nchan_subscriber_type;
+    proxy_set_header X-Channel-Id $nchan_channel_id;
+    proxy_set_header X-Original-URI $request_uri;
+    } 
+    location = /upstream/sub {
+    proxy_pass http://42.51.203.25/sub?id=$nchan_channel_id;
+    proxy_set_header X-Subscriber-Type $nchan_subscriber_type;
+    proxy_set_header X-Message-Id $nchan_message_id;
+    proxy_set_header X-Channel-Id $nchan_channel_id;
+    proxy_set_header X-Original-URI $request_uri;
+    } 
+
+   location = /im/sub {
+      nchan_subscriber;
+      nchan_channel_id $arg_id;
+      nchan_use_redis on;
+      nchan_message_timeout 72h;
+      nchan_message_buffer_length 200;
+      nchan_redis_pass my_redis_server;
+      nchan_websocket_ping_interval 60;
+      nchan_websocket_client_heartbeat PING PONG;
+      nchan_subscribe_request /upstream/sub;
+      nchan_unsubscribe_request /upstream/unsub;
+    }
+    
+    location = /im/pub {
+      nchan_publisher;
+      nchan_channel_id $arg_id;
+      nchan_use_redis on;
+      nchan_message_timeout 72h;
+      nchan_message_buffer_length 200;
+      nchan_redis_pass my_redis_server;
+    }
+
+5* 默认订阅超时
+nchan_subscriber_timeout <number> (seconds)
+arguments: 1
+default: 0 (none)
+context: http, server, location, if
+legacy name: push_subscriber_timeout
+
+Maximum time a subscriber may wait for a message before being disconnected. 
+If you don't want a subscriber's connection to timeout, set this to 0. Wh
+en possible, the subscriber will get a response with a 408 Request Timeout status; 
+otherwise the subscriber will simply be disconnected.
+
+6* websocket心跳配置
+
+nchan_websocket_client_heartbeat <heartbeat_in> <heartbeat_out>
+arguments: 2
+default: none (disabled)
+context: server, location, if
+
+Most browser Websocket clients do not allow manually sending PINGs to the server. To overcome this limitation, 
+this setting can be used to set up a PING/PONG message/response connection heartbeat. 
+When the client sends the server message heartbeat_in (PING), the server automatically responds with heartbeat_out (PONG).
+
+nchan_websocket_ping_interval <number> (seconds)
+arguments: 1
+default: 0 (none)
+context: server, location, if
+
+Interval for sending websocket ping frames. Disabled by default.
+
+      nchan_websocket_ping_interval 60;
+      nchan_websocket_client_heartbeat PING PONG;

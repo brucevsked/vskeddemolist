@@ -1,0 +1,41 @@
+
+在使用npm以前请先安装nodejs
+
+1* 查看版本号
+npm -v
+
+2* 当前可以使用的命令
+npm help
+
+3*查看命令帮助
+npm help [命令]
+npm help install
+
+4* 升级当前npm
+npm install npm -g
+
+5* 搜索模块
+npm search [模块名]
+npm search 
+
+6* 初始化package.json
+npm init
+
+7* 安装依赖包
+npm install [模块名]
+npm install jquery
+npm install webpack -g
+添加参数-g为全局
+
+8* 更新模块
+npm update [模块名]
+npm update express
+
+9* 更新缓存
+npm cache clear
+
+10* 启动应用
+npm start
+
+
+
