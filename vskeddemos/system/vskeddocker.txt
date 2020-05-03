@@ -387,3 +387,33 @@ PHPLDAPADMIN_HTTPS 不使用443协议
 当多个容器依赖时，只需要给依赖尾部添加开机启动即可
 如b容器需要连接a容器,a<-b 这时候只需要给b添加开机启动即会自动启动a容器
 
+
+--------------------------------------------------------------------------------
+docker 安装mysql
+拉取镜像
+docker pull mysql
+制作数据目录
+mkdir -p /data/mysql/data
+mkdir -p /data/mysql/log
+启动镜像单行版本
+docker run --restart=always --name mymysql -d -p 3306:3306 -v /data/mysql/data:/var/lib/mysql:rw -v /data/mysql/log:/var/log/mysql:rw -v /etc/localtime:/etc/localtime:ro -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ mysql mysqld --default-authentication-plugin=mysql_native_password
+启动镜像多行版本
+docker run --restart=always --name mymysql -d -p 3306:3306 \
+    -v /data/mysql/data:/var/lib/mysql:rw \
+    -v /data/mysql/log:/var/log/mysql:rw \
+    -v /etc/localtime:/etc/localtime:ro \
+    -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ mysql mysqld \
+    --default-authentication-plugin=mysql_native_password
+
+初始化创建数据库(做统一初始化脚本时用，跟上同要一起用，不然就要把密码写上)
+until docker exec -i mymysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -e "CREATE DATABASE vskedtest DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"' \
+do \
+  echo "wait" \
+done
+单独执行版本写法
+docker exec -i mymysql sh -c 'exec mysql -uroot -p"Y4yhl9tbf110_" -e "CREATE DATABASE vskedtest DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"'
+
+初始化数据库(做统一初始化脚本时用，跟上同要一起用，不然就要把密码写上)
+docker exec -i mymysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" appserverdev' < /opt/sql/appserverdev.sql
+
+--------------------------------------------------------------------------------
