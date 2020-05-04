@@ -58,6 +58,45 @@ public int makeBooking(Cargo cargo,Voyage voyage){
 模式 Hands-On Modeler
 
 模式 Layered Architecture
+*用户界面层（或表示层）负责向用户显示信息和解释用户指令
+这里的用户可以是另一个计算机系统，不一定是使用用户界面的人
+*应用层 定义软件要完成的任务，并且指挥表达领域概念的对象来解决问题。
+这一层所负责的工作对业务来说意义重大，也是与其他系统的应用层进行交互的必要渠道。
+应用层要尽量简单，不包含业务规则或者知识，只为下一层中的领域对象协调任务，分配工作
+使他们互相协作。它没有反映业务情况的状态，但可以具有另外一种状态，为用户或程序显示某个任务的进度
+*领域层（或模型层） 负责表达业务概念，业务状态信息以及业务规则。
+尽管保存业务状态的技术细节是由基础设施层实现的，但是反映业务情况的状态是由本层控制并且使用的。
+领域层是业务软件的核心
+*基础设施层 为上面各层提供通用的技术能力：为应用层传递消息，为领域层提供持久化机制，
+为用户界面层绘制屏幕组件，等等。基础设施层还能够通过架构框架来支持4个层次间的交互模式
+网上银行分层示例
+用户界面层 transferController
+应用层 fundsTransferService
+领域层 a123:Account,a234:Account 两个账户对象
+基础设施层 unit of work manager(事务处理与持久化JPA),O-R Mapper(持久化对象模型DTO)
+流程说明
+1. transferController->tranfer(a123,a234,100) 要转账
+控制层调用转账方法，传入要转账的两个账户与转账金额，三个参数源账户，目标账户，转账金额
+2. FundsTransferService-beginTransaction()->Unit of Work Manager 开启事务
+应用层调用基础设施层的持久化单元开启事务
+3. FundsTransferService-transferTo(a234,100)->a123:Account 领域模型Account实例a123
+应用层调用本层的转账方法此方法会通知领域层a123领域模型要向a234领域模型转100
+4. a123:Account -credit(100)->a234:Account 领域模型Account实例a234
+领域层a123领域模型授信给a234领域模型100
+5. a234:Account -addToUnitOfWork(a234)->Unit of Work Manager
+领域层a234领域模型通知基础层持久化单元（注意这时候并没真正存储到库里）
+6. a234:Account-confirm->a123:account
+领域层a234确认收到a123信用100
+7. a123:Account-debit(100)-a123
+领域层a123领域模型自己记账100
+8. a123:Account-addToUnitOfWork(a123)->Unit of Work Manager
+领域层a123领域模型通知基础层持久化单元（注意这时候并没真正存储到库里）
+9. a123:Account-confirm->FundsTransferService
+领域层模型通知应用层服务这活确认搞完了
+10. FundsTransferService-commit()->Unit of Work Manager
+应用层服务通知基础层持久化单元你可以真正持久化到数据库了
+11.Unit of WorkManager -update(collection)->O-R Mapper
+基础层通过持久化模型将刚才改好的两个领域模型转换为关系数据库模型保存到库
 
 模式 Entity(Reference Objecct)
 

@@ -51,7 +51,7 @@ VCR
 betamax
 Hoverfly
 
-web测试
+web自动化测试
 Selenium
 Selenide
 

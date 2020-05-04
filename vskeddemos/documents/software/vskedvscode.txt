@@ -1,0 +1,6 @@
+
+
+1* 格式化代码
+shift+alt+f
+或空白处右击->format document
+
