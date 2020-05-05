@@ -615,9 +615,145 @@ id类 vs String/Long
 参数上objAId，objBId是不能搞错的。但如果数据类型都是Long，那编译器是核对不了的～
 EncryptedPassword
   它有对密码进行核对的行为。这里提供了一种思路。当entity的逻辑过多，类变得过大时，
-我们可以将一部分逻辑分到value object中。淡然我们也可以在建模的时候就先考虑把一些逻辑放进value object中。
+我们可以将一部分逻辑分到value object中。当然我们也可以在建模的时候就先考虑把一些逻辑放进value object中。
 这也是domain-driven design一书错推崇的（没记错的话～）。
 
 实际开发过程中应当避免使用Lombok这样的简化插件，因为降低了代码可读性,阻碍了团队项目环境可移植性。
 
+
+ddd中的service
+首先这个在这篇文章里讨论的service基于一个前提，就是采用view, application, domain, infrastructure的分层架构。ddd提倡的架构有很多种，大家可以看前面的文章。《domain driven design》原书也是基于分层架构来论述的。至于现在流行的洋葱架构该怎么办，有机会再讲吧～
+ddd中有三种service。分别是application service, domain service, infrastructure service。
+
+application service
+首先从简单的开始讲。application service是应用程序的某个功能的入口（end point）。如果你使用的是分层架构，那它是位于presentation和domain之间。
+我们想像我们要写一个api用来注册账号。
+url: api/accounts
+method: post
+如果我们使用springMVC来实现这个api的话，那Controller会调用AccountApplicationService。
+
+@RestController
+@RequestMapping("api/accounts")
+public class AccountController{
+  @Autowired
+  private AccountApplicationService accountApplicationService;
+
+  @RequestMapping(value ="", method = RequestMthod.POST)
+  public void register(@RequestBody AccountDTO accountDTO){
+    accountApplicationService.register(accountDTO);
+  }
+}
+上面的代码，controller讲画面传过来的dto传给了AccountApplicationService。
+AccountApplicationService再来调用各种domain object。比如Account (entity), AccountRepository。
+
+public class AccountApplicationService {
+    @Autowired
+    private IAccountRepository accountRepository;
+
+    public void register(AccountDTO accountDTO){
+        Account account = Account.createAccount(accountDTO.getEmail(), accountDTO.getPassword());
+        accountRepository.save(account);
+    }
+}
+infrastructure service
+infrastructure service实现不依赖于业务(domain)的功能。简单的例子来讲，比如打印日志（log），发送邮件（如果你的应用软件不是处理邮件问题的话）
+infrastructure service位于最底层的infrastructure层。
+
+domain service
+实现domain的service类。三种service中，唯一可以写业务逻辑的地方。
+由于ddd提倡充血模型的缘故，我们在建模的时候要尽量避免制造domain service。尽量把业务逻辑放到其他的domain object中（比如entity, value object中）。
+
+Service的比较
+application service vs domain service
+我想infrastructure是没有什么值得讨论的。而application service与domain service会是让人纠结的一个话题。
+最近看到了clean architecture的设计后，感觉可能稍微容易解释一些。(对不起，说好用只讨论分层架构的，却又提起了clean architecture，因为好难解释…)
+
+entities的部分对应的便是domain部分。
+而application service对应的是use cases 用例。
+相比于application service这个有点不知所云的名次，用例是不是更容易理解一些了（也许不是。。。）？
+用例
+用uml图来画的话，就是下面这样的东西。
+
+用例具体教科书般的定义，大家可以自行谷歌一下。大致就是描述一个系统大致的功能而并不描述具体内部的结构或者设计。
+那在clean architecture中，domain object的操作必须通过「用例」这个入口。
+
+那在操作层面上如何处理application service和domain service呢？
+
+首先application service既然是入口，在一个模块中，它必定是存在的。与之相反，domain service则不一定需要。
+因此，再做类设计时可以先假定domain service不存在。直接写application service，在application service中对其他domain object进行操作。
+理想情况下，application service存在的代码基本上就是它调用其他domain object的方法，具体的业务逻辑都会在domain object的方法中。所以当application service中出现if/else之类的语句，或者application service的一个方法变得很长时，我们就该警惕是不是把业务逻辑写到了application service中。这个时候我们该考虑是否需要重构，比如把逻辑放进domain object，或者增加一个domain service。
+按上面一个注册账号的例子，这个时候我们并不需要domain service。
+但如果我们首先要确认email是否被注册，那这时候代码就会变成下面那样
+
+public class AccountApplicationService {
+
+    @Autowired
+    private IAccountRepository accountRepository;
+
+    public void register(AccountDTO accountDTO){
+        Account account = accountRepository.find(new AccountSpecificationByEmail(accountDTO.getEmail()));
+        if (account != null) {
+            throw new EmailAlreadyRegisteredException();
+        }
+        account = Account.createAccount(accountDTO.getEmail(), accountDTO.getPassword());
+        accountRepository.save(account);
+    }
+
+}
+尽管方法不是很长，但判断账号能否被注册的逻辑（业务逻辑）写在了application service中。我们必须考虑将这个逻辑移到其他地方。
+当然理想情况下是把它放进Account中，但查询账号是否存在的逻辑使用到AccountRepository，这个很难放进Account中，所以AccountService自然会是一个选择。
+
+public class AccountService {
+
+    @Autowired
+    private IAccountRepository accountRepository;
+
+    public void register(String email, String password){
+        Account account = accountRepository.find(new AccountSpecificationByEmail(email));
+        if (account != null) {
+            throw new EmailAlreadyRegisteredException();
+        }
+        account = Account.createAccount(email, password);
+        accountRepository.save(account);
+    }
+}
+因为不想让domain层的东西依赖于application层的form，dto类，所以方法的参数没有用dto。
+那application service会变成
+
+public class AccountApplicationService {
+
+    @Autowired
+    private AccountService accountService;
+
+    public void register(AccountDTO accountDTO){
+        accountService.register(accountDTO.getEmail(), accountDTO.getPassword());
+    }
+
+}
+另外，有了AccountService这个类，并不是所有关于Account的逻辑都必须放进那里。
+比如AccountApplicationService里的changePassword()，没有必要放进AccountService中。
+
+public class AccountApplicationService {
+
+    @Autowired
+    private IAccountRepository accountRepository;
+    @Autowired
+    private AccountService accountService;
+
+    public void register(AccountDTO accountDTO){
+        accountService.register(accountDTO.getEmail(), accountDTO.getPassword());
+    }
+
+    public void changePassword(String email, String oldPassword, String newPasssord) {
+        Account account = accountRepository.findById(email);
+        account.changePassword(oldPassword, newPasssord);
+        accountRepository.save(account);
+    }
+
+}
+总结
+ddd中把service类分成三种。
+application service, domain service, infrastructure service。
+domain service中可以写业务逻辑，但同时理想情况下我们尽量不实用domain service。
+另外，我们要注意不要讲业务逻辑写到application service中
 --------------------------------------------------------------------------------
