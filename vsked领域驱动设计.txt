@@ -3,19 +3,19 @@
 公司的业务创建的利润，所以合理解决业务问题才是关键。
 这里的业务就是指一种领域
 每一种业务都会涉及到一种知识体系，软件就是将这个知识体系表达出来。
-
+--------------------------------------------------------------------------------
 3个基本用途决定模型选择
 1 模型和设计核心互相影响
 2 模型是团队所有成员使用通用语言的中枢
 3 模型是浓缩的知识
-
+--------------------------------------------------------------------------------
 有效建模的要素
 1 模型和实现的绑定
 2 建立了一种基于模型的语言
 3 开发一个蕴含丰富知识的模型
 4 提炼模型
 5 头脑风暴和实验
-
+--------------------------------------------------------------------------------
 规则类的处理可以使用策略模式来解决
 要找出模型中隐藏概念（如允许超订10%）
 示例代码允许 10%超订
@@ -42,7 +42,7 @@ public int makeBooking(Cargo cargo,Voyage voyage){
   voyage.addCargo(cargo,confirmation);
   return confirmation;
 }
-
+--------------------------------------------------------------------------------
 
 模式 Ubiquitous Language统一语言
 一个团队 一个项目 一种语言
@@ -52,28 +52,97 @@ public int makeBooking(Cargo cargo,Voyage voyage){
 每一个词语不应当有歧义，需要精确描述
 对统一语言的修改就是对领域模型的修改
 
-
+--------------------------------------------------------------------------------
 模式 Model-Driven Design 领域驱动设计
+两个基本要素
+即模型要支持有效的实现
+抽象出关键的领域知识
 
-模式 Hands-On Modeler
+抽象类Abstract Net
+抽象类实现类Net
+抽象类实现类Bus
+类Layout Rule
 
-模式 Layered Architecture
+业务流程
+1创建连线a0
+Net a0 =new Net("a0);
+2创建连线a1
+Net a1 =new Net("a1);
+3创建总线a
+Bus a=new Bus("a");
+4总线连接线a0
+a.addNet(a0);
+5总线连接线a1
+a.addNet(a1);
+6创建连线规则
+NetRule minWidth4=NetRule.create(MIN_WIDTH,4);
+7为总线绑定连线规则
+a.assignRule(minWidth4);
+
+abstract class AbstractNet{
+  private Set rules;
+  void assignRule(LayoutRule rule){
+    rules.add(rule);
+  }
+
+ Set assignedRules(){
+    return rules;
+  }
+}
+
+class Net extends AbstractNet{
+  private Bus bus;
+
+  Set assignedRules(){
+    Set result=new HashSet();
+    result.addAll(super.assignedRules());
+    result.addAll(bus.assignedRules());
+    return result;
+  }
+}
+
+服务列表
+服务                  |职责
+Net List import |读取Net列表文件，将每一行数据创建Net实例
+Net Rule export|已知Net集合，将所有附加规则写入规则文件
+Bus Repository |提供通过名称访问Bus（总线）的接口
+
+工具类列表
+类名                         |职责
+Net Repository         |提供通过名称访问Net的接口
+Inferred Bus Factory |已经Net集合，利用命名约定来推断总线，并且创建总线实例
+
+现在，启动应用程序，用导入数据来初始化Net和Bus仓库。
+Collection nets=NetListImportService.read(aFile);
+NetRepository.addAll(nets);
+Collection buses=InferredBusFactory.groupIntoBuses(nets);
+BusRepository.addAll(buses);
+--------------------------------------------------------------------------------
+模式 Hands-On Modeler 亲身实践的建模者
+--------------------------------------------------------------------------------
+模式 Layered Architecture 分层架构
 *用户界面层（或表示层）负责向用户显示信息和解释用户指令
 这里的用户可以是另一个计算机系统，不一定是使用用户界面的人
 *应用层 定义软件要完成的任务，并且指挥表达领域概念的对象来解决问题。
-这一层所负责的工作对业务来说意义重大，也是与其他系统的应用层进行交互的必要渠道。
-应用层要尽量简单，不包含业务规则或者知识，只为下一层中的领域对象协调任务，分配工作
-使他们互相协作。它没有反映业务情况的状态，但可以具有另外一种状态，为用户或程序显示某个任务的进度
+这一层所负责的工作对业务来说意义重大，
+也是与其他系统的应用层进行交互的必要渠道。
+应用层要尽量简单，不包含业务规则或者知识，只为下一层中的领域对象协调任务，
+分配工作使他们互相协作。它没有反映业务情况的状态，但可以具有另外一种状态，
+为用户或程序显示某个任务的进度
 *领域层（或模型层） 负责表达业务概念，业务状态信息以及业务规则。
-尽管保存业务状态的技术细节是由基础设施层实现的，但是反映业务情况的状态是由本层控制并且使用的。
+尽管保存业务状态的技术细节是由基础设施层实现的，
+但是反映业务情况的状态是由本层控制并且使用的。
 领域层是业务软件的核心
-*基础设施层 为上面各层提供通用的技术能力：为应用层传递消息，为领域层提供持久化机制，
-为用户界面层绘制屏幕组件，等等。基础设施层还能够通过架构框架来支持4个层次间的交互模式
+*基础设施层 为上面各层提供通用的技术能力：为应用层传递消息，
+为领域层提供持久化机制，
+为用户界面层绘制屏幕组件，等等。
+基础设施层还能够通过架构框架来支持4个层次间的交互模式
 网上银行分层示例
 用户界面层 transferController
 应用层 fundsTransferService
 领域层 a123:Account,a234:Account 两个账户对象
 基础设施层 unit of work manager(事务处理与持久化JPA),O-R Mapper(持久化对象模型DTO)
+
 流程说明
 1. transferController->tranfer(a123,a234,100) 要转账
 控制层调用转账方法，传入要转账的两个账户与转账金额，三个参数源账户，目标账户，转账金额
@@ -98,79 +167,280 @@ public int makeBooking(Cargo cargo,Voyage voyage){
 11.Unit of WorkManager -update(collection)->O-R Mapper
 基础层通过持久化模型将刚才改好的两个领域模型转换为关系数据库模型保存到库
 
-模式 Entity(Reference Objecct)
+--------------------------------------------------------------------------------
+模式 Entity(Reference Objecct) 实体（引用对象）
 
-模式 Value Object
+--------------------------------------------------------------------------------
+模式 Value Object 值对象（描述对象）
 
-模式  Service
+--------------------------------------------------------------------------------
+模式  Service 服务
 
-模式 Module(Package)
+--------------------------------------------------------------------------------
+模式 Module(Package) 模块(包）
 
-模式 Aggregate
-
-模式 Factory
-
-模式 Repository
-
-模式 Intention-Revealing Interfaces
-
-模式 Side-Effect-Free function 
-
-模式 Assertion
-
-模式 Conceptual Contour 
-
-模式 Standalone Class 
-
-模式 Closure of Operation
-
-模式 Strategy(Policy)
-
-模式 Composite
-
+--------------------------------------------------------------------------------
+模式 Aggregate 聚合
+--------------------------------------------------------------------------------
+模式 Factory 工厂
+--------------------------------------------------------------------------------
+模式 Repository 仓库
+--------------------------------------------------------------------------------
+模式 Intention-Revealing Interfaces 释意接口
+--------------------------------------------------------------------------------
+模式 Side-Effect-Free function 无副作用的函数
+--------------------------------------------------------------------------------
+模式 Assertion 断言
+--------------------------------------------------------------------------------
+模式 Conceptual Contour 概念轮廓
+--------------------------------------------------------------------------------
+模式 Standalone Class 单例类
+--------------------------------------------------------------------------------
+模式 Closure of Operation 操作结束
+--------------------------------------------------------------------------------
+模式 Strategy(Policy) 策略
+--------------------------------------------------------------------------------
+模式 Composite 组合
+--------------------------------------------------------------------------------
 模式 Bounded Context
-
+--------------------------------------------------------------------------------
 模式 Continuous Integration
-
+--------------------------------------------------------------------------------
 模式 Context Map
-
+--------------------------------------------------------------------------------
 模式 Shared Kernel
-
+--------------------------------------------------------------------------------
 模式 Customer/Supplier Development Team
-
+--------------------------------------------------------------------------------
 模式 Conformist
-
+--------------------------------------------------------------------------------
 模式 Anticorruption Layer
-
+--------------------------------------------------------------------------------
 模式 Separate Way
-
+--------------------------------------------------------------------------------
 模式 Open Host Service
-
+--------------------------------------------------------------------------------
 模式 Published Language
-
+--------------------------------------------------------------------------------
 模式 Core Domain
-
+--------------------------------------------------------------------------------
 模式 Generic Subdomain
-
+--------------------------------------------------------------------------------
 模式 Domain Vision Statement
-
+--------------------------------------------------------------------------------
 模式 Highlighted Core
-
+--------------------------------------------------------------------------------
 模式 Cohesive Mechanism
-
+--------------------------------------------------------------------------------
 模式 Segregated Core
-
+--------------------------------------------------------------------------------
 模式 Abstract Core
-
+--------------------------------------------------------------------------------
 模式 Evolving Order
-
+--------------------------------------------------------------------------------
 模式 System Metaphor
-
+--------------------------------------------------------------------------------
 模式 Responsibility Layer
-
+--------------------------------------------------------------------------------
 模式 Knowledge Level
-
+--------------------------------------------------------------------------------
 模式 Pluggable Component Framework
+--------------------------------------------------------------------------------
 
 
 
+
+
+
+
+--------------------------------------------------------------------------------
+模型都有哪些
+视图模型VO 封装前端请求数据为对象
+领域模型DM 收到对象并进行实际业务处理
+数据模型DTO 将处理完成的结果领域模型转换为数据模型
+
+
+--------------------------------------------------------------------------------
+取款分层示例
+应用层
+public class TransactionApplicationService{
+  @Autowired
+  private IAccountRepository accountRepository;  
+  public void withdraw(AccountId accountId, Integer amount){  
+    Account account = accountRepository.find(new AccountSpecificationById(accountId)); // 找到用户账户
+    account.withdraw(amount);  // 取款
+    accountRepository.save(account);  // 保存账户状态
+  }
+}
+领域层
+private AccountId accountId;
+  private Integer balance;
+  
+  public void withdraw(amount){
+    if(balance < amount){
+      throw new IllegalStateException("balance is not enough");  // 余额不够就不能取款
+    }
+    balance = balance - amount;
+  }
+}
+
+TransactionApplication属于application层。
+
+Account，IAccountRepository这些类属于domain层。
+
+infrastructure里会有IAccountRepository的具体实现，这里没有写
+
+请注意取款的具体逻辑是在Account类里的。如余额够不够，和金额的具体计算（虽然很简单）。
+所以业务逻辑是在domain层。
+
+TransactionApplication只是把具体的domain object找到，调用其开放的接口，不涉及具体逻辑。
+上边的例子找到用户的账户，告诉账户对象扣钱（具体怎么扣不管），保存账户的状态。
+
+应用层是为了粘合领域层与基础层,应用层不包括业务逻辑，领域层有具体业务逻辑
+
+
+domain层会依赖于infrastructure层。但一个应用最核心的部分显然是domain层。
+domain层依赖某种实现是不合适的，所以（可能）给予控制反转的思想，在domain 层定义了接口，
+然后交由infrastructure来写。这样依赖关系就反转了，infrastructure依赖于domain定义的接口。
+
+
+--------------------------------------------------------------------------------
+不要用这版本，还在思考中
+1 前台登录界面生成登录信息 loginInfoVO
+2 后台web层接收生成的loginInfoVO传给应用服务层
+3 后台应用服务层 创建领域模型 连接UI层与领域模型层
+4 领域模型调用登录方法传入loginInfoVO
+5 返回给前台RespModel
+
+--------------------------------------------------------------------------------
+
+Yes - very good question. Like @Andrew Cooper, our team also went through all this.
+
+We went with the following approaches (right or wrong):
+
+Custom Membership Provider
+
+Neither I or the other developer are fans of the built in ASP.NET Membership provider. It's way too bloated for what our site is about (simple, UGC-driven social website). We created a very simple one that does what our application needs, and nothing more. Whereas the built-in membership provider does everything you might need, but most likely won't.
+
+Custom Forms Authentication Ticket/Authentication
+
+Everything in our application uses interface-driven dependency injection (StructureMap). This includes Forms Authentication. We created a very thin interface:
+
+public interface IAuthenticationService
+{
+   void SignIn(User user, HttpResponseBase httpResponseBase);
+   void SignOut();
+}
+This simple interface allows easy mocking/testing. With the implementation, we create a custom forms authentication ticket containing: things like the UserId and the Roles, which are required on every HTTP request, do not frequently change and therefore should not be fetched on every request.
+
+We then use an action filter to decrypt the forms authentication ticket (including the roles) and stick it in the HttpContext.Current.User.Identity (for which our Principal object is also interface-based).
+
+Use of [Authorize] and [AdminOnly]
+
+We can still make use of the authorization attributes in MVC. And we also created one for each role. [AdminOnly] simply checks the role for the current user, and throws a 401 (forbidden).
+
+Simple, single table for User, simple POCO
+
+All user information is stored in a single table (with the exception of "optional" user info, such as profile interests). This is mapped to a simple POCO (Entity Framework), which also has domain-logic built into the object.
+
+User Repository/Service
+
+Simple User Repository that is domain-specific. Things like changing password, updating profile, retrieving users, etc. The repository calls into domain logic on the User object i mentioned above. The service is a thin wrapper on top of the repository, which seperates single repository methods (e.g Find) into more specialized ones (FindById, FindByNickname).
+
+Domain seperated from security
+
+Our "domain" the User and his/her's association information. This includes name, profile, facebook/social integration, etc.
+
+Things like "Login", "Logout" are dealing with authentication and things like "User.IsInRole" deals with authorization and therefore do not belong in the domain.
+
+So our controllers work with both the IAuthenticationService and the IUserService.
+
+Creating a profile is a perfect example of domain logic, that is mixed with authentication logic also.
+
+Here's what our's looks like:
+
+[HttpPost]
+[ActionName("Signup")]
+public ActionResult Signup(SignupViewModel model)
+{
+    if (ModelState.IsValid)
+    {
+        try
+        {
+            // Map to Domain Model.
+            var user = Mapper.Map<SignupViewModel, Core.Entities.Users.User>(model);
+
+            // Create salt and hash password.           
+            user.Password = _authenticationService.SaltAndHashPassword();
+
+            // Signup User.
+            _userService.Save(user);
+
+            // Save Changes.
+            _unitOfWork.Commit();
+
+            // Forms Authenticate this user.
+            _authenticationService.SignIn(user, Response);
+
+            // Redirect to homepage.
+            return RedirectToAction("Index", "Home", new { area = "" });
+        }
+        catch (Exception exception)
+        {
+            ModelState.AddModelError("SignupError", "Sorry, an error occured during Signup. Please try again later.");
+            _loggingService.Error(exception);
+        }
+    }
+
+    return View(model);
+}
+Summary
+
+The above has worked well for us. I love having a simple User table, and not that bloated madness that is the ASP.NET Membership provider. It's simple and represents our domain, not ASP.NET's representation of it.
+
+That being said, as i said we have a simple website. If you're working on a banking website then i would be careful about re-inventing the wheel.
+
+My advice to use is create your domain/model first, before you even think about authentication. (of course, this is what DDD is all about).
+
+Then work out your security requirements and choose an authentication provider (off the shelf, or custom) appropriately.
+
+Do not let ASP.NET dictate how your domain should be designed. This is the trap most people fall into (including me, on a previous project).
+
+Good luck!
+
+--------------------------------------------------------------------------------
+Entity，value object, Aggregate
+entity
+entity是一类可识别的可追踪的对象。
+
+说简单了，它必须有identifier，再简单点id（可识别，可被追踪）。
+
+另外它是有可变对象，mutable。但即使状态变化了之后，entity还是原来的entity。（好绕口）
+
+  现实一点的例子。一个人家“王帝”，他改名交了“王皇”，名字虽然变了，但还是同一人。
+当然现实世界里我们很难去寻找一个identifier(识别码)，如何定义一个不变的identifier会是个哲学问题，
+但编程时就简单多了，直接搞个id就就行。
+
+value object
+与entity对应的一个概念叫value object
+
+它是一个值，是不可变的，immutable。没有identifier，也不需要被追踪！
+
+  比如java中的字符串和value object的感念很相近。字符串生成之后就是不可变的。而且也没有什么id来识别它。
+
+什么时候使用entity，什么时候使用value object
+
+具体问题具体分析
+
+比如我们需要对地址这个东西建模。如果我们关心的是地址的履历之类的信息，
+过去30年前这个地址可能叫霞飞路，现在可能叫淮海路，而且需求是我们必须知道霞飞路，
+淮海路指的是一个地址。那很可能我们需要的是entity。这个entity可能还要开发change()的方法来改变路名。
+
+但如果我们做的是一个送货软件。地址只是表示一个目的地而已，
+霞飞路和淮海路在我看来就是不同的，那就说明，
+你不必对地址本身的变化进行追踪（送货地址变了，对你很重要。但霞飞路改名成淮海路对你不重要。）。
+那value object就够了。
+
+
+
+--------------------------------------------------------------------------------
