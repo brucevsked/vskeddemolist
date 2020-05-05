@@ -441,11 +441,183 @@ value object
 你不必对地址本身的变化进行追踪（送货地址变了，对你很重要。但霞飞路改名成淮海路对你不重要。）。
 那value object就够了。
 
+你可能觉得何必这么费事搞个表示地址的value object, 搞个字符串不就行了？
+首先这不一定是一个关于ddd的问题。淡然很多情况下，我们可以的确用java的基础类来建模的。
+但从面向对象的封装角度来说，我们可以考虑创造专门的类。
+如果我们创建value object,它是可以拥有行为的。比如Address是一个value object。
+它可以拥有getCountry(), getProvince(), getCity()等方法。
+
+
 也就是说实体与值对象区别在于
 1实体有唯一标识 值对象没有
 2实体的状态是可以改变的，值对象的状态不会发生变化 
 3实体因为唯一标识的原因可以被追踪，值对象不会被追踪
 
+Aggregate
+Aggregate，集合。是有多个（也可以是一个）entity，value object组成的对象。
 
+Aggregate可以看作一个树状结构的东西。根是一个entity。
+Aggregate的一个作用是保持domain object的关联性的正确。
+
+Aggregate和Repository
+Repository
+Repository是用来存放一个aggregate的object。（是不是听起来像DAO？）
+
+Repository的存在，让我们感觉我们存放在它里面的aggregate就好像on memory一样，
+不必去关心它具体是和rdb对接还是其他的形式。
+
+请注意的是Repository对应的是aggregate而不是entity！
+虽然我们在实际偏码时不会去专门写aggregate的类，有关具体实现，之以后的文章会写。
+简单地讲根entity就可以代表aggregate。
+
+domain object的做法与active record的区别
+active record pattern也是很常见的一种模式。大概是建立于数据表的一一映射的类，然后有各自的DAO类。乍看起来和domain object的做法是一样的。
+
+1. 映射关系
+active record一般以一个类对应一个数据表为前提
+repository则没有这个限制。当一个aggregate需要对应多个数据表时，
+那repository自然就对应多个数据表。repository隐藏了数据层的物理实现。
+这里想多提一点。domain model的建立，称作理论设计比较合适。它尽量不关心物理的实现，只求对domain的正确反映。
+而data model的设计，可以称作物理实现。是以数据永久化为目的。与ddd相关联，自然就是如何将domain object永久化。
+
+2. domain object主张充血模式
+active record常常会导致制造大量的于数据表对应的类，这些类一般不会有行为，而描述业务逻辑的职责就会到很多service类上。
+domain object则希望类有自己的行为，而不是开放好多setter，让外部的类来控制自己的状态变化。
+
+假设我们要实现一个账户管理的密码修改功能。
+
+大致需求
+账号通过邮箱地址来识别（identifier）
+　- 密码不能为空
+
+　- 密码必须加密（这个功能暂不实现）
+
+修改密码
+
+　- 修改密码时必须输入旧密码，旧密码输入正确后才可更改密码。
+
+从aggregate开始
+其实建模是一个过程，而且可能是程序设计里比较难有容易被忽略的过程。
+就像很多侦探片里的推理一样，推理很难，但往往侦探片只会告诉你答案，而不是告诉你如何推理的。
+很抱歉我这里也讲不了建模的过程，这回事另一个话题。但大概我们会想到如下的model。
+
+Account aggregate
+Account (entity, Account aggregate的root)
+  因为密码可以更改可以理解为mutable，密码变化后，不代表账号就变成了另一个账号。所以把它定义成entity。
+AccountId (value object)
+  账号id生成后就不可变了。
+Password (value object)
+  密码设置后，密码本身是不可变的。
+  更改账号密码应该理解为，用新密码换掉账号的旧密码。而非旧密码本身做了变化。
+然后对应aggregate，会有AggregateRepository
+
+具体的实现
+Account
+
+public class Account {
+    private AccountId accountId;
+    private EncryptedPassword encryptedPassword;
+ 
+    public void changePassword(String oldPassword, String newPassword){
+        if(encryptedPassword.verify(oldPassword)){
+            throw new IllegalArgumentException("old encryptedPassword is not correct");
+        }
+        encryptedPassword = new EncryptedPassword(newPassword);
+    }
+ 
+    public static Account createAccount(String email, String password){
+        Account account = new Account();
+        account.accountId= new Account(email);
+        account.encryptedPassword = new EncryptedPassword(password);
+        return account;
+    }
+ 
+    private Account(){
+ 
+    }
+}
+
+
+AccountId
+
+@AllArgsConstructor
+@Getter
+public class AccountId {
+    @NonNull
+    private String email;
+}
+用来表示账号id的类。immutable。
+
+
+EncyptedPassword
+
+public class EncryptedPassword {
+    private String encryptedPassword;
+ 
+    public EncryptedPassword(@NonNull String password){
+        if(password.equals("")){
+            throw new IllegalArgumentException("password cannot be null");
+        }
+        // TODO password not encrypted.
+        this.encryptedPassword = password;
+    }
+ 
+    public boolean verify(String ps){
+        return encryptedPassword.equals(ps);
+    }
+}
+
+密码不能为空的验证构造方法中。这在ddd的设计中始终比较常用的方法，在构造方法中做验证，避免矛盾（inconsisitency）的发生。
+数据是否矛盾交给了类自己判断，因为只是类自己应该拥有的知识。当然，当验证逻辑变复杂后，可以把这部分逻辑放到外部专用的验证类。
+
+IAccountRepository
+
+public interface IAccountRepository {
+    Account findById(String email);
+ 
+    void save(Account account);
+}
+
+最后写一下application层的application service（之后的文章会对application service做说明）
+
+AccountApplicationService
+
+public class AccountApplicationService {
+ 
+    @Autowired
+    private IAccountRepository accountRepository;
+ 
+    @Transactional
+    public void changePassword(String email, String oldPassword, String newPasssord){
+        Account account = accountRepository.findById(email);
+        account.changePassword(oldPassword, newPassword);
+        accountRepository.save(account);   
+    }
+}
+
+其他说明
+关于repository的实现
+IAccountRepository的实现类没有写。这个会牵涉到具体的使用和中框架，orm啥的。
+说一下比较令人烦恼的问题，是否该定义save()一个方法还是insert()，update()两个方法。
+理想的来说save()是好的。因为domain就不用关系究竟是插入还是更新这种与db相关的操作。
+然后当业务逻辑确实需要明确是登陆，还是更新时，insert()，update()会更方便。
+这是个需要权衡的问题，感觉没有唯一解。
+充血模型
+可能大家也注意到，ddd的domain object都是采用充血模型的写法。以后也会写文章专门强调这一点。
+value object真的有必要吗
+AccountId真的有必要吗？直接一个String email吗？
+EncryptedPassword真的有必要吗？
+我承认，这些都存在讨论的空间。我也有可能是为了说明问题而使用了复杂的实现。
+
+id类 vs String/Long
+  如果id类都是Long或者String，那彼此之间是不能区别的。搞不清楚id究竟是哪个entity的id。
+特意定义id类，可以在一些方法要传递好多id时防止一些认为错误。比如getAnObject(Long objAId, Long objBId)。
+参数上objAId，objBId是不能搞错的。但如果数据类型都是Long，那编译器是核对不了的～
+EncryptedPassword
+  它有对密码进行核对的行为。这里提供了一种思路。当entity的逻辑过多，类变得过大时，
+我们可以将一部分逻辑分到value object中。淡然我们也可以在建模的时候就先考虑把一些逻辑放进value object中。
+这也是domain-driven design一书错推崇的（没记错的话～）。
+
+实际开发过程中应当避免使用Lombok这样的简化插件，因为降低了代码可读性,阻碍了团队项目环境可移植性。
 
 --------------------------------------------------------------------------------
