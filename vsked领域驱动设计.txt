@@ -958,6 +958,265 @@ public class CommoditySpecificationByName implements ICommoditySpecification{
 假设我们连db都变掉了，变成nosql，那理论上我们只需修改Specification和Repository的实现，而不会影响到domain的逻辑。
 细心的朋友可能注意到，我迟迟没有讲关于Repository的实现。没有Repository的实现，那Specification的实现是没有意义的，他们两个是相互依赖的。
 那么下一篇文章终于还是要讲一讲Repository的实现方法了。突然觉得压力好大！
+上一篇文章讲到了Specification这个特殊的类，它是用来封装搜索的条件，也讲到了它的实现。
+然而Specification和Repository二者的实现是相关的，那这次就来讲一讲Repository的实现。
+
+预备知识
+复习一下Repository是什么
+从字面意思上讲repository是类似于仓库的意思。那在ddd中，它便是存放domain object （entity, value object）的东西。
+需要指出的是它与service类的区别。Repository的职责仅是数据永久化。它将数据永久化的部分抽象，使domain层能够专注对业务逻辑的实现。
+那理所当然repository是不能够包含业务逻辑的，所以我个人不推荐在repository定义像下面那样的方法。
+
+  findPersonByName(String name);
+  findAllPersonsByGroup(Group group);
+
+在repository中应该吧查询条件更加抽象化，而起到这个作用的便是我们之前讲到的Specification。
+
+实现的前提: 分层架构
+还是略微提一下我们实现的repository是基于分层设计这个架构的。
+按照分层设计分为以下三层:
+
+application层
+domain层 <– 定义repository
+infrastructure层 <– 实现repository
+实现repository
+首先，这里仅谈论datasource是关系型数据库的实现。
+repository和specifiction具体的实现其实是和db种类和选用的框架是有关系的，这里我们不能讲得面面俱到。
+假设我们有一个表示商品的entity, Commodity。
+
+public class Commodity {
+    private Long commodityId;
+    private String commodityName;
+    private String description;
+
+    /**
+    * 用于reconstruct的构造方法
+    */
+    private Commodity(Long commodityId, String commodityName, String description){
+      this.commodityId = commodityId;
+      this.commodityName = commodityName;
+      this.description = description;
+    }
+}
+
+reconstruct
+这里提一个概念叫reconstruct。
+ddd中,domain object的实例化必须具有业务上的意义。很多情况下我们会用static的方法来表示其意义。比如
+
+Commodity.createByName(commodityName);
+1
+这前我们还将过用Factory类来保证数据完整性。
+但domain object还存在另一种实例化，那就是从db数据还原一个domain object。业务逻辑上没有因此增加一个domain object。
+只是将已经存在的domain object从repository里重新取出，故称作reconstruct。
+我们为reconstruct定义了一个构造方法。请大家注意，这个构造方法仅用于还原domain object，在实现业务逻辑是我们原则上是不能调用这个构造方法的!
+
+Commodity这个entity对应一个数据表commodities
+
+id	commodity_name	description
+接口定义
+我们定义一个IRepository接口，那应该开放哪些方法呢。我们写一下大致的构思。
+
+public interface ICommodityRepository {
+  // 查询一个Commodity
+  Commodity findOne(ISpecification<Commodity> spec);
+  // 查询满足要求的所有商品
+  List<Commodity> find(ISpecification<Commodity> spec);
+  // 删除
+  void delete(Commodity commodity);
+}
+
+承接上面提到的内容，repository不应该包含业务逻辑，所以两个搜索的方法不包含任何业务的字眼，有关搜索条件全让Specification来定义。
+然后具体的实例化的方法，会有两种方案。
+
+add, update
+  void add(Commodity commodity);
+  void update(Commodity commodity);
+
+save
+  void save(Commodity commodity);
+
+这个会是比较难得选择题。从repository这个设计模式的思想上来说，比较理想的是让业务逻辑不要在意究竟是增加还是更新，
+只要关心把某个object存储就行。从这个角度来说save是更合适的。另外这个选择有时候取决于你选择的ORM。
+可以选择ORM更容易实现的方式。
+
+实现
+大致的思路是Repository, Specification隐藏了具体关于ORM对于的实现，
+所以RepositoryImpl, SpecificationImpl做的事情其实就是使用ORM的具体类来实现增删改查的功能。
+比如jpa的话，基本就是把Specification转化为Predicate可以让EntityManager用来查询。
+好了，之后基本就是关于ORM的事情了。
+
+基于jpa的实现
+jpa的实现，从代码量上面来说可能是最简洁的。不过与其说这是关于ddd的知识，更确切地说基本上完全是关于jpa的…
+
+entity
+我们必须对Commodity这个entity进行一些修改。加上与数据表映射用的信息。
+
+@Entity
+@Table(name = "commodities")
+public class Commodity {
+    @Id
+    @Column(name = "ID", nullable = false)
+    private Long commodityId;
+    @Basic
+    @Column(name = "COMMODITY_NAME", nullable = false)
+    private String commodityName;
+    @Basic
+    @Column(name = "DESCRIPTION", nullable = false)
+    private String description;
+}
+
+repository
+repository也就是几行代码
+
+public interface ICommodityRepository extends Repository<Commodity, Long>, JpaSpecificationExecutor<Commodity> {
+
+}
+
+specification
+之前的实现看起来实在是太简单了，更令人惊喜的是，jpa还很良心地提供了Specification的接口。
+
+/**
+ * Specification in the sense of Domain Driven Design.
+ * 
+ * @author Oliver Gierke
+ * @author Thomas Darimont
+ */
+public interface Specification<T> {
+
+    /**
+     * Creates a WHERE clause for a query of the referenced entity in form of a {@link Predicate} for the given
+     * {@link Root} and {@link CriteriaQuery}.
+     * 
+     * @param root
+     * @param query
+     * @return a {@link Predicate}, must not be {@literal null}.
+     */
+    Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb);
+}
+
+连注释了都写domain driven design~
+假设我们需要一个通过商品名来查询。那么我们可以定义一个。
+jpa里使用Predicate（命题？）来封装具体的查询条件的，所以我们要实现一个返回Predicate的toPredicate()方法。如下。
+Specification
+
+@AllArgsConstructor
+public class CommoditySpecByName extends Specification<Commodity> {
+
+  @NonNull
+  private String commodityName;
+
+  @Override
+  public Predicate toPredicate(Root<Poll> poll, CriteriaBuilder cb) {
+    return cb.equal(root.get(Commodity_.commodityName, commodityName);
+  }
+}
+
+然后具体使用时会是下面这样子
+
+@Autowired
+private ICommodityRepository commodityRepository;
+
+pubic Commodity findCommodityByName(String commodityName){
+  Commodity commodity = commodityRepository.findOne(new CommoditySpecByName(commodityName);
+  return commodity;
+}
+
+关于jpa的实现
+其实我们发现我们基本没有写什么具体实现，尤其是repository，只需定义一个接口，让它继承jpa的一些接口（好绕），jpa就会想变魔术一样，提供默认的实现。
+
+指定repository开放的方法
+JpaRepository开放了许多的方法，save(), findOne(), findAll(), count()等等。
+jpa也只开放了save()这个方法，所以解决了一个本需要你烦恼的选择题。（除非你一定要选择insert/update）
+但如果你觉得JpaRepository开放的方法太多了，很多根本不需要（比如delete(Entity entity)，count()），jpa还提供了其他的手段让你指定需要实现的方法）。
+本来想写一下具体的内容，大家还是在需要时去查文档吧，只要知道有这个选项就行了
+
+domain object与data object的分离
+大家可以看到，使用jpa的话，在entity的类里要写一些与db映射的注解。
+如果你有一些洁癖，不希望有这种依赖于db的信息，因为它实际上暴露具体的数据库实现。那自然而然你可能想要有一个专门与db映射的类，姑且称之为data object吧。
+data object不是domain object，它没有业务的逻辑，只有关于db的一些信息。
+那repository的实现就会变成
+
+查询： 使用ORM查询得到data object, 将data object转化为domain object返回。
+存储: domain object转化成data object, 使用ORM将它永久化。
+而ddd关注的只是repository将domain object永久化的部分。它并不强求你去定义专门映射db的data model的。
+其实使用data model这个手段不仅增加了需要定义的类，还增加了类转换的逻辑，而你能够得到的回报知识讲业务与数据的更大程度的分离。我认为是性价比很低的一个做法。
+题外话，那为什么还要提这个手段呢？
+直接的原因是因为自己工作的地方是采用了这种方式。而做出这个选择的理由是我们没有使用jpa（holy sh#t!）
+结果就是我们很悲惨地定义了一大堆domain object。但在repository里，我们要将domain object转换成ORM需要使用的data object。真的是无比啰嗦，仓了个天啊。
+所以当你的项目也有类似问题，觉得不用jpa就实现不了ddd时，不要放弃，其实也是有办法的，但是如果运气不好，你是用的ORM和ddd很不对路，那开发成本会变得比较大。
+
+基于mybatis的实现
+ORM的选择有千万种，我们再试试另一个比较流行的框架mybatis。看看使用它时该如何实现Repository。
+
+specification
+定义一个specification接口，它的toQuery()方法返回sql语句。
+
+public interface ICommoditySpecification {
+  String toQuery();
+}
+
+和之前例子一样，我们写一个用商品名来获取商品的specification。
+
+@AllArgsConstructor
+public class CommoditySpecByName implements ICommoditySpecification {
+
+  @NonNull
+  private String commodityName;
+
+  @Override
+  public String toQuery() {
+    return "SELECT * FROM commodities WHERE commodityName = " + commodityName;
+  }
+}
+
+repository
+写一个mybatis用来处理commodities这张表的类
+
+public interface CommodityMapper {
+  @Results({
+          @Result(property = "commodityId", column = "id"),
+          @Result(property = "commodityName", column = "commodity_name"),
+          @Result(property = "description", column = "description")
+        })
+  @Select("#{sql}")
+  Commodity findOne(String sql);
+
+  @Insert("INSERT into commodities(id, commodity_name, description) VALUES(#{commodityId}, #{commodityName}, #{description})")
+  void add(Commodity commodity);
+
+  @Update("UPDATE commodities SET commodity_name=#{commodityName}, description =#{description} WHERE commodity_id =#{id}")
+  void update(Commodity commodity);
+
+我们造了个万能的findOne()方法，它能接受任何查询，这是个潜在的安全性问题(估计在代买审核时，这个写法会被喷得体无完肤)。
+当然这里只想说明repository的实现，所以这个问题先不管。
+
+repository
+public CommodityRepositoryImpl implements CommodityRepository{
+  @Autowired
+  private CommodityMapper commodityMapper;
+
+  public Commodity findOne(ICommoditySpecification spec){
+    commodityMapper.findOne(spec.toQuery());
+  }
+
+  public void add(Commodity commodity) {
+    mapper.add(commodity);
+  }
+
+  public void update(Commodity commodity) {
+    mapper.update(commodity);
+  }
+
+}
+
+关于mybatis的实现
+仅仅是写了一部分的实现，大家就可以看出相比于jpa，repository的实现类还是需要一定代码量的。
+不过对喜欢写sql语句的人来说，mybatis也是个不错的ORM选择。而mybatis这个框架，努力一下还是能实现repository，specification模式的。
+
+总结
+这次通过jpa和mybatis的两个例子来说明了repository的实现方法。
+相信大家已经找到了诀窍，无论是哪种ORM基本上都能实现Repository, Specification这个设计模式。当然成本可能千差万别。
+到此为止我们基本上大致讲解了ddd的实现方法。之后还会在写一些文章来谈谈ddd战术方面的一些原则和建议。
 
 --------------------------------------------------------------------------------
 
