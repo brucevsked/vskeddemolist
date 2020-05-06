@@ -40,6 +40,7 @@ public class TestControllerTest extends BaseApplicationTest {
          */
         RequestBuilder request = post("/test")
                 .param("username", "vskeda1username")
+                //.param("token", "ak005")
                 .param("password", "mypassword is unknown");
         mvc.perform(request)
                 .andExpect(content().string(equalTo("testok1")));

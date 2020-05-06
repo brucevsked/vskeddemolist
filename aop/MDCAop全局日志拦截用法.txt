@@ -1,0 +1,19 @@
+第一步引入Aop依赖
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+第二步，包扫描添加类所在包
+@ComponentScan({"com.vsked.log"})
+
+第三步，将两个类复制到所在包里
+也就是com.vsked.log包里
+MDCAop.java
+MDCTool.java
+
+第四步，修改MDCAop.java拦截点，就是前台到后台的入口点一般是controller类所在包
+@Pointcut("execution(public * com..*.controller..*.*(..))")
+
+这里的controller里放的就全是控制器
