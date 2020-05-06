@@ -759,6 +759,206 @@ ddd中把service类分成三种。
 application service, domain service, infrastructure service。
 domain service中可以写业务逻辑，但同时理想情况下我们尽量不实用domain service。
 另外，我们要注意不要讲业务逻辑写到application service中
+
+之前的文章中讲到了entity, value object, repository等domain object。这次终于能将一些相对比较轻松的话题了
+
+Factory
+这个设计模式中应该有一个叫工厂模式，ddd可能也是借鉴了它。
+ddd比较注重数据的完整性。
+有关数据完整性，百度了一下，结果
+
+存储在数据库中的所有数据值均正确的状态
+
+复习一下，ddd中有aggregate（集合）这个概念，集合中的entity, value有一定的必须保持恒定不变的状态。
+而ddd中的数据完整性指的就是这中概念。
+比如有一个aggregate叫Person。其中有两条腿Leg(ValueObject)
+
+public class Person {
+  List<Leg> legs;
+}
+
+那数据完整性观点来讲，无论我们调用什么方法，绝对不能出现下面这种情况
+
+legs.size() != 2
+
+另外ddd提倡充血模式。所以比如说我们创建一个entity的类之后，不会再调用一大堆setter来初始化。
+entity被创建了，它的状态时必须是符合业务逻辑要求，而不是需要进一步加工的。听起来很绕口。来说个实际例子吧。
+比如我们要做一个购物网站，需要一个商品的类。Commodity。下面的贫血模型是ddd所反对的。
+
+@Setter
+@Getter
+public class Commodity{
+
+  private CommodityId id;
+  private Category category;
+  private String commodityName;
+  private String description;
+  private Date dateCreated;
+  private Double price;
+
+  ...
+
+}
+
+所以一般情况，自然我们必须在构造方法中对类进行初始化（原本很自然而然的做法，
+构造方法当然是来构造类的，但因为贫血模型的流行，用含参数的构造方法构造完整的类反而变成了非主流。）
+
+public class Commodity{
+
+  private CommodityId id;
+  private Category category;
+  private String commodityName;
+  private String description;
+  private Date dateCreated;
+  private Double price;
+
+  public Commodity(CommodityId id, Category category, String commodityName, 
+                              String description,  Date dateCreated, double price){
+
+  }
+
+}
+
+如刚才所说，创建一个类，他必须符合业务逻辑的要求，
+那检查是否符合要求则自然成了构造方法所要做的事情。最简单的如null检查
+
+public Commodity(CommodityId id, Category category, String commodityName, 
+                             String description,  Date dateCreated, double price){
+  if(id == null){
+    throw new IllegalArgumentException("id cannot be null.")
+  }
+  if(category == null){
+    throw new IllegalArgumentException("category cannot be null.")
+  }
+  if(commodityName == null){
+    throw new IllegalArgumentException("commodityName cannot be null.")
+  }
+  if(description == null){
+    throw new IllegalArgumentException("description cannot be null.")
+  }
+  this.category = category;
+  this.commodityName = commodityName;
+  this.description = description;
+  ...
+}
+
+再比如字数限定，还有更复杂的检查，比如保质期比可以比生产日期早等等。
+
+  if(dateCreated > dateExpired){
+    throw new IllegalArgumentException("dateCreated cannot be greater dateExpired");
+  }
+
+当这些逻辑变得复杂，构造方法就会变得很大，那类也当然会变得很大。
+自然而然我们就能想到把这部分逻辑分到专门的类里，这就是Factory。
+
+public CommodityFactory{
+
+  public Commodity create(Commodity(CommodityId id, Category category, 
+                                          String commodityName, String description,  Date dateCreated, double price)){
+    if(id == null){
+      throw new IllegalArgumentException("id cannot be null.")
+    }
+    if(category == null){
+      throw new IllegalArgumentException("category cannot be null.")
+    }
+    if(commodityName == null){
+      throw new IllegalArgumentException("commodityName cannot be null.")
+    }
+    if(description == null){
+      throw new IllegalArgumentException("description cannot be null.")
+    }
+    return new Commodity(id, category, commodityName, description, dateCreated, price);
+  }
+}
+
+这里是一个职责分离的思想，把类的实例构造逻辑从entity类移到了Factory里。
+当然这是有些争议的地方，这些验证处理不是可以在entity类构造前，通过一些Validation的工具先处理掉。
+个人觉得domain object是保证数据完整性的最后防线，所以我比较倾向把这些逻辑放在domain object，
+然后抛出异常，然后在前台，或者application层根据异常来做处理。
+
+承接一下开头提到的aggregate的数据完整性的话。在ddd的使用factory时，会使用factory来构建aggregate（根entity）。
+aggregate是一个要求数据完整和不变性（invariant)的单位，对aggregate的验证自然也会写在Factory类中。
+比如，一个商品需要有标签，但标签不能超过三个（开头开腿说过人只能有两条腿～）。
+那Commodity这个entity/repository里会有CommodityTag这个表示标签的value object。
+
+Commodity(CommodityId id, Category category, String commodityName, 
+              String description,  Date dateCreated, double price, List<CommodityTag> tags){
+  ...
+  if(tags.size == 0){
+    throw new IllegalArgumentException("tags cannot be empty.")
+  }
+  if(tags.size > 3){
+    throw new IllegalArgumentException("tags cannot be over 3.")
+  }
+  ...
+}
+
+Specification
+之前说到过，domain object是通过Repository来永久化的，一种Aggregate对应一个Repository。
+Repository一般提供findById()的方法，把aggregate给返回。
+但如果碰到一些比较复杂的查询逻辑，findById()就不够用了，
+但我们肯定又不想每次有新的查询逻辑就创建一个新的方法，于是就用Specification pattern来解决这个问题。
+在ICommodityRepository中定义方法
+
+interface ICommodityRepository{
+  Commodity find(ICommoditySpecification spec);
+}
+1
+2
+3
+定义Specification接口，这里toQuery的返回值是和实际的实现相关的，假设用hibernate的话，就返回Criteria。
+
+interface ICommoditySpecification{
+  Criterion toQuery();
+}
+
+然后可以根据不同的查询逻辑建立不同的Specification类
+通过id来查询的Specification
+
+@AllArgsConstructor
+public class CommoditySpecificationById implements ICommoditySpecification{
+  private CommodityId id;
+
+  public Criterion toQuery(){
+    return Restrictions.eq("commodityId", id);
+  }
+
+}
+
+通过产品名称来查询的Specification
+
+@AllArgsConstructor
+public class CommoditySpecificationByName implements ICommoditySpecification{
+  private CommodityName commodityName;
+
+  public Criterion toQuery(){
+    return Restrictions.eq("commodity_name", commodityName);
+  }
+
+}
+
+大概是这个思路。
+另外Specification把查询的条件也抽象化了，理论上可以解除domain和具体db实现的依赖关系。
+比如我们不用hibernate了，而使用更底层的sql语句，那可以改写成下面那样。
+
+interface ICommoditySpecification{
+  String toQuery();
+}
+
+@AllArgsConstructor
+public class CommoditySpecificationByName implements ICommoditySpecification{
+  private CommodityName commodityName;
+
+  public String toQuery(){
+    return "select * from commodity where commodity_name = " + 
+  }
+
+}
+
+假设我们连db都变掉了，变成nosql，那理论上我们只需修改Specification和Repository的实现，而不会影响到domain的逻辑。
+细心的朋友可能注意到，我迟迟没有讲关于Repository的实现。没有Repository的实现，那Specification的实现是没有意义的，他们两个是相互依赖的。
+那么下一篇文章终于还是要讲一讲Repository的实现方法了。突然觉得压力好大！
+
 --------------------------------------------------------------------------------
 
 unit of work
