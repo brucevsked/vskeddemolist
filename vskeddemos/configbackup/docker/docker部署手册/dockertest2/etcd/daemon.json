@@ -1,0 +1,1 @@
+{ "registry-mirrors": ["https://f0lt06pg.mirror.aliyuncs.com"], "dns": ["1.1.1.1","114.114.114.114"], "data-root": "/data/docker", "cluster-store": "etcd://10.0.192.20:2379", "cluster-advertise": "10.0.192.20:2375"}

@@ -1,0 +1,709 @@
+
+实验环境
+虚拟机1,dockertest1,192.168.111.81,虚拟机网卡桥接,docker网络为host
+虚拟机2,dockertest2,192.168.111.82,虚拟机网卡桥接,docker网络为host
+
+停止所有容器
+docker stop $(docker ps -a -q)
+
+
+启动一个或多个已经被停止的容器
+docker start
+停止一个运行中的容器
+docker stop
+重启容器
+docker restart
+
+机器1
+docker start redis10
+docker start redis11
+docker start redis12
+
+docker start zookeeper10
+docker start zookeeper11
+docker start zookeeper12
+
+docker start pgadmin410
+docker start postgres10
+
+docker start kafka10
+
+机器2
+docker start redis13
+docker start redis14
+docker start redis15
+
+docker start zookeeper13
+docker start zookeeper14
+docker start zookeeper15
+
+docker start kafka11
+
+
+
+环境准备 两台机器都执行
+yum install net-tools
+yum install wget
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo
+yum makecache
+
+
+vi /etc/security/limits.conf
+
+* soft nofile 65535
+* hard nofile 65535
+
+停止防火墙
+systemctl stop firewalld
+
+关闭防火墙
+systemctl disable firewalld
+
+关闭SELINUX
+vi /etc/selinux/config
+
+#SELINUX=enforcing
+#SELINUXTYPE=targeted
+SELINUX=disabled
+
+setenforce 0
+
+
+docker安装
+安装储存设备映射包
+yum install -y yum-utils device-mapper-persistent-data lvm2
+添加docker软件镜像
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+安装dockerCE
+yum install -y docker-ce
+启动docker
+systemctl start docker
+自动启动docker
+systemctl enable docker
+
+
+重启docker服务
+systemctl daemon-reload
+systemctl restart docker.service
+
+安装redis
+参数参考
+https://hub.docker.com/_/redis/
+
+搜索组件
+docker search redis
+拉取redis镜像
+docker pull redis:latest
+准备redis.conf
+mkdir -p /data/redis/redis6379
+mkdir -p /data/redis/redis6380
+mkdir -p /data/redis/redis6381
+mkdir -p /data/config/redis6379
+mkdir -p /data/config/redis6380
+mkdir -p /data/config/redis6381
+
+创建并启动redis集群
+机器1
+docker run --net host -v /data/redis/redis6379:/data -v /data/config/redis6379/redis.conf:/usr/local/etc/redis/redis.conf --name redis10 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+docker run --net host -v /data/redis/redis6380:/data -v /data/config/redis6380/redis.conf:/usr/local/etc/redis/redis.conf --name redis11 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+docker run --net host -v /data/redis/redis6381:/data -v /data/config/redis6381/redis.conf:/usr/local/etc/redis/redis.conf --name redis12 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+机器2
+docker run --net host -v /data/redis/redis6379:/data -v /data/config/redis6379/redis.conf:/usr/local/etc/redis/redis.conf --name redis13 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+docker run --net host -v /data/redis/redis6380:/data -v /data/config/redis6380/redis.conf:/usr/local/etc/redis/redis.conf --name redis14 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+docker run --net host -v /data/redis/redis6381:/data -v /data/config/redis6381/redis.conf:/usr/local/etc/redis/redis.conf --name redis15 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+
+
+停止容器
+得到容器id
+docker ps -a
+docker stop 容器id
+
+docker exec -i -t redis10 /bin/bash
+
+redis-cli --cluster create 192.168.111.81:6379 192.168.111.82:6379 192.168.111.81:6380 192.168.111.81:6381 192.168.111.82:6380 192.168.111.82:6381 --cluster-replicas 1 -a Y4yhl9tbf110_
+redis-cli --cluster info 192.168.111.81:6379 -a Y4yhl9tbf110_
+
+
+安装postgis+postgresql
+参考
+https://www.cnblogs.com/zt2710/p/11429372.html
+参数参考
+https://hub.docker.com/r/kartoza/postgis/
+
+docker pull kartoza/postgis:11.0-2.5
+
+mkdir -p /data/postgres/postgres10
+
+docker run --net host -v /data/postgres/postgres10:/var/lib/postgresql -e ALLOW_IP_RANGE=0.0.0.0/0 -e POSTGRES_USER=postgres -e DEFAULT_ENCODING="UTF8" -e POSTGRES_PASSWORD=Y4yhl9tbf110 --name postgres10 -d kartoza/postgis:11.0-2.5
+
+安装pgadmin4
+
+docker pull dpage/pgadmin4:latest
+
+mkdir -p /data/pgadmin4/pgadmin410
+
+docker run --net host -v /data/pgadmin4/pgadmin410:/var/lib/pgadmin -e 'PGADMIN_LISTEN_PORT=5050' -e 'PGADMIN_DEFAULT_EMAIL=vsked@163.com' -e 'PGADMIN_DEFAULT_PASSWORD=Y4yhl9tbf110' --name pgadmin410 -d dpage/pgadmin4:latest
+
+http://192.168.111.81:5050/login?next=%2F
+vsked@163.com
+Y4yhl9tbf110
+中文
+
+工具->查询工具->一句一句执行下面
+
+update pg_database set encoding = pg_char_to_encoding('UTF8') where datname = 'gis';
+update pg_database set encoding = pg_char_to_encoding('UTF8') where datname = 'postgres';
+
+CREATE EXTENSION postgis;
+CREATE EXTENSION postgis_topology;
+CREATE EXTENSION fuzzystrmatch;
+CREATE EXTENSION postgis_tiger_geocoder;
+CREATE EXTENSION address_standardizer;
+create extension tablefunc;
+
+安装zookeeper集群
+参考参数
+https://hub.docker.com/_/zookeeper/
+
+docker pull zookeeper
+
+机器1
+mkdir -p /data/zookeeper/zookeeper10/data
+mkdir -p /data/zookeeper/zookeeper10/datalog
+mkdir -p /data/zookeeper/zookeeper10/logs
+
+mkdir -p /data/zookeeper/zookeeper11/data
+mkdir -p /data/zookeeper/zookeeper11/datalog
+mkdir -p /data/zookeeper/zookeeper11/logs
+
+mkdir -p /data/zookeeper/zookeeper12/data
+mkdir -p /data/zookeeper/zookeeper12/datalog
+mkdir -p /data/zookeeper/zookeeper12/logs
+
+机器2
+mkdir -p /data/zookeeper/zookeeper13/data
+mkdir -p /data/zookeeper/zookeeper13/datalog
+mkdir -p /data/zookeeper/zookeeper13/logs
+
+mkdir -p /data/zookeeper/zookeeper14/data
+mkdir -p /data/zookeeper/zookeeper14/datalog
+mkdir -p /data/zookeeper/zookeeper14/logs
+
+mkdir -p /data/zookeeper/zookeeper15/data
+mkdir -p /data/zookeeper/zookeeper15/datalog
+mkdir -p /data/zookeeper/zookeeper15/logs
+
+机器1
+docker run --net host -v /data/zookeeper/zookeeper10/data:/data -v /data/zookeeper/zookeeper10/datalog:/datalog -v /data/zookeeper/zookeeper10/logs:/logs -e "ZOO_MY_ID=1" -e "ZOO_ADMINSERVER_ENABLED=false" -e "ZOO_SERVERS=server.1=192.168.111.81:2887:3887;2181 server.2=192.168.111.81:2888:3888;2182 server.3=192.168.111.81:2889:3889;2183 server.4=192.168.111.82:2887:3887;2181 server.5=192.168.111.82:2888:3888;2182 server.6=192.168.111.82:2889:3889;2183" --name zookeeper10 -d zookeeper:latest
+docker run --net host -v /data/zookeeper/zookeeper11/data:/data -v /data/zookeeper/zookeeper11/datalog:/datalog -v /data/zookeeper/zookeeper11/logs:/logs -e "ZOO_MY_ID=2" -e "ZOO_ADMINSERVER_ENABLED=false" -e "ZOO_SERVERS=server.1=192.168.111.81:2887:3887;2181 server.2=192.168.111.81:2888:3888;2182 server.3=192.168.111.81:2889:3889;2183 server.4=192.168.111.82:2887:3887;2181 server.5=192.168.111.82:2888:3888;2182 server.6=192.168.111.82:2889:3889;2183" --name zookeeper11 -d zookeeper:latest
+docker run --net host -v /data/zookeeper/zookeeper12/data:/data -v /data/zookeeper/zookeeper12/datalog:/datalog -v /data/zookeeper/zookeeper12/logs:/logs -e "ZOO_MY_ID=3" -e "ZOO_ADMINSERVER_ENABLED=false" -e "ZOO_SERVERS=server.1=192.168.111.81:2887:3887;2181 server.2=192.168.111.81:2888:3888;2182 server.3=192.168.111.81:2889:3889;2183 server.4=192.168.111.82:2887:3887;2181 server.5=192.168.111.82:2888:3888;2182 server.6=192.168.111.82:2889:3889;2183" --name zookeeper12 -d zookeeper:latest
+
+
+机器2
+docker run --net host -v /data/zookeeper/zookeeper13/data:/data -v /data/zookeeper/zookeeper13/datalog:/datalog -v /data/zookeeper/zookeeper13/logs:/logs -e "ZOO_MY_ID=4" -e "ZOO_ADMINSERVER_ENABLED=false" -e "ZOO_SERVERS=server.1=192.168.111.81:2887:3887;2181 server.2=192.168.111.81:2888:3888;2182 server.3=192.168.111.81:2889:3889;2183 server.4=192.168.111.82:2887:3887;2181 server.5=192.168.111.82:2888:3888;2182 server.6=192.168.111.82:2889:3889;2183" --name zookeeper13 -d zookeeper:latest
+docker run --net host -v /data/zookeeper/zookeeper14/data:/data -v /data/zookeeper/zookeeper14/datalog:/datalog -v /data/zookeeper/zookeeper14/logs:/logs -e "ZOO_MY_ID=5" -e "ZOO_ADMINSERVER_ENABLED=false" -e "ZOO_SERVERS=server.1=192.168.111.81:2887:3887;2181 server.2=192.168.111.81:2888:3888;2182 server.3=192.168.111.81:2889:3889;2183 server.4=192.168.111.82:2887:3887;2181 server.5=192.168.111.82:2888:3888;2182 server.6=192.168.111.82:2889:3889;2183" --name zookeeper14 -d zookeeper:latest
+docker run --net host -v /data/zookeeper/zookeeper15/data:/data -v /data/zookeeper/zookeeper15/datalog:/datalog -v /data/zookeeper/zookeeper15/logs:/logs -e "ZOO_MY_ID=6" -e "ZOO_ADMINSERVER_ENABLED=false" -e "ZOO_SERVERS=server.1=192.168.111.81:2887:3887;2181 server.2=192.168.111.81:2888:3888;2182 server.3=192.168.111.81:2889:3889;2183 server.4=192.168.111.82:2887:3887;2181 server.5=192.168.111.82:2888:3888;2182 server.6=192.168.111.82:2889:3889;2183" --name zookeeper15 -d zookeeper:latest
+
+docker logs -f zookeeper10
+
+安装kafka集群
+https://hub.docker.com/r/wurstmeister/kafka/
+
+docker pull wurstmeister/kafka:latest
+
+
+机器1
+docker run --net host -e "KAFKA_BROKER_ID=1" -e "KAFKA_ADVERTISED_PORT=9092" -e "KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.111.81:9092" -e "KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092" -e "KAFKA_ZOOKEEPER_CONNECT=192.168.111.81:2181" -e "KAFKA_ADVERTISED_HOST_NAME=192.168.111.81" -e "KAFKA_AUTO_CREATE_TOPICS_ENABLE=true" --name kafka10 -d wurstmeister/kafka:latest
+
+机器2
+docker run --net host -e "KAFKA_BROKER_ID=2" -e "KAFKA_ADVERTISED_PORT=9092" -e "KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.111.82:9092" -e "KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092" -e "KAFKA_ZOOKEEPER_CONNECT=192.168.111.82:2181" -e "KAFKA_ADVERTISED_HOST_NAME=192.168.111.82" -e "KAFKA_AUTO_CREATE_TOPICS_ENABLE=true" --name kafka11 -d wurstmeister/kafka:latest
+
+
+hadoop安装
+
+docker pull nvtienanh/hadoop-namenode:latest
+docker pull nvtienanh/hadoop-datanode:latest
+docker pull nvtienanh/hadoop-historyserver:latest
+docker pull nvtienanh/hadoop-nodemanager:latest
+docker pull nvtienanh/hadoop-resourcemanager:latest
+
+docker pull nvtienanh/hadoop-base:latest
+
+主节点上放
+namenode
+historyserver
+resourcemanager
+
+从节点上放
+nodemanager
+datanode
+
+修改主机名
+机器1
+vi /etc/hosts
+192.168.111.81 dockertest1
+192.168.111.82 dockertest2
+机器2
+vi /etc/hosts
+192.168.111.81 dockertest1
+192.168.111.82 dockertest2
+
+设置主机互相信任
+
+
+mkdir -p /data/config/hadoop3a
+mkdir -p /data/config/hadoop3b
+mkdir -p /data/config/hadoop3c
+
+mkdir -p /data/hadoop/hadoop3a
+mkdir -p /data/hadoop/hadoop3b
+mkdir -p /data/hadoop/hadoop3c
+
+docker run --net host -e "CLUSTER_NAME=xhghadoop" -e "CORE_CONF_fs_defaultFS=hdfs://dockertest1:9000" --name hadoop3a -d nvtienanh/hadoop-namenode:latest
+
+docker exec -i -t hadoop3a /bin/bash
+
+
+----------------------------------------------------------------------未测试，禁止使用!
+docker镜像迁移,将本地docker容器迁移到服务端
+从docker容器生成镜像
+docker commit -a "zhaoolee" -m “完成uwsgi的配置” qs zhaoolee-qs:1.0
+将docker镜像导出为静态文件
+docker save zhaoolee-qs:1.0 > qs01.tar
+通过将scp将静态文件发送到服务端
+scp ./qs01.tar root@192.168.214.162:/qs01.tar
+将静态文件还原为镜像, 并导入docker
+docker load < qs01.tar
+从刚刚导入的镜像新建容器
+docker run --net host -v /data/redis/redis6379:/data -v /data/config/redis6379/redis.conf:/usr/local/etc/redis/redis.conf --name redis10 -d zhaoolee-qs:1.0 redis-server /usr/local/etc/redis/redis.conf
+
+----------------------------------------------------------------------未测试，禁止使用!
+
+--------------------------------------------------------------------------------配置文件示例docker test1
+docker test1
+
+/data/config/redis6379/redis.conf
+protected-mode no
+bind 0.0.0.0
+port 6379
+cluster-config-file /data/nodes-10.conf
+pidfile /data/redis10.pid
+logfile /data/redis10.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+--------------------------------------------------------------------------------
+/data/config/redis6380/redis.conf
+protected-mode no
+bind 0.0.0.0
+port 6380
+cluster-config-file /data/nodes-11.conf
+pidfile /data/redis11.pid
+logfile /data/redis11.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+--------------------------------------------------------------------------------
+/data/config/redis6381/redis.conf
+protected-mode no
+bind 0.0.0.0
+port 6381
+cluster-config-file /data/nodes-12.conf
+pidfile /data/redis12.pid
+logfile /data/redis12.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+
+--------------------------------------------------------------------------------配置文件示例docker test2
+docker test2
+
+/data/config/redis6379/redis.conf
+protected-mode no
+bind 0.0.0.0
+port 6379
+cluster-config-file /data/nodes-13.conf
+pidfile /data/redis13.pid
+logfile /data/redis13.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+--------------------------------------------------------------------------------
+/data/config/redis6380/redis.conf
+protected-mode no
+bind 0.0.0.0
+port 6380
+cluster-config-file /data/nodes-14.conf
+pidfile /data/redis14.pid
+logfile /data/redis14.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+--------------------------------------------------------------------------------
+/data/config/redis6381/redis.conf
+protected-mode no
+bind 0.0.0.0
+port 6381
+cluster-config-file /data/nodes-15.conf
+pidfile /data/redis15.pid
+logfile /data/redis15.log
+masterauth Y4yhl9tbf110_
+requirepass Y4yhl9tbf110_
+dir /data
+
+tcp-backlog 511
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+loglevel notice
+databases 16
+always-show-logo yes
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+replica-serve-stale-data yes
+replica-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+replica-priority 100
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+aof-use-rdb-preamble yes
+lua-time-limit 5000
+cluster-enabled yes
+cluster-node-timeout 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-size -2
+list-compress-depth 0
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+stream-node-max-bytes 4096
+stream-node-max-entries 100
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+dynamic-hz yes
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+
+--------------------------------------------------------------------------------
