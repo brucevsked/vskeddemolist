@@ -1,0 +1,162 @@
+
+
+上传hadoop-2.7.4.tar.gz包到
+/opt
+目录下
+
+解包hadoop
+tar -zxvf hadoop-2.7.4.tar.gz
+删除安装备份
+rm -rf hadoop-2.7.4.tar.gz
+
+配置环境变量
+
+vi /etc/profile
+vi /etc/bashrc
+
+export JAVA_HOME=/opt/jdk1.8.0_192
+export JRE_HOME=/opt/jdk1.8.0_192/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib
+
+export FLUME_HOME=/opt/apache-flume-1.9.0-bin
+export FLUME_CONF_DIR=$FLUME_HOME/conf
+
+export ZOOKEEPER_HOME=/opt/apache-zookeeper-3.6.1-bin
+
+export KAFKA_HOME=/opt/kafka_2.12-2.5.0
+
+export HADOOP_HOME=/opt/hadoop-2.7.4
+export HADOOP_CONF_DIR=/opt/hadoop-2.7.4/etc/hadoop
+
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin:$CLASSPATH:$FLUME_HOME/bin:$ZOOKEEPER_HOME/bin:$KAFKA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+使环境变量生效
+source /etc/profile
+
+创建数据文件夹
+mkdir -p /data/data/hadoop/tmp
+
+hadoop要修改的文件
+/opt/hadoop-2.7.4/etc/hadoop/core-site.xml  (注意这里是你的主机名dev1centos7)
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+  <!-- 默认文件系统路径 这里使用集群名称 -->
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://dev1centos7:9000</value>
+  </property>
+  <!-- hadoop框架基本配置 集群时需要分发此目录下name到其他节点 -->
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/data/data/hadoop/tmp</value>
+  </property>
+</configuration>
+
+/opt/hadoop-2.7.4/etc/hadoop/hadoop-env.sh
+
+export JAVA_HOME=${JAVA_HOME}
+export HADOOP_CONF_DIR=${HADOOP_CONF_DIR:-"/etc/hadoop"}
+
+for f in $HADOOP_HOME/contrib/capacity-scheduler/*.jar; do
+  if [ "$HADOOP_CLASSPATH" ]; then
+    export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:$f
+  else
+    export HADOOP_CLASSPATH=$f
+  fi
+done
+
+export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true"
+
+export HADOOP_NAMENODE_OPTS="-Dhadoop.security.logger=${HADOOP_SECURITY_LOGGER:-INFO,RFAS} -Dhdfs.audit.logger=${HDFS_AUDIT_LOGGER:-INFO,NullAppender} $HADOOP_NAMENODE_OPTS"
+export HADOOP_DATANODE_OPTS="-Dhadoop.security.logger=ERROR,RFAS $HADOOP_DATANODE_OPTS"
+
+export HADOOP_SECONDARYNAMENODE_OPTS="-Dhadoop.security.logger=${HADOOP_SECURITY_LOGGER:-INFO,RFAS} -Dhdfs.audit.logger=${HDFS_AUDIT_LOGGER:-INFO,NullAppender} $HADOOP_SECONDARYNAMENODE_OPTS"
+
+export HADOOP_NFS3_OPTS="$HADOOP_NFS3_OPTS"
+export HADOOP_PORTMAP_OPTS="-Xmx512m $HADOOP_PORTMAP_OPTS"
+
+export HADOOP_CLIENT_OPTS="-Xmx512m $HADOOP_CLIENT_OPTS"
+
+export HADOOP_SECURE_DN_USER=${HADOOP_SECURE_DN_USER}
+export HADOOP_SECURE_DN_LOG_DIR=${HADOOP_LOG_DIR}/${HADOOP_HDFS_USER}
+
+export HADOOP_PID_DIR=${HADOOP_PID_DIR}
+export HADOOP_SECURE_DN_PID_DIR=${HADOOP_PID_DIR}
+
+export HADOOP_IDENT_STRING=$USER
+
+export HDFS_NAMENODE_USER=root
+export HDFS_DATANODE_USER=root
+export HDFS_ZKFC_USER=root
+export HDFS_SECONDARYNAMENODE_USER=root
+export HDFS_JOURNALNODE_USER=root
+export YARN_RESOURCEMANAGER_USER=root
+export YARN_NODEMANAGER_USER=root
+
+/opt/hadoop-2.7.4/etc/hadoop/hdfs-site.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+  <!-- 数据副本数量 -->
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+  </property>
+  <!-- 修正datanode限制 -->
+  <property>
+    <name>dfs.datanode.directoryscan.throttle.limit.ms.per.sec</name>
+    <value>1000</value>
+  </property>
+</configuration>
+
+/opt/hadoop-2.7.4/etc/hadoop/mapred-site.xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+</configuration>
+
+/opt/hadoop-2.7.4/etc/hadoop/slaves (注意这里是你的主机名dev1centos7)
+dev1centos7
+
+/opt/hadoop-2.7.4/etc/hadoop/yarn-site.xml
+<?xml version="1.0"?>
+
+<configuration>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+</configuration>
+
+格式化名称节点(只会做这一次以后不需要做了)
+hdfs namenode -format
+
+启动hadoop
+start-dfs.sh
+启动yarn
+start-yarn.sh
+
+查看状态与日志
+jps
+日志
+/opt/hadoop-2.7.4/logs
+
+停止顺序
+
+stop-dfs.sh
+stop-yarn.sh
+
+检查hadoop节点状态
+http://10.0.193.10:50070/
+hadoop应用状态
+http://10.0.193.10:8088/
+hadoop节点与资源管理
+http://10.0.193.10:8042/node

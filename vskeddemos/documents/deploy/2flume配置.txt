@@ -1,0 +1,30 @@
+
+
+上传apache-flume-1.9.0-bin.tar.gz包到
+/opt
+目录下
+
+解包flume
+tar -zxvf apache-flume-1.9.0-bin.tar.gz
+删除安装备份
+rm -rf apache-flume-1.9.0-bin.tar.gz
+
+配置环境变量
+
+vi /etc/profile
+vi /etc/bashrc
+
+export JAVA_HOME=/opt/jdk1.8.0_192
+export JRE_HOME=/opt/jdk1.8.0_192/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib
+
+export FLUME_HOME=/opt/apache-flume-1.9.0-bin
+export FLUME_CONF_DIR=$FLUME_HOME/conf
+
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin:$CLASSPATH:$FLUME_HOME/bin
+
+使环境变量生效
+source /etc/profile
+
+检查flume版本
+flume-ng version

@@ -1,0 +1,92 @@
+未完成需要修正
+
+上传hbase-2.0.0-bin.tar.gz包到
+/opt
+目录下
+
+解包hbase
+tar -zxvf hbase-2.0.0-bin.tar.gz
+删除安装备份
+rm -rf hbase-2.0.0-bin.tar.gz
+
+配置环境变量
+
+vi /etc/profile
+vi /etc/bashrc
+
+export JAVA_HOME=/opt/jdk1.8.0_192
+export JRE_HOME=/opt/jdk1.8.0_192/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib
+
+export FLUME_HOME=/opt/apache-flume-1.9.0-bin
+export FLUME_CONF_DIR=$FLUME_HOME/conf
+
+export ZOOKEEPER_HOME=/opt/apache-zookeeper-3.6.1-bin
+
+export KAFKA_HOME=/opt/kafka_2.12-2.5.0
+
+export HADOOP_HOME=/opt/hadoop-2.7.4
+export HADOOP_CONF_DIR=/opt/hadoop-2.7.4/etc/hadoop
+
+export HBASE_HOME=/opt/hbase-2.0.0
+
+export PHOENIX_HOME=/opt/apache-phoenix-5.0.0-HBase-2.0-bin
+
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin:$CLASSPATH:$FLUME_HOME/bin:$ZOOKEEPER_HOME/bin:$KAFKA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HBASE_HOME/bin:$PHOENIX_HOME/bin
+
+使环境变量生效
+source /etc/profile
+
+创建数据文件夹(注意这里文件夹应当与配置文件对应)
+mkdir -p /data/data/hbase/tmp
+mkdir -p /data/data/phoenix/tephra/snapshots
+
+/opt/hbase-2.0.0/conf/hbase-env.sh
+/opt/hbase-2.0.0/conf/hbase-site.xml
+/opt/hbase-2.0.0/conf/regionservers
+
+start-hbase.sh
+stop-hbase.sh
+
+
+Hbase master情况
+http://10.0.193.10:16010/master-status
+
+
+
+Phoenix
+tar -zxvf apache-phoenix-5.0.0-HBase-2.0-bin.tar.gz 
+rm -rf apache-phoenix-5.0.0-HBase-2.0-bin.tar.gz
+
+chown -R root:root apache-phoenix-5.0.0-HBase-2.0-bin/
+rm -rf /opt/apache-phoenix-5.0.0-HBase-2.0-bin/bin/hbase-site.xml
+
+ln -s /data/config/hbase/conf/hbase-site.xml /opt/apache-phoenix-5.0.0-HBase-2.0-bin/bin/hbase-site.xml
+
+/opt/hbase-2.0.0/conf/hbase-site.xml
+文件放到phoenix的bin目录中
+将phoenix文件夹中的phoenix-5.0.0-HBase-2.0-server.jar放到hbase的lib目录中
+cp /opt/apache-phoenix-5.0.0-HBase-2.0-bin/phoenix-5.0.0-HBase-2.0-server.jar /opt/hbase-2.0.0/lib/phoenix-5.0.0-HBase-2.0-server.jar 
+如果要安装phoenix的连接工具，需要将phoenix-5.0.0-HBase-2.0-client.jar放到对应目录中即可如连接工具SQuirrel
+
+使用SQuirrel连接phoenix测试
+
+先在机器的hosts文件中配置主机名！
+如果你phoenix主机上可以连接但其他机器不能连接phoenix请检查centos系统里/etc/hosts文件里主机名与ip对应关系
+添加phoenix-5.0.0-HBase-2.0-client.jar到工具的lib目录下
+
+添加驱动
+jdbc:phoenix:dev1centos7:2181
+选中刚才放的jar包选list drivers多等一会，然后选择出下面的classname
+
+然后点击连接即可
+
+导入phoenix表结构
+mkdir -p /opt/sql
+上传表结构语句
+
+psql.py dev1centos7:2181 /opt/sql/create-all-V2.sql
+psql.py dev1centos7:2181 /opt/sql/fenxi_index_init.sql
+
+
+导入完成后通过连接工具查询下看看有没有表

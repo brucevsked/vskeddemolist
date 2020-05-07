@@ -1,0 +1,67 @@
+
+未完成需要修正
+Elasticsearch
+rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+vi /etc/yum.repos.d/elasticsearch.repo
+
+[elasticsearch-7.x]
+name=Elasticsearch repository for 7.x packages
+baseurl=https://artifacts.elastic.co/packages/7.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+
+
+yum install -y elasticsearch
+
+如果不行就上传rpm再安装
+cd /opt
+yum -y install elasticsearch-7.6.1-x86_64.rpm 
+rm -rf elasticsearch-7.6.1-x86_64.rpm
+
+
+groupadd elasticsearch
+useradd elasticsearch -g elasticsearch -p elasticsearch
+
+chown -R elsearch:elsearch  elasticsearch
+
+配置 elasticsearch
+
+chown -R elasticsearch:elasticsearch /data/data/elasticsearch
+chmod -R 777 /esdata
+
+ln -s /data/config/elasticsearch/ /etc/elasticsearch
+rm -rf /etc/elasticsearch/elasticsearch.yml
+vi /etc/elasticsearch/elasticsearch.yml
+cluster.name: dev1centos1es
+node.name: node-1
+path.data: /data/data/elasticsearch/data
+path.logs: /data/data/elasticsearch/log
+network.host: 0.0.0.0
+http.port: 9222
+cluster.initial_master_nodes: ["node-1"]
+
+/usr/lib/systemd/system/elasticsearch.service
+/usr/share/elasticsearch/bin/elasticsearch
+
+/etc/sysconfig/elasticsearch
+JAVA_HOME=/usr/share/elasticsearch/jdk
+
+chmod 777 /run
+
+systemctl daemon-reload
+
+# 启动
+systemctl start elasticsearch.service
+# 停止
+systemctl stop elasticsearch.service
+# 开机自启
+systemctl enable elasticsearch.service
+
+# 查看状态
+systemctl status elasticsearch.service
+
+http://10.0.193.10:9222

@@ -1,0 +1,64 @@
+
+
+上传kafka_2.12-2.5.0.tgz包到
+/opt
+目录下
+
+解包kafka
+tar -zxvf kafka_2.12-2.5.0.tgz
+删除安装备份
+rm -rf kafka_2.12-2.5.0.tgz
+
+配置环境变量
+
+vi /etc/profile
+vi /etc/bashrc
+
+export JAVA_HOME=/opt/jdk1.8.0_192
+export JRE_HOME=/opt/jdk1.8.0_192/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib
+
+export FLUME_HOME=/opt/apache-flume-1.9.0-bin
+export FLUME_CONF_DIR=$FLUME_HOME/conf
+
+export ZOOKEEPER_HOME=/opt/apache-zookeeper-3.6.1-bin
+
+export KAFKA_HOME=/opt/kafka_2.12-2.5.0
+
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin:$CLASSPATH:$FLUME_HOME/bin:$ZOOKEEPER_HOME/bin:$KAFKA_HOME/bin
+
+使环境变量生效
+source /etc/profile
+
+修改配置文件
+ /opt/kafka_2.12-2.5.0/config/server.properties
+broker.id=1
+listeners=PLAINTEXT://0.0.0.0:9092
+# 注意这里的advertised.listeners后面写的是外网IP:外网端口号!
+advertised.listeners=PLAINTEXT://dev1centos7:9092
+zookeeper.connect=dev1centos7:2181
+listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+log.dirs=/data/data/kafka/log
+num.partitions=4
+
+num.network.threads=3
+num.io.threads=8
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+num.recovery.threads.per.data.dir=1
+offsets.topic.replication.factor=1
+transaction.state.log.replication.factor=1
+transaction.state.log.min.isr=1
+log.retention.hours=168
+log.segment.bytes=1073741824
+log.retention.check.interval.ms=300000
+zookeeper.connection.timeout.ms=600000
+group.initial.rebalance.delay.ms=0
+message.max.bytes=999999000
+replica.fetch.max.bytes=999999000
+
+启动kafka
+kafka-server-start.sh -daemon /opt/kafka_2.12-2.5.0/config/server.properties
+关闭kafka
+/opt/kafka_2.12-2.5.0/bin/kafka-server-stop.sh

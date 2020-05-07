@@ -1,0 +1,99 @@
+未完成需要修正
+
+kibana
+配置elasticsearch 的可视化界面kibana
+# 下载并安装公共签名密钥
+rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+# 添加源
+vi /etc/yum.repos.d/kibana.repo
+
+[kibana-7.x]
+name=Kibana repository for 7.x packages
+baseurl=https://artifacts.elastic.co/packages/7.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+
+# 安装
+yum install -y kibana
+如果要离线安装那就
+yum -y install kibana-7.6.1-x86_64.rpm
+rm -rf kibana-7.6.1-x86_64.rpm 
+
+rm -rf /etc/kibana/
+ln -s /data/config/kibana/ /etc/kibana
+
+# 配置
+vi /etc/kibana/kibana.yml
+
+server.host: "0.0.0.0"
+# 不要用 127.0.0.1，可能会提示 Kibana server is not ready yet
+elasticsearch.hosts: ["http://10.0.193.10:9222"]
+i18n.locale: "zh-CN"
+
+添加允许管理员启动
+vi /etc/systemd/system/kibana.service
+[Unit]
+Description=Kibana
+
+[Service]
+Type=simple
+User=kibana
+Group=kibana
+# Load env vars from /etc/default/ and /etc/sysconfig/ if they exist.
+# Prefixing the path with '-' makes it try to load, but if the file doesn't
+# exist, it continues onward.
+EnvironmentFile=-/etc/default/kibana
+EnvironmentFile=-/etc/sysconfig/kibana
+ExecStart=/usr/share/kibana/bin/kibana "--allow-root -c /etc/kibana/kibana.yml"
+Restart=on-failure
+RestartSec=3
+StartLimitBurst=3
+StartLimitInterval=60
+WorkingDirectory=/
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+# 刷新服务配置
+systemctl daemon-reload
+
+# 启动
+systemctl start kibana.service
+# 开机自启
+systemctl enable kibana.service
+# 查看状态
+systemctl status kibana.service
+# 重启
+systemctl restart kibana.service
+停止
+systemctl stop kibana.service
+
+如果启不来那手动启动试下
+/usr/share/kibana/bin/kibana -c /etc/kibana/kibana.yml --allow-root
+
+
+http://10.0.193.10:5601
+
+
+在Kibana的控制台中中执行如下命令
+创建索引 如果没有提示error，就意味着成功创建了索引
+PUT schools
+put kaifaxueyuan
+
+创建映射并添加数据
+POST /schools/_bulk
+{  "index": {    "_index": "schools",    "_id": "1"  }}
+{  "name": "Central School",  "description": "CBSE Affiliation",  "street": "Nagan",  "city": "paprola",  "state": "HP",  "zip": "176115",  "location": [    31.8955385,    76.8380405  ],  "fees": 2000,  "tags": [    "Senior Secondary",    "beautiful campus"  ],  "rating": "3.5"}{  "index": {    "_index": "schools",    "_id": "2"  }}{  "name": "Saint Paul School",  "description": "ICSE Afiliation",  "street": "Dawarka",  "city": "Delhi",  "state": "Delhi",  "zip": "110075",  "location": [    28.5733056,    77.0122136  ],  "fees": 5000,  "tags": [    "Good Faculty",    "Great Sports"  ],  "rating": "4.5"}{  "index": {    "_index": "schools",    "_id": "3"  }}{  "name": "Crescent School",  "description": "State Board Affiliation",  "street": "Tonk Road",  "city": "Jaipur",  "state": "RJ",  "zip": "176114",  "location": [    26.8535922,    75.7923988  ],  "fees": 2500,  "tags": [    "Well equipped labs"  ],  "rating": "4.5"}
+
+添加其他索引
+put schools_gov
+添加其他数据
+POST schools_gov/_bulk
+{   "index":{      "_index":"schools_gov", "_id":"1"   }}
+{   "name":"Model School", "description":"CBSE Affiliation", "street":"silk city",   "city":"Hyderabad", "state":"AP", "zip":"500030", "location":[17.3903703, 78.4752129],   "fees":200, "tags":["Senior Secondary", "beautiful campus"], "rating":"3"}{   "index":{      "_index":"schools_gov",  "_id":"2"   }}{   "name":"Government School", "description":"State Board Affiliation",   "street":"Hinjewadi", "city":"Pune", "state":"MH", "zip":"411057",   "location": [18.599752, 73.6821995], "fees":500, "tags":["Great Sports"], "rating":"4"}
