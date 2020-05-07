@@ -24,8 +24,10 @@ vskeddemolist/vskeddemos/documents
 
 ## 软件使用相关手册(超过15种以上软件使用手册)  
 vskeddemolist/vskeddemos/documents/software  
+## 部署手册(超过8种以上大数据相关部署手册)  
+vskeddemolist/vskeddemos/documents/deploy   
 ## 系统相关类手册(超过13种以上系统相关手册带解决方案)  
-vskeddemolist/vskeddemos/ystem
+vskeddemolist/vskeddemos/system
 
 使用gradle构建项目  
 vskeddemolist/vskeddemos/gradleproject  
