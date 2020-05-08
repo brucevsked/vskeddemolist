@@ -66,7 +66,9 @@ openLDAP
 
 ## 系统相关类手册(超过13种以上系统相关手册带解决方案)  
 vskeddemolist/vskeddemos/system
+centos7安装指南.docx  
 ftp相关命令.txt  
+SecureCRT保存日志设置.docx  
 vskedBashShell.txt  
 vskedbat.txt  
 vskedcenteros.txt  
@@ -79,6 +81,9 @@ vskedlinux.txt
 vskedvagrant.txt  
 vskedvirtualbox.txt  
 vskedwin10.txt  
+win写入centos文件夹.docx  
+安装完centos7mini后.docx  
+虚拟机克隆完后.docx  
 
 使用gradle构建项目  
 vskeddemolist/vskeddemos/gradleproject  
