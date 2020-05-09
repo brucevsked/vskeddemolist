@@ -72,8 +72,72 @@ delete_snapshot ‘snapshotName’
 restore_snapshot ‘snapshotName’
 enable ‘tableName’
 
+5* 建表
+create ‘<table name>’,’<column family>’ 
+hbase(main):002:0> create 'emp', 'personal data', ’professional data’
+create 'emp','personaldata','professionaldata'
+create 'student','id','info','address'
 
 
+6* 查看表描述
+describe 'student'
+
+7* 查看所有表
+list
+
+8* 添加数据或更新数据
+put 'student','firstStudent','info:name','Tom'
+put 'student','firstStudent','info:age','24'
+put 'student','firstStudent','info:birthday','1989-06-17'
+put 'student','firstStudent','info:school','qin'
+put 'student','firstStudent','address:school','beijing'
+put 'student','firstStudent','address:home','fujian'   
+
+更新一条记录
+put 'student','firstStudent','info:age','26'
+
+9*查看表中的数据：
+scan 'student'
+
+10* 获取数据
+
+获取一个id的所有数据
+get 'student','firstStudent'
+
+获取一个id,一个列族的所有数据
+get 'student','firstStudent','info'
+
+11* 查询行数
+.查询表中有多少行(这边的行数是根据有多少个类似firstStudent来计算的，并不是按照我们插入的具体信息计算的)
+count 'student'
+
+12* 删除行
+deleteall 'student','secondeStudent'
+
+删除id为secondStudent的值的'info:name'字段
+delete 'student','secondStudent','info:name'
+
+13* 添加字段
+给'secondeStudent'这个id增加'info:go'字段，并使用counter实现递增
+incr 'student','secondeStudent','info:go'
+连续执行incr以上，COUNTER VALUE的值会递增，通过get_counter
+
+获取当前counter的值：
+get_counter 'student','secondeStudent','info:go'
+COUNTER VALUE = 1
+get 'student','secondeStudent','info:go'
+
+14* 清空表
+truncate 'student'
+hbase是先将disable掉student,然后drop掉后重新建表来实现truncate功能
+
+15* 查询表是否存在
+exists 'student'
+
+16* 查看表是否可用
+is_enabled 'student'
+查看是否不可用
+is_disabled 'student'
 
 
 
@@ -111,3 +175,78 @@ Usage: fsck [opts] {only tables}
 
 
 hbase hbck -fixAssignments -fixMeta
+
+
+
+
+1.启动HBase外壳环境（shell）：hbase shell
+2.新建一张表“test”
+  要新建一个表，必须对你的表命名，并定义模式。一个表的模式包含表的属性和一个列族的列表。列族本身也有属性。可以在定义模式时一次定义它们。列族的属性示例包括列族是否应该在文件系统中压缩村村，一个单元格要保存多少个版本等。模式可以修改，需要时把表设为“离线”（offline）即可。外科环境中使用disable命令可以把表设为离线，使用alter命令可以进行必要的修改，而enable命令则可以把表重新设为在线（online）
+  要想新建一个名为myTest的表，使其之列族中有两个前缀data和info，表和列族属性都为默认值，则键入一下命令：
+create 'student','id','info','address'
+
+3.查看表描述：describe 'student'
+4.查看所有表：list
+5.插入一条数据：put 'student','firstStudent','info:name','Tom'
+6.查看表中的数据：scan 'student'
+hbase(main):013:0> scan 'student'
+ROW                   COLUMN+CELL                                               
+ firstStudent         column=info:age, timestamp=1377918572722, value=Tom       
+1 row(s) in 0.0150 seconds
+7.删除一个列族id:先将表disable（如果表中之前有数据的话，会把数据清空）
+如图
+8.插入几条数据：
+put 'student','firstStudent','info:age','24'
+put 'student','firstStudent','info:birthday','1989-06-17'
+put 'student','firstStudent','info:school','qin'
+put 'student','firstStudent','address:school','beijing'
+put 'student','firstStudent','address:home','fujian'   
+9.获取数据
+获取一个id的所有数据
+
+get 'student','firstStudent'
+
+
+
+获取一个id,一个列族的所有数据
+get 'student','firstStudent','info'
+
+
+
+获取一个id,一个列族中一个列的所有数据
+
+get 'student','firstStudent','info:age'
+通过timestamp来获取两个版本的数据
+get 'student','firstStudent',{COLUMN=>'info:age',TIMESTAMP=>1377920586305}
+COLUMN                                CELL                                                                                                      
+ info:age                             timestamp=1377920586305, value=24                                                                         
+1 row(s) in 0.0200 seconds
+
+10.更新一条记录
+将firstStudent的年龄改为26
+put 'student','firstStudent','info:age','26'
+11.查询表中有多少行(这边的行数是根据有多少个类似firstStudent来计算的，并不是按照我们插入的具体信息计算的)
+count 'student'
+12.删除整行
+deleteall 'student','secondeStudent'
+13.删除id为secondStudent的值的'info:name'字段
+delete 'student','secondStudent','info:name'
+14.给'secondeStudent'这个id增加'info:go'字段，并使用counter实现递增
+incr 'student','secondeStudent','info:go'
+连续执行incr以上，COUNTER VALUE的值会递增，通过get_counter
+
+获取当前counter的值：
+get_counter 'student','secondeStudent','info:go'
+COUNTER VALUE = 1
+get 'student','secondeStudent','info:go'
+
+15.清空整张表
+truncate 'student'
+hbase是先将disable掉student,然后drop掉后重新建表来实现truncate功能
+16.查询表是否存在
+exists 'student'
+Table student dose exists
+17.判断表是否enable
+is_enabled 'student'
+18.判断表是否disable
+is_disabled 'student'
