@@ -1,0 +1,293 @@
+参考
+https://blog.csdn.net/piaoruiqing/article/details/102321655
+
+Kubernetes(一) 跟着官方文档从零搭建K8S
+前言
+本文将带领读者一起, 参照着Kubernetes官方文档, 对其安装部署进行讲解. Kubernetes更新迭代很快, 书上、网上等教程可能并不能适用于新版本, 但官方文档能.
+
+阅读这篇文章你能收获到:
+
+如何阅读Kubernetes官方安装指南并搭建一个Kubernetes环境.
+Kubernetes安装过程中的注意事项.
+避过常见的坑.
+阅读本文你需要:
+
+熟悉Linux命令.
+知道Kubernetes是用来干什么的 (不然装它干啥(ಥ_ಥ)).
+知道Docker
+
+器材准备
+序号	名称	数量	备注
+1	服务器	2	操作系统: Linux(centos7, 其它操作系统也可, 安装过程类似, 可参考官方文档)机器配置: CPU >= 2, 内存 >= 2G
+
+从官网找到kubeadm安装文档入口, 文档很详细. 英文阅读没有障碍的读者推荐直接查看英文文档, 中文文档不全且更新不及时安装时可能存在问题.
+前期准备
+笔者已经预先安装好了两台虚拟机, centos7(CPUx2, 内存2.5G). 并在路由器上固定了这两个虚拟机的IP地址.
+
+修改hostname
+[root@k8s-master ~]$ vim /etc/hostname # 修改hostname
+[root@k8s-master ~]$ vim /etc/hosts	# 将本机IP指向hostname
+[root@k8s-master ~]$ reboot -h 		# 重启(可以做完全部前期准备后再重启)
+修改后, 两台虚拟机的配置如下:
+# in k8s-master
+[root@k8s-master ~]$ cat /etc/hostname 
+k8s-master
+[root@k8s-master ~]$ cat /etc/hosts | grep k8s
+10.33.30.92 k8s-master
+10.33.30.91 k8s-worker
+
+# in k8s-worker
+[root@k8s-worker ~]$ cat /etc/hostname 
+k8s-worker
+[root@k8s-worker ~]$ cat /etc/hosts | grep k8s
+10.33.30.92 k8s-master
+10.33.30.91 k8s-worker
+确认MAC和product_uuid的唯一性
+[root@k8s-master ~]$ ifconfig -a    # 查看MAC
+[root@k8s-master ~]$ cat /sys/class/dmi/id/product_uuid	# 查看product_uuid
+注: 如果你的centos7没有ifconfig命令, 可以执行yum install net-tools进行安装.
+配置防火墙
+由于是本地内网测试环境, 笔者图方便, 直接关闭了防火墙. 若安全要求较高, 可以参考官方文档放行必要端口.
+[root@k8s-master ~]$ systemctl stop firewalld	# 关闭服务
+[root@k8s-master ~]$ systemctl disable firewalld	# 禁用服务
+禁用SELinux
+
+修改/etc/selinux/config, 设置SELINUX=disabled. 重启机器.
+[root@k8s-master ~]$ sestatus	# 查看SELinux状态
+SELinux status: disabled
+禁用交换分区
+
+编辑/etc/fstab, 将swap注释掉. 重启机器.
+[root@k8s-master ~]$ vim /etc/fstab 
+#/dev/mapper/cl-swap     swap                    swap    defaults        0 0
+安装Docker
+Docker官方文档对安装步骤描述已经足够详细, 过程并不复杂, 本文便不再赘述.
+Docker请使用18.09, k8s暂不支持Docker最新版19.x, 
+安装时请按照文档描述的方式明确指定版本号
+yum install docker-ce-18.09.9-3.el7 docker-ce-cli-18.09.9-3.el7 containerd.io.
+若网络不好, 可换用国内源, 阿里云、中科大等都可. 此处附上阿里云源docker安装文档地址: 容器镜像服务.
+安装完毕后, 建议将docker源替换为国内. 推荐阿里云镜像加速, 
+有阿里云账号即可免费使用.阿里云 -> 容器镜像服务 -> 镜像中心 -> 镜像加速
+
+配置Docker
+修改/etc/docker/daemon.json为如下内容:
+{
+  "registry-mirrors": ["https://xxxxxxxx.mirror.aliyuncs.com"],
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+其中https://xxxxxxxx.mirror.aliyuncs.com为阿里云镜像加速地址, xxxxxxxx需要替换为自己账户中的地址. 如图:
+安装配置完毕后执行:
+[root@k8s-master ~]$ systemctl enable docker
+[root@k8s-master ~]$ systemctl start docker
+安装Kubernetes
+添加源
+由于国内网络原因, 官方文档中的地址不可用, 本文替换为阿里云镜像地址, 执行以下代码即可:
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+exclude=kube*
+EOF
+
+安装
+[root@k8s-master ~]$ yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+[root@k8s-master ~]$ systemctl enable kubelet && systemctl start kubelet
+修改网络配置
+cat <<EOF >  /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system
+
+注意: 至此, 以上的全部操作, 在Worker机器上也需要执行. 注意hostname等不要相同.
+初始化Master
+生成初始化文件
+[root@k8s-master ~]$ kubeadm config print init-defaults > kubeadm-init.yaml
+该文件有两处需要修改:
+将advertiseAddress: 1.2.3.4修改为本机地址
+将imageRepository: k8s.gcr.io修改为imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
+修改完毕后文件如下:
+apiVersion: kubeadm.k8s.io/v1beta2
+bootstrapTokens:
+- groups:
+  - system:bootstrappers:kubeadm:default-node-token
+  token: abcdef.0123456789abcdef
+  ttl: 24h0m0s
+  usages:
+  - signing
+  - authentication
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: 10.33.30.92
+  bindPort: 6443
+nodeRegistration:
+  criSocket: /var/run/dockershim.sock
+  name: k8s-master
+  taints:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+---
+apiServer:
+  timeoutForControlPlane: 4m0s
+apiVersion: kubeadm.k8s.io/v1beta2
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+controllerManager: {}
+dns:
+  type: CoreDNS
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
+kind: ClusterConfiguration
+kubernetesVersion: v1.15.0
+networking:
+  dnsDomain: cluster.local
+  serviceSubnet: 10.96.0.0/12
+scheduler: {}
+
+
+下载镜像
+[root@k8s-master ~]$ kubeadm config images pull --config kubeadm-init.yaml
+执行初始化
+[root@k8s-master ~]$ kubeadm init --config kubeadm-init.yaml
+等待执行完毕后, 会输出如下内容:
+...
+Your Kubernetes control-plane has initialized successfully!
+...
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 10.33.30.92:6443 --token abcdef.0123456789abcdef \
+    --discovery-token-ca-cert-hash sha256:2883b1961db36593fb67ab5cd024f451b934fc0e72e2fa3858dda3ad3b225837
+
+最后两行需要保存下来, kubeadm join ...是worker节点加入所需要执行的命令.
+
+接下来配置环境, 让当前用户可以执行kubectl命令:
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+测试一下: 此处的NotReady是因为网络还没配置.
+[root@k8s-master kubernetes]$ kubectl get node
+NAME         STATUS     ROLES    AGE     VERSION
+k8s-master   NotReady   master   3m25s   v1.15.3
+
+配置网络
+下载描述文件
+[root@k8s-master ~]$ wget https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+[root@k8s-master ~]$ cat kubeadm-init.yaml | grep serviceSubnet:
+serviceSubnet: 10.96.0.0/12
+
+打开calico.yaml, 将192.168.0.0/16修改为10.96.0.0/12
+需要注意的是, calico.yaml中的IP和kubeadm-init.yaml需要保持一致, 要么初始化前修改kubeadm-init.yaml, 要么初始化后修改calico.yaml.
+执行kubectl apply -f calico.yaml初始化网络.
+
+此时查看node信息, master的状态已经是Ready了.
+
+[root@k8s-master ~]$ kubectl get node
+NAME         STATUS   ROLES    AGE   VERSION
+k8s-master   Ready    master   15m   v1.15.3
+
+安装Dashboard
+[root@k8s-master ~]$ wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
+[root@k8s-master ~]$ kubectl apply -f recommended.yaml 
+
+部署完毕后, 执行kubectl get pods --all-namespaces查看pods状态
+[root@k8s-master kubernetes]$ kubectl get pods --all-namespaces | grep dashboard
+NAMESPACE              NAME                                        READY   STATUS   
+kubernetes-dashboard   dashboard-metrics-scraper-fb986f88d-m9d8z   1/1     Running
+kubernetes-dashboard   kubernetes-dashboard-6bb65fcc49-7s85s       1/1     Running 
+
+创建用户
+
+创建一个用于登录Dashboard的用户. 创建文件dashboard-adminuser.yaml内容如下:
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kube-system
+
+执行命令kubectl apply -f dashboard-adminuser.yaml
+
+生成证书
+官方文档中提供了登录1.7.X以上版本的登录方式, 但并不清晰, 笔者没有完全按照该文档的方式进行操作.
+[root@k8s-master ~]$ grep 'client-certificate-data' ~/.kube/config | head -n 1 | awk '{print $2}' | base64 -d >> kubecfg.crt
+[root@k8s-master ~]$ grep 'client-key-data' ~/.kube/config | head -n 1 | awk '{print $2}' | base64 -d >> kubecfg.key
+[root@k8s-master ~]$ openssl pkcs12 -export -clcerts -inkey kubecfg.key -in kubecfg.crt -out kubecfg.p12 -name "kubernetes-client"
+
+第三条命令生成证书时会提示输入密码, 可以直接两次回车跳过.
+kubecfg.p12即需要导入客户端机器的证书. 将证书拷贝到客户端机器上, 导入即可.
+~$ scp root@10.33.30.92:/root/.kube/kubecfg.p12 ./
+需要注意的是: 若生成证书时跳过了密码, 导入时提示填写密码直接回车即可, 不要纠结密码哪来的 (ﾟ▽ﾟ)/
+此时我们可以登录面板了, 访问地址: https://{k8s-master-ip}:6443/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login, 登录时会提示选择证书, 确认后会提示输入当前用户名密码(注意是电脑的用户名密码).
+
+登录Dashboard
+执行kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}'), 获取Token.
+
+[root@k8s-master .kube]$ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+Name:         admin-user-token-dhhkb
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name: admin-user
+              kubernetes.io/service-account.uid: b20d1143-ce94-4379-9e14-8f80f06d8479
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+ca.crt:     1025 bytes
+namespace:  11 bytes
+token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWRoaGtiIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiMjBkMTE0My1jZTk0LTQzNzktOWUxNC04ZjgwZjA2ZDg0NzkiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06YWRtaW4tdXNlciJ9.f6IbPGwIdFZWStzBj8_vmF01oWW5ccaCpPuVQNLSK1pgEqn0kNVK_x0RYSuKEnujObzpQQdFiRYcI6ITHja2PIVc5Nv83VCn5IaLvZdYuGZWUYRw0efJUBMA4J4N8-pRkiw6fYAuWLeGYghLNXL_nDdC_JkG75ASqrr3U1MVaikOcfrEPaI-T_AJ3TMYhI8aFoKiERpumu5W1K6Jl80Am9pWDX0Ywis5SSUP1VYfu-coI48EXSptcaxEyv58PrHUd6t_oMVV9rpqSxrNtMZvMeXqe8Hnl21vR7ls5yTZegYtHXSc3PKvCaIalKhYXAuhogNcIXHaMzvLSbf-DSQkVw
+
+
+复制该Token到登录页, 点击登录即可, 效果如下:
+添加Worker节点
+重复执行 前期准备-修改hostname ~ 安装Kubernetes-修改网络配置的全部操作, 初始化一个Worker机器.
+
+执行如下命令将Worker加入集群
+
+kubeadm join 10.33.30.92:6443 --token abcdef.0123456789abcdef \
+    --discovery-token-ca-cert-hash sha256:2883b1961db36593fb67ab5cd024f451b934fc0e72e2fa3858dda3ad3b225837 
+
+注意: 此处的秘钥是初始化Master后生成的, 参考前文.
+
+
+
+添加完毕后, 在Master上查看节点状态:
+[root@k8s-master ~]$ kubectl get node
+NAME         STATUS   ROLES    AGE   VERSION
+k8s-master   Ready    master   10h   v1.15.3
+k8s-worker   Ready    <none>   96s   v1.15.3
+
+在面板上也可查看:
+
+参考文献
+https://blog.csdn.net/piaoruiqing/article/details/102321655
+https://kubernetes.io
+https://github.com/kubernetes/dashboard
+推荐阅读:
+Kubernetes(一) 跟着官方文档从零搭建K8S
+Kubernetes(二) 应用部署
+Kubernetes(三) 如何从外部访问服务

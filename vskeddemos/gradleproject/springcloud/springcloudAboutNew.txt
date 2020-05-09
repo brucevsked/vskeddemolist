@@ -1,0 +1,52 @@
+Hoxton
+
+Spring Boot Admin (Server/Client Starter/Admin Server UI)2.2.1
+
+Spring Boot 2.2.2.RELEASE
+
+spring-cloud-loadbalancer 2.2.1.RELEASE
+
+Spring Cloud Gateway 2.2.1.RELEASE 路由转发、权限校验、限流控制等作用
+Spring Cloud Consul 2.2.1.RELEASE
+
+Spring Cloud Openfeign 2.2.1.RELEASE
+
+Spring Cloud Sleuth 2.2.1.RELEASE
+
+Spring Cloud Commons 2.2.1.RELEASE
+
+
+
+
+--------------------------------------------------------------------------------
+Spring Cloud Aws 2.2.1.RELEASE 用不到
+Spring Cloud Vault 2.2.1.RELEASE 管理静态和动态机密
+Spring Cloud Circuitbreaker 1.0.0.RELEASE 好久不更新
+Spring Cloud Cli 2.2.1.RELEASE
+
+Spring Cloud Zookeeper 2.2.1.RELEASE 暂时不用
+Spring Cloud Starter Hoxton.RELEASE 核心配置
+Spring Cloud Build 2.2.1.RELEASE
+Spring Cloud Config 2.2.1.RELEASE 分布式配置中心被 consul取代
+Spring Cloud Dependencies Parent 2.2.1.RELEASE
+Spring Cloud Starter Parent Hoxton.RELEASE
+Spring Cloud Sleuth 2.2.1.RELEASE 日志收集工具包
+Spring Cloud Contract 2.2.1.RELEASE
+Spring Cloud Gcp 1.2.0.RELEASE
+Spring Cloud Bus 2.2.1.RELEASE 事件、消息总线，用于在集群（例如，配置变化事件）中传播状态变化
+Spring Cloud Consul 2.2.1.RELEASE 分布式配置中心
+Spring Cloud Stream Horsham.RELEASE
+Spring Cloud Kubernetes 1.1.0.RELEASE
+
+Spring Cloud Commons 2.2.1.RELEASE
+Spring Cloud Dependencies Hoxton.RELEASE
+Spring Cloud Task 2.2.1.RELEASE 解决短命微服务的任务管理，任务调度的工作
+Spring Cloud Function 3.0.0.RELEASE
+Spring Cloud Hoxton.RELEASE
+Spring Cloud Netflix 2.2.1.RELEASE
+Spring Cloud Security 2.2.1.RELEASE 为应用程序添加安全控制
+Spring Cloud Release Hoxton.RELEASE
+Spring Cloud Cloudfoundry 2.2.1.RELEASE 与CloudFoundry进行集成的一套解决方案 Cloud Foundry是VMware推出的业界第一个开源PaaS云平台
+
+
+

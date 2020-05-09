@@ -1,0 +1,116 @@
+参考
+https://blog.csdn.net/qq_27384769/article/details/102928756
+Kubernetes的单机版安装（CentOS7）
+环境准备
+本文主要针对CentOS7的系统，其他Linux系统与之类似，但是可以部分使用方式上存在一定差异。
+
+步骤1：CentOS系统自带的防火墙服务：
+
+systemctl stop firewalld
+systemctl disable firewalld
+
+步骤2：安装etcd和Kubernetes（自动附带安装Docker）
+yum install -y etcd kubernetes
+
+步骤3：修改/etc/sysconfig/docker文件。
+修改OPTIONS的内容为：
+OPTIONS='--selinux-enabled=false --insecure-registry gcr.io'
+
+步骤4：修改/etc/kubernetes/apiserver文件
+
+修改KUBE_ADMISSION_CONTROL的内容为：去除KUBE_ADMISSION_CONTROL 中的 SecurityContextDeny,ServiceAccount
+
+KUBE_ADMISSION_CONTROL="--admission-control=NamespaceLifecycle,NamespaceExists,LimitRanger,ResourceQuota"
+其他内容保持原样即可。
+
+安装python-rhsm-certificates包
+wget http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+rpm -ivh python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+ 
+ 
+rpm2cpio python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm | cpio -iv --to-stdout ./etc/rhsm/ca/redhat-uep.pem | tee /etc/rhsm/ca/redhat-uep.pem
+
+步骤5：依次启动下列服务：
+systemctl start etcd
+systemctl start docker
+systemctl start kube-apiserver
+systemctl start kube-controller-manager
+systemctl start kube-scheduler
+systemctl start kubelet
+systemctl start kube-proxy
+
+至此，一个单机版的Kubernetes环境已经搭建完成了。 我们可以利用该环境进行Kubernetes功能的学习和使用。
+检查版本
+etcdctl -v
+docker -v
+kubectl version
+
+查看启动状态
+etcdctl member list
+docker ps
+
+基本功能演示
+下面，我们来使用一些基本的命令来验证一下我们的环境是正常的。 准备一个如下的配置文件 mysql-rc.yaml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "123456"
+下面，我们来启动该服务：
+kubectl create -f mysql-rc.yaml
+
+如果出现以下READY数目始终为0：解决方案
+命令执行后，我们可以执行如下命令看查询RC列表：
+kubectl get rc
+# NAME      DESIRED   CURRENT   READY     AGE
+# mysql     1         1         0         6m
+从结果中，我们可以看到，我们的RC的READY数目始终为0，说明没有正常启动。 下面，我们需要去定位一下原因：
+kubectl describe pod mysql
+Events:
+  FirstSeen    LastSeen    Count   From            SubObjectPath   Type        Reason      Message
+  ---------    --------    -----   ----            -------------   --------    ------      -------
+  1h        24m     17  {kubelet 127.0.0.1}         Warning     FailedSync  Error syncing pod, skipping: failed to "StartContainer" for "POD" with ErrImagePull: "image pull failed for registry.access.redhat.com/rhel7/pod-infrastructure:latest, this may be because there are no credentials on this request.  details: (open /etc/docker/certs.d/registry.access.redhat.com/redhat-ca.crt: no such file or directory)"
+  1h    19m 291 {kubelet 127.0.0.1}     Warning FailedSync  Error syncing pod, skipping: failed to "StartContainer" for "POD" with ImagePullBackOff: "Back-off pulling image \"registry.access.redhat.com/rhel7/pod-infrastructure:latest\""
+
+从Events事件上，我们可以看到提示以下两个错误：
+找不到/etc/docker/certs.d/registry.access.redhat.com/redhat-ca.crt文件。 拉取镜像registry.access.redhat.com/rhel7/pod-infrastructure:latest失败。 实际上，原因2是由于原因1导致的，因为拉取pod-infrastructure镜像时，要求redhat-ca.crt文件，而在本地中没有找到该文件。
+问题解决方案
+切换到/etc/docker/certs.d/registry.access.redhat.com/目录下，我们可以看到：  也就是说redhat-ca.crt实际上是指向/etc/rhsm/ca/redhat-uep.pem，而/etc/rhsm/ca/redhat-uep.pem文件本身不存在。
+获取该文件的方式如下
+
+wget http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+rpm -ivh python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+
+PS：如果安装过程中，安装失败，我们则需要删除之前已经安装的相关包后重新执行安装命令：
+yum remove subscription-manager-rhsm-certificates -y
+现在在看一下，是不是/etc/rhsm/ca/redhat-uep.pem已经存在了呢？ 下面，为了解决第2个问题，我们可以手动拉取该镜像：
+docker pull registry.access.redhat.com/rhel7/pod-infrastructure:latest
+拉取过程中可能稍微有些慢，耐心等待即可。 等待镜像拉取完成后，我们可以重新启动之前的RC：
+# 删除之前启动的RC
+kubectl delete -f mysql-rc.yaml
+# 重新启动新的RC
+kubectl create -f mysql-rc.yaml
+稍等片刻，查看POD状态：
+
+可以看到，我们的POD已经正常启动了。 
+ 最后，可以使用docker ps查看目前启动的容器： 
+ 可以看到，目前启动了两个容器：1个是MySQL容器，还有一个是Kubenetes自带的k8s_POD相关的容器（用于管理POD）。
+
+
+
