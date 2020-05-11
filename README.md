@@ -62,6 +62,7 @@ vskeddemolist/vskeddemos/documents/deploy
 6hbase_phoenix配置.txt  
 7elasticsearch配置.txt  
 8kibana配置.txt  
+kubernetes  
 openLDAP  
 
 ## 系统相关类手册(超过13种以上系统相关手册带解决方案)  
