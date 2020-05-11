@@ -1,0 +1,67 @@
+
+参考
+https://blog.csdn.net/zhaoydzhaoyd/article/details/105792964
+
+环境准备：
+CentOS 7.6.1810
+MySQL 5.7
+docker 19.03.8
+
+查看docker版本
+[root@dev2centos7 ~]# docker -v
+Docker version 19.03.8, build afacb8b
+
+查找docker镜像（看哪个stars多可以用哪个，这里我们用官方）
+docker search nacos-server
+
+拉取nacos镜像
+详细用法参考
+https://hub.docker.com/r/nacos/nacos-server
+docker pull nacos/nacos-server
+
+配置数据库(mysql)也可以用navicat之类的工具创建 utf-8mb4编码
+关于mysql的docker部署可以查看本人的docker相关手册
+create database nacos_config
+
+导入数据库结构
+nacos-db.sql
+
+创建日志目录
+mkdir -p /logs/nacos
+
+mkdir -p /data/nacos/conf
+mkdir -p /data/nacos/data
+
+特别注意，这里mysql不支持8.0以上所以这里用的mysql5.7.29
+创建nacos容器(!注意MYSQL_SERVICE_HOST是你的mysql容器id)
+docker run -d \
+-v /logs/nacos:/home/nacos/logs/ \
+-v /data/nacos/data:/home/nacos/data/ \
+-e MODE=standalone \
+-e SPRING_DATASOURCE_PLATFORM=mysql \
+-e MYSQL_SERVICE_HOST=10.0.193.11 \
+-e MYSQL_SERVICE_PORT=3307 \
+-e MYSQL_SERVICE_USER=root \
+-e MYSQL_SERVICE_PASSWORD=Y4yhl9tbf110_  \
+-e MYSQL_SERVICE_DB_NAME=nacos_config \
+-p 8848:8848 \
+--restart=always \
+--name nacos \
+nacos/nacos-server
+
+(!注意MYSQL_SERVICE_HOST是你的mysql容器IP,也可以用宿主IP)
+查询方式：docker inspect mysql | grep IPAddress 查询出来写上去即可
+因为我这儿mysql镜像名称是mymysql所以
+docker inspect mymysql | grep IPAddress
+
+http://10.0.193.11:8848/nacos
+
+Nacos logs files: /home/nacos/logs/
+
+Nacos conf files: /home/nacos/conf/
+
+Nacos data files: /home/nacos/data/
+
+
+
+

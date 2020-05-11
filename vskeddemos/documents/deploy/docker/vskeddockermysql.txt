@@ -1,0 +1,56 @@
+--------------------------------------------------------------------------------
+docker 安装mysql8
+拉取镜像
+docker pull mysql
+制作数据目录
+mkdir -p /data/mysql/data
+mkdir -p /data/mysql/log
+启动镜像单行版本
+docker run --restart=always --name mymysql -d -p 3306:3306 -v /data/mysql/data:/var/lib/mysql:rw -v /data/mysql/log:/var/log/mysql:rw -v /etc/localtime:/etc/localtime:ro -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ mysql mysqld --default-authentication-plugin=mysql_native_password
+启动镜像多行版本
+docker run --restart=always --name mymysql -d -p 3306:3306 \
+    -v /data/mysql/data:/var/lib/mysql:rw \
+    -v /data/mysql/log:/var/log/mysql:rw \
+    -v /etc/localtime:/etc/localtime:ro \
+    -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ mysql mysqld \
+    --default-authentication-plugin=mysql_native_password
+
+初始化创建数据库(做统一初始化脚本时用，跟上同要一起用，不然就要把密码写上)
+until docker exec -i mymysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -e "CREATE DATABASE vskedtest DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"' \
+do \
+  echo "wait" \
+done
+单独执行版本写法
+docker exec -i mymysql sh -c 'exec mysql -uroot -p"Y4yhl9tbf110_" -e "CREATE DATABASE vskedtest DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"'
+
+初始化数据库(做统一初始化脚本时用，跟上同要一起用，不然就要把密码写上)
+docker exec -i mymysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" appserverdev' < /opt/sql/appserverdev.sql
+
+其他运行方式
+docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:5.7.29
+#--name 是容器名称
+
+#-itd 后台运行
+
+#-p 将容器端口映射到宿主机端口
+
+#-e 设置相关参数，此处为mysql初始化密码
+
+#mysql:5,7,29 是pull下来的镜像，可以使用docker images查看
+
+--------------------------------------------------------------------------------
+docker 安装mysql5
+docker pull mysql:5.7.29
+
+建立数据目录与日志目录
+mkdir -p /data/mysql5.7.29/data/
+mkdir -p /data/mysql5.7.29/log/
+启动镜像多行版本(-itd 后台运行)
+docker run --restart=always -itd --name mysql5.7.29 -d -p 3307:3306 \
+-v /data/mysql5.7.29/data:/var/lib/mysql:rw \
+-v /data/mysql5.7.29/log:/var/log/mysql:rw \
+-v /etc/localtime:/etc/localtime:ro \
+-e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ \
+mysql:5.7.29
+
+--------------------------------------------------------------------------------

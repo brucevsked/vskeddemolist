@@ -1,0 +1,27 @@
+参考
+https://docs.docker.com/compose/install/
+
+--------------------------------------------------------------------------------
+安装方案1
+安装docker-compose(集群管理)Compose 是用于定义和运行多容器 Docker 应用程序的工具
+yum -y install gcc
+yum install python-devel
+yum install -y epel-release
+yum install -y python-pip
+pip install --upgrade pip
+pip install wheel
+pip install docker-compose
+查看版本
+docker-compose -version
+
+卸载
+rm /usr/local/bin/docker-compose
+pip uninstall docker-compose
+--------------------------------------------------------------------------------
+安装方案2(官方)
+安装docker-compose新版
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+docker-compose --version

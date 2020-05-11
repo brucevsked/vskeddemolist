@@ -1,3 +1,11 @@
+20200511 这个时间点
+1* 配置中心这里我们选择nacos
+https://github.com/alibaba/nacos
+https://nacos.io/en-us/
+https://nacos.io/zh-cn/
+
+
+
 服务注册/发现：Service Registry/Discovery。spring-cloud-commons 模块对服务注册/发现模型进行统一；
 分布式配置：Configuration Management。spring-core 模块对配置有 Environment 和 PropertySource 抽象，各个配置中心可以添加各自实现的 PropertySource；
 服务熔断：Circuit Breaker。spring-cloud-commons 模块对熔断器模式客户端调用模型进行统一（早期有个单独的项目 spring-cloud-circuit-breaker，后来合并到 spring-cloud-commons 模块）；
