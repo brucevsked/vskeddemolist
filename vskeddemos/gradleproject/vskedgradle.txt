@@ -1,4 +1,21 @@
 --------------------------------------------------------------------------------
+在这里搜索插件
+https://plugins.gradle.org/
+应用插件老写法，不要用这个了
+apply plugin: 'io.spring.dependency-management'
+应用插件新写法，用这个
+plugins {
+    id "java"
+    id "org.springframework.boot" version "2.2.6.RELEASE"
+    id 'io.spring.dependency-management' version '1.0.6.RELEASE' apply true
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Hoxton.RELEASE"
+    }
+}
+--------------------------------------------------------------------------------
 排除包
 configurations {
     //remove default logger

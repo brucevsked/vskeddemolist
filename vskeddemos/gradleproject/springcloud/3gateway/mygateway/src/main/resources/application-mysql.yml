@@ -1,0 +1,25 @@
+server:
+  port: 8080 #端口号
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+  cloud:
+    gateway:
+      routes:
+        - id: gateway-service
+          uri: http://www.baidu.com
+          predicates:
+            - Path=/testgateway1
+
+logging:
+  config: classpath:log4j2.xml
+
+
