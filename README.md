@@ -20,6 +20,7 @@ vskeddemolist/vskeddemos/cplusplus
 ## 数据库手册大全(超过12种以上数据库手册)  
 vskeddemolist/vskeddemos/database  
 0databaseAbout.txt  
+sql优化层次.txt  
 vskedDb2.txt  
 vskedhadoop.txt  
 vskedhbase.txt  
@@ -54,6 +55,11 @@ vskedultraedit.txt
 vskedvscode.txt  
 ## 部署手册(超过8种以上大数据相关部署手册)  
 vskeddemolist/vskeddemos/documents/deploy   
+docker/vskeddocker.txt  
+docker/vskeddockercompose.txt  
+docker/vskeddockermysql.txt  
+kubernetes/kubernetes单机.txt  
+kubernetes/kubernetes集群.txt    
 1jdk配置.txt  
 2flume配置.txt  
 3zookeeper配置.txt  
@@ -62,7 +68,6 @@ vskeddemolist/vskeddemos/documents/deploy
 6hbase_phoenix配置.txt  
 7elasticsearch配置.txt  
 8kibana配置.txt  
-kubernetes  
 openLDAP  
 
 ## 系统相关类手册(超过13种以上系统相关手册带解决方案)  
@@ -75,7 +80,6 @@ vskedbat.txt
 vskedcenteros.txt  
 vskedcplusplus.txt  
 vskedcpu.txt  
-vskeddocker.txt  
 vskeddos.txt  
 vskederlang.txt  
 vskedlinux.txt  

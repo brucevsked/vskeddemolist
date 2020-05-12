@@ -1,0 +1,69 @@
+
+plugins {
+    id "java"
+    id "org.springframework.boot" version "2.2.6.RELEASE"
+}
+
+group "com.vsked"
+version "1.0"
+
+project.ext{
+    springBootVersion="2.2.6.RELEASE"
+    springCloudNacosConfig="2.2.1.RELEASE"
+    springCloudOpenFeign="2.2.2.RELEASE"
+    mysqlVersion="8.+"
+    slf4jVersion="1.7.30"
+    log4j2Version="2.13.1"
+    commonsLang3Version="3.+"
+    mockitoVersion="3.+"
+    hamcrestVersion="2.+"
+    jbehaveVersion="4.+"
+    testngVersion="7.+"
+}
+
+
+
+repositories {
+    jcenter()
+    //mavenCentral()
+}
+
+configurations {
+    //remove default logger
+    all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+
+dependencies {
+    runtimeOnly  "org.springframework.boot:spring-boot-devtools:$rootProject.springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-test:$rootProject.springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-web:$rootProject.springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:$rootProject.springBootVersion"
+
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign:$rootProject.springCloudOpenFeign"
+
+    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:$rootProject.springCloudNacosConfig"
+
+    implementation "mysql:mysql-connector-java:$rootProject.mysqlVersion"
+
+    implementation "org.slf4j:slf4j-api:$rootProject.slf4jVersion"
+    implementation "org.apache.commons:commons-lang3:$rootProject.commonsLang3Version"
+    implementation "org.apache.logging.log4j:log4j-core:$rootProject.log4j2Version"
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:$rootProject.log4j2Version"
+    implementation "org.apache.logging.log4j:log4j-api:$rootProject.log4j2Version"
+    implementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+    implementation "org.hamcrest:hamcrest:$rootProject.hamcrestVersion"
+    implementation "org.jbehave:jbehave-core:$rootProject.jbehaveVersion"
+    implementation "org.testng:testng:$rootProject.testngVersion"
+
+    implementation "com.squareup.okio:okio:2.6.0"
+    implementation "com.squareup.okhttp3:okhttp:4.6.0"
+}
+
+test{
+    useTestNG()
+    reports.html.enabled = true
+    testLogging.showStandardStreams = true
+}
+
+
+
