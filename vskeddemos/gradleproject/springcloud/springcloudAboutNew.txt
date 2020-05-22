@@ -58,3 +58,9 @@ Spring Cloud Cloudfoundry 2.2.1.RELEASE 与CloudFoundry进行集成的一套解�
 
 
 
+
+
+
+Spring Cloud Ilford为下一个主版本，等Spring Cloud Ilford出来再用或调研吧
+参考
+http://blog.didispace.com/spring-cloud-2020-roadmap/
