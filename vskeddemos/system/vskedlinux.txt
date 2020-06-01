@@ -361,6 +361,10 @@ du -sh [foldername]
 du -ms *
 du -sh *
 
+du -sh * | sort -n
+
+du -h --max-depth=1 |grep 'G' |sort
+
 55* compress zip file
 zip -r [filename].zip [foldername]
 
