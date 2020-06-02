@@ -428,6 +428,12 @@ cat /proc/meminfo | grep MemTotal
 
 69*view cpu info
 cat /proc/cpuinfo 
+查看cpu个数
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
+# 查看每个物理CPU中core的个数(即核数)
+cat /proc/cpuinfo| grep "cpu cores"| uniq
+# 查看逻辑CPU的个数
+cat /proc/cpuinfo| grep "processor"| wc -l
 
 70* uncompress zip file
 unzip [fileName]
