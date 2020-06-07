@@ -2081,12 +2081,7 @@ class Person (val identification: Identification,
   var address: String) {
 
 }
-1
-2
-3
-4
-5
-6
+
 而在一个求职服务里，Person会是这样的
 
 class Person (val id : Long,
@@ -2100,17 +2095,7 @@ class Resume(val id: ResumeId,
   var professionalExperience: String
   var skills: List<Skill>) {
 }
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
+
 尽管这两个Person在现实中是相关的，即使他们共同存在于某一个平台，
 在他们各自的bounded context中，
 他们是相对独立的，可以想像，这两个Person拥有的行为也会是不同的。

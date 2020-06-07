@@ -911,3 +911,25 @@ iptables -t nat -A POSTROUTING -d 10.0.192.11 -p tcp --dport 8080 -j SNAT --to 1
 [root@localhost sbin]# iptables -t nat -A PREROUTING -p tcp --dport 729 -j REDIRECT --to-ports 80
 [root@localhost sbin]# service iptables save
 [root@localhost sbin]# service iptables restart
+
+--------------------------------------------------------------------------------
+CentOS7磁盘空间不足，却找不到占用空间的大文件
+1 df -ah  显示/根目录占用百分之九十
+进入根目录对指定的文件夹查询容量
+cd /
+ du -sh * | sort -n
+磁盘有50G，加起来有10G左右的文件找不到 
+2 自己影响中，已经清理过日志了，但是空间还是没有释放，所以怀疑是进程占用的问题
+通过命令 查询已经删除了的文件，并且被进程占用的文件
+lsof | grep delete
+3 查询具体的服务，找到对应的服务重启即可
+ps -ef | pid号
+找到了一下几个服务，一一重启，根据具体的情况来处理就好
+systemctl restart rsyslog
+systemctl restart gmain
+systemctl restart zabbix-agent
+systemctl restart cloudera-scm-agent
+4，　　最后检查一下
+lsof | grep delete　
+没有了占用文件
+df -ah
