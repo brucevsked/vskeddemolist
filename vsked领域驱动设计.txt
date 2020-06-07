@@ -2333,3 +2333,57 @@ UOW就是泡茶（包含上面那几件事）
 提交事务
 
 从开始事务到提交事务的操作远程是一个工作单元，这样可以保证数据完整性
+
+--------------------------------------------------------------------------------
+第一步领域故事理论
+domain story telling 
+https://domainstorytelling.org
+4元素
+Actors  故事场景参与者
+WorkObjects 传递的东西或要表现的东西
+Activities 关系 以上两种的关系
+Annotations 流程解释
+
+第二步需求分析领域故事
+
+第三步领域故事流程绘制
+领域模型中需求流程制作网站
+https://www.wps.de/modeler
+
+第四步根据领域流程图规划领域边界
+
+第五步边界与边界的关系处理
+为了对领域的保护
+
+（D down，U up）
+
+ACL 防腐层
+OHS开放主机服务
+PL 发布语言
+
+
+DDD domain driver designer
+
+Bounded Context 领域边界
+Aggregate 聚合根
+Entities  实体
+Value Object 值对象
+Services 服务
+DomainEvents 领域事件
+Factories 工厂
+Repositories 仓储
+
+
+
+
+UnifiedModelingLanguage (UML)统一建模语言
+
+泛化（generalization）
+实现（realization）
+依赖（dependency）
+关联（association）
+聚合（aggregation）
+组合（composition）
+
+
+https://github.com/alibaba/COLA
