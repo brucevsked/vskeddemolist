@@ -1,36 +1,36 @@
 
-spring boot2Ä¬ÈÏredisÁ¬½Ó³Ølettuce
-spring boot2Ä¬ÈÏÊı¾İ¿âÁ¬½Ó³Øhikari
+spring boot2é»˜è®¤redisè¿æ¥æ± lettuce
+spring boot2é»˜è®¤æ•°æ®åº“è¿æ¥æ± hikari
 
-ÃüÁîÆô¶¯Óë¹Ø±Õ
-webÄ£¿é,Ö±½ÓÓÃjar°üÔËĞĞ¼´¿É
+å‘½ä»¤å¯åŠ¨ä¸å…³é—­
+webæ¨¡å—,ç›´æ¥ç”¨jaråŒ…è¿è¡Œå³å¯
 nohup java -jar appserverwebadmin.jar &
 
-Ô¶³Ì¶ÏµãÁ¬½Ó
-µÚÒ»²½Æô¶¯²ÎÊıÖĞÌí¼ÓÒÔÏÂ
+è¿œç¨‹æ–­ç‚¹è¿æ¥
+ç¬¬ä¸€æ­¥å¯åŠ¨å‚æ•°ä¸­æ·»åŠ ä»¥ä¸‹
 java -jar -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5505 appserverwebadmin.jar
-µÚ¶ş²½myeclipse²Ëµ¥ÖĞrun->debug config->Remote Java Application
-µÚÈı²½ÌîĞ´·şÎñÆ÷ipÓëµ÷ÊÔ¶Ë¿ÚºÅ
+ç¬¬äºŒæ­¥myeclipseèœå•ä¸­run->debug config->Remote Java Application
+ç¬¬ä¸‰æ­¥å¡«å†™æœåŠ¡å™¨ipä¸è°ƒè¯•ç«¯å£å·
 
  ps -ef|grep appserverwebadmin
  kill -9 pid
 
-1* ¼¯³Éshiro×¢Òâ
-ÔÚshiroµÄrealmÒÔ¼°¸÷²Ù×÷ÀàÖĞ²»Òª×¢ÈëserviceÒª×¢Èëdao(»òmapper)
+1* é›†æˆshiroæ³¨æ„
+åœ¨shiroçš„realmä»¥åŠå„æ“ä½œç±»ä¸­ä¸è¦æ³¨å…¥serviceè¦æ³¨å…¥dao(æˆ–mapper)
 
-2* ¹Ø±ÕÊÂÎñ·ÀÖ¹ÑéÖ¤ÂëÀàÈ¡²»µ½Öµ
-spring boot+redisÊ±Òª¹Ø±ÕredisÊÂÎñ
+2* å…³é—­äº‹åŠ¡é˜²æ­¢éªŒè¯ç ç±»å–ä¸åˆ°å€¼
+spring boot+redisæ—¶è¦å…³é—­redisäº‹åŠ¡
 
-        //¿ªÆôÊÂÎñ
-//        redisTemplate.setEnableTransactionSupport(true); //ÑéÖ¤ÂëbugĞŞÕı²»Òª¿ªÆô!!!
+        //å¼€å¯äº‹åŠ¡
+//        redisTemplate.setEnableTransactionSupport(true); //éªŒè¯ç bugä¿®æ­£ä¸è¦å¼€å¯!!!
 
-3*mybatisÏà¹Ø
+3*mybatisç›¸å…³
 mybatis:
   configuration:
-    call-setters-on-nulls: true #ÊÇnullÖµÒ²·µ»Ø
-    local-cache-scope: SESSION #¹Ø±ÕÒ»¼¶»º´æ
-    #cache-enabled: true #¿ªÆô¶ş¼¶»º´æ
-4* redisÏà¹Ø
+    call-setters-on-nulls: true #æ˜¯nullå€¼ä¹Ÿè¿”å›
+    local-cache-scope: SESSION #å…³é—­ä¸€çº§ç¼“å­˜
+    #cache-enabled: true #å¼€å¯äºŒçº§ç¼“å­˜
+4* redisç›¸å…³
   redis:
     database: 0
     host: 127.0.0.1
@@ -38,34 +38,34 @@ mybatis:
     password: mima
     timeout: 10000
 
-5*Êı¾İ¿âÁ¬°´
+5*æ•°æ®åº“è¿æŒ‰
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/appserverdev?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-6*¿ªÆôÈÈ²¿Êğ
+6*å¼€å¯çƒ­éƒ¨ç½²
   devtools:
     restart:
-      enabled: true #ÉèÖÃ¿ªÆôÈÈ²¿Êğ
+      enabled: true #è®¾ç½®å¼€å¯çƒ­éƒ¨ç½²
 
-7* Ä¬ÈÏtomcat×î´óÁ¬½ÓÊı
+7* é»˜è®¤tomcatæœ€å¤§è¿æ¥æ•°
 server:
-  port: 9010 #¶Ë¿ÚºÅ
+  port: 9010 #ç«¯å£å·
   tomcat:
     uri-encoding: UTF-8
-    max-threads: 1000 #×î´óÏß³ÌÊı
-    max-connections: 20000 #×î´óÁ¬½ÓÊı
-  #servlet.context-path: /appserveruser  #ÏîÄ¿Ãû£¬Èç¹û²»Éè¶¨£¬Ä¬ÈÏÊÇ /
-8* ¿ªÆôspring boot+mybatis¶ş¼¶»º´æ
+    max-threads: 1000 #æœ€å¤§çº¿ç¨‹æ•°
+    max-connections: 20000 #æœ€å¤§è¿æ¥æ•°
+  #servlet.context-path: /appserveruser  #é¡¹ç›®åï¼Œå¦‚æœä¸è®¾å®šï¼Œé»˜è®¤æ˜¯ /
+8* å¼€å¯spring boot+mybatisäºŒçº§ç¼“å­˜
 application.yml
-    cache-enabled: true #¿ªÆô¶ş¼¶»º´æ
-Æô¶¯applicationÌí¼Ó×¢½â
+    cache-enabled: true #å¼€å¯äºŒçº§ç¼“å­˜
+å¯åŠ¨applicationæ·»åŠ æ³¨è§£
 @EnableCaching
 
- service²ã·½·¨ÉÏÌí¼Ó×¢½â
+ serviceå±‚æ–¹æ³•ä¸Šæ·»åŠ æ³¨è§£
 	@Cacheable(cacheNames="appModuleListExt1")
-9* thymeleafÏà¹Ø
+9* thymeleafç›¸å…³
   thymeleaf:
     cache: false
     prefix=classpath:/templates/
@@ -73,52 +73,56 @@ application.yml
     mode=HTML5
     encoding=UTF-8
 
-10* ÎÄ¼şÉÏ´«´óĞ¡ÏŞÖÆ
+10* æ–‡ä»¶ä¸Šä¼ å¤§å°é™åˆ¶
   servlet:
     multipart:
       enabled: true
       max-file-size: 5000MB
       max-request-size: 5000MB
 
-11* ¹Ø±Õ×Ô¶¯ÅäÖÃ
-µÚÒ»ÖÖ·½Ê½×¢½â
+11* å…³é—­è‡ªåŠ¨é…ç½®
+ç¬¬ä¸€ç§æ–¹å¼æ³¨è§£
 @EnableAutoConfiguration(exclude = {org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration})
  
-µÚ¶şÖÖ·½Ê½ÅäÖÃÎÄ¼ş
+ç¬¬äºŒç§æ–¹å¼é…ç½®æ–‡ä»¶
 
 spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
-12* spring boot devtoolsÈÈ²¿Êğ
-¿ªÆôidea×Ô¶¯make¹¦ÄÜ 
-µÚÒ»²½
-gradleÊÇÕâ¸ö
-CTRL + SHIFT + A --> ²éÕÒ make project automatically --> Ñ¡ÖĞ
-mavenÊÇÕâ¸ö
-CTRL + SHIFT + A --> ²éÕÒ build project automatically --> Ñ¡ÖĞ
-µÚ¶ş²½
-CTRL + SHIFT + A --> ²éÕÒ Registry --> ÕÒµ½²¢¹´Ñ¡ compiler.automake.allow.when.app.running
-µÚÈı²½Ìí¼Ómaven²å¼ş
-            <!-- spring boot devtools µÚ¶ş²½Ìí¼Ómaven²å¼ş-->
+12* spring boot devtoolsçƒ­éƒ¨ç½²
+å¼€å¯ideaè‡ªåŠ¨makeåŠŸèƒ½ 
+ç¬¬ä¸€æ­¥
+gradleæ˜¯è¿™ä¸ª
+CTRL + SHIFT + A --> æŸ¥æ‰¾ make project automatically --> é€‰ä¸­
+mavenæ˜¯è¿™ä¸ª
+CTRL + SHIFT + A --> æŸ¥æ‰¾ build project automatically --> é€‰ä¸­
+ç¬¬äºŒæ­¥
+CTRL + SHIFT + A --> æŸ¥æ‰¾ Registry --> æ‰¾åˆ°å¹¶å‹¾é€‰ compiler.automake.allow.when.app.running
+ç¬¬ä¸‰æ­¥æ·»åŠ mavenæ’ä»¶
+            <!-- spring boot devtools ç¬¬äºŒæ­¥æ·»åŠ mavenæ’ä»¶-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!--forkÈç¹ûÃ»ÓĞ¸ÃÏîÅäÖÃ,Õâ¸ödevtools²»»áÆğ×÷ÓÃ£¬¼´Ó¦ÓÃ²»»árestartÕâ¸öÒªÊÖ¶¯¼Ó½øÈ¥ -->
+                    <!--forkå¦‚æœæ²¡æœ‰è¯¥é¡¹é…ç½®,è¿™ä¸ªdevtoolsä¸ä¼šèµ·ä½œç”¨ï¼Œå³åº”ç”¨ä¸ä¼šrestartè¿™ä¸ªè¦æ‰‹åŠ¨åŠ è¿›å» -->
                     <fork>true</fork>
                 </configuration>
             </plugin>
-µÚËÄ²½Ìí¼ÓmavenÒÀÀµ
+ç¬¬å››æ­¥æ·»åŠ mavenä¾èµ–
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
             <scope>runtime</scope>
         </dependency>
-²¢¿ªÆôapplication.ymlÖĞÅäÖÃ
+å¹¶å¼€å¯application.ymlä¸­é…ç½®
 spring:
   devtools:
     restart:
-      enabled: true #ÉèÖÃ¿ªÆôÈÈ²¿Êğ
-µÚÎå²½ÖØÆôidea
+      enabled: true #è®¾ç½®å¼€å¯çƒ­éƒ¨ç½²
+ç¬¬äº”æ­¥é‡å¯idea
+
+13* ä¼˜é›…åœæœº
+åœ¨webå®¹å™¨å…³é—­æ—¶webæœåŠ¡å™¨ä¸å†æ¥å—æ–°è¯·æ±‚,å¹¶ç­‰å¾…æ´»åŠ¨è¯·æ±‚å®Œæˆç¼“å†²æœŸï¼Œspring boot 2.3åŠä»¥ä¸Šæ”¯æŒ
+server.shutdown=graceful
