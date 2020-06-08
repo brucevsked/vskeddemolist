@@ -141,6 +141,11 @@ jackson-dataformat-xml
 全文搜索引擎
 Elasticsearch
 
+数据库
+关系型
+postgresql
+对象型
+InterSystems Caché数据库
 
 ------------------------------------------------------------前端部分
 数据模拟
