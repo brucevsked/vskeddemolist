@@ -2,6 +2,9 @@
 查看vagrant版本信息
 vagrant -v
 
+默认用户名与密码
+vagrant
+
 Vagrant命令详解
 命令	作用
 vagrant box add	添加box的操作
