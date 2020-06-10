@@ -7,3 +7,4 @@ pom3.xml springboot基本用法+junit5+log4j2
 pom4.xml 项目依赖jar包都打进新jar包打法
 pom5.xml 可运行jar包打法
 pom6.xml 常用类库
+pom7.xml testng+jbehave+mockito+hamcrest+okio+okhttp+retrofit
