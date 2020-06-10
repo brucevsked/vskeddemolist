@@ -57,3 +57,6 @@ shift+f9
 
 17* 正常模式运行应用（不能用断点）
 shift+f10
+
+18* 修正web项目中js,css,图片等引用路径
+file->project structure->modules->展开项目->web->添加webapp目录即可
