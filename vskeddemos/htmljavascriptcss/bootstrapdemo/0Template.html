@@ -12,13 +12,29 @@
 </head>
 
 <body >
-  
+  <div class="container-fluid">
+
+    <div class="row">
+      <!--xs代表手机小屏幕，md代表平板中屏幕，lg代表PC大屏幕-->
+      <!--同一对的元素之和必须等于12，否则出现错误，如A的col-xs-2+B的col-xs-10是等于12的-->
+      <div class="col-6 bg-warning"> A </div>
+      <div class="col-6 bg-primary"> B </div>      
+    </div>
+
+    <div class="row">
+      <!--xs代表手机小屏幕，md代表平板中屏幕，lg代表PC大屏幕-->
+      <!--同一对的元素之和必须等于12，否则出现错误，如A的col-xs-2+B的col-xs-10是等于12的-->
+      <div class="col-6 bg-primary"> C </div>
+      <div class="col-6 bg-warning"> D </div>
+    </div>
+
+  </div>
 
 
 
-  <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script type="text/javascript" src="js/lib/popper/popper.min.js"></script>
-	<script type="text/javascript" src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/popper/popper.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
 
 <script>
 'use strict'
