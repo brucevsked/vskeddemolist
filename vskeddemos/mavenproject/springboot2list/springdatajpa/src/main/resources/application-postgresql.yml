@@ -1,27 +1,0 @@
-server:
-  port: 8080 #端口号
-  tomcat:
-    uri-encoding: UTF-8
-
-spring:
-  devtools:
-    restart:
-      enabled: true #设置开启热部署
-  jpa:    hibernate:      ddl-auto: update
-    show-sql: true
-  datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/testaa
-    username: postgres
-    password: Y4yhl9tbf110
-    driver-class-name: org.postgresql.Driver
-    hikari:      connection-test-query: select 1
-    
-  http:
-    encoding:
-      charset: UTF-8
-      enabled: true
-
-logging:
-  config: classpath:log4j2.xml
-
-
