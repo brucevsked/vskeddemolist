@@ -22,3 +22,29 @@ FetchType.EAGER
 
 懒加载
 FetchType.LAZY
+
+
+SpringDataJpa Specification接口用法
+首先，我们需要了解到Specification是springDateJpa中的一个接口，他是用于当jpa的一些基本CRUD操作的扩展，可以把他理解成一个spring jpa的复杂查询接口。其次我们需要了解Criteria 查询，这是是一种类型安全和更面向对象的查询。而Spring Data JPA支持JPA2.0的Criteria查询，相应的接口是JpaSpecificationExecutor。
+
+而JpaSpecificationExecutor这个接口基本是围绕着Specification接口来定义的， Specification接口中只定义了如下一个方法：
+
+Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb); 
+
+下面，我们来理解这个方法，首先，要理解这个方法，以及正确的使用它，就需要对JPA2.0的Criteria查询有一个足够的熟悉和理解，因为这个方法的参数和返回值都是JPA标准里面定义的对象。 
+
+Criteria查询基本概念
+
+Criteria 查询是以元模型的概念为基础的，元模型是为具体持久化单元的受管实体定义的，这些实体可以是实体类，嵌入类或者映射的父类。
+
+CriteriaQuery接口：代表一个specific的顶层查询对象，它包含着查询的各个部分，比如：select 、from、where、group by、order by等注意：CriteriaQuery对象只对实体类型或嵌入式类型的Criteria查询起作用
+
+Root接口：代表Criteria查询的根对象，Criteria查询的查询根定义了实体类型，能为将来导航获得想要的结果，它与SQL查询中的FROM子句类似
+
+1：Root实例是类型化的，且定义了查询的FROM子句中能够出现的类型。root代表查询的实体类,query可以从中得到root对象,告诉jpa查询哪一个实体类,还可以添加查询条件,还可以结合EntityManager对象 得到最终查询的 TypedQuery对象.
+
+2：查询根实例能通过传入一个实体类型给 AbstractQuery.from方法获得。
+
+3：Criteria查询，可以有多个查询根。 
+
+4.CriteriaBuilder接口：用来构建CritiaQuery的构建器对象Predicate：一个简单或复杂的谓词类型，其实就相当于条件或者是条件组合。 

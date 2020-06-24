@@ -33,7 +33,7 @@ public class UserRespositoryTest extends BaseTest{
 		log.debug("save ok");
 	}
 	
-	@Test
+//	@Test
 	public void save1() {
 		Role role=new Role(1, "超级管理员", "他拥有一切权限");
 		Set<Role> roles=new HashSet<Role>();
@@ -79,7 +79,7 @@ public class UserRespositoryTest extends BaseTest{
 		log.info(user.getUid() +user.getUsername());
 	}
 	
-//	@Test
+	@Test
 	public void page1() {
 		Pageable pageable=PageRequest.of(1, 5);
 		List<User> userList=userRepository.findAll(pageable).getContent();
