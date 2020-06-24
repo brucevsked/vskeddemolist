@@ -1,27 +1,71 @@
 package com.vsked.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor // 自动所有参数的构造方法方法
-@NoArgsConstructor // 自动无参的构造方法方法
-@Builder
 @Entity
-@Table(name="vskedtest1")
+@Table(name="user")
 public class User {
 	
 	@Id
 	private Integer uid;
+	
 	private String username;
+	
 	private String usernick;
+	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private Set<Role> roles;
+	
+	public Integer getUid() {
+		return uid;
+	}
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getUsernick() {
+		return usernick;
+	}
+	public void setUsernick(String usernick) {
+		this.usernick = usernick;
+	}
+	
+	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	public User() {
+		super();
+	}
+	public User(Integer uid, String username, String usernick) {
+		super();
+		this.uid = uid;
+		this.username = username;
+		this.usernick = usernick;
+	}
+	public User(Integer uid, String username, String usernick, Set<Role> roles) {
+		super();
+		this.uid = uid;
+		this.username = username;
+		this.usernick = usernick;
+		this.roles = roles;
+	}
+	
 	
 }

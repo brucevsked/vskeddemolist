@@ -1,29 +1,44 @@
 package com.vsked.test;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
-import javax.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import com.vsked.entity.Role;
 import com.vsked.entity.User;
 import com.vsked.repository.UserRepository;
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class UserRespositoryTest extends BaseTest{
 	
-	@Resource
+	private static final Logger log = LoggerFactory.getLogger(UserRespositoryTest.class);
+	
+	@Autowired
 	UserRepository userRepository;
 	
-	@Test
+//	@Test
 	public void save() {
 		User user=new User(7,"username7","thisis7");
+		userRepository.save(user);
+		log.debug("save ok");
+	}
+	
+	@Test
+	public void save1() {
+		Role role=new Role(1, "超级管理员", "他拥有一切权限");
+		Set<Role> roles=new HashSet<Role>();
+		roles.add(role);
+		User user=new User(6,"username6","vsked",roles);
 		userRepository.save(user);
 		log.debug("save ok");
 	}
