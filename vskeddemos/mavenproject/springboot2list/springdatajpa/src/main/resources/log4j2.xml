@@ -80,7 +80,7 @@
         <logger name="reactor.util" level="ERROR"></logger>
         <!-- 不打印本项目sql语句,需要时请调整为debug -->
         <logger name="com.vsked.dao" level="ALL" additivity="true"></logger>
-        <root level="all">
+        <root level="ALL">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
             <appender-ref ref="RollingFileWarn"/>

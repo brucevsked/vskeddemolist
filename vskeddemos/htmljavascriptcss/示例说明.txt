@@ -23,6 +23,7 @@ mockdemo 前端数据模拟生成,ajax类数据模拟
 select2demo 下拉列表框美化
 svg 使用js操作svg画上下箭头
 sweetalertdemo 弹出框，确认框美化
+swiperdemo 滑动示例，图片轮播示例
 tablesdemo 表格示例
 toastrdemo 通知插件基于jquery
 touchspindemo 加减值控件一个文本左加右减

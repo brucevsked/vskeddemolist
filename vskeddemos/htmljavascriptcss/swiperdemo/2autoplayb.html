@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>自动播放</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="js/lib/swiper/css/swiper.min.css" >
+</head>
+
+<body>
+  
+  <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper" id="mySwiper">
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/lib/swiper/js/swiper.min.js"></script>
+  <script>
+    'use strict'
+    
+    $(function(){
+      console.log('init ok');
+      
+      var imgList=['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg','img/5.jpg','img/6.jpg','img/7.jpg'];
+      
+      var imgContent='';
+      
+      for(var i=0;i<imgList.length;i++){
+        imgContent+='<div class="swiper-slide"><img src="'+imgList[i]+'"/></div>';
+      }
+      
+      $('#mySwiper').html(imgContent);
+
+      var swiper = new Swiper('.swiper-container', {
+      spaceBetween: 30,
+      loop:true,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    });
+    </script>
+
+</body>
+</html>
