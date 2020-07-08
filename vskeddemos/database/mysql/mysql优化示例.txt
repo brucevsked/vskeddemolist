@@ -1,0 +1,201 @@
+[client]
+port = 3306
+socket = /data/mysql/tmp/mysql.sock
+default-character-set = utf8mb4
+
+[mysqld]
+#  ---------------- Basic ----------------
+port = 3306
+socket = /data/mysql/tmp/mysql.sock
+basedir = /usr/local/mysql   
+datadir = /data/mysql/data
+pid-file = /data/mysql/tmp/mysql.pid
+user = mysql
+tmpdir = /data/mysql/tmp
+character_set_server = utf8mb4
+transaction_isolation = READ-COMMITTED
+default-storage-engine = InnoDB
+explicit_defaults_for_timestamp = 1
+lower_case_table_names = 1
+event_scheduler = 1
+skip-external-locking
+sql_mode = 'NO_AUTO_VALUE_ON_ZERO,STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,PIPES_AS_CONCAT,ANSI_QUOTES'
+plugin_dir = /usr/local/mysql/lib/mysql/plugin
+#replicate-ignore-db = mysql
+
+#  ---------------- Connection/File/Table ----------------
+interactive_timeout = 1800
+wait_timeout = 1800
+lock_wait_timeout = 1800
+skip_name_resolve = 1
+max_connections = 1000
+max_user_connections = 256
+max_connect_errors = 20000
+back_log = 600
+open_files_limit = 8192
+table_open_cache = 4096
+table_definition_cache = 4096
+table_open_cache_instances = 64
+
+#  ---------------- Session Buffer Cache ----------------
+query_cache_size = 0
+query_cache_type = 0
+max_allowed_packet = 64M
+read_buffer_size = 16M
+read_rnd_buffer_size = 16M
+sort_buffer_size = 16M
+tmp_table_size = 64M
+join_buffer_size = 32M
+thread_cache_size = 64
+thread_stack = 256K
+
+#  ---------------- Thread Pool ----------------
+thread_handling = pool-of-threads
+thread_pool_oversubscribe = 3
+thread_pool_size = 24
+extra_max_connections = 8
+extra_port = 33333
+
+#  ---------------- Logfile ----------------
+log-error = /data/mysql/log/error.log
+slow_query_log = 1
+slow_query_log_file = /data/mysql/log/slow.log
+log_queries_not_using_indexes = 1
+log_slow_admin_statements = 1
+log_slow_slave_statements = 1
+log_throttle_queries_not_using_indexes = 10
+min_examined_row_limit = 100
+binlog-rows-query-log-events = 1
+log-bin-trust-function-creators = 1
+long_query_time = 0.1
+
+#  ---------------- Binlog ----------------
+log-bin = /data/mysql/log/binlog/mysql-bin
+log-bin-index = /data/mysql/log/binlog/mysql-bin.index
+binlog_format = row
+expire_logs_days = 7
+sync_binlog = 1
+binlog_cache_size = 8M
+max_binlog_cache_size = 2048M
+max_binlog_size = 1024M
+binlog_rows_query_log_events = 1
+
+#  ---------------- InnoDB ----------------
+innodb_buffer_pool_size = 18G
+innodb_buffer_pool_instances = 8
+innodb_online_alter_log_max_size = 1024M
+innodb_thread_concurrency = 8
+innodb_io_capacity = 4000
+innodb_io_capacity_max = 8000
+innodb_sort_buffer_size = 64M
+innodb_page_size = 16K
+innodb_open_files = 4096
+innodb_flush_log_at_trx_commit = 1
+innodb_read_io_threads = 8
+innodb_write_io_threads = 8
+innodb_purge_threads = 4
+innodb_max_dirty_pages_pct = 80
+innodb_buffer_pool_load_at_startup = 1
+innodb_buffer_pool_dump_at_shutdown = 1
+innodb_lock_wait_timeout = 10
+innodb_rollback_on_timeout = 1
+innodb_lru_scan_depth = 4096
+innodb_flush_method = O_DIRECT
+innodb_checksum_algorithm = CRC32
+innodb_file_per_table = 1
+innodb_file_format = Barracuda
+innodb_file_format_max = Barracuda
+innodb_flush_neighbors = 0
+innodb_large_prefix = 1
+innodb_print_all_deadlocks = 1
+innodb_stats_persistent_sample_pages = 64
+innodb_autoinc_lock_mode = 2
+innodb_sync_spin_loops = 100
+innodb_spin_wait_delay = 30
+innodb_stats_on_metadata = 0
+
+#  ---------------- Redo/Undo ----------------
+innodb_log_buffer_size = 16M
+innodb_log_file_size = 1024M
+innodb_log_files_in_group = 3
+innodb_log_group_home_dir = /data/mysql/log/redo
+innodb_undo_logs = 128
+innodb_undo_tablespaces = 3
+innodb_undo_directory = /data/mysql/log/undo
+
+#  ---------------- Replication ----------------
+server-id = 101
+master_info_repository = TABLE
+relay_log_info_repository = TABLE
+gtid_mode = on
+enforce_gtid_consistency = 1
+log_slave_updates = 1
+relay_log = /data/mysql/log/relay/relay.log
+relay_log_recovery = 1
+slave_skip_errors = ddl_exist_errors
+slave-rows-search-algorithms = 'INDEX_SCAN,HASH_SCAN'
+
+#  ---------------- Semi Sync Replication ----------------
+#plugin_load = "rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so"
+#loose_rpl_semi_sync_master_enabled = 1
+#loose_rpl_semi_sync_slave_enabled = 1
+#loose_rpl_semi_sync_master_timeout = 5000
+
+#  ---------------- perforamnce_schema ----------------
+performance-schema-instrument = 'memory/%=COUNTED'
+performance_schema_digests_size = 40000
+performance_schema_max_table_instances = 40000
+performance_schema_max_sql_text_length = 4096
+performance_schema_max_digest_length = 4096
+
+[mysqld-5.6]
+metadata_locks_hash_instances = 64
+
+[mysqld-5.7]
+loose_innodb_numa_interleave = 1
+innodb_buffer_pool_dump_pct = 40
+innodb_page_cleaners = 4
+innodb_undo_log_truncate = 1
+innodb_max_undo_log_size = 2G
+innodb_purge_rseg_truncate_frequency = 128
+slave-parallel-type = LOGICAL_CLOCK
+slave-parallel-workers = 16
+slave_preserve_commit_order = 1
+slave_transaction_retries = 128
+binlog_gtid_simple_recovery = 1
+log_timestamps = system
+show_compatibility_56 = 1
+
+#  ---------------- MySQL Group Replication ----------------
+#plugin_load = "group_replication.so"
+#binlog_checksum = NONE
+transaction_write_set_extraction = MURMUR32
+#transaction_write_set_extraction = XXHASH64
+#report_host = 127.0.0.1
+#loose_group_replication_group_name = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+#loose_group_replication_start_on_boot = 0
+#loose_group_replication_local_address = "127.0.0.1:33060"
+#loose_group_replication_group_seeds = "127.0.0.1:33060,127.0.0.1:33060,127.0.0.1:33060"
+#loose_group_replication_compression_threshold = 100
+#loose_group_replication_flow_control_mode = 0
+#loose_group_replication_single_primary_mode = 1
+#loose_group_replication_enforce_update_everywhere_checks = 0
+#loose_group_replication_transaction_size_limit = 10485760
+#loose_group_replication_unreachable_majority_timeout = 120
+
+[mysqldump]
+quick
+max_allowed_packet = 64M
+single-transaction
+
+[mysqld_safe]
+#malloc-lib = tcmalloc
+malloc-lib = /usr/lib64/libjemalloc.so.1
+
+[mysql]
+no-auto-rehash
+prompt="\\u@\\h:\\d>"
+EOF
+————————————————
+版权声明：本文为CSDN博主「cai182081」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/cai182081/java/article/details/81232767
