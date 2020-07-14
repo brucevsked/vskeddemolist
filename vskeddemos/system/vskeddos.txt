@@ -106,7 +106,7 @@ mkdir a\b\c\d
 
 23*创建链接 写入源的文件或文件夹会放到目标路径节省c盘空间用
 mklink [参数d或j] [软链接没实体内容虚拟的] [有具体文件的目录实体内容]
-mklink /j 目标目录 源目录
+mklink /j 有内容的目录 最终移到哪儿
 mklink /d "c:\temp1\test1" "d:\temp\test1"
 mklink /j "c:\temp1\test1" "d:\temp\test1"
 mklink /j "C:\Users\brucevsked\AppData\Local\Google" "D:\softlink\Google"
