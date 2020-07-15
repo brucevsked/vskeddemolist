@@ -76,6 +76,7 @@ spring mvc 老了
 领域驱动(DDD)
 
 持续集成与持续部署
+Spinnaker
 jenkins
 gocd(ThoughtWorks)
 
