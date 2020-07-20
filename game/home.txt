@@ -52,3 +52,1253 @@ Microsoft
 Xbox 
 Xbox360
 Xbox one 
+
+
+
+
+Emulators
+name score
+Mesen 8.9 
+Nestopia UE 8.7
+Jnes  8.6
+FCEUX  8.3
+VirtuaNES  8.2
+BizHawk 8.1 
+
+
+
+
+
+The list contains 1058 games.
+
+Original Title[4][5][6]	NES Title[4][5][6]	Date[4][5][6]	Publisher[4][5][6]
+'89 Dennō Kyūsei Uranai	—	December 10, 1988	Jingukan Polaris
+10-Yard Fight	10-Yard Fight	August 30, 1985	Irem
+1942	1942	December 11, 1985	Capcom
+1943: The Battle of Valhalla	1943: The Battle of Midway	June 20, 1989	Capcom
+1999: Hore, Mita koto ka! Seikimatsu	—	September 18, 1992	Coconuts Japan
+2010 Street Fighter	Street Fighter 2010: The Final Fight	August 8, 1990	Capcom
+4 Nin Uchi Mahjong	—	November 2, 1984	Nintendo
+8 Eyes	8 Eyes	September 27, 1988	SETA
+A Ressha de Ikou	—	August 21, 1991	Pony Canyon
+A Week of Garfield	—	April 7, 1989	Towachiki
+Aa Yakyū Jinsei Itchokusen	—	December 25, 1992	Sammy
+Abadox	Abadox	December 15, 1989	Natsume
+Abarenbou Tengu	Zombie Nation	December 14, 1990	Meldac
+Aces: Iron Eagle III	Ultimate Air Combat	August 7, 1992	Pack-In-Video
+Advanced Dungeons & Dragons: Dragons of Flame	—	February 21, 1992	Pony Canyon
+Advanced Dungeons & Dragons: Heroes of the Lance	Advanced Dungeons & Dragons: Heroes of the Lance	March 8, 1991	Pony Canyon
+Advanced Dungeons & Dragons: Hillsfar	Advanced Dungeons & Dragons: Hillsfar	March 21, 1991	Pony Canyon
+Advanced Dungeons & Dragons: Pool of Radiance	Advanced Dungeons & Dragons: Pool of Radiance	June 28, 1991	Pony Canyon
+Adventures of Lolo	Adventures of Lolo 2	January 6, 1990	HAL
+Adventures of Lolo 2	Adventures of Lolo 3	December 26, 1990	HAL
+After Burner II	—	March 30, 1989	Sunsoft
+Ai Sensei no Oshiete: Watashi no Hoshi	—	March 26, 1993	Irem
+Aigiina no Yogen: From the Legend of Balubalouk	—	November 21, 1986	Vic Tokai
+Air Fortress	Air Fortress	August 11, 1987	HAL
+Airwolf	—	December 24, 1988	Kyugo Boueki
+Akagawa Jirou no Yuurei Ressha	—	February 8, 1991	King Records
+Akira	—	December 24, 1988	Taito
+Akuma no Shoutaijou	Uninvited	September 29, 1989	Kemco
+Akuma-kun: Makai no Wana	—	February 24, 1990	Bandai
+Akumajou Densetsu	Castlevania III: Dracula's Curse	December 22, 1989	Konami
+Akumajou Dracula	Castlevania	February 5, 1993	Konami
+Akumajou Special: Boku Dracula Kun	—	October 19, 1990	Konami
+Alien Syndrome	Alien Syndrome (unlicensed)	December 2, 1988	Sunsoft
+America Daitōryō Senkyo	—	October 28, 1988	Hect
+America Oudan Ultra Quiz: Shijou Saidai no Tatakai	—	November 29, 1991	Tomy
+American Dream	—	September 23, 1989	Coconuts Japan
+Ankoku Shinwa: Yamato Takeru Densetsu	—	March 24, 1989	Tokyo Shoseki
+Aoki Ookami to Shiroki Mejika: Genchou Hishi	—	March 25, 1993	Koei
+Aoki Ookami to Shiroki Mejika: Genghis Khan	Genghis Khan	April 20, 1989	Koei
+Arabian Dream Scheherazade	Magic of Scheherazade, The	September 3, 1987	Culture Brain
+Arctic	—	February 23, 1990	Pony Canyon
+Argos no Senshi	Rygar	April 14, 1987	Tecmo
+Argus	—	April 17, 1986	Jaleco
+Arkanoid	Arkanoid	December 26, 1986	Taito
+Arkanoid II	—	March 8, 1988	Taito
+Armadillo	—	August 9, 1991	IGS
+Artelius	—	November 13, 1987	Nihon Bussan
+Asmik-kun Land	—	December 20, 1991	Asmik
+ASO: Armored Scrum Object	Alpha Mission	September 3, 1986	SNK
+Astro Fang: Super Machine	—	October 26, 1990	A-Wave
+Astro Robo Sasa	—	August 9, 1985	ASCII
+Athena	Athena	June 5, 1987	SNK
+Atlantis no Nazo	—	April 17, 1986	Sunsoft
+Attack Animal Gakuen	—	December 26, 1987	Pony Canyon
+B-Wings	—	June 3, 1986	Data East
+Babel no Tou	—	July 18, 1986	Namco
+Baken Hisshou Gaku: Gate In	—	May 25, 1990	K Amusement
+Bakushō! Ai no Gekijō	—	December 29, 1990	Coconuts Japan
+Bakushou!! Jinsei Gekijou	—	March 17, 1989	Taito
+Bakushou!! Jinsei Gekijou 2	—	March 22, 1991	Taito
+Bakushou!! Jinsei Gekijou 3	—	December 20, 1991	Taito
+Bakushō! Star Monomane Shitennō	—	September 14, 1990	Pack-In-Video
+Ballblazer	—	March 4, 1988	Pony Canyon
+Balloon Fight	Balloon Fight	January 22, 1985	Nintendo
+Baltron	—	March 19, 1986	Toei Animation
+Banana	—	September 8, 1986	Victor
+Bananan Ouji no Daibouken	Banana Prince	December 20, 1991	Takara
+Barcode World	—	December 18, 1992	Sunsoft
+Bard's Tale: Tales of the Unknown	Bard's Tale: Tales of the Unknown	December 21, 1990	Pony Canyon
+The Bard's Tale II: The Destiny Knight	—	January 25, 1992	Pony Canyon
+Baseball	Baseball	December 7, 1983	Nintendo
+Baseball Fighter	—	July 5, 1991	VAP
+Baseball Stars: Mezase Sankanou!!	Baseball Stars	May 19, 1989	SNK
+Batman	Batman	December 22, 1989	Sunsoft
+Bats & Terry	—	July 22, 1987	Use
+Battle Baseball	—	February 19, 1993	Banpresto
+Battle City	—	September 9, 1985	Namco
+Battle Fleet	—	June 22, 1990	Namco
+Battle Formula	Super Spy Hunter	September 27, 1991	Sunsoft
+Datach: Battle Rush: Build Up Robot Tournament	—	November 13, 1993	Bandai
+Battle Stadium: Senbatsu Pro Yakyuu	—	December 20, 1990	IGS
+Battle Storm	—	December 21, 1991	Yonezawa PR21
+Battletoads	Battletoads	December 20, 1991	NCS
+Be-Bop High School: Koukousei Gokuraku Densetsu	—	March 30, 1988	Data East
+Best Keiba: Derby Stallion	—	December 21, 1991	ASCII
+Best Play Pro Yakyuu	—	July 15, 1988	ASCII
+Best Play Pro Yakyuu II	—	March 30, 1990	ASCII
+Best Play Pro Yakyuu '90	—	December 13, 1990	ASCII
+Best Play Pro Yakyuu Shin Data	—	November 11, 1988	ASCII
+Best Play Pro Yakyuu Special	—	October 16, 1992	ASCII
+Bikkuri Nekketsu Shin Kiroku! Harukanaru Kin Medal	Crash 'n the Boys: Street Challenge	June 26, 1992	Technos Japan
+Bikkuriman World: Gekitou Sei Senshi	—	July 27, 1990	Hudson Soft
+Binary Land	—	December 19, 1985	Hudson Soft
+Bio Miracle Bokutte Upa	—	February 26, 1993	Konami
+Bio Senshi Dan: Increaser to no Tatakai	Bashi Bazook: Morphoid Masher (unreleased)	September 22, 1987	Jaleco
+Bird Week	—	June 3, 1986	Toshiba EMI
+The Black Bass	—	February 6, 1987	Hot B
+The Black Bass 2	The Black Bass	October 18, 1988	Hot B
+Blodia Land: Puzzle Quest	—	August 11, 1990	Tonkin House
+Bloody Warriors: Shan-Go no Gyakushuu	—	October 19, 1990	Toei Animation
+Blue Marlin, The	The Blue Marlin	December 27, 1991	Hot B
+Bokosuka Wars	—	December 14, 1985	ASCII
+Bomber King	RoboWarrior	August 7, 1987	Hudson Soft
+Bomberman	Bomberman	December 19, 1985	Hudson Soft
+Bomberman II	Bomberman II	June 28, 1991	Hudson Soft
+Booby Kids	—	July 10, 1987	Nihon Bussan
+Boulder Dash	Boulder Dash	March 23, 1990	Data East
+Bubble Bobble 2	Bubble Bobble Part 2	March 5, 1993	Taito
+Bucky O'Hare	Bucky O'Hare	January 31, 1992	Konami
+Buggy Popper	Bump 'n' Jump	October 8, 1986	Data East
+Burai Fighter	Burai Fighter	July 20, 1990	Taito
+BurgerTime	BurgerTime	November 27, 1985	Namco
+Business Wars	—	January 24, 1992	Hect
+Cadillac	—	February 2, 1990	Hect
+Capcom Barcelona '92	Capcom's Gold Medal Challenge '92	June 5, 1992	Capcom
+Captain Ed	—	August 25, 1989	CBS Sony Group
+Captain Saver	Power Blade 2	September 29, 1992	Taito
+Captain Silver	—	December 16, 1988	Tokuma Shoten
+Captain Tsubasa	Tecmo Cup Soccer Game	April 28, 1988	Tecmo
+Captain Tsubasa Vol. II: Super Striker	—	July 20, 1990	Tecmo
+Casino Derby & Super Bingo	—	March 19, 1993	Yonezawa PR21
+Castle Excellent	Castlequest	November 28, 1986	ASCII
+Castle Quest	—	April 19, 1990	Hudson Soft
+Chack'n Pop	—	May 24, 1985	Taito
+Challenger	—	October 15, 1985	Hudson Soft
+Championship Bowling	Championship Bowling	February 8, 1991	Athena
+Championship Lode Runner	—	April 17, 1985	Hudson Soft
+Chaos World	—	October 25, 1991	Natsume
+Chester Field: Ankoku Shin e no Chōsen	—	July 30, 1987	Vic Tokai
+Chibi Maruko-Chan: Uki Uki Shopping	—	October 4, 1991	Namco
+Chiisana Obake: Achhi Sochhi Kocchi	—	December 4, 1992	VAP
+Chiki Chiki Machine Mou Race	Wacky Races	December 25, 1991	Atlus
+Chip to Dale no Daisakusen	Chip 'N Dale: Rescue Rangers	June 8, 1990	Capcom
+Chip to Dale no Daisakusen 2	Chip 'N Dale: Rescue Rangers 2	December 10, 1993	Capcom
+Chitei Senkou Bazolder	Wurm: Journey to the Center of the Earth	November 15, 1991	SOFEL
+Chiyonofuji no Ōichō	—	December 7, 1990	Face
+Choplifter	—	June 26, 1986	Jaleco
+Chou-Wakusei Senki MetaFight	Blaster Master	June 17, 1988	Sunsoft
+Choujikuu Yousai Macross	—	December 10, 1985	Namco
+Chōjin Sentai Jetman	—	December 21, 1991	Angel
+Choujin Ultra Baseball	Baseball Simulator 1.000	October 27, 1989	Culture Brain
+Choujinrou Senki Warwolf	Werewolf: The Last Warrior	June 28, 1991	Takara
+Chuugoku Janshi Story: Tonpuu	—	December 23, 1989	Natsume
+Chuugoku Senseijutsu	—	November 29, 1988	Jaleco
+Chuuka Taisen	—	September 22, 1989	Taito
+Circus Charlie	—	March 4, 1986	Soft Pro
+City Adventure Touch: Mystery of Triangle	—	March 14, 1987	Toho
+City Connection	City Connection	September 27, 1985	Jaleco
+Clu Clu Land	Clu Clu Land	November 22, 1984	Nintendo
+Cobra Command	Cobra Command	October 21, 1988	Data East
+Cocoron	—	May 3, 1991	Takeru
+Columbus: Ougon no Yoake	—	November 20, 1992	Tomy
+Conflict	Conflict	December 1, 1989	Vic Tokai
+Contra	Contra (USA version)
+Probotector (European version)
+Gryzor (Oceania and Europe)	February 9, 1988	Konami
+Cosmic Epsilon	—	November 24, 1989	Asmik
+Cosmic Wars	—	August 4, 1989	Konami
+Cosmo Genesis	Star Voyager	December 23, 1986	ASCII
+Cosmo Police Galivan	—	June 3, 1988	Nihon Bussan
+Crayon Shin-Chan: Ora to Poi Poi	—	August 27, 1993	Bandai
+Crazy Climber	—	December 26, 1986	Nihon Bussan
+Crisis Force	—	August 27, 1991	Konami
+Cross Fire	—	November 2, 1990	Kyugo Boueki
+Cycle Race: Road Man	—	December 17, 1988	Tokyo Shoseki
+Dai-2-Ji Super Robot Taisen	—	December 19, 1991	Banpresto
+Daikaijyu Deburasu	—	December 21, 1990	Data East
+Daikoukai Jidai	Uncharted Waters	March 15, 1991	Koei
+Daiku no Gen-San	Hammerin' Harry	November 15, 1991	Irem
+Daiku no Gen-San 2	—	October 22, 1993	Irem
+Dai Meiro - Meikyuu no Tatsujin	—	November 30, 1990	Epoch
+Daisenryaku	—	October 11, 1988	Bothtec
+Daiva	—	December 5, 1986	Toshiba EMI
+Dark Lord	—	February 8, 1991	Data East
+Dash Yarou	Rally Bike	June 15, 1990	Visco
+Datach Crayon Shin-Chan: Ora to Poi Poi	—	August 27, 1993	Bandai
+Datsugoku	P.O.W.: Prisoners of War	June 30, 1989	K Amusements
+De-Block	—	August 9, 1991	Athena
+Deep Dungeon III	—	May 13, 1988	Square
+Deep Dungeon IV	—	April 6, 1990	Asmik
+Deja Vu	Deja Vu	November 22, 1988	Kemco
+Dengeki Big Bang!	Clash at Demonhead	January 27, 1989	Vic Tokai
+Densetsu no Kishi Elrond	Wizards & Warriors	July 15, 1988	Jaleco
+Derby Stallion Zengokuban	—	August 29, 1992	ASCII
+Devilman	—	April 25, 1989	Namco
+Devil World	Devil World (EU only)	October 5, 1984	Nintendo
+Dezaemon	—	September 13, 1991	Athena
+Die Hard	Die Hard	July 19, 1991	Pack-In-Video
+Dig Dug	—	June 4, 1985	Namco
+Dig Dug II	Dig Dug II	April 18, 1986	Namco
+Digital Devil Monogatari Megami Tensei	—	September 11, 1987	Namco
+Digital Devil Monogatari: Megami Tensei II	—	April 6, 1990	Namco
+Doki! Doki! Yūenchi: Crazy Land Daisakusen	Trolls in Crazyland	August 9, 1991	VAP
+Dokuganryu Masamune	—	April 5, 1988	Namco
+Don Doko Don	—	March 9, 1990	Taito
+Don Doko Don 2	—	January 31, 1992	Taito
+Donald Duck	Snoopy's Silly Sports Spectacular	September 22, 1988	Kemco
+Donald Land	—	January 29, 1988	Data East
+Donkey Kong	Donkey Kong	July 15, 1983	Nintendo
+Donkey Kong 3	Donkey Kong 3	July 4, 1984	Nintendo
+Donkey Kong Jr. Math	Donkey Kong Jr. Math	December 12, 1983	Nintendo
+Donkey Kong Jr.	Donkey Kong Jr.	July 15, 1983	Nintendo
+Door Door	—	July 18, 1985	Enix
+Doraemon	—	December 12, 1986	Hudson Soft
+Doraemon: Giga Zombie no Gyakushū	—	September 14, 1990	Epoch
+Double Dragon	Double Dragon	April 8, 1988	Technos Japan
+Double Dragon II: The Revenge	Double Dragon II: The Revenge	December 22, 1989	Technos Japan
+Double Dragon III: The Rosetta Stone	Double Dragon III: The Sacred Stones	February 22, 1991	Technos Japan
+Double Moon Densetsu	—	October 30, 1992	NCS
+Dough Boy	—	December 11, 1985	Kemco
+Downtown Nekketsu Koushinkyoku: Soreyuke Daiundoukai	—	October 12, 1990	Technos Japan
+Downtown Nekketsu Monogatari	River City Ransom (American version)
+Street Gangs (European version)	April 25, 1989	Technos Japan
+Dr. Mario	Dr. Mario	July 27, 1990	Nintendo
+Dragon Ball 3: Gokuuden	—	October 27, 1989	Bandai
+Dragon Ball Z	—	October 27, 1990	Bandai
+Dragon Ball Z Side Story: Plan to Eradicate the Saiyans	—	August 6, 1993	Bandai
+Dragon Ball Z II: Gekishin Freeza	—	August 10, 1991	Bandai
+Dragon Ball Z III: Ressen Jinzou Ningen	—	August 7, 1992	Bandai
+Datach: Dragon Ball Z: Gekitou Tenkaichi Budokai	—	December 29, 1992	Bandai
+Dragon Ball: Daimaou Fukkatsu	—	August 12, 1988	Bandai
+Dragon Ball: Shenron no Nazo	Dragon Power(USA version)
+Dragon Ball: Le Secret du Dragon (European version)	November 27, 1986	Bandai
+Dragon Buster	—	January 7, 1987	Namco
+Dragon Buster II	—	April 27, 1989	Namco
+Dragon Fighter	Dragon Fighter	August 10, 1990	Towachiki
+Dragon Ninja	Bad Dudes	July 14, 1989	Namco
+Dragon Quest	Dragon Warrior	May 27, 1986	Enix
+Dragon Quest II: Gods of the Evil Spirits	Dragon Warrior II	January 26, 1987	Enix
+Dragon Quest III: And thus into Legend...	Dragon Warrior III	February 10, 1988	Enix
+Dragon Quest IV: The Guided Ones	Dragon Warrior IV	February 11, 1990	Enix
+Dragon Scroll	—	December 4, 1987	Konami
+Dragon Slayer IV: Drasle Family	Legacy of the Wizard	July 17, 1987	Namco
+Dragon Slayer Jr.: Romancia	—	October 30, 1987	Tokyo Shoseki
+Dragon Spirit: Aratanaru Densetsu	Dragon Spirit: The New Legend	April 14, 1989	Namco
+Dragon Unit	Castle of Dragon	February 27, 1990	Athena
+Dragon Wars	—	August 9, 1991	Kemco
+Dragon's Lair	Dragon's Lair	September 20, 1991	Epic/Sony Records
+Dream Master	—	September 22, 1992	Namco
+Duck Hunt	Duck Hunt	April 21, 1984	Nintendo
+DuckTales 2	DuckTales 2	April 23, 1993	Capcom
+Dungeon Kid	—	August 31, 1990	Quest Corporation
+Dungeon & Magic: Sword of Element	Dungeon Magic: Sword of the Elements	November 10, 1989	Natsume
+Dynamite Batman	Batman: Return of the Joker	December 20, 1991	Sunsoft
+Dynamite Bowl	—	May 24, 1987	Toshiba EMI
+Eggerland: Meikyū no Fukkatsu	—	August 9, 1988	HAL
+Egypt	—	May 31, 1991	Human Entertainment
+Elevator Action	Elevator Action	June 28, 1985	Taito
+Elnark no Zaihou	—	August 10, 1987	Towachiki
+Elysion	—	April 28, 1988	Tokyo Shoseki
+Emoyan no 10-bai Pro Yakyuu	—	December 19, 1989	Hect
+Erika to Satoru no Yume Bōken	—	September 27, 1988	Namco
+Esper Boukentai	—	October 13, 1987	Jaleco
+Esper Dream 2	—	June 26, 1992	Konami
+Excitebike	Excitebike	November 30, 1984	Nintendo
+Exciting Boxing	—	December 16, 1987	Konami
+Exciting Rally	Championship Rally	April 24, 1992	HAL
+Exed Exes	—	December 21, 1985	Tokuma Shoten
+Exerion	—	February 11, 1985	Jaleco
+F1 Circus	—	February 7, 1992	Nihon Bussan
+F-1 Sensation	Formula 1 Sensation (EU only)	January 29, 1993	Konami
+F-1 Race	—	November 2, 1984	Nintendo
+Famicom Igo Nyuumon	—	November 29, 1991	I'Max
+Famicom Jump: Hero Retsuden	—	February 15, 1989	Bandai
+Famicom Jump II: The Strongest Seven	—	December 2, 1991	Bandai
+Famicom Meijinsen	—	September 2, 1988	SNK
+Famicom Shougi: Ryuu-Ou-Sen	—	February 15, 1991	I'Max
+Famicom Top Management	—	December 12, 1990	Koei
+Famicom Wars	—	August 12, 1988	Nintendo
+Famicom Yakyuuban	—	December 15, 1989	Epoch
+Family Block	Thunder & Lightning	April 12, 1991	Athena
+Family Boxing	Ring King	June 19, 1987	Namco
+Family Circuit	—	February 6, 1988	Namco
+Family Circuit '91	—	July 19, 1991	Namco
+Family Computer Othello	Othello	November 13, 1986	Kawada, Co. Ltd
+Family Jockey	—	April 24, 1987	Namco
+Family Mahjong	—	August 11, 1987	Namco
+Family Mahjong II: Shanghai he no Michi	—	November 25, 1988	Namco
+Family Pinball	Rock 'n Ball	March 24, 1989	Namco
+Family Quiz	—	November 16, 1988	Athena
+Family Tennis	—	December 11, 1987	Namco
+Family Trainer: Aerobics Studio	Dance Aerobics	February 26, 1987	Bandai
+Family Trainer: Athletic World	Athletic World	November 12, 1986	Bandai
+Family Trainer: Daiundōkai	Super Team Games	November 27, 1987	Bandai
+Family Trainer: Fuuun! Takeshi Shiro 2	—	December 20, 1988	Bandai
+Family Trainer: Jogging Race	—	May 28, 1987	Bandai
+Family Trainer: Manhattan Police	Street Cop	August 31, 1987	Bandai
+Family Trainer: Meiro Daisakusen	—	July 31, 1987	Bandai
+Family Trainer: Rai Rai! Kyonshizu: Baby Kyonshi no Amida Daibouken	—	January 26, 1988	Bandai
+Family Trainer: Running Stadium	Stadium Events/World Class Track Meet	December 23, 1986	Bandai
+Family Trainer: Totsugeki! Fuuun Takeshi Shiro	—	December 28, 1987	Bandai
+Famista '89 Kaimaku Ban!!	—	July 28, 1989	Namco
+Famista '90	—	December 19, 1989	Namco
+Famista '91	—	December 21, 1990	Namco
+Famista '92	—	December 20, 1991	Namco
+Famista '93	—	December 22, 1992	Namco
+Famista '94	—	December 1, 1993	Namco
+Fantasy Zone	Fantasy Zone (unlicensed)	July 20, 1987	Sunsoft
+Fantasy Zone 2: The Teardrop of Opa-Opa	—	December 20, 1988	Sunsoft
+Faria Fuuin no Tsurugi	Faria: A World of Mystery and Danger	July 21, 1989	Hi-Score Media Work
+Faxanadu	Faxanadu	November 16, 1987	Hudson Soft
+FC Genjin	Bonk's Adventure	July 30, 1993	Hudson Soft
+Ferrari	Ferrari Grand Prix Challenge	November 13, 1992	Coconuts Japan
+Field Combat	—	July 9, 1985	Jaleco
+Fighting Golf	Lee Trevino's Fighting Golf	March 24, 1988	SNK
+Fighting Road	—	December 13, 1988	Toei Animation
+Final Fantasy	Final Fantasy	December 18, 1987	Square
+Final Fantasy I+II	—	February 27, 1994	Square
+Final Fantasy II	—	December 17, 1988	Square
+Final Fantasy III	—	April 27, 1990	Square
+Final Lap	—	August 12, 1988	Namco
+Final Mission	S.C.A.T.: Special Cybernetic Attack Team	June 22, 1990	Natsume
+Fire Emblem: Shadow Dragon and the Blade of Light	—	April 20, 1990	Nintendo
+Fire Emblem Gaiden	—	March 14, 1992	Nintendo
+Flappy	—	June 14, 1985	DB Soft
+Fleet Commander	—	March 29, 1988	ASCII
+Flintstones: The Rescue of Dino and Hoppy	Flintstones, The: The Rescue of Dino & Hoppy	August 7, 1992	Taito
+Flipull	—	December 15, 1989	Taito
+Flying Hero	—	February 17, 1989	Epic/Sony Records
+Formation Z	—	April 4, 1985	Jaleco
+Front Line	—	August 1, 1985	Taito
+Fudou Myououden	Demon Sword	March 29, 1988	Taito
+Fushigi na Blobby	A Boy and His Blob: Trouble on Blobolonia	November 29, 1990	Jaleco
+Fushigi no Umi no Nadia	—	March 15, 1991	Toho
+Fuzzical Fighter	—	May 17, 1991	Sigma Entertainment
+Galaga	Galaga: Demons of Death	February 15, 1985	Namco
+Galaxian	—	September 7, 1984	Namco
+Gambler Jiko Chuushinha	—	November 11, 1988	Asmik
+Gambler Jiko Chuushinha 2	—	December 7, 1990	Asmik
+Game Party	—	August 3, 1990	Coconuts Japan
+Ganbare Goemon! Karakuri Dōchū	—	July 30, 1986	Konami
+Ganbare Goemon 2	—	January 4, 1989	Konami
+Ganbare Goemon Gaiden: Kieta Ougon Kiseru	—	January 5, 1990	Konami
+Ganbare Goemon Gaiden 2	—	January 3, 1992	Konami
+Ganbare Pennant Race!	—	February 28, 1989	Konami
+Ganso Saiyūki: Super Monkey Daibōken	—	November 21, 1986	VAP
+Gegege no Kitaro: Youkai Daimakyou	Ninja Kid	April 17, 1986	Bandai
+Gegege no Kitaro 2	—	December 22, 1987	Bandai
+Geimos	—	August 28, 1985	ASCII
+Gekikame Ninja Den	Teenage Mutant Ninja Turtles(USA version)
+Teenage Mutant Hero Turtles (European version)	May 12, 1989	Konami
+Gekitotsu Shiku Battle	—	November 17, 1989	Irem
+Gekitou Pro Wrestling!! Toukon Densetsu	Tecmo World Wrestling	September 1, 1989	Tecmo
+Gekitou!! Stadium	Bad News Baseball	December 15, 1989	Tecmo
+Genpei Tōma Den	—	October 21, 1988	Namco
+Getsu Fūma Den	—	July 7, 1987	Konami
+Ghostbusters	Ghostbusters	September 22, 1986	Tokuma Shoten
+Gimme a Break: Shijou Saikyou no Quiz Ou Ketteisen	—	December 13, 1991	Yonezawa PR21
+Gimme a Break: Shijou Saikyou no Quiz Ou Ketteisen 2	—	August 28, 1992	Yonezawa PR21
+Gimmick!	Mr. Gimmick	January 31, 1992	Sunsoft
+Ginga Eiyuu Densetsu	—	December 21, 1988	Kemco
+Ginga no Sannin	—	December 15, 1987	Nintendo
+Goal !!	Goal! Two	September 25, 1992	Jaleco
+God Slayer: Haruka Tenkū no Sonata	Crystalis	April 13, 1990	SNK
+Gojira	Godzilla: Monster of Monsters	December 9, 1988	Toho
+Golf	Golf	May 1, 1984	Nintendo
+The Golf '92	—	July 3, 1992	G.O.1
+Golf Club: Birdie Rush	—	December 9, 1987	Data East
+Golf Grand Slam	Golf Grand Slam	January 13, 1991	Hect
+Golf-kko Open	—	November 25, 1989	Taito
+Golgo 13: Kamigami no Koukon	Golgo 13: Top Secret Episode	March 26, 1988	Vic Tokai
+Golgo 13 II	Mafat Conspiracy, The	July 27, 1990	Vic Tokai
+Gomoku Narabe Renju	—	August 27, 1983	Nintendo
+Goonies	—	February 21, 1986	Konami
+Goonies II: Fratelli Saigo no Chousen	Goonies II, The	March 18, 1987	Konami
+Gorby no Pipeline Daisakusen	—	April 12, 1991	Tokuma Shoten
+Gorilla Man	—	April 28, 1993	Yonezawa PR21
+Gozonji Yajikitatin Douchuu	—	November 7, 1989	HAL
+Gradius	Gradius	April 25, 1986	Konami
+Gradius II	—	December 16, 1988	Konami
+Grand Master	—	February 26, 1991	Varie
+Great Battle Cyber	—	December 25, 1992	Banpresto
+Great Boxing - Rush Up	World Champ	December 7, 1990	Visco
+Great Deal	—	October 25, 1991	Hect
+Great Tank	Iron Tank: The Invasion of Normandy	July 29, 1988	SNK
+Gremlins 2: The New Batch	Gremlins 2: The New Batch	December 14, 1990	Sunsoft
+Guardic Gaiden	Guardian Legend, The	February 5, 1988	Irem
+Guevara	Guerrilla War	December 26, 1988	SNK
+GunHed: Aratanaru Tatakai	—	April 13, 1990	Varie
+Gun-Nac	Gun-Nac	October 5, 1990	Tonkin House
+Gun Sight	Laser Invasion	March 15, 1991	Konami
+Gun-Dec	Vice: Project Doom	April 26, 1991	Sammy
+Gyrodine	—	March 13, 1986	Taito
+Haja No Fuuin: Miracle Warriors	—	October 13, 1987	ASCII
+Hana no Star Kaidou	—	March 17, 1987	Victor
+Hanjuku Hero	—	December 2, 1988	Square
+Happy Birthday Bugs	Bugs Bunny Birthday Blowout	August 3, 1990	Kemco
+Hatris	Hatris	July 6, 1990	Bullet-Proof Software
+Hayauchi Super Igo	—	March 3, 1989	Namco
+Heavy Barrel	Heavy Barrel	March 2, 1990	Data East
+Hebereke	Ufouria	September 20, 1991	Sunsoft
+Hector '87	Starship Hector	July 16, 1987	Hudson Soft
+Heisei Tensai Bakabon	—	December 6, 1991	Namco
+Hello Kitty no Hanabatake	—	December 11, 1992	Character Soft
+Hello Kitty World	—	March 27, 1992	Character Soft
+Heracles no Eikou: Toujin Makyouden	—	June 12, 1987	Data East
+Heracles no Eikou II: Titan no Metsubou	—	December 23, 1989	Data East
+Hi no Tori Hououhen: Gaou no Bouken	—	January 4, 1987	Konami
+Higemaru Makaijima - Nanatsu no Shima Daibōken	—	April 14, 1987	Capcom
+Highway Star	Rad Racer	August 7, 1987	Square
+Hirake! Ponkikki	—	April 17, 1992	Takara
+Hiryu no Ken	Flying Dragon: The Secret Scroll	February 14, 1987	Culture Brain
+Hiryu no Ken II	—	July 29, 1988	Culture Brain
+Hiryu no Ken III: 5 Nin no Ryuu Senshi	—	June 21, 1991	Culture Brain
+Hiryu no Ken Special: Fighting Wars	—	June 21, 1991	Culture Brain
+Hissatsu Doujou Yaburi	—	July 18, 1989	Sigma Entertainment
+Hissatsu Shigotojin	—	December 15, 1990	Banpresto
+Hitler no Fukkatsu: Top Secret	Bionic Commando	July 20, 1988	Capcom
+Hogan's Alley	Hogan's Alley	June 12, 1984	Nintendo
+Hokkaidou Rensa Satsujin: Ohotsuku ni Kiyu	—	June 27, 1987	ASCII
+Hokuto no Ken	—	August 10, 1986	Toei Animation
+Hokuto no Ken 2	Fist of the North Star	April 17, 1987	Toei Animation
+Hokuto no Ken 3	—	October 19, 1989	Toei Animation
+Hokuto no Ken 4	—	March 29, 1991	Toei Animation
+Holy Diver	—	April 28, 1989	Irem
+Home Run Night	—	March 31, 1989	Data East
+Home Run Night '90	—	July 24, 1990	Data East
+Honmei	—	April 28, 1989	Nihon Bussan
+Honoo no Doukyuuji: Dodge Danpei	—	March 27, 1992	Sunsoft
+Honoo no Doukyuuji: Dodge Danpei 2	—	March 26, 1993	Sunsoft
+Honshougi: Naitou Kudan Shougi Hiden	—	August 10, 1985	SETA
+Hook	Hook	March 27, 1992	Epic/Sony Records
+Hoshi no Kirby: Yume no Izumi no Monogatari	Kirby's Adventure	March 23, 1993	Nintendo
+Hoshi wo Miru Hito	—	October 27, 1987	Hot B
+Hostages	Rescue: The Embassy Mission	December 1, 1989	Kemco
+Hototogisu	—	August 19, 1988	Irem
+Hottāman no Chitei Tanken	—	December 6, 1986	Use
+Houma ga Koku	Dr. Jekyll and Mr. Hyde	April 8, 1988	Toho
+Hudson Hawk	Hudson Hawk	December 27, 1991	Epic/Sony Records
+Hyakkiyakou	—	February 22, 1989	Use
+Hyaku no Sekai no Monogatari	—	August 9, 1991	ASK
+Hydlide Special	Hydlide	March 18, 1986	Toshiba EMI
+Hydlide 3	—	February 17, 1989	Namco
+Hyokkori Hyoutan Shima: Nazo no Kaizokusen	—	April 25, 1992	Yutaka
+Hyper Olympic	Track & Field	June 21, 1985	Konami
+Hyper Sports	—	September 27, 1985	Konami
+I Love Softball	—	December 19, 1989	Coconuts Japan
+Ice Climber	Ice Climber	January 30, 1985	Nintendo
+Idemitsu - Space College - Kikenbutsu no Yasashii Butsuri to Kagaku[7]	—	1990	Konami, Idemitsu Kosan
+Ide Yosuke Meijin no Jissen Mahjong	—	September 24, 1987	Capcom
+Ide Yosuke Meijin no Jissen Mahjong II	—	February 22, 1991	Capcom
+Idol Hakkenden	—	September 14, 1989	Towachiki
+Igo Meikan	—	January 10, 1990	Hect
+Igo Shinan	—	July 14, 1989	Hect
+Igo Shinan '91	—	July 5, 1991	Hect
+Igo Shinan '92	—	March 10, 1992	Hect
+Igo Shinan '93	—	November 27, 1992	Hect
+Igo Shinan '94	—	December 17, 1993	Hect
+Igo: Kyū Roban Taikyoku	—	April 14, 1987	Bullet-Proof Software
+Ikari	Ikari Warriors	November 26, 1986	K Amusement
+Ikari II	Ikari Warriors II: Victory Road	April 16, 1988	K Amusement
+Ikari III	Ikari Warriors III: The Rescue	March 16, 1990	K Amusement
+IkeIke! Nekketsu Hockey-bu	—	February 7, 1992	Technos Japan
+Ikinari Musician	—	March 5, 1987	Tokyo Shoseki
+Ikki	—	November 28, 1985	Sunsoft
+Image Fight	Image Fight	March 16, 1990	Irem
+Inbou no Wakusei: Shankara	—	June 26, 1992	IGS
+Indora no Hikari	—	October 20, 1987	Kemco
+Insector X	—	September 21, 1990	Taito
+Ishin no Arashi	—	September 15, 1990	Koei
+Itadaki Street: Watashi no Oten Niyottete	—	March 21, 1991	ASCII
+Izaki Shuugorou no Keiba Hisshougaku	—	March 30, 1990	Imagineer
+J-League Fighting Soccer: The King of Ace Strikers	—	June 19, 1993	IGS
+Datach: J. League Super Top Players	—	April 22, 1994	Bandai
+J-League Winning Goal	—	May 27, 1994	Electronic Arts Victor
+Jackie Chan	Jackie Chan's Action Kung Fu	January 25, 1991	Hudson Soft
+Jajamaru Gekimaden	—	May 29, 1990	Jaleco
+Jajamaru Ninpou Chou	—	March 28, 1989	Jaleco
+JaJaMaru no Daibouken	—	August 22, 1986	Jaleco
+Jangou	—	August 30, 1990	Victor
+Jarin-Ko Chie	—	July 15, 1988	Konami
+Jesus: Kyofu no Bio Monster	—	March 17, 1989	King Records
+The Jetsons: Cogswell's Caper!	Jetsons, The: Cogswell's Caper!	April 23, 1993	Taito
+Jigoku Gokuraku Maru	Kabuki: Quantum Fighter	December 21, 1990	Pack-In-Video
+Jikuu (Toki) no Tabibito	—	December 26, 1986	Kemco
+Jikuu Yuten Debias	—	November 27, 1987	Namco
+Jongbou	—	July 18, 1987	K Amusement
+Joust	Joust	October 30, 1987	HAL
+Joy Mech Fight	—	May 21, 1993	Nintendo
+JuJu Densetsu	Toki	July 19, 1991	Taito
+Jumbo Ozaki no Hole in One Professional	—	February 1, 1988	HAL
+Jumpin' Kid: Jack to Mame no Ki Monogatari	—	December 19, 1990	Asmik
+Just Breed	—	December 15, 1992	Enix
+Juuryoku Soukou Metal Storm	Metal Storm	April 24, 1992	Irem
+Juvei Quest	—	January 4, 1991	Namco
+Jyuouki	—	July 20, 1990	Asmik
+Kabushiki Doujou	—	May 2, 1989	Hect
+Kage	Shadow of the Ninja/Blue Shadow	August 10, 1990	Natsume
+Kage no Densetsu	Legend of Kage, The	April 18, 1986	Taito
+Kagerou Densetsu	—	May 11, 1990	Pixel Multimedia
+Kaguya Hime Densetsu	—	December 16, 1988	Victor
+Kai no Bouken: The Quest of Ki	—	July 22, 1988	Namco
+Kaijuu Monogatari	—	November 18, 1988	Namco
+Kaiketsu Yancha Maru	Kid Niki: Radical Ninja	October 2, 1987	Irem
+Kaiketsu Yancha Maru 2: Karakuri Land	—	August 30, 1991	Irem
+Kaiketsu Yanchamaru 3: Taiketsu! Zouringen	—	March 30, 1993	Irem
+Kakefu Kimi no Jump Tengoku	Kid Kool	July 22, 1988	Vic Tokai
+Kame no Ongaeshi	Xexyz	August 26, 1988	Hudson Soft
+Kamen no Ninja Akakage	—	May 20, 1988	Toei Animation
+Kamen no Ninja Hamaru	Yo! Noid	March 16, 1990	Capcom
+Kamen Rider Club	—	February 3, 1988	Bandai
+Kamen Rider SD	—	January 22, 1993	Angel
+Karakuri Kengoden Musashi Lord: Karakuri Jin Shissouru	—	October 5, 1991	Yutaka
+Karaoke Studio	—	July 30, 1987	Bandai
+Karaoke Studio Senyou Cassette Vol. 1	—	October 28, 1987	Bandai
+Karaoke Studio Senyou Cassette Vol. 2	—	February 18, 1988	Bandai
+Karateka	—	December 5, 1985	Soft Pro
+Karnov	Karnov	December 18, 1987	Namco
+Katte ni Shirokuma	—	December 15, 1989	CBS Sony Group
+Kawa no Nushi Tsuri	—	August 10, 1990	Pack-In-Video
+Kekkyoku Nankyoku Daibouken	—	April 22, 1985	Konami
+Kero Kero Keroppi no Daibouken	—	March 29, 1991	Character Soft
+Kero Kero Keroppi no Daibouken 2	—	February 19, 1993	Character Soft
+Keroppi to Keroriinu no Splash Bomb	—	December 1, 1993	Character Soft
+Kid: Maboroshi no Teiou Hen	Casino Kid	January 6, 1989	SOFEL
+Kidō Senshi Z-Gundam: Hot Scramble	—	August 28, 1986	Bandai
+King Kong 2: Ikari no Megaton Punch	—	December 18, 1986	Konami
+King of Kings	—	December 9, 1988	Namco
+King's Knight	King's Knight	September 18, 1986	Square
+Kinnikuman: Muscle Tag Match	M.U.S.C.L.E.	November 8, 1985	Bandai
+Kiteretsu Daihyakka	—	February 23, 1990	Epoch
+Kitte Rai Da! Gunjin Shougi Nanya Sore?	—	May 26, 1989	SOFEL
+Klax	Klax (unlicensed)	December 14, 1990	Hudson Soft
+Knight Rider	Knight Rider	September 30, 1988	Pack-In-Video
+Konami Sports in Seoul	Track & Field II	September 16, 1989	Konami
+Koufuku o Yobu Game: Dora Dora Dora	—	January 25, 1991	Natsume
+Kōryū Densetsu Villgust Gaiden	—	July 30, 1993	Angel
+Kōshien	—	October 6, 1989	K Amusement
+Kujaku Ou	—	September 21, 1988	Pony Canyon
+Kujaku Ou II	—	August 11, 1990	Pony Canyon
+Kunio-Kun no Jidaigeki dayo Zenin Shuugou: Downtown Special	—	July 26, 1991	Technos Japan
+Kunio-Kun no Nekketsu Soccer League	—	April 23, 1993	Technos Japan
+Kurogane Hiroshi no Yosou Daisuki! Kachiuma Densetsu	—	April 20, 1990	Nihon Bussan
+Kyatto Ninden Teyandee	—	July 19, 1991	Tecmo
+Kyonshis 2	—	September 25, 1987	Taito
+Kyorochan Land	Castelian	December 11, 1992	Hiro
+Kyoryu Sentai Zyuranger	—	November 13, 1992	Angel
+Kyouto Hana no Misshitsu Satsujin Jiken - Yamamura Misa Suspense	—	February 11, 1989	Taito
+Kyouto Ryuu no Tera Satsujin Jiken - Yamamura Misa Suspense	—	December 11, 1987	Taito
+Kyouto Zaiteku Satsujin Jiken Yamamura Misa Suspense	—	November 2, 1990	Hect
+Kyuukyoku Harikiri Koshien	—	March 19, 1992	Taito
+Kyuukyoku Harikiri Stadium	—	June 28, 1988	Taito
+Kyuukyoku Harikiri Stadium '88	—	December 16, 1988	Taito
+Kyuukyoku Harikiri Stadium Heisei Gannenhan	—	July 21, 1989	Taito
+Kyuukyoku Harikiri Stadium III	—	March 1, 1991	Taito
+Kyuukyoku Tiger	Twin Cobra	August 4, 1989	CBS Sony Group
+L'Empereur	L'Empereur	May 23, 1991	Koei
+Labyrinth	—	January 7, 1987	Tokuma Shoten
+Lagrange Point	—	April 26, 1991	Konami
+Last Armageddon	—	November 10, 1990	Yutaka
+Law of the West	—	March 6, 1987	Pony Canyon
+Layla	—	December 20, 1986	DB Soft
+Little Magic	—	September 14, 1990	Data East
+Little Mermaid	Little Mermaid, The	July 19, 1991	Capcom
+Lode Runner	Lode Runner	July 31, 1984	Hudson Soft
+Lord of King	Astyanax	December 21, 1989	Jaleco
+Lost Word of Jenny	—	March 25, 1987	Takara
+Lot Lot	—	December 21, 1985	Tokuma Shoten
+Lunar Ball	Lunar Pool	December 5, 1985	Pony Canyon
+Lupin III Sansei: Pandora No Isan	—	November 6, 1987	Namco
+Mach Rider	Mach Rider	November 21, 1985	Nintendo
+Mad City	Adventures of Bayou Billy, The	August 12, 1988	Konami
+Magic Candle	—	March 6, 1992	Sammy
+Magic Darts	Magic Darts	April 26, 1991	SETA
+Magic John	Totally Rad	September 28, 1990	Jaleco
+Magical Taruruto-Kun: Fantastic World!!	—	March 21, 1991	Bandai
+Magical Taruruto-Kun 2: Magical Adventure	—	June 19, 1992	Bandai
+Magical Kids Doropi	Krion Conquest, The	December 14, 1990	Vic Tokai
+MagMax	MagMax	March 19, 1986	Nihon Bussan
+Magnum Kiki Ippatsu: Empire City 1931	—	December 25, 1987	Toshiba EMI
+MahaRaja	—	September 29, 1989	Sunsoft
+Mahjong	—	August 27, 1983	Nintendo
+Mahjong Club Nagatacho: Sousaisen	—	April 25, 1991	Hect
+Mahjong Taikai	—	October 31, 1989	Koei
+Mahjong Taisen	—	May 20, 1992	Nihon Bussan
+Mahou no Princess Minkiimomo Remember Dream	—	July 29, 1992	Yutaka
+Maison Ikkoku	—	July 21, 1988	Bothtec
+Majaventure - Mahjong Senki	—	October 19, 1990	Tokuma Shoten
+Majou Densetsu II: The Maze of Galious	—	August 11, 1987	Konami
+Major League	—	October 27, 1989	Irem
+Makai-Mura	Ghosts 'n Goblins	June 13, 1986	Capcom
+Maniac Mansion	Maniac Mansion	September 13, 1988	Jaleco
+Mappy	—	November 14, 1984	Namco
+Mappy Kids	—	December 22, 1989	Namco
+Mappy-Land	Mappy-Land	November 26, 1986	Namco
+Mario Bros.	Mario Bros.	September 9, 1983	Nintendo
+Mario Open Golf	NES Open Tournament Golf	September 20, 1991	Nintendo
+Marusa no Onna	—	September 19, 1989	Capcom
+Mashin Eiyuden Wataru Gaiden	—	March 23, 1990	Hudson Soft
+Mashou	Deadly Towers	December 15, 1986	Irem
+Masuzoe Kaname Icchou Made Famicom	—	April 17, 1992	Coconuts Japan
+Matendo Douji	Conquest of the Crystal Palace	August 24, 1990	Quest Corporation
+Matsumoto Akira no Kabushiki Hisshougaku	—	February 18, 1988	Imagineer
+Matsumoto Akira no Kabushiki Hisshougaku II	—	March 31, 1989	Imagineer
+Max Warrior	Isolated Warrior	February 15, 1991	VAP
+Meiji Ishin	—	September 29, 1989	Use
+Meikyuu Kumikyoku	Milon's Secret Castle	November 13, 1986	Hudson Soft
+Meikyuu Shima	Kickle Cubicle	June 29, 1990	Irem
+Meimon! Daisan Yakyuubu	—	August 8, 1989	Bandai
+Meimon! Tako Nishiouendan	—	December 1, 1989	Asmik
+Meitantei Holmes: Kiri no London Satsujin Jiken	—	May 13, 1988	Towachiki
+Meitantei Holmes: M-Kara no Chousenjou	—	May 1, 1989	Towachiki
+Melville no Honoo	—	August 11, 1989	Gakken
+Metal Flame: Psybuster	Metal Mech: Man & Machine	December 14, 1990	Jaleco
+Metal Gear	Metal Gear	December 22, 1987	Konami
+Metal Max	—	May 24, 1991	Data East
+Metal Slader Glory	—	August 30, 1991	HAL
+Metro Cross	—	December 16, 1986	Namco
+Mezase! Top Pro: Green ni Kakeru Yume	—	March 5, 1993	Jaleco
+Mickey Mouse	Mickey Mousecapade	March 6, 1987	Hudson Soft
+Mickey Mouse III: Yume Fuusen	Kid Klown in Night Mayor World	September 25, 1992	Kemco
+Might and Magic Book One: The Secret of the Inner Sanctum	Might & Magic: Secret of the Inner Sanctum	July 31, 1990	Gakken
+Mighty Bomb Jack	Mighty Bomb Jack	April 24, 1986	Tecmo
+Mighty Final Fight	Mighty Final Fight	June 11, 1993	Capcom
+Millipede	Millipede	October 1, 1987	HAL
+Mindseeker	—	April 18, 1989	Namco
+Minelvaton Saga: Ragon no Fukkatsu	—	October 23, 1987	Taito
+Mini-Putt	—	February 15, 1991	A-Wave
+Minna no Tabou no Nakayoshi Daisakusen	—	November 22, 1991	Character Soft
+Miracle Ropitt: 2100-Nen no Daibōken	—	August 7, 1987	King Records
+Mirai Senshi Raios	—	December 1, 1989	Pack-In-Video
+Mirai Shinwa Jarvas	—	June 30, 1987	Taito
+Mississippi Satsujin Jiken	—	October 31, 1986	Jaleco
+Mitokoumon	—	August 11, 1987	Sunsoft
+Mitokoumon II: Sekai Manyuuki	—	August 11, 1988	Sunsoft
+Mitsume ga Tooru	—	July 17, 1992	Tomy
+Mizushima Shinji no Daikoushien	—	October 26, 1990	Capcom
+Moai-Kun	—	March 9, 1990	Konami
+Moe-Pro! Saikyou Hen	Bases Loaded 4	November 22, 1991	Jaleco
+Moero TwinBee	Stinger	March 26, 1993	Konami
+Moero!! Judo Warriors	—	June 29, 1990	Jaleco
+Moero!! Junior Basket	Hoops	November 22, 1988	Jaleco
+Moero!! Pro Soccer	Goal!	December 23, 1988	Jaleco
+Moero!! Pro Tennis	Racket Attack	April 15, 1988	Jaleco
+Moero!! Pro Yakyuu	Bases Loaded	June 26, 1987	Jaleco
+Moero!! Pro Yakyuu '88	Bases Loaded II: Second Season	August 10, 1988	Jaleco
+Moero!! Pro Yakyuu '90: Kandouhen	Bases Loaded 3	July 27, 1990	Jaleco
+Moeru! Oniisan	Circus Caper	August 8, 1989	Toho
+Mokushi Pachi Pro: Pachi Otto-Kun	—	December 18, 1987	Coconuts Japan
+Momotaro Densetsu	—	October 26, 1987	Hudson Soft
+Momotarou Densetsu Gaiden	—	December 17, 1993	Hudson Soft
+Momotaro Dentetsu	—	December 2, 1988	Hudson Soft
+Money Game	—	August 10, 1988	SOFEL
+Money Game II: Kabutochou no Kiseki	Wall Street Kid	December 20, 1989	SOFEL
+Monopoly	Monopoly	November 1, 1991	Tomy
+Monster Maker: Nanatsu no Hihō	—	December 20, 1991	SOFEL
+Moon Crystal	—	August 28, 1992	Hect
+Morita Shougi	—	April 14, 1987	SETA
+Mother	Earth Bound (unreleased)	July 27, 1989	Nintendo
+Motocross Champion	—	January 27, 1989	Konami
+Mottomo Abunai Deka	—	February 6, 1990	Toei Animation
+Mouryou Senki Madara	—	March 30, 1990	Konami
+Murder Club	—	June 30, 1989	SETA
+Musashi no Bōken	—	December 22, 1990	Sigma Entertainment
+Musashi no Ken – Tadaima Shugyo Chu	—	August 8, 1986	Taito
+My Life My Love: Boku no Yume: Watashi no Negai	—	August 3, 1991	Banpresto
+Nagagutsu o Haita Neko: Sekai Isshū 80 Nichi Dai Bōken	Puss 'n Boots: Pero's Great Adventure	November 21, 1986	Toei Animation
+Nakajima Satoru: F-1 Hero	Michael Andretti's World GP	December 9, 1988	Varie
+Nakajima Satoru F-1 Hero 2	—	September 27, 1991	Varie
+Nakayo Shito Issho	—	December 10, 1993	Yutaka
+Namco Classic	—	May 27, 1988	Namco
+Namco Classic II	—	March 13, 1992	Namco
+Namco Mahjong III: Mahjong Tengoku	—	March 8, 1991	Namco
+Nantettatte!! Baseball	—	October 26, 1990	Sunsoft
+Nantettatte Baseball KO Game Cassette '91 Kaimakuban	—	May 23, 1991	Sunsoft
+Nantettatte Baseball KO Game Set OB All Star Hen	—	February 28, 1991	Sunsoft
+Napoleon Senki	—	March 18, 1988	Irem
+Navy Blue	—	February 14, 1992	I'Max
+Nekketsu Kakutou Densetsu	—	December 23, 1992	Technos Japan
+Nekketsu Kouha Kunio Kun	Renegade	April 17, 1987	Technos Japan
+Nekketsu Koukou Dodge Ball Bu	Super Dodge Ball	July 26, 1988	Technos Japan
+Nekketsu Koukou Dodgeball-bu Soccer-hen	Nintendo World Cup	May 18, 1990	Technos Japan
+Nekketsu Street Basket: Ganbare Dunk Heroes	—	December 22, 1993	Technos Japan
+New Ghostbusters 2	New Ghostbusters 2 (EU only)	December 26, 1990	HAL
+New York Nyankies	Rockin' Kats	April 5, 1991	Atlus
+NHK Gakuen - Space School - Sansu 4 Nen (Ge)[8][9][10]	—	1989	Konami, NHK, Tokyo Shoseki
+NHK Gakuen - Space School - Sansu 4 Nen (Jou)	—	1989	Konami, NHK, Tokyo Shoseki
+NHK Gakuen - Space School - Sansu 5 Nen (Ge)	—	1989	Konami, NHK, Tokyo Shoseki
+NHK Gakuen - Space School - Sansu 5 Nen (Jou)	—	1989	Konami, NHK, Tokyo Shoseki
+NHK Gakuen - Space School - Sansu 6 Nen (Ge)	—	1989	Konami, NHK, Tokyo Shoseki
+NHK Gakuen - Space School - Sansu 6 Nen (Jou)	—	1989	Konami, NHK, Tokyo Shoseki
+Nichibutsu Mahjong III	—	July 20, 1990	Nihon Bussan
+Niji no Silkroad	—	February 22, 1991	Victor
+Ningen Heiki Dead Fox	Code Name: Viper	February 23, 1990	Capcom
+Ninja Cop Saizou	Wrath of the Black Manta	November 17, 1989	Kyugo
+Ninja Crusaders	Ninja Crusaders	December 14, 1990	Sammy
+Ninja Hattori-kun	—	March 5, 1986	Hudson Soft
+Ninja JaJaMaru-kun	—	November 15, 1985	Jaleco
+Ninja Jajamaru: Ginga Daisakusen	—	March 29, 1991	Jaleco
+Ninja Kun	—	May 10, 1985	Jaleco
+Ninja Kun: Ashura no Shou	—	May 27, 1988	UPL
+Ninja Ra Hoi!	—	August 9, 1990	ASCII
+Ninja Ryuukenden	Ninja Gaiden/Shadow Warriors	December 9, 1988	Tecmo
+Ninja Ryuukenden II	Ninja Gaiden II: The Dark Sword of Chaos/Shadow Warriors II	April 6, 1990	Tecmo
+Ninja Ryuukenden III	Ninja Gaiden III: The Ancient Ship of Doom/Shadow Warriors III	June 21, 1991	Tecmo
+Nippon Ichi no Nakantoku	—	August 10, 1990	Asmik
+Nishimura Kyoutarou Mystery: Blue Train Satsujin Jiken	—	January 20, 1989	Irem
+Nishimura Kyoutarou Mystery: Super Express Satsujin Jiken	—	March 2, 1990	Irem
+Nobunaga no Yabou: Bushou Fuuunroku	—	December 21, 1991	Koei
+Nobunaga no Yabou: Sengouku Gunyuuden	Nobunaga's Ambition 2	February 3, 1990	Koei
+Nobunaga no Yabou: Zenkokuban	Nobunaga's Ambition	March 18, 1988	Koei
+North and South	North & South	September 21, 1990	Kemco
+Nuts & Milk	—	July 28, 1984	Hudson Soft
+Obake no Q Tarou: Wan Wan Panic	Chubby Cherub	December 16, 1985	Bandai
+Obocchamakun	—	April 5, 1991	Tecmo
+Ochinnitoshi Puzzle Tonjan!?	—	September 29, 1989	Jaleco
+Oeka Kids - Anpanman no Hiragana Daisuki	—	March 26, 1991	Bandai
+Oeka Kids - Anpanman to Oekaki Shiyou	—	October 25, 1990	Bandai
+Oishinbo: Kyukyoku no Menu 3bon Syoubu	—	July 25, 1989	Bandai
+Olympus no Tatakai	Battle of Olympus, The	March 28, 1988	Imagineer
+Onyanko Town	—	November 21, 1985	Pony Canyon
+Operation Wolf	Operation Wolf	March 31, 1989	Taito
+Osomatsu-Kun: Back to Zami no Deppa	—	December 8, 1989	Bandai
+Otaku no Seiza	—	July 31, 1991	M&M
+Outlanders	—	December 4, 1987	Victor
+Over Horizon	Over Horizon (EU only)	April 26, 1991	Hot B
+Paaman	—	December 14, 1990	Irem
+Paaman Part 2	—	December 20, 1991	Irem
+Pac-Land	—	November 21, 1985	Namco
+Pac-Man	Pac-Man	November 2, 1984	Namco
+Pachicom	—	November 21, 1985	Toshiba EMI
+Pachi-Slot Adventure 2	—	September 17, 1993	Coconuts Japan
+Pachi-Slot Adventure 3: Bitaoshii 7 Kenzan!	—	May 13, 1994	Coconuts Japan
+Pachinko Daisakusen	—	July 19, 1991	Coconuts Japan
+Pachinko Daisakusen 2	—	July 10, 1992	Coconuts Japan
+Pachiokun 2	—	January 30, 1989	Coconuts Japan
+Pachiokun 3	—	October 26, 1990	Coconuts Japan
+Pachiokun 4	—	November 22, 1991	Coconuts Japan
+Pachiokun 5	—	June 11, 1993	Coconuts Japan
+Palamedes	Palamedes	July 6, 1990	Hot B
+Palamedes 2	—	May 17, 1991	Hot B
+Paperboy	Paperboy	January 30, 1991	Altron
+Parareru World	—	August 10, 1990	Varie
+Parasol Henbee	—	February 15, 1991	Epoch
+Paris-Dakar Rally Special	—	February 3, 1988	CBS Sony Group
+Parodius Da! -Shinwa kara Owarai e-	Parodius	November 30, 1990	Konami
+Peepar Time	—	August 10, 1990	Sanritsu Denki
+Penguin-Kun Wars	—	December 25, 1985	ASCII
+Perfect Bowling	—	July 25, 1989	Tonkin House
+Photon: The Ultimate Game on Planet Earth	—	August 28, 1987	Takara
+Pinball	Pinball	February 2, 1984	Nintendo
+Pinball Quest	Pinball Quest	December 15, 1989	Jaleco
+Pizza Pop	—	January 7, 1992	Jaleco
+Plasma Ball	—	March 27, 1992	Jaleco
+Pocket Zaurus: Ju Ouken no Nazo	—	February 27, 1987	Bandai
+Pooyan	—	September 20, 1985	Hudson Soft
+Popeye	Popeye	July 15, 1983	Nintendo
+Popeye no Eigo Asobi	—	November 22, 1983	Nintendo
+Portopia Renzoku Satsujin Jiken	—	November 29, 1985	Enix
+Power Blazer	Power Blade	April 20, 1990	Taito
+Power Soccer	—	March 30, 1990	Tokuma Shoten
+Predator	Predator	March 10, 1988	Pack-In-Video
+President no Sentaku	—	March 2, 1990	Hot B
+Pro Yakyuu Family Stadium	R.B.I. Baseball	December 10, 1986	Namco
+Pro Yakyuu Family Stadium '87	—	December 22, 1987	Namco
+Pro Yakyuu Family Stadium '88	—	December 20, 1988	Namco
+Pro Yakyuu Satsujin Jiken!	—	December 24, 1988	Capcom
+Punch-Out!!	Mike Tyson's Punch-Out!!	November 21, 1987	Nintendo
+Puyo Puyo	—	July 23, 1993	Tokuma Shoten
+Puzslot	—	February 28, 1992	Sammy
+Puzznic	Puzznic	July 19, 1991	IGS
+Pajama Hero Nemo	Little Nemo: The Dream Master	December 7, 1990	Capcom
+Pyokotan no Daimeiro	—	March 19, 1993	Sunsoft
+Quarterback Scramble	—	December 19, 1989	Pony Canyon
+Quarth	—	April 13, 1990	Konami
+Quinty	Mendel Palace	June 27, 1989	Namco
+Quiz Project Q: Cutie Project & Battle 1000	—	May 29, 1992	Hect
+Racer Mini Yonku: Japan Cup	—	August 25, 1989	Konami
+Radia Senki: Reimeihen	—	November 15, 1991	Tecmo
+Raf World	Journey to Silius	August 10, 1990	Sunsoft
+Raid on Bungeling Bay	Raid on Bungeling Bay	February 22, 1985	Hudson Soft
+Rainbow Island: The Story of Bubble Bobble 2	Rainbow Islands	July 26, 1988	Taito
+Rambo	Rambo	December 4, 1987	Pack-In-Video
+Rampart	—	November 29, 1991	Konami
+Rasāru Ishii no Childs Quest	—	June 23, 1989	Namco
+Recca - Summer Carnival '92	—	July 17, 1992	Naxat Soft
+Red Arremer II	Gargoyle's Quest II: The Demon Darkness	July 17, 1992	Capcom
+Reigen Doushi	Phantom Fighter	September 16, 1988	Pony Canyon
+Rekka no Gotoku Tenka o Tore!	—	September 8, 1990	Banpresto
+Ripple Island	—	January 23, 1988	Sunsoft
+Road Fighter	Road Fighter (EU only)	July 11, 1985	Konami
+Robocco Wars	—	August 2, 1991	IGS
+RoboCop	RoboCop	August 25, 1989	Data East
+RoboCop 2	RoboCop 2	1990	Data East
+Robot Block	Stack-Up	July 26, 1985	Nintendo
+Robot Gyro	Gyromite	August 13, 1985	Nintendo
+Rockman	Mega Man	December 17, 1987	Capcom
+Rockman 2: Dr. Wily no Nazo	Mega Man 2	December 24, 1988	Capcom
+Rockman 3: Dr. Wily no Saigo!?	Mega Man 3	September 28, 1990	Capcom
+Rockman 4: Aratanaru Yabō!!	Mega Man 4	December 6, 1991	Capcom
+Rockman 5: Blues no Wana!?	Mega Man 5	December 4, 1992	Capcom
+Rockman 6: Shijō Saidai no Tatakai!!	Mega Man 6	October 5, 1993	Capcom
+Rokudenashi Blues	—	October 29, 1993	Bandai
+Rollerball	Rollerball	December 20, 1988	HAL
+Rolling Thunder	Rolling Thunder (unlicensed)	March 17, 1989	Namco
+Route 16 Turbo	—	October 4, 1985	Sunsoft
+Royal Blood	Gemfire	August 29, 1991	Koei
+RPG Jinsei Game	—	November 26, 1993	Takara
+Sensha Senryaku: Sabaku no Kitsune	Desert Commander	April 28, 1988	Kemco
+Saikoushi Sedi	—	December 24, 1988	Fuji Television
+Saint Seiya	Les Chevaliers du Zodiaque: La Légende d'or (EU only)	August 10, 1987	Bandai
+Saint Seiya 2	—	May 30, 1988	Bandai
+Saiyuuki World	—	November 11, 1988	Jaleco
+Saiyuuki World 2	Whomp 'Em	December 7, 1990	Jaleco
+Sakigake!! Otokojuku	—	March 3, 1989	Bandai
+Salad no Kuni no Tomato Hime	Princess Tomato in the Salad Kingdom	May 27, 1988	Hudson Soft
+Salamander	Life Force	September 25, 1987	Konami
+San Goku Shi	Romance of the Three Kingdoms	October 30, 1988	Koei
+San Goku Shi II	Romance of the Three Kingdoms II	November 2, 1990	Koei
+San Goku Shi: Chuugen no Hasha	—	July 29, 1988	Namco
+San Goku Shi II: Haou no Tairiku	—	June 10, 1992	Namco
+Sanada Juu Yuushi	—	June 24, 1988	Kemco
+Sanma no Meitantei	—	April 2, 1987	Namco
+Sanrio Carnival	—	November 22, 1990	Character Soft
+Sanrio Carnival 2	—	January 14, 1993	Character Soft
+Sanrio Cup: Pon Pon Volley	—	July 17, 1992	Character Soft
+Sansara Naga	—	March 23, 1990	Victor
+Sansū 1-nen: Keisan Game	—	April 25, 1986	Tokyo Shoseki
+Sansū 2-nen: Keisan Game	—	April 25, 1986	Tokyo Shoseki
+Sansū 3-nen: Keisan Game	—	April 25, 1986	Tokyo Shoseki
+Sansū 4-nen: Keisan Game	—	October 30, 1986	Tokyo Shoseki
+Sansū 5+6-nen: Keisan Game	—	October 30, 1986	Tokyo Shoseki
+Satomi Hakkenden	—	January 20, 1989	SNK
+Satsui no Kaisou	—	January 7, 1988	HAL
+SD Battle Oozumou	—	April 20, 1990	Banpresto
+SD Gundam Gachapon Senshi 2: Capsule Senki	—	June 25, 1989	Bandai
+SD Gundam Gachapon Senshi 3: Eiyuu Senki	—	December 22, 1990	Yutaka
+SD Gundam Gachapon Senshi 4: New Type Story	—	December 21, 1991	Yutaka
+SD Gundam Gachapon Senshi 5: Battle of Universal Century	—	December 22, 1992	Yutaka
+SD Gundam Gaiden: Knight Gundam Monogatari	—	August 11, 1990	Bandai
+SD Gundam Gaiden: Knight Gundam Monogatari 2: Hikari no Kishi	—	October 12, 1991	Bandai
+SD Gundam Gaiden: Knight Gundam Monogatari 3	—	October 23, 1992	Bandai
+Datach: SD Gundam: Gundam Wars	—	April 23, 1993	Bandai
+SD Hero Soukessen: Taose! Aku no Gundan	—	July 7, 1990	Banpresto
+SD Keiji Blader	—	August 2, 1991	Taito
+Seicross	Seicross	May 15, 1986	Nihon Bussan
+Seikima II Akuma no Gyakushū!	—	December 25, 1986	CBS Sony Group
+Seirei Densetsu Lickle	Little Samson	June 26, 1992	Taito
+Seirei Gari	—	December 8, 1989	Hudson Soft
+Sekiryuou	—	February 10, 1989	Sunsoft
+Senjo no Ookami	Commando	September 27, 1986	Capcom
+Shadow Brain	—	March 21, 1991	Pony Canyon
+Shadowgate	Shadowgate	March 31, 1989	Kemco
+Shanghai	—	December 4, 1987	Sunsoft
+Shanghai II	—	August 24, 1990	Sunsoft
+Sherlock Holmes: Hakushaku Reijō Yūkai Jiken	—	December 11, 1986	Towachiki
+Shikinjo	—	April 26, 1991	Toei Animation
+Shin 4-Jin Uchi Mahjong: Yakuman Tengoku	—	June 28, 1991	Nintendo
+Shin Moero!! Pro Yakyuu	—	July 13, 1989	Jaleco
+Shin Satomi Hakken-Den - Hikari to Yami no Tatakai	—	December 8, 1989	Toei Animation
+Shinjinrui	Adventures of Dino Riki	February 10, 1987	Rix Soft
+Shinsenden	—	December 15, 1989	Irem
+Shougi Meikan '92	—	January 30, 1992	Hect
+Shougi Meikan '93	—	December 4, 1992	Hect
+Shogun	—	May 27, 1988	Hect
+Shōnen Ashibe Nepal Daibouken no Maki	—	November 15, 1991	Takara
+Shuffle Fight	—	October 9, 1992	Banpresto
+Shufflepuck Café	—	October 21, 1990	Pony Canyon
+Side Pocket	Side Pocket	October 30, 1987	Namco
+Silva Saga	—	July 24, 1992	SETA
+Sky Destroyer	—	November 14, 1985	Taito
+Sky Kid	Sky Kid	August 22, 1986	Namco
+Snow Bros.	Snow Brothers	December 6, 1991	Toaplan
+Soccer	Soccer	April 9, 1985	Nintendo
+Softball Tengoku	Dusty Diamond's All-Star Softball	October 27, 1989	Tonkin House
+Solomon no Kagi	Solomon's Key	July 30, 1986	Tecmo
+Solomon no Kagi 2	Solomon's Key 2/Fire 'n Ice	January 24, 1992	Tecmo
+Solstice	Solstice: The Quest for the Staff of Demnos	July 20, 1990	Epic/Sony Records
+SonSon	—	February 8, 1986	Capcom
+Soreike! Anapanman Minna de Hiking Game	—	March 20, 1992	Bandai
+Space Harrier	—	January 6, 1989	Takara
+Space Hunter	—	September 25, 1986	Kemco
+Space Invaders	—	April 17, 1985	Taito
+Space Shadow	—	February 20, 1989	Bandai
+Spartan X	Kung Fu	June 21, 1985	Nintendo
+Spartan X 2	—	September 27, 1991	Irem
+Spelunker	Spelunker	December 7, 1985	Irem
+Spelunker II: Yūsha e no Chōsen	—	September 18, 1987	Irem
+Splatterhouse: Wanpaku Graffiti	—	July 31, 1989	Namco
+Spot	Spot: The Video Game	October 16, 1992	Bullet-Proof Software
+Spy vs. Spy	Spy VS. Spy	April 26, 1986	Kemco
+Spy vs. Spy II: Nankoku Shirei!!	—	March 27, 1987	Kemco
+Sqoon	Sqoon	June 26, 1986	Irem
+Square no Tom Sawyer	—	November 30, 1989	Square
+Star Force	Star Force	June 25, 1985	Hudson Soft
+Star Luster	—	December 6, 1985	Namco
+Star Soldier	Star Soldier	June 13, 1986	Hudson Soft
+Star Wars	—	December 4, 1987	Namco
+Star Wars	Star Wars	November 15, 1991	Victor
+Star Wars: Teikoku no Gyakushuu	Star Wars: The Empire Strikes Back	March 12, 1993	Victor
+Stargate	Defender II	September 24, 1987	HAL
+STED: Iseki Wakusei no Yabou	—	July 27, 1990	K Amusement
+Stick Hunter	—	December 18, 1987	K Amusement
+Sugoro Quest: Dice no Senshi Tachi	—	June 28, 1991	Technos Japan
+Suikoden: Tenmei no Chikai	Bandit Kings of Ancient China	June 25, 1990	Koei
+Sukeban Deka III	—	January 22, 1988	Toei Animation
+Super Arabian	—	July 25, 1985	Sunsoft
+Super Black Onyx	—	July 14, 1988	Bullet-Proof Software
+Super Chinese	Kung-Fu Heroes	June 20, 1986	Namco
+Super Chinese 2	Little Ninja Brothers	May 26, 1989	Culture Brain
+Super Chinese 3	—	March 1, 1991	Culture Brain
+Super Contra	Super C (USA version)
+Probotector 2: Return of the Evil Forces (European version)	February 2, 1990	Konami
+Super Dynamix Badminton	—	August 26, 1988	VAP
+Super Mario Bros.	Super Mario Bros.	September 13, 1985	Nintendo
+Super Mario Bros. 3	Super Mario Bros. 3	October 23, 1988	Nintendo
+Super Mario USA	Super Mario Bros. 2	September 16, 1992	Nintendo
+Super Mogura Tataki!! Pokkun Mogura	—	December 8, 1989	IGS
+Super Momotaro Dentetsu	—	March 20, 1992	Hudson Soft
+Super Pinball	—	August 23, 1988	Coconuts Japan
+Super Pitfall	Super Pitfall	September 5, 1986	Pony Canyon
+Super Real Baseball '88	—	July 30, 1988	VAP
+Super Rugby	—	December 27, 1989	TSS
+Super Sprint	Super Sprint (unlicensed)	August 3, 1991	Altron
+Super Star Force: Jikūreki no Himitsu	—	November 11, 1986	Tecmo
+Super Star Pro Wrestling	WCW Wrestling	December 9, 1989	Pony Canyon
+Super Xevious: GAMP no Nazo	—	September 19, 1986	Namco
+Superman	Superman	December 26, 1987	Kemco
+SWAT: Special Weapons and Tactics	—	September 11, 1987	Toei Animation
+Sweet Home	—	December 15, 1989	Capcom
+Sword Master	Sword Master	December 21, 1990	Athena
+Tag Team Pro Wrestling	Tag Team Wrestling	April 2, 1986	Namco
+Taito Basketball	Ultimate Basketball	April 26, 1991	Taito
+Taito Chase H.Q.	—	December 8, 1989	Taito
+Taito Grand Prix: Eikou heno License	—	December 18, 1987	Taito
+Taiyou no Shinden Asteka II	Tombs & Treasure	August 3, 1988	Tokyo Shoseki
+Taiyou no Yuusha Firebird	—	January 11, 1992	Irem
+Takahashi Meijin no Boken Jima	Adventure Island	September 12, 1986	Hudson Soft
+Takahashi Meijin no Boken Jima II	Adventure Island II	April 26, 1991	Hudson Soft
+Takahashi Meijin no Boken Jima III	Adventure Island 3	July 31, 1992	Hudson Soft
+Master Takahashi's Adventure Island IV	—	June 24, 1994	Hudson Soft
+Takahashi Meijin no Bug-tte Honey	—	June 5, 1987	Hudson Soft
+Takeda Shingen	—	March 28, 1988	Hot B
+Takeda Shingen II	Shingen the Ruler	August 21, 1989	Hot B
+Takeshi no Chōsenjō	—	December 10, 1986	Taito
+Takeshi no Sengoku Fūunji	—	November 25, 1988	Taito
+Tamura Teruaki no Mahjong Seminar	—	September 21, 1990	Pony Canyon
+Tanigawa Koji no Shougi Shinan II	—	March 18, 1988	Pony Canyon
+Tanigawa Koji no Shougi Shinan III	—	September 14, 1989	Pony Canyon
+Tantei Jinguji Saburo: Yokohamakou Renzoku Satsujin Jiken	—	February 26, 1988	Data East
+Tantei Jinguji Saburo: Toki no Sugiyuku Mama Ni	—	September 28, 1990	Data East
+Tao	—	December 1, 1989	VAP
+Tashiro Masashi no Princess ga Ippai	—	October 27, 1989	Epic/Sony Records
+Tatakae! Chō Robot Seimeitai Transformers: Convoy no Nazo	—	December 5, 1986	Takara
+Tatakai no Banka	Trojan	December 24, 1986	Capcom
+Tatake!! Ramen-Man	—	August 10, 1988	Bandai
+Tecmo Bowl	Tecmo Bowl	November 30, 1990	Tecmo
+Tecmo Super Bowl	Tecmo Super Bowl	December 13, 1991	Tecmo
+Tecmo World Cup Soccer	Tecmo World Cup Soccer (EU only)	December 7, 1990	Tecmo
+Teenage Mutant Ninja Turtles: Super Kame Ninja	Teenage Mutant Ninja Turtles II: The Arcade Game(USA version)
+Teenage Mutant Hero Turtles II: The Arcade Game (European version)	December 7, 1990	Konami
+Teenage Mutant Ninja Turtles III: The Manhattan Project	Teenage Mutant Ninja Turtles III: The Manhattan Project	December 13, 1991	Konami
+Tenchi o Kurau	Destiny of an Emperor	May 19, 1989	Capcom
+Tenchi o Kurau II	—	April 5, 1991	Capcom
+Tenkaichi Bushi Keru Naguuru	—	July 21, 1989	Namco
+Tennis	Tennis	January 14, 1984	Nintendo
+Terao no Dosukoi Oozumou	—	November 24, 1989	Jaleco
+Terminator 2	Terminator 2: Judgment Day	June 26, 1992	Pack-In-Video
+Terra Cresta	Terra Cresta	September 27, 1986	Nihon Bussan
+Tetra Star	—	May 24, 1991	Taito
+Tetris	—	December 22, 1988	Bullet-Proof Software
+Tetris 2 + Bombliss	—	December 13, 1991	Bullet-Proof Software
+Tetris Flash	Tetris 2	September 21, 1993	Nintendo
+Tetsudou-Oh	—	December 13, 1991	DB Soft
+Tetsuwan Atom	—	February 26, 1988	Konami
+Thexder	—	December 19, 1985	Square
+Thunderbirds	Thunderbirds	September 29, 1989	Pack-In-Video
+Tiger-Heli	Tiger-Heli	December 5, 1986	Pony Canyon
+Time Zone	—	October 25, 1991	Sigma Entertainment
+Times of Lore	Times of Lore	December 7, 1990	Toho
+Tiny Toon Adventures	Tiny Toon Adventures	December 20, 1991	Konami
+Tiny Toon Adventures 2: Montana Land e Yōkoso	Tiny Toon Adventures 2: Trouble in Wackyland	November 27, 1992	Konami
+Titan	—	August 10, 1990	SOFEL
+TM Network: Live in Power Bowl	—	December 22, 1989	Epic/Sony Records
+Tobidase Daisakusen 2: JJ	—	August 21, 1989	Square
+Tokkyū Shirei Solbrain	Shatterhand	October 26, 1991	Angel
+Tokoro-san no Mamoru mo Semeru mo	—	June 27, 1987	Epic/Sony Records
+Tokyo Pachi-Slot Adventure	—	December 13, 1991	Coconuts Japan
+Tom & Jerry	Tom & Jerry	November 13, 1992	Altron
+Tom Sawyer no Bouken	Adventures of Tom Sawyer, The	February 6, 1989	SETA
+Top Gun	Top Gun	December 11, 1987	Konami
+Top Gun: Dual Fighters	Top Gun: The Second Mission	December 15, 1989	Konami
+Top Rider	—	December 17, 1988	Varie
+Top Striker	—	October 22, 1992	Namco
+Totsuzen! Macho Man	Amagon	December 2, 1988	Vic Tokai
+Touch Down Fever: American Football	Touch Down Fever	November 11, 1988	K Amusement
+Touhou Kenbunku	—	November 10, 1988	Natsume
+Tōkaidō Gojūsan-tsugi	—	July 3, 1986	Sunsoft
+Toukon Club	—	July 24, 1992	Jaleco
+The Tower of Druaga	—	August 6, 1985	Namco
+The Triathlon	—	December 16, 1988	K Amusement
+Tsuppari Oozumou	—	September 18, 1987	Tecmo
+Tsuppari Wars	—	June 28, 1991	Sammy
+Tsurikichi Sanpei	—	March 17, 1988	Victor
+Tsuru Pikahage Maru: Mezase! Tsuruseko no Akashi	—	December 13, 1991	Jaleco
+Twin Eagle: Revenge Joe's Brother	Twin Eagle	April 12, 1991	Romstar
+TwinBee	—	January 4, 1986	Konami
+TwinBee 3	—	September 29, 1989	Konami
+Uchuu Keibitai SDF	—	September 7, 1990	HAL
+Uchūsen: Cosmo Carrier	—	November 6, 1987	Jaleco
+Ultima	Ultima III: Exodus	October 9, 1987	Pony Canyon
+Ultima: Seisha he no Michi	Ultima: Quest of the Avatar	September 20, 1989	Pony Canyon
+Ultraman Club Kaijuu Dai Kessen!!	—	December 25, 1992	Angel
+Datach: Ultraman Club: Supokon Fight!	—	April 23, 1993	Bandai
+Ultraman Club 2: Kaettekita Ultraman Club	—	April 7, 1990	Yutaka
+Ultraman Club 3	—	December 29, 1991	Yutaka
+The Untouchables	The Untouchables	December 20, 1991	Altron
+Urban Champion	Urban Champion	November 14, 1984	Nintendo
+Urusei Yatsura: Lum's Wedding Bell	—	October 23, 1986	Jaleco
+US Championship V'Ball	Super Spike V'Ball	November 10, 1989	Technos Japan
+USA Ice Hockey in FC	Pro Sport Hockey	March 6, 1993	Jaleco
+Ushio to Tora: Shin'en no Daiyō	—	July 9, 1993	Yutaka
+Utsurun Desu.: Kawauso Hawaii e Iku!!!	—	March 6, 1992	Takara
+Valkyrie no Bōken: Toki no Kagi Densetsu	—	August 1, 1986	Namco
+Valis: The Fantasm Soldier	—	August 21, 1987	Tokuma Shoten
+Vegas Connection: Casino Kara Ai wo Komete	—	November 24, 1989	Sigma Entertainment
+Venus Senki	—	October 14, 1989	Varie
+Viva Las Vegas	Vegas Dream	September 30, 1988	Epic/Sony Records
+Volguard II	—	December 7, 1985	DB Soft
+Wagyan Land	—	February 9, 1989	Namco
+Wagyan Land 2	—	December 14, 1990	Namco
+Wagyan Land 3	—	December 8, 1992	Namco
+Wai Wai World	—	January 14, 1988	Konami
+Wai Wai World 2: SOS!! Parsley Jō	—	January 5, 1991	Konami
+Wanpaku Duck Yume Bouken	DuckTales	January 26, 1990	Capcom
+Wanpaku Kokkun no Gourmet World	Panic Restaurant	April 24, 1992	Taito
+Wario no Mori	Wario's Woods	February 19, 1994	Nintendo
+Warpman	—	July 12, 1985	Namco
+Western Kids	Cowboy Kid	September 13, 1991	Visco
+White Lion Densetsu	Legend of the Ghost Lion	July 14, 1989	Kemco
+Wild Gunman	Wild Gunman	February 18, 1984	Nintendo
+Willow	Willow	July 18, 1989	Capcom
+Wily & Right no RockBoard: That's Paradise	—	January 15, 1993	Capcom
+Wing of Madoola	—	December 18, 1986	Sunsoft
+Winners Cup	—	August 12, 1988	Data East
+Wit's	—	July 13, 1990	Athena
+Wizardry: Proving Grounds of the Mad Overlord	Wizardry: Proving Grounds of the Mad Overlord	December 22, 1987	ASCII
+Wizardry II: Legacy of Llylgamyn - The Third Scenario	—	February 21, 1989	ASCII
+Wizardry III: Knight of Diamonds - The Second Scenario	Wizardry: Knight of Diamonds - The Second Scenario	March 9, 1990	ASCII
+Woody Poko	—	June 20, 1987	DB Soft
+World Boxing	—	September 8, 1990	TSS
+World Grand-Prix - Pole To Finish	Al Unser Jr.'s Turbo Racing	January 31, 1989	Data East
+World Super Tennis	Top Players' Tennis/Four Players' Tennis	October 13, 1989	Asmik
+Wrecking Crew	Wrecking Crew	June 18, 1985	Nintendo
+WWF WrestleMania Challenge	WWF WrestleMania Challenge	March 27, 1992	Hot B
+Xevious	Xevious	November 8, 1984	Namco
+Yie Ar Kung Fu	—	April 22, 1985	Konami
+Yoshi no Cookie	Yoshi's Cookie	November 21, 1992	Nintendo
+Yoshi no Tamago	Yoshi
+Mario & Yoshi	December 14, 1991	Nintendo
+Yokai Dochuki	—	June 24, 1988	Namco
+Youkai Club	—	May 19, 1987	Jaleco
+Yousei Monogatari RodLand	RodLand	December 11, 1992	Jaleco
+Ys	—	August 26, 1988	Victor
+Ys II	—	May 25, 1990	Victor
+Ys III: Wanderers from Ys	—	September 27, 1991	Victor
+Yume Penguin Monogatari	—	January 25, 1991	Konami
+Datach: YuYu Hakusho: Bakutō Ankoku Bujutsu Kai	—	October 22, 1993	Bandai
+Zelda no Densetsu 1	Legend of Zelda, The	February 19, 1994	Nintendo
+Zenbei!! Pro Basketball	All-Pro Basketball	July 21, 1989	Vic Tokai
+Zippy Race	—	July 18, 1985	Irem
+Zoids: Chuuou Tairiku no Tatakai	—	September 5, 1987	Toshiba EMI
+Zoids 2: Zenebasu no Gyakushuu	—	January 27, 1989	Toshiba EMI
+Zoids: Mokushiroku	—	December 21, 1990	Tomy
+Zombie Hunter	—	July 3, 1987	Hi-Score Media Work
+Zunō Senkan Galg	—	December 14, 1985	DB Soft
+Unreleased games
+This list is incomplete; you can help by expanding it.
+Title	Year	Publisher
+Armadillo II	1992[11]	IGS
+Bio Force Ape	1992	SETA
+Donkey Kong no Ongaku Asobi[12]	1983	Nintendo
+Felix the Cat[13]	1992	Hudson Soft
+Final Fantasy IV[14]	1991	Square
+Neo Vulgus	1988	Capcom
+Parody World: Monster Party	1989	Bandai
+Pescatore[15]	1991	Sunsoft
+Shounen Majutsushi Indy[16]	1992	IGS Corp.
+Strider Hiryuu	1988	Capcom
+Sunman	1992	Sunsoft
+Unlicensed games
+This list is incomplete; you can help by expanding it.
+Title	Year	Publisher	Country
+2 in 1: Cosmocop and Cyber Monster	1993	Sachen	Taiwan
+2 in 1: Tough Cop and Super Tough Cop	1993	Sachen	Taiwan
+Adam & Eve	1991	NTDEC	Taiwan
+Aladdin	1995	J.Y. Company	Taiwan
+Aladdin II	June 1995	Unknown	Taiwan
+Auto-Upturn	1991	Sachen	Taiwan
+AV Bishoujo Senshi Girl Fighting	1994	Ge De Industry Co.	Taiwan
+AV Dragon Mahjang	1991	Hacker International	Japan
+AV Mahjong Club	1991	Hacker International	Japan
+AV Pachi Slot: Big Chance	1991	Hacker International	Japan
+AV Poker	1990	Hacker International	Japan
+AV Super Real Pachinko	1991	Hacker International	Japan
+AV World Soccer	1991	Hacker International	Japan
+Balloon Monster	1991	NTDEC	Taiwan
+Bao Xiao San Guo	Unknown	Fuzhou Waixing Computer Science & Technology Co.,LTD	China
+Battle Kid: Kikenna Wana	July 18, 2018	Columbus Circle	Japan
+Black Dragon	1991	Daou Infosys	South Korea
+Bingo 75	1990	Sachen	Taiwan
+Bomber Boy	1997	Super Game	Taiwan
+Boogerman	1997	Super Game	Taiwan
+Boogerman 2: The Final Adventure	1997	Rex Soft	Taiwan
+Bookyman	1991	NTDEC	Taiwan
+Caltron 6-in-1	1991	NTDEC	Taiwan
+Challenge of the Dragon	1990	Sachen	Taiwan
+Chess Academy	1990	Sachen	Taiwan
+Chinese Checkers	1991	Sachen	Taiwan
+Contra Spirits	1997	Hosenkan Electronics	Taiwan
+Cosmos Cop	1991	NTDEC	Taiwan
+Colorful Dragon	1989	Sachen	Taiwan
+Crystal Commando	1991	Daou Infosys	South Korea
+Dancing Block	1990	Sachen	Taiwan
+Dao Shuai	1989	Sachen	Taiwan
+Destroyer	1991	NTDEC	Taiwan
+Decathlon	1992	Computer & Entertainment	Taiwan
+Dian Shi Ma Li	1989	Fiver Firm	Taiwan
+Donkey Kong Country 4	1997	J.Y. Company	Taiwan
+Dooly Bravo Land	1992	Daou Infosys	South Korea
+Dragon Ball Z 5	1995	Rex Soft	Taiwan
+Earthworm Jim 2	1997	Super Game	Taiwan
+Felix the Cat	July 9, 1998	Dragon Co.	China
+Feng Kuang Ji Dan Zi	2001	Fuzhou Waixing Computer Science & Technology Co.,LTD	China
+Fighting Hero	1991	NTDEC	Taiwan
+Final Combat	1992	Sachen	Taiwan
+Flying Superboy	1991	Daou Infosys	South Korea
+Gaiapolis	1994	Sachen	Taiwan
+Galactic CrusaderTW
+Papillon GalsJP	1989	SachenTW
+Kinema MusicJP	Taiwan,Japan
+Family Noraebang	1993	Daou Infosys	South Korea
+Hanafuda Yūkyōde Nagarebana Oryu	1991	Hacker International	Japan
+Happy Pairs	1991	Sachen	Taiwan
+Hayama Reiko: Katsuragi Mayako no AV Hanafuda Club	1991	Hacker International	Japan
+Hee-dong Ei's Adventures	1991	Daou Infosys	South Korea
+Hell Fighter	1991	Sachen	Taiwan
+Hidden Chinese Chess	1989	Sachen	Taiwan
+Hong Lou Meng	Unknown	Dragon Co.	China
+Honey Peach	1990	Sachen	Taiwan
+Huge Insect	1993 but released in the early 2000's	Sachen	Taiwan
+Idol Shisen Mahjong	1990	Hacker International	Japan
+Janggun-ui Adeul	1992	Daou Infosys	South Korea
+Jovial Race	1989	Sachen	Taiwan
+Joyvan KidTW
+Metal Fighter μJP	1989TW
+October 30, 1991JP	SachenTW
+Kinema MusicJP	Taiwan,Japan
+Jurassic Boy	1994	Sachen	Taiwan
+Kart Fighter	1993	Ge De Industry Co.	Hong Kong
+Klax	1991	Daou Infosys	South Korea
+Koko Adventure	1993	Daou Infosys	South Korea
+Little Red Hood	1989	Sachen	Taiwan
+Locksmith	1991	Sachen	Taiwan
+Lucky 777	1989	Sachen	Taiwan
+Luan Shi San Guo	Unknown	Dragon Co.	China
+Magic Kid Googoo	1992	Zemina	South Korea
+Magical Mathematics	1990	Sachen	Taiwan
+Magic Cube	1991	Sachen	Taiwan
+Mahjong Academy	Unknown	Sachen	Taiwan
+Mahjang Companion	1990	SachenTW
+Hacker InternationalJP	Taiwan,Japan'
+Mahjong Summit Kabukichou Hen	1990	Hacker International	Japan
+Mahjong TrapTW
+Shisen Mahjong: Seifuku HenJP	1990	SachenTW
+Hacker InternationalJP	Taiwan,Japan
+Metal Force	1994	Daou Infosys	South Korea
+Middle School English	1989	Sachen	Taiwan
+Millionaire	1990	Sachen	Taiwan
+Mickey Mania 7	1996	J.Y. Company	Taiwan
+Miss Peach World	1991	Hacker International	Japan
+Mortal Kombat 3	Unknown	Super Game	Taiwan
+NEO Heiankyo Alien[17]	2017	Columbus Circle	Japan
+Octagon	1991	Daou Infosys	South Korea
+Olympic I.Q.	1991	Sachen	Taiwan
+One-eyed Jack	1991	Daou Infosys	South Korea
+Panda Baby	1997	Dragon Co.	China
+Pipe V	1990	Sachen	Taiwan
+Pocahontas Part 2	1997	Super Game	Taiwan
+Poker II	1990	Sachen	Taiwan
+Poker III	1991	Sachen	Taiwan
+Poker Mahjong	1991	Sachen	Taiwan
+Popo Team	1992	Sachen	Taiwan
+PyramidTW
+Pyramid Cleopatra Kiki IppatsuJP	1990	SachenTW
+Hacker InternationalJP	Taiwan,Japan
+Pyramid II	1990	Sachen	Taiwan
+Q Boy	1994	Sachen	Taiwan
+Raid/Tu Ji	1989	Sachen	Taiwan
+Road Runner X	1991	Daou Infosys	South Korea
+Rockball	1993	Sachen	Taiwan
+Rocman X	1995	Sachen	Taiwan
+Samurai Spirits	1995	Rex Soft	Taiwan
+Sidewinder	1989	Sachen	Taiwan
+Silver Eagle	1994	Sachen	Taiwan
+Soap Panic	1991	Hacker International	Japan
+Somari	March 1, 1994	Ge De Industry Co.	Taiwan,South Korea,Japan
+Strategist	1991	Sachen	Taiwan
+Street Heroes	1994	Sachen	Taiwan
+Super Aladdin	Unknown	Super Game	Taiwan
+Super Contra 7	1996	E.S.C. Co. Ltd	China
+Super Contra X	1994	TXC Corporation	Taiwan
+Super Donkey Kong - Xiang Jiao Chuan	1994	Liang Yi Productions	Taiwan
+Super Lion King	Unknown	Super Game	Taiwan
+Super Shinobi	1997	Super Game	Taiwan
+Super Mario World	1995	J.Y. Company	Taiwan
+Super Maruo	1986?	Unknown	Japan
+Super Pang	1991	Sachen	Taiwan
+Super Pang II	1992	Sachen	Taiwan
+Tasac	1992	Sachen	Taiwan
+Taiwan 16 Mahjong	1989	Sachen	Taiwan
+Taiwan Mahjong II	1992	Sachen	Taiwan
+The Dragon	1995	Ramar International Co., LTD.	Taiwan
+The King of Fighters '97	1997	Rex Soft	Taiwan
+The Lion King III: Timon & Pumbaa	1997	Dragon Co.	China
+The Lion King V: Timon & Pumbaa	1998	Dragon Co.	China
+The Penguin and Seal	1989	Sachen	Taiwan
+The Great Wall	1992	Sachen	Taiwan
+The World of Card Games	1990	Sachen	Taiwan
+Tom & Jerry 3	1998	Dragon Co.	China
+Tube Exploration	1991	Daou Infosys	South Korea
+Twin Eagle	1989	Sachen	Taiwan
+Utaco	Unknown	Miguel	Japan
+Wait and See!	1997	Dragon Co.	China
+Zhong Guo Da Heng	Unknown	Sachen	Taiwan
+See also
+	Video games portal
+List of Nintendo Entertainment System games
+List of Family Computer Disk System games
+Famicom
