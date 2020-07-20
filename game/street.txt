@@ -16,3 +16,38 @@ SNK
 SEGA
 
 
+
+Emulators
+name score
+
+ Kawaks 	 Windows 	 Freeware 	        Rating: Full StarFull StarFull StarHalf StarNo Star 8.1 (155 Votes) 
+  CPS1 / CPS2 and Neo Geo emulator
+
+ Zinc 	 Windows 	 Freeware 	        Rating: Full StarFull StarFull StarHalf StarNo Star 7.9 (39 Votes) 
+  Sony ZN1, ZN2 and Namco System 11 emulator
+
+ Calice 	 Windows 	 Freeware 	        Rating: Full StarFull StarFull StarHalf StarNo Star 7.9 (18 Votes) 
+  Capcom CPS-1, Capcom CPS-2, Sega System 16, Sega System 18, SNK Neogeo and Gaelco System 1 emulator
+
+ Raine 	 Windows 	 Freeware 	        Rating: Full StarFull StarFull StarHalf StarNo Star 7.8 (17 Votes) 
+  Taito and Jaleco hardware emulator.
+
+ MAME 	  Windows 	 Freeware 	        Rating: Full StarFull StarFull StarHalf StarNo Star 7.8 (587 Votes) 
+  Multiple Arcade Machine Emulator capable of running thousands of classic arcade games
+
+ RetroArch 	  Multi-platform 	 Open-Source 	        Rating: Full StarFull StarFull StarNo StarNo Star 7.7 (355 Votes) 
+  Frontend for the Libretro API, effectively a multi-system emulator
+
+ Daphne 	 Many 	 Free 	        Rating: Full StarFull StarFull StarNo StarNo Star 7.5 (17 Votes) 
+  Arcade-Lasterdisk
+
+ FinalBurn Alpha 	 Windows 	 Freeware 	        Rating: Full StarFull StarFull StarNo StarNo Star 7.5 (23 Votes) 
+  Arcade Emulator
+
+ VivaNonno 	 Windows 	 Freeware 	        Rating: Full StarFull StarHalf StarNo StarNo Star 6.9 (13 Votes) 
+  namco system 22 emulator
+
+ Nebula 	 Windows 	 Freeware 	        Rating: Full StarHalf StarNo StarNo StarNo Star 6.3 (31 Votes) 
+  CPS2, Neogeo, PGM and Konami emulator.
+
+
