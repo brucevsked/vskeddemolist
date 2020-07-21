@@ -2417,12 +2417,27 @@ https://github.com/alibaba/COLA
 聚合根与聚合根这间引用时
 初始化 由工厂来创建对象，创建对象时调用子聚合根的仓储
 
-public class MouseFactory{
+public class Root1{
+    Long rid;
+    List<Root2Id> root2List;
+}
 
-    public createMouse(){
-        AggregateRoot1 root1 = AggregateRoot1Repository.GetById（root1id); //root1
-       AggregateRoot1 root2=AggregateRoot2Repository.GetByRoot1（root1id);//root2
-      root1.setRoot2(root2);
+创建聚合根与聚合根
+public class Root1Factory{
+
+    public createRoot1(){
+       Root1 root1 = Root1Repository.GetById(rid);//get root1 by rid
+       List<root2> root2List=root1Root2Repository.getByRoot1Id(root1id);//get root2 list by root1
+      root1.setRoot2List(root2);
+    }
+}
+
+持久化聚合根与聚合根
+public class Root1Service{
+    public void save(){
+        Root1Repository.save(root1);//save root1
+        Root2Repository.save(root2);//save root2
+        root1Root2Repository.save(root1,root2);//save root2 by root1id
     }
 }
 --------------------------------------------------------------------------------
