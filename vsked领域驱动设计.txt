@@ -2413,3 +2413,16 @@ https://github.com/alibaba/COLA
 物流场景
 订单地址 是关注核心
 --------------------------------------------------------------------------------
+
+聚合根与聚合根这间引用时
+初始化 由工厂来创建对象，创建对象时调用子聚合根的仓储
+
+public class MouseFactory{
+
+    public createMouse(){
+        AggregateRoot1 root1 = AggregateRoot1Repository.GetById（root1id); //root1
+       AggregateRoot1 root2=AggregateRoot2Repository.GetByRoot1（root1id);//root2
+      root1.setRoot2(root2);
+    }
+}
+--------------------------------------------------------------------------------
