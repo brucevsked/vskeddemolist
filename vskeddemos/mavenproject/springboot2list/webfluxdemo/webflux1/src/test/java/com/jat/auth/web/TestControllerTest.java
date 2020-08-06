@@ -5,51 +5,41 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.jat.test.BaseTest;
 
+import reactor.core.publisher.Mono;
+
 public class TestControllerTest extends BaseTest{
 	
-	MockMvc mvc;
+	private static final Logger log = LoggerFactory.getLogger(TestControllerTest.class);
+	
+	WebClient webClient;
 	
     @Autowired
     TestController testController;
     
     @BeforeClass
     public void initMvc(){
-        mvc = MockMvcBuilders.standaloneSetup(testController).build();
+    	//webClient = WebClient.create();
+    	//webClient = WebClient.create("http://127.0.0.1:8181");
     }
     
     @Test
     public void test1() throws Exception {
-        /**
-         * 用来测试post,前端传值时直接传参数，后端封装成对象用@ModelAttribute
-         */
-        RequestBuilder request = post("/test")
-                .param("username", "vskeda1username")
-                .param("password", "mypassword is unknown");
-        mvc.perform(request)
-                .andExpect(content().string(equalTo("testok1")));
-
+    	String reqUrl="http://127.0.0.1:8181";
+    	webClient=WebClient.builder().baseUrl(reqUrl).build();
+    	Mono<String> respMono=webClient.get().uri("/test1").retrieve().bodyToMono(String.class);
+    	log.info("|"+respMono.block()+"|");
     }
     
-    @Test
-    public void test2() throws Exception {
-        /**
-         * 用来测试get,前端在请求路径或问号后面传参数时，后端封装用@PathVariable("ida") String id 或 @Param("username") String username
-         */
-        RequestBuilder request = get("/test/9631")
-                .param("username", "vskeda1username")
-                .param("password", "mypassword is unknown");
-        mvc.perform(request)
-                .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("9631testok2vskeda1username")));
-
-    }
-
 }

@@ -1,12 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.vsked</groupId>
-  <artifactId>vskedtool</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>vskedtool Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.vsked</groupId>
+	<artifactId>vskedtool</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+	<name>vskedtool</name>
+	
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,10 +19,11 @@
 		<jackson.version>2.9.8</jackson.version>
 		<!-- 解决pom头部unkonow错误 -->
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-		
+
 		<slf4j.version>1.7.30</slf4j.version>
 		<log4j2.version>2.13.1</log4j2.version>
 	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -50,22 +52,22 @@
 			<artifactId>jstl-impl</artifactId>
 			<version>1.2</version>
 		</dependency>
-<!-- slf4j start -->
-<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>${slf4j.version}</version>
-</dependency>
+		<!-- slf4j start -->
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
 
-<!-- slf4j end -->
+		<!-- slf4j end -->
 		<!-- log4j2 start -->
-<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-slf4j-impl</artifactId>
+		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${log4j2.version}</version>
-</dependency>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
 		<dependency>
@@ -96,16 +98,16 @@
 			<artifactId>retrofit</artifactId>
 			<version>2.2.0</version>
 		</dependency>
-<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-<dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>2.6</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
 
 	</dependencies>
-  <build>
-    <finalName>vskedtool</finalName>
+	<build>
+		<finalName>vskedtool</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -127,5 +129,5 @@
 				</configuration>
 			</plugin>
 		</plugins>
-  </build>
+	</build>
 </project>

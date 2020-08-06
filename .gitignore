@@ -27,3 +27,12 @@ vskeddemos/mavenproject/designmode/.settings/org.eclipse.wst.common.component
 vskeddemos/mavenproject/vskedtool/.myeclipse/**/*.*
 vskeddemos/mavenproject/vskedtool/target/**/*.*
 todo/springsecurity/.idea/*.*
+vskeddemos/mavenproject/designmode/.classpath
+vskeddemos/mavenproject/designmode/.classpath
+vskeddemos/mavenproject/designmode/.project
+vskeddemos/mavenproject/designmode/.classpath
+vskeddemos/mavenproject/designmode/.settings/.jsdtscope
+*.prefs
+*.component
+vskeddemos/mavenproject/designmode/.settings/org.eclipse.wst.common.project.facet.core.xml
+vskeddemos/mavenproject/vskedtool/.settings/org.eclipse.jdt.core.prefs
