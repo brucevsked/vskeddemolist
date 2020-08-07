@@ -3,6 +3,18 @@
 2 创建数据量大的表时使用时间或其他方式进行分区
 3 表空间设置空无限并自动扩展
 
+重要操作前
+em一定要调试好
+虚拟机实验
+硬盘快照 与定期备份策略
+数据备份,
+
+重要操作后
+重启oracle服务测试
+重启服务器操作系统测试
+发现问题及时恢复硬盘快照
+
+
 在数据库用户下相关命令
 dba用户登录
 sqlplus / as sysdba
@@ -1159,3 +1171,31 @@ end;
 exec dropObject('temp_table','table');
 
 --------------------------------------------------------------------------
+
+
+启动日志：
+$ORACLE_BASE/diag/rdbms/ora11g/ora11g/trace/alert_ora11g.log (ora11g为SID值)
+
+
+startup mount;(startup nomount只是启动了实例而没有启动数据库，startup mount启动了实例，并加载了数据库，但是数据库没有打开，startup是最全的，实例，数据库加载，数据库打开都完成。)
+
+startup mount;
+
+mkdir -p /home/oracle/arp/oraarp/archive
+
+sqlplus "/as sysdba";
+conn sys/aaa@orcl as sysdba
+
+startup mount;
+修改归档位置/oracleData/oracle/fast_recovery_area
+alter system set log_archive_dest_1='location=/oracleData/oracle/fast_recovery_area';
+启用归档模式
+SQL> alter database archivelog;
+SQL> alter database open;
+SQL> archive log list;
+
+切回非归档模式
+alter database noarchivelog;
+startup force
+ALTER SYSTEM SET FAST_START_MTTR_TARGET=30;
+emctl start dbconsole
