@@ -232,34 +232,82 @@ select * from testphone where phoneNum REGEXP '2$';
 
 确认binlog已经开始最好是row模式
 
-登录到数据库
-mysql -uroot -p123
 创建与删除数据库（仅用来测试实际恢复跳过此步）
-mysql> create database xiaohai;
-mysql> drop database xiaohai;
+CREATE TABLE `vskedtest`  (
+  `testid` int(11) NOT NULL AUTO_INCREMENT,
+  `testname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `testmark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`testid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
-查看binlog日志
+-- ----------------------------
+-- Records of vskedtest
+-- ----------------------------
+INSERT INTO `vskedtest` VALUES (1, 'v1', 'v1');
+INSERT INTO `vskedtest` VALUES (2, 'v2', 'v2');
+INSERT INTO `vskedtest` VALUES (3, 'v3', 'vvv3');
+INSERT INTO `vskedtest` VALUES (4, 'v4', 'v4');
+INSERT INTO `vskedtest` VALUES (5, 'v5', 'v5');
+INSERT INTO `vskedtest` VALUES (6, 'v6', '6');
+INSERT INTO `vskedtest` VALUES (7, 'v7', 'v7');
+INSERT INTO `vskedtest` VALUES (8, 'v8', 'v8');
+INSERT INTO `vskedtest` VALUES (9, 'v9', 'v9');
+INSERT INTO `vskedtest` VALUES (10, 'v10', 'vv');
+INSERT INTO `vskedtest` VALUES (11, 'v11', 'v111');
 
+模拟误制作，此处以删除mysql数据为例
+delete from `vskedtest`;
+
+开始恢复，在线上的话，应该比较复杂，要先进行锁表
+lock tables vskedtest read ;
+查询mysql所有的binlog文件
+show master logs;
+查询当前mysql已经记录到哪个binlog子文件中
+show master status;
+查看binlog的路径
+show variables like "log_%";
+
+通过mysqlbinlog命令打开binlog文件，并在mysql-bin.000001 文件中查找“删除”记录
+mysqlbinlog  --no-defaults --base64-output=decode-rows -v -v mysql-bin.000001 | grep -B 15 -A 15 'DELETE FROM'
+拷贝mysql-bin.000001 文件中的删除记录到指定位置的文件中 mydeletedata.txt
+mysqlbinlog --no-defaults --base64-output=decode-rows -v -v mysql-bin.000001| sed -n '/### DELETE FROM `ry`.`vskedtest`/,/COMMIT/p' > mydeletedata.txt
+
+将 mydeletedata.txt 文件中的记录转换成sql语句 注意@3.*这一句里3是指第几个逗号要转换成分号
+cat mydeletedata.txt | sed -n '/###/p' | sed 's/### //g;s/\/\*.*/,/g;s/DELETE FROM/INSERT INTO/g;s/WHERE/SELECT/g;' |sed -r 's/(@3.*),/\1;/g' | sed 's/@[1-9]=//g' > mydata.sql
+
+再手工处理下数据导入
+mysql -uroot -p123 <mydata.sql;
+
+select * from `vskedtest`;
+
+然后去查看从哪里开始执行了删除
+
+
+
+删除开始位置
+mysqlbinlog -vv --start-datetime='2020-08-11 16:58:00' --stop-datetime='2020-08-11 17:00:00' mysql-bin.000001| grep "vskedtest" | more
+show binlog events in 'mysql-bin.000001';
+远程连接上mysql所在服务器
+
+
+查看binlog日志根据/etc/my.cnf配置文件看到binlog存储目录
+
+mysqlbinlog /data/mysqllocal/log/binlog/mysql-bin.000001
 [root@db01 binlog]# mysqlbinlog mysql-bin.000008
-# at 1200  注意这里可能是你执行其他正常sql语句时的起点
-#200409 16:41:36 server id 10  end_log_pos 1297 CRC32 0x84e92ac7 	Query	thread_id=8   exec_time=0	error_code=0
-SET TIMESTAMP=1586421696/*!*/;
-create database xiaohai
-/*!*/;
-# at 1297  注意这里 是你误操作执行删除数据前，下面就是你执行误操作的时间，这里是终点
-#200409 16:42:24 server id 10  end_log_pos 1384 CRC32 0xfdf1d747 	Query	thread_id=8   exec_time=0	error_code=0
-SET TIMESTAMP=1586421744/*!*/;
-drop database xiaohai
-/*!*/;
-DELIMITER ;
-# End of log file
-ROLLBACK /* added by mysqlbinlog */;
-/*!50003 SET COMPLETION_TYPE=@OLD_COMPLETION_TYPE*/;
-/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=0*/;
+
+
+ mysqlbinlog /data/mysqllocal/log/binlog/mysql-bin.000001
+
+通过binlog日志可以看到Delete_rows是删除行，向上看找到误删除以前的at XXX
 
 
 恢复数据
-[root@db01 binlog]# mysqlbinlog mysql-bin.000008 --start-position=1200 --stop-position=1297>test.sql
+mysqlbinlog /data/mysqllocal/log/binlog/mysql-bin.000001 --start-position=289 --stop-position=2353>test20200811.sql
+登录到数据库
+mysql -uroot -p123
+source /data/mysqllocal/log/binlog/test20200811.sql
+
+mysqlbinlog mysql-bin.000008 --start-position=1200 --stop-position=2353>test.sql
 mysql> source /data/binlog/test.sql;
 mysql> show databases;
 
@@ -893,3 +941,6 @@ LimitNOFILE = 5000
 
 执行命令
 systemctl enable mysql
+
+systemctl start mysqld
+systemctl stop mysqld
