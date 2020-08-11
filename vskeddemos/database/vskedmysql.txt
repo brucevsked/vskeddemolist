@@ -226,6 +226,44 @@ select concat('a','b','c');
 select * from testphone where phoneNum REGEXP '2$';
 
 29* 误删除数据恢复 误delete恢复
+
+
+方案1本地binlog开启时恢复
+
+确认binlog已经开始最好是row模式
+
+登录到数据库
+mysql -uroot -p123
+创建与删除数据库（仅用来测试实际恢复跳过此步）
+mysql> create database xiaohai;
+mysql> drop database xiaohai;
+
+查看binlog日志
+
+[root@db01 binlog]# mysqlbinlog mysql-bin.000008
+# at 1200  注意这里可能是你执行其他正常sql语句时的起点
+#200409 16:41:36 server id 10  end_log_pos 1297 CRC32 0x84e92ac7 	Query	thread_id=8   exec_time=0	error_code=0
+SET TIMESTAMP=1586421696/*!*/;
+create database xiaohai
+/*!*/;
+# at 1297  注意这里 是你误操作执行删除数据前，下面就是你执行误操作的时间，这里是终点
+#200409 16:42:24 server id 10  end_log_pos 1384 CRC32 0xfdf1d747 	Query	thread_id=8   exec_time=0	error_code=0
+SET TIMESTAMP=1586421744/*!*/;
+drop database xiaohai
+/*!*/;
+DELIMITER ;
+# End of log file
+ROLLBACK /* added by mysqlbinlog */;
+/*!50003 SET COMPLETION_TYPE=@OLD_COMPLETION_TYPE*/;
+/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=0*/;
+
+
+恢复数据
+[root@db01 binlog]# mysqlbinlog mysql-bin.000008 --start-position=1200 --stop-position=1297>test.sql
+mysql> source /data/binlog/test.sql;
+mysql> show databases;
+
+方案2在其他机器上恢复
 第一步先将当前数据库同步到本地一份取名跟线上名字一样
 第二步下载binlog文件
 第三步解压
