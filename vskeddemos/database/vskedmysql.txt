@@ -17,6 +17,7 @@ binlog_rows_query_log_events = 1
 然后重启mysql服务
 查看日志状态
 show variables like 'log_%'; 
+show variables like '%log_bin%';
 
 
 查看当前表行存储格式
@@ -665,3 +666,192 @@ max_connections=11210
 
 2对数据量大的表添加分区，并对查询参数添加索引
 
+
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html
+
+[mysqld]
+#
+# Remove leading # and set to the amount of RAM for the most important data
+# cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+# innodb_buffer_pool_size = 128M
+#
+# Remove leading # to turn on a very important data integrity option: logging
+# changes to the binary log between backups.
+# log_bin
+#
+# Remove leading # to set options mainly useful for reporting servers.
+# The server defaults are faster for transactions and fast SELECTs.
+# Adjust sizes as needed, experiment to find the optimal values.
+# join_buffer_size = 128M
+# sort_buffer_size = 2M
+# read_rnd_buffer_size = 2M
+datadir=/data/mysql/mysql
+socket=/data/mysql/mysql/mysql.sock
+
+tmpdir = /data/mysql/tmp
+
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+pid-file=/var/run/mysqld/mysqld.pid
+character_set_server = utf8mb4
+default-storage-engine = InnoDB
+
+#  ---------------- Connection/File/Table ----------------
+interactive_timeout = 1800
+wait_timeout = 1800
+lock_wait_timeout = 1800
+skip_name_resolve = 1
+max_connections = 1000
+max_user_connections = 256
+max_connect_errors = 20000
+back_log = 600
+open_files_limit = 8192
+table_open_cache = 4096
+table_definition_cache = 4096
+table_open_cache_instances = 64
+
+#  ---------------- Session Buffer Cache ----------------
+query_cache_size = 0
+query_cache_type = 0
+max_allowed_packet = 64M
+read_buffer_size = 16M
+read_rnd_buffer_size = 16M
+sort_buffer_size = 16M
+tmp_table_size = 64M
+join_buffer_size = 32M
+thread_cache_size = 64
+thread_stack = 256K
+
+#  ---------------- Logfile ----------------
+log-error = /data/mysql/log/error.log
+slow_query_log = 1
+slow_query_log_file = /data/mysql/log/slow.log
+log_queries_not_using_indexes = 1
+log_throttle_queries_not_using_indexes = 10
+min_examined_row_limit = 100
+binlog-rows-query-log-events = 1
+log-bin-trust-function-creators = 1
+long_query_time = 0.1
+#  ---------------- Binlog ----------------
+server-id = 101
+log-bin = /data/mysql/log/binlog/mysql-bin
+log-bin-index = /data/mysql/log/binlog/mysql-bin.index
+binlog_format = row
+expire_logs_days = 32
+sync_binlog = 1
+binlog_cache_size = 8M
+max_binlog_cache_size = 2048M
+max_binlog_size = 1024M
+binlog_rows_query_log_events = 1
+#  ---------------- InnoDB ----------------
+innodb_buffer_pool_size = 18G
+innodb_buffer_pool_instances = 8
+innodb_online_alter_log_max_size = 1024M
+innodb_thread_concurrency = 8
+innodb_io_capacity = 4000
+innodb_io_capacity_max = 8000
+innodb_sort_buffer_size = 64M
+innodb_page_size = 16K
+innodb_open_files = 4096
+innodb_flush_log_at_trx_commit = 1
+innodb_read_io_threads = 8
+innodb_write_io_threads = 8
+innodb_purge_threads = 4
+innodb_max_dirty_pages_pct = 80
+innodb_buffer_pool_load_at_startup = 1
+innodb_buffer_pool_dump_at_shutdown = 1
+innodb_lock_wait_timeout = 10
+innodb_rollback_on_timeout = 1
+innodb_lru_scan_depth = 4096
+innodb_flush_method = O_DIRECT
+innodb_checksum_algorithm = CRC32
+innodb_file_per_table = 1
+innodb_file_format = Barracuda
+innodb_file_format_max = Barracuda
+innodb_flush_neighbors = 0
+innodb_large_prefix = 1
+innodb_print_all_deadlocks = 1
+innodb_stats_persistent_sample_pages = 64
+innodb_autoinc_lock_mode = 2
+innodb_sync_spin_loops = 100
+innodb_spin_wait_delay = 30
+innodb_stats_on_metadata = 0
+
+#  ---------------- perforamnce_schema ----------------
+performance-schema-instrument = 'memory/%=COUNTED'
+performance_schema_digests_size = 40000
+performance_schema_max_table_instances = 40000
+performance_schema_max_sql_text_length = 4096
+performance_schema_max_digest_length = 4096
+
+
+
+-----------------------------------------------------------------
+
+centos7 安装mysql5.7
+
+yum list installed | grep yum-utils
+yum -y install yum-utils
+
+安装mysql源
+wget -P ./ http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+rpm -ivh mysql57-community-release-el7-11.noarch.rpm
+
+检查mysql的yum源是否安装成功
+yum repolist enabled | grep "mysql.*-community.*" 
+
+关闭操作系统原mysql模块
+yum module disable mysql
+
+安装新的mysql5.7版本
+yum -y install mysql-community-server
+
+启动mysql服务
+systemctl start mysqld
+
+查找新安装的数据库密码
+grep 'temporary password' /var/log/mysqld.log
+
+=CqLdnkd=1(c
+
+登录并修改mysql数据库密码
+mysql -uroot -p
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'Y4yhl9tbf110_';
+更新localhost为%
+use mysql
+update user set host='%' where user='root';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'Y4yhl9tbf110_' WITH GRANT OPTION;
+flush privileges;
+
+参数见上面
+vi /etc/my.cnf
+
+如果需要修改端口号
+port=3308
+
+开机自启动mysql
+vi /usr/lib/systemd/system/mysql.service
+
+[Unit]
+Description=MySQL Server
+Documentation=man:mysqld(8)
+Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html
+After=network.target
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=mysql
+Group=mysql
+ExecStart=/usr/local/mysql/bin/mysqld --defaults-file=/etc/my.cnf
+LimitNOFILE = 5000
+#Restart=on-failure
+#RestartPreventExitStatus=1
+#PrivateTmp=false
+
+
+执行命令
+systemctl enable mysql
