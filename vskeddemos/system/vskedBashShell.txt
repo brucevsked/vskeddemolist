@@ -1,130 +1,130 @@
 Bourne Again Shell
 
-Í·²¿ÒªĞ´
+å¤´éƒ¨è¦å†™
 #!/bin/bash
 
 set -x #open script debug
 
-1* Ìí¼ÓÖ´ĞĞÈ¨ÏŞ
-chmod +x ½Å±¾Ãû
+1* æ·»åŠ æ‰§è¡Œæƒé™
+chmod +x è„šæœ¬å
 chmod +x testsh1.sh
 
-2*Ö´ĞĞ½Å±¾
-µ±Ç°Â·¾¶Ö´ĞĞ
-./½Å±¾Ãû
+2*æ‰§è¡Œè„šæœ¬
+å½“å‰è·¯å¾„æ‰§è¡Œ
+./è„šæœ¬å
 testsh1.sh
 
-È«Â·¾¶Ö´ĞĞ
+å…¨è·¯å¾„æ‰§è¡Œ
 /tmp/vskedtest/testsh1.sh 
 
-½âÊÍÆ÷Ö´ĞĞ
-/bin/sh ½Å±¾Â·¾¶
+è§£é‡Šå™¨æ‰§è¡Œ
+/bin/sh è„šæœ¬è·¯å¾„
 /bin/sh testsh1.sh
 /bin/sh /tmp/vskedtest/testsh1.sh
 
-3*±éÀúÄ¿Â¼ÏÂÎÄ¼ş
-shpfilepath=`ls /tmp/vskedtest/*.shp` #¶¨Òå±éÀúµÄÄ¿Â¼
+3*éå†ç›®å½•ä¸‹æ–‡ä»¶
+shpfilepath=`ls /tmp/vskedtest/*.shp` #å®šä¹‰éå†çš„ç›®å½•
 
 for shpFile in $shpfilepath
   do
     echo $shpFile
 done
 
-4*Ö´ĞĞÖ¸¶¨½Å±¾
-source ½Å±¾Â·¾¶
+4*æ‰§è¡ŒæŒ‡å®šè„šæœ¬
+source è„šæœ¬è·¯å¾„
 
-5* forÑ­»·ÊıÖµ
+5* forå¾ªç¯æ•°å€¼
 for j in $(seq 1 3)
 do
   echo $j  #1 2 3
 done
 
-¿ìËÙÉú³ÉÎÄ¼şÊ¾Àı
+å¿«é€Ÿç”Ÿæˆæ–‡ä»¶ç¤ºä¾‹
 for j in $(seq 1 10)
 do 
   echo $j>$j.xml
 done
 
-6* ±äÁ¿×ÔÔö1
+6* å˜é‡è‡ªå¢1
 1  i=`expr $i + 1`;
 2  let i+=1;
 3  ((i++));
 4  i=$[$i+1];
 5  i=$(( $i + 1 ))
 
-7* ½ÓÊÕ´«Èë²ÎÊı
-$0 ÕıÔÚÖ´ĞĞÂ·¾¶±¾Éí
-$1 µÚÒ»¸ö²ÎÊı
-$2 µÚ¶ş¸ö²ÎÊı
+7* æ¥æ”¶ä¼ å…¥å‚æ•°
+$0 æ­£åœ¨æ‰§è¡Œè·¯å¾„æœ¬èº«
+$1 ç¬¬ä¸€ä¸ªå‚æ•°
+$2 ç¬¬äºŒä¸ªå‚æ•°
 
-8* ÑÓÊ±
-sleep ÃëÊı
+8* å»¶æ—¶
+sleep ç§’æ•°
 sleep 1
 
-9*¿ªÆô»ò¹Ø±Õ½Å±¾µ÷ÊÔ
-¿ªÆô
+9*å¼€å¯æˆ–å…³é—­è„šæœ¬è°ƒè¯•
+å¼€å¯
 set -x
-¹Ø±Õ
+å…³é—­
 set +x
-ĞèÒªĞ´µ½#!/bin/bashĞĞÏÂ»ò
+éœ€è¦å†™åˆ°#!/bin/bashè¡Œä¸‹æˆ–
 /bin/sh -x  xxxx.sh
 
-10*Ö´ĞĞÍâ²¿ÃüÁî
+10*æ‰§è¡Œå¤–éƒ¨å‘½ä»¤
 pgsql_path=/usr/bin
 $pgsql_path/shp2pgsql -s 3857 -c -W 
 
-11* »ñÈ¡ÏµÍ³µ±Ç°Ê±¼ä
-Ô­Ê¼Ê±¼ä
+11* è·å–ç³»ç»Ÿå½“å‰æ—¶é—´
+åŸå§‹æ—¶é—´
 echo $(date)
-¸ñÊ½»¯Êä³ö
+æ ¼å¼åŒ–è¾“å‡º
 echo $(date "+%Y-%m-%d %H:%M:%S")
 
 
-12* Êä³ö
-Êä³öµ½¿ØÖÆÌ¨
-echo "×Ö·û´®»ò±äÁ¿"
-Êä³öµ½ÎÄ¼ş¸²¸Ç·½Ê½
+12* è¾“å‡º
+è¾“å‡ºåˆ°æ§åˆ¶å°
+echo "å­—ç¬¦ä¸²æˆ–å˜é‡"
+è¾“å‡ºåˆ°æ–‡ä»¶è¦†ç›–æ–¹å¼
 echo "abc" > /opt/testfile111
-Êä³öµ½ÎÄ¼ş×·¼Ó·½Ê½
+è¾“å‡ºåˆ°æ–‡ä»¶è¿½åŠ æ–¹å¼
 echo "abc122" >> /opt/testfile111
 
-13* ¶¨Òåº¯Êı
+13* å®šä¹‰å‡½æ•°
 
 function myfun1(){
 echo "this is myoupt"
-echo "input parameter1µÚÒ»¸ö²ÎÊı" $1
-echo "input parameter2µÚ¶ş¸ö²ÎÊı" $2
+echo "input parameter1ç¬¬ä¸€ä¸ªå‚æ•°" $1
+echo "input parameter2ç¬¬äºŒä¸ªå‚æ•°" $2
 
 }
-º¯Êıµ÷ÓÃ
+å‡½æ•°è°ƒç”¨
 myfun1 hello world
 
-14* ±äÁ¿¶¨ÒåÓëÊ¹ÓÃ
+14* å˜é‡å®šä¹‰ä¸ä½¿ç”¨
 
 myname="vsked"
 echo ${myname}
 
-15* whileÑ­»·
+15* whileå¾ªç¯
 while condition
 do
     command
 done
 
-ÓĞÏŞÑ­»·
+æœ‰é™å¾ªç¯
 int=1
 while(( $int<=5 ))
 do
     echo $int
     let "int++"
 done
-ÎŞÏŞÑ­»·
+æ— é™å¾ªç¯
 int=1
 while :
 do
     echo $int
     let "int++"
 done
-Ê¾Àı
+ç¤ºä¾‹
 
 interval=6
 
@@ -138,7 +138,7 @@ echo "good idea"
 
 done
 
-16* Ö´ĞĞÏµÍ³ÃüÁî(×¢ÒâÊÇ·´ÒıºÅ£¡)
+16* æ‰§è¡Œç³»ç»Ÿå‘½ä»¤(æ³¨æ„æ˜¯åå¼•å·ï¼)
 sourceFolderom="/opt/testsh/om/"
 
 for omFile in `ls $sourceFolderom`

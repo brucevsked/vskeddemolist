@@ -1,4 +1,4 @@
-﻿secure crt保存会话日志
+secure crt保存会话日志
 options->global options->default session->edit default settings->logfile->指定保存路径->Change ALL Sessions(no undo)
 1. Session Options --> Terminal 中将Anti-idle下的 Sending String选项打钩，并且在后面输入框中随意输入几个空格。用处是防止你在停止操作几分钟后操作会被断开，设置之后，每隔五分钟客户端会自动向服务器端发送几个空格，从而保活连接。
 2. Session Options --> Terminal --> Emulation界面中，将Emulation下的Terminal下拉条选为Linux，并且勾选ANSI color，会让你的文件和文件夹显示Linux支持的各种颜色，很容易分辨

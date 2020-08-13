@@ -439,6 +439,30 @@ source命令还原
 mysql > use db_name
 mysql > source /backup/mysqldump/db_name.db
 
+
+-B参数备份和恢复（建议使用）
+（1）备份操作
+a、备份
+mysqldump -uroot -p'123456' -B mytest > /mnt/mytest_bak_B.sql
+
+说明：加了-B参数后，备份文件中多的Create database和use mytest的命令
+加-B参数的好处：
+加上-B参数后，导出的数据文件中已存在创建库和使用库的语句，不需要手动在原库是创建库的操作，在恢复过程中不需要手动建库，可以直接还原恢复。
+
+（2）恢复操作
+a、删除mytest库
+mysql -uroot -p'123456' -e "drop database mytest;"
+b、恢复数据
+（1）使用不带参数的导出文件导入（导入时不指定要恢复的数据库），报错
+mysql -uroot - p'123456' < /mnt/mytest_bak.sql   
+ERROR 1046 (3D000) at line 22: No database selected
+（2）使用带-B参数的导出文件导入（导入时也不指定要恢复的数据库），成功
+mysql -uroot -p'123456' < /mnt/mytest_bak_B.sql 
+c、查看数据
+mysql -uroot -p'123456' -e "select * from mytest.student;"
+
+
+
 --------------------------------
 problem
 
@@ -967,3 +991,60 @@ systemctl enable mysql
 
 systemctl start mysqld
 systemctl stop mysqld
+
+
+-----------------------------------------------------------------
+mysql定时备份脚本
+
+mkdir -p /opt/vskedsh/
+cd /opt/vskedsh/
+vi mysqlfullbackup.sh
+
+#!/bin/bash
+
+# now time 20200813
+dateNow=$(date "+%Y%m%d")
+
+mysqlUserName=root
+mysqlUserPass=root123
+backUpDatabaseName=ry
+# my socket path
+# mysqlSocket=/data/mysql/mysql/mysql.sock
+#default socket path
+mysqlSocket=/var/lib/mysql/mysql.sock
+
+fullBackUpFolderBase=/data/backup/mysql/fullbackup
+fullBackUpFolder="${fullBackUpFolderBase}/${dateNow}"
+
+mkdir -p ${fullBackUpFolder}
+
+fullBackUpLog="${fullBackUpFolderBase}/mysqlFullBackUp.log"
+
+echo "start full back up:$(date "+%Y-%m-%d %H:%M:%S")" >> ${fullBackUpLog}
+echo $(date) >> ${fullBackUpLog}
+
+backUpFileNameBase="$(date "+%Y%m%d%H%M%S")fullback.sql"
+backUpFileName="${fullBackUpFolder}/${backUpFileNameBase}"
+mysqldump --socket=${mysqlSocket} -u${mysqlUserName} -p${mysqlUserPass} -B ${backUpDatabaseName} > ${backUpFileName}
+
+cd ${fullBackUpFolder}
+tar -zcvf ${backUpFileName}.tar.gz ${backUpFileNameBase}
+rm -rf ${backUpFileName}
+echo "finish full back up:$(date "+%Y-%m-%d %H:%M:%S")" >> ${fullBackUpLog}
+
+
+
+添加完脚本后记得加权限
+chmod +x /opt/vskedsh/mysqlfullbackup.sh
+
+定时脚本
+crontab -e
+每天23点50执行一次
+50 23 */1 * * /opt/vskedsh/mysqlfullbackup.sh
+
+还原命令
+还原前先再备份一次数据库
+删除要还原的数据库
+mysql -uroot -pY4yhl9tbf110_ < /data/backup/20200813103207fullback.sql
+
+-----------------------------------------------------------------
