@@ -415,6 +415,29 @@ INSERT INTO t1 (a,b,c) VALUES (1,2,3)
 其中update相当于执行了
 UPDATE t1 SET c=c+1 WHERE a=1;
 
+37* 全量备份 与 全量还原
+备份所有数据库
+mysqldump -uroot -p --all-databases > /backup/mysqldump/all.db
+
+备份指定数据库
+mysqldump -uroot -p test > /backup/mysqldump/test.db
+
+备份指定数据库指定表(多个表以空格间隔)
+mysqldump -uroot -p  mysql db event > /backup/mysqldump/2table.db
+
+备份指定数据库排除某些表
+mysqldump -uroot -p test --ignore-table=test.t1 --ignore-table=test.t2 > /backup/mysqldump/test2.db
+
+还原操作
+注：在导入备份数据库前，db_name如果没有，是需要创建的； 而且与db_name.db中数据库名是一样的才可以导入
+创建要还原的库名
+mysqladmin -uroot -p create db_name 
+系统命令还原
+mysql -uroot -p  db_name < /backup/mysqldump/db_name.db
+
+source命令还原
+mysql > use db_name
+mysql > source /backup/mysqldump/db_name.db
 
 --------------------------------
 problem

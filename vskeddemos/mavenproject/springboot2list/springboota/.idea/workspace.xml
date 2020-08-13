@@ -1,8 +1,628 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:commonconfigurationdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:commonlangdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:commonscodecdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:commonscompress" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:ftpdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:hikaricpdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:imgdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jacksondemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jodatimedemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jodddboomdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jsoupdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:log4j2demo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:logbackdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:retrofitdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:shirorestful" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:shirorestfulpagination" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:simcustc1" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:slf4jdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:socketdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:springmvcdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:springmvcjdbctemplate" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:springmvcmybatismysql" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:springmvcshiro" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:springmybatis2demo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:springnoxmljdbc" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:springsessiondemo1" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:ssmmv" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:ssmmv" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:ssmmv0" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:ssmmv" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:ssmmv0x" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:tess4jdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:tesseractocrdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskedtool" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:xmldemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:mavenproject" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:youtudemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:js" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:js" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:highstock201" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:js" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:highstock201" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:exporting-server" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:js" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:highstock201" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:exporting-server" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:java" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:js" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:highstock201" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:exporting-server" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:java" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:highcharts-export" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:js" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:js" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dojo193" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:js" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dojo193" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dijit" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:js" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dojo193" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dojox" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:vskeddemos" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:projects" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:jslibdemo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:WebRoot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:js" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dojo193" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:gridx" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4157b039-eacc-41a7-9fbb-661c8cfdb622" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="4157b039-eacc-41a7-9fbb-661c8cfdb622" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/springboota.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../database/vskedmysql.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../database/vskedmysql.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vsked/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vsked/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vsked/controller/SysUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vsked/controller/SysUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../system/vskedcenteros.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../system/vskedcenteros.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../system/vskeddos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../system/vskeddos.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../system/vskedvagrant.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../system/vskedvagrant.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,46 +635,48 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="userSettingsFile" value="E:\Program Files\apache-maven\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-      </MavenImportingSettings>
-    </option>
   </component>
   <component name="ProjectId" id="1PwdOqQwuOFGrGNgWXPeK7xBNH5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static" />
+    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="L:\git\vskeddemolist\vskeddemos\mavenproject\springboot2list\springboota\src\main\resources\static" />
+      <recent name="L:\git\vskeddemolist\vskeddemos\mavenproject\springboot2list\springboota\src\main\resources" />
       <recent name="L:\Users\brucevsked\Desktop\springboota\src\main\resources" />
       <recent name="L:\Users\brucevsked\Desktop\springboota\src\main\java\com\vsked" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.Application">
     <configuration name="springboota [clean]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
@@ -106,10 +728,83 @@
       <option name="presentableId" value="Default" />
       <updated>1566789063659</updated>
       <workItem from="1566789064953" duration="628000" />
+      <workItem from="1597217703570" duration="861000" />
+      <workItem from="1597219064681" duration="298000" />
+      <workItem from="1597219410665" duration="441000" />
+      <workItem from="1597219876708" duration="54000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1323" height="212" key="GridCell.Tab.0.bottom" timestamp="1597219853926">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597219853926" />
+    <state width="1323" height="212" key="GridCell.Tab.0.center" timestamp="1597219853926">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1597219853926" />
+    <state width="1323" height="212" key="GridCell.Tab.0.left" timestamp="1597219853926">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1597219853926" />
+    <state width="1323" height="212" key="GridCell.Tab.0.right" timestamp="1597219853926">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1597219853926" />
+    <state width="1323" height="212" key="GridCell.Tab.1.bottom" timestamp="1597219853927">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597219853927" />
+    <state width="1323" height="212" key="GridCell.Tab.1.center" timestamp="1597219853927">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1597219853927" />
+    <state width="1323" height="212" key="GridCell.Tab.1.left" timestamp="1597219853926">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1597219853926" />
+    <state width="1323" height="212" key="GridCell.Tab.1.right" timestamp="1597219853927">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1597219853927" />
+    <state width="1323" height="212" key="GridCell.Tab.2.bottom" timestamp="1597219853928">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597219853928" />
+    <state width="1323" height="212" key="GridCell.Tab.2.center" timestamp="1597219853927">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1597219853927" />
+    <state width="1323" height="212" key="GridCell.Tab.2.left" timestamp="1597219853927">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1597219853927" />
+    <state width="1323" height="212" key="GridCell.Tab.2.right" timestamp="1597219853927">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="212" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1597219853927" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1597218510266">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1597218510266" />
   </component>
 </project>

@@ -82,6 +82,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "D:/WWW", "/wwwroot"
   config.memory = 4096 #内存
   config.cpus = 2 #cpu设置
+  config.gui = false #是否显示虚拟机界面
 end
 
 

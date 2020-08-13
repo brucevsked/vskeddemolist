@@ -468,6 +468,73 @@ yum install cifs-utils
 mount -o user=hary,pass=123 //IP/common /mnt/test
 
 
+30* 定时任务
+yum -y install vixie-cron
+yum -y install crontabs
+
+systemctl start crond
+systemctl stop crond
+systemctl restart crond
+systemctl reload crond
+systemctl status crond
+systemctl enable crond
+
+日志文件:  ll /var/log/cron*
+编辑文件： vim /etc/crontab       
+进程：ps -ef | grep crond  ==> /etc/init.d/crond restart
+作用：定时备份，实时备份
+
+Linux下的任务调度分为两类，系统任务调度和用户任务调度。
+    系统任务调度：系统周期性所要执行的工作，比如写缓存数据到硬盘、日志清理等。
+        在/etc/crontab文件，这个就是系统任务调度的配置文件。
+    用户任务调度：用户定期要执行的工作，比如用户数据备份、定时邮件提醒等。
+        用户可以使用 crontab 工具来定制自己的计划任务。
+        在crontab 文件都被保存在/var/spool/cron目录中。其文件名与用户名一致
+
+crontab常用命令
+crontab -u    //设定某个用户的cron服务
+crontab -l     //列出某个用户cron服务的详细内容
+crontab -r    //删除某个用户的cron服务
+crontab -e    //编辑某个用户的cron服务
+crontab -i    //打印提示，输入yes等确认信息
+
+基本格式 :
+*　　*　　*　　*　　*　　command
+分　时　 日　   月　 周　 命令
+第1列表示分钟1～59 每分钟用*或者 */1表示
+第2列表示小时1～23（0表示0点）
+第3列表示日期1～31
+第4列表示月份1～12
+第5列标识号星期0～6（0表示星期天）
+第6列要运行的命令
+
+
+如现在sh脚本定时写入文件
+/opt/vskedtest/timetofile.sh
+#!/bin/bash
+
+mkdir -p /opt/vskedtest/timetofile/
+echo $(date) >>/opt/vskedtest/timetofile/timetofile.log
+
+添加可执行权限
+chmod +x /opt/vskedtest/timetofile.sh
+
+定时运行脚本测试 1分钟执行一次
+crontab -e
+*/1 * * * * /opt/vskedtest/timetofile.sh
+
+测试效果
+tail -f /opt/vskedtest/timetofile/timetofile.log
+每小时执行一次
+0 */1 * * * /opt/vskedtest/timetofile.sh
+每天执行一次
+0 0 */1 * * /opt/vskedtest/timetofile.sh
+每天23点50执行一次
+50 23 */1 * * /opt/vskedtest/timetofile.sh
+每周天执行一次
+0 0 * * 0 /opt/vskedtest/timetofile.sh
+每周一执行一次
+0 0 * * 1 /opt/vskedtest/timetofile.sh
 
 
 --------------------------------------------------------------------------------

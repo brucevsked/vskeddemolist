@@ -4,11 +4,11 @@
 <!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，    当设置成trace时，你会看到log4j2内部各种详细输出-->
 <!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
 <configuration status="warn" monitorInterval="60">
-	<Properties>
-	<!--<Property name="logpath">${sys:catalina.home}/logs/springboota/</Property>-->
-	 <Property name="logpath">/logs/springboota/</Property> 
-	 <Property name="logname">springboota</Property>
-	</Properties>
+    <Properties>
+        <!--<Property name="logpath">${sys:catalina.home}/logs/mybatismutids/</Property>-->
+        <Property name="logpath">/logs/template/</Property>
+        <Property name="logname">template</Property>
+    </Properties>
     <!--先定义所有的appender-->
     <appenders>
         <!--这个输出控制台的配置-->
@@ -34,7 +34,7 @@
                 <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
         </RollingFile>
- 
+
         <RollingFile name="RollingFileWarn" fileName="${logpath}/warn_${logname}" filePattern="${logpath}/${logname}error_%d{yyyy-MM-dd}_%i.log">
             <Filters>
                 <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
@@ -48,7 +48,7 @@
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
             <DefaultRolloverStrategy max="20"/>
         </RollingFile>
- 
+
         <RollingFile name="RollingFileError" fileName="${logpath}/error_${logname}" filePattern="${logpath}/${logname}error_%d{yyyy-MM-dd}_%i.log">
             <ThresholdFilter level="ERROR"/>
             <PatternLayout charset="utf-8" pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} traceId:[%X{mdc_trace_id}] %-5level %class{36} %L %M - %msg%xEx%n" />
@@ -77,9 +77,9 @@
         <logger name="io.lettuce" level="ERROR"></logger>
         <logger name="springfox.documentation" level="ERROR"></logger>
         <logger name="org.apache" level="ERROR"></logger>
-        <logger name="reactor.util" level="ERROR"></logger>
-		<!-- 不打印本项目sql语句,需要时请调整为debug -->
-		<logger name="com.vsked.dao" level="ALL" additivity="true"></logger>
+        <logger name="reactor.util" level="ALL"></logger>
+        <!-- 不打印本项目sql语句,需要时请调整为debug -->
+        <logger name="com.vsked.dao" level="ALL" additivity="true"></logger>
         <root level="all">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
@@ -88,5 +88,5 @@
             <appender-ref ref="RollingFileAll"/>
         </root>
     </loggers>
- 
+
 </configuration>

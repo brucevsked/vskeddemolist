@@ -1,27 +1,21 @@
 server:
-  port: 9010 #端口号
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
   tomcat:
     uri-encoding: UTF-8
-  #servlet.context-path: /appserveruser  #项目名，如果不设定，默认是 /
-  
+  address: 127.0.0.1
+  shutdown: graceful #优雅停机
+
 spring:
   devtools:
     restart:
       enabled: true #设置开启热部署
-  datasource:
-    url: jdbc:postgresql://192.168.60.12:5432/coalmineh
-    username: coalmineh
-    password: Y4yhl9tbf110
-    driver-class-name: org.postgresql.Driver
-    
-  http:
-    encoding:
-      charset: UTF-8
-      enabled: true
-
-mybatis:
-  configuration:
-    call-setters-on-nulls: true
+  messages:
+    basename: validation
 
 logging:
   config: classpath:log4j2.xml

@@ -12,4 +12,9 @@ public class SysUserController {
     public String hello(){
         return "helloinfo";
     }
+
+    @RequestMapping("/")
+    public String index(){
+        return "index.html";
+    }
 }
