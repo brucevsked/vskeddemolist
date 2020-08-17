@@ -28,4 +28,8 @@ mysqldump --socket=${mysqlSocket} -u${mysqlUserName} -p${mysqlUserPass} -B ${bac
 cd ${fullBackUpFolder}
 tar -zcvf ${backUpFileName}.tar.gz ${backUpFileNameBase}
 rm -rf ${backUpFileName}
+
+#delete 7 day ago folder
+find ${fullBackUpFolderBase} -mtime +7 -exec rm -rf {} \;
+
 echo "finish full back up:$(date "+%Y-%m-%d %H:%M:%S")" >> ${fullBackUpLog}

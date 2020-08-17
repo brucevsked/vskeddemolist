@@ -26,8 +26,8 @@ testsh1.sh
 shpfilepath=`ls /tmp/vskedtest/*.shp` #定义遍历的目录
 
 for shpFile in $shpfilepath
-  do
-    echo $shpFile
+ do
+  echo $shpFile
 done
 
 4*执行指定脚本
@@ -36,21 +36,21 @@ source 脚本路径
 5* for循环数值
 for j in $(seq 1 3)
 do
-  echo $j  #1 2 3
+ echo $j #1 2 3
 done
 
 快速生成文件示例
 for j in $(seq 1 10)
 do 
-  echo $j>$j.xml
+ echo $j>$j.xml
 done
 
 6* 变量自增1
-1  i=`expr $i + 1`;
-2  let i+=1;
-3  ((i++));
-4  i=$[$i+1];
-5  i=$(( $i + 1 ))
+1 i=`expr $i + 1`;
+2 let i+=1;
+3 ((i++));
+4 i=$[$i+1];
+5 i=$(( $i + 1 ))
 
 7* 接收传入参数
 $0 正在执行路径本身
@@ -67,7 +67,7 @@ set -x
 关闭
 set +x
 需要写到#!/bin/bash行下或
-/bin/sh -x  xxxx.sh
+/bin/sh -x xxxx.sh
 
 10*执行外部命令
 pgsql_path=/usr/bin
@@ -107,29 +107,29 @@ echo ${myname}
 15* while循环
 while condition
 do
-    command
+  command
 done
 
 有限循环
 int=1
 while(( $int<=5 ))
 do
-    echo $int
-    let "int++"
+  echo $int
+  let "int++"
 done
 无限循环
 int=1
 while :
 do
-    echo $int
-    let "int++"
+  echo $int
+  let "int++"
 done
 示例
 
 interval=6
 
 while : 
-  do
+ do
 echo "666"
 sleep $interval
 echo "here is 666"
@@ -142,7 +142,82 @@ done
 sourceFolderom="/opt/testsh/om/"
 
 for omFile in `ls $sourceFolderom`
-  do
-    echo $omFile
+ do
+  echo $omFile
 done
 
+17* 删除指定天数之前文件
+也可通过命令 touch -t 201212212359 aa （建立文件aa,时间是2012年12月21日23时59分）修改时间
+touch -t mkdir -p 202008162359 mkdir -p 20200816
+若是删除目录下的指定文件可以用：
+find 对应目录 -mtime +天数 -name "文件名" -exec rm -rf {} \;
+
+保留7天文件,删除7天以前的文件夹
+find /data/backup/mysql/fullbackup -mtime +7 -exec rm -rf {} \;
+
+
+
+
+
+--------------------------------------------------------------------------------
+mkdir -p 20200801
+mkdir -p 20200802
+mkdir -p 20200803
+mkdir -p 20200804
+mkdir -p 20200805
+mkdir -p 20200806
+mkdir -p 20200807
+mkdir -p 20200808
+mkdir -p 20200809
+mkdir -p 20200810
+mkdir -p 20200811
+mkdir -p 20200812
+mkdir -p 20200813
+mkdir -p 20200814
+mkdir -p 20200815
+mkdir -p 20200816
+mkdir -p 20200817
+mkdir -p 20200818
+mkdir -p 20200819
+mkdir -p 20200820
+mkdir -p 20200821
+mkdir -p 20200822
+mkdir -p 20200823
+mkdir -p 20200824
+mkdir -p 20200825
+mkdir -p 20200826
+mkdir -p 20200827
+mkdir -p 20200828
+mkdir -p 20200829
+mkdir -p 20200830
+
+touch -t 202008012301 20200801
+touch -t 202008022302 20200802
+touch -t 202008032303 20200803
+touch -t 202008042304 20200804
+touch -t 202008052305 20200805
+touch -t 202008062306 20200806
+touch -t 202008072307 20200807
+touch -t 202008082308 20200808
+touch -t 202008092309 20200809
+touch -t 202008102310 20200810
+touch -t 202008112311 20200811
+touch -t 202008122312 20200812
+touch -t 202008132313 20200813
+touch -t 202008142314 20200814
+touch -t 202008152315 20200815
+touch -t 202008162316 20200816
+touch -t 202008172317 20200817
+touch -t 202008182318 20200818
+touch -t 202008192319 20200819
+touch -t 202008202320 20200820
+touch -t 202008212321 20200821
+touch -t 202008222322 20200822
+touch -t 202008232323 20200823
+touch -t 202008242324 20200824
+touch -t 202008252325 20200825
+touch -t 202008262326 20200826
+touch -t 202008272327 20200827
+touch -t 202008282328 20200828
+touch -t 202008292329 20200829
+touch -t 202008302330 20200830
