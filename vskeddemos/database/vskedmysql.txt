@@ -1043,8 +1043,8 @@ chmod +x /opt/vskedsh/mysqlfullbackup.sh
 
 定时脚本
 crontab -e
-每天23点50执行一次
-50 23 */1 * * /opt/vskedsh/mysqlfullbackup.sh
+每天23点20执行一次
+20 23 */1 * * /opt/vskedsh/mysqlfullbackup.sh
 
 还原命令
 还原前先再备份一次数据库
