@@ -1,0 +1,69 @@
+
+--------------------------------------------------------------------------------
+https://hub.docker.com/_/tomcat?tab=tags
+
+拉取镜像
+docker pull tomcat:9.0.37-jdk8
+
+端口号/data/tomcat/tomcat9.0.37a/conf/server.xml 
+8005 shutdown
+8080 server
+8443 redirect
+8009 AJP
+
+特别注意 不需要运行这些创建目录命令，我们通过编辑Vagrantfile文件添加同步配置即可
+添加到配置ip地址下面一行即可
+  config.vm.synced_folder "D:/economy/docker", "/docker"
+
+mkdir -p /docker/tomcat9.0.37a/logs
+mkdir -p /docker/tomcat9.0.37a/conf
+mkdir -p /docker/tomcat9.0.37a/webapp
+
+端口号/data/tomcat/tomcat9.0.37b/conf/server.xml 
+8006 shutdown
+8081 server
+8444 redirect
+8010 AJP
+
+mkdir -p /docker/tomcat9.0.37b/logs
+mkdir -p /docker/tomcat9.0.37b/conf
+mkdir -p /docker/tomcat9.0.37b/webapp
+
+端口号/data/tomcat/tomcat9.0.37c/conf/server.xml 
+8007 shutdown
+8082 server
+8445 redirect
+8011 AJP
+
+mkdir -p /docker/tomcat9.0.37c/logs
+mkdir -p /docker/tomcat9.0.37c/conf
+mkdir -p /docker/tomcat9.0.37c/webapp
+
+在docker容器内默认CATALINA_HOME
+/usr/local/tomcat
+
+创建并启动tomcat9.0.37a
+docker run --restart=always --name tomcat9.0.37a -d -p 8080:8080 \
+    -v /docker/tomcat9.0.37a/logs:/usr/local/tomcat/logs \
+    -v /docker/tomcat9.0.37a/conf:/usr/local/tomcat/conf \
+    -v /docker/tomcat9.0.37a/webapps:/usr/local/tomcat/webapps \
+    tomcat:9.0.37-jdk8
+
+创建并启动tomcat9.0.37b
+docker run --restart=always --name tomcat9.0.37b -d -p 8081:8081 \
+    -v /docker/tomcat9.0.37b/logs:/usr/local/tomcat/logs \
+    -v /docker/tomcat9.0.37b/conf:/usr/local/tomcat/conf \
+    -v /docker/tomcat9.0.37b/webapps:/usr/local/tomcat/webapps \
+    tomcat:9.0.37-jdk8
+
+创建并启动tomcat9.0.37c
+docker run --restart=always --name tomcat9.0.37c -d -p 8082:8082 \
+    -v /docker/tomcat9.0.37c/logs:/usr/local/tomcat/logs \
+    -v /docker/tomcat9.0.37c/conf:/usr/local/tomcat/conf \
+    -v /docker/tomcat9.0.37c/webapps:/usr/local/tomcat/webapps \
+    tomcat:9.0.37-jdk8
+
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------

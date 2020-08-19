@@ -1,0 +1,95 @@
+
+--------------------------------------------------------------------------------
+镜像网站
+https://hub.docker.com/_/nginx?tab=tags
+
+拉取镜像
+docker pull nginx:latest
+
+查看本地已拉取镜像
+docker images
+
+mkdir -p /data/nginx/logs
+mkdir -p /data/nginx/conf
+
+
+
+如果需要清空配置
+echo "">/data/nginx/conf/nginx.conf
+新建配置文件
+vi /data/nginx/conf/nginx.conf
+
+--------------------------------------------------------------------------------
+user  nginx;
+worker_processes  4;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+    multi_accept on;
+    use epoll;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+    
+upstream mytomcat1{
+server 10.0.193.11:8080 weight=1;
+server 10.0.193.11:8081 weight=1;
+server 10.0.193.11:8082 weight=1;
+#ip_hash;
+}
+
+server {
+    listen       80;
+    location / {
+        proxy_pass http://mytomcat1;
+        proxy_redirect off;
+        proxy_http_version 1.1;
+        proxy_connect_timeout 600; #nginx跟后端服务器连接超时时间(代理连接超时)
+        proxy_read_timeout 600; #连接成功后，后端服务器响应时间(代理接收超时)
+        proxy_send_timeout 600; #后端服务器数据回传时间(代理发送超时)
+        proxy_buffer_size 32k; #设置代理服务器（nginx）保存用户头信息的缓冲区大小
+        proxy_buffers 4 32k; #proxy_buffers缓冲区，网页平均在32k以下的话，这样设置
+        proxy_busy_buffers_size 64k; #高负荷下缓冲大小（proxy_buffers*2）
+        proxy_temp_file_write_size 64k; #设定缓存文件夹大小，大于这个值，将从upstream服务器传
+        index  index.html index.htm index.jsp;
+    }
+
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+
+    include /etc/nginx/conf.d/*.conf;
+}
+--------------------------------------------------------------------------------
+
+
+
+docker run --restart=always --name mynginx -d -p 80:80 -v /data/nginx/logs:/var/log/nginx/ -v /data/nginx/conf:/etc/nginx/conf/ nginx /usr/sbin/nginx -c /etc/nginx/conf/nginx.conf -g 'daemon off;' 
+
+docker stop mynginx
+docker start mynginx
+
+--------------------------------------------------------------------------------
