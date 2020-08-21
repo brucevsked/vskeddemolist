@@ -18,14 +18,71 @@
 <body>
 <!-- 使用方向键试试 或拖动看看-->
 <script>
+'use strict'
+
 var baseTest=new Object({
+	//字符串属性测试
+	firstName:"bruce",
+	middleName:"alexander",
+	lastName:"vsked",
+	//整数测试
+	age:18,
+	//布尔测试
+	isMan:true,
+	//数组测试
+	hobby:["sport","music","swmming","football","basketball","baseball"],
+	//json测试
+	family:{"father":"a1","mother":"b1","brother":"c1","sister":"d1","grandfather":"e1"},
 	mathTest:function(){
+		var x=2;
+		var y=3;
 		//pow(x,y) 方法可返回 x 的 y 次幂的值
-		var mathPowTest=Math.pow(2,3);//2*2*2=8
-		console.log(mathPowTest);
+		var mathPowTest=Math.pow(x,y);//2*2*2=8
+		console.log("%d的%d次方是%d",x,y,mathPowTest);
 	},
-	t2:function(){
-    
+	consoleTest:function(){
+		//字符串输出测试
+		console.log("字符串输出测试|%s===%s***%s###|",baseTest.firstName,baseTest.middleName,baseTest.lastName);
+		//整数输出测试
+		console.log("整数输出测试|%d+%d=%d|",baseTest.age,baseTest.age,(baseTest.age+baseTest.age));
+		//控制台输出测试
+        var strHello="this is hello world";
+		console.log(strHello);
+	    console.debug(strHello);
+	    console.info(strHello);
+	    console.warn(strHello);
+		console.error(strHello);
+/*		
+		console.assert(expression[, object, ...])
+断言，测试一条表达式是否为真，不为真时将抛出异常（断言失败）。
+
+console.dir(object)
+输出一个对象的全部属性（输出结果类似于 DOM 面板中的样式）。
+
+console.dirxml(node)
+输出一个 HTML 或者 XML 元素的结构树，点击结构树上面的节点进入到 HTML 面板。
+
+console.trace()
+输出 Javascript 执行时的堆栈追踪。
+
+console.group(object[, object, ...])
+输出消息的同时打开一个嵌套块，用以缩进输出的内容。调用 console.groupEnd() 用以结束这个块的输出。
+
+console.groupCollapsed()
+同 console.group(); 区别在于嵌套块默认是收起的。
+
+console.time(name)
+计时器，当调用 console.timeEnd(name);并传递相同的 name 为参数时，计时停止，并输出执行两条语句之间代码所消耗的时间（毫秒）。
+
+console.profile([title])
+与 profileEnd() 结合使用，用来做性能测试，与 console 面板上 profile 按钮的功能完全相同。
+
+console.count([title])
+输出该行代码被执行的次数，参数 title 将在输出时作为输出结果的前缀使用。
+
+console.clear()
+清空控制台
+*/
 	},
 	t3:function(){
 		
@@ -38,6 +95,7 @@ var baseTest=new Object({
 	}
 });
 baseTest.mathTest();
+baseTest.consoleTest();
 </script>
 
 </body>
