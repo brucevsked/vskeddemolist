@@ -115,7 +115,7 @@ mklink /j "C:\Users\brucevsked\AppData\Roaming\kingsoft" "D:\softlink\kingsoft"
 
 mklink /j "C:\Users\brucevsked\.m2\repository" "E:\mavenLocalRepository"
 mklink /j "c:\Users\vsked\.m2\repository" e:\mavenLocalRepository
-mklink /j "D:\apacheTomcat\apache-tomcat-9.0.30\webapps\coalminehwaui" "D:\vskedjcdz\project\企业风险事故分析平台\00主线产品\开发库\src\coalmineh\coalminehwa\coalminehwaui\src\main\resources\coalminehwaui"
+mklink /j "D:\apacheTomcat\apache-tomcat9\webapps\bookborrow" "D:\economy\project\demoproject\ddddemo1\src\main\resources\static"
 
 需要软件转换才可以用ftp研究中
 mklink /j "e:\testfoldera" "ftp://172.22.90.45/data/zhongxing/cljk/"
