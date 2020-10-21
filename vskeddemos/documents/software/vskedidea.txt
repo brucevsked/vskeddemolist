@@ -4,6 +4,7 @@ Maven Helper项目中maven依赖查找插件
 
 idea中maven一定要用自己安装的不要用idea自带的!
 
+
 1* 查看方法调用
 右击要查看调用的方法->find usages
 alt+f7
@@ -23,8 +24,8 @@ file->settings->build,execution,deployment->maven
 6*手动编译
 Ctrl+Shift+F9
 
-7*自动编译的修改配置
-File-Settings-Compiler-Build Project automatically
+7*自动编译的修改配置(解决idea项目中javascript,css,html缓存不刷新问题)
+File-Settings-build,execution,deployment->Build Project automatically打对号
 
 8*全局查找
 ctrl+shift+a
