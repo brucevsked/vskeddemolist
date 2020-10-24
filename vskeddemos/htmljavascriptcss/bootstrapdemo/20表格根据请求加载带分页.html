@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>bootstrap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="js/lib/bootstrap-table/bootstrap-table.min.css">
+</head>
+
+<body >
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-12">
+
+        <table id="table">
+          <thead>
+            <tr>
+              <th data-field="id">ID</th>
+              <th data-field="name">Item Name</th>
+              <th data-field="price">Item Price</th>
+            </tr>
+          </thead>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/popper/popper.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+  <script src="js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+  <script src="js/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+  <script src="js/mock-min.js"></script>
+
+<script>
+'use strict'
+
+$(function(){
+
+        Mock.mock(RegExp("http://localhost:8080/mypage.*"),"get",{
+      	draw:1,
+      	total:257,
+        "rows|200": [{"id":/\d{3}/,"name":"@cname","price":"@float(0.00, 99999.99)"}]
+        });
+    $("#table").bootstrapTable({
+      url:"http://localhost:8080/mypage.html",
+      pagination: true  //开启分页
+    });
+});
+</script>
+	
+
+</body>
+</html>

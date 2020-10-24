@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>bootstrap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="js/lib/bootstrap-table/bootstrap-table.min.css">
+</head>
+
+<body >
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-12">
+
+        <table id="table">
+          <thead>
+            <tr>
+              <th data-field="id">ID</th>
+              <th data-field="name">Item Name</th>
+              <th data-field="price">Item Price</th>
+            </tr>
+          </thead>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/popper/popper.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+  <script src="js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+  <script src="js/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script>
+'use strict'
+
+$(function(){
+  var data = [
+      {
+        'id': 0,
+        'name': 'Item 0',
+        'price': '$0'
+      },
+      {
+        'id': 1,
+        'name': 'Item 1',
+        'price': '$1'
+      },
+      {
+        'id': 2,
+        'name': 'Item 2',
+        'price': '$2'
+      },
+      {
+        'id': 3,
+        'name': 'Item 3',
+        'price': '$3'
+      },
+      {
+        'id': 4,
+        'name': 'Item 4',
+        'price': '$4'
+      },
+      {
+        'id': 5,
+        'name': 'Item 5',
+        'price': '$5'
+      }
+    ]
+    $('#table').bootstrapTable({data: data})
+});
+</script>
+	
+
+</body>
+</html>
