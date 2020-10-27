@@ -48,7 +48,7 @@ docker pull mysql:5.7.29
 mkdir -p /data/mysql5.7.29/data/
 mkdir -p /data/mysql5.7.29/log/
 mkdir -p /data/mysql5.7.29/conf/
-vi /data/mysql5.7.29/conf/.cnf
+vi /data/mysql5.7.29/conf/my.cnf
 启动镜像多行版本(-itd 后台运行)
 docker run --restart=always -itd --name mysql5.7.29 -d -p 3307:3306 \
 -v /data/mysql5.7.29/data:/var/lib/mysql:rw \
@@ -61,7 +61,7 @@ mysql:5.7.29
 --------------------------------------------------------------------------------
 自定义配置文件版本
 mkdir -p /data/mysql/conf/
-vi /data/mysql/conf/.cnf
+vi /data/mysql/conf/my.cnf
 
 docker run --restart=always --name mymysql -d -p 3306:3306 \
     -v /data/mysql/data:/var/lib/mysql:rw \
