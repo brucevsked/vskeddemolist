@@ -87,8 +87,17 @@ docker images
 docker image inspect 镜像id
 docker image inspect fc99158db54a
 删除docker基础镜像
+先用 查看镜像列表
+docker images
+再用 删除基础镜像
+docker rmi -f 镜像ID
+示例
+docker rmi -f f9b990972689
 docker rmi -f 镜像名称
 docker rmi -f nvtienanh/hadoop-resourcemanager
+
+删除成功后再用 检查删除结果
+docker images
 
 4* 查看当前docker信息
 docker info
