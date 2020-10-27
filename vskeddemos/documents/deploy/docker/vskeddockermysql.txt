@@ -5,12 +5,14 @@ docker pull mysql
 制作数据目录
 mkdir -p /data/mysql/data
 mkdir -p /data/mysql/log
+mkdir -p /data/mysql/conf/
 启动镜像单行版本
-docker run --restart=always --name mymysql -d -p 3306:3306 -v /data/mysql/data:/var/lib/mysql:rw -v /data/mysql/log:/var/log/mysql:rw -v /etc/localtime:/etc/localtime:ro -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ mysql mysqld --default-authentication-plugin=mysql_native_password
+docker run --restart=always --name mymysql -d -p 3306:3306 -v /data/mysql/data:/var/lib/mysql:rw -v /data/mysql/log:/var/log/mysql:rw -v /data/mysql/conf/my.cnf:/etc/mysql/my.cnf -v /etc/localtime:/etc/localtime:ro -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ mysql mysqld --default-authentication-plugin=mysql_native_password
 启动镜像多行版本
 docker run --restart=always --name mymysql -d -p 3306:3306 \
     -v /data/mysql/data:/var/lib/mysql:rw \
     -v /data/mysql/log:/var/log/mysql:rw \
+    -v /data/mysql/conf/my.cnf:/etc/mysql/my.cnf \
     -v /etc/localtime:/etc/localtime:ro \
     -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ mysql mysqld \
     --default-authentication-plugin=mysql_native_password
@@ -45,12 +47,41 @@ docker pull mysql:5.7.29
 建立数据目录与日志目录
 mkdir -p /data/mysql5.7.29/data/
 mkdir -p /data/mysql5.7.29/log/
+mkdir -p /data/mysql5.7.29/conf/
+vi /data/mysql5.7.29/conf/.cnf
 启动镜像多行版本(-itd 后台运行)
 docker run --restart=always -itd --name mysql5.7.29 -d -p 3307:3306 \
 -v /data/mysql5.7.29/data:/var/lib/mysql:rw \
 -v /data/mysql5.7.29/log:/var/log/mysql:rw \
+-v /data/mysql5.7.29/conf/my.cnf:/etc/mysql/my.cnf \
 -v /etc/localtime:/etc/localtime:ro \
 -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ \
 mysql:5.7.29
 
 --------------------------------------------------------------------------------
+自定义配置文件版本
+mkdir -p /data/mysql/conf/
+vi /data/mysql/conf/.cnf
+
+docker run --restart=always --name mymysql -d -p 3306:3306 \
+    -v /data/mysql/data:/var/lib/mysql:rw \
+    -v /data/mysql/log:/var/log/mysql:rw \
+    -v /data/mysql/conf/my.cnf:/etc/mysql/my.cnf \
+    -v /etc/localtime:/etc/localtime:ro \
+    -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ mysql mysqld \
+    --default-authentication-plugin=mysql_native_password
+
+
+docker mysql默认配置
+[mysqld]
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+datadir         = /var/lib/mysql
+#log-error      = /var/log/mysql/error.log
+# By default we only accept connections from localhost
+#bind-address   = 127.0.0.1
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+--------------------------------------------------------------------------------
+还可以进入docker容器查看
+docker exec -i -t mysql5.7.29 /bin/bash
