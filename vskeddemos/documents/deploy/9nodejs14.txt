@@ -1,0 +1,18 @@
+
+curl --silent --location https://rpm.nodesource.com/setup_14.x | bash -
+
+yum install -y nodejs
+
+查看node.js版本
+node -v
+
+查看NPM版本
+npm -v
+
+
+
+安装cnpm淘宝镜像，使用命令行输入，回车：
+
+```bash
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
