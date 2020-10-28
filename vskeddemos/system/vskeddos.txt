@@ -117,6 +117,9 @@ mklink /j "C:\Users\brucevsked\.m2\repository" "E:\mavenLocalRepository"
 mklink /j "c:\Users\vsked\.m2\repository" e:\mavenLocalRepository
 mklink /j "D:\apacheTomcat\apache-tomcat9\webapps\bookborrow" "D:\economy\project\demoproject\ddddemo1\src\main\resources\static"
 
+mklink /j "C:\Users\vsked\VirtualBox VMs" "H:\vagrantabout\VirtualBox VMs"
+mklink /j "C:\Users\vsked\.vagrant.d" "H:\vagrantabout\.vagrant.d"
+
 需要软件转换才可以用ftp研究中
 mklink /j "e:\testfoldera" "ftp://172.22.90.45/data/zhongxing/cljk/"
 

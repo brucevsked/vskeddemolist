@@ -1061,3 +1061,19 @@ crontab -e
 mysql -uroot -pY4yhl9tbf110_ < /data/backup/20200813103207fullback.sql
 
 -----------------------------------------------------------------
+yum卸载mysql
+
+systemctl status mysql
+systemctl stop mysql
+systemctl disable mysqld
+
+rpm -qa | grep -i mysql
+yum remove mysql-community-server-5.7.31-1.el7.x86_64
+yum -y remove mysql-community-*
+
+rpm -qa | grep -i mysql
+find / -name mysql | xargs rm -rf
+
+rm -rf /var/lib/mysql
+rm -rf /var/lib/mysql/mysql
+rm -rf /usr/share/mysql

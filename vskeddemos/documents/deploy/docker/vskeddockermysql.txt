@@ -12,7 +12,7 @@ docker run --restart=always --name mymysql -d -p 3306:3306 -v /data/mysql/data:/
 docker run --restart=always --name mymysql -d -p 3306:3306 \
     -v /data/mysql/data:/var/lib/mysql:rw \
     -v /data/mysql/log:/var/log/mysql:rw \
-    -v /data/mysql/conf/my.cnf:/etc/mysql/my.cnf \
+    -v /data/mysql/conf/my.cnf:/etc/mysql/my.cnf:rw \
     -v /etc/localtime:/etc/localtime:ro \
     -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ mysql mysqld \
     --default-authentication-plugin=mysql_native_password
@@ -42,21 +42,48 @@ docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:5.7.
 
 --------------------------------------------------------------------------------
 docker 安装mysql5
-docker pull mysql:5.7.29
+
+https://hub.docker.com/_/mysql?tab=tags
+
+搜索组件
+docker search mysql
+docker pull mysql:5.7.32
 
 建立数据目录与日志目录
-mkdir -p /data/mysql5.7.29/data/
-mkdir -p /data/mysql5.7.29/log/
-mkdir -p /data/mysql5.7.29/conf/
-vi /data/mysql5.7.29/conf/my.cnf
+mkdir -p /data/mysql5.7.32/data/
+mkdir -p /data/mysql5.7.32/log/
+mkdir -p /data/mysql5.7.32/conf/
+vi /data/mysql5.7.32/conf/my.cnf
+[client]
+default-character-set = utf8mb4
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set = utf8mb4
+[mysqld]
+# 设置3306端口
+port = 3306
+# 服务端使用的字符集默认为latin1
+character-set-server = utf8mb4
+# 创建新表时将使用的默认存储引擎
+default-storage-engine = INNODB
+# 让MySQL不区分大小写
+lower_case_table_names=1
+
 启动镜像多行版本(-itd 后台运行)
-docker run --restart=always -itd --name mysql5.7.29 -d -p 3307:3306 \
--v /data/mysql5.7.29/data:/var/lib/mysql:rw \
--v /data/mysql5.7.29/log:/var/log/mysql:rw \
--v /data/mysql5.7.29/conf/my.cnf:/etc/mysql/my.cnf \
+docker run --restart=always -itd --name mysql5732 -d -p 3306:3306 \
+-v /data/mysql5.7.32/data:/var/lib/mysql:rw \
+-v /data/mysql5.7.32/log:/var/log/mysql:rw \
+-v /data/mysql5.7.32/conf/my.cnf:/etc/mysql/my.cnf:rw \
 -v /etc/localtime:/etc/localtime:ro \
 -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ \
-mysql:5.7.29
+mysql:5.7.32
+
+
+进入docker容器查看
+docker exec -it mysql5732 /bin/bash
+
+再用命令行登录mysql
+mysql -uroot -pY4yhl9tbf110_
 
 --------------------------------------------------------------------------------
 自定义配置文件版本
