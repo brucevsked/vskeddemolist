@@ -1,0 +1,58 @@
+
+
+curl --silent --location https://rpm.nodesource.com/setup_12.x | bash -
+
+
+yum list | grep nodejs
+
+yum install -y nodejs
+
+查看node.js版本
+node -v
+
+查看NPM版本
+npm -v
+
+# 配置taobao镜像
+npm config set registry https://registry.npm.taobao.org
+
+
+安装cnpm淘宝镜像，使用命令行输入，回车：
+
+```bash
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
+
+
+--------------------------------------------------------------------------------
+yum 彻底删除nodejs，重新安装
+yum remove nodejs npm -y
+手动删除残留
+进入
+/usr/local/lib 删除所有 node 和 node_modules文件夹
+进入 /usr/local/include 删除所有 node 和 node_modules 文件夹
+进入 /usr/local/bin 删除 node 的可执行文件
+/usr/lib 删除所有 node 和 node_modules 文件夹
+
+rm -rf /var/lib/yum/repos/x86_64/7/nodesource
+rm -rf x86_64/7/nodesource
+删除源
+/etc/yum.repos.d/nodesource-el7.repo
+
+清理
+yum clean all
+更新缓存
+yum makecache
+--------------------------------------------------------------------------------
+optional install error: Package require os(darwin) not compatible with your platform(linux)
+解决
+方案1
+cnpm rebuild node-sass
+#不放心可以重新安装下
+cnpm i
+
+方案2
+npm update
+npm install
+nodejs node_modules/node-sass/scripts/install.js
+npm rebuild node-sass
