@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>bootstrap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="js/lib/bootstrap-table/bootstrap-table.min.css">
+</head>
+
+<body >
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-3">    <input type="text" id="accountName" value="" placeholder="账户名" class="form-control">   </div>
+      <div class="col-3">    <button type="button" id="queryBt" class="btn btn-primary">查询</button>  </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+
+        <table id="table">
+          <thead>
+            <tr>
+              <th data-field="id">ID</th>
+              <th data-field="name">Item Name</th>
+              <th data-field="price">Item Price</th>
+            </tr>
+          </thead>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/popper/popper.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+  <script src="js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+  <script src="js/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+  <script src="js/mock-min.js"></script>
+
+<script>
+'use strict'
+
+var accountList=new Object({
+    isDebug:true,
+    setTitle:function(){
+        // 设置标题
+        $("title").html("老衲图书借阅系统-账户列表");
+    },
+    initAccountListData:function(){
+      Mock.mock(RegExp("http://localhost:8080/mypage.*"),"get",{
+      	draw:1,
+      	total:120,
+        "rows|6": [{"id":/\d{3}/,"name":"@cname","price":"@float(0.00, 99999.99)"}]
+        });
+
+
+        $("#table").bootstrapTable({
+            method: "get", //请求方式
+            url:"http://localhost:8080/mypage.html", //请求地址 数据格式为
+            cache: false,  //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            queryParamsType:"",//必须带这个参数 不带这个会变成offet,limit模式请求
+            queryParams:function(params){
+                var myParams={
+                    pageSize:params.pageSize,
+                    pageNumber:params.pageNumber,
+                    accountName:$("#accountName").val()
+                };
+                return myParams;
+
+            },
+            pagination: true,  //开启分页
+            pageList:[3,5,10,20,25,30,35],
+            paginationLoop:true, //到最后一页再点下一页时回到第一页
+            pageNumber: 1, //起始页
+            pageSize: 3, //一页显示多少条
+            sidePagination: "server", //分页模式 server:服务端模式, client:客户端分页模式
+            search: false, //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，意义不大
+            clickToSelect: true,
+            singleSelect : true //打开单选选项vsked
+        });
+
+
+    },
+    query:function(){
+        if(accountList.isDebug){
+            console.log("let's query now");
+        }
+        Mock.mock(RegExp("http://localhost:8080/mypage.*"),"get",{
+      	draw:1,
+      	total:120,
+        "rows|6": [{"id":/\d{3}/,"name":"@cname","price":"@float(0.00, 99999.99)"}]
+        });
+        $("#table").bootstrapTable("refresh");
+    },
+    initUI:function(){
+        //界面初始化
+        accountList.setTitle();
+        accountList.initAccountListData();
+        $("#queryBt").on("click", accountList.query);
+    }
+});
+
+
+$(function(){
+
+    accountList.initUI();
+});
+</script>
+	
+
+</body>
+</html>
