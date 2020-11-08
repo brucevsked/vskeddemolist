@@ -39,3 +39,12 @@ nginx.exe -s stop
 
 4* 平滑重启
 nginx.exe -s reload
+--------------------------------------------------------------------------------centos安装
+yum install yum-utils
+rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+yum install -y nginx
+
+启动
+systemctl start nginx.service
+开机自动启动
+systemctl enable nginx.service
