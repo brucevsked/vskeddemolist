@@ -536,6 +536,10 @@ tail -f /opt/vskedtest/timetofile/timetofile.log
 每周一执行一次
 0 0 * * 1 /opt/vskedtest/timetofile.sh
 
+31* 查看开机启动服务列表
+systemctl list-unit-files
+systemctl list-unit-files|grep mysql
+
 
 --------------------------------------------------------------------------------
 lvm扩容管理
