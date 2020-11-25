@@ -25,27 +25,77 @@
       min-height: 90%;
       height: 90%;
   }
+
+  .row-equal-height {
+    display: flex;
+    margin-left: 1em;
+    min-height: 90%;
+    height: 90%;
+    width: 97%;
+}
+
+#left {
+  background-color: rgba(255,0,0,0.3);
+  width:20%;
+}
+
+#right {
+  background-color: rgba(0,255,0,0.3);
+  width: 78%;
+}
   </style>
 </head>
 
 <body >
 
 
-    <div class="fill8" style="background-color: rgba(255,0,0,0.1);">
-      <div class="w-100 h-100 d-inline-block" style="width: 120px; background-color: rgba(108, 108, 240, 0.1)">
-        Width 100%
-        Height 100%
-      </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">导航栏</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">主页 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">小学</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            中学
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">初一</a>
+            <a class="dropdown-item" href="#">初二</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">初三</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">禁用导航项</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="请输入要搜索的内容" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+      </form>
     </div>
-    <div class="fill90" style="background-color: rgba(0, 247, 255, 0.1);">
+  </nav>
 
-      <div class="w-25 h-100 d-inline-block" style="background-color: #eee;">Width 25%</div>
+  <div class="row row-equal-height">
 
-      <div class="w-75 h-100 d-inline-block" style="background-color: #eee;">Width 75%</div>
-
-
-
+    <div class="col-xs-3" id="left">
+      <h1>short</h1>
     </div>
+    <div class="col-xs-3" id="right">
+      <h1>long</h1>
+    </div>
+  
+  </div>
 
   
 
