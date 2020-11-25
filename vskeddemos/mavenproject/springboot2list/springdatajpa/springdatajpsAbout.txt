@@ -48,3 +48,10 @@ Root接口：代表Criteria查询的根对象，Criteria查询的查询根定义
 3：Criteria查询，可以有多个查询根。 
 
 4.CriteriaBuilder接口：用来构建CritiaQuery的构建器对象Predicate：一个简单或复杂的谓词类型，其实就相当于条件或者是条件组合。 
+
+
+建表时不使用下划线命名
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
