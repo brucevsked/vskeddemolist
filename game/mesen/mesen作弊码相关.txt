@@ -1,0 +1,49 @@
+
+第一步先找作弊库
+还可以点击导入，再点击作弊库，找到对应游戏英文名称即可
+
+如果没有对应作弊库可以用vct转换
+
+vct版本
+; 0256 香帅传奇(中文版)[KT-1007]
+#0 055E-02-00FA		体力
+#0 0560-02-00FA		真气
+#0 055C-02-FFFF		经验
+#0 0562-01-FA		攻击
+#0 0563-01-FA		防御
+
+改装为mesen版本为
+
+055E:FA  体力
+0560:FA  真气
+055C:FF  经验
+
+
+作弊码转换，将库里的转换为其他文件
+<?xml version="1.0" encoding="utf-8"?>
+<cheats MesenCheatFile="true" version="1.0">
+  <cheat enabled="1" game="0x967A605F" gameName="超级马里奥兄弟1(u)">
+    <address>0x0754</address>
+    <value>0x00</value>
+    <description>变大</description>
+  </cheat>
+  <cheat enabled="1" game="0x967A605F" gameName="超级马里奥兄弟1(u)">
+    <address>0x0756</address>
+    <value>0x02</value>
+    <description>拥有火力</description>
+  </cheat>
+  <cheat enabled="0" game="0x967A605F" gameName="超级马里奥兄弟1(u)">
+    <address>0x079E</address>
+    <value>0x01</value>
+    <description>无敌</description>
+  </cheat>
+</cheats>
+
+修改三个地方即可
+1文件名与游戏名同名
+2xml文件中game属性修改成当前文件的
+3修改xml文件中gameName为当前游戏名称
+
+最终绝技：
+自己查找作弊码即可
+
