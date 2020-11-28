@@ -25,7 +25,7 @@ file->settings->build,execution,deployment->maven
 Ctrl+Shift+F9
 
 7*自动编译的修改配置(解决idea项目中javascript,css,html缓存不刷新问题)
-File-Settings-build,execution,deployment->Build Project automatically打对号
+File-Settings-build,execution,deployment->Compiler->Build Project automatically打对号
 
 8*全局查找
 ctrl+shift+a
@@ -61,3 +61,17 @@ shift+f10
 
 18* 修正web项目中js,css,图片等引用路径
 file->project structure->modules->展开项目->web->添加webapp目录即可
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+testNG 7.3.0检查DTD文件错误解决
+运行→编辑配置→模板→TestNG，进行默认配置
+-Dtestng.dtd.http=true
+如果已经运行过，再运行过的单元测试启动参数上再加上这个参数即可
