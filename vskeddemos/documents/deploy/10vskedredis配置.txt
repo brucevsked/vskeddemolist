@@ -74,3 +74,7 @@ client-output-buffer-limit pubsub 32mb 8mb 60
 hz 10
 dynamic-hz yes
 aof-rewrite-incremental-fsync yes
+
+systemctl start redis
+netstat -lnp | grep 6379
+systemctl stop redis
