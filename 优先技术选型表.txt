@@ -44,7 +44,6 @@ EasyMock
 PowerMock
 
 第三方数据模拟mock server
-Mountebank
 WireMock
 Stubby4j
 VCR

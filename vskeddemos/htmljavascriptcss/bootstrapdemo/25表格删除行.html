@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>bootstrap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="js/lib/bootstrap-table/bootstrap-table.min.css">
+<style>
+  .addRow1{
+
+  }
+  .delRow1{
+
+  }
+</style>
+</head>
+
+<body >
+  <div class="container-fluid">
+<button class="btn btn-primary addRow1">addRow</button>
+    <div class="row">
+      <div class="col-12">
+
+        <table id="table">
+          <thead>
+            <tr>
+              <th data-field="id">ID</th>
+              <th data-field="name">Item Name</th>
+              <th data-field="price">Item Price</th>
+              <th data-field="myopera">myoperate</th>
+            </tr>
+          </thead>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/popper/popper.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+  <script src="js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+  <script src="js/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+  <script src="js/mock-min.js"></script>
+
+<script>
+'use strict'
+
+$(function(){
+
+  var data = [
+      {
+        'id': 0,
+        'name': 'Item 0',
+        'price': '$0',
+        'myopera':"<button class=\"btn btn-danger delRow1\">delete this</button>"
+      },
+      {
+        'id': 1,
+        'name': 'Item 1',
+        'price': '$1',
+        'myopera':"<button class=\"btn btn-danger delRow1\">delete this</button>"
+      },
+      {
+        'id': 2,
+        'name': 'Item 2',
+        'price': '$2',
+        'myopera':"<button class=\"btn btn-danger delRow1\">delete this</button>"
+      },
+      {
+        'id': 3,
+        'name': 'Item 3',
+        'price': '$3',
+        'myopera':"<button class=\"btn btn-danger delRow1\">delete this</button>"
+      }
+    ]
+    $('#table').bootstrapTable({data: data})
+
+    var tbody = $('#table').children('tbody');
+
+      //Then if no tbody just select your table 
+      var table = tbody.length ? tbody : $('#table');
+
+      $('.addRow1').click(function() {
+        var count=$('#table').children('tbody').children("tr").length;
+        console.log(count)
+        //Add row
+        table.append('<tr><td>'+count+'</td><td>testb</td><td>testc</td><td><button class=\"btn btn-danger delRow1\">delete this</button></td>  </tr>');
+      })
+
+      $("#table").on('click', '.delRow1', function() {
+        $(this).closest('tr').remove();
+      });
+
+});
+</script>
+	
+
+</body>
+</html>
