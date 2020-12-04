@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>bootstrap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+
+<style type="text/css">
+	@media (min-width: 992px){
+		.dropdown-menu .dropdown-toggle:after{
+			border-top: .3em solid transparent;
+		    border-right: 0;
+		    border-bottom: .3em solid transparent;
+		    border-left: .3em solid;
+		}
+
+		.dropdown-menu .dropdown-menu{
+			margin-left:0; margin-right: 0;
+		}
+
+		.dropdown-menu li{
+			position: relative;
+		}
+		.nav-item .submenu{ 
+			display: none;
+			position: absolute;
+			left:100%; top:-7px;
+		}
+		.nav-item .submenu-left{ 
+			right:100%; left:auto;
+		}
+
+		.dropdown-menu > li:hover{ background-color: #f1f1f1 }
+		.dropdown-menu > li:hover > .submenu{
+			display: block;
+		}
+	}
+</style>
+</head>
+
+<body >
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">导航栏</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">主页 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">小学</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            中学
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">初一</a>
+            <a class="dropdown-item" href="#">初二</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">初三</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">禁用导航项</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> 社会</a>
+            <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#"> Dropdown item 1 </a></li>
+            <li><a class="dropdown-item dropdown-toggle" href="#"> Dropdown item 2 </a>
+               <ul class="submenu dropdown-menu">
+                <li><a class="dropdown-item" href="">Submenu item 1</a></li>
+                <li><a class="dropdown-item" href="">Submenu item 2</a></li>
+                <li><a class="dropdown-item " href="">Submenu item 3 &raquo </a>
+                  <ul class="submenu dropdown-menu">
+                    <li><a class="dropdown-item" href="">Multi level 1</a></li>
+                    <li><a class="dropdown-item" href="">Multi level 2</a></li>
+                </ul>
+                </li>
+                <li><a class="dropdown-item" href="">Submenu item 4</a></li>
+                <li><a class="dropdown-item" href="">Submenu item 5</a></li>
+             </ul>
+            </li>
+            <li><a class="dropdown-item" href="#"> Dropdown item 3 </a></li>
+            <li><a class="dropdown-item" href="#"> Dropdown item 4 </a>
+            </ul>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="请输入要搜索的内容" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+      </form>
+    </div>
+  </nav>
+
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/popper/popper.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+
+<script>
+"use strict"
+
+$(function(){
+	//////////////////////// Prevent closing from click inside dropdown
+  $(document).on('click', '.dropdown-menu', function (e) {
+      e.stopPropagation();
+    });
+
+    // make it as accordion for smaller screens
+    if ($(window).width() < 992) {
+	  	$('.dropdown-menu a').click(function(e){
+	  		e.preventDefault();
+	        if($(this).next('.submenu').length){
+	        	$(this).next('.submenu').toggle();
+	        }
+	        $('.dropdown').on('hide.bs.dropdown', function () {
+			   $(this).find('.submenu').hide();
+			})
+	  	});
+	}
+});
+</script>
+	
+
+</body>
+</html>
