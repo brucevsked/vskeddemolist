@@ -6,14 +6,18 @@
 
 <title>1datatables单表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-   <link href="css/plugins/dataTables/datatables.min.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+<link href="css/plugins/dataTables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <link href="css/style.css" rel="stylesheet">
+<link href="js/plugins/dataTables/select/css/select.bootstrap4.css" rel="stylesheet">
 
 </head>
 
@@ -453,12 +457,14 @@
                         </div>
 	</div>
 	
-<!-- 使用方向键试试 或拖动看看-->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/dataTables/datatables.min.js"></script>
     <script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
-    <!-- Page-Level Scripts -->
+    
+    <script src="js/plugins/dataTables/select/js/dataTables.select.min.js"></script>
+    <script src="js/plugins/dataTables/select/js/select.bootstrap4.min.js"></script>
+    
     <script>
         $(document).ready(function(){
             $('.dataTables-example').DataTable({

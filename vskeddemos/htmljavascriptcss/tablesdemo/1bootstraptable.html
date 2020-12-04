@@ -6,8 +6,14 @@
 
 <title>bootstrapTable</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-<link href="js/plugins/bootstrap4/css/bootstrap.min.css" rel="stylesheet">
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="js/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
 </head>
 
@@ -39,8 +45,8 @@
             </div>
         </div>            
 <!-- 使用方向键试试 或拖动看看-->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/plugins/bootstrap4/js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
      <script src="js/mock-min.js" type="text/javascript"></script>
     <script>
@@ -71,7 +77,7 @@
       Mock.mock(RegExp('http://localhost:8080/mypage.*'),'get',{
       	draw:1,
       	total:257,
-        'rows|10': [{'roleId':/\d{3}/,'roleName':'@cname','roleValue':/^1[385][1-9]\d{8}/,'roleDescription':'11'}]
+        'rows|5': [{'roleId':/\d{3}/,'roleName':'@cname','roleValue':/^1[385][1-9]\d{8}/,'roleDescription':'11'}]
         });
 
 $('#roleList').bootstrapTable({
@@ -83,22 +89,22 @@ $('#roleList').bootstrapTable({
             pagination: true,
             paginationLoop:true,
             pageNumber: 1,
-            pageSize: 10,
+            pageSize: 5,
             pageList: [10, 25, 50, 100],
             sidePagination: "server",
             sortable: true,
             sortOrder: 'asc',
             search: false,
-            strictSearch: true,
+            strictSearch: false,
             minimumCountColumns: 2,
             clickToSelect: true,
-            searchOnEnterKey: true,
+            searchOnEnterKey: false,
             undefinedText:"-",
             buttonsAlign:"right",
-            showRefresh: true,
-            showToggle:true,
+            showRefresh: false,
+            showToggle:false,
             singleSelect : true, //打开单选选项vsked
-            showPaginationSwitch:true,
+            showPaginationSwitch:false,
             columns: [
             {
             	checkbox: true,
