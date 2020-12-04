@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>27bstreeview1基本用法</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="css/fontawesomeweb/css/font-awesome.min.css" >
+<link rel="stylesheet" href="js/lib/bstreeview/css/bstreeview.min.css" >
+
+</head>
+
+<body >
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-10"> 
+        <div id="testTree"></div>
+      </div> 
+    </div>
+
+
+
+  </div>
+
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/popper/popper.min.js"></script>
+  <script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+	<script src="js/lib/bstreeview/js/bstreeview.min.js" ></script>
+
+<script>
+'use strict'
+
+$(function(){
+
+  var treeJsonData = [
+  {
+    text: "Node 1",
+    nodes: [
+      {
+        text: "Sub Node 1",
+        nodes: [
+          {
+            id:    "sub-node-1",
+            text:  "baidu",
+            icon:  "fa fa-folder",
+            class: "nav-level-3",
+            href:  "https://baidu.com"
+          },
+          {
+            text: "Sub Child Node 2",
+            icon: "fa fa-folder"
+          }
+        ]
+      },
+      {
+        text: "Sub Node 2",
+         icon: "fa fa-folder"
+      }
+    ]
+  },
+  {
+    text: "Node 2",
+    icon: "fa fa-folder"
+  },
+  {
+    text: "Node 3"
+  },
+  {
+    text: "Node 4"
+  },
+  {
+    text: "Node 5"
+  }
+];
+
+$('#testTree').bstreeview({ data: treeJsonData });
+
+});
+</script>
+	
+
+</body>
+</html>
