@@ -67,6 +67,13 @@ shift+f10
 18* 修正web项目中js,css,图片等引用路径
 file->project structure->modules->展开项目->web->添加webapp目录即可
 
+19* 修正正动导入超过5个包时变成*问题
+
+file->Settings->Editor->Code Style->Java->Imports
+Class count to use import with ‘*’ 
+后面数字改为999
+再点应用即可
+
 
 
 
