@@ -21,6 +21,7 @@
   <button id="getTxtBt">getTxt</button>
   <button id="getValueBt">getValue</button>
   <button id="getValueBt1">getValue1</button>
+  <button id="getValueBt2">getNodeInfo</button>
   <div id="myRsDiv"></div>
 
   <script src="js/lib/jquery.min.js"></script>
@@ -41,7 +42,7 @@
         var oldData = [{ "id": 1, "text": "china", "link": "my href1china", "level": 1, "sequence": 1, "parentId": 0 }, { "id": 2, "text": "USA", "link": "my href2 USA", "level": 1, "sequence": 2, "parentId": 0 }, { "id": 201, "text": "shandong", "link": "my href1 shandong", "level": 2, "sequence": 1, "parentId": 1 }, { "id": 3001, "text": "jinan", "link": "my href jinan", "level": 3, "sequence": 1, "parentId": 201 }, { "id": 3002, "text": "zibo", "link": "my href zibo", "level": 3, "sequence": 2, "parentId": 201 }];
         var items = new Array();
         $.each(oldData, function (index, el) {
-          items.push({ "id": el.id, "text": el.text, "parent": (el.parentId == 0) ? "#" : el.parentId });
+          items.push({ "id": el.id, "text": el.text,"level":el.level,"parent": (el.parentId == 0) ? "#" : el.parentId });
         });
         return items;
       },
@@ -74,6 +75,16 @@
           return null;
         }
         return null;
+      },
+      getNodeById:function(nodeId){
+        
+        var curItem={};
+        $.each(select2Tree.curData, function (index, el) {
+            if(el.id==nodeId){
+              curItem=el;
+            }
+        });
+        return curItem;
       },
       initUI: function (targetId) {
         //初始化下拉列表
@@ -131,6 +142,13 @@
       $("#getValueBt1").on("click", function () {
         var myData = $("#videotype").val();
         $("#myRsDiv").html("hey:" + myData);
+      });
+
+      $("#getValueBt2").on("click", function () {
+        var mySelectedId = $("#videotype").select2("val");
+        var myNodeInfo=select2Tree.getNodeById(mySelectedId);
+        console.log(myNodeInfo);
+        $("#myRsDiv").html("hey:" + myNodeInfo.id+""+myNodeInfo.text);
       });
 
       //----------------
