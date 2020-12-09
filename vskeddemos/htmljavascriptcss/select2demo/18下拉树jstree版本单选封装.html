@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+  <!-- must set here! -->
+  <base href="">
+
+  <title>18下拉树jstree封装版</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <link href="js/lib/select2/css/select2.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="js/lib/jsTree/themes/default/style.min.css" />
+
+</head>
+
+<body>
+  <select id="videotype" name="videotype">
+
+  </select>
+  <button id="getTxtBt">getTxt</button>
+  <button id="getValueBt">getValue</button>
+  <button id="getValueBt1">getValue1</button>
+  <div id="myRsDiv"></div>
+
+  <script src="js/lib/jquery.min.js"></script>
+  <script src="js/lib/mock-min.js" type="text/javascript"></script>
+  <script src="js/lib/select2/js/select2.full.min.js"></script>
+
+  <script src="js/lib/jsTree/jstree.min.js"></script>
+
+  <script>
+    "use strict"
+
+    var select2Tree = new Object({
+      curData: [],
+      setCurData: function (newData) {
+        select2Tree.curData = newData;
+      },
+      getCurData: function () {
+        var oldData = [{ "id": 1, "text": "china", "link": "my href1china", "level": 1, "sequence": 1, "parentId": 0 }, { "id": 2, "text": "USA", "link": "my href2 USA", "level": 1, "sequence": 2, "parentId": 0 }, { "id": 201, "text": "shandong", "link": "my href1 shandong", "level": 2, "sequence": 1, "parentId": 1 }, { "id": 3001, "text": "jinan", "link": "my href jinan", "level": 3, "sequence": 1, "parentId": 201 }, { "id": 3002, "text": "zibo", "link": "my href zibo", "level": 3, "sequence": 2, "parentId": 201 }];
+        var items = new Array();
+        $.each(oldData, function (index, el) {
+          items.push({ "id": el.id, "text": el.text, "parent": (el.parentId == 0) ? "#" : el.parentId });
+        });
+        return items;
+      },
+      matchCustom: function (params, data) {
+        if ($.trim(params.term) === "") {
+          return data;
+        } else {
+          //start unselected tree data
+          var curSelectNode = new Array();
+          $.each(select2Tree.curData, function (index, el) {
+            curSelectNode.push(el.id);
+          });
+          $(".select2-results").jstree("deselect_node", curSelectNode);
+          //end unselected tree data
+
+          //start select tree data
+          var curSelectNode = new Array();
+          $.each(select2Tree.curData, function (index, el) {
+            if (el.text.indexOf(params.term) >= 0) {
+              curSelectNode.push(el.id);
+            }
+          });
+
+          $(".select2-results").jstree("select_node", curSelectNode);
+          //end select tree data
+          return data;
+        }
+
+        if (typeof data.text === "undefined") {
+          return null;
+        }
+        return null;
+      },
+      initUI: function (targetId) {
+        //初始化下拉列表
+        $("#" + targetId).select2({
+          multiple: false,//是否多选
+          width: "100%",
+          matcher: select2Tree.matchCustom,//自定义搜索过滤
+          data: select2Tree.curData
+        });
+        //下拉打开事件
+        $("#" + targetId).on("select2:open", function (e) {
+          $.jstree.destroy();//销毁树
+          $(".select2-results").html("");//清空原下拉列表内容
+          $(".select2-results").jstree({ core: { data: select2Tree.curData } });//将树初始化到下拉列表中去
+
+          $(".select2-results").bind("activate_node.jstree", function (obj, e) {
+            // 绑定点击事件获取当前节点
+            var currentNode = e.node;
+            $("#" + targetId).val(currentNode.id, currentNode.text).trigger("change");//方式2
+
+            $("#" + targetId).select2("close");
+
+          });
+          // Bind an event
+          $("#" + targetId).on("select2:close", function (e) {
+            $.jstree.destroy();//销毁树
+          });
+
+        });//end select2:open
+
+      }
+
+    });
+
+
+    $(function () {
+
+      var newData = select2Tree.getCurData(); //第一步准备好下拉数据数据
+      select2Tree.setCurData(newData);//第二步设置下拉树数据
+      select2Tree.initUI("videotype");//第三步将下拉树显示到哪个层上
+
+
+      //详细用法参见 https://select2.org/getting-started/basic-usage
+
+      $("#getTxtBt").on("click", function () {
+        var myData = $("#videotype").select2("data")[0].text;
+        $("#myRsDiv").html("hello:" + myData);
+      });
+
+      $("#getValueBt").on("click", function () {
+        var myData = $("#videotype").select2("val");
+        $("#myRsDiv").html("hey:" + myData);
+        console.log("第二种取值方式" + $("#videotype").val());
+      });
+      $("#getValueBt1").on("click", function () {
+        var myData = $("#videotype").val();
+        $("#myRsDiv").html("hey:" + myData);
+      });
+
+      //----------------
+
+
+
+    });
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
