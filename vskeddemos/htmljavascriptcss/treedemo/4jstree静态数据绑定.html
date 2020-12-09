@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>静态数据绑定</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="js/lib/jsTree/themes/default/style.min.css" />
+</head>
+
+<body>
+<button id="test1Bt">初始化树</button>
+<button id="test2Bt">销毁树</button>
+<button id="test3Bt">销毁树1</button>
+<div id="myRoleList">	
+</div>
+
+<script src="js/jquery.min.js"></script> 
+<script src="js/lib/jsTree/jstree.js"></script>
+<script src="js/mock-min.js" ></script>
+
+<script>
+
+$(function () {
+  
+  $('#test1Bt').on('click',sysRoleList.initTree);
+  $('#test2Bt').on('click',sysRoleList.destroyTree);
+  $('#test3Bt').on('click',sysRoleList.destroyTree1);
+  
+  
+});
+
+var sysRoleList=new Object({
+	initTree: function(){
+    $('#myRoleList').jstree({
+    core:{
+      data:[
+      {id:'0',parent:'#',text:'公司总部'  },
+      {id:'1',parent:'0',text:'北京公司'  },
+      {id:'1a',parent:'1',text:'aaa'  },
+      {id:'1b',parent:'1',text:'bbb'  },
+      {id:'1c',parent:'1',text:'ccc'  },
+      {id:'1ca1',parent:'1c',text:'ccc1'  },
+      {id:'1ca2',parent:'1c',text:'ccc2'  },
+      {id:'1ca3',parent:'1c',text:'ccc3'  },
+      {id:'2',parent:'0',text:'济南公司'  },
+      {id:'3',parent:'0',text:'上海公司'  },
+      {id:'4',parent:'0',text:'海南公司'  },
+      {id:'5',parent:'0',text:'月球公司'  }
+      ]
+    },
+    plugins:['checkbox']
+  });
+  
+	},
+	destroyTree:function(){
+	  $.jstree.destroy();
+	},
+	destroyTree1:function(){
+	  $("#myRoleList").jstree().destroy();
+	}
+});
+</script>
+
+</body>
+</html>

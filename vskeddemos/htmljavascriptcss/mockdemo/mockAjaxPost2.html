@@ -21,7 +21,7 @@
 
 <script type="text/javascript">
     $(function(){
-      Mock.mock('http://localhost:8080/lostweek/hello.html','post',function(){
+      Mock.mock(RegExp('http://localhost:8080/lostweek/hello.*'),'post',function(){
         var rsArry=new Array();
         for(var i=0;i<10;i++){
           var Random = Mock.Random;
@@ -79,7 +79,7 @@
       }
     });
     
-	$.post('http://localhost:8080/lostweek/hello.html',{ myName: 'ffa' },function (dt){
+	$.post('http://localhost:8080/lostweek/hello',{ myName: 'ffa' },function (dt){
 		 $('#backMsg1').html(dt);
 	});
 

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+	<!-- must set here! -->
+	<base href="">
+
+	<title>后台加载数据进行中.未完成,需要递归调用选择状态</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<link rel="stylesheet" href="js/lib/jsTree/themes/default/style.min.css" />
+</head>
+
+<body>
+	<button id="test1Bt">初始化树</button>
+	<button id="test2Bt">销毁树</button>
+	<button id="test3Bt">销毁树1</button>
+	<div id="myRoleList">
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/lib/jsTree/jstree.js"></script>
+	<script src="js/mock-min.js"></script>
+
+	<script>
+
+		/**
+	    
+			checkbox:{
+			  undetermined:true,//半选中状态
+			  three_state:false, //父子级别级联选择
+			  tie_selection:false,
+			  keep_selected_style:false //是否默认选中
+			  }
+		*/
+
+		$(function () {
+
+			$('#test1Bt').on('click', sysRoleList.initTree);
+			$('#test2Bt').on('click', sysRoleList.destroyTree);
+			$('#test3Bt').on('click', sysRoleList.destroyTree1);
+
+
+		});
+
+		var sysRoleList = new Object({
+			initTree: function () {
+
+				Mock.mock('http://localhost:8080/lostweek/hello', 'post', function () {
+					var rsArry = new Array();
+					rsArry.push({ ida: '0', parentb: '#', text: '公司总部', state: { opened: true, disabled: false, checked: true } });
+					rsArry.push({ ida: '1', parentb: '0', text: '北京公司', state: { opened: true, disabled: false, checked: true } });
+					rsArry.push({ ida: '1a', parentb: '1', text: 'aaa', state: { opened: true, disabled: false, checked: true } });
+					rsArry.push({ ida: '1b', parentb: '1', text: 'bbb', state: { opened: true, disabled: false, checked: true } });
+					rsArry.push({ ida: '1c', parentb: '1', text: 'ccc', state: { opened: true, disabled: false, checked: true } });
+					rsArry.push({ ida: '1ca1', parentb: '1c', text: 'ccc1', state: { opened: true, disabled: false, checked: false } });
+					rsArry.push({ ida: '1ca2', parentb: '1c', text: 'ccc2', state: { opened: true, disabled: false, checked: true } });
+					rsArry.push({ ida: '1ca3', parentb: '1c', text: 'ccc3', state: { opened: true, disabled: false, checked: true } });
+					rsArry.push({ ida: '2', parentb: '0', text: '济南公司', state: { opened: true, disabled: false, checked: true } });
+					rsArry.push({ ida: '2a', parentb: '2', text: '济南公司1', state: { opened: true, disabled: false, checked: false } });
+					rsArry.push({ ida: '2b', parentb: '2', text: '济南公司2', state: { opened: true, disabled: false, checked: false } });
+					rsArry.push({ ida: '2c', parentb: '2', text: '济南公司3', state: { opened: true, disabled: false, checked: false } });
+					rsArry.push({ ida: '3', parentb: '0', text: '上海公司', state: { opened: true, disabled: false, checked: false } });
+					rsArry.push({ ida: '4', parentb: '0', text: '海南公司', state: { opened: true, disabled: false, checked: true } });
+					rsArry.push({ ida: '5', parentb: '0', text: '月球公司', state: { opened: true, disabled: false, checked: false } });
+					return rsArry;
+				});
+
+				$.post('http://localhost:8080/lostweek/hello', { myName: 'ffa' }, function (dt) {
+
+					$('#myRoleList').jstree({
+						check_callback: true,
+						checkbox: {
+							tie_selection: false,//半选中状态
+						},
+						core: {
+							data: function (node, cb) {
+								var items = [];
+								$.each(dt, function (index, el) {
+									items.push({ id: el.ida, text: el.text, parent: el.parentb });
+
+								});
+								cb.call(this, items);
+							}
+						},
+						plugins: ['checkbox']
+					});
+
+
+				}, 'json');
+
+
+
+
+			},
+			destroyTree: function () {
+				$.jstree.destroy();
+			},
+			destroyTree1: function () {
+				$("#myRoleList").jstree().destroy();
+			},
+			isExistChild(cur, dataList) {
+				for (var i = 0; i < dataList.length; i++) {
+					if (cur.id == dataList[i].parent) return true;
+				}
+				return false;
+			},
+			hasSelectedChild(cur, dataList) {
+				for (var i = 0; i < dataList.length; i++) {
+					if (cur.id == dataList[i].parent && dataList[i].checked == true) return true;
+				}
+				return false;
+			}
+		});
+	</script>
+
+</body>
+
+</html>
