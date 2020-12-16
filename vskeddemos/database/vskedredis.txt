@@ -67,6 +67,10 @@ redis-cli -a 密码  shutdown
 15* 查看集群信息
 /opt/redis-5.0.7/bin/redis-cli --cluster info 10.0.192.31:6379 -a Y4yhl9tbf110_
 
+16* 选择数据库,切换数据库
+SELECT index
+select 库索引
+
 
 ------------------------------------------------------------
 redis安装 tar包版本
