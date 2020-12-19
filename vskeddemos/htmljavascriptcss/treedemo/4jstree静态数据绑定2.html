@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>静态数据绑定</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<link rel="stylesheet" href="js/lib/jsTree/themes/default/style.min.css" />
+</head>
+
+<body>
+<button id="test1Bt">初始化树</button>
+<button id="test2Bt">销毁树</button>
+<button id="test3Bt">销毁树1</button>
+<div id="myRoleList">	
+</div>
+
+<script src="js/jquery.min.js"></script> 
+<script src="js/lib/jsTree/jstree.js"></script>
+<script src="js/mock-min.js" ></script>
+
+<script>
+
+$(function () {
+  
+  $('#test1Bt').on('click',sysRoleList.initTree);
+  $('#test2Bt').on('click',sysRoleList.destroyTree);
+  $('#test3Bt').on('click',sysRoleList.destroyTree1);
+  
+  
+});
+
+var oldData=[{"id":1, "text":"china", "link":"my href1china","level":1, "sequence":1, "parentId":0}, {"id":2, "text":"USA", "link":"my href2 USA","level":1, "sequence":2, "parentId":0}, {"id":201, "text":"shandong", "link":"my href1 shandong","level":2, "sequence":1, "parentId":1}, {"id":3001, "text":"jinan", "link":"my href jinan","level":3, "sequence":1, "parentId":201}, {"id":3002, "text":"zibo", "link":"my href zibo","level":3, "sequence":2, "parentId":201}];
+var items = new Array();
+                $.each(oldData, function (index, el) {
+                    items.push({ "id": el.id, "text": el.text, "parent": (el.parentId==0)?"#":el.parentId });
+                });
+
+var sysRoleList=new Object({
+	initTree: function(){
+    $('#myRoleList').jstree({
+    core:{
+      data:items
+    },
+    plugins:['checkbox']
+  });
+  
+	},
+	destroyTree:function(){
+	  $.jstree.destroy();
+	},
+	destroyTree1:function(){
+	  $("#myRoleList").jstree().destroy();
+	}
+});
+</script>
+
+</body>
+</html>
