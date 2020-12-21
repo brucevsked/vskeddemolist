@@ -4,7 +4,12 @@ spring boot2默认数据库连接池hikari
 
 命令启动与关闭
 web模块,直接用jar包运行即可
-nohup java -jar appserverwebadmin.jar &
+nohup java -jar appserverwebadmin.jar -Dspring.profiles.active ="default,dev" &
+nohup java -jar /opt/baomakuaituan/back/yami-shop-multishop-0.0.1-SNAPSHOT.jar -Dspring.profiles.active ="default,dev" > /opt/baomakuaituan/logs/yami-shop-multishop.log &
+无日志版本
+nohup kafka-server-start.sh /opt/kafka_2.12-2.3.0/config/server.properties >/dev/null 2>&1 &
+关闭后台
+ps aux|grep yami-shop-multishop|grep -v grep |awk '{print $2}'|xargs kill -9
 
 远程断点连接
 第一步启动参数中添加以下
