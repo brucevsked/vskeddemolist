@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: myprovider1
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 10.0.193.11:8848

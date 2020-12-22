@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="hessiandemo">
-        <wb-resource deploy-path="/" source-path="/WebRoot"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="/hessiandemo"/>
-        <property name="java-output-path" value="/hessiandemo/WebRoot/WEB-INF/classes"/>
-    </wb-module>
-</project-modules>

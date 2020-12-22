@@ -20,6 +20,8 @@ PATH后面新添加
 
 验证环境变量  
 gcc --version  
+g++ --version  
+gdb --version  
 
 gcc (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0  
 Copyright (C) 2018 Free Software Foundation, Inc.  
