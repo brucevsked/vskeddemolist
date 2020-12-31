@@ -7,7 +7,6 @@ server:
       force: true
   tomcat:
     uri-encoding: UTF-8
-  address: 127.0.0.1
   shutdown: graceful #优雅停机
 
 spring:

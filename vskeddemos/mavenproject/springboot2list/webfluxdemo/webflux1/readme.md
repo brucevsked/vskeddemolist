@@ -1,6 +1,6 @@
 ## 所用技术
 maven 3.6.3  
-SpringBoot  2.3.1  
+SpringBoot  2.4.1  
 Log4j  
 TestNG  7.1.0
 
