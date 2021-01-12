@@ -11,7 +11,8 @@ CascadeType.REMOVE
 级联删除，当删除关联关系时会将子对象的数据删除 
 
 CascadeType.REFRESH
-级联刷新，保存关联关系时会更新子对象和数据库中一致(意思是你在父对象中添加一个只包含ID的子对象，也可以保存进去) 
+级联刷新，保存关联关系时会更新子对象和数据库中一致
+(意思是你在父对象中添加一个只包含ID的子对象，也可以保存进去) 
 
 CascadeType.ALL
 包含上述所有操作
@@ -25,23 +26,30 @@ FetchType.LAZY
 
 
 SpringDataJpa Specification接口用法
-首先，我们需要了解到Specification是springDateJpa中的一个接口，他是用于当jpa的一些基本CRUD操作的扩展，可以把他理解成一个spring jpa的复杂查询接口。其次我们需要了解Criteria 查询，这是是一种类型安全和更面向对象的查询。而Spring Data JPA支持JPA2.0的Criteria查询，相应的接口是JpaSpecificationExecutor。
+首先，我们需要了解到Specification是springDateJpa中的一个接口，
+他是用于当jpa的一些基本CRUD操作的扩展，可以把他理解成一个spring jpa的复杂查询接口。
+其次我们需要了解Criteria 查询，这是是一种类型安全和更面向对象的查询。
+而Spring Data JPA支持JPA2.0的Criteria查询，相应的接口是JpaSpecificationExecutor。
 
 而JpaSpecificationExecutor这个接口基本是围绕着Specification接口来定义的， Specification接口中只定义了如下一个方法：
 
 Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb); 
 
-下面，我们来理解这个方法，首先，要理解这个方法，以及正确的使用它，就需要对JPA2.0的Criteria查询有一个足够的熟悉和理解，因为这个方法的参数和返回值都是JPA标准里面定义的对象。 
+下面，我们来理解这个方法，首先，要理解这个方法，以及正确的使用它，
+就需要对JPA2.0的Criteria查询有一个足够的熟悉和理解，因为这个方法的参数和返回值都是JPA标准里面定义的对象。 
 
 Criteria查询基本概念
 
 Criteria 查询是以元模型的概念为基础的，元模型是为具体持久化单元的受管实体定义的，这些实体可以是实体类，嵌入类或者映射的父类。
 
-CriteriaQuery接口：代表一个specific的顶层查询对象，它包含着查询的各个部分，比如：select 、from、where、group by、order by等注意：CriteriaQuery对象只对实体类型或嵌入式类型的Criteria查询起作用
+CriteriaQuery接口：代表一个specific的顶层查询对象，它包含着查询的各个部分，
+比如：select 、from、where、group by、order by等注意：CriteriaQuery对象只对实体类型或嵌入式类型的Criteria查询起作用
 
 Root接口：代表Criteria查询的根对象，Criteria查询的查询根定义了实体类型，能为将来导航获得想要的结果，它与SQL查询中的FROM子句类似
 
-1：Root实例是类型化的，且定义了查询的FROM子句中能够出现的类型。root代表查询的实体类,query可以从中得到root对象,告诉jpa查询哪一个实体类,还可以添加查询条件,还可以结合EntityManager对象 得到最终查询的 TypedQuery对象.
+1：Root实例是类型化的，且定义了查询的FROM子句中能够出现的类型。
+root代表查询的实体类,query可以从中得到root对象,告诉jpa查询哪一个实体类,
+还可以添加查询条件,还可以结合EntityManager对象 得到最终查询的 TypedQuery对象.
 
 2：查询根实例能通过传入一个实体类型给 AbstractQuery.from方法获得。
 
@@ -55,3 +63,46 @@ Root接口：代表Criteria查询的根对象，Criteria查询的查询根定义
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+Spring Data JPA是个非常强大的ORM持久化解决方案，免去了mybatis或spring jdbcTemplate的开发人员编写脚本的无趣工作。
+
+通过简单明了地约定好接口方法的规则，来自动生成相应的JPQL语句，映射成PO对象，能大幅节省开发人员的编码量。
+
+接口方法的命名规则也很简单，明白And、Or、Is、Equal、Greater、StartingWith等英文单词的含义，就可以写接口方法了。
+
+以下是从Spring Data JPA官方网站上的docs整理而来，网上其他有些文章写的有的是错的，
+
+大于等于、小于等于应为：GreaterThanEqual、LessThanEqual，而不是GreaterThanEquals、LessThanEquals，如果带了s，会导致程序启动报错。
+
+关键词            |   SQL符号            |样例                                                   | 对应JPQL 语句片段
+And              |	  and	              | findByLastnameAndFirstname  |	 … where x.lastname = ?1 and x.firstname = ?2
+Or	             |    or	              | findByLastnameOrFirstname   | … where x.lastname = ?1 or x.firstname = ?2
+Is,Equals        |    =	                | findByFirstname,findByFirstnameIs,findByFirstnameEquals| … where x.firstname = ?1
+Between	         | between xxx and xxx	|findByStartDateBetween	… where x.startDate between ?1 and ?2
+LessThan	       |   <	                |findByAgeLessThan	… where x.age < ?1
+LessThanEqual	   |<=	findByAgeLessThanEqual	… where x.age <= ?1
+GreaterThan	     |>	findByAgeGreaterThan	… where x.age > ?1
+GreaterThanEqual |	>=	findByAgeGreaterThanEqual	… where x.age >= ?1
+After	>	findByStartDateAfter	… where x.startDate > ?1
+Before	<	findByStartDateBefore	… where x.startDate < ?1
+IsNull	is null	findByAgeIsNull	… where x.age is null
+IsNotNull,NotNull	is not null	findByAge(Is)NotNull	… where x.age not null
+Like	like	findByFirstnameLike	… where x.firstname like ?1
+NotLike	not like	findByFirstnameNotLike	… where x.firstname not like ?1
+StartingWith	like 'xxx%'	findByFirstnameStartingWith	… where x.firstname like ?1(parameter bound with appended %)
+EndingWith	like 'xxx%'	findByFirstnameEndingWith	… where x.firstname like ?1(parameter bound with prepended %)
+Containing	like '%xxx%'	findByFirstnameContaining	… where x.firstname like ?1(parameter bound wrapped in %)
+OrderBy	order by	findByAgeOrderByLastnameDesc	… where x.age = ?1 order by x.lastname desc
+Not	<>	findByLastnameNot	… where x.lastname <> ?1
+In	in()	findByAgeIn(Collection<Age> ages)	… where x.age in ?1
+NotIn	not in()	findByAgeNotIn(Collection<Age> ages)	… where x.age not in ?1
+TRUE	=true	findByActiveTrue()	… where x.active = true
+FALSE	=false	findByActiveFalse()	… where x.active = false
+IgnoreCase	upper(xxx)=upper(yyyy)	findByFirstnameIgnoreCase	… where UPPER(x.firstame) = UPPER(?1)
+
+
+
+
+
+命名+带分页方式
+    Page<ArticleDO> findAllByAccountIdIsAndMenuIdIs(Long menuId, Long accountId, Pageable pageable);
