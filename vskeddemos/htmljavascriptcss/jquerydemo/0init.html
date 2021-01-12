@@ -15,15 +15,31 @@
 
 <body>
 
+  <button id="bt1">click1</button>
+  <button id="bt2">click2</button>
+  <button id="bt3">click3</button>
 
   <script type="text/javascript" charset="UTF-8" src="js/lib/jquery.min.js"></script>
   <script type="text/javascript" charset="UTF-8" src="js/project/demo1.js"></script>
   <script>
 "use strict"
 
+var login=new Object({
+  test1:function(){
+    console.log(1);
+  },
+  test2:function(obj){
+    console.log(obj);
+    console.log(obj.data);
+  }
+});
+
 $(function(){
 
 console.log('init ok');
+$("#bt1").on("click", login.test1);
+$("#bt2").on("click",{page:"hellopage"},login.test2);
+$("#bt3").on("click",123,login.test2);
 
 });
   </script>
