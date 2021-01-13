@@ -106,3 +106,201 @@ IgnoreCase	upper(xxx)=upper(yyyy)	findByFirstnameIgnoreCase	… where UPPER(x.fi
 
 命名+带分页方式
     Page<ArticleDO> findAllByAccountIdIsAndMenuIdIs(Long menuId, Long accountId, Pageable pageable);
+
+@Entity
+@Table(name="menu")
+public class MenuDO {
+	
+	@Id
+    private Long id;
+
+	/**
+	 * 菜单文本
+	 */
+	private String text;
+	
+	private String link;
+	
+	private Integer level;
+	
+	private Integer sequence;
+
+	private Long parentId;
+	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name = "parentId")
+	private Set<MenuDO> subMenus;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Integer getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(Integer sequence) {
+		this.sequence = sequence;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+
+	public Set<MenuDO> getSubMenus() {
+		return subMenus;
+	}
+
+	public void setSubMenus(Set<MenuDO> subMenus) {
+		this.subMenus = subMenus;
+	}
+
+	public MenuDO() {
+		super();
+	}
+
+	public MenuDO(Long id, String text, String link, Integer level, Integer sequence, Long parentId) {
+		super();
+		this.id = id;
+		this.text = text;
+		this.link = link;
+		this.level = level;
+		this.sequence = sequence;
+		this.parentId = parentId;
+	}
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\":" +id.longValue()+
+                ", \"text\":\"" + text +
+                "\", \"link\":\"" + link  +
+                "\",\"level\":" + (level==null?"-1":level.intValue()) +
+                ", \"sequence\":" + sequence.intValue() +
+                ", \"parentId\":" + (parentId==null?"0":parentId.longValue())+
+				", \"subMenus\":" + ((subMenus==null)?"[]":subMenus.toString())+
+                "}";
+    }
+	
+	
+
+}
+
+
+
+
+@Entity
+@Table(name="article")
+public class ArticleDO {
+	
+	@Id
+    private Long id;
+
+    private String title;
+    
+    private String content;
+    
+    @JoinColumn(table = "account",name = "id")
+    private Long accountId;
+
+    @OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "menuId")
+    private MenuDO menu;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Long getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
+	}
+
+	public MenuDO getMenu() {
+		return menu;
+	}
+
+	public void setMenu(MenuDO menu) {
+		this.menu = menu;
+	}
+
+	public ArticleDO() {
+		super();
+	}
+
+	public ArticleDO(Long id, String title, String content, Long accountId) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.accountId = accountId;
+	}
+    
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\":" + id.longValue() +
+                ", \"title\":\"" + title +
+                "\", \"content\":\"" + content +
+				"\", \"menu\":" + menu.toString() +
+                "}";
+    }
+    
+
+}
+
