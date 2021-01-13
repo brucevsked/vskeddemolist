@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>载入新页</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="">
+<meta http-equiv="description" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+
+  需要放到tomcat才可以
+  http://127.0.0.1:8080/jquerydemo/13load.html
+
+  <div id="mainDiv"></div>
+
+  <script type="text/javascript" charset="UTF-8" src="js/lib/jquery.min.js"></script>
+
+  <script>
+"use strict"
+
+var index=new Object({
+  load:function(pageUrl,data,callback){
+    $('#mainDiv').load(pageUrl,data,callback);
+  },
+  myCallBack1:function(){
+    console.log("it's ok now");
+  }
+});
+
+$(function(){
+
+console.log('init ok');
+index.load("8addElements.html");
+
+});
+  </script>
+</body>
+</html>
