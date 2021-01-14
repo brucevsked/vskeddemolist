@@ -55,7 +55,8 @@ root代表查询的实体类,query可以从中得到root对象,告诉jpa查询�
 
 3：Criteria查询，可以有多个查询根。 
 
-4.CriteriaBuilder接口：用来构建CritiaQuery的构建器对象Predicate：一个简单或复杂的谓词类型，其实就相当于条件或者是条件组合。 
+4.CriteriaBuilder接口：用来构建CritiaQuery的构建器对象
+Predicate：一个简单或复杂的谓词类型，其实就相当于条件或者是条件组合。 
 
 
 建表时不使用下划线命名
@@ -304,3 +305,42 @@ public class ArticleDO {
 
 }
 
+对象中有子对象
+左连接示例
+
+
+package com.jat.repository.back.specification;
+
+import com.jat.dto.back.ArticleDO;
+import com.jat.vo.ArticleQueryVO;
+import org.springframework.data.jpa.domain.Specification;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+public class ArticleSpecification implements Specification<ArticleDO> {
+
+    private ArticleQueryVO articleQueryVO;
+
+    public ArticleSpecification(ArticleQueryVO articleQueryVO) {
+        this.articleQueryVO = articleQueryVO;
+    }
+
+    public Predicate toPredicate(Root<ArticleDO> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+        Predicate titlePredicate=criteriaBuilder.like(root.get("title"),"%"+articleQueryVO.getTitle()+"%");
+        Predicate contentPredicate=criteriaBuilder.like(root.get("content"),"%"+articleQueryVO.getContent()+"%");
+
+        if(articleQueryVO.getMenuId()==null || articleQueryVO.getMenuId().intValue()==-1){
+            return criteriaBuilder.and(titlePredicate,contentPredicate);
+        }
+
+        Join menuJoin=root.join("menu", JoinType.LEFT);
+        Predicate menuIdPredicate=criteriaBuilder.equal(menuJoin.get("id"),articleQueryVO.getMenuId());
+        return criteriaBuilder.and(titlePredicate,contentPredicate,menuIdPredicate);
+
+    }
+}

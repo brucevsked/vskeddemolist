@@ -70,6 +70,8 @@ select host from user where user = 'root';
 grant all  on *.* to 'root'@'%' ;
 flush privileges; 
 
+select `host`,`user` from mysql.`user`;
+
 9* create database 创建数据库
 create database [databaseName]
 
@@ -553,6 +555,11 @@ default-character-set=utf8mb4
 [client]
 default-character-set=utf8mb4
 
+8* 跳过密码直接登录
+配置文件中(ini cnf)添加
+skip-grant-tables
+mysql -u root -p
+直接回车即可
 
 
 

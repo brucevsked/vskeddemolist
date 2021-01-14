@@ -75,6 +75,16 @@ idea配置
 当我们修改了Java类后，IDEA默认是不自动编译的，而spring-boot-devtools又是监测classpath下的文件发生变化才会重启应用，所以需要设置IDEA的自动编译：
 （1）File-Settings-Build,Execution,Deployment-Compiler-Build Project automatically
 （2）ctrl + shift + alt + /,选择Registry,勾上 Compiler autoMake allow when app running
+如果是thymeleaf还需要
+1关闭thymeleaf缓存yml里
+  thymeleaf:
+    cache: false
+
+在启动项目前点击下拉，选edit configurations
+将当前项目里的Running application update Policies中
+on update action,
+on frame deactivation
+修改为update class and resources
 
 修改类并测试即可
 
