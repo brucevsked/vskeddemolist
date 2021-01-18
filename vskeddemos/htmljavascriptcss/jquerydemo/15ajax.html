@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>ajax</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="">
+<meta http-equiv="description" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+
+  <button id="bt1">click1</button>
+  <button id="bt2">click2</button>
+  <button id="bt3">click3</button>
+
+  <script type="text/javascript" charset="UTF-8" src="js/lib/jquery.min.js"></script>
+  <script type="text/javascript" charset="UTF-8" src="js/project/demo1.js"></script>
+  <script>
+"use strict"
+
+var login=new Object({
+  testGet1:function(){
+    $.ajax({
+      type:"get",
+      url:"http://localhost:8080/lostweek/hello.html",
+      //async:true,
+      success:function(dt){
+        $('#backMsg').html(dt);
+      }
+    });
+  },
+  testGet2:function(){
+    $.get('http://localhost:8080/lostweek/hello.html',{ name:'vsked'},function(dt){
+		 $('#backMsg1').html(dt);
+	});
+  },
+  testPost1:function(){
+    $.ajax({
+      type:"post",
+      url:"http://localhost:8080/lostweek/hello.html",
+      //async:true,
+      success:function(dt){
+        $('#backMsg').html(dt);
+      }
+    });
+  },
+  testPost2:function(){
+    $.post('http://localhost:8080/lostweek/hello.html',{ myName: 'ffa' },function (dt){
+		 $('#backMsg1').html(dt);
+	});
+  },
+  testPut:function(){
+    $.ajax({
+      type:"put",
+      dataType: "json", //html,xml,json,text,script,jsonp
+      url:"http://localhost:8080/lostweek/hello.html",
+      //async:true,
+      success:function(dt){
+        $('#backMsg').html(dt);
+      }
+    });
+  },
+  testDelete:function(){
+    $.ajax({
+      type:"delete",
+      dataType: "json", //html,xml,json,text,script,jsonp
+      url:"http://localhost:8080/lostweek/hello.html",
+      //async:true,
+      success:function(dt){
+        $('#backMsg').html(dt);
+      }
+    });
+  },
+  testPatch:function(){
+    $.ajax({
+      type:"patch",
+      dataType: "json", //html,xml,json,text,script,jsonp
+      url:"http://localhost:8080/lostweek/hello.html",
+      //async:true,
+      success:function(dt){
+        $('#backMsg').html(dt);
+      }
+    });
+  }
+});
+
+$(function(){
+
+console.log('init ok');
+$("#bt1").on("click", login.test1);
+$("#bt2").on("click",{page:"hellopage"},login.test2);
+$("#bt3").on("click",123,login.test2);
+
+});
+  </script>
+</body>
+</html>

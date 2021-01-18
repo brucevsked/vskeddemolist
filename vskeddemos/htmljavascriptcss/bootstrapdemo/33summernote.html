@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>bootstrap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="js/lib/summernote/summernote.min.css" >
+
+
+</head>
+<body>
+<button id="test1">给值</button>
+<button id="test2">给值</button>
+<button id="test3">取值</button>
+    <div id="content"></div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lib/popper/popper.min.js"></script>
+  <script src="js/lib/bootstrap/js/bootstrap.min.js" ></script>
+  <script src="js/lib/summernote/summernote.min.js" ></script>
+  
+
+<script>
+"use strict"
+
+var htmlTool=new Object({
+    /**
+     * 将html进行转义
+     * @param htmlStr
+     * @returns {Node|void|string|*}
+     */
+     htmlToEscape:function(htmlStr){
+        return htmlStr.replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
+    },
+    /**
+     * 将html转义后字符串转义回html
+     * @param str
+     * @returns {Node|void|string|*}
+     */
+    escapeToHtml:function(str){
+        var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+        return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
+    }
+});
+
+$(function(){
+
+    $('#content').summernote({
+                    height:$(window).height()-330,
+                    placeholder: "请输入您的文章内容。"
+                });
+    $("#test1").on("click",function(){
+        $("#content").summernote("code","<p>good idea</p><h1>hello h1</h1>");
+        
+    });
+    $("#test2").on("click",function(){
+        console.log("will test new")
+       
+    });
+    $("#test3").on("click",function(){
+        var content=$("#content").summernote("code");
+        console.log(content);
+    });
+
+});
+</script>
+	
+
+</body>
+</html>
