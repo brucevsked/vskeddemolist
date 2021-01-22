@@ -1,5 +1,5 @@
 server:
-  port: 80 #端口号
+  port: 8080 #端口号
    #servlet.context-path: / 项目名，如果不设定，默认是 /
 
 spring:
