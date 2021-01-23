@@ -18,8 +18,12 @@ n64
 
 月光宝盒千机变
 
-模拟器前端
+模拟器前端+模拟器核心
 retroarch
 
 mednafen
+
+模拟器前端
+EmulationStation
+EmuELEC 3.0
 
