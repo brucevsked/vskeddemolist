@@ -1,7 +1,7 @@
 package com.vsked.pattern2;
 
-import org.junit.Test;
 
+import org.testng.annotations.Test;
 
 public class Sample1FactoryTest {
 	

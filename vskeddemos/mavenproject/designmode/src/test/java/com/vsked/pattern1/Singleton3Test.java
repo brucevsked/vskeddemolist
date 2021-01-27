@@ -1,8 +1,9 @@
 package com.vsked.pattern1;
 
-import org.junit.Test;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.Test;
 
 public class Singleton3Test {
 	

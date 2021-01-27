@@ -1,6 +1,7 @@
 package com.vsked.pattern4;
 
-import org.junit.Test;
+
+import org.testng.annotations.Test;
 
 public class AbstractFactoryTest {
 	

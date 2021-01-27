@@ -1,6 +1,6 @@
 package com.vsked.pattern3;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 public class FactoryTest {
 	
