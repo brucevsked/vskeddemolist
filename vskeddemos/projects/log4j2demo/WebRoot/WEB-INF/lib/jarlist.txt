@@ -1,0 +1,7 @@
+commons-dbcp-1.4.jar
+commons-pool-1.6.jar
+log4j-api-2.3.jar
+log4j-core-2.3.jar
+log4j-slf4j-impl-2.3.jar
+mysql-connector-java-5.1.28-bin.jar
+ojdbc6.jar

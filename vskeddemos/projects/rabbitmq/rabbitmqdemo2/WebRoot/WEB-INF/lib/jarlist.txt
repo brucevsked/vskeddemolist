@@ -1,0 +1,5 @@
+commons-cli-1.1.jar
+commons-io-1.2.jar
+hamcrest-core.jar
+junit.jar
+rabbitmq-client.jar

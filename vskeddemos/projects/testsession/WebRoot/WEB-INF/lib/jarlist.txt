@@ -1,0 +1,5 @@
+ehcache-2.10.0.jar
+ehcache-web-2.0.4.jar
+log4j-1.2.17.jar
+slf4j-api-1.7.12.jar
+slf4j-log4j12-1.7.12.jar

@@ -1,0 +1,6 @@
+c3p0-0.9.5.1.jar
+c3p0-oracle-thin-extras-0.9.5.1.jar
+jfinal-2.0-bin.jar
+log4j-1.2.17.jar
+mchange-commons-java-0.2.10.jar
+mysql-connector-java-5.1.35-bin.jar

@@ -1,0 +1,13 @@
+aopalliance-1.0.jar
+aspectjrt.jar
+aspectjweaver.jar
+commons-logging-1.1.3.jar
+hamcrest-core-1.3.jar
+junit-4.11.jar
+spring-aop-4.1.1.RELEASE.jar
+spring-aspects-4.0.0.M3.jar
+spring-beans-4.1.1.RELEASE.jar
+spring-context-4.1.1.RELEASE.jar
+spring-context-support-4.0.0.M3.jar
+spring-core-4.1.1.RELEASE.jar
+spring-expression-4.1.1.RELEASE.jar

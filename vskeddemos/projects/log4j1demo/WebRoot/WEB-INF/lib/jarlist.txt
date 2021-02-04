@@ -1,0 +1,3 @@
+commons-logging-1.1.3.jar
+log4j-1.2.17.jar
+mysql-connector-java-5.1.28-bin.jar

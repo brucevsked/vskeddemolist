@@ -1,0 +1,5 @@
+log4j-1.2.17.jar
+quartz-2.2.1.jar
+quartz-jobs-2.2.1.jar
+slf4j-api-1.7.5.jar
+slf4j-log4j12-1.7.5.jar
