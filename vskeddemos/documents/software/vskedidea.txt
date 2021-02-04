@@ -74,6 +74,13 @@ Class count to use import with ‘*’
 后面数字改为999
 再点应用即可
 
+20* 编辑器中UTF-8字符显示为中文
+file->settings->editor->File Encodings
+Global Encoding: UTF-8
+Project Encoding: UTF-8
+Default encoding for properties fies: UTF-8  
+
+
 
 
 

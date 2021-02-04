@@ -1,0 +1,6 @@
+core-3.0.0.jar
+fastjson-1.2.6.jar
+javase-3.0.0.jar
+junit-4.5.jar
+qrcode.jar
+Qrcodeen.jar

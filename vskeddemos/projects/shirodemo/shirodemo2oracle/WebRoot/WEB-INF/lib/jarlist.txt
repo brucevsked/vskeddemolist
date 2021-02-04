@@ -1,0 +1,4 @@
+mysql-connector-java-5.1.21.jar
+ojdbc7.jar
+shiro-all-1.2.4.jar
+slf4j-api-1.7.5.jar

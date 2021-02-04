@@ -1,0 +1,5 @@
+c3p0-0.9.5.2.jar
+c3p0-oracle-thin-extras-0.9.5.2.jar
+mchange-commons-java-0.2.15.jar
+mysql-connector-java-5.1.28-bin.jar
+ojdbc6.jar

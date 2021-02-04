@@ -1,0 +1,9 @@
+javax.faces-2.2.8.jar
+primefaces-5.1.jar
+weld-api.jar
+weld-core-impl.jar
+weld-core.jar
+weld-environment-common.jar
+weld-se.jar
+weld-servlet.jar
+weld-spi.jar

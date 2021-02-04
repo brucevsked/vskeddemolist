@@ -1,0 +1,551 @@
+
+<?xml version="1.0" encoding='UTF-8'?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="包名">
+   <classname="类名" table="表名">
+      <id name="主键在java类中的字段名" column="对应表中字段" type="类型">
+          <generatorclass="主键生成策略"/>
+      </id>
+    </class>
+</hibernate-mapping>
+
+1. 主键（id）
+Hibernate的主键生成策略有如下几种：
+1) assigned
+主键由外部程序负责生成，在 save() 之前指定。
+2) hilo
+通过hi/lo 算法实现的主键生成机制，需要额外的数据库表或字段提供高位值来源。
+3) seqhilo
+与hilo 类似，通过hi/lo 算法实现的主键生成机制，需要数据库中的 Sequence，适用于支持 Sequence 的数据库，如Oracle。
+4) increment
+主键按数值顺序递增。此方式的实现机制为在当前应用实例中维持一个变量，以保存着当前的最大值，之后每次需要生成主键的时候将此值加1作为主键。这种方式可能产生的问题是：不能在集群下使用。
+5) identity
+采用数据库提供的主键生成机制。如DB2、SQL Server、MySQL 中的主键生成机制。
+6) sequence
+采用数据库提供的 sequence 机制生成主键。如 Oralce 中的Sequence。
+7) native
+由 Hibernate 根据使用的数据库自行判断采用 identity、hilo、sequence 其中一种作为主键生成方式。
+8) uuid.hex
+由 Hibernate 基于128 位 UUID 算法 生成16 进制数值（编码后以长度32 的字符串表示）作为主键。
+9) uuid.string
+与uuid.hex 类似，只是生成的主键未进行编码（长度16），不能应用在 PostgreSQL 数据中。
+10) foreign
+使用另外一个相关联的对象的标识符作为主键。
+主键配置举例如下：
+<id name="id" column="id" type="java.lang.Integer">  
+ 　　<generatorclass="native"/>  
+</id>
+2. 普通属性（property）
+       开发人员可以打开网址：http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd 来查看hibernate3.0的dtd信息，可看到property的定义如下：
+
+<!-- Property of an entity class or component, component-element, composite-id, etc.
+JavaBeans style properties are mapped to table columns. -->
+
+<!ELEMENT property (meta*,(column|formula)*,type?)>
+    <!ATTLIST property name CDATA #REQUIRED>
+    <!ATTLIST property node CDATA #IMPLIED>
+    <!ATTLIST property access CDATA #IMPLIED>
+    <!ATTLIST property type CDATA #IMPLIED>
+    <!ATTLIST property column CDATA #IMPLIED>
+    <!ATTLIST property length CDATA #IMPLIED>
+    <!ATTLIST property precision CDATA #IMPLIED>
+    <!ATTLIST property scale CDATA #IMPLIED>
+    <!ATTLIST property not-null (true|false) #IMPLIED>
+    <!ATTLIST property unique (true|false) "false">
+    <!ATTLIST property unique-key CDATA #IMPLIED>
+    <!ATTLIST property index CDATA #IMPLIED>                <!-- include the columns spanned by this property in an index -->
+    <!ATTLIST property update (true|false) #IMPLIED>
+    <!ATTLIST property insert (true|false) #IMPLIED>
+    <!ATTLIST property optimistic-lock (true|false) "true">    <!-- only supported for properties of a class (not component) -->
+    <!ATTLIST property formula CDATA #IMPLIED>
+    <!ATTLIST property lazy (true|false) "false">
+    <!ATTLIST property generated (never|insert|always) "never">
+
+
+它的各属性中比较常用的有：
+
+name（对应的java类的属性名称）
+
+column（对应的表中的字段）
+
+type（属性的类型，比如java的类型java.lang.String, java.util.Calendar等，或者hibernate的类型integer, long, short, float, double, character, byte, boolean, yes_no, true_false, date, calendar等，hibernate的type即代表java类型到数据库字段类型的映射。）
+
+not-null（设置该属性是否为空，为true时表示非空，默认为false）和length(字段的长度限制)
+
+Eg1. <property name="accessname" column="accessName" type="java.lang.String" not-null="true"/>
+
+Eg2. <property name="state" column="state" type="java.lang.Byte" not-null="true"/>
+
+Eg3. <property name="description" column="description" type="java.lang.String"/>
+
+3. 一对多（多对一）关系
+"一对多"是最普遍的映射关系，简单来讲就如消费者与订单的关系。
+
+一对多：从消费者角的度来说一个消费者可以有多个订单，即为一对多。
+
+多对一：从订单的角度来说多个订单可以对应一个消费者，即为多对一。
+
+一对多关系在hbm文件中的配置信息（双向一对多）：
+
+消费者（一方）：
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+        <class name="com.suxiaolei.hibernate.pojos.Customer" table="customer">
+            <!-- 主键设置 -->
+            <id name="id" type="string">
+                <column name="id"></column>
+                <generator class="uuid"></generator>
+            </id>
+            <!-- 属性设置 -->
+            <property name="username" column="username" type="string"></property>
+            <property name="balance" column="balance" type="integer"></property>
+
+            <set name="orders" inverse="true" cascade="all">
+                <key column="customer_id" ></key>
+                <one-to-many class="com.suxiaolei.hibernate.pojos.Order"/>
+            </set>
+        </class>
+    </hibernate-mapping>
+
+订单（多方）：
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+        <class name="com.suxiaolei.hibernate.pojos.Order" table="orders">
+            <id name="id" type="string">
+                <column name="id"></column>
+                <generator class="uuid"></generator>
+            </id>
+
+            <property name="orderNumber" column="orderNumber" type="string"></property>
+            <property name="cost" column="cost" type="integer"></property>
+
+            <many-to-one name="customer" class="com.suxiaolei.hibernate.pojos.Customer"
+                         column="customer_id" cascade="save-update">
+            </many-to-one>
+        </class>
+    </hibernate-mapping>
+
+"一对多"关联关系，Customer方对应多个Order方，所以Customer包含一个集合用于存储多个Order，Order包含一个Customer用于储存关联自己的Customer。
+
+一对多关联关系有一种特例：自身一对多关联。例如：
+
+自身一对多关联自身的hbm文件设置：
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+    <hibernate-mapping>
+        <class name="com.suxiaolei.hibernate.pojos.Category" table="category">
+            <id name="id" type="string">
+                <column name="id"></column>
+                <generator class="uuid"></generator>
+            </id>
+
+            <property name="name" column="name" type="string"></property>
+
+            <set name="chidrenCategories" cascade="all" inverse="true">
+                <key column="category_id"></key>
+                <one-to-many class="com.suxiaolei.hibernate.pojos.Category"/>
+            </set>
+
+            <many-to-one name="parentCategory" class="com.suxiaolei.hibernate.pojos.Category" column="category_id">
+            </many-to-one>
+
+        </class>
+    </hibernate-mapping>
+
+外键存放父亲的主键
+
+4. 多对多关系
+多对多关系也很常见，例如学生与选修课之间的关系，一个学生可以选择多门选修课，而每个选修课又可以被多名学生选择。数据库中的多对多关联关系一般需采用中间表的方式处理，将多对多转化为两个一对多。
+
+多对多关系在hbm文件中的配置信息：
+
+学生：
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.suxiaolei.hibernate.pojos.Student" table="student">
+        <id name="id" type="integer">
+            <column name="id"></column>
+            <generator class="increment"></generator>
+        </id>
+
+        <property name="name" column="name" type="string"></property>
+
+        <set name="courses" inverse="false" cascade="save-update" table="student_course">
+            <key column="student_id"></key>
+            <many-to-many class="com.suxiaolei.hibernate.pojos.Course"
+                column="course_id"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
+
+课程：
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.suxiaolei.hibernate.pojos.Course" table="course">
+        <id name="id" type="integer">
+            <column name="id"></column>
+            <generator class="increment"></generator>
+        </id>
+
+        <property name="name" column="name" type="string"></property>
+
+        <set name="students" inverse="true" cascade="save-update" table="student_course">
+            <key column="course_id"></key>
+            <many-to-many class="com.suxiaolei.hibernate.pojos.Student"
+                column="student_id"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
+
+其实多对多就是两个一对多，在多对多的关系设计中，一般都会使用一个中间表将他们拆分成两个一对多。
+<set>标签中的"table"属性就是用于指定中间表的。中间表一般包含两个表的主键值，该表用于存储两表之间的关系。
+由于被拆成了两个一对多，中间表是多方，它是使用外键关联的，<key>是用于指定外键的，用于从中间表取出相应的数据。
+中间表每一行数据只包含了两个关系表的主键，要获取与自己关联的对象集合，
+还需要取出由外键所获得的记录中的另一个主键值，由它到对应的表中取出数据，填充到集合中。
+<many-to-many>中的"column"属性是用于指定按那一列的值获取对应的数据。
+
+例如用course表来说，它与student表使用一个中间表student_course关联。
+如果要获取course记录对应的学生记录，首先需要使用外键"course_id"从student_course表中取得相应的数据，
+然后在取得的数据中使用"student_id"列的值，在student表中检索出相关的student数据。
+其实，为了便于理解，你可以在使用course表的使用就把中间表看成是student表，反之亦然。
+这样就可以使用一对多的思维来理解了，多方关联一方需要外键那么在本例子中就需要"course_id"来关。
+
+5. 一对一关系
+一对一关系就球队与球队所在地之间的关系，一支球队仅有一个地址，而一个地区也仅有一支球队（貌似有点勉强，将就下吧）。
+数据表间一对一关系的表现有两种，一种是外键关联，一种是主键关联。图示如下：
+
+一对一外键关联：
+一对一外键关联在hbm文件中的配置信息
+地址：
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.suxiaolei.hibernate.pojos.Adress" table="adress">
+        <id name="id" type="integer">
+            <column name="id"></column>
+            <generator class="increment"></generator>
+        </id>
+
+        <property name="city" column="city" type="string"></property>
+
+        <one-to-one name="team" class="com.suxiaolei.hibernate.pojos.Team" cascade="all"></one-to-one>
+
+    </class>
+</hibernate-mapping>
+
+球队：
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.suxiaolei.hibernate.pojos.Team" table="team">
+        <id name="id" type="integer">
+            <column name="id"></column>
+            <generator class="increment"></generator>
+        </id>
+
+        <property name="name" column="name" type="string"></property>
+
+        <many-to-one name="adress" class="com.suxiaolei.hibernate.pojos.Adress" column="adress_id" unique="true"></many-to-one>
+
+    </class>
+</hibernate-mapping>
+
+一对一外键关联，其实可以看做是一对多的一种特殊形式，多方退化成一。
+多方退化成一只需要在<many-to-one>标签中设置"unique"="true"。
+一对一主键关联在hbm文件中的配置信息：
+地址：
+<hibernate-mapping>
+    <class name="com.suxiaolei.hibernate.pojos.Adress" table="adress">
+        <id name="id" type="integer">
+            <column name="id"></column>
+            <generator class="increment"></generator>
+        </id>
+
+        <property name="city" column="city" type="string"></property>
+
+        <one-to-one name="team" class="com.suxiaolei.hibernate.pojos.Team" cascade="all"></one-to-one>
+
+    </class>
+</hibernate-mapping>
+
+球队：
+<hibernate-mapping>
+    <class name="com.suxiaolei.hibernate.pojos.Team" table="team">
+        <id name="id" type="integer">
+            <column name="id"></column>
+            <generator class="foreign">
+                <param name="property">adress</param>
+            </generator>
+        </id>
+
+        <property name="name" column="name" type="string"></property>
+
+        <one-to-one name="adress" class="com.suxiaolei.hibernate.pojos.Adress" cascade="all"></one-to-one>
+
+    </class>
+</hibernate-mapping>
+
+一对一主键关联，是让两张的主键值一样。要使两表的主键相同，只能一张表生成主键，另一张表参考主键。
+"class"="foreign"就是设置team表的主键参照adress属性的主键值。
+
+
+
+hihernate一对多关联映射（单向Classes----->Student）
+
+一对多关联映射利用了多对一关联映射原理
+
+多对一关联映射：在多的一端加入一个外键指向一的一端，它维护的关系是多指向一
+一对多关联映射：在多的一端加入一个外键指向一的一端，它维护的关系是一指向多
+
+也就是说一对多和多对一的映射策略是一样的，只是站的角度不同
+
+在一一端维护关系的缺点：
+* 如果将t_student表里的classesid字段设置为非空，则无法保存
+* 因为不是在student这一端维护关系，所以student不知道是哪个班的，
+所以需要发出多余的update语句来更新关系
+
+hihernate一对多关联映射（双向Classes<----->Student）
+
+一对多双向关联映射：
+* 在一一端的集合上使用<key>，在对方表中加入一个外键指向一一端
+* 在多一端采用<many-to-one>
+
+注意：<key>标签指定的外键字段必须和<many-to-one>指定的外键字段一致，否则引用字段的错误
+
+如果在”一“一端维护一对多关联关系，hibernate会发出多余的udpate语句，所以我们一般在多
+的一端来维护关联关系
+
+关于inverse属性：
+inverse主要用在一对多和多对多双向关联上，inverse可以被设置到集合标签<set>上，
+默认inverse为false，所以我们可以从”一“一端和”多“一端维护关联关系，
+如果设置成inverse为true，则我们只能从多一端来维护关联关系
+
+注意：inverse属性，只影响数据的存储，也就是持久化
+
+inverse和cascade
+* inverse是关联关系的控制方向
+* cascade操作上的连锁反应
+
+hibernate一对一主键关联映射（单向关联Person---->IdCard）
+
+一对一主键关联映射:让两个实体对象的id保持相同，这样可以避免多余的字段被创建
+
+具体映射：
+
+<id name="id">
+<!-- person的主键来源idCard，也就是共享idCard的主键 -->
+<generator class="foreign">
+<param name="property">idCard</param>
+</generator>
+</id>
+<property name="name"/>
+<!-- one-to-one标签的含义，指示hibernate怎么加载它的关联对象，默认根据主键加载，
+constrained="true"， 表明当前主键上存在一个约束，person的主键作为外键参照了idCard 
+-->
+<one-to-one name="idCard" constrained="true"/>
+
+hibernate一对一主键关联映射（双向关联Person<---->IdCard）
+
+需要在idcard映射文件中加入<one-to-one>标签指向person，指示hibernate如何加载person
+默认根据主键加载
+
+hibernate一对一唯一外键关联映射（单向关联Person---->IdCard）
+
+一对唯一外键关联映射是多对一关联映射的特例
+
+可以采用<many-to-one>标签，指定多的一端的unique=true，这样就限制了多的一端的多重性为一
+通过这种手段映射一对一唯一外键关联
+
+hibernate一对一唯一外键关联映射（双向关联Person<---->IdCard）
+
+一对一唯一外键关联双向，需要在另一端（idcard），添加<one-to-one>标签，指示hibernate如何加载
+其关联对象，默认根据主键加载person，外键关联映射中，因为两个实体采用的是person的外键维护的关系，
+所以不能指定主键加载person，而要根据person的外键加载，所以采用如下映射方式：
+<one-to-one name="person" property-ref="idCard"/>
+
+hibernate多对一关联映射
+
+关联映射的本质：
+* 将关联关系映射到数据库，所谓的关联关系是对象模型在内存中的一个或多个引用
+
+<many-to-one>会在多的一端加入一个外键，指向一的一端，这个外键是由<many-to-one>
+中的column属性定义的，如果忽略了这个属性那么默认的外键与实体的属性一致
+
+<many-to-one>标签的定义示例：
+* <many-to-one name="group" column="groupid"/>
+
+理解级联的含义？
+* 是对象的连锁操作 
+
+hibernate多对多关联映射(单向User---->Role)
+
+具体映射方式：
+<set name="roles" table="t_user_role">
+<key column="userid"/>
+<many-to-many class="com.bjsxt.hibernate.Role" column="roleid"/>
+</set>
+
+hibernate多对多关联映射(双向User<---->Role)
+
+映射方法：
+<set name="roles" table="t_user_role">
+<key column="userid"/>
+<many-to-many class="com.bjsxt.hibernate.Role" column="roleid"/>
+</set>
+table属性值必须和单向关联中的table属性值一致
+<key>中column属性值要与单向关联中的<many-to-many>标签中的column属性值一致
+在<many-to-many>中的column属性值要与单向关联中<key>标签的column属性值一致
+
+
+
+
+组件(Component)映射多用来表示对象的从属关系(组合,聚合).
+比如一个学生可能有姓名,年龄,性别,成绩等属性,其中成绩是另一个对象,又有科目,分数属性,
+这里就需要用组件映射来表是之间的关系.
+
+Java代码:
+// 学生
+class Student{
+  private String name;
+  private int age;
+  private String sex;
+  private Grade grade;
+
+}
+// 成绩
+class Grade{
+  private String subject;
+  private float score;
+
+}
+
+数据库:
+-- 学生表
+create table STUDENT ( 
+    ID char(32) not null, 
+    NAME varchar(16) not null, 
+    SEX char(1), 
+    AGE integer, 
+    primary key (ID) 
+);
+
+-- 成绩表
+create table GRADE ( 
+    ID char(32) not null, 
+    student_id char(32) not null, 
+    SUBJECT varchar(10), 
+    SCORE float, 
+    primary key (ID),
+    foreign key (student_id) 
+);
+
+Hibernate映射文件:
+<?xml version="1.0"?> 
+<!DOCTYPE hibernate-mapping 
+    PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd"> 
+<hibernate-mapping> 
+    <class name="Student" table="STUDENT"> 
+
+            <id name="id" type="string" unsaved-value="null"> 
+            <column name="ID" sql-type="char(32)"/> 
+            <generator class="uuid.hex"/> 
+        </id> 
+
+        <property name="name" type="string" not-null="true"> 
+            <column name="NAME" length="16" not-null="true"/> 
+        </property> 
+        <property name="sex" type="char" column="SEX"/> 
+        <property name="age" type="int" column="AGE"/> 
+        
+        <component name="grade" class="Grade"> 
+            <property name="subject" type="string" column="SUBJECT" not-null="true"/> 
+            <property name="score" type="float" column="SCORE" not-null="true"/> 
+        </component> 
+
+    </class> 
+</hibernate-mapping>
+
+
+
+Hibernate配置复合主键 composite primary key
+
+1.要使用复合主键，对应类Student必须实现Serializable接口。
+2.要重写hashCode和equals方法。
+
+重写hashCode和equals方法的原因：
+Hibernate要判断两个对象是否相同，避免出现两个复合主键相同的对象实例被加入数据库（数据库也不会接收）。
+因此Hibernate会通过hashCode和equals方法来判断是否可以将两个对象放入诸如Set这样的集合中去。
+import java.io.Serializable;
+
+public class Student implements Serializable
+{	
+	//这里用name和cardId作为联合主键
+
+	private String cardId;
+
+	private String name;
+
+	private int age;
+
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cardId == null) ? 0 : cardId.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (cardId == null)
+		{
+			if (other.cardId != null)
+				return false;
+		}
+		else if (!cardId.equals(other.cardId))
+			return false;
+		if (name == null)
+		{
+			if (other.name != null)
+				return false;
+		}
+		else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+}
+
+<hibernate-mapping package="composite">
+	<class name="Student" table="test_student">
+
+	<!-- composite-id表示复合主键 -->
+	<composite-id>
+		<!-- key-property表示组成主键的元素 -->
+		<key-property name="cardId" column="card_id" type="string"/>
+		<key-property name="name" column="name" type="string"/>
+
+	</composite-id>
+
+	 <property name="age" column="age" type="int"/>
+	</class>
+</hibernate-mapping>

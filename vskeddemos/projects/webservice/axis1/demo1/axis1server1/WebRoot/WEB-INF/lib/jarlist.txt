@@ -1,0 +1,10 @@
+axis-ant.jar
+axis.jar
+commons-discovery-0.2.jar
+commons-email-1.2.jar
+commons-logging-1.0.4.jar
+jaxrpc.jar
+log4j-1.2.8.jar
+mail.jar
+saaj.jar
+wsdl4j-1.5.1.jar
