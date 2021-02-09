@@ -2455,3 +2455,6 @@ Custom tom=new Customer(1,"tom");
 Order tomOrder=OrderFactory.createOrder(tom);
 
 --------------------------------------------------------------------------------
+
+领域对象不应当是被序列化的
+领域对象并非持久化对象
