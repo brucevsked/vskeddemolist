@@ -211,3 +211,20 @@ $ vagrant box add     # 添加box到列表
  
 
 $ vagrant box remove  # 从box列表移除 
+
+--------------------------------------------------------------------------------
+先用vagrant登录密码vagrant
+sudo passwd root
+输入新密码
+su - root
+vi /etc/ssh/sshd_config
+
+LoginGraceTime 2m
+PermitRootLogin yes
+StrictModes yes
+
+PasswordAuthentication yes
+修改完后检查
+/etc/ssh/sshd_config
+重启sshd服务
+service sshd restart
