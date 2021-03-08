@@ -86,7 +86,15 @@ del [文件名]
 18* 在控制台显示文字或变量
 echo 文字内容
 echo helloword
+打印环境变量
 echo %path%
+
+打开打印回显
+echo on
+关闭打印回显
+echo off
+向文件追加内容
+echo "hello this is good boy" >a.txt
 
 19* 停止显示
 pause
@@ -346,6 +354,13 @@ echo %ifo:~-14,5%
 60* 查看端口开放
 tcping ip 端口
 这个工具需要单独安装才能使用，不如telnet了
+
+61* 运行bat时接收参数
+a.bat 1 2 3
+内容如下
+@echo off
+echo %1 %2 %3
+Pause
 
 
 

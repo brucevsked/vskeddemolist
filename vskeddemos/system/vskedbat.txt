@@ -1,6 +1,10 @@
-1* on or off request
+1* echo  
+打开打印回显
 echo on
+关闭打印回显
 echo off
+向文件追加内容
+echo "hello this is good boy" >a.txt
 
 2* @ don't show the command after @
 @echo on

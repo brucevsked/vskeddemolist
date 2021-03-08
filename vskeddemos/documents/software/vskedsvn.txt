@@ -1,0 +1,57 @@
+
+
+
+svn命令语法格式
+svn <subcommand> [options] [args]    #svn+子命令+选项+参数
+
+svn常用子命令（括号代表可简写）：
+
+checkout（co）：从源码库迁出一个指定版本的项目副本到客户端
+
+update（up）：从服务器上同步项目到本地，在日常使用中checkout用于第一次迁出，之后都是使用up来同步
+
+delete（del,rm,remove）：删除本地或者svn服务器上的文件
+
+import：将本地文件导入到源码库中，通常用于第一次上传让服务器生成代码项目，以后还需要上传则是commit
+
+add：在commit之前需要先把文件add到SVN中，然后再commit才能正式上传
+
+commit(ci)：提交已修改过的本地文件到服务器
+
+info：查看某文件信息，如修改时间，版本号
+
+status：查看svn工作目录的当前状态
+
+
+copy(cp) ：复制一份项目副本
+
+diff(di)：
+
+
+
+1* 检出命令
+svn co http://路径(目录或文件的全路径)　[本地目录全路径]  --username 用户名 --password 密码
+
+svn co svn://路径(目录或文件的全路径)　[本地目录全路径]  --username 用户名 --password 密码
+
+svn checkout http://路径(目录或文件的全路径)　[本地目录全路径] --username　用户名
+svn checkout svn://路径(目录或文件的全路径)　[本地目录全路径]  --username　用户名
+
+svn co svn://192.168.0.3/测试工具 /home/testtools --username luke
+
+svn co http://192.168.0.3/test/testapp --username luke
+
+svn checkout svn://192.168.0.3/测试工具 /home/testtools --username luke
+
+svn checkout http://192.168.0.3/test/testapp --username luke
+
+检出指定具体版本
+svn co http://路径(目录或文件的全路径)　[本地目录全路径] [--revision] --username 用户名 --password 密码
+
+svn checkout http://siphon.googlecode.com/svn/trunk/ siphon -r r791
+svn checkout -r r791 http://siphon.googlecode.com/svn/trunk/ siphon 
+
+2* 在不下载文件的情况下查看SVN服务器中的文件
+svn ls svn://192.168.38.128/weixin
+
+

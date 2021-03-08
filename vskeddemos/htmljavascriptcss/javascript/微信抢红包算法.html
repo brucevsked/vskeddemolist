@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>微信抢红包算法</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+</head>
+
+<body>
+  
+  <script src="js/jquery.min.js"></script>
+
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+"use strict"
+
+function getRandomMoney(remainMoney,remainSize){
+let moneyList=[];
+
+const min=0.01;
+
+let max,money;
+
+while (remainSize>1){
+max=remainMoney/remainSize*2;
+
+money=Math.random()*max;
+
+money=money<0.01 ? 0.01 : money;
+
+money=Math.round(money*100)/100;
+
+moneyList.push(money);
+
+remainSize--;
+
+remainMoney-=money;
+
+}
+
+moneyList.push(Math.round(remainMoney*100)/100);
+
+return moneyList;
+
+}
+
+
+const testCount=1; //测试次数
+
+const maxMoney=200; //红包总金额
+
+const maxSize=20; //红包个数
+
+let result=[]; //结果集
+
+for(let i=0; i<testCount;i++){
+
+result.push(getRandomMoney(maxMoney,maxSize));
+
+}
+
+console.log("这1次模拟的结果是："+result);
+
+
+</script>
+
+</body>
+</html>
