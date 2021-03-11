@@ -1,0 +1,19 @@
+Apache Dubbo Admin
+
+docker search dubbo-admin
+docker pull apache/dubbo-admin:latest
+
+
+Environment variables
+admin.registry.address
+admin.config-center
+admin.metadata-report.address
+
+
+ environment:
+      - admin.registry.address=zookeeper://zookeeper:2181
+      - admin.config-center=zookeeper://zookeeper:2181
+      - admin.metadata-report.address=zookeeper://zookeeper:2181
+
+
+docker run --restart=always -p 8282:8080 -e admin.registry.address=zookeeper://10.0.193.11:2181 -e admin.config-center=zookeeper://10.0.193.11:2181 -e admin.metadata-report.address=zookeeper://10.0.193.11:2181 --name dubboadmin1 -d apache/dubbo-admin:latest

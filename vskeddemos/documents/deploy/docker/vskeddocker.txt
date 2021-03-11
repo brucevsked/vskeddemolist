@@ -427,8 +427,3 @@ docker exec -i mymysql sh -c 'exec mysql -uroot -p"Y4yhl9tbf110_" -e "CREATE DAT
 docker exec -i mymysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" appserverdev' < /opt/sql/appserverdev.sql
 
 --------------------------------------------------------------------------------
-docker 安装redis
-
-拉取redis镜像
-docker pull redis
---------------------------------------------------------------------------------

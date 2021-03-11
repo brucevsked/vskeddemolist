@@ -80,6 +80,8 @@ ${project.build.sourceEncoding}表示主源码的编码格式;
 ${project.build.sourceDirectory}表示主源码路径;
 ${project.build.finalName}表示输出文件名称;
 ${project.version}表示项目版本,与${version}相同;
+${project.artifactId} 对应了<project><artifactId>元素的值
+${project.groupId}:项目的groupId
 自定义属性(在pom.xml文件的<properties>标签下定义的Maven属性)
 <project>
   <properties>

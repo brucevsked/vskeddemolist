@@ -51,3 +51,6 @@ yum install -y nginx
 systemctl start nginx.service
 开机自动启动
 systemctl enable nginx.service
+
+
+
