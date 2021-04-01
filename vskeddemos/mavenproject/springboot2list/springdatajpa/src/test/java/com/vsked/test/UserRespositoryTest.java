@@ -26,14 +26,14 @@ public class UserRespositoryTest extends BaseTest{
 	@Autowired
 	UserRepository userRepository;
 	
-//	@Test
+	@Test
 	public void save() {
 		User user=new User(7,"username7","thisis7");
 		userRepository.save(user);
 		log.debug("save ok");
 	}
 	
-//	@Test
+	@Test
 	public void save1() {
 		Role role=new Role(1, "超级管理员", "他拥有一切权限");
 		Set<Role> roles=new HashSet<Role>();
@@ -43,7 +43,7 @@ public class UserRespositoryTest extends BaseTest{
 		log.debug("save ok");
 	}
 	
-//	@Test
+	@Test
 	public void saveAll() {
 		List<User> saveUserList=new LinkedList<User>();
 		for(int i=10;i<50;i++) {
@@ -53,21 +53,21 @@ public class UserRespositoryTest extends BaseTest{
 		log.debug("save batch ok");
 	}
 	
-//	@Test
+	@Test
 	public void delete() {
 		Integer uid=6;
 		userRepository.deleteById(uid);
 		log.debug("delete ok");
 	}
 	
-//	@Test
+	@Test
 	public void edit() {
 		User user=new User(1,"usernameaaa","thisisttttaaa");
 		userRepository.save(user);
 		log.debug("update ok");
 	}
 	
-//	@Test
+	@Test
 	public void query() {
 		List<User> userList=userRepository.findAll();
 		for(User user:userList) {
@@ -88,7 +88,7 @@ public class UserRespositoryTest extends BaseTest{
 		}
 	}
 	
-//	@Test
+	@Test
 	public void page2() {
 		String sortColumn="uid";
 		Pageable pageable=PageRequest.of(0, 10,Sort.Direction.ASC,sortColumn);

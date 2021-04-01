@@ -2406,7 +2406,6 @@ UnifiedModelingLanguage (UML)统一建模语言
 组合（composition）
 
 
-https://github.com/alibaba/COLA
 --------------------------------------------------------------------------------
 
 防腐层

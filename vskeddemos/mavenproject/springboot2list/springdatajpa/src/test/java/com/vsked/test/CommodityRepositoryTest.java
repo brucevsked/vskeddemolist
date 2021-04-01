@@ -22,7 +22,7 @@ public class CommodityRepositoryTest extends BaseTest{
 	@Autowired
 	CommodityRepository commodityRepository;
 	
-//	@Test
+	@Test
 	public void test1() {
 		String myName="apple";
 		Specification<Commodity> specification = new Specification<Commodity>() {

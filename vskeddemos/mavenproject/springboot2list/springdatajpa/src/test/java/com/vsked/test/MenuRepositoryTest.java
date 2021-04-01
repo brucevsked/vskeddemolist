@@ -18,7 +18,7 @@ public class MenuRepositoryTest extends BaseTest{
 	@Autowired
 	MenuRepository menuRepository;
 	
-//	@Test
+	@Test
 	public void save1() {
 		log.info("start save");		
 		Menu menuLevel1=new Menu(1,"china","my href1china");		
@@ -26,7 +26,7 @@ public class MenuRepositoryTest extends BaseTest{
 		log.info("save ok");		
 	}
 	
-//	@Test
+	@Test
 	public void save2() {
 		log.info("start save");
 		
@@ -46,7 +46,7 @@ public class MenuRepositoryTest extends BaseTest{
 		
 	}
 	
-//	@Test
+	@Test
 	public void find1() {
 		log.info("start find");
 		Menu menuLevel1=menuRepository.findById(1).get();

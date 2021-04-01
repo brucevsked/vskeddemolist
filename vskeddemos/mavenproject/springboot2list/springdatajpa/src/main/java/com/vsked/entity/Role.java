@@ -39,6 +39,9 @@ public class Role {
 		this.roledescription = roledescription;
 	}
 
+	/**
+	 * 注意这里需要一个空构造方法
+	 */
 	public Role() {
 		super();
 	}
