@@ -1,0 +1,45 @@
+
+https://gitea.io/en-us/
+
+安装git
+yum -y install git
+
+建立安装目录
+mkdir -p /data/gitea/
+cd /data/gitea/
+下载
+wget -O gitea https://dl.gitea.io/gitea/1.13.6/gitea-1.13.6-linux-amd64
+加权限
+chmod +x gitea
+启动测试
+./gitea web
+
+http://ip:3000
+
+vi /usr/lib/systemd/system/gitea.service
+
+[Unit]
+Description=gitea
+ 
+[Service]
+User=root
+ExecStart=/data/gitea/gitea web
+Restart=on-abort
+ 
+[Install]
+WantedBy=multi-user.target
+
+重载daemon，让新的服务文件生效
+systemctl daemon-reload
+启动gitea
+systemctl start gitea
+设置开机启动
+systemctl enable gitea
+
+
+
+解决mysql5.6|数据库设置无效: Error 1071: Specified key was too long; max key length is 767 bytes
+set global innodb_large_prefix=on
+set global innodb_file_format=Barracuda;
+show variables like '%innodb_large_prefix%'
+

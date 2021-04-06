@@ -1,0 +1,58 @@
+
+https://gogs.io/
+
+
+yum -y install git
+
+
+mkdir -p /data/gogs
+cd /data/gogs
+下载
+wget -O gogs https://dl.gogs.io/0.11.91/gogs_0.11.91_linux_amd64.tar.gz
+
+解包
+tar -zxvf gogs_0.11.91_linux_amd64.tar.gz
+
+导入数据库 或手工新建gogs数据库utf-8mb4
+mysql -u root -p < scripts/mysql.sql
+
+cd /data/gogs/gogs
+启动测试
+./gogs web
+
+http://ip:3000
+
+vi /usr/lib/systemd/system/gogs.service
+
+[Unit]
+Description=gogs
+ 
+[Service]
+User=root
+ExecStart=/data/gogs/gogs/gogs web
+Restart=on-abort
+ 
+[Install]
+WantedBy=multi-user.target
+
+重载daemon，让新的服务文件生效
+systemctl daemon-reload
+启动gitea
+systemctl start gogs
+设置开机启动
+systemctl enable gogs
+
+
+
+解决:Error 1709: Index column size too large. The maximum column size is 767 bytes.
+set global innodb_file_format = BARRACUDA;
+set global innodb_large_prefix = ON;
+set global innodb_file_per_table=ON; 
+
+查看设置结果：
+
+show variables like 'innodb_large_prefix';
+show variables like 'innodb_file_format';
+show variables like 'innodb_file_per_table';
+
+
