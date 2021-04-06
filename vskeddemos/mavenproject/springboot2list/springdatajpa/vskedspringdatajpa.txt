@@ -1,4 +1,15 @@
 
+当yml文件中配置为
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+或值为
+create-drop
+时才会执行resources目录中的import.sql文件
+
+
+
 Spring Data Jpa 中级联操作CascadeType的含义
 CascadeType.PERSIST
 
