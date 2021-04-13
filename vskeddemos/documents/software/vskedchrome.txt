@@ -1,0 +1,6 @@
+
+1* 截取长图
+F12 调出控制台
+ctrl+shift+p 输入screen
+选择Capture full size screenshot
+
