@@ -1,0 +1,141 @@
+
+对应
+代码自动发布流程.docx
+文档
+
+配置JDK环境变量
+vi /etc/profile
+vi /etc/bashrc
+
+export JAVA_HOME=/usr/java/jdk1.8.0_151
+export JRE_HOME=/usr/java/jdk1.8.0_151/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib
+
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin:$CLASSPATH
+
+使环境变量生效
+source /etc/profile
+
+检查环境变量
+echo $JAVA_HOME
+安装maven
+yum install maven
+
+安装完成后在
+/usr/share/maven
+当前maven版本太低。我们下载新的升级下maven
+下载新版本maven如apache-maven-3.6.3-bin.tar.gz
+并上传到
+/usr/share
+cd /usr/share
+tar -zxvf apache-maven-3.6.3-bin.tar.gz
+rm -rf maven
+mv apache-maven-3.6.3/ maven
+
+
+修改maven配置文件
+/etc/maven/settings.xml
+添加阿里云与maven仓库配置
+配置软链接
+如果你已经下载过了可以先移动，再用软链接解决磁盘空间问题
+mkdir -p /data/maven/repository
+mv /root/.m2/repository/ /data/maven
+ln -s /data/maven/repository/ /root/.m2/
+
+修改jar包下载目录
+  <localRepository>/data/maven/repository</localRepository>
+
+添加仓库下载地址
+
+    <mirror>
+      <id>repo1</id>
+      <name>central1</name>
+      <url>https://repo1.maven.org/maven2/</url>
+      <mirrorOf>central</mirrorOf>        
+    </mirror>
+    <mirror>
+      <id>repo2</id>
+      <name>central2</name>
+      <url>https://repo.maven.apache.org/maven2/</url>
+      <mirrorOf>central</mirrorOf>        
+    </mirror>
+    <mirror>
+        <id>nexus-aliyun</id>        
+        <name>Nexusaliyun</name>
+        <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        <mirrorOf>central</mirrorOf>
+    </mirror> 
+
+修改完成配置文件/etc/maven/settings.xml后建立软链接
+先删除原压缩包里解出来的配置
+rm -rf /usr/share/maven/conf/settings.xml
+再将最新修改好的配置文件用软链接链过去
+ln -s /etc/maven/settings.xml /usr/share/maven/conf/settings.xml
+
+安装jenkins
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+yum install jenkins
+配置jenkins
+
+安装完成后
+/etc/sysconfig/jenkins #jenkins配置文件
+/var/lib/jenkins/ #默认的JENKINS_HOME。 
+/var/log/jenkins/jenkins.log #日志文件
+
+修改jenkins启动时java路径
+vi /etc/init.d/jenkins
+修改
+candidates="
+/usr/java/jdk1.8.0_151/bin/java
+
+添加当前机器java所在位置
+service jenkins start
+systemctl daemon-reload
+chkconfig jenkins on
+
+访问启动界面
+http://192.168.1.8:8080/login?from=%2F
+
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+
+安装语言插件
+搜索
+localization
+找到
+Localization: Chinese (Simplified)
+
+安装svn插件
+Subversion
+
+安装远程发布插件
+Publish Over SSH
+
+配置JDK
+全局配置中
+
+配置maven
+全局配置中
+
+
+创建工程下载目录
+
+mkdir -p /data/jenkinstask/svn/local
+mkdir -p /data/jenkinstask/svn/test
+mkdir -p /data/jenkinstask/svn/dev
+mkdir -p /data/jenkinstask/svn/prod
+
+chmod -R 777 /data/jenkinstask/svn/
+
+
+新建本地任务测试
+添加全局凭证，也就是SVN拉取时用户名与密码
+
+添加构建后执行shell脚本
+rm -rf /data/jenkinstask/svn/local/*.jar
+mvn clean
+mvn compile
+mvn package
+cp target/*.jar /data/jenkinstask/svn/local
