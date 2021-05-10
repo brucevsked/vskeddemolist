@@ -173,9 +173,73 @@ mvn dependency:tree>>d:/mytreea.txt
                 </executions>  
             </plugin>  
 
+25* 区分不同环境 profile功能
+第一步在pom文件中添加profile位于project标签中，与build标签同级
+这一步是为定义activatedProperties文件
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <!-- 环境标识，需要与配置文件的名称相对应 -->
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+            <activation>
+                <!-- 默认环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <activatedProperties>test</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
+并在build标签中添加
+        <resources>
+            <resource>
+                <!--配置文件路径  -->
+                <directory>src/main/resources</directory> <!--这里对应项目存放配置文件的目录-->
+                <!--开启filtering功能  -->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 
+第二步
 
+在src/main/resources目录中传入一个 
+这一步是为了使用上一步定义的activatedProperties变量
+@activatedProperties@
+变量
 
+application.yml
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  profiles:
+    active:
+      - @activatedProperties@
+并为相关环境准备文件
+开发环境一般用(注意日志配置引入在yml文件中)
+application-dev.yml
+log4j2-dev.xml
+生产环境一般用
+application-prod.yml
+log4j2-prod.xml
+测试环境一般用
+application-test.yml
+log4j2-test.xml
+
+第三步使用
+mvn package –P要激活的环境，这个在第一步中定义activatedProperties时候写的
+mvn package –Pdev
 --------------------------------------------------------------------------------
 idea依赖解决插件
 Maven Helper

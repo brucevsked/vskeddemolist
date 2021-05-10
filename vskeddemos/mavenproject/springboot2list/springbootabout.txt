@@ -166,3 +166,61 @@ spring:
 13* 优雅停机
 在web容器关闭时web服务器不再接受新请求,并等待活动请求完成缓冲期，spring boot 2.3及以上支持
 server.shutdown=graceful
+
+14* 项目中不使用parent
+Using Spring Boot without the parent POM
+
+问题
+spring boot项目一般情况下的parent如下：
+
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.4.0.BUILD-SNAPSHOT</version>
+</parent>
+  但是如果这个项目是其他项目的子项目呢???，意味着pom文件里要多个parent，但是一个孩子多个亲爸的事情怎么允许在代码的世界呢;（pom中只能一个parent）；
+
+解决
+  关于spring-boot，人家官网说了，不一定非要继承spring-boot的parent pom的，人家已经考虑到你可能已经继承了其他parent的情况，并给出了dependency management的方案。
+
+http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-maven-without-a-parent
+
+Not everyone likes inheriting from the spring-boot-starter-parent POM. You may have your own corporate standard parent that you need to use, or you may just prefer to explicitly declare all your Maven configuration.
+
+If you don’t want to use the spring-boot-starter-parent, you can still keep the benefit of the dependency management (but not the plugin management) by using a scope=import dependency:
+
+<dependencyManagement>
+     <dependencies>
+        <dependency>
+            <!-- Import dependency management from Spring Boot -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>1.4.0.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+That setup does not allow you to override individual dependencies using a property as explained above. To achieve the same result, you’d need to add an entry in the dependencyManagement of your project before the spring-boot-dependencies entry. For instance, to upgrade to another Spring Data release train you’d add the following to your pom.xml.
+
+<dependencyManagement>
+    <dependencies>
+        <!-- Override Spring Data release train provided by Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-releasetrain</artifactId>
+            <version>Fowler-SR2</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>1.4.0.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+In the example above, we specify a BOM but any dependency type can be overridden that way.
+
