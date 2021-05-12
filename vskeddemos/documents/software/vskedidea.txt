@@ -80,7 +80,14 @@ Global Encoding: UTF-8
 Project Encoding: UTF-8
 Default encoding for properties fies: UTF-8  
 
-
+21* 开启控制台单元测试输入(解决idea单元测试不能使用Scanner)
+第一步打开idea选择菜单help-> Edit Customer VM Options菜单
+在最后一行加入
+-Deditable.java.test.console=true
+第二步关闭idea并找到idea64.exe文件所在路径，找到idea64.exe.vmoptions文件
+在最后一行也加入
+-Deditable.java.test.console=true
+第三步重启idea再使用单元测试输入即可
 
 
 
