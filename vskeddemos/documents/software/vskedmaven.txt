@@ -210,7 +210,10 @@ mvn dependency:tree>>d:/mytreea.txt
                 <filtering>true</filtering>
             </resource>
         </resources>
-
+<!-- 指定filter,根据最终profile下的env属性获取对应的配置文件 根据实际情况修改 -->
+  		<filters>
+  			<filter>src/main/prop/log4j2-${activatedProperties}.xml</filter>
+  		</filters>
 第二步
 
 在src/main/resources目录中传入一个 
