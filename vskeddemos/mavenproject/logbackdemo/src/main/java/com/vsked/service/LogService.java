@@ -9,7 +9,7 @@ public class LogService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LogService.class);
 	
-	public static void testLog(){
+	public void testLog(){
 		Random r=new Random();
 		logger.trace("trace "+r.nextDouble());
 		logger.debug("debug "+r.nextDouble());
