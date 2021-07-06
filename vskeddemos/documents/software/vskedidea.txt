@@ -72,6 +72,7 @@ file->project structure->modules->展开项目->web->添加webapp目录即可
 file->Settings->Editor->Code Style->Java->Imports
 Class count to use import with ‘*’ 
 后面数字改为999
+下面的names count to use static 也改为999
 再点应用即可
 
 20* 编辑器中UTF-8字符显示为中文
@@ -89,6 +90,11 @@ Default encoding for properties fies: UTF-8
 -Deditable.java.test.console=true
 第三步重启idea再使用单元测试输入即可
 
+22* 数据源配置
+View->ToolWindows->Database
+在弹出的面板中选择+号->datasource->mysql(根据实际库来)
+填写好相关信息后点击测试连接(test connection)看结果
+测试成功后点apply应用即可
 
 
 
