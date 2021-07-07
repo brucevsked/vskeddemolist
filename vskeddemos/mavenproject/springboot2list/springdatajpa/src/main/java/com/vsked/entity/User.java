@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -20,8 +22,12 @@ public class User {
 	private String username;
 	
 	private String usernick;
-	
+
+	/**
+	 * 生成一张中间表userRoles是表名,joincolumns是当前表主键名称，inversejoincolumns是子对象中主键
+	 */
 	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinTable(name = "userRoles",joinColumns = {@JoinColumn(name = "userId")},inverseJoinColumns = {@JoinColumn(name = "roldId")})
 	private Set<Role> roles;
 	
 	public Integer getUid() {
