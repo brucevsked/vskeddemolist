@@ -13,20 +13,21 @@ create-drop
 Spring Data Jpa 中级联操作CascadeType的含义
 CascadeType.PERSIST
 
-级联新增，保存父对象时会新建其中包含的子对象 
+级联新增，保存父对象时会新建其中包含的子对象
 
 CascadeType.MERGE
-级联修改，保存父对象时会更新其中所包含的子对象数据 
+级联修改，保存父对象时会更新其中所包含的子对象数据
 
 CascadeType.REMOVE
-级联删除，当删除关联关系时会将子对象的数据删除 
+级联删除，当删除关联关系时会将子对象的数据删除
 
 CascadeType.REFRESH
 级联刷新，保存关联关系时会更新子对象和数据库中一致
-(意思是你在父对象中添加一个只包含ID的子对象，也可以保存进去) 
+(意思是你在父对象中添加一个只包含ID的子对象，也可以保存进去)
 
 CascadeType.ALL
 包含上述所有操作
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 
 fetch 加载方式
 立即加载
@@ -539,4 +540,92 @@ public class StudentScore {
     public void setStudentScoreKey(StudentScoreKey studentScoreKey) {
         this.studentScoreKey = studentScoreKey;
     }
+}
+
+
+中间表示例
+JoinTable joinColumns当前对象(SystemObjectEntity)唯一标识名称(如本对象中叫id中间表中叫systemObjectId)，
+inverseJoinColumns子对象唯一标识ObjectActionEntity(如子对象唯一标识列为id,中间表中名称叫objectActionId)
+
+@Table(name = "systemObject")
+@Entity
+public class SystemObjectEntity {
+
+    @Id
+    @Column(name = "id")
+    private String id;
+
+    @OneToMany(cascade= CascadeType.ALL)
+    @JoinTable(name = "systemObjectAction",joinColumns = {@JoinColumn(name = "systemObjectId")},inverseJoinColumns = {@JoinColumn(name = "objectActionId")})
+    private Set<ObjectActionEntity> actionEntitySet;
+}
+
+
+
+单向一对一
+
+@Entity
+public class Student {
+
+    @Id
+    @Column(insertable = false, updatable = false, columnDefinition = "INT UNSIGNED  COMMENT '学生ID'")
+    private Integer studentId;
+
+    @Column(length = 50, columnDefinition = "VARCHAR(255) NOT NULL COMMENT '学生名'")
+    private String studentName;
+
+    @OneToOne
+    @JoinColumn(name = "teacher_id", referencedColumnName = "teacherId")
+    //设置生成的外键名称为teacher_id，对应Teacher类中的teacherId
+    private Teacher teacher;
+
+
+}
+
+@Entity
+public class Teacher {
+
+    @Id
+    @Column(insertable = false, updatable = false, columnDefinition = "INT UNSIGNED COMMENT '教师ID'")
+    private Integer teacherId;
+
+    @Column(length = 50, columnDefinition = "VARCHAR(255) NOT NULL COMMENT '教师名'")
+    private String teacherName;
+
+}
+
+
+双向一对一
+
+@Entity
+public class Student {
+
+    @Id
+    @Column(insertable = false, updatable = false, columnDefinition = "INT UNSIGNED  COMMENT '学生ID'")
+    private Integer studentId;
+
+    @Column(length = 50, columnDefinition = "VARCHAR(255) NOT NULL COMMENT '学生名'")
+    private String studentName;
+
+    @OneToOne
+    @JoinColumn(name = "teacher_id", referencedColumnName = "teacherId")
+    //设置生成的外键名称为teacher_id，对应Teacher类中的teacherId
+    private Teacher teacher;
+
+
+}
+
+@Entity
+public class Teacher {
+
+    @Id
+    @Column(insertable = false, updatable = false, columnDefinition = "INT UNSIGNED COMMENT '教师ID'")
+    private Integer teacherId;
+
+    @Column(length = 50, columnDefinition = "VARCHAR(255) NOT NULL COMMENT '教师名'")
+    private String teacherName;
+
+    @OneToOne(mappedBy = "teacher")//对应Student中的Teacher对象的名字
+    private Student student;
+
 }
