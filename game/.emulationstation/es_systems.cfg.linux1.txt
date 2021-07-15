@@ -1,0 +1,401 @@
+<?xml version="1.0"?>
+<systemList>
+  <system>
+    <name>3do</name>
+    <fullname>3DO</fullname>
+    <path>/home/pi/RetroPie/roms/3do</path>
+    <extension>.cue .chd .m3u .iso .CUE .CHD .M3U .ISO</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-opera/opera_libretro.so %ROM%</command>
+    <platform>3do</platform>
+    <theme>3do</theme>
+  </system> 
+  <system>
+    <name>amiga</name>
+    <fullname>Commodore Amiga</fullname>
+    <path>/home/pi/RetroPie/roms/amiga</path>
+    <extension>.zip .uae .adf .dms .fdi .ipf .hdf .hdz .m3u .ZIP .UAE .ADF .DMS .FDI .IPF .HDF .HDZ .M3U</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-puae/puae_libretro.so %ROM%</command>
+    <platform>amiga</platform>
+    <theme>amiga</theme>
+  </system> 
+  <system>
+    <name>amstradcpc</name>
+    <fullname>Amstrad CPC</fullname>
+    <path>/home/pi/RetroPie/roms/amstradcpc</path>
+    <extension>.dsk .cpc .DSK .CPC</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-caprice32/cap32_libretro.so %ROM%</command>
+    <platform>amstradcpc</platform>
+    <theme>amstradcpc</theme>
+  </system>
+  <system>
+    <name>pc</name>
+    <fullname>Windows/DOS</fullname>
+    <path>/home/pi/RetroPie/roms/pc</path>
+    <extension>.exe .bat .zip .7z .EXE .BAT .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-doxbox/dosbox_libretro.so %ROM%</command>
+    <platform>pc</platform>
+    <theme>pc</theme>
+	<!-- The core ffmpeg_libretro.so can be used to Play 480p Videos. --> 
+	<!-- Adjust core settings to NOT Load DUMMY Core after Play, so when the video ends, it just go back to Main Menu. -->    
+  </system>
+  <system>  
+    <name>atari2600</name>
+    <fullname>Atari 2600</fullname>
+    <path>/home/pi/RetroPie/roms/atari2600</path>
+    <extension>.a26 .bin .rom .zip .gz .A26 .BIN .ROM .ZIP .GZ</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-stella2014/stella2014_libretro.so %ROM%</command>
+    <platform>atari2600</platform>
+    <theme>atari2600</theme>
+  </system>  
+  <system>
+    <name>atari5200</name>
+    <fullname>Atari 5200</fullname>
+    <path>/home/pi/RetroPie/roms/a5200</path>
+    <extension>.a52 .bas .bin .xex .atr .xfd .dcm .atr.gz .xfd.gz .A52 .BAS .BIN .XEX .ATR .XFD .DCM .ATR.GZ .XFD.GZ</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-atari800/atari800_libretro.so %ROM%</command>
+    <platform>atari5200</platform>
+    <theme>atari5200</theme>
+  </system>
+  <system>
+    <name>atari7800</name>
+    <fullname>Atari 7800</fullname>
+    <path>/home/pi/RetroPie/roms/atari7800</path>
+    <extension>.7z .a78 .bin .zip .7Z .A78 .BIN .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-prosystem/prosystem_libretro.so %ROM%</command>
+    <platform>atari7800</platform>
+    <theme>atari7800</theme>
+  </system>
+  <system>
+    <name>atarist</name>
+    <fullname>Atari ST/STE</fullname>
+    <path>/home/pi/RetroPie/roms/atarist</path>
+    <extension>.st .stx .img .rom .ST .STX .IMG .ROM</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-hatari/hatari_libretro.so %ROM%</command>
+    <platform>atarist</platform>
+    <theme>atarist</theme>
+  </system>    
+  <system>
+    <name>atarilynx</name>
+    <fullname>Atari Lynx</fullname>
+    <path>/home/pi/RetroPie/roms/atarilynx</path>
+    <extension>.7z .lnx .zip .7Z .LNX .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-handy/handy_libretro.so %ROM%</command>
+    <platform>atarilynx</platform>
+    <theme>atarilynx</theme>
+  </system>
+  <system>
+    <name>atarijaguar</name>
+    <fullname>Atari Jaguar</fullname>
+    <path>/home/pi/RetroPie/roms/atarijaquar</path>
+    <extension>.j64 .jag .zip .7z .J64 .JAG .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-virtualjaguar/virtualjaguar_libretro.so %ROM%</command>
+    <platform>atarijaguar</platform>
+    <theme>atarijaguar</theme>
+  </system> 
+  <system>
+    <name>coleco</name>
+    <fullname>Colecovision</fullname>
+    <path>/home/pi/RetroPie/roms/colecovision</path>
+    <extension>.bin .col .rom .zip .7z .BIN .COL .ROM .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-bluemsx/bluemsx_libretro.so %ROM%</command>
+    <platform>coleco</platform>
+    <theme>colecovision</theme>
+  </system>
+  <system>
+    <name>c64</name>
+    <fullname>Commodore 64</fullname>
+    <path>/home/pi/RetroPie/roms/c64</path>
+    <extension>.rom .crt .d64 .g64 .t64 .tap .x64 .zip .ROM .CRT .D64 .G64 .T64 .TAP .X64 .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-vice/vice_x64_libretro.so %ROM%</command>
+    <platform>c64</platform>
+    <theme>c64</theme>
+  </system>  
+  <system>
+    <name>intellivision</name>
+    <fullname>Intellivision</fullname>
+    <path>/home/pi/RetroPie/roms/intellivision</path>
+    <extension>.int .bin .INT .BIN</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-freeintv/freeintv_libretro.so %ROM%</command>
+    <platform>intellivision</platform>
+    <theme>intellivision</theme>
+  </system>
+  <system>
+    <name>msx</name>
+    <fullname>MSX / MSX2</fullname>
+    <path>/home/pi/RetroPie/roms/msx</path>
+    <extension>.rom .mx1 .mx2 .col .dsk .zip .ROM .MX1 .MX2 .COL .DSK .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-bluemsx/bluemsx_libretro.so %ROM%</command>
+    <platform>msx</platform>
+    <theme>msx</theme>
+  </system>
+  <system>
+    <name>ports</name>
+    <fullname>Ports</fullname>
+    <path>/home/pi/RetroPie/roms/ports</path>
+    <extension>.sh .SH</extension>
+    <command>%ROM%</command>
+    <platform>pc</platform>
+    <theme>ports</theme>
+  </system>
+  <system>
+    <name>scummvm</name>
+    <fullname>ScummVM</fullname>
+    <path>/home/pi/RetroPie/roms/scummvm</path>
+    <extension>.sh .svm .SH .SVM</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-scummvm/scummvm_libretro.so %ROM%</command>
+    <platform>scummvm</platform>
+    <theme>scummvm</theme>
+  </system>   
+  <system>
+    <name>daphne</name>
+    <fullname>Arcade (Daphne)</fullname>
+    <path>/home/pi/RetroPie/roms/daphne</path>
+    <extension>.zip .bat .exe</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-daphne/daphne_libretro.so %ROM%</command>
+    <platform>daphne</platform>
+    <theme>daphne</theme>
+  </system> 
+  <system>
+    <name>mame</name>
+    <fullname>Arcade (MAME)</fullname>
+    <path>/home/pi/RetroPie/roms/mame</path>
+    <extension>.7z .zip .7Z .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-mame2003-plus/mame2003_plus_libretro.so %ROM%</command>
+    <platform>mame</platform>
+    <theme>mame</theme>
+  </system>  
+  <system>
+    <name>fba</name>
+    <fullname>Arcade (Final Burn Neo)</fullname>
+    <path>/home/pi/RetroPie/roms/fba</path>
+    <extension>.7z .zip .7Z .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fbneo/fbneo_libretro.so %ROM%</command>
+    <platform>fba</platform>
+    <theme>fba</theme>
+  </system>
+    <system>
+    <name>neogeo</name>
+    <fullname>NeoGeo</fullname>
+    <path>/home/pi/RetroPie/roms/neogeo</path>
+    <extension>.zip .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fbalpha2012/fbalpha2012_libretro.so %ROM%</command>
+    <platform>neogeo</platform>
+    <theme>neogeo</theme>
+  </system> 
+  <system>
+    <name>neogeocd</name>
+    <fullname>SNK Neo Geo CD</fullname>
+    <path>/home/pi/RetroPie/roms/neogeocd</path>
+    <extension>.chd .zip .7z .CHD .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fbalpha2012/fbalpha2012_libretro.so %ROM%</command>
+    <platform>neogeocd</platform>
+    <theme>neogeocd</theme>
+  </system>   
+  <system>
+    <name>sg-1000</name>
+    <fullname>Sega SG-1000</fullname>
+    <path>/home/pi/RetroPie/roms/sg-1000</path>
+    <extension>.sg .zip .SG .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-genesis-plus-gx/genesis_plus_gx_libretro.so %ROM%</command>
+    <platform>sg-1000</platform>
+    <theme>sg-1000</theme>
+  </system>   
+  <system>
+    <name>mastersystem</name>
+    <fullname>Sega Master System</fullname>
+    <path>/home/pi/RetroPie/roms/mastersystem</path>
+    <extension>.sms .zip .SMS .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-genesis-plus-gx/genesis_plus_gx_libretro.so %ROM%</command>
+    <platform>mastersystem</platform>
+    <theme>mastersystem</theme>
+  </system>  
+  <system>
+    <name>gamegear</name>
+    <fullname>Sega Gamegear</fullname>
+    <path>/home/pi/RetroPie/roms/gamegear</path>
+    <extension>.gg .zip .7z .GG .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-genesis-plus-gx/genesis_plus_gx_libretro.so %ROM%</command>
+    <platform>gamegear</platform>
+    <theme>gamegear</theme>
+  </system>
+  <system>
+    <name>genesis</name>
+    <fullname>Sega Mega Drive / Genesis</fullname>
+    <path>/home/pi/RetroPie/roms/megadrive</path>
+    <extension>.7z .smd .bin .gen .md .zip .7Z .SMD .BIN .GEN .MD .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-genesis-plus-gx/genesis_plus_gx_libretro.so %ROM%</command>
+    <platform>genesis</platform>
+    <theme>genesis</theme>
+  </system>
+  <system>
+    <name>segacd</name>
+    <fullname>Sega Mega CD</fullname>
+    <path>/home/pi/RetroPie/roms/segacd</path>
+    <extension>.cue .chd .m3u .iso .CUE .CHD .M3U .ISO</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-genesis-plus-gx/genesis_plus_gx_libretro.so %ROM%</command>
+    <platform>segacd</platform>
+    <theme>segacd</theme>
+  </system>
+  <system>
+    <name>sega32x</name>
+    <fullname>Sega 32X</fullname>
+    <path>/home/pi/RetroPie/roms/sega32x</path>
+    <extension>.32x .smd .bin .md .zip .32X .SMD .BIN .MD .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-picodrive/picodrive_libretro.so %ROM%</command>
+    <platform>sega32x</platform>
+    <theme>sega32x</theme>
+  </system>  
+  <system>
+    <name>saturn</name>
+    <fullname>Sega Saturn</fullname>
+    <path>/home/pi/RetroPie/roms/saturn</path>
+    <extension>.iso .cue .ccd .ISO .CUE .CCD</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-yabause/yabause_libretro.so %ROM%</command>
+    <platform>saturn</platform>
+    <theme>saturn</theme>
+  </system>  
+  <system>
+    <name>dreamcast</name>
+    <fullname>Sega Dreamcast</fullname>
+    <path>/home/pi/RetroPie/roms/dreamcast</path>
+    <extension>.cdi .CDI .chd .zip .7z .CHD .gdi .GDI .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-flycast/flycast_libretro.so %ROM%</command>
+    <platform>dreamcast</platform>
+    <theme>dreamcast</theme>
+  </system>
+  <system>
+    <name>naomi</name>
+    <fullname>Sega NAOMI</fullname>
+    <path>/home/pi/RetroPie/roms/naomi</path>
+    <extension>.cue .chd .m3u .cdi .gdi .zip .7z .lst .bin .CUE .CHD .M3U .CDI .GDI .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-flycast/flycast_libretro.so %ROM%</command>
+    <platform>naomi</platform>
+    <theme>naomi</theme>
+  </system>  
+  <system>
+    <name>pcengine</name>
+    <fullname>PC Engine</fullname>
+    <path>/home/pi/RetroPie/roms/pcengine</path>
+    <extension>.7z .pce .ccd .chd .cue .zip .7Z .PCE .CCD .CHD .CUE .ZIP</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/mednafen_pce_fast_libretro.so %ROM%</command>
+    <platform>pcengine</platform>
+    <theme>pcengine</theme>
+  </system>
+  <system>
+    <name>supergrafx</name>
+    <fullname>Super Grafx</fullname>
+    <path>/home/pi/RetroPie/roms/supergrafx</path>
+    <extension>.pce .zip .cue .PCE .ZIP .CUE .sgx .SGX</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-beetle-supergrafx/mednafen_supergrafx_libretro.so %ROM%</command>
+    <platform>supergrafx</platform>
+    <theme>supergrafx</theme>
+  </system> 
+  <system>
+    <name>nes</name>
+    <fullname>Nintendo Entertainment System</fullname>
+    <path>/home/pi/RetroPie/roms/nes</path>
+    <extension>.nes .zip .7x .NES .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fceumm/fceumm_libretro.so %ROM%</command>
+    <platform>nes</platform>
+    <theme>nes</theme>
+  </system>  
+  <system>
+    <name>fds</name>
+    <fullname>Famicom Disk System</fullname>
+    <path>/home/pi/RetroPie/roms/fds</path>
+    <extension>.fds .zip .7z .FDS .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fceumm/fceumm_libretro.so %ROM%</command>
+    <platform>fds</platform>
+    <theme>fds</theme>
+  </system>
+  <system>
+    <name>snes</name>
+    <fullname>Super Nintendo</fullname>
+    <path>/home/pi/RetroPie/roms/snes</path>
+    <extension>.smc .sfc .fig .swc .mgd .zip .7z .SMC .SFC .FIG .SWC .MGD .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-bsnes/bsnes_libretro.so %ROM%</command>
+    <platform>snes</platform>
+    <theme>snes</theme>
+  </system>
+  <system>
+    <name>gb</name>
+    <fullname>Game Boy</fullname>
+    <path>/home/pi/RetroPie/roms/gb</path>
+    <extension>.gb .zip .7z .GB .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-gambatte/gambatte_libretro.so %ROM%</command>
+    <platform>gb</platform>
+    <theme>gb</theme>
+  </system>
+  <system>
+    <name>gbc</name>
+    <fullname>Game Boy Color</fullname>
+    <path>/home/pi/RetroPie/roms/gbc</path>
+    <extension>.gbc .zip .7z .GBC .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-gambatte/gambatte_libretro.so %ROM%</command>
+    <platform>gbc</platform>
+    <theme>gbc</theme>
+  </system>
+  <system>
+    <name>gba</name>
+    <fullname>Game Boy Advance</fullname>
+    <path>/home/pi/RetroPie/roms/gba</path>
+    <extension>.gba .zip .GBA .ZIP .7z .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-mgba/mgba_libretro.so %ROM%</command>
+    <platform>gba</platform>
+    <theme>gba</theme>
+  </system>
+  <system>
+    <name>nds</name>
+    <fullname>Nintendo DS</fullname>
+    <path>/home/pi/RetroPie/roms/nds</path>
+    <extension>.nds .bin .zip .7z .NDS .BIN .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-desmume2015/desmume2015_libretro.so %ROM%</command>
+    <platform>nds</platform>
+    <theme>nds</theme>
+  </system>
+  <system>
+    <name>n64</name>
+    <fullname>Nintendo 64</fullname>
+    <path>/home/pi/RetroPie/roms/n64</path>
+    <extension>.z64 .n64 .v64 .zip .7z .Z64 .N64 .V64 .ZIP .7Z</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-mupen64plus/mupen64plus_libretro.so %ROM%</command>
+    <platform>n64</platform>
+    <theme>n64</theme>
+  </system>
+  <system>
+    <name>gamecube</name>
+    <fullname>Nintendo Gamecub</fullname>
+    <path>/home/pi/RetroPie/roms/gamecube</path>
+    <extension>.zip .ZIP .iso .ISO .DOL .dol</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-dolphin/dolphin_libretro.so %ROM%</command>
+    <platform>gamecube</platform>
+    <theme>gc</theme>
+  </system>
+  <system>
+    <name>wii</name>
+    <fullname>Nintendo Wii</fullname>
+    <path>/home/pi/RetroPie/roms/wii</path>
+    <extension>.zip .ZIP .iso .ISO .wad .WAD .wbfs .WBFS</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-dolphin/dolphin_libretro.so %ROM%</command>
+    <platform>wii</platform>
+    <theme>wii</theme>
+  </system>
+  <system>
+    <name>psx</name>
+    <fullname>PlayStation</fullname>
+    <path>/home/pi/RetroPie/roms/psx</path>
+    <extension>.bin .cue .cbn .img .m3u .mdf .pbp .toc .z .znx .chd .BIN .CUE .CBN .IMG .M3U .MDF .PBP .TOC .Z .ZNX .CHD</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-beetle-psx/mednafen_psx_hw_libretro.so %ROM%</command>
+    <platform>psx</platform>
+    <theme>psx</theme>
+  </system>
+  <system>
+    <name>psp</name>
+    <fullname>PlayStation Portable</fullname>
+    <path>/home/pi/RetroPie/roms/psp</path>
+    <extension>.iso .cso .pbp</extension>
+    <command>/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-ppsspp/ppsspp_libretro.so %ROM%</command>
+    <platform>psp</platform>
+    <theme>psp</theme>
+  </system>
+</systemList>
