@@ -97,6 +97,7 @@ View->ToolWindows->Database
 测试成功后点apply应用即可
 
 23* log4j2日志级别高亮颜色显示
+正式项目中不推荐使用。因为那个高亮在文本编辑器不会显示颜色的。没有任何作用。仅能在idea中看。如果需要可以仅配置在开发环境中
 1在log4j2.xml配置高亮代码设置highlight标识，其中highlight部分为高亮日志显示字段
 2 PatternLayout标签添加属性 disableAnsi="false" 
 
