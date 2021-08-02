@@ -106,6 +106,10 @@ View->ToolWindows->Database
     <PatternLayout charset="utf-8" pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} traceId:[%X{mdc_trace_id}] %highlight{%-5level} %class{36} %L %M - %msg%xEx%n" disableAnsi="false" />
 </console>
 
+24* 自动生成serialVersionUID
+file->settings->Editor->Inspections->java->Serialization issues
+Serializable class without 'serialVersionUID' 打对号
+'serialVersionUID' field not declared 'private static final long'打对号
 
 
 
