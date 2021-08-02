@@ -362,6 +362,14 @@ a.bat 1 2 3
 echo %1 %2 %3
 Pause
 
+62* 查看文件内容
+type 文件名
+type readme.txt
+
+more 文件名
+more readme.txt
+
+
 
 
 
