@@ -114,6 +114,26 @@ FALSE	=false	findByActiveFalse()	… where x.active = false
 IgnoreCase	upper(xxx)=upper(yyyy)	findByFirstnameIgnoreCase	… where UPPER(x.firstame) = UPPER(?1)
 
 
+mappedBy表示声明自己不是一对多的关系维护端，由对方来维护，是在一的一方进行声明的。mappedBy的值应该为一的一方的表名
+中间表示例
+JoinTable joinColumns当前对象(SystemObjectEntity)唯一标识名称(如本对象中叫id中间表中叫systemObjectId)，
+inverseJoinColumns子对象唯一标识ObjectActionEntity(如子对象唯一标识列为id,中间表中名称叫objectActionId)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "rolePermission3",joinColumns = {@JoinColumn(name = "roleId")},inverseJoinColumns = {@JoinColumn(name = "permissionId")})
+    List<PermissionPO> permissions=new LinkedList<>();
+    
+
+
+@Embedded 和 @Embeddable
+指定其值为可嵌入类实例的实体的持久字段或属性。
+可嵌入类必须标注为Embeddable。
+ @Embedded 用来修饰 对象属性(引用类型 -- 类对象 -- 属性注解)
+ @Embeddable 用来修饰 类(类注解)
+ 用来复用类对象的属性 可使用 @AttributeOverrides 来进行重写
+  如 AttributeOverride，AttributeOverrides， 
+  AssociationOverride，和AssociationOverrides 
+  注释可以用于覆盖声明或嵌入类默认映射。 
+
 
 对象关联关系说明
 假设有类book,bookCategory两个实体
