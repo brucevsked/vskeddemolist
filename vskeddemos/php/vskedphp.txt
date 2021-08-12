@@ -1,0 +1,11 @@
+
+
+1* 查看php版本
+php -v
+
+2* 查看php扩展,查看php在cli下加载了哪些模块
+php -m
+
+3* 查看php在cli下详细信息
+php -i
+

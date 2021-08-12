@@ -540,6 +540,14 @@ tail -f /opt/vskedtest/timetofile/timetofile.log
 systemctl list-unit-files
 systemctl list-unit-files|grep mysql
 
+32* 发送post请求
+json请求
+curl -H "Content-Type: application/json" -X POST -d '{"user_id": "123", "coin":100, "success":1, "msg":"OK!" }' "http://192.168.0.1:8001/test"
+form请求
+curl -d'login=emma＆password=123'-X POST https://google.com/login
+
+
+
 
 --------------------------------------------------------------------------------
 lvm扩容管理
