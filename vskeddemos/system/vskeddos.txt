@@ -52,8 +52,12 @@ sc delete 服务名
 9*调用关机重启列表
 shutdown -i
 
-10* 立即关机
+10* 关机相关命令
+shutdown -s -t 秒数
+立即关机
 shutdown -s -t 0
+3小时后关机
+shutdown -s -t 10800
 
 11* 列出当前目录所有文件与文件夹
 dir 
