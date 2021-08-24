@@ -546,6 +546,17 @@ curl -H "Content-Type: application/json" -X POST -d '{"user_id": "123", "coin":1
 form请求
 curl -d'login=emma＆password=123'-X POST https://google.com/login
 
+33* 移动命令
+移动目录
+mv 源目录名 目标路径
+将cc文件夹移动到aa文件夹里
+mv /tmp/cc /tmp/aa
+移动目录下所有文件到新文件夹
+mv 源目录/* 新目录
+将bb文件夹中所有文件移动到aa文件夹中
+mv /tmp/bb/* /tmp/aa
+
+
 
 
 

@@ -9,3 +9,12 @@ php -m
 3* 查看php在cli下详细信息
 php -i
 
+--------------------------------------------------------------------------------
+
+宝塔面板安装
+yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
+
+
+--------------------------------------------------------------------------------
+thinkphp打日志
+\Think\Log::record("---------- start load_gps_goodslist");
