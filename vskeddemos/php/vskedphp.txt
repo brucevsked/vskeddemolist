@@ -9,6 +9,40 @@ php -m
 3* 查看php在cli下详细信息
 php -i
 
+4* 数组相关操作
+新建一个数组
+$myArr=array();
+新建有内容的数组
+$a=array("red","green");
+向数组尾部追加元素
+array_push(数组变量,元素1,元素2);
+追加示例
+array_push($a,"blue","yellow");
+打印数组
+print_r($a);
+
+把数组元素组合为字符串
+implode(连接符号,要合并的数组);
+implode(",",$arr);
+
+把字符串打散为数组
+$str = 'one,two,three,four';
+explode(',',$str,0);
+
+5* 循环
+foreach($community_goods as $val){
+	$tmp_data = array();//新建数组
+	$tmp_data['actId'] = $val['id'];//商品编号
+}
+
+6* 判断 
+if( !empty($head_id) && $head_id >0 )
+{
+  $params = array();
+}
+
+
+
 --------------------------------------------------------------------------------
 
 宝塔面板安装
@@ -17,4 +51,38 @@ yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_
 
 --------------------------------------------------------------------------------
 thinkphp打日志
-\Think\Log::record("---------- start load_gps_goodslist");
+\Think\Log::record(date('Y-m-d H:i:s')."---------- start load_gps_goodslist");
+
+\Think\Log::record(date('Y-m-d H:i:s')."---------- end load_gps_goodslist else");
+日志级别
+\Think\Log::record(date('Y-m-d H:i:s')."---------- start load_gps_goodslist","debug",true);
+
+
+Think\Log::record('测试日志信息，这是警告级别','WARN',true);
+
+
+	public function getCurMill(){
+    	list($msec, $sec) = explode(' ', microtime());
+		$msectime =  (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);
+		$tag6602='Y-m-d H:i:s';
+        $a6603 = substr($msectime,0,10);
+        $b6604 = substr($msectime,10);
+        $date6601 = date($tag6602,$a6603).'.'.$b6604;
+		return $date6601;
+	}
+
+    \Think\Log::record($this->getCurMill()."---------- end load_gps_goodslist else","debug",true);
+
+根据多个id查询多个结果
+	public function getGoodInfoListByIds($ids){
+		$myWhere=array();
+		$myWhere['id']=array('in',$ids);
+		$goodsInfoList = M('lionfish_comshop_goods')->field('id,goodsname,productprice')->where( $myWhere )->order('id desc')->select();
+        return $goodsInfoList;
+	}
+
+in与and合用
+		$myWhere=array();
+		$myWhere['id']=array('in',$ids);
+		$myWhere['name']='vsked'; //相当于and
+		$goodsInfoList = M('lionfish_comshop_goods')->field('id,goodsname,productprice')->where( $myWhere )->order('id desc')->select();

@@ -38,4 +38,7 @@ redhat-java
 --------------------------------------------------------------------------------
 php server使用
 打开php项目以后，按ctrl+shift+p输入以下按回车
+开启php服务器
 PHP Server: Serve project
+关闭php服务器
+PHP Server: stop Serve
