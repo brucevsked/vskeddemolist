@@ -16,8 +16,12 @@ $myArr=array();
 $a=array("red","green");
 向数组尾部追加元素
 array_push(数组变量,元素1,元素2);
-追加示例
+追加示例1
 array_push($a,"blue","yellow");
+追加示例2
+$dataList[] = array('name'=>'thinkphp','email'=>'thinkphp@gamil.com');
+$dataList[] = array('name'=>'onethink','email'=>'onethink@gamil.com');
+
 打印数组
 print_r($a);
 
@@ -27,7 +31,15 @@ implode(",",$arr);
 
 把字符串打散为数组
 $str = 'one,two,three,four';
-explode(',',$str,0);
+explode(',',$str);
+
+数组与json
+$arr = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
+echo json_encode($arr);
+
+$json = '{"a":1,"b":2,"c":3,"d":4,"e":5}';
+var_dump(json_decode($json));
+var_dump(json_decode($json, true));
 
 5* 循环
 foreach($community_goods as $val){
@@ -41,7 +53,15 @@ if( !empty($head_id) && $head_id >0 )
   $params = array();
 }
 
+7* 响应json数据
+			$result['code'] = 1;
+			$result['msg'] = '您的订单处于售后处理中，请完成后再确认收货！';
+			echo json_encode($result);
+			die();
 
+8* 调用类中方法
+$this->方法名(参数);
+$this->get_area_info($community_info['province_id']); 
 
 --------------------------------------------------------------------------------
 
@@ -86,3 +106,4 @@ in与and合用
 		$myWhere['id']=array('in',$ids);
 		$myWhere['name']='vsked'; //相当于and
 		$goodsInfoList = M('lionfish_comshop_goods')->field('id,goodsname,productprice')->where( $myWhere )->order('id desc')->select();
+		return $dataList;
