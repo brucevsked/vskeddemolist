@@ -1,3 +1,6 @@
+
+
+
 1* 创建项目
 mvn archetype:generate -DgroupId=包名 -DartifactId=工程名
 mvn archetype:generate -DgroupId=com.vsked -DartifactId=vskedtest1 -DinteractiveMode=false
@@ -248,5 +251,172 @@ idea依赖解决插件
 Maven Helper
 在插件安装好之后，我们打开pom.xml文件，在底部会多出一个Dependency Analyzer选项
 找到红色的右击exclude即可
+
+--------------------------------------------------------------------------------
+基础教程
+POM Project Object Model
+
+介绍
+Maven 是一个意第绪语单词，意思是知识的积累，最初是为了简化 Jakarta Turbine 项目中的构建过程。
+有几个项目，每个项目都有自己的 Ant 构建文件，都略有不同。JAR 被检入 CVS。
+我们想要一种构建项目的标准方法、对项目组​​成的清晰定义、一种发布项目信息的简单方法以及一种在多个项目之间共享 JAR 的方法。
+
+结果是现在可以用于构建和管理任何基于 Java 的项目的工具。
+我们希望我们已经创建了一些东西，使 Java 开发人员的日常工作更容易，并且通常有助于理解任何基于 Java 的项目。
+
+Maven的目标
+Maven 的主要目标是让开发人员在最短的时间内了解开发工作的完整状态。
+为了实现这个目标，Maven 处理了几个关注的领域：
+
+简化构建过程
+提供统一的构建系统
+提供优质项目信息
+鼓励更好的开发实践
+简化构建过程
+
+虽然使用 Maven 并不能消除了解底层机制的需要，但 Maven 确实为开发人员屏蔽了许多细节。
+
+提供统一的构建系统
+Maven 使用其项目对象模型 (POM) 和一组插件构建项目。
+一旦您熟悉了一个 Maven 项目，您就会知道所有 Maven 项目是如何构建的。这可以节省导航许多项目的时间。
+
+提供优质项目信息
+Maven 提供了有用的项目信息，这些信息部分来自您的 POM，部分来自您的项目源。
+例如，Maven 可以提供：
+
+直接从源代码管理创建的更改日志
+交叉引用来源
+项目管理的邮件列表
+项目使用的依赖
+单元测试报告，包括覆盖率
+第三方代码分析产品还提供了 Maven 插件，将他们的报告添加到 Maven 给出的标准信息中。
+
+提供最佳实践开发指南
+Maven 旨在收集最佳实践开发的当前原则，并使项目朝着该方向发展变得容易。
+
+例如，单元测试的规范、执行和报告是使用 Maven 的正常构建周期的一部分。
+当前的单元测试最佳实践被用作指导方针：
+
+将测试源代码保存在单独但并行的源代码树中
+使用测试用例命名约定来定位和执行测试
+让测试用例设置他们的环境，而不是为测试准备定制构建
+Maven 还协助项目工作流，例如发布和问题管理。
+
+Maven 还建议了一些关于如何布局项目目录结构的指南。了解布局后，您可以轻松导航其他使用 Maven 的项目。
+
+虽然对项目布局采取固执己见的方法，但由于历史原因，某些项目可能不适合这种结构。
+虽然 Maven 旨在灵活满足不同项目的需求，但它无法在不影响其目标的情况下满足所有情况。
+
+如果您的项目具有无法重组的异常构建结构，您可能不得不放弃某些功能或完全放弃使用 Maven。
+
+Maven 不是什么？
+您可能听说过以下有关 Maven 的一些事情：
+
+Maven 是一个站点和文档工具
+Maven 扩展 Ant 以让您下载依赖项
+Maven 是一组可重用的 Ant 脚本
+Maven 会做这些事情，正如您在上面的“什么是 Maven？”中所读到的那样。部分，这些并不是 Maven 的唯一特性，它的目标也大不相同。
+
+
+创建您的第一个项目！为了创建最简单的 Maven 项目，请从命令行执行以下命令：
+参数说明B,--batch-mode 的简写批处理模式，避免人工参与交互而造成挂起。
+archetype:generate 原型模板生成
+-D后面加属性指向命令行传入一个属性并赋值
+-DgroupId 其实就是groupId是组织或项目的唯一标志
+-DartifactId 具体的项目名称
+-DarchetypeArtifactId 从模板项目中创建新项目，这里模板项目为maven-archetype-quickstart
+-DarchetypeVersion 模板项目版本号
+
+
+mvn -B archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
+
+执行此命令后，您会注意到发生了一些事情。首先，您会注意到my-app为新项目创建了一个名为的目录，该目录包含一个名为的文件pom.xml，该文件应如下所示：
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+ 
+  <groupId>com.mycompany.app</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1.0-SNAPSHOT</version>
+ 
+  <name>my-app</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+ 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+ 
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+ 
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+       ... lots of helpful plugins
+    </pluginManagement>
+  </build>
+</project>
+
+pom.xml包含此项目的项目对象模型 (POM)。POM 是 Maven 中的基本工作单元。记住这一点很重要，因为 Maven 本质上是以项目为中心的，因为一切都围绕着项目的概念。简而言之，POM 包含有关您的项目的每一条重要信息，并且本质上是用于查找与您的项目相关的任何内容的一站式购物。理解 POM 很重要，鼓励新用户参考POM 简介。
+
+这是一个非常简单的 POM，但仍显示每个 POM 包含的关键元素，因此让我们逐一介绍它们以熟悉 POM 要点：
+
+project这是所有 Maven pom.xml 文件中的顶级元素。
+modelVersion此元素指示此 POM 使用的对象模型的版本。模型本身的版本很少更改，但是如果 Maven 开发人员认为有必要更改模型，为了确保使用的稳定性，它是强制性的。
+groupId此元素指示创建项目的组织或组的唯一标识符。groupId 是项目的关键标识符之一，通常基于您组织的完全限定域名。例如org.apache.maven.plugins是所有 Maven 插件的指定 groupId。
+artifactId此元素指示此项目生成的主要工件的唯一基本名称。项目的主要工件通常是 JAR 文件。像源包这样的次要工件也使用 artifactId 作为其最终名称的一部分。Maven 生成的典型工件的格式为 <artifactId>-<version>.<extension>（例如，myapp-1.0.jar）。
+version此元素指示项目生成的工件的版本。Maven 在帮助您进行版本管理方面大有帮助，您经常会SNAPSHOT在版本中看到指示符，这表明项目处于开发状态。我们将在本指南中讨论快照的使用以及它们如何工作。
+name此元素指示用于项目的显示名称。这通常用于 Maven 生成的文档中。
+url此元素指示可以找到项目站点的位置。这通常用于 Maven 生成的文档中。
+properties该元素包含可在 POM 中的任何位置访问的值占位符。
+dependencies这个元素的子元素列表dependencies。POM 的基石。
+build此元素处理诸如声明项目的目录结构和管理插件之类的事情。
+
+在第一个项目的原型生成之后，您还会注意到已经创建了以下目录结构
+my-app
+|-- pom.xml
+`-- src
+    |-- main
+    |   `-- java
+    |       `-- com
+    |           `-- mycompany
+    |               `-- app
+    |                   `-- App.java
+    `-- test
+        `-- java
+            `-- com
+                `-- mycompany
+                    `-- app
+                        `-- AppTest.java
+
+如您所见，从原型创建的项目具有 POM、应用程序源的源树和测试源的源树。这是 Maven 项目的标准布局（应用程序源驻留在 中${basedir}/src/main/java，测试源驻留在 中${basedir}/src/test/java，其中 ${basedir} 表示包含 的目录pom.xml）。
+
+如果您要手动创建 Maven 项目，这是我们推荐使用的目录结构。这是一个 Maven 约定，要了解更多信息，您可以阅读我们的标准目录布局简介。
+
+现在我们有一个 POM、一些应用程序源和一些您可能会问的测试源......
+
+如何编译我的应用程序源？
+切换到 archetype:generate 创建 pom.xml 的目录并执行以下命令来编译您的应用程序源
+mvn compile
+
+如何编译我的测试源并运行我的单元测试？
+mvn test
+
+打成一个jar包
+mvn package
+
+将jar包安装到本地仓库
+mvn install
+
+
+
 
 

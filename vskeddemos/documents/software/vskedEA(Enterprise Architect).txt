@@ -1,0 +1,5 @@
+
+
+1流程图
+
+工程树一侧新建图标（CreateDiagarm）->选择策略模型（StrategicModeling）->选择流对话图标（Flow Chart）
