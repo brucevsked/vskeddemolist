@@ -114,6 +114,46 @@ FALSE	=false	findByActiveFalse()	… where x.active = false
 IgnoreCase	upper(xxx)=upper(yyyy)	findByFirstnameIgnoreCase	… where UPPER(x.firstame) = UPPER(?1)
 
 
+对于mappedBy用法：
+
+　　a） 只有OneToOne,OneToMany,ManyToMany上才有mappedBy属性，ManyToOne不存在该属性；
+
+　　b） mappedBy标签一定是定义在the owned side（被拥有方的），他指向theowning side（拥有方）；
+
+　　c） 关系的拥有方负责关系的维护，在拥有方建立外键。所以用到@JoinColumn
+
+　　d）mappedBy跟JoinColumn/JoinTable总是处于互斥的一方，也就是说一个类写了JoinColumn/JoinTable另一个类才会写mappedBy
+
+两个类用户类与证书类是一对一的关系
+
+@Table(name = "user5")
+@Entity
+public class User5PO implements Serializable {
+    @Id
+    private Long id;
+    private String name;
+    //保存用户时会保存证书类，但保存证书类时不会保存用户类，因为这里关系是由用户类来维护的
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "userCertificate5",joinColumns = {@JoinColumn(name = "userId")},inverseJoinColumns = {@JoinColumn(name = "certificateId")})
+    private Certificate5PO certificate;
+}
+
+
+@Table(name = "certificate5")
+@Entity
+public class Certificate5PO implements Serializable {
+
+    @Transient//此字段不需要持久化到数据库
+    private static final long serialVersionUID = -4996099625666042353L;
+
+    @Id
+    private Long id;
+    private String content;
+    
+    @OneToOne(mappedBy = "certificate")
+    private User5PO user;
+}
+
 mappedBy表示声明自己不是一对多的关系维护端，由对方来维护，是在一的一方进行声明的。mappedBy的值应该为一的一方的表名
 中间表示例
 JoinTable joinColumns当前对象(SystemObjectEntity)唯一标识名称(如本对象中叫id中间表中叫systemObjectId)，
