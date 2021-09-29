@@ -42,3 +42,7 @@ php server使用
 PHP Server: Serve project
 关闭php服务器
 PHP Server: stop Serve
+
+--------------------------------------------------------------------------------
+markdown插件
+Markdown All in One

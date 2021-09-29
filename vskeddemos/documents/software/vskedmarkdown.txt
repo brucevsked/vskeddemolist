@@ -82,3 +82,21 @@ This paragraph has a quote
  
 > That is pulled out like this
 from the text my post.
+
+
+6* 表格
+|  表头   | 表头  |
+|  ----  | ----  |
+| 单元格  | 单元格 |
+| 单元格  | 单元格 |
+
+使用示例
+| 编号               |  名称         | 英文名                |
+|         ----      |  ----          | ----                 |
+| 10000000000000001 |  资源属性编号   | ResourceAttributeId  |
+| 20000000000000001 |  资源动作编号   | ResourceActionId     |
+| 30000000000000001 |  资源编号      | ResourceId           |
+| 40000000000000001 |  权限编号      | PermissionId         |
+| 50000000000000001 |  角色编号      | RoleId               |
+| 60000000000000001 |  证书编号      | CertificateId        |
+| 70000000000000001 |  用户编号      | UserId               |
