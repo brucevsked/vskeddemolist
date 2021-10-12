@@ -689,3 +689,18 @@ public class Teacher {
     private Student student;
 
 }
+
+
+
+Multiple representations of the same entity are being merged 解決
+spring:
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #表名去下划线
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        event:
+          merge.entity_copy_observer: allow #加这一段解决
