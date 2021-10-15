@@ -1,4 +1,6 @@
 
+--------------------------------------------------------------------------------
+yml相关配置
 当yml文件中配置为
   jpa:
     hibernate:
@@ -8,7 +10,100 @@
 create-drop
 时才会执行resources目录中的import.sql文件
 
+spring:
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #命名去掉下划下
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        event:
+          merge.entity_copy_observer: allow #允许对象关联操作(如角色用权限，用户要绑定角色时不加这个会异常)
 
+--------------------------------------------------------------------------------
+java注解说明
+
+特别说明：
+所有实体都需要实现序列化接口，并且需要有序列唯一标识值serialVersionUID，而且这个值不需要持久化到数据库
+
+@Entity  //检查1
+@Table(name = "account") //检查2
+public class AccountPO implements Serializable { //检查3 implements Serializable
+
+    @Transient//此字段不需要持久化到数据库    检查5
+    private static final long serialVersionUID = 2589051058614650816L; //检查4这个id用idea或eclipse自动生成
+
+    @Id //检查6
+    private String accountName;
+
+}
+
+@Entity
+标识这个实体类是一个JPA实体，告诉JPA在程序运行的时候记得生成这个实体类所对应的表~！
+
+@Table（name = "自定义的表名"）
+自定义设置这个实体类在数据库所对应的表名！
+
+@Transient
+此字段不需要持久化到数据库
+
+@Id
+把这个类里面所在的变量设置为主键Id。
+
+@GeneratedValue
+设置主键的生成策略，这种方式依赖于具体的数据库，如果数据库不支持自增主键，那么这个类型是没法用的。
+不推荐使用数据库自动生成ID，这样不方便移植，现在都使用程序算法生成ID，方便统一管理
+
+@Basic
+表示一个简单的属性到数据库表的字段的映射,对于没有任何标注的getXxxx()方法,
+默认 即为 @Basic fetch: 表示该属性的读取策略,有EAGER和LAZY两种,分别表示主支抓取和延迟加载,默认为EAGER.
+
+@Column（name = "自定义字段名"，length = "自定义长度"，nullable = "是否可以空"，unique = "是否唯一"，columnDefinition = "自定义该字段的类型和长度"）
+表示对这个变量所对应的字段名进行一些个性化的设置，例如字段的名字，字段的长度，是否为空和是否唯一等等设置。
+
+@Temporal
+当我们使用到java.util包中的时间日期类型，则需要@Temporal注释来说明转化成java.util包中的类型。其中包含三种转化类型分别是：
+java.sql.Date日期型，精确到年月日，例如“2008-08-08”
+java.sql.Time时间型，精确到时分秒，例如“20:00:00”
+java.sql.Timestamp时间戳，精确到纳秒，例如“2008-08-08 20:00:00.000000001”
+
+@Enumerated（"需要定义存入数据库的类型”)
+使用@Enumerated映射枚举字段，我这里为性别建立了性别的枚举类型，而后面跟上的是存入数据库以String类型存入。
+
+@Embedded和@Embeddable
+当一个实体类要在多个不同的实体类中进行使用，而本身又不需要独立生成一个数据库表，这就是需要使用@Embedded、@Embeddable的时候了。
+我们在Address里加上了@Embeddable这个注解表示，Address这个类是一个可以被嵌套的类，而在Author类中，
+我们声明了一个Address类型的变量address，然后给它加上@Embedded注解，意思是我们要在Author类嵌套Address类，当然这里涉及到一个生命周期的问题。
+当被引用的对象和主对象拥有相同的生命周期的时候才考虑使用@Embedded和@Embeddable。
+简单的说就是Author类存在的时候才会有Address类，当Author类不存在的时候，
+对应Author类所以诞生的Address类也应该是不存在的。
+通俗的说就是作者存在的时候才会有这个作者的地址。而不会是有一个地址存在着却没有人属于这个地址。
+而且内嵌类会和主类生成一张表，所以内嵌类对应主类应该是要唯一的和拥有相同生命周期的。
+
+在使用实体类生成对应的数据库表时，很多的时候都会遇到这种情况：在一个实体类中引用另外的实体类，
+一般遇上这种情况，我们使用@OneToOne、@OneToMany、@ManyToOne、@ManyToMany这4个注解比较多，
+但是好奇害死猫，除了这四个有没有别的使用情况，尤其是一个实体类要在多个不同的实体类中进行使用，
+而本身又不需要独立生成一个数据库表，这就是需要@Embedded、@Embeddable的时候了
+
+当一个实体类要在多个不同的实体类中进行使用，而其不需要生成数据库表
+
+@Embeddable：注解在类上，表示此类是可以被其他类嵌套
+@Embedded：注解在属性上，表示嵌套被@Embeddable注解的同类型类
+
+@EmbeddedId
+复合主键使用
+
+
+@ElementCollection
+集合映射，当实体类包含多个相同类型的变量的时候就可以使用@ElementCollection来声明这个变量，
+而JPA会为此生成两个关联的表。例如一个人有家庭住址，也有单位地址；但是“地址”并不能失去人的存在而存在，
+所以是一个失去独立性的实体类；所以地址不能映射为一个实体，这时就需要映射为组件，
+也就是个人的信息里边包含地址。是整体与部分的关系。但由于这个地址可能有多个。比如公司地址、出生地址、家庭地址等。
+
+
+--------------------------------------------------------------------------------
 
 Spring Data Jpa 中级联操作CascadeType的含义
 CascadeType.PERSIST
