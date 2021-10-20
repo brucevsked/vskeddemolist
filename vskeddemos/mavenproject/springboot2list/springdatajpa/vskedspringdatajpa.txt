@@ -209,6 +209,13 @@ FALSE	=false	findByActiveFalse()	… where x.active = false
 IgnoreCase	upper(xxx)=upper(yyyy)	findByFirstnameIgnoreCase	… where UPPER(x.firstame) = UPPER(?1)
 
 
+实战示例
+    Optional<User6> findAllByCertificatesExpireTimeAfter(Date nowTime);
+
+Certificates是User6的一个属性，在User6中属性第一个字母是小写，也就是certificates
+ExpireTime是Certificate对象的一个属性第一个字母也是小写，在代码中是expireTime
+但是根据springdatajpa规则查找属性时第一个字母应当大写，所以最终结果如上面实战示例所示.
+
 对于mappedBy用法：
 
 　　a） 只有OneToOne,OneToMany,ManyToMany上才有mappedBy属性，ManyToOne不存在该属性；
