@@ -55,4 +55,16 @@ show variables like 'innodb_large_prefix';
 show variables like 'innodb_file_format';
 show variables like 'innodb_file_per_table';
 
+卸载
+
+systemctl disable gogs
+systemctl stop gogs
+rm -rf /usr/lib/systemd/system/gogs.service
+cd /data/
+rm -rf gogs
+
+find / -name gogs
+查到只有一个数据库了，连接上navicat删除即可，再使用上面命令查不到了。
+
+
 
