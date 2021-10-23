@@ -805,7 +805,43 @@ case when sourcetype=1 then b.username when sourcetype=2 then c.username end use
 left join appUserT b on a.opuid=b.uid and sourcetype=1 left join webUserT c on a.opuid=c.uid and sourcetype=2 ) r1 where r1.phone='15555555555';
 -----------------------------------------------------------------
 
+通过一张表更新另一张表。
+使用一张表数据通过条件更新本表数据
 
+CREATE TABLE `testa`  (
+  `tid` int(11) NOT NULL,
+  `tname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `tage` int(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`tid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+INSERT INTO `testa` VALUES (1, 'aa', 18);
+INSERT INTO `testa` VALUES (2, 'bb', 19);
+INSERT INTO `testa` VALUES (3, 'cc', 20);
+INSERT INTO `testa` VALUES (4, 'dd', 21);
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+先查一次表里结果
+select * from testa;
+取到做完条件以后数据
+select tid,tname,
+case 
+when tage<=18 then tage+1 
+when tage>18&&tage<21 then tage+10 
+else tage end as ta 
+from testa;
+
+把两张表连接起来更新，要带上where条件
+update testa pp,(select tid,
+case 
+when tage<=18 then tage+1 
+when tage>18&&tage<21 then tage+10 
+else tage end as ta 
+from testa ) vv set pp.tage=vv.ta where pp.tid=vv.tid
+再查一次表里结果
+select * from testa;
+-----------------------------------------------------------------
 
 mysql优化指南
 
