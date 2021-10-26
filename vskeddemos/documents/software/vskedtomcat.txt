@@ -152,6 +152,7 @@ server.xml文件中修改Host标签中name属性为内网IP重启tomcat即可
 在这之前一定要配置好jdk的环境变量
 
 ----------------------------------------------------------------------------------------
+
 部分乱码问题解决方案
 使用service install安装服务的可以这样改
 注册表或批处理中添加-Dfile.encoding=UTF-8
@@ -163,6 +164,10 @@ options选项中
 windows
   修改catalina.bat
   set "JAVA_OPTS=%JAVA_OPTS% %LOGGING_CONFIG% -Dfile.encoding=UTF-8"
+
+如果是在windows启动时控制台出现乱码
+startup.bat 添加
+set "JAVA_OPTS=-Duser.language=en"
 
 Linux
   修改catalina.sh 
