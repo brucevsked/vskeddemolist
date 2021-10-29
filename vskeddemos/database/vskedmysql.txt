@@ -84,7 +84,7 @@ show engines;
 show full processlist
 show processlist
 
-12* alter column name in table 修改列
+12* alter column name in table 修改列，添加列
 alter table [tablename] change [oldColumnName] [newColumnName]
 
 alter table userT change usName userName
@@ -92,6 +92,25 @@ alter table userT change usName userName varchar(200);
 
 13* insert one table to another table 将一个表数据插入另一张表
 insert into t2(name,age) select myName,myId from t1
+
+示例,如果需要默认值或update请修改
+/*
+*this script create by vsked
+*mysql 5.7.30 version
+*202110290955
+*/
+
+
+show variables like 'version';
+select column_name,column_comment,data_type 
+from information_schema.columns 
+where table_name='oscshop_lionfish_comshop_goods' and table_schema='grouptooljat';
+
+alter table oscshop_lionfish_comshop_goods  add orderby  int(5) not null default 100 comment '排序';
+
+select column_name,column_comment,data_type 
+from information_schema.columns 
+where table_name='oscshop_lionfish_comshop_goods' and table_schema='grouptooljat';
 
 14* 查看版本
 show variables like 'version'
