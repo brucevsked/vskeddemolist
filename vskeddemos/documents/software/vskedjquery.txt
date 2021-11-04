@@ -55,5 +55,13 @@ $("p:last")
 
 $("p:last").html('b'+$("p:last").html());
 
+11* 跳转到指定页面
+ $(location).prop("href",pageUrl);
+
+12* 将指定页面刷新到指定层
+$("#要刷入的层").load(指定页面,数据,回调);
+$("#mainContent").load(pageUrl,data,callback);
+
+
 
 

@@ -4,3 +4,7 @@ F12 调出控制台
 ctrl+shift+p 输入screen
 选择Capture full size screenshot
 
+2* 查看js源代码时为乱码
+先将js文件保存为utf-8文件格式
+在chrome浏览器中安装Set Character Encoding插件
+
