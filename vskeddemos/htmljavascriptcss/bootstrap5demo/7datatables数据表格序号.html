@@ -62,7 +62,7 @@ $(function () {
     Mock.mock(RegExp('http://localhost:8080/mypage.*'), 'get', {
         draw: 1,
         recordsTotal: 257,
-        'data|100': [{'id|+1': 1, 'code': /\d{3}/, 'name': '@cname', 'phone': /^1[385][1-9]\d{8}/}]
+        'data|100': [{'code': /\d{3}/, 'name': '@cname', 'phone': /^1[385][1-9]\d{8}/}]
     });
     //----------mock end1
 
@@ -82,7 +82,7 @@ $(function () {
         },
         columnDefs: [{
             targets: [0],
-            visible: false,
+            visible: true,
             searchable: false
         }],
         searching: false, //隐藏搜索
@@ -90,7 +90,10 @@ $(function () {
         bPaginate: true,//显示分页器
 		select:true,//单击选中
         columns: [
-            {data: 'id'},
+            {data: 'id',render:function(data, type, full, meta){
+                var rowNumber=meta.settings._iDisplayStart+meta.row+1;
+                return rowNumber;
+            }},
             {data: 'code'},
             {data: 'name'},
             {data: 'phone'}
