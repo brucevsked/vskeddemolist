@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="h-100">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>datatables表格</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+
+<link rel="stylesheet" href="css/bootstrap.min.css" >
+
+<link rel="stylesheet" href="css/dataTables.bootstrap5.css" >
+</head>
+
+<body class="h-100">
+
+<main class="h-100">
+ 
+  <table id="dt0" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>code</th>
+            <th>First name</th>
+            <th>phone</th>
+        </tr>
+    </thead>
+
+</table>
+
+
+</main>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <script src="js/jquery.dataTables.min.js"></script>
+  <script src="js/dataTables.bootstrap5.min.js"></script>
+  <!-- datatables 中文语言包，需要放在datatables引入后面 -->
+  <script src="js/dataTablesCNLanguage.js"></script>
+
+  <script src="js/mock-min.js"></script>
+
+
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+"use strict"
+
+$(function(){
+  // 文档就绪
+
+  //----------mock start1
+  Mock.mock(RegExp('http://localhost:8080/mypage.*'),'get',{
+      	draw:1,
+      	recordsTotal:257,
+        'data|100': [{'id|+1':1,'code':/\d{3}/,'name':'@cname','phone':/^1[385][1-9]\d{8}/}]
+        });
+  //----------mock end1
+
+  $('#dt0').DataTable({
+  	ajax:{
+  	url:'http://localhost:8080/mypage',
+  	data:function(d){
+  	  if($('#code').val()!=''){
+  	    d.code=$('#code').val();
+  	    console.log(d.code);
+  	  }
+  	  if($('#phone').val()!=''){
+  	  d.phone=$('#phone').val();
+  	  console.log(d.phone);
+  	  }
+  	}
+  	},
+	  columnDefs: [{
+	    targets: [0],
+	    visible: false,
+	    searchable: false
+	  }],
+	  searching: false, //隐藏搜索
+	  pageLength:10,//每页显示10条
+	  bPaginate:true,//显示分页器
+  	columns:[
+  	{data:'id'},
+  	{data:'code'},
+  	{data:'name'},
+  	{data:'phone'}
+  	]
+  	});
+
+});
+
+</script>
+
+</body>
+</html>
