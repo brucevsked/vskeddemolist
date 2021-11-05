@@ -107,3 +107,20 @@ in与and合用
 		$myWhere['name']='vsked'; //相当于and
 		$goodsInfoList = M('lionfish_comshop_goods')->field('id,goodsname,productprice')->where( $myWhere )->order('id desc')->select();
 		return $dataList;
+
+thinkphp中控制器说明
+car.checkout
+CarController.class.php
+checkout()方法
+
+
+事务开启
+1.启动事务：$模型->startTrans();
+2.提交事务：$模型->commit();
+3.事务回滚：$模型->rollback();
+
+1、要操作的数据表引擎必须是innodb，不是的话要调过来，myisam引擎不支持事务。
+2、操作数据之前用
+M()->startTrans();。
+CRUD后都正常用M()->commit();提交。
+需要回滚M()->rollback();。

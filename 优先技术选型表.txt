@@ -147,6 +147,11 @@ Elasticsearch
 postgresql
 对象型
 InterSystems Caché数据库
+数据分析类数据库（列式存储）
+
+clickhouse 灵活
+Apache Kylin 成本
+Kyligence 未调研
 
 ------------------------------------------------------------前端部分
 数据模拟
