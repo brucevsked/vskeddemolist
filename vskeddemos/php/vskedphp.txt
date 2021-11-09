@@ -33,6 +33,12 @@ implode(",",$arr);
 $str = 'one,two,three,four';
 explode(',',$str);
 
+元素是否在数组内
+in_array(search,array,type)
+search	必需。规定要在数组搜索的值。
+array	必需。规定要搜索的数组。
+type	可选。如果设置该参数为 true，则检查搜索的数据与数组的值的类型是否相同。
+
 数组与json
 $arr = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
 echo json_encode($arr);
