@@ -4,7 +4,7 @@
 <!-- must set here! -->
 <base href="">
 
-<title>bootstrap原型模板</title>
+<title>登录</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,34 +20,60 @@
 <body class="text-center">
   
   <main class="form-signin">
-    <form>
-      <img class="mb-4" src="img/bootstrap/bootstrap-logo.svg" alt="" width="72" height="57">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-  
-      <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
-      </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-      </div>
-  
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-    </form>
-  </main>
 
+    <div class="mb-4 alert alert-warning" id="serverMsg" role="alert">欢迎使用君安泰信息科技系统</div>
+    <h1 class="h3 mb-3 fw-normal">请登录</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="accountName" placeholder="用户名" value="admin" >
+      <label for="accountName">账户名称</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="pwd" placeholder="密码" value="123456">
+      <label for="pwd">账户密码</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="button" id="loginBt">登录</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2018–2021</p>
+
+</main>
+  
+  <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 
 <!-- 使用方向键试试 或拖动看看-->
 <script>
 "use strict"
+
+
+$(function(){
+    login.keyboardSubmit();
+    login.init();//初始化登录界面
+});
+
+var login=new Object({
+    keyboardSubmit:function(){
+        //键盘回车提交功能
+      document.onkeydown=function(evt){
+          var theEvent = window.event || e;
+          var code = theEvent.keyCode || theEvent.which;
+          if (code == 13) {
+              $("#loginBt").click();
+          }
+      }
+    },
+    init:function(){
+        //common.getRequestId();//初始化页面唯一标识
+        $("#loginBt").on("click",user.login);//绑定登录事件
+        $("#accountName").focus(); //账户名获取焦点
+    }
+});
+
+var user=new Object({
+  login:function(){
+    console.log("用户登录height起来");
+  }
+});
 
 </script>
 
