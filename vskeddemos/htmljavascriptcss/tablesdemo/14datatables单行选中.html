@@ -196,7 +196,7 @@
 
 	    $('#testBt1').on('click',function(){
 	      var myTable=$('#dt0').DataTable();
-	      var mySelectedDataList=myTable.rows('.selected').data();
+	      var mySelectedDataList=myTable.rows({selected:true}).data();
 	      $.each(mySelectedDataList,function(indexa,ela){
 	        console.log(ela.id+'|'+ela.code+'|'+ela.name+'|'+ela.phone);
 	        });

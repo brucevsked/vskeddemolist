@@ -152,12 +152,13 @@
 	  }],
 	  searching: false, //隐藏搜索
 		pageLength: 10,//每页显示10条
+    select:"multi",//可选值os,single,multi 当值为os时可以按住ctrl或shift可以多选
 		lengthMenu:[1,2,5,10,20,25,30,35,40,45,50,55,60,65,70,75,80],//每页显示多少条列表
 	  bPaginate:true,//显示分页器
 	  //stripeClasses: ["odd", "even"],
 		fnRowCallback:function(nRow,aData,iDataIndex,iDisplayIndexFull){
 		  //行创建后回调
-		  console.log(nRow+'|'+iDataIndex+'|'+aData.code+'|'+$('td', nRow).eq(0).text());
+		  //console.log(nRow+'|'+iDataIndex+'|'+aData.code+'|'+$('td', nRow).eq(0).text());
 		    return nRow;
 		},
 	  responsive: true,
@@ -196,16 +197,13 @@
 
 	    $('#testBt1').on('click',function(){
 	      var myTable=$('#dt0').DataTable();
-	      var mySelectedDataList=myTable.rows('.selected').data();
+	      var mySelectedDataList=myTable.rows({selected:true}).data();
 	      $.each(mySelectedDataList,function(indexa,ela){
 	        console.log(ela.id+'|'+ela.code+'|'+ela.name+'|'+ela.phone);
 	        });
 
 	      });
-    //绑定选择事件
-    $('#dt0 tbody').on( 'click', 'tr', function () {
-        $(this).toggleClass('selected');
-    } );
+
 
     $('#testQueryBt1').on('click', function() {
 

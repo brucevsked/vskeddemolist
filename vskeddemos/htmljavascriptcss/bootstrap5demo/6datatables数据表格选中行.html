@@ -23,6 +23,8 @@
 
 <main class="h-100">
  
+  <button type="button" class="btn btn-primary" id="getSelectedRowBt">获取选中行</button>
+
   <table id="dt0" class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -88,13 +90,23 @@ $(function () {
         searching: false, //隐藏搜索
         pageLength: 10,//每页显示10条
         bPaginate: true,//显示分页器
-		select:true,//单击选中
+		select:"single",//可选值os,single,multi 当值为os时可以按住ctrl或shift可以多选
         columns: [
-            {data: 'id'},
-            {data: 'code'},
-            {data: 'name'},
-            {data: 'phone'}
+            {data: "id"},
+            {data: "code"},
+            {data: "name"},
+            {data: "phone"}
         ]
+    });
+
+    $("#getSelectedRowBt").click(function(){
+        console.log(11);
+        var rows=$("#dt0").DataTable().rows({selected:true}).data();
+        console.log("当前选中行数:"+rows.length);
+        if(rows.length==1){
+            var curRow=rows[0];
+            alert(curRow.id+"|"+curRow.code+"|"+curRow.name)
+        }
     });
 
 });

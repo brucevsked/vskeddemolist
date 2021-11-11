@@ -196,7 +196,7 @@
 
 	    $('#testBt1').on('click',function(){
 	      var myTable=$('#dt0').DataTable();
-	      var mySelectedDataList=myTable.rows('.selected').data();
+	      var mySelectedDataList=myTable.rows({selected:true}).data();
 	      
 	      console.log(myTable.cell('.selected', 2).data());
 	      
