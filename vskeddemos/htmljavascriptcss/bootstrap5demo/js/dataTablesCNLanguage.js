@@ -19,6 +19,9 @@ $.fn.dataTable.defaults.oLanguage = {
         "sNext": "下页",
         "sLast": "末页"
     },
+    "select":{
+        "rows":"已选中 %d 行"
+    },
     "oAria": {
         "sSortAscending": ": 以升序排列此列",
         "sSortDescending": ": 以降序排列此列"
