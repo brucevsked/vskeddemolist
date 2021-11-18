@@ -83,13 +83,14 @@ $(function () {
             }
         },
         columnDefs: [{
-            targets: [0],
+            targets: 0,
             visible: false,
             searchable: false
         }],
         searching: false, //隐藏搜索
         pageLength: 10,//每页显示10条
         bPaginate: true,//显示分页器
+        ordering:false, //总开关，关闭排序
 		select:"single",//可选值os,single,multi 当值为os时可以按住ctrl或shift可以多选
         columns: [
             {data: "id"},
