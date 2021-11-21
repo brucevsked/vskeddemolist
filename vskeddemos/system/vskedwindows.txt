@@ -72,3 +72,18 @@ win10 远程远程桌面 CredSSP加密 Oracle修正
 打开“凭据分配”，在右侧找到“加密Oracle修改”，双击打开
 设置为“已启用”，保护级别改为“易受攻击”(vulnerable)
 然后，再连接远程桌面，就会出现安全警告，确认就可以连接了
+
+--------------------------------------------------------------------------------
+
+关闭win10自动更新
+
+gpedit.msc
+【计算机配置】-【管理模板】-【Windows组件】-【Windows更新】
+配置自动更新 设置为 已禁用
+
+
+regedit
+HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+在 AU 对应的右侧窗口中，我们找到 NoAutoUpdate ，可以看到 NoAutoUpdate 的 DWORD(32位)值 为【1】
+
+
