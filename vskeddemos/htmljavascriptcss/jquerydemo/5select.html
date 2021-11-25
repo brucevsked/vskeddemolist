@@ -14,23 +14,32 @@
 </head>
 
 <body>
-
+玩法选择：
 <select id="playTypeSel">
-	<option value="0">0a</option>
-	<option value="1">1b</option>
-	<option value="2">2c</option>
-	<option value="3">3d</option>
+	<option value="0">1对1单挑</option>
+	<option value="1">5对5团战</option>
+	<option value="2">11对11团战</option>
+	<option value="3">2对2混战</option>
+	<option value="4">1对5晋级</option>
 </select>
 
-<button type="button" id="testBt">测试</button>
-<button type="button" id="test1Bt">测试1</button>
+<br/>
+
+<button type="button" id="testBt">获取选中的值与文本</button>
+<button type="button" id="test1Bt">清空并加新</button>
+<button type="button" id="test3Bt">清空除1外并加新</button>
 <br>
-<input type="radio" name="tya1r" value="0">0
-<input type="radio" name="tya1r" value="1">1
-<input type="radio" name="tya1r" value="2" checked >2
-<input type="radio" name="tya1r" value="3">3
-<button type="button" id="test2Bt">测试1</button>
+<input type="radio" name="tya1r" value="0">1对1单挑
+<input type="radio" name="tya1r" value="1">5对5团战
+<input type="radio" name="tya1r" value="2" checked >11对11团战
+<input type="radio" name="tya1r" value="3">2对2混战
+<input type="radio" name="tya1r" value="4">1对5晋级
+
+<button type="button" id="test2Bt">设置默认选中项目</button>
+
   <script type="text/javascript" charset="UTF-8" src="js/lib/jquery.min.js"></script>
   <script type="text/javascript" charset="UTF-8" src="js/project/demo5.js"></script>
+
+
 </body>
 </html>
