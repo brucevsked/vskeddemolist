@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>树形测试</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="css/bootstrap.min.css" >
+</head>
+
+<body>
+
+1 checkbox tree,复选框树
+2 有子节点时前面显示+，没有子节点时前面不显示+
+3 单击+时显示子节点，并切换图标为-
+4 父节点开关选项，选中子节点时是否自动勾选父节点
+5 子节点开关选项，选中父节点时是否自动勾选全部子节点
+6 全部展开方法
+7 全部收起方法（只保留最顶级）
+8 获取选中值
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+"use strict"
+
+var vskedtree=new Object({
+  id:"vskedTree1s",//唯一标识
+  config:{
+    idKey:"id", //树数据主键标识
+    parentIdKey:"parentId", //树数据父节点标识
+    textKey:"name", //树数据文本显示标识
+    maxLevelParentId:"-1", //最高层级父节点编号可是是null,undefined,0,-1等
+    isCheckedParent:true, //勾选子节点时是否勾选父节点
+    isCheckedChild:true,  //勾选父节点时是否勾选所有子节点
+  },
+  treeData:[],
+
+  show:function(){
+
+  },
+  isExistChild:function(){
+
+  },
+  getChildrensData:function(parentId){
+    var childrenList=new Array();
+        var navDataIndex=0;
+
+        for(navDataIndex=0;navDataIndex<this.treeData.length;navDataIndex++) {
+          var curNode=this.treeData[navDataIndex];
+            var tmpParentId=curNode[this.config.parentIdKey];
+
+            if(parentId==tmpParentId){
+                childrenList.push(curNode);
+            }
+        }
+        return childrenList;
+  },
+  init:function(config,data){
+    this.config=config;
+    this.treeData=data;
+  }
+});
+
+
+</script>
+
+</body>
+</html>
