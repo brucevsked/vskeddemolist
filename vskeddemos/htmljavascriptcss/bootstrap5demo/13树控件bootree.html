@@ -1,53 +1,62 @@
 <!DOCTYPE HTML>
 <html lang="zh">
-<head>
-<!-- must set here! -->
-<base href="">
 
-<title>树控件bootree</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
-<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<!-- 全屏模式,不显示工具栏和菜单栏 -->
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<!-- 关闭iphone电话号码链接 -->
-<meta name="format-detection" content="telephone=no" />
-<link rel="stylesheet" href="css/bootstrap.min.css" >
-<link rel="stylesheet" href="css/bootstrap-icons.css" >
-<link rel="stylesheet" href="css/bootree.min.css" >
+<head>
+  <!-- must set here! -->
+  <base href="">
+
+  <title>树控件bootree</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <!-- 全屏模式,不显示工具栏和菜单栏 -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- 关闭iphone电话号码链接 -->
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/bootree.min.css">
 </head>
 
 <body>
 
   <div id="myTree"></div>
-
+  <button id="btnSave" class="btn btn-primary">显示选中</button>
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  
+
   <script src="js/bootree.min.js"></script>
 
-<!-- 使用方向键试试 或拖动看看-->
-<script>
-"use strict"
+  <!-- 使用方向键试试 或拖动看看-->
+  <script>
+    "use strict"
 
-var tree = $('#myTree').tree({
-                    primaryKey: 'id',
-                    uiLibrary: 'bootstrap',
-                    //dataSource: '/Locations/Get',
-                    // dataSource: [ { id: 12, text: 'foo', children: [ { id: 23, text: 'bar' } ] } ]
-                    dataSource: [
-        				{ id: 1, text: 'Apple', children: [ { id: 2, text: 'Avocado' } ] },
-        				{ id: 3, text: 'Banana', children: [
-        													{ id: 4, text: 'Beans' },
-        													{ id: 5, text: 'Broccoli',
-        														children: [ { id: 6, text: 'Bunch Grape' } ]
-        													}
-        												 ]
-        				}
-        			],
-                    checkboxes: true
-                });
-</script>
+    var tree = $('#myTree').tree({
+      primaryKey: 'id',
+      uiLibrary: 'bootstrap',
+      //dataSource: '/Locations/Get',
+      // dataSource: [ { id: 12, text: 'foo', children: [ { id: 23, text: 'bar' } ] } ]
+      dataSource: [
+        { id: 1, text: 'Apple', children: [{ id: 2, text: 'Avocado' }] },
+        {
+          id: 3, text: 'Banana', children: [
+            { id: 4, text: 'Beans' },
+            {
+              id: 5, text: 'Broccoli',
+              children: [{ id: 6, text: 'Bunch Grape' }]
+            }
+          ]
+        }
+      ],
+      checkboxes: true
+    });
+
+    $('#btnSave').on('click', function () {
+      var checkedIds = tree.getCheckedNodes();
+      alert(checkedIds);
+    });
+  </script>
 
 </body>
+
 </html>
