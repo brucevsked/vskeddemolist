@@ -1,5 +1,6 @@
 /*
- * JQuery zTree core v3.5.41
+ * JQuery zTree core
+ * v3.5.48
  * http://treejs.cn/
  *
  * Copyright (c) 2010 Hunter.z
@@ -7,8 +8,9 @@
  * Licensed same as jquery - MIT License
  * http://www.opensource.org/licenses/mit-license.php
  *
- * Date: 2019-10-11
+ * Date: 2020-11-21
  */
+
 (function ($) {
   var settings = {}, roots = {}, caches = {},
     //default consts of core
@@ -65,6 +67,7 @@
         dblClickExpand: true,
         expandSpeed: "fast",
         fontCss: {},
+        nodeClasses: {},
         nameIsHTML: false,
         selectedMulti: true,
         showIcon: true,
@@ -80,6 +83,10 @@
           title: "",
           url: "url",
           icon: "icon"
+        },
+        render: {
+          name: null,
+          title: null,
         },
         simpleData: {
           enable: false,
@@ -643,11 +650,19 @@
         if (typeof newName !== 'undefined') {
           node[key] = newName;
         }
-        return "" + node[key];
+        var rawName = "" + node[key];
+        if(typeof setting.data.render.name === 'function') {
+          return setting.data.render.name.call(this,rawName,node);
+        }
+        return rawName;
       },
       nodeTitle: function (setting, node) {
         var t = setting.data.key.title === "" ? setting.data.key.name : setting.data.key.title;
-        return "" + node[t];
+        var rawTitle = "" + node[t];
+        if(typeof setting.data.render.title === 'function') {
+          return setting.data.render.title.call(this,rawTitle,node);
+        }
+        return rawTitle;
       },
       removeNodeCache: function (setting, node) {
         var children = data.nodeChildren(setting, node);
@@ -1321,12 +1336,16 @@
         var title = data.nodeTitle(setting, node),
           url = view.makeNodeUrl(setting, node),
           fontcss = view.makeNodeFontCss(setting, node),
+          nodeClasses = view.makeNodeClasses(setting, node),
           fontStyle = [];
         for (var f in fontcss) {
           fontStyle.push(f, ":", fontcss[f], ";");
         }
-        html.push("<a id='", node.tId, consts.id.A, "' class='", consts.className.LEVEL, node.level, "' treeNode", consts.id.A, " onclick=\"", (node.click || ''),
-          "\" ", ((url != null && url.length > 0) ? "href='" + url + "'" : ""), " target='", view.makeNodeTarget(node), "' style='", fontStyle.join(''),
+        html.push("<a id='", node.tId, consts.id.A, "' class='", consts.className.LEVEL, node.level,
+          nodeClasses.add ? ' ' + nodeClasses.add.join(' ') : '', 
+          "' treeNode", consts.id.A,
+          node.click ? " onclick=\"" + node.click + "\"" : "",
+          ((url != null && url.length > 0) ? " href='" + url + "'" : ""), " target='", view.makeNodeTarget(node), "' style='", fontStyle.join(''),
           "'");
         if (tools.apply(setting.view.showTitle, [setting.treeId, node], setting.view.showTitle) && title) {
           html.push("title='", title.replace(/'/g, "&#39;").replace(/</g, '&lt;').replace(/>/g, '&gt;'), "'");
@@ -1336,6 +1355,10 @@
       makeNodeFontCss: function (setting, node) {
         var fontCss = tools.apply(setting.view.fontCss, [setting.treeId, node], setting.view.fontCss);
         return (fontCss && ((typeof fontCss) != "function")) ? fontCss : {};
+      },
+      makeNodeClasses: function (setting, node) {
+        var classes = tools.apply(setting.view.nodeClasses, [setting.treeId, node], setting.view.nodeClasses);
+        return (classes && (typeof classes !== "function")) ? classes : {add:[], remove:[]};
       },
       makeNodeIcoClass: function (setting, node) {
         var icoCss = ["ico"];
@@ -1357,7 +1380,7 @@
           var icon = (isParent && node.iconOpen && node.iconClose) ? (node.open ? node.iconOpen : node.iconClose) : node[setting.data.key.icon];
           if (icon) icoStyle.push("background:url(", icon, ") 0 0 no-repeat;");
           if (setting.view.showIcon == false || !tools.apply(setting.view.showIcon, [setting.treeId, node], true)) {
-            icoStyle.push("width:0px;height:0px;");
+            icoStyle.push("display:none;");
           }
         }
         return icoStyle.join('');
@@ -1429,8 +1452,8 @@
         if (!dom) {
           return;
         }
-        // support IE 7
-        if (typeof Element === 'undefined') {
+        // support IE 7 / 8
+        if (typeof Element === 'undefined' || typeof HTMLElement === 'undefined') {
           var contRect = setting.treeObj.get(0).getBoundingClientRect(),
             findMeRect = dom.getBoundingClientRect();
           if (findMeRect.top < contRect.top || findMeRect.bottom > contRect.bottom
@@ -1639,6 +1662,16 @@
           aObj.css(fontCss);
         }
       },
+      setNodeClasses: function (setting, treeNode) {
+        var aObj = $$(treeNode, consts.id.A, setting),
+          classes = view.makeNodeClasses(setting, treeNode);
+        if ('add' in classes && classes.add.length) {
+          aObj.addClass(classes.add.join(' '));
+        }
+        if ('remove' in classes && classes.remove.length) {
+          aObj.removeClass(classes.remove.join(' '));
+        }
+      },
       setNodeLineIcos: function (setting, node) {
         if (!node) return;
         var switchObj = $$(node, consts.id.SWITCH, setting),
@@ -1820,7 +1853,7 @@
           return expandFlag;
 
           function showNodeFocus() {
-            var a = $$(node, setting).get(0);
+            var a = $$(node, consts.id.A, setting).get(0);
             if (a && focus !== false) {
               view.scrollIntoView(setting, a);
             }
@@ -1964,6 +1997,7 @@
             view.setNodeUrl(setting, node);
             view.setNodeLineIcos(setting, node);
             view.setNodeFontCss(setting, node);
+            view.setNodeClasses(setting, node);
           }
         }
       };
