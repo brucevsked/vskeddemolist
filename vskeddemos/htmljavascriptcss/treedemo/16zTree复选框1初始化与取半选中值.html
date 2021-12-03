@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+	<!-- must set here! -->
+	<base href="">
+
+	<title>ztree复选框初始化与取值</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<link rel="stylesheet" href="js/lib/zTree/css/zTreeStyle/zTreeStyle.css" />
+</head>
+
+<body>
+
+	<button type="button" id="getNavigationIdBt">获取选中节点</button>
+
+	<div class="zTreeDemoBackground left">
+		<ul id="navigationTree" class="ztree"></ul>
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/lib/zTree/js/jquery.ztree.all.min.js"></script>
+
+	<script>
+		"use strict"
+
+        /**
+		 * 自定义过滤器，返回选中状态与半选中状态节点 
+		 */
+		function myFilter1(node){
+			console.log(node.name+"|"+node.getCheckStatus().checked+"|"+node.getCheckStatus().half)
+			return node.getCheckStatus().checked || node.getCheckStatus().half; //勾选或半勾选状态
+		}
+
+		$(function () {
+
+			var navigationTreeSetting = {
+				view: { selectedMulti: true }, //否允许同时选中多个节点
+				check: { enable: true }, //设置 zTree 的节点上是否显示 checkbox / radio
+				data: { simpleData: { enable: true } } //如果设置为 true，请务必设置 setting.data.simpleData 内的其他参数: idKey / pIdKey / rootPId，并且让数据满足父子关系。
+			};
+
+			/*
+			自定义父子节点
+		simpleData: {
+			enable: true,
+			idKey: "id",
+			pIdKey: "pId",
+			rootPId: 0
+		}
+			*/
+
+			var navigationTreeData = [
+				{ id: 1, pId: 0, name: "系统管理1", open: true   }, //halfCheck半勾选设置true时为全勾选?
+				{ id: 11, pId: 1, name: "用户管理11" },
+				{ id: 12, pId: 1, name: "角色管理12", open: true  },
+				{ id: 121, pId: 12, name: "权限对象121", checked: true },
+				{ id: 122, pId: 12, name: "权限对象属性122" },
+				{ id: 123, pId: 12, name: "权限对象动作123" },
+				{ id: 13, pId: 1, name: "权限管理13" },
+				{ id: 2, pId: 0, name: "业务管理2", open: true  },
+				{ id: 21, pId: 2, name: "技术业务21" },
+				{ id: 22, pId: 2, name: "行政业务22", open: true },
+				{ id: 221, pId: 22, name: "人力资源业务221", checked: true },
+				{ id: 222, pId: 22, name: "绩效业务222" },
+				{ id: 223, pId: 22, name: "三方合作223" },
+				{ id: 23, pId: 2, name: "财务业务23", checked: true }
+			];
+
+
+			$.fn.zTree.init($("#navigationTree"), navigationTreeSetting, navigationTreeData);
+
+			$("#getNavigationIdBt").click(function(){
+				var treeObj = $.fn.zTree.getZTreeObj("navigationTree");
+				var nodes = treeObj.getNodesByFilter(myFilter1);
+				//debugger
+				var navigationIds="";
+				$.each(nodes,function(nodeIndex,node){
+					navigationIds+=node.id+",";
+				});
+				alert(navigationIds);
+			});
+
+		});
+	</script>
+
+</body>
+
+</html>
