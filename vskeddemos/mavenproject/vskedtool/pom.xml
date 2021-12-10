@@ -24,7 +24,7 @@
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
 		<!-- 解决pom头部unkonow错误 -->
-		<log4j.version>2.14.0</log4j.version>
+		<log4j.version>2.15.0</log4j.version>
 		<testng.version>7.4.0</testng.version>
 	</properties>
 	
