@@ -102,15 +102,18 @@ insert into t2(name,age) select myName,myId from t1
 
 
 show variables like 'version';
-select column_name,column_comment,data_type 
+select column_name,column_type,column_comment,data_type 
 from information_schema.columns 
-where table_name='oscshop_lionfish_comshop_goods' and table_schema='grouptooljat';
+where table_name='oscshop_lionfish_comshop_goods' and table_schema='grouptooljat' order by column_name;
 
 alter table oscshop_lionfish_comshop_goods  add orderby  int(5) not null default 100 comment '排序';
 
-select column_name,column_comment,data_type 
+select column_name,column_type,column_comment,data_type 
 from information_schema.columns 
-where table_name='oscshop_lionfish_comshop_goods' and table_schema='grouptooljat';
+where table_name='oscshop_lionfish_comshop_goods' and table_schema='grouptooljat' order by column_name;
+
+修改带枚举的列
+alter table oscshop_lionfish_community_head_commiss_order modify `type` enum('orderbuy','commiss','tuijian','tuanzhang') not null default 'orderbuy' COMMENT 'orderbuy 团员订单购买 ,commiss 下级的会员订单购买,tuijian 推荐团长的佣金，tuanzhang 团长';
 
 14* 查看版本
 show variables like 'version'
