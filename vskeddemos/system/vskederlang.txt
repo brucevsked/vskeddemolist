@@ -1,6 +1,0 @@
-1* 进入erlang命令行
-erl
-
-2* 退出erlang命令行
-halt().
-

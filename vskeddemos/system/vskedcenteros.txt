@@ -77,8 +77,14 @@ yum repolist
 yum repolist all
 清理
 yum clean all
-更新缓存
+更新元数据（缓存）
 yum makecache
+
+删除源
+cd /etc/yum.repos.d/
+找到要删除的源
+rm -rf 源名称即可
+
 安装软件包
 yum -y install clamav*
 本地目录安装

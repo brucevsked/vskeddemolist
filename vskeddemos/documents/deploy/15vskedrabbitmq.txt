@@ -1,0 +1,99 @@
+
+先查询erlang与rabbitmq版本对应表
+https://www.rabbitmq.com/which-erlang.html
+
+仅用于centos7版本，如果是centos8需要参考官网https://www.rabbitmq.com/install-rpm.html#install-erlang
+vi /etc/yum.repos.d/rabbitmq.repo
+
+# In /etc/yum.repos.d/rabbitmq.repo
+
+##
+## Zero dependency Erlang
+##
+
+[rabbitmq_erlang]
+name=rabbitmq_erlang
+baseurl=https://packagecloud.io/rabbitmq/erlang/el/7/$basearch
+repo_gpgcheck=1
+gpgcheck=1
+enabled=1
+# PackageCloud's repository key and RabbitMQ package signing key
+gpgkey=https://packagecloud.io/rabbitmq/erlang/gpgkey
+       https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+
+[rabbitmq_erlang-source]
+name=rabbitmq_erlang-source
+baseurl=https://packagecloud.io/rabbitmq/erlang/el/7/SRPMS
+repo_gpgcheck=1
+gpgcheck=0
+enabled=1
+gpgkey=https://packagecloud.io/rabbitmq/erlang/gpgkey
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+
+##
+## RabbitMQ server
+##
+
+[rabbitmq_server]
+name=rabbitmq_server
+baseurl=https://packagecloud.io/rabbitmq/rabbitmq-server/el/7/$basearch
+repo_gpgcheck=1
+gpgcheck=1
+enabled=1
+# PackageCloud's repository key and RabbitMQ package signing key
+gpgkey=https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey
+       https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+
+[rabbitmq_server-source]
+name=rabbitmq_server-source
+baseurl=https://packagecloud.io/rabbitmq/rabbitmq-server/el/7/SRPMS
+repo_gpgcheck=1
+gpgcheck=0
+enabled=1
+gpgkey=https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+
+yum install socat logrotate -y
+
+yum install erlang rabbitmq-server -y
+
+
+开机启动
+sudo systemctl enable rabbitmq-server
+重新启动
+sudo systemctl restart rabbitmq-server
+启动
+sudo systemctl start rabbitmq-server
+停止
+sudo systemctl stop rabbitmq-server
+状态
+sudo systemctl status rabbitmq-server
+ 
+启动管理插件
+rabbitmq-plugins enable rabbitmq_management
+systemctl restart rabbitmq-server
+
+创建用户 ：admin为用户名 Y4yhl9tbf110_是密码，更改为自己的
+sudo rabbitmqctl add_user admin Y4yhl9tbf110_
+设置角色【administrator】
+sudo rabbitmqctl set_user_tags admin administrator
+设置权限
+sudo rabbitmqctl set_permissions -p "/" admin ".*" ".*" ".*"
+重启
+sudo systemctl start rabbitmq-server
+查看添加完成的用户
+rabbitmqctl list_users
+
+用刚才添加完的用户登录
+http://10.0.193.11:15672
+
