@@ -91,7 +91,7 @@ Events:
 从Events事件上，我们可以看到提示以下两个错误：
 找不到/etc/docker/certs.d/registry.access.redhat.com/redhat-ca.crt文件。 拉取镜像registry.access.redhat.com/rhel7/pod-infrastructure:latest失败。 实际上，原因2是由于原因1导致的，因为拉取pod-infrastructure镜像时，要求redhat-ca.crt文件，而在本地中没有找到该文件。
 问题解决方案
-切换到/etc/docker/certs.d/registry.access.redhat.com/目录下，我们可以看到：  也就是说redhat-ca.crt实际上是指向/etc/rhsm/ca/redhat-uep.pem，而/etc/rhsm/ca/redhat-uep.pem文件本身不存在。
+切换到/etc/docker/certs.d/registry.access.redhat.com/目录下，我们可以看到：也就是说redhat-ca.crt实际上是指向/etc/rhsm/ca/redhat-uep.pem，而/etc/rhsm/ca/redhat-uep.pem文件本身不存在。
 获取该文件的方式如下
 
 wget http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm

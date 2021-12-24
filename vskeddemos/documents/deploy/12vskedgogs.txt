@@ -47,7 +47,7 @@ systemctl enable gogs
 解决:Error 1709: Index column size too large. The maximum column size is 767 bytes.
 set global innodb_file_format = BARRACUDA;
 set global innodb_large_prefix = ON;
-set global innodb_file_per_table=ON; 
+set global innodb_file_per_table=ON;
 
 查看设置结果：
 

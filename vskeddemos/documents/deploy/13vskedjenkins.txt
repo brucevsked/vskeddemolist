@@ -43,28 +43,28 @@ mv /root/.m2/repository/ /data/maven
 ln -s /data/maven/repository/ /root/.m2/
 
 修改jar包下载目录
-  <localRepository>/data/maven/repository</localRepository>
+  <localRepository>/data/maven/repository</localRepository>
 
 添加仓库下载地址
 
-    <mirror>
-      <id>repo1</id>
-      <name>central1</name>
-      <url>https://repo1.maven.org/maven2/</url>
-      <mirrorOf>central</mirrorOf>        
-    </mirror>
-    <mirror>
-      <id>repo2</id>
-      <name>central2</name>
-      <url>https://repo.maven.apache.org/maven2/</url>
-      <mirrorOf>central</mirrorOf>        
-    </mirror>
-    <mirror>
-        <id>nexus-aliyun</id>        
-        <name>Nexusaliyun</name>
-        <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-        <mirrorOf>central</mirrorOf>
-    </mirror> 
+    <mirror>
+      <id>repo1</id>
+      <name>central1</name>
+      <url>https://repo1.maven.org/maven2/</url>
+      <mirrorOf>central</mirrorOf>
+      </mirror>
+    <mirror>
+      <id>repo2</id>
+      <name>central2</name>
+      <url>https://repo.maven.apache.org/maven2/</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+    <mirror>
+        <id>nexus-aliyun</id>
+        <name>Nexusaliyun</name>
+        <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        <mirrorOf>central</mirrorOf>
+    </mirror>
 
 修改完成配置文件/etc/maven/settings.xml后建立软链接
 先删除原压缩包里解出来的配置
