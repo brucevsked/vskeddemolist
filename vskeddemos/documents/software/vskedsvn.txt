@@ -58,4 +58,5 @@ svn ls svn://192.168.38.128/weixin
 
 空白处右击->TortoiseSVN->settings->General中Subverion中global ignore pattern
 常用排除格式
-*.o *.lo *.la *.al .libs *.so *.so.[0-9]* *.a *.pyc *.pyo __pycache__ *.rej *~ #*# .#* .*.swp .DS_Store [Tt]humbs.db .idea *.iml target .project .settings .classpath .factorypath
+*.o *.lo *.la *.al .libs *.so *.so.[0-9]* *.a *.pyc *.pyo __pycache__ *.rej *~ #*# .#* .*.swp .DS_Store [Tt]humbs.db .idea *.iml target .project .settings .classpath .factorypath .vscode
+如果设置完成后没有不起作用把C:\Users\你的登录用户名\AppData\Roaming\Subversion\config文件内容全部注释即可
