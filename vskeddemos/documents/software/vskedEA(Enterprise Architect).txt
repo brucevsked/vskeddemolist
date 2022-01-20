@@ -36,3 +36,22 @@
 
 
 --------------------------------------------------------------------------------
+需求
+Requirements (Extended->Requirements)
+
+用例
+Use Case (UML Behavioral->Use Case)
+
+行为模型组
+
+活动
+Activity (UML Behavioral->Activity)
+
+状态
+State Machine (UML Behavioral->State Machine )
+
+时序
+Sequence (UML Behavioral->Sequence )
+
+
+
