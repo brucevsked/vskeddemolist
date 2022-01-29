@@ -16,3 +16,8 @@ do you plan
 
 target 1
 english can like native language
+
+target 2
+math system
+everymath caculate method use language like java wirte it
+method and user manual
