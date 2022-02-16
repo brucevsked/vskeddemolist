@@ -43,7 +43,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println("第"+count+"次"+",服务端接受的消息:"+msg);
         String message = (String) msg;
         if ("hb_request".equals(message)) {  //如果是心跳命令，则发送给客户端;否则什么都不做
-            ctx.write("服务端成功收到心跳信息");
+            ctx.write("服务端成功收到心跳信息"+count);
             ctx.flush();
         }
         count++;
