@@ -106,6 +106,29 @@ java.sql.Timestamp时间戳，精确到纳秒，例如“2008-08-08 20:00:00.000
 --------------------------------------------------------------------------------
 
 Spring Data Jpa 中级联操作CascadeType的含义
+
+CascadeType.DETACH 
+关键示例代码如下
+public class ApiWhitePO implements Serializable {
+
+    @Id
+    private Long id;
+    @OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    @JoinTable(name = "apiApiWhite",joinColumns = {@JoinColumn(name = "apiWhiteId")},inverseJoinColumns = {@JoinColumn(name = "apiId")})
+    private ApiPO api;
+}
+
+只删除主表与中间表数据
+如当前有
+api表
+apiWhite表
+apiApiWhite中间表
+
+现在根据apiWhite表中主键删除时，只会删除
+apiWhite表
+apiApiWhite中间表
+两张表的内容
+
 CascadeType.PERSIST
 
 级联新增，保存父对象时会新建其中包含的子对象
