@@ -98,6 +98,42 @@ $("#bt2").on("click",{page:"hellopage"},login.test2);
 $("#bt3").on("click",123,login.test2);
 
 });
+
+/**
+
+前台contentType:"application/json"时
+      $.ajax({
+            type: "post",
+            headers: {},
+            contentType:"application/json",
+            data:"[{\"mytid\":\"aa\"},{\"mytid\":\"bb\"}]",
+            url: "http://127.0.0.1:8181/test/test2",
+            async: false,//同步
+            success: function (dt) {
+               console.log(dt);
+            },
+            error: function (er) {
+                console.error(er);
+            }
+        });
+后台用接值
+    @PostMapping("/test/test2")
+    public String test2(@RequestBody List<TestId> ids){
+        log.info("--------------start2");
+        log.debug("{}",ids);
+        return ids+"";
+    }
+
+--------------------------------------------------------
+后台用接值
+    @PostMapping("/test/test1")
+    public String test1(@RequestParam("roleIds[]") List<String> roleIds){
+        log.info("--------------start1");
+        log.debug("{}",roleIds);
+        return roleIds+"";
+    }
+
+*/
   </script>
 </body>
 </html>

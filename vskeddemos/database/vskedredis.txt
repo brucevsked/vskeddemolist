@@ -60,6 +60,11 @@ ttl key
 redis-cli shutdown
 redis-cli -a 密码  shutdown
 
+15* 对缓存使用分组
+使用:分隔即可，如下
+jat:system:id:apiId
+
+
 集群安全关闭
 /opt/redis-5.0.7/bin/redis-cli -p 6379 -a Y4yhl9tbf110_ shutdown
 /opt/redis-5.0.7/bin/redis-cli -p 6380 -a Y4yhl9tbf110_ shutdown
