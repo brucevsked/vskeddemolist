@@ -147,6 +147,11 @@ CascadeType.ALL
 包含上述所有操作
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 
+一对一级联删除时需要添加 orphanRemoval = true 示例如下
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    @JoinTable(name = "userCertificate",joinColumns = {@JoinColumn(name = "userId")},inverseJoinColumns = {@JoinColumn(name = "certificateId")})
+    private CertificatePO certificate;
+
 fetch 加载方式
 立即加载
 FetchType.EAGER
