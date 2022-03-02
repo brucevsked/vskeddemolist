@@ -62,3 +62,6 @@ configure -> Options -> Source Code  Engineering
 设置EA语言数据类型
 Develop -> Options -> Configure Code Engineering DataTypes
 在productName中选择要修改数据类型的编程语言，在下方修改即可
+
+用箭头连接2个对象时，弹框提示The requested connection is not uml compliant
+Start -> Preference -> Links -> 去掉勾选“Strict Connector Syntax”
