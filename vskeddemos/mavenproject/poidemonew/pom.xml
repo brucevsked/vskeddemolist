@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<poi.version>3.17</poi.version>
+		<poi.version>5.2.1</poi.version>
 	</properties>
 	<dependencies>
 
