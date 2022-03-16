@@ -26,6 +26,7 @@ npm install [模块名]
 npm install jquery
 npm install webpack -g
 添加参数-g为全局
+在修改完package.json文件后需要运行此命令安装新的依赖库
 
 8* 更新模块
 npm update [模块名]
@@ -36,6 +37,11 @@ npm cache clear
 
 10* 启动应用
 npm start
+npm run dev
+
+11* 查看库版本列表
+npm info 库名 versions
+npm info vue-router versions
 
 
 
