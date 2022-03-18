@@ -26,6 +26,38 @@ var indexPage=new Object({
             document.getElementById("resultDiv").innerHTML=error;
         });
     },
+    get3Test:async function(){
+        console.log("------------------get3test");
+        var myUrl=indexPage.basePath+"get3";
+        await axios.get(myUrl).then(function (dt) {
+            console.log(dt);
+        }).catch(function (error) {
+            alert(error);
+        });
+    },
+    get4Test:async function(){
+        console.log("------------------get4test");
+        var myUrl=indexPage.basePath+"get4";
+        await axios.get(myUrl).then(function (dt) {
+            console.log(dt);
+        }).catch(function (error) {
+            alert(error);
+        });
+    },
+    get5Test:async function(){
+        console.log("------------------get5test");
+        var myUrl=indexPage.basePath+"get5";
+        await axios.get(myUrl).then(function (dt) {
+            console.log(dt);
+        }).catch(function (error) {
+            alert(error);
+        });
+    },
+    get6Test:async function(){
+        await indexPage.get3Test();
+        await indexPage.get4Test();
+        await indexPage.get5Test();
+    },
     post1Test:function(){
         console.log("------------------post1Test");
         var myUrl=indexPage.basePath+"post1";
@@ -134,6 +166,8 @@ var indexPage=new Object({
         get1Bt.addEventListener("click",indexPage.get1Test,false);
         var get2Bt=document.getElementById("get2Bt");
         get2Bt.addEventListener("click",indexPage.get2Test,false);
+        var get3Bt=document.getElementById("get3Bt");
+        get3Bt.addEventListener("click",indexPage.get6Test,false);
 
         var post1Bt=document.getElementById("post1Bt");
         post1Bt.addEventListener("click",indexPage.post1Test,false);

@@ -29,11 +29,21 @@ public class TestController {
     @GetMapping("/get3")
     public String get3(){
         log.trace("get3");
+        try {
+            Thread.sleep(1200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "no parameter get3";
     }
 
     @GetMapping("/get4")
     public String get4(){
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         log.trace("get4");
         return "no parameter get4";
     }
