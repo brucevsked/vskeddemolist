@@ -1,21 +1,21 @@
 本系列文档基于CentOS-7-x86_64-DVD-1908版本，公司52服务器上有安装盘
 
-上传jdk-8u192-linux-x64.tar.gz包到
+上传jdk-8u251-linux-x64.tar.gz包到
 /opt
 目录下
 
 解包jdk
-tar -zxvf jdk-8u192-linux-x64.tar.gz
+tar -zxvf jdk-8u251-linux-x64.tar.gz
 删除安装备份
-rm -rf jdk-8u192-linux-x64.tar.gz
+rm -rf jdk-8u251-linux-x64.tar.gz
 
 配置环境变量
 
 vi /etc/profile
 vi /etc/bashrc
 
-export JAVA_HOME=/opt/jdk1.8.0_192
-export JRE_HOME=/opt/jdk1.8.0_192/jre
+export JAVA_HOME=/opt/jdk1.8.0_251
+export JRE_HOME=/opt/jdk1.8.0_251/jre
 export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib
 
 export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin:$CLASSPATH

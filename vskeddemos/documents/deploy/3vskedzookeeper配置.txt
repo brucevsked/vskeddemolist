@@ -1,13 +1,12 @@
-
-
-上传apache-zookeeper-3.6.1-bin.tar.gz包到
+apache-zookeeper-3.8.0
+上传apache-zookeeper-3.8.0-bin.tar.gz包到
 /opt
 目录下
 
 解包zookeeper
-tar -zxvf apache-zookeeper-3.6.1-bin.tar.gz
+tar -zxvf apache-zookeeper-3.8.0-bin.tar.gz
 删除安装备份
-rm -rf apache-zookeeper-3.6.1-bin.tar.gz
+rm -rf apache-zookeeper-3.8.0-bin.tar.gz
 
 配置环境变量
 
@@ -21,15 +20,19 @@ export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib
 export FLUME_HOME=/opt/apache-flume-1.9.0-bin
 export FLUME_CONF_DIR=$FLUME_HOME/conf
 
-export ZOOKEEPER_HOME=/opt/apache-zookeeper-3.6.1-bin
+export ZOOKEEPER_HOME=/opt/apache-zookeeper-3.8.0-bin
 
 export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin:$CLASSPATH:$FLUME_HOME/bin:$ZOOKEEPER_HOME/bin
 
 使环境变量生效
 source /etc/profile
 
+mkdir -p /data/data/zookeeper/logs
+mkdir -p /data/data/zookeeper/data
+
 修改配置文件
-/opt/apache-zookeeper-3.6.1-bin/conf/zoo.cfg
+vi /opt/apache-zookeeper-3.8.0-bin/conf/zoo.cfg
+```
 tickTime=2000
 initLimit=10
 syncLimit=5
@@ -41,6 +44,7 @@ autopurge.snapRetainCount=500
 autopurge.purgeInterval=24
 minSessionTimeout=160000
 maxSessionTimeout=300000
+```
 
 启动zookeeper，需要配置好环境变量
 zkServer.sh start
@@ -48,3 +52,4 @@ zkServer.sh start
 zkServer.sh status
 停止zookeeper
 zkServer.sh stop
+
