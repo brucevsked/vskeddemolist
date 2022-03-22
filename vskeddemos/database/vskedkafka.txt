@@ -15,6 +15,9 @@ kafka-console-producer.sh --broker-list 172.22.90.44:9092 --topic testFlink
 消费消息 按回车以后会收到生产者发的消息
 kafka-console-consumer.sh --broker-list 172.22.90.44:9092 --topic mytopica01a --from-beginning
 
+kafka-console-consumer.sh --bootstrap-server 172.22.90.44:9092 --topic topicName
+kafka-console-consumer.sh --zookeeper 172.22.90.44:2181 --topic topicName
+
 
 [root@CDHNode2 ~]# kafka-console-consumer.sh
 This tool helps to read data from Kafka topics and outputs it to standard output.
