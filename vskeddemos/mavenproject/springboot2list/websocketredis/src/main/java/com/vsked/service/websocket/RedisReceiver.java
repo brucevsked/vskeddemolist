@@ -1,10 +1,10 @@
-package com.jcdz.hbdservice.websocket;
+package com.vsked.service.websocket;
 
 import java.util.*;
 
-import com.jcdz.hcommon.DateTimeTool;
-import com.jcdz.hcommon.StringTool;
-import com.jcdz.hcommon.SysConstant;
+import com.vsked.common.DateTimeTool;
+import com.vsked.common.StringTool;
+import com.vsked.common.SysConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

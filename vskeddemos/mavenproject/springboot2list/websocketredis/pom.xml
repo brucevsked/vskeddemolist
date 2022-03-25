@@ -19,12 +19,20 @@
         <lombok.version>1.18.6</lombok.version>
 		<!-- 解决pom头部unkonow错误 -->
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+
+        <testng.version>7.4.0</testng.version>
+
+        <nettySpringbootStart.version>0.8.0</nettySpringbootStart.version>
+        <jodatime.version>2.10.14</jodatime.version>
+        <commonslang3.version>3.12.0</commonslang3.version>
+        <gson.version>2.9.0</gson.version>
+        <guava.version>31.1-jre</guava.version>
     </properties>
     <!-- 1、设置Spring boot的parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.7.RELEASE</version>
+        <version>2.6.2</version>
     </parent>
     
 
@@ -48,6 +56,25 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mockito-junit-jupiter</artifactId>
+                    <groupId>org.mockito</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>junit-vintage-engine</artifactId>
+                    <groupId>org.junit.vintage</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>junit-jupiter</artifactId>
+                    <groupId>org.junit.jupiter</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
         </dependency>
         <!-- DevTools in Spring Boot 项目热部署 -->
         <dependency>
@@ -68,7 +95,7 @@
         <dependency>
             <groupId>org.yeauty</groupId>
             <artifactId>netty-websocket-spring-boot-starter</artifactId>
-            <version>0.8.0</version>
+            <version>${nettySpringbootStart.version}</version>
         </dependency>
 
         <dependency>
@@ -95,6 +122,34 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
         </dependency>
+        <!--Java中处理时间与日期是很常见的操作，
+        jdk中基础的工具类就是我们熟悉的Date和Calendar，
+        然而这些工具类的api使用并不是很方便和强大。
+        于是就诞生了Joda-Time这个专门处理日期时间的库。（
+        JDK1.8的API已经重写了日期库，引入的java.time包，其实也是借鉴了Joda-Time）
+        -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${jodatime.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commonslang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -113,7 +168,7 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <!-- true:跳过测试 -->
-                    <skip>true</skip>
+                    <skip>false</skip>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -122,7 +177,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <skip>true</skip>
+                    <skip>false</skip>
                 </configuration>
             </plugin>
         </plugins>

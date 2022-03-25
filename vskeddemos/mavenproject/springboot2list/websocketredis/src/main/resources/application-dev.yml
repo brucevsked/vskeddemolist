@@ -1,10 +1,17 @@
+server:
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 spring:
   devtools:
     restart:
       enabled: true #设置开启热部署
   redis:
     database: 0
-    host: 192.168.111.95
+    host: 10.0.193.11
     port: 6379
     password: Y4yhl9tbf110_
     timeout: 10000

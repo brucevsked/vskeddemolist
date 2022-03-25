@@ -10,6 +10,8 @@ src/main/resources/application-dev.yml
 测试文件
 /src/test/java/com/vsked/service/目录中html文件
 
+http://127.0.0.1:8181/testsend
+
 
 技术原理
 第一步

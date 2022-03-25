@@ -15,6 +15,11 @@ public class SysConstant {
 	/**
 	 * 
 	 */
-	public static String webSocketChannel="serverC1"; 
+	public static String webSocketChannel="serverC1";
+
+	/**
+	 * redis中主题与推送token对应表，用来向前端推送消息用
+	 */
+	public static String webSocketTopicToken="websockettopictoken:";
 
 }
