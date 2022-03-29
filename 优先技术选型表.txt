@@ -153,7 +153,14 @@ clickhouse 灵活
 Apache Kylin 成本
 Kyligence 未调研
 
+后台bug查找
+fundebug（付费）
+
 ------------------------------------------------------------前端部分
+前端bug查找
+fundebug（付费）
+
+
 数据模拟
 mock.js
 
