@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>html原型模板</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+
+
+</head>
+
+<body >
+
+  <div id="testDiv">
+  HTML页面的生命周期有以下三个重要事件：<br/>
+
+  DOMContentLoaded — 浏览器已经完全加载了HTML，DOM树已经构建完毕，但是像是 <img> 和样式表等外部资源可能并没有下载完毕。<br/>
+  load — 浏览器已经加载了所有的资源（图像，样式表等）。<br/>
+  beforeunload/unload -- 当用户离开页面的时候触发。<br/>
+  每个事件都有特定的用途<br/>
+  
+  DOMContentLoaded -- DOM加载完毕，所以js可以访问所有DOM节点，初始化界面。<br/>
+  load -- 附加资源已经加载完毕，可以在此事件触发时获得图像的大小（如果没有被在HTML/CSS中指定）<br/>
+  beforeunload/unload -- 用户正在离开页面：可以询问用户是否保存了更改以及是否确定要离开页面。<br/>
+</div>
+
+<script>
+"use strict"
+
+
+//DOMContentLoaded 由 document 对象触发。我们使用 addEventListener 来监听它：
+class HtmlTest{
+
+  readyTest(){
+    console.log("1-----------------ready go!--------------");
+  }
+  onLoadTest(){
+    console.log("2=================here is window onload===================");
+  }
+  beforeUnLoadTest(){
+    console.log("3++++++++++++++++++++++before window unload+++++++++++++++++++++++++++++++++");
+  }
+  unLoadTest(){
+    console.log("4###################window unload###################");
+    debugger;
+    return "关闭提示";
+  }
+}
+
+var myHtmlTest=new HtmlTest();
+document.addEventListener("DOMContentLoaded", myHtmlTest.readyTest);
+window.onload=myHtmlTest.onLoadTest;
+window.onbeforeunload=myHtmlTest.beforeUnLoadTest;
+window.onunload=myHtmlTest.unLoadTest;
+
+
+</script>
+
+</body>
+</html>
