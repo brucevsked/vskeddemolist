@@ -1,15 +1,20 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="zh">
 <head>
 <!-- must set here! -->
 <base href="">
 
-<title>ES6</title>
+<title>es6 class test</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-<!--
-<link rel="stylesheet" href="js/lib/easyui/themes/default/easyui.css"/>
--->
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
 </head>
 
 <body>
@@ -19,11 +24,13 @@
 <script type="text/javascript">
  "use strict";
 class Person {
+  name="good";
+  beforeStr="!!!!!!!!!!!!!";
   constructor(name) {
     this.name = name;
   }
   say () {
-    console.log("say hi");
+    console.log(this.beforeStr+"say hi");
   }
   static say1 () {
     console.log("say hi i va");
