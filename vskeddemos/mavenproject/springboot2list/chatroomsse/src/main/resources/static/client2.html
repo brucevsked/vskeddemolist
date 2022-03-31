@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+  <!-- must set here! -->
+  <base href="">
+
+  <title>client2</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <!-- 全屏模式,不显示工具栏和菜单栏 -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- 关闭iphone电话号码链接 -->
+  <meta name="format-detection" content="telephone=no" />
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+</head>
+
+<body>
+我是2，我要发送给1
+<div id="msgListDiv"></div>
+<div id="inputMsgDiv">
+  <textarea cols="50" rows="8" id="inputMsgTextarea">
+
+  </textarea>
+</div>
+
+<div>
+  <button type="button" id="sendBt">发送</button>
+</div>
+
+
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+  "use strict"
+
+  class indexPage{
+    clientId="client2";
+    serverSendUrl="http://127.0.0.1:8181/pushData?clientId="+this.clientId;
+
+    initUI(){
+      this.connect();
+      document.getElementById("sendBt").onclick=this.sendMsg;
+    }
+
+    connect(){
+      this.isSupport();
+      var source = new EventSource(this.serverSendUrl);
+      //连接一旦建立，就会触发open事件
+      source.onopen = function (event) {
+        console.log("连接建立成功");
+      };
+      //客户端收到服务器发来的数据，就会触发message事件，可以在onmessage属性的回调函数。
+      source.onmessage = function (event) {
+        console.log("收到数据");
+        const data = event.data;
+        console.log(data);
+        let msgListDiv=document.getElementById("msgListDiv");
+        msgListDiv.innerHTML=msgListDiv.innerHTML+"<div>"+data+"</div>";
+      };
+      //如果发生通信错误（比如连接中断），就会触发error事件，可以在onerror属性定义回调函数。
+      source.onerror = function (error) {
+        console.log("发生异常",error);
+      };
+    }
+
+    isSupport(){
+      if ("EventSource" in window) {
+        console.log("支持");
+      }else{
+        console.log("不支持");
+        return false;
+      }
+    }
+
+    sendMsg(){
+      const msgContent=document.getElementById("inputMsgTextarea").value;
+      console.log(msgContent);
+      fetch("http://127.0.0.1:8181/push?clientId=client1&content="+msgContent)
+              .then(response => response.json())
+              .then(data => console.log(data));
+    }
+
+  }
+
+  let index=new indexPage();
+  index.initUI();
+</script>
+
+</body>
+</html>
