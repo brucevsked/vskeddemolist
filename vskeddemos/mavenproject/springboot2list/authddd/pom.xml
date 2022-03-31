@@ -21,7 +21,7 @@
         <!-- 解决pom头部unkonow错误 -->
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <log4j2.version>2.13.1</log4j2.version>
+        <log4j2.version>2.17.1</log4j2.version>
 
         <testng.version>7.1.0</testng.version>
         <jbehave.version>4.6.3</jbehave.version>
