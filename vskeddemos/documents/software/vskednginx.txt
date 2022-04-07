@@ -38,10 +38,19 @@ nginx.exe -c D:\env\nginx-1.16.0\conf\nginxtest.conf
 进入cmd中
 d:
 cd D:\env\nginx-1.16.0
+快速关闭
 nginx.exe -s stop
+或
+tasklist /fi "imagename eq nginx.exe"
+
+正常关闭
+nginx.exe -s quit
 
 4* 平滑重启
 nginx.exe -s reload
+
+
+
 --------------------------------------------------------------------------------centos安装
 yum install yum-utils
 rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
