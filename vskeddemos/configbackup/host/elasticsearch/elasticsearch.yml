@@ -1,0 +1,8 @@
+cluster.name: demoevn1es
+node.name: node-1
+path.data: /esdata/es
+path.logs: /esdata/log
+network.host: 0.0.0.0
+http.port: 9222
+cluster.initial_master_nodes: ["node-1"]
+
