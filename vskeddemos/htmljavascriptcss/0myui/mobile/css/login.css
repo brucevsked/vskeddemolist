@@ -1,0 +1,32 @@
+body{
+    display: flex;
+    min-height: 60vh;
+    flex-direction: column;
+}
+    
+header p{
+    text-align: center;
+    width:auto;
+}
+
+main{
+    flex: 1;
+    width: auto;
+}
+
+footer{
+    margin-bottom: 50;
+    width:100%;
+    text-align: center;
+}
+
+#loginForm{
+    position:absolute;
+    top: 19%;
+    left: 19%;
+    width:24%;
+}
+
+#loginForm p{
+    text-align: center;
+}
