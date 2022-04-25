@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+  <!-- must set here! -->
+  <base href="">
+
+  <title>get请求</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+测试参考：L:\git\vskeddemolist\vskeddemos\mavenproject\ajaxtest
+
+  <div id="testdiv"></div>
+
+
+  <script>
+"use strict"
+
+class GetTest{
+  test1(){
+    const url = "http://localhost:8181/get1";
+    //res.text(); or res.json();
+    fetch(url).then(res=>res.text()).then(res=>{
+      console.log(res);
+      console.log("----------------------1");
+    });
+  }
+
+  test2(){
+    const url = "http://localhost:8181/get2?id=99&name=vskedtest";
+    //res.text(); or res.json();
+    fetch(url).then(res=>res.text()).then(res=>{
+      console.log(res);
+      console.log("----------------------2");
+    });
+  }
+
+  async test3(){
+    const url = "http://localhost:8181/get3";
+    //res.text(); or res.json();
+    await fetch(url).then(res=>res.text()).then(res=>{
+      console.log(res);
+      console.log("----------------------3");
+    });
+  }
+
+  async test4(){
+    const url = "http://localhost:8181/get4";
+    //res.text(); or res.json();
+    await fetch(url).then(res=>res.text()).then(res=>{
+      console.log(res);
+      console.log("----------------------4");
+    });
+  }
+
+  async test5(){
+    const url = "http://localhost:8181/get5";
+    //res.text(); or res.json();
+    await fetch(url).then(res=>res.text()).then(res=>{
+      console.log(res);
+      console.log("----------------------5");
+    });
+  }
+
+  async test6(){
+    await this.test3();
+    await this.test4();
+    await this.test5();
+  }
+
+}
+
+var myGetTest=new GetTest();
+myGetTest.test1();
+myGetTest.test2();
+myGetTest.test6();
+
+  </script>
+
+</body>
+
+</html>

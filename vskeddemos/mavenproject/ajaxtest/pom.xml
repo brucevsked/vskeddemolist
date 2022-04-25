@@ -29,13 +29,13 @@
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
-		<testng.version>7.4.0</testng.version>
+		<testng.version>7.5</testng.version>
 	</properties>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.4</version>
+		<version>2.6.7</version>
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>

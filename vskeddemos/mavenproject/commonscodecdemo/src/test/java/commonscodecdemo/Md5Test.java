@@ -1,9 +1,9 @@
 package commonscodecdemo;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.Test;
 
 /**
  * md5不可逆加密
@@ -18,7 +18,7 @@ public class Md5Test {
 	public void md5Test(){
 		String myPass="000000";
 		String s=DigestUtils.md5Hex(myPass.getBytes());
-		log.debug(s);
+		log.debug("{}",s);
 	}
 
 

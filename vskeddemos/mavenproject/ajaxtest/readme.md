@@ -1,7 +1,7 @@
 # log4j2testng7springboot2
 ## 一 所用技术
 maven 3.6.3  
-SpringBoot  2.4.4  
+SpringBoot  2.6.7  
 Log4j  2.13.3  
 TestNG  7.1.0
 
@@ -12,5 +12,8 @@ AbstractTransactionalTestNGSpringContextTests
 AbstractTestNGSpringContextTests  
 
 http://127.0.0.1:8181
+
+http://127.0.0.1:8181/1get.html
+http://127.0.0.1:8181/2post.html
 
 

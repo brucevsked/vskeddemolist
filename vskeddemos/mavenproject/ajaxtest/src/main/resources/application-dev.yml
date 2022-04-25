@@ -5,14 +5,6 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-  undertow:
-    accesslog:
-      enabled: true
-      dir: /logs/log4j2testng7springboot2simple/access_log
-      prefix: accesslog
-      suffix: .log
-      rotate: true
-      pattern: '%t %a %A %p %H %m %R %s %b'
   shutdown: graceful #开启优雅停机 默认为immediate立即停机
 
 spring:

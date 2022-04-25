@@ -1,7 +1,7 @@
 package commonscodecdemo;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

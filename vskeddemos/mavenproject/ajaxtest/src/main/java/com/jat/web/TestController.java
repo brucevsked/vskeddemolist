@@ -17,7 +17,7 @@ public class TestController {
     @GetMapping("/get1")
 	public String get1(){
         log.trace("get1");
-        return "no parameter get1";
+        return "{\"test\":\"no parameter get1\"}";
     }
 
     @GetMapping("/get2")

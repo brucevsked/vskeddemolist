@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+  <!-- must set here! -->
+  <base href="">
+
+  <title>post请求</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+测试参考：L:\git\vskeddemolist\vskeddemos\mavenproject\ajaxtest
+
+  <div id="testdiv"></div>
+
+
+  <script>
+"use strict"
+
+class PostTest{
+  test1(){
+    const url = "http://localhost:8181/post1";
+    //res.text(); or res.json();
+    fetch(url,{
+      method:"POST",
+      mode:"cors",
+      headers: {
+        //"Content-Type": "application/json"
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+    }).then(res=>res.text()).then(res=>{
+      console.log(res);
+      console.log("----------------------1");
+    });
+  }
+
+  test2(){
+    const url = "http://localhost:8181/post2";
+    //res.text(); or res.json();
+    fetch(url,{
+      method:"POST",
+      body:"id=9911&name=godIsGirl", //数据
+      mode:"cors",
+      headers: {
+        //"Content-Type": "application/json"
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }).then(res=>res.text()).then(res=>{
+      console.log(res);
+      console.log("----------------------2");
+    });
+  }
+
+}
+
+const myPostTest=new PostTest();
+myPostTest.test1();
+myPostTest.test2();
+
+  </script>
+
+</body>
+
+</html>
