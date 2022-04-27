@@ -59,6 +59,71 @@ const myPostTest=new PostTest();
 myPostTest.test1();
 myPostTest.test2();
 
+
+/*
+
+同步调用示例，第一个文件里声明同步方法
+"use strict"
+
+class User{
+    async login(accountName,accountPass){
+        const url = "/w/authentication";
+        const data = await fetch(url, {
+            method: "POST",
+            body: "accountName=" + accountName + "&accountPassword=" + accountPass, //数据
+            mode: "cors",
+            headers: {
+                //"Content-Type": "application/json"
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        });
+
+        return data.json();
+    }
+
+}
+
+第二个文件里调用
+"use strict"
+
+class login{
+    userLogin(){
+        console.log("----用户登录-----");
+        const user=new User();
+        const accountName=document.getElementById("accountName").value;
+        const accountPass=document.getElementById("accountPass").value;
+        //这里调用的
+        user.login(accountName, accountPass).then(function(res){
+            if(res.code=="0000"){
+                console.log(res.data);
+            }else{
+                alert(res.msg);
+            }
+        });
+    }
+
+    cleanLoginInfo(){
+        document.getElementById("accountName").value="";
+        document.getElementById("accountPass").value="";
+        document.getElementById("accountName").focus();
+        console.log("----重置完成-----");
+    }
+
+    initUI(){
+        document.getElementById("loginBt").onclick=this.userLogin;
+        document.getElementById("resetBt").onclick=this.cleanLoginInfo;
+        document.getElementById("accountName").focus();
+        console.log("-------------初始化界面完成----");
+    }
+}
+
+const loginPage=new login();
+loginPage.initUI();
+
+
+
+*/
+
   </script>
 
 </body>
