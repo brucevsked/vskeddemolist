@@ -1,0 +1,42 @@
+body{
+    display: flex;
+    min-height: 97vh;
+    flex-direction: column;
+}
+
+header{
+    margin-top: auto;
+}
+header p{
+    text-align: center;
+    width:auto;
+}
+
+nav{
+    flex-direction: column;
+    width: 15%;
+}
+
+nav ul{
+    height: 80vh;
+    background-color: #2a3f54;
+    transition: all 0.5s;
+    /* 再加个溢出隐藏 */
+    overflow: hidden;
+}
+
+nav ul li{
+    height: 30px;
+}
+
+main{
+    flex: 1;
+    width: auto;
+}
+
+footer{
+    margin-bottom: auto;
+    width:100%;
+    text-align: center;
+}
+

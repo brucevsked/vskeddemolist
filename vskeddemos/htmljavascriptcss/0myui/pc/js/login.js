@@ -1,12 +1,18 @@
 "use strict"
 
-class login{
+class Login{
+
+    toLogin(){
+        window.location.href="index.html";
+    }
 
     init(){
         document.getElementById("accountName").focus();
+        var loginBt=document.getElementById("loginBt");
+        loginBt.addEventListener("click",this.toLogin,false);
     }
 
 }
 
-var loginPage=new login();
-loginPage.init();
+var login=new Login();
+login.init();
