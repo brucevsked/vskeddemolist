@@ -1,7 +1,7 @@
 body{
     display: grid;
     grid-template-rows: 10vh;
-    grid-template-columns: 15vw 84vw 0vw;
+    grid-template-columns: 13vw 86vw 0vw;
     min-height: 97vh;
 }
 
@@ -70,17 +70,12 @@ nav dl dd a:focus{
 main {
     grid-row: 2;
     grid-column: 2;
-    width: 20%;
-    display: block;
-    position: fixed;
-    margin-top: 6vh;
-    margin-left: 17%;
+    margin-left: 2vw;
 }
 
 footer{
     grid-row: 3;
     grid-column: 2;
-    width:100%;
     text-align: center;
 
 }
