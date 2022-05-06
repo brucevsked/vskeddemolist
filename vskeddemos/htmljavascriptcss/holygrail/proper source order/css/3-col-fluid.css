@@ -1,0 +1,99 @@
+/* CSS Document */
+
+body {
+	background:#9343B9;
+	text-align:center;
+	margin:20px;
+	padding:0;
+	font:normal 0.8em/1.2em verdana,aria,sans-serif;
+	color:#666;
+	}
+a {
+	color:#FFF;
+	text-decoration:none;
+	border-bottom:1px dotted;
+	}
+a:hover {
+	border-bottom:1px solid;
+	color:#9343B9;
+	}
+#wrapper1 {
+	position:relative;
+	text-align:left;
+	width:100%;
+	background:#FFF url("../images/rightcolor_bg.gif") repeat-y top right;
+	}
+#wrapper2 {
+	position:relative;
+	text-align:left;
+	width:100%;
+	background:url("../images/leftcolor_bg.gif") repeat-y top left;
+	}
+#header {
+	background:#BB62AB;
+	padding:10px;
+	margin:0;
+	text-align:center;
+	color:#FFF;
+	}
+#header h1 {
+	font-size:200%;
+	}
+#header a:hover {
+	color:#7A2875;
+	}
+#maincol {
+	position:relative;
+	margin:0;
+	padding:10px;
+	}
+#leftcol { 
+	position:relative;
+	top:-10px;
+	left:-10px;
+	float:left;
+	width:220px;  /* for IE5/WIN */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width:200px; /* actual value */
+	margin:0 0 -10px 0;
+	padding:10px;
+	background:#ECB9E8;
+	z-index:100;
+	}
+#rightcol {
+	position:relative;
+	top:-10px;
+	right:-10px;
+	float:right;
+	width:220px;  /* for IE5/WIN */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width:200px; /* actual value */
+	margin:0 0 -10px 0;
+	padding:10px;
+	background:#D7C4FA;
+	z-index:99;
+	}
+#centercol {
+	position:relative;
+	padding:0 240px;
+	}
+#centercol a {
+	color:#666;
+	}
+#centercol a:hover {
+	border-bottom:1px solid;
+	color:#9343B9;
+	}
+#footer {
+	position:relative;
+	top:1px;
+	background:#7A2875;
+	width:100%;
+	clear:both;
+	margin:0;
+	padding:1% 0;
+	text-align:center;
+	color:#CCC;
+	}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>3 Column Product Comparison</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Link to the Responsive Columns CSS -->
+    <link rel="stylesheet" type="text/css" href="css/r-c-min.css" />
+
+    <!-- Link to your general styles -->
+    <link rel="stylesheet" type="text/css" href="css/column-styles.css" />
+
+    <!--
+    See this article for more details on linking to CSS:
+    https://matthewjamestaylor.com/add-css-to-html
+    -->
+</head>
+<body>
+
+
+<r-c>
+    <c1-1>
+        <p>← <a href="index.html">Layout index</a></p>
+        <h1>3 Column Product Comparison</h1>
+    </c1-1>
+</r-c>
+
+<!-- Start layout -->
+<r-c join class="comparison">
+    <c1-4 md1-3 class="yellow">
+        <h3>Free</h3>
+        <p class="price">$0</p>
+        <ul>
+            <li class="tick"><span>Feature 1</span></li>
+            <li class="tick"><span>Feature 2</span></li>
+            <li class="tick"><span>Feature 3</span></li>
+            <li class="cross"><span>Feature 4</span></li>
+            <li class="cross"><span>Feature 5</span></li>
+            <li class="cross"><span>Feature 6</span></li>
+            <li class="cross"><span>Feature 7</span></li>
+            <li class="cross"><span>Feature 8</span></li>
+        </ul>
+        <a class="button" href="#">Go<span> Free</span></a>
+    </c1-4>
+    <c2-4 md1-3 class="orange">
+        <h3>Standard</h3>
+        <p class="price">$49</p>
+        <ul>
+            <li class="tick">Feature 1</li>
+            <li class="tick">Feature 2</li>
+            <li class="tick">Feature 3</li>
+            <li class="tick">Feature 4</li>
+            <li class="tick">Feature 5</li>
+            <li class="tick">Feature 6</li>
+            <li class="cross">Feature 7</li>
+            <li class="cross">Feature 8</li>
+        </ul>
+        <a class="button" href="#">Go Standard</a>
+    </c2-4>
+    <c1-4 md1-3 class="red">
+        <h3>Pro</h3>
+        <p class="price">$99</p>
+        <ul>
+            <li class="tick"><span>Feature 1</span></li>
+            <li class="tick"><span>Feature 2</span></li>
+            <li class="tick"><span>Feature 3</span></li>
+            <li class="tick"><span>Feature 4</span></li>
+            <li class="tick"><span>Feature 5</span></li>
+            <li class="tick"><span>Feature 6</span></li>
+            <li class="tick"><span>Feature 7</span></li>
+            <li class="tick"><span>Feature 8</span></li>
+        </ul>
+        <a class="button" href="#">Go<span> Pro</span></a>
+    </c1-4>
+</r-c>
+<!-- End layout -->
+
+</body>
+</html>

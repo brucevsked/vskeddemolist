@@ -1,0 +1,331 @@
+/* Page body styles */
+body {
+    margin:0; /* Remove the default page margin */
+    background:#eee;
+}
+
+/* General styles that apply to everything */
+* {
+    font-family:-apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.5em;
+}
+a {
+    color:#004e9d; /* Link color */
+}
+a:hover {
+    color:#000; /* Hovered link color */
+}
+
+/* Column colors */
+.red {background:#f97171}
+.orange {background:#f99e50}
+.yellow {background:#f5d55f}
+.green {background:#c5ed77}
+.aqua {background:#72f1d4}
+.blue {background:#72c2f1}
+.purple {background:#987ded}
+.pink {background:#dc7ded}
+
+
+/* The following are styles for specific demos */
+
+/* fixed-width */
+.fixed-width > * {
+    max-width:30em;
+    margin:0 auto;
+}
+
+/* full-screen centered */
+.full-height-centered {
+    min-height:100vh;
+    text-align:center;
+    background:#f97171;
+}
+
+/* full screen */
+.full-height {
+    min-height:100vh;
+}
+
+/* cover photo */
+.cover-photo {
+    background-image:url(https://placeimg.com/640/480/arch);
+    background-size:cover;
+    background-position:50% 50%;
+}
+
+/* love heart */
+.love-heart {
+    margin:0;
+    padding:1rem;
+    min-height:100vh;
+    background:#f97171;
+}
+.love-heart > :first-child {
+    border-radius:50% 50% 0% 100% / 36% 26% 74% 64%;
+    background-color:#fff;
+    background-image:url(https://placeimg.com/640/480/people);
+    background-size:cover;
+    background-position:50% 50%;
+}
+.love-heart > :last-child {
+    border-radius:50% 50% 100% 0% / 26% 36% 64% 74%;
+    background-color:#fff;
+    background-image:url(https://placeimg.com/640/480/animals);
+    background-size:cover;
+    background-position:50% 50%;
+}
+
+/* open book */
+.open-book {
+    margin:2rem 1rem 1rem;
+    padding:1rem;
+    background:#7e1010;
+    border-radius:.3rem;
+    gap:0;
+}
+.open-book > * {
+    background:#fff;
+}
+.open-book > :first-child {
+    transform-origin:100% 100%;
+    transform:skew(0, 4deg);
+}
+.open-book > :last-child {
+    transform-origin:0 100%;
+    transform:skew(0, -4deg);
+    background: linear-gradient(90deg, #eee 0%, #fff 100%);
+}
+
+/* heading boxes */
+.heading-boxes > * {
+    background:#fff;
+    border-radius:.4em;
+    overflow:hidden;
+}
+.heading-boxes > * > h1,
+.heading-boxes > * > h2,
+.heading-boxes > * > h3 {
+    background:#f97171;
+    margin:0;
+    padding:.5em calc(8px + 1.5625vw);
+}
+.heading-boxes > * > div {
+    padding:0 calc(8px + 1.5625vw) .5em;
+}
+
+/* product comparison */
+.comparison {
+    margin-top:2.5em;
+}
+.comparison > * {
+    position:relative;
+    padding:0;
+    text-align:center;
+}
+.comparison > :nth-child(2) {
+    z-index:10;
+    box-shadow:0 5px 10px rgba(0, 0, 0, 25%);
+}
+.comparison > :nth-child(2):before {
+    content:"Most Popular";
+    display:block;
+    position:absolute;
+    top:-2em;
+    left:0;
+    right:0;
+    line-height:2em;
+    background:#000;
+    color:#fff;
+    border-top-left-radius:.4em;
+    border-top-right-radius:.4em;
+}
+.comparison ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+    background:#fff;
+}
+.comparison li {
+    white-space:nowrap;
+    line-height:2.2em;
+    border-top:1px solid #eee;
+}
+.comparison li:first-child {
+    border-top:0;
+}
+.comparison li.tick:before {
+    content: '✓ ';
+    color:#006e37;
+    font-weight:bold;
+    font-size:1.3em;
+}
+.comparison li.cross:before {
+    content: '✗ ';
+    color:#ec1358;
+    font-weight:bold;
+    font-size:1.3em;
+}
+.comparison h3 {
+    margin:0;
+    padding:.4em 0 0;
+}
+.comparison .price {
+    margin:0 0 .2em;
+    font-size:2em;
+    font-weight:bold;
+}
+.comparison span {
+    display:none;
+}
+.comparison .button {
+    display:inline-block;
+    margin:.5em 0;
+    padding:.4em .5em;
+    background:#fff;
+    color:#000;
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:.4em;
+}
+.comparison > :nth-child(2) .button {
+    background:#000;
+    color:#fff;
+}
+@media (min-width:900px) {
+    .comparison {
+        margin:2.5em calc(8px + 1.5625vw);
+    }
+    .comparison span {
+        display:inline;
+    }
+}
+
+/* rounded window */
+.round-window {
+    min-height:100vw;
+    background:#72c2f1;
+    margin:0;
+    padding:calc(8px + 1.5625vw);
+}
+.round-window > * {
+    background-color:#fff;
+    background-size:cover;
+    background-position:50% 50%;
+}
+.round-window > :nth-child(1) {
+    border-top-left-radius:100%;
+    background-image:url(https://placeimg.com/640/640/people);
+}
+.round-window > :nth-child(2) {
+    border-top-right-radius:100%;
+    background-image:url(https://placeimg.com/640/640/arch);
+}
+.round-window > :nth-child(3) {
+    border-bottom-left-radius:100%;
+    background-image:url(https://placeimg.com/640/640/animals);
+}
+.round-window > :nth-child(4) {
+    border-bottom-right-radius:100%;
+    background-image:url(https://placeimg.com/640/640/nature);
+}
+
+/* image cards */
+.image-cards > * {
+    background:#fff;
+    border-radius:.5em;
+    overflow:hidden;
+    box-shadow:0 5px 10px rgba(0, 0, 0, 25%);
+    position:relative;
+}
+.image-cards figure {
+    margin:0;
+    padding:0;
+    display:block;
+}
+.image-cards img {
+    display:block;
+    max-width:100%;
+    height:auto;
+}
+.image-cards figcaption {
+    margin:0;
+    padding:.5em 1em;
+    text-align:center;
+    font-style:italic;
+}
+.image-cards figcaption a {
+    text-decoration:none;
+}
+.image-cards figcaption a:hover {
+    text-decoration:underline;
+}
+.image-cards figcaption a:after {
+    content:"";
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+
+/* arrow steps */
+.step-arrows > * {
+    background:#fff;
+    padding:0;
+    border:2px solid #444;
+    position:relative;
+}
+.step-arrows > *:before {
+    content:"";
+    display:block;
+    position:absolute;
+    width:calc((8px + 1.5625vw)*2);
+    height:calc((8px + 1.5625vw)*2/3);
+    background-image:url('data:image/svg+xml;utf8,<svg width="150" height="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 50"><path fill="%23ec1358" d="M90 0v13.15H0v23.7h90V50l60-25z"/></svg>');
+    background-size:contain;
+    background-repeat:no-repeat;
+    z-index:10;
+}
+.step-arrows > *:first-child:before {
+    display:none;
+}
+.step-arrows > * h3 {
+    background:#444;
+    color:#fff;
+    margin:0;
+    padding:.4em 1em .5em;
+}
+.step-arrows > * p {
+    margin:0;
+    padding:.5em 1em;
+}
+@media (max-width:599px) {
+    .step-arrows > *:before {
+        right:50%;
+        bottom:100%;
+        transform:translate(50%, calc(-50% + 4px)) rotate(90deg);
+    }
+}
+@media (min-width:600px) and (max-width:1199px) {
+    .step-arrows > *:before {
+        top:50%;
+        right:100%;
+        transform:translate(calc((8px + 1.5625vw)/2), -50%);
+    }
+    .step-arrows > *:nth-child(2n+1):before {
+        transform:translate(-24%, -30%) rotate(135deg);
+        top:auto;
+        right:auto;
+        left:100%;
+        bottom:100%;
+    }
+}
+@media (min-width:1200px) {
+    .step-arrows > *:before {
+        top:50%;
+        right:100%;
+        transform:translate(calc((8px + 1.5625vw)/2), -50%);
+    }
+}
