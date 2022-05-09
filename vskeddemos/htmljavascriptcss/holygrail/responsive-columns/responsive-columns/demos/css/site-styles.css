@@ -1,0 +1,81 @@
+/* Page body styles */
+body {
+    margin:0; /* Remove the default page margin */
+}
+
+/* General styles that apply to everything */
+* {
+    font-family:-apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.5em;
+}
+a {
+    color:#004e9d; /* Link color */
+}
+a:hover {
+    color:#000; /* Hovered link color */
+}
+
+/* Responsive images */
+figure {
+    text-align:center;
+    margin:.5rem 0;
+    padding:0;
+}
+figure svg,
+figure img {
+    max-width:100%;
+    height:auto;
+}
+
+/* Header */
+.header {
+    border-bottom:2px solid #000;
+    background:#fff;
+    padding:1rem;
+    text-align:center;
+}
+.header figure {
+    margin:0;
+    padding:0;
+}
+.header figure img,
+.header figure svg {
+    display:inline-block;
+}
+
+/* Horizontal menu links used in the header and footer */
+.menu-links {
+    list-style:none;
+    margin:.5em 0;
+    padding:0;
+}
+.menu-links li {
+    display:inline-block;
+}
+.menu-links a {
+    display:block;
+    padding:.5em;
+    white-space:nowrap;
+}
+
+/* Main Content Column */
+.main-content {
+    background:#fff;
+}
+
+/* Left Sidebar Column */
+.left-sidebar {
+    background:#e6e6e6;
+}
+
+/* Right Sidebar Column */
+.right-sidebar {
+    background:#f2f2f2;
+}
+
+/* Footer */
+.footer {
+    text-align:center;
+    border-top:2px solid #000;
+    background:#fff;
+}

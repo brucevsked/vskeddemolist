@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>'Holy Grail' 3 Column Responsive Layout with Flexbox CSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Link to the Responsive Columns CSS -->
+    <link rel="stylesheet" type="text/css" href="css/r-c-min.css" />
+
+    <!-- Link to your general site styles -->
+    <link rel="stylesheet" type="text/css" href="css/site-styles.css" />
+
+    <!--
+    See this article for more details on linking to CSS:
+    https://matthewjamestaylor.com/add-css-to-html
+    -->
+</head>
+<body>
+
+<header data-r-c data-join data-middle class="header">
+    <figure data-md1-5>
+        <a href="#">
+            <!-- replace this svg image with your logo -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52.92 52.92" width="80" height="80"><path d="M52.92 26.46a26.46 26.46 0 0 1-26.46 26.46A26.46 26.46 0 0 1 0 26.46 26.46 26.46 0 0 1 26.46 0a26.46 26.46 0 0 1 26.46 26.46"/><path fill="#fff" d="M40.97 29.66q1 0 1.52-.7.53-.71.53-2.01 0-1.3-.53-2t-1.52-.7q-.99 0-1.53.7-.53.7-.53 2t.53 2q.54.7 1.53.7zm4.42-2.71q0 1.9-1.1 3.25-1.09 1.35-3.31 1.35-2.23 0-3.32-1.35-1.1-1.35-1.1-3.25 0-1.87 1.1-3.24t3.32-1.37q2.22 0 3.32 1.37 1.1 1.37 1.1 3.24zm-4.41-4.57zm-10.1 7.01q.8 0 1.35-.59.54-.6.54-1.9 0-1.24-.52-1.88-.52-.64-1.39-.64-1.19 0-1.64 1.12-.23.6-.23 1.46 0 .75.25 1.34.46 1.1 1.65 1.1zm-.56-6.98q.65 0 1.14.2.82.34 1.33 1.25V22.6h2.2v8.2q0 1.67-.57 2.51-.97 1.46-3.7 1.46-1.66 0-2.7-.65-1.05-.65-1.17-1.94h2.46q.1.4.3.57.37.31 1.24.31 1.22 0 1.63-.82.27-.52.27-1.75v-.56q-.33.56-.7.83-.67.52-1.75.52-1.66 0-2.66-1.17-1-1.17-1-3.17 0-1.92.97-3.23.96-1.31 2.71-1.31zm.72-.03zm-9.9 7.28q.99 0 1.52-.7.53-.71.53-2.01 0-1.3-.53-2t-1.53-.7q-.99 0-1.52.7t-.53 2q0 1.3.53 2t1.52.7zm4.42-2.71q0 1.9-1.1 3.25t-3.32 1.35q-2.22 0-3.32-1.35-1.09-1.35-1.09-3.25 0-1.87 1.1-3.24 1.09-1.37 3.31-1.37 2.23 0 3.32 1.37 1.1 1.37 1.1 3.24zm-4.42-4.57Zm-13.61-2.8h2.44v9.57h5.78v2.1H7.53Z"/></svg>
+        </a>
+    </figure>
+    <ul data-md4-5 class="menu-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</header>
+<r-c join>
+    <main data-lg1-2 class="main-content">
+        <p>← <a href="index.html">Layout index</a></p>
+
+        <h1>Main Content</h1>
+        <p>This layout responds to all screen sizes. Here are the three layouts it uses for mobile, tablet, and desktop breakpoints: (Change the size of your browser window to see the layout adjust.)</p>
+
+        <figure>
+            <img src="https://cdn.matthewjamestaylor.com/img/responsive-holy-grail-layout.png" width="400" height="543" alt="Holy Grail layout at mobile, tablet, and desktop breakpoints" />
+        </figure>
+    </main>
+    <aside data-md1-2 data-lg1-4 data-lg1 class="left-sidebar">
+        <h2>Left Sidebar</h2>
+        <p>You can put side navigation here or aside content.</p>
+    </aside>
+    <aside data-md1-2 data-lg1-4 class="right-sidebar">
+        <h2>Right Sidebar</h2>
+        <p>Put aside content here or advertising.</p>
+    </aside>
+</r-c>
+<footer data-r-c data-join class="footer">
+    <c1-1>
+        <ul class="menu-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+        </ul>
+        <p><small>Made with <a href="https://matthewjamestaylor.com/responsive-columns" target="_blank" rel="noopener">Responsive Columns</a>.</small></p>
+    </c1-1>
+</footer>
+
+</body>
+</html>
