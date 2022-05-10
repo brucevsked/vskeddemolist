@@ -23,9 +23,11 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
-		<!-- 解决pom头部unkonow错误 -->
-		<log4j.version>2.14.0</log4j.version>
-		<testng.version>7.1.0</testng.version>
+		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
+		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
+
+		<log4j.version>2.17.2</log4j.version>
+		<testng.version>7.5</testng.version>
 	</properties>
 
 	<dependencies>
@@ -62,7 +64,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>${mavenCompilerPlugin.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -74,7 +76,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
+				<version>${mavenSurefirePlugin.version}</version>
 				<configuration>
 					<skip>true</skip>
 				</configuration>

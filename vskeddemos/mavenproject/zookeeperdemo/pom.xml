@@ -2,111 +2,75 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.vsked</groupId>
   <artifactId>zookeeperdemo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>zookeeperdemo</name>
-  <description>zookeeperdemo</description>
-  
+  <version>1.0.0</version>
+  <name>${project.artifactId}</name>
+  <description>just demo for zk</description>
+
     <properties>
         <!-- 声明项目配置依赖编码格式为 utf-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- 编译UTF-8 -->
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jackson.version>2.9.8</jackson.version>
-        <lombok.version>1.18.6</lombok.version>
-		<slf4j.version>1.7.25</slf4j.version>
-		<log4j2.version>2.11.0</log4j2.version>
-		<!-- 解决pom头部unkonow错误 -->
-		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.install.skip>true</maven.install.skip>
+        <mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
+        <mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
+        <slf4j.version>1.7.36</slf4j.version>
+        <log4j.version>2.17.2</log4j.version>
+        <testng.version>7.5</testng.version>
+        <zookeeper.version>3.8.0</zookeeper.version>
     </properties>
-    
+
     <dependencies>
-	<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.glassfish.web/jstl-impl -->
-		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>jstl-impl</artifactId>
-			<version>1.2</version>
-			<exclusions>
-			    <exclusion>
-			    <groupId>javax.servlet</groupId>		
-			    <artifactId>servlet-api</artifactId>  
-		     </exclusion>  
-	        </exclusions> 
-		</dependency>
-<!-- slf4j start -->
-<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>${slf4j.version}</version>
-</dependency>
-
-<!-- slf4j end -->
-		<!-- log4j2 start -->
-<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-slf4j-impl</artifactId>
-			<version>${log4j2.version}</version>
-</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${log4j2.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>${log4j2.version}</version>
-		</dependency>
-		<!-- log4j2 end -->
-<!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
-<dependency>
-    <groupId>org.apache.zookeeper</groupId>
-    <artifactId>zookeeper</artifactId>
-    <version>3.5.6</version>
-</dependency>
-
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>${zookeeper.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.vsked.Application</mainClass>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${mavenCompilerPlugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -119,6 +83,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>${mavenSurefirePlugin.version}</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>

@@ -143,6 +143,10 @@ docker create --name dev_mysql1 -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 mysql/m
 9* 搜索镜像
 docker search 组件名
 docker search tomcat8
+查看latest版本(使用前先要将镜像拉下来)
+docker image inspect zookeeper:latest|grep i version
+如果不行就查看详细信息，在详细信息里找
+docker image inspect zookeeper:latest
 
 10* 分配一个终端(进入docker)
 docker exec -i -t 容器名称/容器id /bin/bash
@@ -165,6 +169,19 @@ docker network inspect	提供 Docker 网络的详细配置信息。docker inspec
 docker network ls	用于列出运行在本地 Docker 主机上的全部网络。
 docker network prune	删除 Docker 主机上全部未使用的网络。
 docker network rm	删除 Docker 主机上指定网络。
+
+创建一个网段
+docker network create --subnet=10.0.192.0/24 docker-net
+
+启动容器时指定网段
+docker run --restart=always --net docker-net --ip 10.0.192.88 \
+        -p 2181:2181 \
+        -p 2888:2888 -p 3888:3888 \
+        -p 44641:44641 \
+        -v /data/zookeeper/zk0/data:/data \
+        -v /data/zookeeper/zk0/data/logs:/datalog \
+        -v /data/config/zookeeper/zk0/zoo.cfg:/conf/zoo.cfg \
+        --name zk0 -d zookeeper:latest
 
 12* 运行容器
 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
@@ -434,5 +451,34 @@ docker exec -i mymysql sh -c 'exec mysql -uroot -p"Y4yhl9tbf110_" -e "CREATE DAT
 
 初始化数据库(做统一初始化脚本时用，跟上同要一起用，不然就要把密码写上)
 docker exec -i mymysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" appserverdev' < /opt/sql/appserverdev.sql
+
+--------------------------------------------------------------------------------
+
+docker修改主机名 也就是hosts文件
+先查看容器详情
+docker inspect zk0
+找到其中的
+HostnamePath跟HostsPath
+记下路径
+        "HostnamePath": "/var/lib/docker/containers/7c1a582477377d99edc2bf9980c8b10dce93c1eca71a7cde6a2569848f126965/hostname",
+        "HostsPath": "/var/lib/docker/containers/7c1a582477377d99edc2bf9980c8b10dce93c1eca71a7cde6a2569848f126965/hosts",
+还有一个文件是config.v2.json
+在容器详情里找到容器唯一标识记下来
+"Id": "7c1a582477377d99edc2bf9980c8b10dce93c1eca71a7cde6a2569848f126965",
+查找容器配置文件
+find / -name "config.v2.json"
+/var/lib/docker/containers/7c1a582477377d99edc2bf9980c8b10dce93c1eca71a7cde6a2569848f126965/config.v2.json
+
+也可以不用查找容器标识，直接进入这个路径跟上面主机名都在一个目录下面
+/var/lib/docker/containers/7c1a582477377d99edc2bf9980c8b10dce93c1eca71a7cde6a2569848f126965/
+
+
+先备份下原始文件
+cd /var/lib/docker/containers/7c1a582477377d99edc2bf9980c8b10dce93c1eca71a7cde6a2569848f126965/
+cp config.v2.json config.v2.json.bak
+cp hostname hostname.bak
+cp hosts hosts.bak
+
+备份完以后使用vi或拉出文件修改就可以了
 
 --------------------------------------------------------------------------------
