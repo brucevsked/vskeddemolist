@@ -1,0 +1,25 @@
+server:
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 60s #设置优雅停机缓冲时间默认30s
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+
+logging:
+  config: classpath:log4j2.xml
+
+curator:
+  connectString: 10.0.193.11:2181,10.0.193.11:2182,10.0.193.11:2183 # zookeeper 地址
+  retryCount: 2 # 重试次数
+  elapsedTimeMs: 2000 # 重试间隔时间
+  sessionTimeoutMs: 60000 # session超时时间
+  connectionTimeoutMs: 10000 # 连接超时时间

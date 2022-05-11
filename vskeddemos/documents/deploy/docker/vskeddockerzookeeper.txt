@@ -64,8 +64,8 @@ autopurge.purgeInterval=24
 minSessionTimeout=160000
 maxSessionTimeout=300000
 server.0=10.0.192.88:2888:3888
-server.1=10.0.192.89:2889:3889
-server.2=10.0.192.90:2890:3890
+server.1=10.0.192.89:2888:3888
+server.2=10.0.192.90:2888:3888
 
 
 节点2
@@ -84,15 +84,15 @@ initLimit=10
 syncLimit=5
 dataDir=/data
 dataLogDir=/data/logs
-clientPort=2182
-admin.serverPort=44642
+clientPort=2181
+admin.serverPort=44641
 autopurge.snapRetainCount=500
 autopurge.purgeInterval=24
 minSessionTimeout=160000
 maxSessionTimeout=300000
 server.0=10.0.192.88:2888:3888
-server.1=10.0.192.89:2889:3889
-server.2=10.0.192.90:2890:3890
+server.1=10.0.192.89:2888:3888
+server.2=10.0.192.90:2888:3888
 
 
 节点3
@@ -111,15 +111,15 @@ initLimit=10
 syncLimit=5
 dataDir=/data
 dataLogDir=/data/logs
-clientPort=2183
-admin.serverPort=44643
+clientPort=2181
+admin.serverPort=44641
 autopurge.snapRetainCount=500
 autopurge.purgeInterval=24
 minSessionTimeout=160000
 maxSessionTimeout=300000
 server.0=10.0.192.88:2888:3888
-server.1=10.0.192.89:2889:3889
-server.2=10.0.192.90:2890:3890
+server.1=10.0.192.89:2888:3888
+server.2=10.0.192.90:2888:3888
 
 检查三个节点参数
 cat /data/zookeeper/zk0/data/myid
@@ -142,33 +142,34 @@ docker run --restart=always --net docker-net --ip 10.0.192.88 \
         -v /data/zookeeper/zk0/data:/data \
         -v /data/zookeeper/zk0/data/logs:/datalog \
         -v /data/config/zookeeper/zk0/zoo.cfg:/conf/zoo.cfg \
-        --name zk0 -d zookeeper:latest
+        --name zk0 -h zk0 -d zookeeper:latest
 
 启动节点2
 
 docker run --restart=always --net docker-net --ip 10.0.192.89 \
-        -p 2182:2182 \
-        -p 2889:2889 -p 3889:3889 \
-        -p 44642:44642 \
+        -p 2182:2181 \
+        -p 2889:2888 -p 3889:3888 \
+        -p 44642:44641 \
         -v /data/zookeeper/zk1/data:/data \
         -v /data/zookeeper/zk1/data/logs:/datalog \
         -v /data/config/zookeeper/zk1/zoo.cfg:/conf/zoo.cfg \
-        --name zk1 -d zookeeper:latest
+        --name zk1 -h zk1 -d zookeeper:latest
 
 启动节点3
 
 docker run --restart=always --net docker-net --ip 10.0.192.90 \
-        -p 2183:2183 \
-        -p 2890:2890 -p 3890:3890 \
-        -p 44643:44643 \
+        -p 2183:2181 \
+        -p 2890:2888 -p 3890:3888 \
+        -p 44643:44641 \
         -v /data/zookeeper/zk2/data:/data \
         -v /data/zookeeper/zk2/data/logs:/datalog \
         -v /data/config/zookeeper/zk2/zoo.cfg:/conf/zoo.cfg \
-        --name zk2 -d zookeeper:latest
+        --name zk2 -h zk2 -d zookeeper:latest
 
 使用zookeeper连接工具测试看效果
 ZooInspector.jar
 
+以下内容暂不需要，如果非想用主机名连接也可以试试下面效果
 
 docker修改主机名 也就是hosts文件
 先查看容器详情
@@ -289,8 +290,8 @@ autopurge.purgeInterval=24
 minSessionTimeout=160000
 maxSessionTimeout=300000
 server.0=zk0:2888:3888
-server.1=zk1:2889:3889
-server.2=zk2:2890:3890
+server.1=zk1:2888:3888
+server.2=zk2:2888:3888
 
 vi /data/config/zookeeper/zk1/zoo.cfg
 
@@ -306,8 +307,8 @@ autopurge.purgeInterval=24
 minSessionTimeout=160000
 maxSessionTimeout=300000
 server.0=zk0:2888:3888
-server.1=zk1:2889:3889
-server.2=zk2:2890:3890
+server.1=zk1:2888:3888
+server.2=zk2:2888:3888
 
 vi /data/config/zookeeper/zk2/zoo.cfg
 
@@ -323,8 +324,8 @@ autopurge.purgeInterval=24
 minSessionTimeout=160000
 maxSessionTimeout=300000
 server.0=zk0:2888:3888
-server.1=zk1:2889:3889
-server.2=zk2:2890:3890
+server.1=zk1:2888:3888
+server.2=zk2:2888:3888
 
 docker start zk0
 docker start zk1
