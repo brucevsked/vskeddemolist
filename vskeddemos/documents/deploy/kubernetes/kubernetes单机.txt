@@ -114,3 +114,20 @@ kubectl create -f mysql-rc.yaml
 
 
 
+--------------------------------------------------------------------------------
+
+systemctl stop firewalld
+systemctl disable firewalld
+
+yum install epel-release
+yum install -y etcd 
+yum install -y kubernetes
+
+
+systemctl start etcd
+systemctl start docker
+systemctl start kube-apiserver
+systemctl start kube-controller-manager
+systemctl start kube-scheduler
+systemctl start kubelet
+systemctl start kube-proxy

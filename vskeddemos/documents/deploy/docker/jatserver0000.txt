@@ -1,0 +1,13 @@
+docker run --restart=always -p 6379:6379 \
+-v /data/redis/redis6379:/data \
+-v /data/config/redis6379/redis.conf:/usr/local/etc/redis/redis.conf \
+--name redis10 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
+
+
+docker run --restart=always -itd --name mysql5732 -d -p 3306:3306 \
+-v /data/mysql5.7.32/data:/var/lib/mysql:rw \
+-v /data/mysql5.7.32/log:/var/log/mysql:rw \
+-v /data/mysql5.7.32/conf/my.cnf:/etc/mysql/my.cnf:rw \
+-v /etc/localtime:/etc/localtime:ro \
+-e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ \
+mysql:5.7.32

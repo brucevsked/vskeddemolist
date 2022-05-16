@@ -1,0 +1,13 @@
+[Unit]
+Description=nacos
+After=network.target
+ 
+[Service]
+Type=forking
+ExecStart=/opt/nacos/nacos2/bin/startup.sh
+ExecReload=/opt/nacos/nacos2/bin/shutdown.sh
+ExecStop=/opt/nacos/nacos2/bin/shutdown.sh
+PrivateTmp=true
+ 
+[Install]  
+WantedBy=multi-user.target

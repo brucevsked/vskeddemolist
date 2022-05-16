@@ -228,6 +228,8 @@ cp 源文件名或目录 新文件名或目录
 cp test1.txt text2.txt
 
 cp -rf /mnt/cdrom /tmp/ha
+级联复制
+cp -r /opt/nacos/nacos0 /opt/nacos/nacos3
 
 
 36* umount cdrom or U disk
