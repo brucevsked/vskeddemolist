@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: springcloudnacosconfig
+  cloud:
+    nacos:
+      config:
+        server-addr: 10.0.193.11:8848,10.0.193.11:8852,10.0.193.11:8850
+        file-extension: yml
