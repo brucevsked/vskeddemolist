@@ -5,8 +5,8 @@
 <!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
 <configuration status="warn" monitorInterval="60">
     <Properties>
-        <Property name="logpath">/logs/springcloudnacosconfig/</Property>
-        <Property name="logname">springcloudnacosconfig</Property>
+        <Property name="logpath">/logs/springcloudnacosserviceprovide2/</Property>
+        <Property name="logname">springcloudnacosserviceprovide2</Property>
     </Properties>
     <!--先定义所有的appender-->
     <appenders>

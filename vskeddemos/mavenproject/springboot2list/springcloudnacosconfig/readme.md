@@ -10,8 +10,8 @@ Nacos 2.1.0
 
 spring-cloud-alibaba结合nacos配置中心  
 
-1动态加载yml自定义属性  
-2动态加载yml内容为spring boot类属性
+动态加载yml自定义属性  
+
 
 http://127.0.0.1:8080/user0
 
