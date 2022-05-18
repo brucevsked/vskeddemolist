@@ -1,0 +1,59 @@
+
+docker network create --subnet=10.0.192.0/24 docker-net
+
+--------------------------------------------------------------------------------
+zookeeper安装 docker版本 单机
+
+搜索组件
+docker search zookeeper
+拉取zookeeper镜像
+docker pull zookeeper:latest
+
+mkdir -p /data/config/zookeeper/zk1
+mkdir -p /data/zookeeper/zk1/data
+mkdir -p /data/zookeeper/zk1/data/logs
+
+修改zookeeper配置，注意这里配置是容器内的配置,也就是说这里的路径是容器内的路径，还会通过-v映射到主机目录
+vi /data/config/zookeeper/zk1/zoo.cfg
+```
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/data
+dataLogDir=/data/logs
+clientPort=2181
+admin.serverPort=44641
+autopurge.snapRetainCount=500
+autopurge.purgeInterval=24
+minSessionTimeout=160000
+maxSessionTimeout=300000
+```
+
+docker run --restart=always --net docker-net --ip 10.0.192.10 \
+ -p 2181:2181 \
+ -p 2888:2888 \
+ -p 3888:3888 \
+ -p 44641:44641 \
+ -v /data/zookeeper/zk1/data:/data \
+ -v /data/zookeeper/zk1/logs:/datalog \
+ -v /data/config/zookeeper/zk1/zoo.cfg:/conf/zoo.cfg \
+ --name zk1 -d zookeeper:latest
+
+使用zookeeper连接工具测试看效果
+ZooInspector.jar
+--------------------------------------------------------------------------------
+kafka 安装 docker版本 单机
+
+搜索组件
+docker search kafka
+拉取 kafka 镜像
+docker pull bitnami/kafka:latest
+
+docker run --restart=always --net docker-net --ip 10.0.192.20 \
+ -p 9092:9092 \
+ -e ALLOW_PLAINTEXT_LISTENER=yes \
+ -e KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092 \
+ -e KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://10.0.193.11:9092 \
+ -e KAFKA_CFG_ZOOKEEPER_CONNECT=10.0.192.10:2181 \
+ --name kafka1 -d bitnami/kafka:latest
+
