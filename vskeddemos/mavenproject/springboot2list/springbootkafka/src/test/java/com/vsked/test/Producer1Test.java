@@ -1,5 +1,6 @@
 package com.vsked.test;
 
+import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
@@ -7,11 +8,11 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vsked.service.kafka.KafkaManagerService;
+import org.testng.annotations.Test;
 
 public class Producer1Test {
 	
@@ -30,8 +31,9 @@ public class Producer1Test {
 
 		try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(p)) {
 //			while (true) {
-			for(int i=0;i<1;i++) {
-				String msg = i+"Hello,hello,hello,hey,hey,这里是我发的消息," + new Random().nextInt(100);
+			for(int i=0;i<3;i++) {
+				String msg = i+"|"+new Date() +"Hello,hello,hello,hey,hey,这里是我发的消息," + new Random().nextInt(100);
+
 				ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic,"aaa", msg);
 				record.headers().add("filename"+i, ("yellobook.txt"+i).getBytes());
 				kafkaProducer.send(record);

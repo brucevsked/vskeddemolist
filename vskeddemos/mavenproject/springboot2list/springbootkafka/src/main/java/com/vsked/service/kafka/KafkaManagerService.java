@@ -15,7 +15,9 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
+import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
@@ -29,7 +31,7 @@ public class KafkaManagerService {
 	public static final String myListenerId="myListeneraaa";
 	public static Map<String,KafkaMessageListenerContainer<String, String>> topicListenerList=new HashMap<String, KafkaMessageListenerContainer<String,String>>();
 	
-	public static String kafkaServerIp="192.168.1.133:9092";
+	public static String kafkaServerIp="10.0.193.11:9092";
 	
 	public static int taskCount=1;
 	
@@ -111,7 +113,7 @@ public class KafkaManagerService {
 		configs.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,  "true");
 		
 		DefaultKafkaConsumerFactory<String, String>  kafkaConsumerFactory=new DefaultKafkaConsumerFactory<String, String>(configs);
-		
+
 		ContainerProperties containerProperties=new ContainerProperties(topicname.split(","));
 		MessageListener<String, String> myMsgListner=new MessageListener<String, String>() {
 
@@ -135,6 +137,7 @@ public class KafkaManagerService {
 		
 		KafkaMessageListenerContainer<String, String> kafkaMessageListenerContainer=new KafkaMessageListenerContainer<String, String>(kafkaConsumerFactory,containerProperties);
 		kafkaMessageListenerContainer.setBeanName(myListenerId);//这里就是@KafkaListener中的id也就是
+		//kafkaMessageListenerContainer.getContainerProperties().setIdleBetweenPolls(1000*60*1);//设置消费者拉取频率 适用于动态主题
 		kafkaMessageListenerContainer.setAutoStartup(true);
 		
 		kafkaMessageListenerContainer.start();
@@ -217,6 +220,7 @@ public class KafkaManagerService {
 		containerProperties2.setMessageListener(myMsgListner2);
 		
 		KafkaMessageListenerContainer<String, String> kafkaMessageListenerContainer2=new KafkaMessageListenerContainer<String, String>(kafkaConsumerFactory2,containerProperties2);
+		//kafkaMessageListenerContainer2.getContainerProperties().setIdleBetweenPolls(1000*60*1);//设置消费者拉取频率 适用于动态主题
 		kafkaMessageListenerContainer2.setAutoStartup(true);
 		kafkaMessageListenerContainer2.setBeanName(myListenerId+2);//这里就是@KafkaListener中的id也就是
 		kafkaMessageListenerContainer2.start();
@@ -224,4 +228,6 @@ public class KafkaManagerService {
 		
 		return rs;
 	}
+
+
 }

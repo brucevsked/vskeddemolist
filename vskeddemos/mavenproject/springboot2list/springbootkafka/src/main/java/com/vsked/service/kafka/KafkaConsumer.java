@@ -1,5 +1,6 @@
 package com.vsked.service.kafka;
 
+import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -69,6 +70,15 @@ public class KafkaConsumer {
    // @KafkaListener(topics = "#{'${kafkalistenerlist.topiclist}'.split(',')}",id=KafkaConsumer.myListenerId)
     public void onMessage1(ConsumerRecord<String, String> record) {
     	System.out.println("当前主题是:"+record.topic());
+    }
+
+
+    @KafkaListener(topics = "vskedtopic1",containerFactory = "timeBatchFactory")
+    public void onMessage2(ConsumerRecord<String, String> record) {
+        System.out.println("-------------------------"+new Date());
+        System.out.println("当前主题是:"+record.topic());
+        System.out.println(""+record.value());
+
     }
     
 

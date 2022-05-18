@@ -1,7 +1,6 @@
 package com.vsked.service.kafka;
 
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class FootBallService implements SaveDataInterface{
 			Thread.sleep(6000);
 			log.info("-------------end-----------------FootBall"+inputData.get("count"));
 		}catch(Exception e) {
-			
+			log.error("start football error",e);
 		}
 		return 0;
 	}
