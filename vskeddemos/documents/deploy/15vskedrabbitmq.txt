@@ -78,6 +78,7 @@ sudo systemctl start rabbitmq-server
 sudo systemctl stop rabbitmq-server
 状态
 sudo systemctl status rabbitmq-server
+
  
 启动管理插件
 rabbitmq-plugins enable rabbitmq_management
@@ -96,4 +97,16 @@ rabbitmqctl list_users
 
 用刚才添加完的用户登录
 http://10.0.193.11:15672
+
+--------------------------------------------------------------------------------
+卸载
+
+停止
+sudo systemctl stop rabbitmq-server
+停止开机启动
+systemctl disable rabbitmq-server
+卸载rabbitmq
+yum remove rabbitmq*
+
+yum remove erlang*
 
