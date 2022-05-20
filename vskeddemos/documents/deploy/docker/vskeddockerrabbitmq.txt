@@ -13,3 +13,6 @@ docker run --restart=always \
  --name rabbitmq1 -d rabbitmq:3-management
 
  如果出现你的连接不是私密连接之类的，把谷歌浏览器记住的密码删除，再登录即可
+
+访问管理控制台
+http://10.0.193.11:15672

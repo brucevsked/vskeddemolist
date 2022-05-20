@@ -1,0 +1,36 @@
+server:
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 60s #设置优雅停机缓冲时间默认30s
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  rabbitmq:
+    host: 10.0.193.11
+    port: 5672
+    username: root
+    password: root
+    publisher-confirm-type: correlated #确认消息已发送到交互机 P -> Exchange
+    publisher-returns: true #确认消息已发送到队列 Exchange -> Queue
+    listener:
+      simple:
+        acknowledge-mode: manual #设置手动确认 (ack) Queue -> C
+        prefetch: 100
+  redis:
+    host: 10.0.193.11
+    timeout: 6000ms
+    password: Y4yhl9tbf110_
+
+
+logging:
+  config: classpath:log4j2.xml
+
+
