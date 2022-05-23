@@ -13,6 +13,8 @@ spring-cloud-alibaba结合nacos服务注册与发现
 服务提供端示例  
 
 http://127.0.0.1:9081/echo?id=test1
+http://127.0.0.1:9081/echo0?id=noneed
+http://127.0.0.1:9081/echo1?id=test2
 
 
 

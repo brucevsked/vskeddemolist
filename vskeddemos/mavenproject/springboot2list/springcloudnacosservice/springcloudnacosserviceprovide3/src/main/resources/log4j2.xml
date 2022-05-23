@@ -75,7 +75,7 @@
         <logger name="org.mybatis" level="ERROR"></logger>
         <logger name="io.netty" level="ERROR"></logger>
         <logger name="io.lettuce" level="ERROR"></logger>
-        <logger name="springfox.documentation" level="ERROR"></logger>
+        <logger name="com.alibaba.nacos" level="ERROR"></logger>
         <logger name="org.xnio" level="ERROR"></logger>
         <logger name="io.undertow" level="ERROR"></logger>
 

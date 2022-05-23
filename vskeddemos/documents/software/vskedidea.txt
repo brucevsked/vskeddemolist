@@ -135,5 +135,5 @@ BISACXYELK-eyJsaWNlbnNlSWQiOiJCSVNBQ1hZRUxLIiwibGljZW5zZWVOYW1lIjoiQ2hpbmFOQiIsI
 --------------------------------------------------------------------------------
 常用插件
 statistic 代码统计插件
-maven helper 包依赖查看
+maven helper 包依赖查看 安装完以后重启idea打开pom文件后，最下面会显示分析pom
 --------------------------------------------------------------------------------
