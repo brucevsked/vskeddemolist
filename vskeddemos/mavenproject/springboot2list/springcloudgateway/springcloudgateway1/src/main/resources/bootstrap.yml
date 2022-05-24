@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: myGateWay1
+  cloud:
+    nacos:
+      config:
+        server-addr: 10.0.193.11:8848,10.0.193.11:8852,10.0.193.11:8850
+        file-extension: yml
+        endpoint:
+      discovery:
+        server-addr: 10.0.193.11:8848,10.0.193.11:8852,10.0.193.11:8850
+        enabled: true
+    gateway:
+      # 核心概念1：路由，一个路由代表一个处理逻辑，
+      # 该逻辑里面包含三个元素：匹配条件(是否该此路由处理)、真实处理地址、过滤器
+      routes:
+        # id要确保唯一性
+        - id: router1
+          # 真实处理地址，请求一旦确定是当前路由处理，就会转发到这个地址去
+          uri: http://127.0.0.1:9082
+          # 核心概念2：谓语或者断言，作用是判断请求是否由当前路由处理
+          predicates:
+            - Path=/getUser/**
+  main:
+    web-application-type: reactive
