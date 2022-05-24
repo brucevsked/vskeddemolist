@@ -1,0 +1,18 @@
+server:
+  port: 7082 #端口号
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+
+logging:
+  config: classpath:log4j2.xml
+
+
