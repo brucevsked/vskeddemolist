@@ -6,8 +6,8 @@
 <configuration status="warn" monitorInterval="60">
     <Properties>
         <!--<Property name="logpath">${sys:catalina.home}/logs/springdatajpa/</Property>-->
-        <Property name="logpath">/logs/springcloudgateway1/</Property>
-        <Property name="logname">springcloudgateway1</Property>
+        <Property name="logpath">/logs/springcloudgateway2/</Property>
+        <Property name="logname">springcloudgateway2</Property>
     </Properties>
     <!--先定义所有的appender-->
     <appenders>
