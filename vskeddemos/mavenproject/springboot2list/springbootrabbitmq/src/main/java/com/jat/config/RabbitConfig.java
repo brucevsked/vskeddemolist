@@ -32,9 +32,13 @@ public class RabbitConfig {
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
             if (ack) {
                 log.info("消息成功发送到Exchange");
-                String msgId = correlationData.getId();
-                storeService.updateStoreState(msgId+"_db",1);
-                storeService.updateStoreState(msgId+"_cache",1);
+                log.info("{}",correlationData);
+                if(!correlationData.getId().startsWith("query")){
+                    String msgId = correlationData.getId();
+                    storeService.updateStoreState(msgId+"_db",1);
+                    storeService.updateStoreState(msgId+"_cache",1);
+                }
+
             } else {
                 log.info("消息发送到Exchange失败, {}, cause: {}", correlationData, cause);
             }
@@ -74,6 +78,19 @@ public class RabbitConfig {
     }
 
     @Bean
+    public Queue dbReadQueue() {
+        return new Queue(ProjectConfig.DB_READ_QUEUE_NAME, true);
+    }
+    @Bean
+    public DirectExchange dbReadExchange() {
+        return new DirectExchange(ProjectConfig.DB_READ_EXCHANGE_NAME, true, false);
+    }
+    @Bean
+    public Binding dbReadBinding() {
+        return BindingBuilder.bind(dbReadQueue()).to(dbReadExchange()).with(ProjectConfig.DB_READ_ROUTING_KEY_NAME);
+    }
+
+    @Bean
     public Queue cacheQueue() {
         return new Queue(ProjectConfig.CACHE_QUEUE_NAME, true);
     }
@@ -86,5 +103,20 @@ public class RabbitConfig {
     @Bean
     public Binding cacheBinding() {
         return BindingBuilder.bind(cacheQueue()).to(cacheExchange()).with(ProjectConfig.CACHE_ROUTING_KEY_NAME);
+    }
+
+    @Bean
+    public Queue cacheReadQueue() {
+        return new Queue(ProjectConfig.CACHE_READ_QUEUE_NAME, true);
+    }
+    @Bean
+    public DirectExchange cacheReadExchange() {
+        return new DirectExchange(ProjectConfig.CACHE_READ_EXCHANGE_NAME, true, false);
+    }
+
+
+    @Bean
+    public Binding cacheReadBinding() {
+        return BindingBuilder.bind(cacheReadQueue()).to(cacheReadExchange()).with(ProjectConfig.CACHE_READ_ROUTING_KEY_NAME);
     }
 }

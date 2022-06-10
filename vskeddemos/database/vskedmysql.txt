@@ -494,7 +494,10 @@ lower_case_table_names = 1时，mysql会先把表名转为小写，再执行操�
 重启完成后可以用以下语句检查
 show global variables like '%lower_case%';
 
-
+38* 日期相关函数
+now()
+sysdate()
+select DATE_ADD(NOW(),INTERVAL 1 DAY);
 
 --------------------------------
 problem

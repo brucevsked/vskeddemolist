@@ -9,6 +9,12 @@
 
 工程树一侧新建图标（CreateDiagarm）->选择UML结构模型（UML Structural）->选择类图（Class）
 
+3* 活动图与泳道图
+
+工程树一侧新建图标(CreateDiagarm) ->选择UML行为模型(UML Behavioral) ->选择活动图(Activity)
+如果是泳道图的话，在空白处右击->选择泳道与矩阵（Swimlanes and Martix...）
+
+
 
 
 
