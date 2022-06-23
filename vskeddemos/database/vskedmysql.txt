@@ -89,6 +89,8 @@ alter table [tablename] change [oldColumnName] [newColumnName]
 
 alter table userT change usName userName
 alter table userT change usName userName varchar(200);
+修改已经存在的列长度
+alter table `ktv_screenplay_role` modify column pic varchar(1000) COMMENT '图片';
 
 13* insert one table to another table 将一个表数据插入另一张表
 insert into t2(name,age) select myName,myId from t1

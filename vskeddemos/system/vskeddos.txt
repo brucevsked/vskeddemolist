@@ -149,6 +149,12 @@ dir > nul
 27* 删除目录
 rd [目录名]
 rd testD
+删除目录及子目录
+rd /S 目录名
+删除目录及子目录安静模式，不需要确认
+rd /S /Q 目录名
+清空windows 10 windowsDefined保护记录
+C:\ProgramData\Microsoft\Windows Defender\Scans\History\Service\DetectionHistory
 
 28* 注解
 rem [注解内容]
