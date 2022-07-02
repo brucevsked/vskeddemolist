@@ -228,3 +228,8 @@ PasswordAuthentication yes
 /etc/ssh/sshd_config
 重启sshd服务
 service sshd restart
+
+--------------------------------------------------------------------------------
+vagrant plugin install vagrant-vbguest
+vagrant plugin update vagrant-vbguest
+vagrant plugin uninstall vagrant-vbguest
