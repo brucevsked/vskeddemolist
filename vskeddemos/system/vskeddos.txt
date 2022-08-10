@@ -7,11 +7,20 @@ DOS与cmd
 [命令1] && [命令2] && [命令3]
 dir && d: && dir
 
+打包，改名，删除
+mvn package assembly:single && ren d:\economy\project\dramakill\dramaapi\dramaapi\target\dramaapi-1.0.jar d.jar && ren d:\economy\project\dramakill\dramaapi\dramaapi\target\dramaapi-1.0-jar-with-dependencies.jar dramaapi-1.0.jar && del /Q d:\economy\project\dramakill\dramaapi\dramaapi\target\d.jar
+
 
 2*将命令生成的内容写成文件
 [命令] >> [c:\1.txt]
 dir /b 只显示文件名
+导出时追加模式
 dir /b >> c:\1.txt
+导出时覆盖模式
+dir /b > c:\2.txt
+
+将生成的内容导到剪贴板
+dir /b | clip
 
 一闪而过的dos窗口查看异常可以
 
@@ -61,8 +70,14 @@ shutdown -s -t 10800
 
 11* 列出当前目录所有文件与文件夹
 dir 
+列出目录只带文件名
 dir /b
-
+列出目录与子目录文件
+dir /s
+列出目录与子目录的mp4文件
+dir *.mp4 /s
+列出目录与子目录的mp4文件全路径
+dir *.mp4 /s /b
 12* 修改文件属性+代表给-代表去s系统 h隐藏 a存档 r只读
 attrib 文件名
 attrib +s +h 文件名
@@ -86,6 +101,8 @@ color f
 
 17* 删除文件
 del [文件名]
+安静模式删除，不需要确认
+del /Q filename
 
 18* 在控制台显示文字或变量
 echo 文字内容
@@ -165,6 +182,9 @@ ren [原文件或文件夹名] [新文件或文件夹名]
 ren t1 t2
 rename [原文件或文件夹名] [新文件或文件夹名]
 rename t1 t2
+
+ren d:\economy\project\dramakill\dramaapi\dramaapi\target\dramaapi-1.0.jar d.jar
+ren d:\economy\project\dramakill\dramaapi\dramaapi\target\dramaapi-1.0-jar-with-dependencies.jar dramaapi-1.0.jar
 
 30* 设置控制台标题
 title [标题名]

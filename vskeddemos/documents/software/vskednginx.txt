@@ -62,4 +62,44 @@ systemctl start nginx.service
 systemctl enable nginx.service
 
 
+--------------------------------------------------------------------------------
+
+获取请求头中参数
+$arg_参数名
+示例
+http://www.test.com/hell?id=1&name=2
+取id参数
+$arg_id
+
+取header中的值
+$http_参数名
+如将id与name放到了header参数中
+取id参数
+$http_id
+
+
+        location /test {
+            add_header Content-Type 'text/html;charset=utf-8';
+            return 200 "good test";
+        }
+
+        location /test1 {
+            add_header Content-Type 'text/html;charset=utf-8'; 
+            return 200 "key:$arg_attname";
+        }
+
+        location /test2 {
+            
+            if ($arg_attname ~ "(.+)"){
+                #设置下载文件名
+                        add_header Content-Type application/x-download;
+                        add_header Content-Disposition "attachment;filename=$arg_attname";
+            }
+
+             add_header Content-Type 'text/html;charset=utf-8'; 
+              return 200 "no this file";
+            
+        }
+
+
 

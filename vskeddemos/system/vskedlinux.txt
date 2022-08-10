@@ -90,6 +90,7 @@ tar -zccf [fileName].tar.gz [fileOrFolderName]
 
 13* 解tar压缩包uncompress a gz bag
 tar -zxvf [fileName].tar.gz
+tar -xvf 111.tar
 
 
 14* 安装rpm包install rpm package

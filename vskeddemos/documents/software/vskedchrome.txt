@@ -8,3 +8,7 @@ ctrl+shift+p 输入screen
 先将js文件保存为utf-8文件格式
 在chrome浏览器中安装Set Character Encoding插件
 
+3* 打开自动播放设置
+在快捷方式中目标参数里，最后面添加
+ --autoplay-policy=no-user-gesture-required
+
