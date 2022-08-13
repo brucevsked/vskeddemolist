@@ -25,5 +25,5 @@ http://localhost:3000/
 
 修改package.json添加依赖    "vue-router": "4.0.14"
 npm info vue-router versions
-安装最新的vue-router@4.0.14
-npm install vue-router@4.0.14
+安装最新的vue-router
+npm install vue-router

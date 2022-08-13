@@ -55,6 +55,10 @@ public class AccountPO implements Serializable { //检查3 implements Serializab
 @GeneratedValue
 设置主键的生成策略，这种方式依赖于具体的数据库，如果数据库不支持自增主键，那么这个类型是没法用的。
 不推荐使用数据库自动生成ID，这样不方便移植，现在都使用程序算法生成ID，方便统一管理
+如mysql自增时代码
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+数据库使用
+`id`  INTEGER UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '用户编号',
 
 @Basic
 表示一个简单的属性到数据库表的字段的映射,对于没有任何标注的getXxxx()方法,
