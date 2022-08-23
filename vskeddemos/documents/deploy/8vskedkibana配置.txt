@@ -97,3 +97,10 @@ put schools_gov
 POST schools_gov/_bulk
 {   "index":{      "_index":"schools_gov", "_id":"1"   }}
 {   "name":"Model School", "description":"CBSE Affiliation", "street":"silk city",   "city":"Hyderabad", "state":"AP", "zip":"500030", "location":[17.3903703, 78.4752129],   "fees":200, "tags":["Senior Secondary", "beautiful campus"], "rating":"3"}{   "index":{      "_index":"schools_gov",  "_id":"2"   }}{   "name":"Government School", "description":"State Board Affiliation",   "street":"Hinjewadi", "city":"Pune", "state":"MH", "zip":"411057",   "location": [18.599752, 73.6821995], "fees":500, "tags":["Great Sports"], "rating":"4"}
+
+--------------------------------------------------------------------------------
+
+systemctl stop kibana.service
+systemctl disable kibana.service
+
+yum remove -y kibana

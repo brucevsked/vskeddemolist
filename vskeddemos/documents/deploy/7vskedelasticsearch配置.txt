@@ -131,3 +131,9 @@ systemctl enable elasticsearch.service
 systemctl status elasticsearch.service
 
 http://10.0.193.10:9222
+
+--------------------------------------------------------------------------------
+systemctl stop elasticsearch.service
+systemctl disable elasticsearch.service
+
+yum remove -y elasticsearch
