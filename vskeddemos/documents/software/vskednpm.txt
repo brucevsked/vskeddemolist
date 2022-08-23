@@ -28,6 +28,9 @@ npm install webpack -g
 添加参数-g为全局
 在修改完package.json文件后需要运行此命令安装新的依赖库
 
+npm install 库名@版本号
+npm install vue-router@3.5.2
+
 8* 更新模块
 npm update [模块名]
 npm update express
