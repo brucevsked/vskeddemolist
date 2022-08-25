@@ -1,6 +1,6 @@
 
 
-cd L:\git\vskeddemolist\vskeddemos\htmljavascriptcss\vue2demo
+cd L:\git\vskeddemolist\vskeddemos\htmljavascriptcss\vue2lesson
 vue create lesson1
 Y
 npm
