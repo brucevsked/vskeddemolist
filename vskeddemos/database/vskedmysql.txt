@@ -16,7 +16,7 @@ max_binlog_size = 1024M
 binlog_rows_query_log_events = 1
 然后重启mysql服务
 查看日志状态
-show variables like 'log_%'; 
+show variables like 'log_%';
 show variables like '%log_bin%';
 
 
@@ -1147,3 +1147,29 @@ find / -name mysql | xargs rm -rf
 rm -rf /var/lib/mysql
 rm -rf /var/lib/mysql/mysql
 rm -rf /usr/share/mysql
+
+-----------------------------------------------------------------
+误执行delete使用ibd文件恢复
+
+找另外一台机器！！！
+1 新建一个库跟那名字一样的（注意编码）
+2 
+建个结构一样的表
+CREATE TABLE `app_user`  (
+  `id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '手机号',
+ 
+  `spare15` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注15',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表' ROW_FORMAT = DYNAMIC;
+移除要恢复表的表空间
+
+alter table `app_user` DISCARD TABLESPACE;
+
+3 将ibd文件复制到数据库目录，可以用 看到
+show global variables like '%datadir%';
+
+4 重新导入表空间
+alter table `app_user` IMPORT TABLESPACE;
+
+5再查询就看到数据恢复了

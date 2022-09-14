@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>测试取地址</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+
+
+
+</head>
+
+<body>
+
+
+
+<script>
+"use strict"
+
+var test=new Object({
+ s1(){
+console.log("------------"+new Date());
+  },
+  proc(url){
+    var p1=url.indexOf("preUrl=");
+    var s1=url.substring(0,p1);
+    var s2=url.substring(p1+7);
+    var preUrlDecode=decodeURIComponent(s2);
+    console.log(s1)
+    console.log(s2)
+    console.log(preUrlDecode);
+
+    var ar1=s1.split("&");
+
+    var ktvId;
+    var roomId;
+    var playSource;
+
+    for(var i=0;i<ar1.length;i++){
+      var tmpS1=ar1[i];
+      if(tmpS1.indexOf("ktvId")>=0){
+        ktvId=tmpS1.substring(tmpS1.indexOf("=")+1);
+      }
+      if(tmpS1.indexOf("roomId")>=0){
+        roomId=tmpS1.substring(tmpS1.indexOf("=")+1);
+      }
+    }
+    
+    console.log("ktvId|"+ktvId+"|");
+    console.log("roomId|"+roomId+"|");
+
+    var ar2=preUrlDecode.split("&");
+    for(var i=0;i<ar2.length;i++){
+      var tmpS1=ar2[i];
+      if(tmpS1.indexOf("playSource")>=0){
+        playSource=tmpS1.substring(tmpS1.indexOf("=")+1);
+      }
+      
+    }
+
+    console.log("playSource|"+playSource+"|");
+    return {
+      ktvId:ktvId,
+      roomId:roomId,
+      playSource:playSource
+    };
+
+  }
+});
+
+var result=test.proc("/ktvId=2&roomId=3&preUrl=https%3A%2F%2Fak-h5.act-media.com%2F%23%2F%3FktvId%3D1%26roomId%3D1%26playSource%3D1%26barcode%3D14513210101149%26cancelHref%3D1");
+console.log("result:",result);
+
+setTimeout(test.s1,2000);
+</script>
+
+</body>
+</html>

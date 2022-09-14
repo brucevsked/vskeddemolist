@@ -22,7 +22,7 @@ export default {
           console.log(1);
 window.init=function(){
           var map = new AMap.Map("map1", {
-                           center: [116.478935, 39.997761],
+                           center: [116.75199, 36.55358],
                            zoom: 17
                        });
           this.map=map;
