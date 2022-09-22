@@ -188,7 +188,10 @@ git常用忽略提交文件列表
 *.iml
 
 .idea/
+.settings/
 bin/
 classes/
 target/
+node_modules/
+
 
