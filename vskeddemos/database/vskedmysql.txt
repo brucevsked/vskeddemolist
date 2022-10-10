@@ -501,6 +501,32 @@ now()
 sysdate()
 select DATE_ADD(NOW(),INTERVAL 1 DAY);
 
+3* 联合主键与外键
+
+CREATE TABLE IF NOT EXISTS `account`
+(
+    `accountName`    VARCHAR(100) PRIMARY KEY COMMENT '账号名称',
+    `password`       VARCHAR(100) COMMENT '账号密码',
+    INDEX (`accountName`)
+) engine = InnoDB,COMMENT='账号';
+
+CREATE TABLE IF NOT EXISTS `user`
+(
+    `id`        integer PRIMARY KEY COMMENT '用户编号',
+    `name`      VARCHAR(100)        COMMENT '用户名称',
+    `birthday`  date                COMMENT '出生日期',
+    INDEX (`name`)
+) engine = InnoDB,COMMENT='用户';
+
+CREATE TABLE IF NOT EXISTS `userAccount`
+(
+    `userId`        integer       COMMENT '用户编号',
+    `accountName`   VARCHAR(100)  COMMENT '账号名称',
+    primary key (`userId`,`accountName`),
+    foreign key (`userId`) references `user`(`id`),
+    foreign key (`accountName`) references `account`(`accountName`)
+) engine = InnoDB,COMMENT='用户账号';
+
 --------------------------------
 problem
 

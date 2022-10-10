@@ -1,0 +1,115 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<!--<meta name="viewport" content="width=640, target-densitydpi=device-dpi, user-scalable=no"/>-->
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+      <meta charset="UTF-8">
+
+<meta content="" name="description"/>
+<meta content="" name="keywords"/>
+<script type="text/javascript" src="./impublic/js/zepto.js"></script>
+
+<style type="text/css">
+#rule1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 10px;
+    background: url("./impublic/images/rule1.png") repeat-x;
+}
+
+#rule2 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 10px;
+    height: 100%;
+    background: url("./impublic/images/rule2.png") repeat-y;
+}
+
+#main {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: #00aaff solid 10px;
+    box-sizing: border-box;
+}
+
+span {
+    font-size: 30px;
+    color: #f00;
+}
+</style>
+</head>
+<body>
+<div id="main"></div>
+<script type="text/javascript">
+window.addEventListener('resize', function () {
+//        console.log('resize');
+//        if (animFrame) cancelAnimationFrame(animFrame);
+refrash();
+}, false);
+//    window.addEventListener("orientationchange", function () {
+//        console.log('orientationchange', window.orientation);
+//        if (animFrame) cancelAnimationFrame(animFrame);
+//        refrash();
+//    }, false);
+function refrash() {
+var _w = window.innerWidth;
+var _h = window.innerHeight;
+var _w2 = 750;
+var _h2 = Math.floor(750 / _w * _h);
+
+$('#main').html(navigator.userAgent
+    + '<br>' +
+    '实际尺寸：width:' + _w * window.devicePixelRatio + 'px,height:' + _h * window.devicePixelRatio + 'px'
+    + '<br>' +
+    '换算尺寸：width:<span>' + _w2 + '</span>px,height:<span>' + _h2 + '</span>px'
+);
+
+//        checkTop();
+}
+
+var resizeTimeout;
+var info = '';
+var frame = 0;
+var to;
+
+function checkTop() {
+if (frame >= 30) return;
+frame++;
+info += '|' + document.body.scrollTop;
+$('#main').html(info);
+if (document.body.scrollTop != 0) {
+    document.body.scrollTop = 0;
+    if (to) {
+        clearTimeout(to);
+        to = null;
+    }
+    return;
+}
+to = setTimeout(checkTop, 100);
+}
+
+refrash();
+
+var animFrame;
+
+function anim() {
+animFrame = requestAnimationFrame(anim);
+}
+
+anim();
+</script>
+<div id="rule1"></div>
+<div id="rule2"></div>
+</body>
+</html>
