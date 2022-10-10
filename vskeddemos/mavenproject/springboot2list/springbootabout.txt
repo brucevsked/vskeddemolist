@@ -224,3 +224,14 @@ That setup does not allow you to override individual dependencies using a proper
 </dependencyManagement>
 In the example above, we specify a BOM but any dependency type can be overridden that way.
 
+15* 自动执行脚本
+always为始终执行初始化
+embedded只初始化内存数据库（默认值）,如h2等
+never为不执行初始化
+
+spring:
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
