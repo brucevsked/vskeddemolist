@@ -69,6 +69,34 @@ if( !empty($head_id) && $head_id >0 )
 $this->方法名(参数);
 $this->get_area_info($community_info['province_id']); 
 
+9* 写文件 php write file
+
+        $f = fopen("d:/testaaa.txt", "w");
+        $text = "文件内容";
+        fwrite($f, $text);
+10* 面向对象编程
+
+class BaseRequestVO {
+    public $req_time;
+    public $version;
+    public $out_org_code;
+    public $req_data;
+
+	public static function getReqTime(){
+        $res_data = date('YmdHis',time());
+        return $res_data;
+    }
+}
+
+调用
+$BaseRequestVO=new BaseRequestVO();
+        $BaseRequestVO->req_time='20210907150256';
+        $BaseRequestVO->version='3.0';
+        $BaseRequestVO->out_org_code='OP00000003';
+        $BaseRequestVO->req_data='仅测试需要拼装';
+req_time=$BaseRequestVO->getReqTime();
+
+
 --------------------------------------------------------------------------------
 
 宝塔面板安装
