@@ -154,6 +154,8 @@ Elasticsearch
 数据库
 关系型
 postgresql
+内存库
+h2
 对象型
 InterSystems Caché数据库
 数据分析类数据库（列式存储）
