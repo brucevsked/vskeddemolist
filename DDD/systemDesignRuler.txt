@@ -14,7 +14,7 @@ front user interface
 2validate the user input data is null? is empty,data type,min value,max value. etc.
 3Object-Oriented Programming use javascript class defined the object and action like DDD
 4process Cross-Origin Resource Sharing in ajax or fetch or axios
-5test all code of business flow in page.
+5test all code of business flow in page.unit test
 6set a switch when it is open we print the log in console.we can defined the log level,like trace,debug,error etc.
 7give the use clear tips when program error or has some problem
 8only use one technology push request.like jquery ajax,axios,fetch.only use one.and package it to global code;
@@ -30,7 +30,7 @@ back service
 2validate the user input data is null? is empty,data type,min value,max value. etc.
 3Object-Oriented Programming use the class and defined the bussiness domain object like DDD
 4process Cross-Origin Resource Sharing at request or intercepter or filter etc.in spring boot we can use global CorsConfig.
-5test all service or domain object action .we can use memeory database(h2) and mock data.
+5test all service or domain object action .we can use memeory database(h2) and mock data. unit test
 6set a switch when it is open we can write the log in file or database.we can control the log level.(logback,log4j2)
 7when code has some error or exception give message to front
 8process the ajax,axios,fetch request only use one.
