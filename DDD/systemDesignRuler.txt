@@ -19,6 +19,9 @@ front user interface
 7give the use clear tips when program error or has some problem
 8only use one technology push request.like jquery ajax,axios,fetch.only use one.and package it to global code;
 9global data struct like {"code":"0000","msg":"user register success","data":[]}
+10 monitor system, gather the environment info and show it to log
+11 when monitor find error or exception send message to back system.it will send maill or alert root user
+12request is asynchronism or synchronism we must know the function call trace，which is before,which is after
 
 --------------------------------------------------------------------------------
 back service  
@@ -32,4 +35,6 @@ back service
 7when code has some error or exception give message to front
 8process the ajax,axios,fetch request only use one.
 9response global data struct like {"code":"0000","msg":"user register success","data":[]}
-
+10 monitor system ,gather the environment like cpu memory disk space network etc.
+11 when the monitor find error or exception send message or call root user
+12process the asynchronism or synchronism .we must decide by scene
