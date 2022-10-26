@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.jat</groupId>
@@ -9,6 +10,7 @@
 	<version>1.0</version>
 
 	<name>${project.artifactId}</name>
+	<url>https://www.jat168.com</url>
 
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
@@ -22,14 +24,41 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
+
 		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
-
-		<log4j.version>2.18.0</log4j.version>
 		<testng.version>7.5</testng.version>
+		<mysqlConnector.version>8.0.31</mysqlConnector.version>
+		<h2.version>2.1.214</h2.version>
 	</properties>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.5</version>
+		<relativePath />
+		<!-- lookup parent from repository -->
+	</parent>
 	<dependencies>
+		<!-- spring boot devtools 第一步添加依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- spring boot核心,包括自动配置支持，日志和YAML -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- test start -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
@@ -37,19 +66,60 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${log4j.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>mockito-junit-jupiter</artifactId>
+					<groupId>org.mockito</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>junit-vintage-engine</artifactId>
+					<groupId>org.junit.vintage</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>junit-jupiter</artifactId>
+					<groupId>org.junit.jupiter</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- test end -->
+		<!-- 对web开发的支持，包含了spring webmvc和tomcat等web开发的特性 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- 排除Tomcat依赖 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>${log4j.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${log4j.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysqlConnector.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -64,7 +134,7 @@
 					<target>${java.version}</target>
 					<!-- true:跳过测试 -->
 					<skip>true</skip>
-					<encoding>UTF-8</encoding>
+					<encoding>${maven.compiler.encoding}</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -73,6 +143,17 @@
 				<version>${mavenSurefirePlugin.version}</version>
 				<configuration>
 					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- spring boot devtools 第二步添加maven插件 -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.7.4</version>
+				<configuration>
+					<mainClass>com.jat.Application</mainClass>
+					<!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
+					<fork>true</fork>
 				</configuration>
 			</plugin>
 		</plugins>

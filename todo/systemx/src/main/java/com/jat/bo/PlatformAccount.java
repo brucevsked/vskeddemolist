@@ -65,7 +65,7 @@ public class PlatformAccount {
         }
     }
 
-    public static void checkIsExist(PlatformAccount platformAccount){
+    public void isExist(PlatformAccount platformAccount){
         if(platformAccount !=null){
             throw new IllegalArgumentException("账户名["+ platformAccount.getName()+"]已经存在！");
         }

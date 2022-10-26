@@ -1,38 +1,13 @@
 package com.jat;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * Hello world!
- *
- */
+@SpringBootApplication
 public class Application {
 
-	private static final Logger log = LoggerFactory.getLogger(Application.class);
-
-	public String hello(String accountName) {
-		String currenAccounttName="";
-
-		if(log.isTraceEnabled()){
-			log.trace("Log4j2testNG7Application start");
-		}
-
-		if(log.isDebugEnabled()){
-			log.debug("accountName is:{}",accountName);
-		}
-
-		currenAccounttName=accountName;
-
-		if(log.isInfoEnabled()){
-			log.info("currentName is:{}",currenAccounttName);
-		}
-
-		if(log.isTraceEnabled()){
-			log.trace("Log4j2testNG7Application end");
-		}
-
-		return currenAccounttName;
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
 	}
 
 }

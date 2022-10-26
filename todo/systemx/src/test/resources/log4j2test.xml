@@ -5,9 +5,8 @@
 <!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
 <configuration status="warn" monitorInterval="60">
     <Properties>
-        <!--<Property name="logpath">${sys:catalina.home}/logs/mybatismutids/</Property>-->
-        <Property name="logpath">/logs/log4j2testng7simpletest/</Property>
-        <Property name="logname">log4j2testng7simpletest</Property>
+        <Property name="logpath">/logs/systemxtest/</Property>
+        <Property name="logname">systemxtest</Property>
     </Properties>
     <!--先定义所有的appender-->
     <appenders>
@@ -70,7 +69,16 @@
     <loggers>
         <!--过滤掉spring和hibernate的一些无用的debug信息-->
         <logger name="org.springframework" level="ERROR"></logger>
-
+        <logger name="org.hibernate" level="ERROR"></logger>
+        <logger name="com.zaxxer" level="ERROR"></logger>
+        <logger name="org.mybatis" level="ERROR"></logger>
+        <logger name="io.netty" level="ERROR"></logger>
+        <logger name="io.lettuce" level="ERROR"></logger>
+        <logger name="springfox.documentation" level="ERROR"></logger>
+        <logger name="org.apache" level="ERROR"></logger>
+        <logger name="reactor.util" level="ALL"></logger>
+        <!-- 不打印本项目sql语句,需要时请调整为debug -->
+        <logger name="com.vsked.dao" level="ALL" additivity="true"></logger>
         <root level="all">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
