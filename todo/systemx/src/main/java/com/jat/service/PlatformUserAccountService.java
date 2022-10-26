@@ -3,7 +3,6 @@ package com.jat.service;
 import com.jat.bo.PlatformAccount;
 import com.jat.bo.PlatformUser;
 import com.jat.bo.PlatformUserAccount;
-import com.jat.manager.PlatformAccountManager;
 import com.jat.manager.PlatformUserAccountManager;
 
 public class PlatformUserAccountService {
@@ -25,7 +24,7 @@ public class PlatformUserAccountService {
         this.platformUserService = platformUserService;
     }
 
-    public void register(String accountName, String accountPassword){
+    public PlatformUserAccount register(String accountName, String accountPassword){
         PlatformAccount account=platformAccountService.create(accountName,accountPassword);
         PlatformAccount accountStore=platformAccountService.findBy(account.getName().getName());
         account.isExist(accountStore);
@@ -33,6 +32,6 @@ public class PlatformUserAccountService {
         PlatformUser user=platformUserService.create(accountName,null);
 
         PlatformUserAccount userAccount=platformUserAccountManager.create(user,account);
-        platformUserAccountManager.save(userAccount);
+        return platformUserAccountManager.save(userAccount);
     }
 }

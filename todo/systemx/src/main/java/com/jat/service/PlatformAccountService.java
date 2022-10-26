@@ -17,7 +17,7 @@ public class PlatformAccountService {
 
     public PlatformAccount create(String accountName, String accountPassword){
         Long accountId=platformIdService.nextAccountId();
-        return platformAccountManager.create(accountId,accountName,accountName);
+        return platformAccountManager.create(accountId,accountName,accountPassword);
     }
     public PlatformAccount findBy(String accountName){
         return platformAccountManager.findBy(accountName);
