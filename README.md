@@ -1,7 +1,9 @@
 # vskeddemolist
 
-联系请加qq1485559892  
+contact me qq1485559892 or send email vsked@163.com to me  
 this is alot of demo my name is vsked now u can see the java   project at this list  
+
+## Thank for JetBrains support idea license
 
 ## at first please look at the(索引请查看以下文档)  
 vskeddemos/documents/demo工程列表说明.docx  
