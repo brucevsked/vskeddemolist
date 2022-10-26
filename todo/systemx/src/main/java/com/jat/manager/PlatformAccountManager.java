@@ -15,6 +15,10 @@ public class PlatformAccountManager {
         return new PlatformAccount(id,name,pass);
     }
 
+    public PlatformAccount create(Long id, String name, String pass,String passAgain){
+        return new PlatformAccount(id,name,pass,passAgain);
+    }
+
     public PlatformAccount findBy(String accountName){
         PlatformAccountName accountNameQuery=new PlatformAccountName(accountName);
         return platformAccountRepository.findBy(accountNameQuery);

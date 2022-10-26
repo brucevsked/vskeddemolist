@@ -19,7 +19,8 @@ public class PlatformUserAccountServiceTest extends BaseTestWithTransactional {
     public void register(){
         String accountName="testRegister";
         String password="myPass123";
-        PlatformUserAccount userAccount=platformUserAccountService.register(accountName,password);
+        String passwordAgain="myPass123";
+        PlatformUserAccount userAccount=platformUserAccountService.register(accountName,password,passwordAgain);
         log.debug("{}",userAccount);
     }
 }
