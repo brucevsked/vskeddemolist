@@ -1,6 +1,7 @@
 package com.jat.repositoryimpl.jpaImpl;
 
 import com.jat.bo.PlatformAccount;
+import com.jat.bo.PlatformAccountName;
 import com.jat.bo.PlatformUser;
 import com.jat.bo.PlatformUserAccount;
 import com.jat.po.PlatformAccountPO;
@@ -25,6 +26,11 @@ public class PlatformUserAccountRepositoryImpl implements PlatformUserAccountRep
     public PlatformUserAccount save(PlatformUserAccount bo) {
         PlatformUserAccountPO po=boToPo(bo);
         po=iPlatformUserAccountRepository.save(po);
+        return poToBo(po);
+    }
+
+    public PlatformUserAccount findBy(PlatformAccountName platformAccountName) {
+        PlatformUserAccountPO po=iPlatformUserAccountRepository.findByAccountName(platformAccountName.getName()).orElse(null);
         return poToBo(po);
     }
 

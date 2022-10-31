@@ -24,6 +24,17 @@ public class PlatformUserAccountService {
         this.platformUserService = platformUserService;
     }
 
+    public PlatformUserAccount create(String accountName, String accountPassword){
+        PlatformAccount account=platformAccountService.create(accountName,accountPassword);
+        PlatformAccount accountStore=platformAccountService.findBy(account.getName().getName());
+        account.isExist(accountStore);
+
+        PlatformUser user=platformUserService.create(accountName,null);
+
+        PlatformUserAccount userAccount=platformUserAccountManager.create(user,account);
+        return platformUserAccountManager.save(userAccount);
+    }
+
     public PlatformUserAccount register(String accountName, String accountPassword, String passwordAgain){
         PlatformAccount account=platformAccountService.create(accountName,accountPassword,passwordAgain);
         PlatformAccount accountStore=platformAccountService.findBy(account.getName().getName());
@@ -37,5 +48,14 @@ public class PlatformUserAccountService {
 
     public void login(String accountName, String accountPassword){
         //TODO login process
+        PlatformAccount account=platformAccountService.create(accountName,accountPassword);
+        PlatformUserAccount platformUserAccountStore=platformUserAccountManager.findBy(account.getName().getName());
+        PlatformUserAccount.isNotExist(platformUserAccountStore);
+
+        platformUserAccountStore.login(account);
+
+
+
+
     }
 }

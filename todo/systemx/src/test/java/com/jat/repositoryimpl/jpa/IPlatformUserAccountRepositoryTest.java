@@ -48,9 +48,4 @@ public class IPlatformUserAccountRepositoryTest extends BaseTestWithTransactiona
         log.debug("{}",po);
     }
 
-    @Test
-    public void nextId(){
-        Long id=userAccountRepository.count();
-        log.debug("{}",id);
-    }
 }

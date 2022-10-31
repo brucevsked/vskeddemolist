@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS `rolePermission`;
 DROP TABLE IF EXISTS `permission`;
 DROP TABLE IF EXISTS `platformUserRole`;
 DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `platformUserCertificate`;
+DROP TABLE IF EXISTS `platformCertificate`;
 DROP TABLE IF EXISTS `platformUserAccount`;
 DROP TABLE IF EXISTS `platformUser`;
 DROP TABLE IF EXISTS `platformAccount`;
@@ -27,6 +29,21 @@ CREATE TABLE IF NOT EXISTS `platformUserAccount`
     primary key (`userId`,`accountId`),
     foreign key (`userId`)    references `platformUser`(`id`),
     foreign key (`accountId`) references `platformAccount`(`id`)
+) ;
+
+CREATE TABLE IF NOT EXISTS `platformCertificate`
+(
+    `id`          integer PRIMARY KEY,
+    `expireTime`  datetime
+);
+
+CREATE TABLE IF NOT EXISTS `platformUserCertificate`
+(
+    `userId`        integer,
+    `certificateId` integer,
+    primary key (`userId`,`certificateId`),
+    foreign key (`userId`)    references `platformUser`(`id`),
+    foreign key (`certificateId`) references `platformCertificate`(`id`)
 ) ;
 
 CREATE TABLE IF NOT EXISTS `role`

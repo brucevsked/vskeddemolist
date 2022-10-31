@@ -9,42 +9,34 @@ public class PlatformAccount {
     private PlatformAccountName name;
     private PlatformAccountPassword password;
 
-    public PlatformAccount(Long accountIdPar, String accountNameStr, String passwordStr) {
-        PlatformAccountId platformAccountId =new PlatformAccountId(accountIdPar);
-        PlatformAccountName platformAccountName =new PlatformAccountName(accountNameStr);
-        PlatformAccountPassword platformAccountPassword =new PlatformAccountPassword(passwordStr);
-        this.id= platformAccountId;
-        this.name = platformAccountName;
-        this.password = platformAccountPassword;
+    public PlatformAccount(Long accountId, String accountName, String password) {
+        this.id= new PlatformAccountId(accountId);
+        this.name = new PlatformAccountName(accountName);
+        this.password = new PlatformAccountPassword(password);
     }
 
-    public PlatformAccount(Long accountIdPar,String accountNameStr, String passwordStr, String passwordAgainStr) {
-        PlatformAccountId platformAccountId =new PlatformAccountId(accountIdPar);
-        PlatformAccountName platformAccountName =new PlatformAccountName(accountNameStr);
+    public PlatformAccount(Long accountId,String accountName, String passwordStr, String passwordAgainStr) {
+        this.id= new PlatformAccountId(accountId);
+        this.name = new PlatformAccountName(accountName);
         PlatformAccountPassword platformAccountPassword =new PlatformAccountPassword(passwordStr);
         PlatformAccountPassword passwordAgain=new PlatformAccountPassword(passwordAgainStr);
         platformAccountPassword.validAgainPassword(passwordAgain.getPassword());
-        this.id= platformAccountId;
-        this.name = platformAccountName;
         this.password = platformAccountPassword;
     }
 
-    public PlatformAccount(Long accountIdPar,String accountNameStr, String passwordOldStr, String passwordNewStr, String passwordNewAgainStr){
-        PlatformAccountId platformAccountId =new PlatformAccountId(accountIdPar);
-        PlatformAccountName platformAccountName =new PlatformAccountName(accountNameStr);
+    public PlatformAccount(Long accountId,String accountName, String passwordOldStr, String passwordNewStr, String passwordNewAgainStr){
+        this.id= new PlatformAccountId(accountId);
+        this.name = new PlatformAccountName(accountName);
         PlatformAccountPassword platformAccountPasswordOld =new PlatformAccountPassword(passwordOldStr);
         PlatformAccountPassword platformAccountPasswordNew =new PlatformAccountPassword(passwordNewStr);
         PlatformAccountPassword passwordAgain=new PlatformAccountPassword(passwordNewAgainStr);
         platformAccountPasswordNew.validAgainPassword(passwordAgain.getPassword());
         platformAccountPasswordNew.validOldPassword(platformAccountPasswordOld.getPassword());
-        this.id= platformAccountId;
-        this.name = platformAccountName;
         this.password = platformAccountPasswordNew;
     }
 
-    public void changePassword(String passwordNewStr){
-        PlatformAccountPassword platformAccountPasswordNew =new PlatformAccountPassword(passwordNewStr);
-        this.password= platformAccountPasswordNew;
+    public void changePassword(String passwordNew){
+        this.password= new PlatformAccountPassword(passwordNew);
     }
 
     public void setId(PlatformAccountId id) {

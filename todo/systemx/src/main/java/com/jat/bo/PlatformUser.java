@@ -45,19 +45,14 @@ public class PlatformUser {
         return age;
     }
 
-    public PlatformUser(String nameStr) {
-        PlatformUserName name=new PlatformUserName(nameStr);
-        this.name = name;
+    public PlatformUser(String userName) {
+        this.name = new PlatformUserName(userName);
     }
 
-    public PlatformUser(Long idPar, String nameStr, LocalDate birthdayDate) {
-        PlatformUserId id=new PlatformUserId(idPar);
-        PlatformUserName name=new PlatformUserName(nameStr);
-        PlatformUserBirthday birthday=new PlatformUserBirthday(birthdayDate);
-
-        this.id = id;
-        this.name = name;
-        this.birthday = birthday;
+    public PlatformUser(Long id, String name, LocalDate birthdayDate) {
+        this.id = new PlatformUserId(id);
+        this.name = new PlatformUserName(name);
+        this.birthday = new PlatformUserBirthday(birthdayDate);
         this.age = calculateAge(birthday);
     }
 

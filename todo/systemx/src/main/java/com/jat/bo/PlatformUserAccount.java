@@ -24,6 +24,18 @@ public class PlatformUserAccount {
         return platformAccount;
     }
 
+    public static void isNotExist(PlatformUserAccount platformUserAccount){
+        if(platformUserAccount==null){
+            throw new IllegalArgumentException("账号不存在！");
+        }
+    }
+
+    public void login(PlatformAccount account){
+        if(!this.platformAccount.getPassword().getPassword().equals(account.getPassword().getPassword())){
+            throw new IllegalArgumentException("账号密码输入错误！");
+        }
+    }
+
     @Override
     public String toString() {
         return "{" +
