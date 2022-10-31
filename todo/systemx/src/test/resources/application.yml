@@ -1,3 +1,15 @@
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
 spring:
   profiles:
     active: test
+  lifecycle:
+    timeout-per-shutdown-phase: 60s #设置优雅停机缓冲时间默认30s
+  devtools:
+    restart:
+      enabled: true #设置开启热部署

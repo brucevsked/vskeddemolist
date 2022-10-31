@@ -24,7 +24,7 @@ public class PlatformAccountRepositoryImplTest extends BaseTestWithTransactional
 
     @Test
     public void findByName(){
-        PlatformAccountName platformAccountName=new PlatformAccountName("admin");
+        PlatformAccountName platformAccountName=new PlatformAccountName("sysadmin");
         PlatformAccount platformAccount=platformAccountRepository.findBy(platformAccountName);
         log.debug("{}",platformAccount);
     }

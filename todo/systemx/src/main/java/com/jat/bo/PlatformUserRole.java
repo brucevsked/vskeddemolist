@@ -1,15 +1,20 @@
 package com.jat.bo;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 public class PlatformUserRole {
 
     private PlatformUser platformUser;
-    private List<Role> roles=new LinkedList<>();
+    private List<Role> roles;
 
     public PlatformUserRole(PlatformUser platformUser, List<Role> roles) {
+        if(platformUser ==null){
+            throw new IllegalArgumentException("用户不能为空！");
+        }
+        if(roles ==null){
+            throw new IllegalArgumentException("角色列表不能为空！");
+        }
         this.platformUser = platformUser;
         this.roles = roles;
     }

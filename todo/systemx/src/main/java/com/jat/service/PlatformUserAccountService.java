@@ -34,4 +34,8 @@ public class PlatformUserAccountService {
         PlatformUserAccount userAccount=platformUserAccountManager.create(user,account);
         return platformUserAccountManager.save(userAccount);
     }
+
+    public void login(String accountName, String accountPassword){
+        //TODO login process
+    }
 }
