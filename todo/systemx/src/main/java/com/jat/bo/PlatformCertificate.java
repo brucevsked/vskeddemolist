@@ -8,6 +8,11 @@ public class PlatformCertificate {
     private PlatformCertificateId id;
     private PlatformCertificateExpireTime expireTime;
 
+    public PlatformCertificate(Long id) {
+        this.id = new PlatformCertificateId(id);
+        this.expireTime=new PlatformCertificateExpireTime();
+    }
+
     public PlatformCertificate(Long id, LocalDateTime expireTime) {
         this.id = new PlatformCertificateId(id);
         this.expireTime = new PlatformCertificateExpireTime(expireTime);

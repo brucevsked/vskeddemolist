@@ -46,6 +46,14 @@ public class PlatformUserAccountService {
         return platformUserAccountManager.save(userAccount);
     }
 
+    public void isNotExist(PlatformUserAccount platformUserAccount){
+        PlatformUserAccount.isNotExist(platformUserAccount);
+    }
+
+    public PlatformUserAccount findBy(String accountName){
+        return platformUserAccountManager.findBy(accountName);
+    }
+
     public void login(String accountName, String accountPassword){
         //TODO login process
         PlatformAccount account=platformAccountService.create(accountName,accountPassword);
@@ -53,9 +61,6 @@ public class PlatformUserAccountService {
         PlatformUserAccount.isNotExist(platformUserAccountStore);
 
         platformUserAccountStore.login(account);
-
-
-
 
     }
 }

@@ -1,13 +1,18 @@
 package com.jat.config;
 
 import com.jat.manager.PlatformAccountManager;
+import com.jat.manager.PlatformCertificateManager;
 import com.jat.manager.PlatformIdManager;
 import com.jat.manager.PlatformUserAccountManager;
+import com.jat.manager.PlatformUserCertificateManager;
 import com.jat.manager.PlatformUserManager;
 import com.jat.repositoryimpl.jpaImpl.PlatformAccountRepositoryImpl;
+import com.jat.repositoryimpl.jpaImpl.PlatformCertificateRepositoryImpl;
 import com.jat.repositoryimpl.jpaImpl.PlatformUserAccountRepositoryImpl;
+import com.jat.repositoryimpl.jpaImpl.PlatformUserCertificateRepositoryImpl;
 import com.jat.repositoryimpl.jpaImpl.PlatformUserRepositoryImpl;
 import com.jat.service.PlatformAccountService;
+import com.jat.service.PlatformCertificateService;
 import com.jat.service.PlatformIdService;
 import com.jat.service.PlatformUserAccountService;
 import com.jat.service.PlatformUserService;
@@ -21,15 +26,20 @@ public class BeanManager {
     @Resource
     private PlatformAccountRepositoryImpl platformAccountRepositoryImpl;
     @Resource
-    private PlatformUserRepositoryImpl platformUserRepository;
+    private PlatformUserRepositoryImpl platformUserRepositoryImpl;
     @Resource
-    private PlatformUserAccountRepositoryImpl platformUserAccountRepository;
+    private PlatformUserAccountRepositoryImpl platformUserAccountRepositoryImpl;
+    @Resource
+    private PlatformCertificateRepositoryImpl platformCertificateRepositoryImpl;
+    @Resource
+    private PlatformUserCertificateRepositoryImpl platformUserCertificateRepositoryImpl;
 
     @Bean("platformIdManager")
     public PlatformIdManager getIdManager(){
         PlatformIdManager manager=new PlatformIdManager();
         manager.setPlatformAccountRepository(platformAccountRepositoryImpl);
-        manager.setPlatformUserRepository(platformUserRepository);
+        manager.setPlatformUserRepository(platformUserRepositoryImpl);
+        manager.setPlatformCertificateRepository(platformCertificateRepositoryImpl);
         return manager;
     }
 
@@ -58,7 +68,7 @@ public class BeanManager {
     @Bean("platformUserManager")
     public PlatformUserManager getUserManager(){
         PlatformUserManager manager=new PlatformUserManager();
-        manager.setPlatformUserRepository(platformUserRepository);
+        manager.setPlatformUserRepository(platformUserRepositoryImpl);
         return manager;
     }
 
@@ -73,7 +83,7 @@ public class BeanManager {
     @Bean("platformUserAccountManager")
     public PlatformUserAccountManager getUserAccountManager(){
         PlatformUserAccountManager manager=new PlatformUserAccountManager();
-        manager.setPlatformUserAccountRepository(platformUserAccountRepository);
+        manager.setPlatformUserAccountRepository(platformUserAccountRepositoryImpl);
         return manager;
     }
     @Bean("platformUserAccountService")
@@ -84,5 +94,28 @@ public class BeanManager {
         service.setPlatformUserService(getUserService());
         return service;
     }
+    @Bean("platformCertificateManager")
+    public PlatformCertificateManager getCertificateManager(){
+        PlatformCertificateManager manager=new PlatformCertificateManager();
+        manager.setPlatformCertificateRepository(platformCertificateRepositoryImpl);
+        return manager;
+    }
+
+    @Bean("platformCertificateService")
+    public PlatformCertificateService getCertificateService(){
+        PlatformCertificateService service=new PlatformCertificateService();
+        service.setPlatformCertificateManager(getCertificateManager());
+        service.setPlatformIdService(getIdService());
+        return service;
+    }
+
+    @Bean("platformUserCertificateManager")
+    public PlatformUserCertificateManager getUserCertificateManager(){
+        PlatformUserCertificateManager manager=new PlatformUserCertificateManager();
+        manager.setPlatformUserCertificateRepository(platformUserCertificateRepositoryImpl);
+        return manager;
+    }
+
+
 
 }

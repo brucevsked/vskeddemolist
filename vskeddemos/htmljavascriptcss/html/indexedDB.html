@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>IndexedDB test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+
+
+</head>
+
+<body>
+  <small>添加前请先打开数据库(如数据库不存在则执行创建过程)</small><br /><br />
+    <button onClick="testIndexDB._create('user')">打开数据库</button>
+       <button onClick="testIndexDB._delete('user')">删除数据库</button><br /><br />
+    姓名：<input type="text" id="name"><br />
+    年龄：<input type="number" id="age" min=1><br />
+    性别：<br />
+          男：<input type="radio" id="nan" name="xb" value="male" checked>
+          女：<input type="radio" id="nv" name="xb" value="female"><br />
+    
+    <button onClick="testIndexDB._add()">添加数据</button>
+    <button onClick="testIndexDB._get()">获取数据</button><br />
+    <p id="display"></p>
+
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+"use strict"
+
+var db;
+var request;
+var objectStore;
+
+class IndexedDB {
+
+  constructor(){
+    
+  }
+
+  checkIsSupport(){
+    if("indexedDB" in window) {
+      // 支持
+      document.body.innerHTML=document.body.innerHTML+"your browser support indexedDB";
+    } else {
+      // 不支持
+      document.body.innerHTML=document.body.innerHTML+"your browser not support indexedDB!!!";
+    }
+  }
+
+  _create(dbName){
+    request=indexedDB.open(dbName,1);
+    
+    request.onerror = function () {
+           alert("打开数据库失败:"+event.target.message);
+    }
+    request.onsuccess = function (event) {
+        alert("打开数据库成功!");
+        db=event.target.result;
+        var transaction = db.transaction(["info"], "readwrite");
+        objectStore = transaction.objectStore("info");
+        
+    } 
+    request.onupgradeneeded = function(event) {
+           alert("版本变化！");
+           db = event.target.result;
+           objectStore = db.createObjectStore("info", {keyPath: "userId",autoIncrement: true});
+     }
+}
+
+
+   
+  _delete(dbName){
+    try{
+      request=indexedDB.deleteDatabase(dbName);
+      request.onerror = function () {
+               alert("删除数据库失败:"+event.target.message);
+        }
+        request.onsuccess = function (event) {
+            alert("删除数据库成功!");
+        } 
+    }catch(e){
+       alert(e.getMessage);
+    }
+}
+ 
+  _get (argument) {
+    var p=document.getElementById("display");
+    p.innerHTML="";//获取数据前先清理一下页面已显示的数据
+    if(!db){
+        alert("请打开数据先！");
+        return false;
+    }
+    var store = db.transaction("info").objectStore("info");
+    var keyRange = IDBKeyRange.lowerBound(0);//规定keyRange从0开始
+    var cursorRequest = store.openCursor(keyRange);//按照keyRange的设置开启游标
+ 
+    cursorRequest.onsuccess = function (e) {
+ 
+        var result = e.target.result;
+ 
+        if (!!result == false)
+            return;
+
+            debugger
+           var p=document.getElementById("display");
+           p.innerHTML+="姓名:"+result.value.name+" 年龄:"+result.value.age+" 性别:"+result.value.xb+"<br />";
+
+        result.continue();//这边执行轮询读取
+    };
+ 
+    cursorRequest.onerror = function (e) {
+        alert("数据检索失败！");
+    };
+ 
+}
+ 
+ 
+  _add (argument) {
+    var name=document.getElementById("name").value;
+    var age=document.getElementById("age").value;
+    var xb,flag=document.getElementById("nan").checked;
+    if(flag)
+        xb="男";
+    else
+        xb="女";
+    var detail={
+        name:name,
+        age:age,
+        xb:xb
+    }
+    
+    if(!db){
+        alert("请打开数据先！");
+        return false;
+    }
+       var transaction = db.transaction(["info"], "readwrite");
+       objectStore = transaction.objectStore("info");
+       objectStore.add(detail);
+    alert("添加成功！");
+}
+
+
+
+}//end class IndexedDB
+
+
+
+var testIndexDB=new IndexedDB();
+
+</script>
+
+</body>
+</html>

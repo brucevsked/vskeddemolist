@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>orginal object program</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+
+
+</head>
+
+<body>
+
+<button onclick="person1.sit()">click here1</button><br>
+<button onclick="person2.sit()">click here2</button>
+
+<script>
+"use strict"
+
+// class name
+class Person{
+
+  constructor(...args){
+    if(args.length==0){
+      //set class properties
+      this.age=50;
+      console.log("constructor with no args is here");
+    }else{
+      //set class properties
+      this.age=args[0];
+      console.log("constructor with age is here");
+    }
+    
+  }
+
+
+  sit(){
+    console.log("Person sit down");
+    console.log("person age is:"+this.age);
+  }
+
+  say(str){
+    console.log("Person say:"+str);
+  }
+
+  setAge(ageNew){
+    //change class properties value
+    this.age=ageNew;
+  }
+
+
+}
+
+var person1=new Person();
+console.log("current person1 age is:"+person1.age);
+person1.sit();
+person1.say("My name is person1");
+person1.setAge(52);
+console.log("current person1 age is:"+person1.age);
+
+var person2=new Person(18);
+console.log("current person2 age is:"+person2.age);
+person2.sit();
+person2.say("My name is person2");
+person2.setAge(66);
+console.log("current person2 age is:"+person2.age);
+
+</script>
+
+</body>
+</html>

@@ -18,5 +18,9 @@ public class PlatformIdService {
         return platformIdManager.nextUserId();
     }
 
+    public Long nextCertificateId(){
+        return platformIdManager.nextCertificateId();
+    }
+
 
 }
