@@ -16,7 +16,8 @@ public class PlatformAccountRepositoryImpl implements PlatformAccountRepository 
 
 
     public Long nextId() {
-        return iPlatformAccountRepository.nextId();
+        Long id=iPlatformAccountRepository.nextId();
+        return id==null?1:id;
     }
 
     @Override

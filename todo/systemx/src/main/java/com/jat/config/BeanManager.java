@@ -6,15 +6,17 @@ import com.jat.manager.PlatformIdManager;
 import com.jat.manager.PlatformUserAccountManager;
 import com.jat.manager.PlatformUserCertificateManager;
 import com.jat.manager.PlatformUserManager;
-import com.jat.repositoryimpl.jpaImpl.PlatformAccountRepositoryImpl;
-import com.jat.repositoryimpl.jpaImpl.PlatformCertificateRepositoryImpl;
-import com.jat.repositoryimpl.jpaImpl.PlatformUserAccountRepositoryImpl;
-import com.jat.repositoryimpl.jpaImpl.PlatformUserCertificateRepositoryImpl;
-import com.jat.repositoryimpl.jpaImpl.PlatformUserRepositoryImpl;
+import com.jat.repository.PlatformAccountRepository;
+import com.jat.repository.PlatformCertificateRepository;
+import com.jat.repository.PlatformUserAccountRepository;
+import com.jat.repository.PlatformUserCertificateRepository;
+import com.jat.repository.PlatformUserRepository;
+import com.jat.service.AuthenticationService;
 import com.jat.service.PlatformAccountService;
 import com.jat.service.PlatformCertificateService;
 import com.jat.service.PlatformIdService;
 import com.jat.service.PlatformUserAccountService;
+import com.jat.service.PlatformUserCertificateService;
 import com.jat.service.PlatformUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,15 +26,15 @@ import javax.annotation.Resource;
 public class BeanManager {
 
     @Resource
-    private PlatformAccountRepositoryImpl platformAccountRepositoryImpl;
+    private PlatformAccountRepository platformAccountRepositoryImpl;
     @Resource
-    private PlatformUserRepositoryImpl platformUserRepositoryImpl;
+    private PlatformUserRepository platformUserRepositoryImpl;
     @Resource
-    private PlatformUserAccountRepositoryImpl platformUserAccountRepositoryImpl;
+    private PlatformUserAccountRepository platformUserAccountRepositoryImpl;
     @Resource
-    private PlatformCertificateRepositoryImpl platformCertificateRepositoryImpl;
+    private PlatformCertificateRepository platformCertificateRepositoryImpl;
     @Resource
-    private PlatformUserCertificateRepositoryImpl platformUserCertificateRepositoryImpl;
+    private PlatformUserCertificateRepository platformUserCertificateRepositoryImpl;
 
     @Bean("platformIdManager")
     public PlatformIdManager getIdManager(){
@@ -114,6 +116,24 @@ public class BeanManager {
         PlatformUserCertificateManager manager=new PlatformUserCertificateManager();
         manager.setPlatformUserCertificateRepository(platformUserCertificateRepositoryImpl);
         return manager;
+    }
+
+    @Bean("platformUserCertificateService")
+    public PlatformUserCertificateService getUserCertificateService(){
+        PlatformUserCertificateService service=new PlatformUserCertificateService();
+        service.setPlatformUserCertificateManager(getUserCertificateManager());
+        return service;
+
+    }
+
+    @Bean("authenticationService")
+    public AuthenticationService getAuthenticationService(){
+        AuthenticationService service=new AuthenticationService();
+        service.setPlatformAccountService(getAccountService());
+        service.setPlatformUserAccountService(getUserAccountService());
+        service.setPlatformCertificateService(getCertificateService());
+        service.setPlatformUserCertificateService(getUserCertificateService());
+        return service;
     }
 
 

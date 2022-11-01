@@ -15,7 +15,8 @@ public class PlatformUserRepositoryImpl implements PlatformUserRepository {
     private IPlatformUserRepository iPlatformUserRepository;
 
     public Long nextId() {
-        return iPlatformUserRepository.nextId();
+        Long id=iPlatformUserRepository.nextId();
+        return id==null?1:id;
     }
 
     public PlatformUser poToBo(PlatformUserPO po){

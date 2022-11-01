@@ -23,7 +23,9 @@ public class PlatformUserCertificateRepositoryImpl implements PlatformUserCertif
 
     @Override
     public PlatformUserCertificate save(PlatformUserCertificate platformUserCertificate) {
-        return null;
+        PlatformUserCertificatePO po=boToPo(platformUserCertificate);
+        po=iPlatformUserCertificateRepository.save(po);
+        return poToBo(po);
     }
 
     public PlatformUserCertificate poToBo(PlatformUserCertificatePO po){

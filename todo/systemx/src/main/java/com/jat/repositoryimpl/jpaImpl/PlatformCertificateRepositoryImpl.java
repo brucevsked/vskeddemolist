@@ -15,7 +15,8 @@ public class PlatformCertificateRepositoryImpl implements PlatformCertificateRep
 
     @Override
     public Long nextId() {
-        return iPlatformCertificateRepository.nextId();
+        Long id=iPlatformCertificateRepository.nextId();
+        return id==null?1:id;
     }
 
     public PlatformCertificate poToBo(PlatformCertificatePO po){

@@ -54,13 +54,4 @@ public class PlatformUserAccountService {
         return platformUserAccountManager.findBy(accountName);
     }
 
-    public void login(String accountName, String accountPassword){
-        //TODO login process
-        PlatformAccount account=platformAccountService.create(accountName,accountPassword);
-        PlatformUserAccount platformUserAccountStore=platformUserAccountManager.findBy(account.getName().getName());
-        PlatformUserAccount.isNotExist(platformUserAccountStore);
-
-        platformUserAccountStore.login(account);
-
-    }
 }

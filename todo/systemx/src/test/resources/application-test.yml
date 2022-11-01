@@ -27,4 +27,4 @@ spring:
       data-locations: classpath:h2/data.sql
 
 logging:
-  config: classpath:log4j2test.xml
+  config: classpath:log4j2.xml
