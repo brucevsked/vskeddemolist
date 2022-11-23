@@ -334,8 +334,6 @@ vskedtemplate
 webservice  
 xmldemo  
 
-项目大多数用myeclipse2017或myeclipse2019
-后期项目主要以idea或eclipse为主  
 
 其他技术选型与管理流程，知识模型等可参考以下网站  
 https://devops.phodal.com/home  

@@ -85,5 +85,16 @@ gpedit.msc
 regedit
 HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
 在 AU 对应的右侧窗口中，我们找到 NoAutoUpdate ，可以看到 NoAutoUpdate 的 DWORD(32位)值 为【1】
+--------------------------------------------------------------------------------
 
+清除Windows Defender保护记录
+删除此目录下所有文件
+C:\ProgramData\Microsoft\Windows Defender\Scans\History\Service>
+del Detections.log
+del History.Log
+del Unknown.Log
+rd DetectionHistory /s
 
+等待测试，未证实
+下次测试下磁盘清理功能
+右击C盘选择属性，选择磁盘清理，选择清理系统文件，defender相关打上对号清理下试试

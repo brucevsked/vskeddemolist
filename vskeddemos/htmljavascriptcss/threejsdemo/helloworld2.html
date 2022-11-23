@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="">
+    
+    <title>threejs hello world</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="">
+	<meta http-equiv="description" content="">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/style0.css">
+  </head>
+  
+  <body>
+  
+    <script type="text/javascript" charset="UTF-8" src="js/lib/three.min.js" ></script>
+
+    <script>
+"use strict"
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth-20, window.innerHeight-20);
+document.body.appendChild(renderer.domElement);
+
+var geometry = new THREE.BoxGeometry(1,1,1);
+var material = new THREE.MeshBasicMaterial({color: 0x0000ff});
+var cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+camera.position.z = 5;
+
+var render = function () {
+	requestAnimationFrame(render);
+
+	cube.rotation.x += 0.01;
+	cube.rotation.y += 0.01;
+	
+
+	renderer.render(scene, camera);
+};
+
+render();
+    </script>
+  </body>
+</html>

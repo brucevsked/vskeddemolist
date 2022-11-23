@@ -6,3 +6,4 @@
 2.3nginx.conf 一台服务器下面多个域名 辅助配置没有https证书 域名b2b2c-platform.junantaikeji.com
 3nginx.conf 文件或图片访问测试root与alias示例
 4nginx.conf 一台服务器下多个域名，无https证书 域名www.vsked.cn
+5nginx.conf 去掉访问地址第一段。注意端口号！将http://127.0.0.1/prod-api/test2访问地址重写为http://127.0.0.1:8181/test2
