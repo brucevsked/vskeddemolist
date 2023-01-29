@@ -1,6 +1,8 @@
 ﻿
 1* 启动客户端
 redis-cli
+-c 可以实现自动定位到新的节点去获得相应的值(解决(error) MOVED 问题)
+redis-cli -c
 
 如果不知道在哪儿可以查找下
 whereis redis-cli
@@ -76,6 +78,18 @@ jat:system:id:apiId
 SELECT index
 select 库索引
 
+17* 删除已经做好的集群
+先关闭所有进程
+ps aux|grep redis|grep -v grep |awk '{print $2}'|xargs kill -9
+
+ps -ef|grep redis
+删除相关data目录中的
+appendonly10.aof
+nodes-10.conf
+redis10.log
+redis10.pid
+
+再创建新集群即可
 
 ------------------------------------------------------------
 redis安装 tar包版本

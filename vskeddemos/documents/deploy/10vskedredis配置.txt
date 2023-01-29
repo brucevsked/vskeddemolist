@@ -1,6 +1,6 @@
 redis安装yum 版本
 
-安装redis5
+安装redis
 
 yum install -y gcc
 yum install gcc-c++
@@ -75,6 +75,8 @@ hz 10
 dynamic-hz yes
 aof-rewrite-incremental-fsync yes
 
+systemctl enable redis
 systemctl start redis
 netstat -lnp | grep 6379
 systemctl stop redis
+--------------------------------------------------------------------------------

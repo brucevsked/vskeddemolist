@@ -502,6 +502,7 @@ crontab -l     //列出某个用户cron服务的详细内容
 crontab -r    //删除某个用户的cron服务
 crontab -e    //编辑某个用户的cron服务
 crontab -i    //打印提示，输入yes等确认信息
+crontab -l   //列出当前用户的相关任务
 
 基本格式 :
 *　　*　　*　　*　　*　　command
@@ -561,8 +562,38 @@ mv 源目录/* 新目录
 将bb文件夹中所有文件移动到aa文件夹中
 mv /tmp/bb/* /tmp/aa
 
+34* 软链接
+创建软链接
+ln -s 源文件 目标文件
+ln -s /tmp/cc /tmp/aa
+删除软链接
+rm –rf 软链接名称（请注意不要在后面加“/”)
+rm –rf aa
 
+修改软链接
+ln –snf [新的源文件或目录] [目标文件或目录]
+ln –snf /tmp/test1 /tmp/test2
 
+35* 安装apt
+搜索并下载对应版本：rpmforge-release
+（下载地址：https://www.rpmfind.net/linux/rpm2html/search.php?query=rpmforge-release）
+
+执行安装命令->对应的包名
+rpm -i rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
+如出现 Header V3 DSA/SHA1 Signature, key ID 6b8d79e6: NOKEY
+执行：
+rpm --import /etc/pki/rpm-gpg/RPM*（执行完后并无任何回显）
+安装失败（虽然后来直接指定了源）
+yum install apt
+sudo apt-get update
+
+35* 查找
+
+find / -name 文件名
+查找最近多少分钟内修改的文件
+find . -name '*' -mmin -1200
+
+find / -name '*' -mmin -1200
 
 
 --------------------------------------------------------------------------------
@@ -1028,3 +1059,142 @@ systemctl restart cloudera-scm-agent
 lsof | grep delete　
 没有了占用文件
 df -ah
+
+--------------------------------------------------------------------------------
+去除提示
+You have new mail in /var/spool/mail/root
+
+cat /var/spool/mail/root
+关闭提示
+echo "unset MAILCHECK" >> /etc/profile
+source /etc/profile
+查看多大
+ls -lth /var/spool/mail
+清空
+cat /dev/null > /var/spool/mail/root
+
+--------------------------------------------------------------------------------
+安装杀毒软件
+yum install clamav
+下载病毒库
+freshclam
+扫描并删除感染文件
+clamscan --remove -r / -l /opt/clamav.log
+
+查到文件后可以查找
+ FOUND
+来确认找到哪些病毒
+
+
+ clamscan --help
+
+                       Clam AntiVirus: Scanner 0.103.7
+           By The ClamAV Team: https://www.clamav.net/about.html#credits
+           (C) 2022 Cisco Systems, Inc.
+
+    clamscan [options] [file/directory/-]
+
+    --help                -h             Show this help
+    --version             -V             Print version number
+    --verbose             -v             Be verbose
+    --archive-verbose     -a             Show filenames inside scanned archives
+    --debug                              Enable libclamav's debug messages
+    --quiet                              Only output error messages
+    --stdout                             Write to stdout instead of stderr. Does not affect 'debug' messages.
+    --no-summary                         Disable summary at end of scanning
+    --infected            -i             Only print infected files
+    --suppress-ok-results -o             Skip printing OK files
+    --bell                               Sound bell on virus detection
+
+    --tempdir=DIRECTORY                  Create temporary files in DIRECTORY
+    --leave-temps[=yes/no(*)]            Do not remove temporary files
+    --gen-json[=yes/no(*)]               Generate JSON description of scanned file(s). JSON will be printed and also-
+                                         dropped to the temp directory if --leave-temps is enabled.
+    --database=FILE/DIR   -d FILE/DIR    Load virus database from FILE or load all supported db files from DIR
+    --official-db-only[=yes/no(*)]       Only load official signatures
+    --log=FILE            -l FILE        Save scan report to FILE
+    --recursive[=yes/no(*)]  -r          Scan subdirectories recursively
+    --allmatch[=yes/no(*)]   -z          Continue scanning within file after finding a match
+    --cross-fs[=yes(*)/no]               Scan files and directories on other filesystems
+    --follow-dir-symlinks[=0/1(*)/2]     Follow directory symlinks (0 = never, 1 = direct, 2 = always)
+    --follow-file-symlinks[=0/1(*)/2]    Follow file symlinks (0 = never, 1 = direct, 2 = always)
+    --file-list=FILE      -f FILE        Scan files from FILE
+    --remove[=yes/no(*)]                 Remove infected files. Be careful!
+    --move=DIRECTORY                     Move infected files into DIRECTORY
+    --copy=DIRECTORY                     Copy infected files into DIRECTORY
+    --exclude=REGEX                      Don't scan file names matching REGEX
+    --exclude-dir=REGEX                  Don't scan directories matching REGEX
+    --include=REGEX                      Only scan file names matching REGEX
+    --include-dir=REGEX                  Only scan directories matching REGEX
+
+    --bytecode[=yes(*)/no]               Load bytecode from the database
+    --bytecode-unsigned[=yes/no(*)]      Load unsigned bytecode
+                                         **Caution**: You should NEVER run bytecode signatures from untrusted sources.
+                                         Doing so may result in arbitrary code execution.
+    --bytecode-timeout=N                 Set bytecode timeout (in milliseconds)
+    --statistics[=none(*)/bytecode/pcre] Collect and print execution statistics
+    --detect-pua[=yes/no(*)]             Detect Possibly Unwanted Applications
+    --exclude-pua=CAT                    Skip PUA sigs of category CAT
+    --include-pua=CAT                    Load PUA sigs of category CAT
+    --detect-structured[=yes/no(*)]      Detect structured data (SSN, Credit Card)
+    --structured-ssn-format=X            SSN format (0=normal,1=stripped,2=both)
+    --structured-ssn-count=N             Min SSN count to generate a detect
+    --structured-cc-count=N              Min CC count to generate a detect
+    --structured-cc-mode=X               CC mode (0=credit debit and private label, 1=credit cards only
+    --scan-mail[=yes(*)/no]              Scan mail files
+    --phishing-sigs[=yes(*)/no]          Enable email signature-based phishing detection
+    --phishing-scan-urls[=yes(*)/no]     Enable URL signature-based phishing detection
+    --heuristic-alerts[=yes(*)/no]       Heuristic alerts
+    --heuristic-scan-precedence[=yes/no(*)] Stop scanning as soon as a heuristic match is found
+    --normalize[=yes(*)/no]              Normalize html, script, and text files. Use normalize=no for yara compatibility
+    --scan-pe[=yes(*)/no]                Scan PE files
+    --scan-elf[=yes(*)/no]               Scan ELF files
+    --scan-ole2[=yes(*)/no]              Scan OLE2 containers
+    --scan-pdf[=yes(*)/no]               Scan PDF files
+    --scan-swf[=yes(*)/no]               Scan SWF files
+    --scan-html[=yes(*)/no]              Scan HTML files
+    --scan-xmldocs[=yes(*)/no]           Scan xml-based document files
+    --scan-hwp3[=yes(*)/no]              Scan HWP3 files
+    --scan-archive[=yes(*)/no]           Scan archive files (supported by libclamav)
+    --alert-broken[=yes/no(*)]           Alert on broken executable files (PE & ELF)
+    --alert-broken-media[=yes/no(*)]     Alert on broken graphics files (JPEG, TIFF, PNG, GIF)
+    --alert-encrypted[=yes/no(*)]        Alert on encrypted archives and documents
+    --alert-encrypted-archive[=yes/no(*)] Alert on encrypted archives
+    --alert-encrypted-doc[=yes/no(*)]    Alert on encrypted documents
+    --alert-macros[=yes/no(*)]           Alert on OLE2 files containing VBA macros
+    --alert-exceeds-max[=yes/no(*)]      Alert on files that exceed max file size, max scan size, or max recursion limit
+    --alert-phishing-ssl[=yes/no(*)]     Alert on emails containing SSL mismatches in URLs
+    --alert-phishing-cloak[=yes/no(*)]   Alert on emails containing cloaked URLs
+    --alert-partition-intersection[=yes/no(*)] Alert on raw DMG image files containing partition intersections
+    --nocerts                            Disable authenticode certificate chain verification in PE files
+    --dumpcerts                          Dump authenticode certificate chain in PE files
+
+    --max-scantime=#n                    Scan time longer than this will be skipped and assumed clean (milliseconds)
+    --max-filesize=#n                    Files larger than this will be skipped and assumed clean
+    --max-scansize=#n                    The maximum amount of data to scan for each container file (**)
+    --max-files=#n                       The maximum number of files to scan for each container file (**)
+    --max-recursion=#n                   Maximum archive recursion level for container file (**)
+    --max-dir-recursion=#n               Maximum directory recursion level
+    --max-embeddedpe=#n                  Maximum size file to check for embedded PE
+    --max-htmlnormalize=#n               Maximum size of HTML file to normalize
+    --max-htmlnotags=#n                  Maximum size of normalized HTML file to scan
+    --max-scriptnormalize=#n             Maximum size of script file to normalize
+    --max-ziptypercg=#n                  Maximum size zip to type reanalyze
+    --max-partitions=#n                  Maximum number of partitions in disk image to be scanned
+    --max-iconspe=#n                     Maximum number of icons in PE file to be scanned
+    --max-rechwp3=#n                     Maximum recursive calls to HWP3 parsing function
+    --pcre-match-limit=#n                Maximum calls to the PCRE match function.
+    --pcre-recmatch-limit=#n             Maximum recursive calls to the PCRE match function.
+    --pcre-max-filesize=#n               Maximum size file to perform PCRE subsig matching.
+    --disable-cache                      Disable caching and cache checks for hash sums of scanned files.
+
+Pass in - as the filename for stdin.
+
+(*) Default scan settings
+(**) Certain files (e.g. documents, archives, etc.) may in turn contain other
+   files inside. The above options ensure safe processing of this kind of data.
+
+--------------------------------------------------------------------------------
+解决无法删除某些病毒文件
+
+chattr -ai /etc/newinit.sh

@@ -1,0 +1,24 @@
+
+查看当前版本
+nvm -v
+
+nvm --config
+
+ 查看已安装node版本列表
+nvm list
+
+下载对应node版本
+nvm install 版本号
+
+nvm install 12.13.0
+
+nvm use 版本号 切换node版本
+
+nvm use 16.14.2
+nvm use 12.13.0
+
+开启nvm
+nvm on
+
+关闭nvm
+nvm off

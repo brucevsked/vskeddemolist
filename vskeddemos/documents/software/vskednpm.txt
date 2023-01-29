@@ -37,6 +37,7 @@ npm update express
 
 9* 更新缓存
 npm cache clear
+npm cache clean --force
 
 10* 启动应用
 npm start

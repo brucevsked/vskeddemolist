@@ -26,4 +26,16 @@ public class RedisTemplateTest extends BaseTest{
 		}
 	}
 
+	@Test
+	public void t2(){
+		try{
+			redisTemplate.opsForValue().set("name1", "vsked");
+			redisTemplate.opsForValue().set("name2", "张三");
+			String name2=(String) redisTemplate.opsForValue().get("name2");
+			log.debug("|"+name2+"|");
+		}catch(Exception e){
+			log.error(e.getMessage(),e);
+		}
+	}
+
 }
