@@ -137,6 +137,8 @@ show index from 表名
 
 19* 创建索引
 ALTER TABLE `表名` ADD INDEX 索引名 ( `列名` )
+添加唯一索引
+ALTER TABLE 数据表名 ADD CONSTRAINT 唯一约束名 UNIQUE(字段名);
 
 创建联合唯一索引并清除重复记录
 alter ignore table user add unique index(user_id,user_name);
@@ -666,6 +668,9 @@ select *,CONCAT(username,userpass) myisRepeat,sum(1) mycount from usertest group
 
 
 
+
+
+
 删除重复数据 oracle sqlserver
 delete from SIM_Account 
 where   ICCID in (select ICCID    from SIM_Account group by ICCID      having count(ICCID) > 1) 
@@ -676,6 +681,8 @@ and   ID not in (select min(ID) from SIM_Account group by ICCID     having count
 delete from `mysqltesttablea1` where `userid` not in (select minid from (
 select min(`userid`) as minid from `mysqltesttablea1` group by `username`
 ) b);
+
+delete from sys_user where user_id in(select user_id from (select user_id FROM	sys_user WHERE	phonenumber IN ( SELECT phonenumber FROM sys_user GROUP BY phonenumber HAVING count( phonenumber ) > 1 ) 	AND user_id NOT IN ( SELECT min( user_id ) FROM sys_user GROUP BY phonenumber HAVING count( phonenumber )> 1 )) myUser)
 
 
 select count(1) from SIM_Account 
@@ -1199,3 +1206,5 @@ show global variables like '%datadir%';
 alter table `app_user` IMPORT TABLESPACE;
 
 5再查询就看到数据恢复了
+
+-----------------------------------------------------------------

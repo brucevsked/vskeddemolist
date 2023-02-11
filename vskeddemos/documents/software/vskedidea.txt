@@ -24,13 +24,15 @@ file->settings->build,execution,deployment->maven
 6*手动编译
 Ctrl+Shift+F9
 
-7*自动编译的修改配置(解决idea项目中javascript,css,html缓存不刷新问题)
+7*自动编译的修改配置(解决idea项目中javascript,css,html缓存不刷新问题) debug热部署
 File-Settings-build,execution,deployment->Compiler->Build Project automatically打对号
 
 File-Settings-Advaced Settings-Allow auto-make to start even if developed application is currently running
 
+CTRL + SHIFT + A 选择Registry
 compile.document.save.trigger.delay 设置为100
 compile.automake.save.trigger.delay 设置为100
+
 
 8*全局查找
 ctrl+shift+a
@@ -126,4 +128,5 @@ file->Invalidate Caches->Clear file system cache and local history
 常用插件
 statistic 代码统计插件
 maven helper 包依赖查看 安装完以后重启idea打开pom文件后，最下面会显示分析pom
+mybatisx 增强mybatis在java代码与xml文件之间跳转
 --------------------------------------------------------------------------------

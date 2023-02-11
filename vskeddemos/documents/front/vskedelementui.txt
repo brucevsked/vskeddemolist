@@ -1,0 +1,79 @@
+
+普通输框并绑定模型
+<el-input v-model="query.name" placeholder="用户名" class="handle-input mr5"></el-input>
+
+密码输框
+<el-input type="password" placeholder="password" v-model="param.password" @keyup.enter.native="submitForm()">
+
+隐藏域
+<el-input v-model="form.id" v-show="false"></el-input>
+
+输入框默认获取焦点
+添加ref
+<el-input v-model="param.userName" placeholder="请输入用户名" ref="userName" />
+在mounted 方法中调用
+this.$refs.userName.focus();//用户名取焦点
+
+按钮
+<el-button type="primary" @click="submitForm()">登录</el-button>
+
+规则验证
+S1
+                                    <!-- 第1步 设置要绑定的规则:rules  设置表单唯一标识 ref -->
+            <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
+                              <!-- 第2步 绑定要验证的字段prop -->
+                <el-form-item prop="userName">
+                    <el-input v-model="param.userName" placeholder="userName" ref="userName">
+                        <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
+                    </el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                    <el-input
+                        type="password"
+                        placeholder="password"
+                        v-model="param.password"
+                        @keyup.enter.native="submitForm()"
+                    >
+                        <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
+                    </el-input>
+                </el-form-item>
+                <div class="login-btn">
+                    <el-button type="primary" @click="submitForm()">登录</el-button>
+                </div>
+                <p class="login-tips">Tips : 请填写正确的用户名和密码。</p>
+            </el-form>
+S2
+    data: function() {
+        return {
+            param: {
+                userName: 'admin',
+                password: '123456',
+            },
+            //第3步 声明要绑定的规则，对应第1步规则名，设置验证字段规则，对应第2步
+            rules: {
+                userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+                password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+            },
+        };
+    },
+
+S3
+            //第4步 使用验证规则验证整个表单
+            this.$refs.login.validate(valid => {
+                debugger;
+                if(valid){
+                    login(this.param.userName,this.param.password).then(res=>{
+                        if(res.code!=0){
+                            this.$message.error(res.msg);
+                        }else{
+                            this.$message.success('登录成功');
+                            localStorage.setItem('token', res.data.token);
+                            this.$router.push('/');
+                        }
+                    });
+                }else{
+                    this.$message.error('请输入用户名和密码');
+                    console.log('error submit!!');
+                    return false;
+                }
+            });

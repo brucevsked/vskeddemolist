@@ -149,3 +149,16 @@ server {
             proxy_pass   http://127.0.0.1:8181;            
         }
 --------------------------------------------------------------------------------
+root与alias示例
+        #实际文件地址/testimg/1.gif
+        #http://localhost/img/1.gif
+        location /img/ {
+            alias /testimg/;
+        }
+        
+        #实际文件地址/testimg1/img1/1.gif 因为这里的root指的是/testimg1/ 目录location/img1/指的是/testimg1/目录下的img1目录
+        #http://localhost/img1/1.gif
+        location /img1/ {
+            root /testimg1/;
+        }
+--------------------------------------------------------------------------------

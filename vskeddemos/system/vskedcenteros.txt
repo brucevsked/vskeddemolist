@@ -1198,3 +1198,49 @@ Pass in - as the filename for stdin.
 解决无法删除某些病毒文件
 
 chattr -ai /etc/newinit.sh
+
+--------------------------------------------------------------------------------
+多台机器 免密码秘钥登录
+
+第一步，在每台机器生成公钥与私钥 ,每台机器都运行
+ssh-keygen -t  rsa
+cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+
+第二步，查看除第一台机器以外所有公钥
+cat /root/.ssh/id_rsa.pub
+
+第三步，将其他机器公钥添加到1号机器，每台机器公钥都添加
+echo "这里填写本机外其他机器公钥，第二步的命令在其他机器执行的结果" >> /root/.ssh/authorized_keys
+
+第四步，将公钥集合复制到其他机器
+
+scp /root/.ssh/authorized_keys root@172.25.15.3:/root/.ssh/authorized_keys
+scp /root/.ssh/authorized_keys root@172.25.15.4:/root/.ssh/authorized_keys
+scp /root/.ssh/authorized_keys root@172.25.15.5:/root/.ssh/authorized_keys
+scp /root/.ssh/authorized_keys root@172.25.15.6:/root/.ssh/authorized_keys
+scp /root/.ssh/authorized_keys root@172.25.15.7:/root/.ssh/authorized_keys
+
+测试复制,
+在1号机器上生成文件
+echo goodcert >> cc.txt
+复制到其他机器，在每台机器都执行一遍这几条命令，目的是输入yes，可以再次创建一个文件测试
+scp /opt/testcluster/cc.txt root@172.25.15.3:/opt/testcluster/cc.txt
+scp /opt/testcluster/cc.txt root@172.25.15.4:/opt/testcluster/cc.txt
+scp /opt/testcluster/cc.txt root@172.25.15.5:/opt/testcluster/cc.txt
+scp /opt/testcluster/cc.txt root@172.25.15.6:/opt/testcluster/cc.txt
+scp /opt/testcluster/cc.txt root@172.25.15.7:/opt/testcluster/cc.txt
+
+清除测试文件，每台机器
+rm -rf /opt/testcluster/cc.txt
+cat /opt/testcluster/cc.txt
+
+echo goodcert >> /opt/testcluster/aa.txt
+scp /opt/testcluster/aa.txt root@172.25.15.3:/opt/testcluster/aa.txt
+scp /opt/testcluster/aa.txt root@172.25.15.4:/opt/testcluster/aa.txt
+scp /opt/testcluster/aa.txt root@172.25.15.5:/opt/testcluster/aa.txt
+scp /opt/testcluster/aa.txt root@172.25.15.6:/opt/testcluster/aa.txt
+scp /opt/testcluster/aa.txt root@172.25.15.7:/opt/testcluster/aa.txt
+
+rm -rf /opt/testcluster/aa.txt
+
+
