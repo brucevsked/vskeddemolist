@@ -1208,3 +1208,11 @@ alter table `app_user` IMPORT TABLESPACE;
 5再查询就看到数据恢复了
 
 -----------------------------------------------------------------
+
+左连接查询名称可以为null解决 for jfinal5
+        String name= HttpRequest.getParam(getPara("name"));
+        String url= HttpRequest.getParam(getPara("url"));
+        String parentname= HttpRequest.getParam(getPara("parentname"));
+
+Page pageData= Resource.dao.paginate(pageIndex,pageSize,"select a.*,b.`name` parentname","from resource a left join resource b on a.parentId=b.id  where a.`name` like ? and a.url like ? "+(parentname.length()>0?" and ":"or b.`name` is null and ")+" b.`name` like ? order by id desc","%"+name+"%","%"+url+"%","%"+parentname+"%");
+-----------------------------------------------------------------

@@ -1,4 +1,21 @@
 
+this.$nextTick 将回调延迟到下次DOM更新循环之后执行。在修改数据之后立即使用它，然后等待DOM更新。
+                this.$nextTick(()=>{
+                    this.$refs.addName.focus();//取焦点
+                });
+
+重置表单
+this.$nextTick(() => {
+    this.$refs['addForm'].resetFields();
+});
+
+前提条件1 表单需要有ref
+<el-form ref="addForm" :model="form" label-width="70px">
+前提条件2 需要绑定prop
+<el-form-item label="名称" prop="name">
+    <el-input v-model="form.name" ref="addName"></el-input>
+</el-form-item>
+
 普通输框并绑定模型
 <el-input v-model="query.name" placeholder="用户名" class="handle-input mr5"></el-input>
 
@@ -8,18 +25,348 @@
 隐藏域
 <el-input v-model="form.id" v-show="false"></el-input>
 
+只能输入数字
+<el-input v-model="form.sequence" type="number"></el-input>
+
 输入框默认获取焦点
 添加ref
 <el-input v-model="param.userName" placeholder="请输入用户名" ref="userName" />
 在mounted 方法中调用
 this.$refs.userName.focus();//用户名取焦点
 
+checkbox 动态生成 form.roleIds 需要是一个数组
+                <el-form-item label="角色" prop="roleIds">
+                    <el-checkbox 
+                    v-for="(item,index) in roleList" 
+                    :key="item.id" 
+                    :label="item.id" v-model="form.roleIds"
+                    >{{item.name}}</el-checkbox>
+
+                </el-form-item>
+checkbox 动态生成与回填数据
+        <!-- 编辑弹出框 -->
+        <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
+            <el-form ref="editForm" :model="form" label-width="70px">
+                <!-- 隐藏域id -->
+                <el-input v-model="form.id" v-show="false"></el-input>
+                <el-form-item label="昵称" prop="name">
+                    <el-input v-model="form.name"></el-input>
+                </el-form-item>
+                <el-form-item label="手机" prop="phone">
+                    <el-input v-model="form.phone"></el-input>
+                </el-form-item>
+                <el-form-item label="角色" prop="roleIds">
+                    <el-checkbox :ref="'rck'+item.id" 
+                    v-for="(item,index) in roleList" 
+                    :key="item.id" 
+                    :label="item.id" 
+                    v-model="form.roleIds" 
+                        >{{item.name}}</el-checkbox>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="editVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveEdit">确 定</el-button>
+            </span>
+        </el-dialog>
+回填数据
+        data() {
+            return {
+                form: {
+                    roleIds: [] //角色编号
+                },
+//动态生成复选
+            getRoleList() {
+                findAllRole().then((res) => {
+                    if (res.code == 0) {
+                        this.roleList = res.data;
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+
+                });
+            },
+            //回填复选框数据
+            getUserRoleList(form) {
+                setTimeout(() => {
+                    findUserRole(form).then((res) => {
+                        if (res.code == 0) {
+                            var tmpArray = new Array();
+                            for (var i = 0; i < res.data.length; i++) {
+                                tmpArray.push(res.data[i].id);
+                            }
+                            this.$set(this.form,'roleIds',tmpArray);
+                        } else {
+                            this.$message.error(res.msg);
+                        }
+
+                    });
+                }, 200);
+
+            },
+            // 编辑操作
+            handleEdit(index, row) {
+                this.editVisible = true;
+                this.form = row;
+                this.getRoleList();
+                this.getUserRoleList(this.form);
+            },
+            // 保存编辑
+            saveEdit() {
+                this.editVisible = false;
+                edit(this.form).then((res) => {
+                    //console.log(res);
+                    if (res.code == 0) {
+                        this.$message.success('修改成功');
+                        this.getData();
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+
+                });
+
+            },
+
+下拉选择框固定值
+<el-form-item label="选择器">
+    <el-select v-model="form.region" placeholder="请选择">
+        <el-option key="bbk" label="步步高" value="bbk"></el-option>
+        <el-option key="xtc" label="小天才" value="xtc"></el-option>
+        <el-option key="imoo" label="imoo" value="imoo"></el-option>
+    </el-select>
+</el-form-item>
+
+下拉选择动态值
+<el-form-item label="上级菜单">
+    <el-select v-model="form.parentId" placeholder="请选择">
+        <el-option v-for=" item in parentMenus" :key="item.id" :label="item.name" :value="item.id">
+        </el-option>
+    </el-select>
+</el-form-item>
+
+resource.js
+export const findAll = () => {
+    return request({
+        url: '/manager/resource/findAll',
+        method: 'get',
+      headers:{
+          token:localStorage.getItem('token')
+      }
+    });
+};
+
+resourceList.vue
+    import {
+        findAll
+    } from '../../api/resource';
+
+data() {
+    return {
+        parentMenus: [] //上级菜单列表
+    }
+}
+ methods: {
+            parentMenuList() {
+                findAll().then(res => {
+                    console.log(res);
+                    if (res.code == 0) {
+                        this.parentMenus = res.data;
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+
+                });
+            },
+            handleAdd() {
+                this.addVisible = true;
+                this.parentMenuList();
+                console.log("添加");
+            },
+ }
+
+
+复选树 无数据回填版本，仅用于显示与数据提交，新建时使用
+                    <!-- :data 为要绑定的数据 :props为属性映射 node-key节点唯一标识 show-checkbox显示复选框 check-strictly取消父子关联 @check-change选中状态被改变后事件   -->
+                    <el-tree ref="addTree" 
+                    :data="parentMenus" 
+                    :props="menuProps" 
+                    node-key="id" 
+                    v-model="form.menuIds" 
+                    show-checkbox 
+                    check-strictly 
+                    @check-change="addTreeChecked"
+                    ></el-tree>
+return 中代码
+        data() {
+            return {
+                form: {},
+                parentMenus: [], //菜单列表
+                menuProps:{ //菜单默认属性
+                    label:'title', //菜单标题
+                    children:'subs' //子菜单标识
+                },
+            };
+        },
+methods 中代码
+           // 这个方法仅调试使用
+            addTreeChecked(){
+                //显示选中的id
+                //console.log('selected node',this.$refs.addTree.getCheckedKeys());
+            },
+            parentMenuList() {
+                getAllMenus().then(res => {
+                    if (res.code == 0) {
+                        this.parentMenus = res.data;
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+
+                });
+            },
+            //添加操作
+            handleAdd() {
+                this.addVisible = true;
+                this.parentMenuList();
+                if (this.$refs.addForm !== undefined) {
+                    this.$refs.addForm.resetFields();
+                }
+                this.$nextTick(() => {
+                    this.$refs.addName.focus(); //取焦点
+                });
+
+            },
+            // 保存添加
+            saveAdd() {
+                this.addVisible = false;
+                //重新绑定下要传的选项
+                this.form.menuIds=this.$refs.addTree.getCheckedKeys();
+                console.log("add",this.form)
+
+                add(this.form).then(res => {
+                    //console.log(res);
+                    if (res.code == 0) {
+                        this.$message.success('添加成功');
+                        this.getData();
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+
+                });
+
+            },
+role.js 中代码
+//获取所有菜单
+export function getAllMenus() {
+    return request({
+        url: '/manager/role/allMenus',
+        method: 'get',
+        headers: {
+            token: localStorage.getItem('token')
+        }
+    })
+}
+
+
+复选树 数据回填版本，编辑时使用
+
+        <!-- 编辑弹出框 -->
+        <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
+            <el-form ref="editForm" :model="form" label-width="70px">
+                <!-- 隐藏域id -->
+                <el-input v-model="form.id" v-show="false"></el-input>
+                <el-form-item label="名称" prop="name">
+                    <el-input v-model="form.name" ref="editName"></el-input>
+                </el-form-item>
+                <el-form-item label="描述" prop="descript">
+                    <el-input v-model="form.descript"></el-input>
+                </el-form-item>
+                <el-form-item label="菜单" prop="menuIds">
+                    <!-- :data 为要绑定的数据 :props为属性映射 node-key节点唯一标识 show-checkbox显示复选框 check-strictly取消父子关联 @check-change选中状态被改变后事件   -->
+                    <el-tree ref="editTree" 
+                    :data="parentMenus" 
+                    :props="menuProps" 
+                    node-key="id" 
+                    v-model="form.menuIds" 
+                    show-checkbox 
+                    check-strictly 
+                    ></el-tree>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="editVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveEdit">确 定</el-button>
+            </span>
+        </el-dialog>
+return 代码
+        data() {
+            return {
+                form: {},
+                parentMenus: [], //菜单列表
+                menuProps:{ //菜单默认属性
+                    label:'title', //菜单标题
+                    children:'subs' //子菜单标识
+                },
+                idx: -1,
+                id: -1
+            };
+        },
+
+methods代码
+            fillEditTree(form){
+                setTimeout(()=>{
+                    getRoleResource(form).then((res) => {
+                        if (res.code == 0) {
+                            for(res in res.data){
+                                //一次只能设置一个
+                                this.$refs.editTree.setChecked(res,true);
+                            }                        
+                        } else {
+                            this.$message.error(res.msg);
+                        }
+                    
+                    });
+                },80);
+
+            },
+
+            // 编辑操作
+            handleEdit(index, row) {
+                this.idx = index;
+                this.form = row;
+                this.editVisible = true;
+                this.parentMenuList();
+                this.fillEditTree(this.form);
+
+            },
+
+role.js操作
+//获取选中角色资源
+export const getRoleResource = (form) => {
+    return request({
+        url: '/manager/role/getRoleResource',
+        method: 'get',
+        headers: {
+            token: localStorage.getItem('token')
+        },
+        params: form
+    });
+};
+
 按钮
 <el-button type="primary" @click="submitForm()">登录</el-button>
 
+条件判断v-if
+    <template slot-scope="scope">
+        <span v-if="scope.row.type=='0'">目录</span>
+        <span v-else-if="scope.row.type=='1'">菜单</span>
+        <span v-else-if="scope.row.type=='2'">按钮</span>
+        <span v-else>------</span>
+    </template>
+
+
 规则验证
 S1
-                                    <!-- 第1步 设置要绑定的规则:rules  设置表单唯一标识 ref -->
+             <!-- 第1步 设置要绑定的规则:rules  设置表单唯一标识 ref -->
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                               <!-- 第2步 绑定要验证的字段prop -->
                 <el-form-item prop="userName">
@@ -77,3 +424,35 @@ S3
                     return false;
                 }
             });
+
+------------------------------------
+
+mounted和created在页面加载过程只执行一次
+created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。
+mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。
+created先执行，mounted后执行,computed发生在created与mounted之间。
+
+
+导出变量
+const bus = new Vue();
+export default bus;
+
+//导入变量
+import bus from '../common/bus'; 
+
+导出方法
+// 登录方法
+export function login(userName, password) {
+  const data = {
+    userName,
+    password
+  }
+  return request({
+    url: '/manager/user/login',
+    method: 'post',
+    data: data
+  })
+}
+
+导入方法
+import {info} from '../../api/user'; //导入方法

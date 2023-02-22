@@ -165,7 +165,35 @@ spring:
 
 13* 优雅停机
 在web容器关闭时web服务器不再接受新请求,并等待活动请求完成缓冲期，spring boot 2.3及以上支持
-server.shutdown=graceful
+
+添加依赖
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+
+开启关闭端点
+server:
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "shutdown"
+
+测试关闭
+
+curl -X POST localhost:8080/actuator/shutdown
+如果显示一句说明配置成功了
+{"message":"Shutting down, bye..."}
+
+也可以使用
+kill -15 pid 来实现同样的效果
+推荐 kill -15
 
 14* 项目中不使用parent
 Using Spring Boot without the parent POM
@@ -235,3 +263,18 @@ spring:
       mode: always
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
+
+--------------------------------------------------------------------------------
+解决spring boot3 调用JUL日志打印
+sun.util.logging.internal.LoggingProvider 的问题
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+			<!-- 去掉控制台与文件里以 sun.util.logging.internal 开头的日志打印-->
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j-jul</artifactId>
+					<groupId>org.apache.logging.log4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>

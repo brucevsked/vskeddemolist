@@ -113,6 +113,10 @@ file->settings->Editor->Inspections->java->Serialization issues
 Serializable class without 'serialVersionUID' 打对号
 'serialVersionUID' field not declared 'private static final long'打对号
 
+24* 控制台行数设置与编码设置
+ 点击 File ->Settings ->editor - >General->Console   选中如下图 idea默认的输出缓存区大小只有1024KB
+ 修改为 20480 并所下面编码设置为utf-8
+
 
 
 
