@@ -264,6 +264,16 @@ spring:
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
 
+16* spring或spring boot中取request
+RequestContextHolder.getRequestAttributes().getRequest()
+
+17* 请求参数封装为map
+get版本
+@RequestParam Map<String,Object> params
+post版本
+@RequestBody Map<String,Object> params
+
+
 --------------------------------------------------------------------------------
 解决spring boot3 调用JUL日志打印
 sun.util.logging.internal.LoggingProvider 的问题

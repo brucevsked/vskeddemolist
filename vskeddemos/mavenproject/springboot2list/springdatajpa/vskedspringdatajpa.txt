@@ -1,4 +1,5 @@
 
+
 --------------------------------------------------------------------------------
 yml相关配置
 当yml文件中配置为
@@ -269,6 +270,10 @@ IgnoreCase	upper(xxx)=upper(yyyy)	findByFirstnameIgnoreCase	… where UPPER(x.fi
 Certificates是User6的一个属性，在User6中属性第一个字母是小写，也就是certificates
 ExpireTime是Certificate对象的一个属性第一个字母也是小写，在代码中是expireTime
 但是根据springdatajpa规则查找属性时第一个字母应当大写，所以最终结果如上面实战示例所示.
+
+查询与分页
+Page<ResourcePO> findByNameLikeAndUrlLikeAndIsDelIsAndParentNameLikeOrParentNameIsNull(String name, String url, Integer isDel, String parentName, Pageable pageable);
+
 
 对于mappedBy用法：
 
@@ -860,3 +865,56 @@ spring:
       hibernate:
         event:
           merge.entity_copy_observer: allow #加这一段解决
+--------------------------------------------------------------------------------
+动态sql查询与and 1=1处理
+
+调用代码为
+        Page<ResourcePO> resourcePage=resourceRepository.findAll(specification,pageable);
+
+
+public class ResourceListSpecific implements Specification<ResourcePO> {
+
+    private Map<String,Object> params;
+
+    public ResourceListSpecific(Map<String, Object> params) {
+        this.params = params;
+    }
+
+    @Override
+    public Predicate toPredicate(Root<ResourcePO> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+        List<Predicate> ps=new LinkedList<>();
+        //and 1=1处理
+        Predicate pall=criteriaBuilder.equal(criteriaBuilder.literal(1),1);
+        if(params.get("name")!=null && (!"".equals(params.get("name"))) ){
+            String uname="%"+params.get("name")+"%";
+            Predicate p1 = criteriaBuilder.like(root.get("name"), uname);
+            pall=criteriaBuilder.and(pall,p1);
+        }
+
+        if(params.get("url")!=null){
+            String url="%"+params.get("url")+"%";
+            Predicate p1 = criteriaBuilder.like(root.get("url"), url);
+            pall=criteriaBuilder.and(pall,p1);
+        }
+
+        if(params.get("isDel")!=null){
+            Predicate p1 = criteriaBuilder.equal(root.get("isDel"), params.get("isDel"));
+            pall=criteriaBuilder.and(pall,p1);
+        }
+
+        if(params.get("parentName")!=null ){
+            String uname="%"+params.get("parentName")+"%";
+            Predicate p1 = criteriaBuilder.like(root.join("parent", JoinType.LEFT).get("name"), uname);
+            String parentName=params.get("parentName")+"";
+            if(parentName.length()<=0){
+                Predicate p2 = criteriaBuilder.isNull(root.join("parent", JoinType.LEFT).get("name"));
+                Predicate p3=criteriaBuilder.or(p1,p2);
+                pall=criteriaBuilder.and(pall,p3);
+            }
+            pall=criteriaBuilder.and(pall,p1);
+        }
+
+        return pall;
+    }
+}
+--------------------------------------------------------------------------------
