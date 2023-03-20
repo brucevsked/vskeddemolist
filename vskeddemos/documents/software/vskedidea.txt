@@ -49,7 +49,7 @@ ctrl+alt+b
 files->settings->editor-> Inspections->General ->Duplicated Code去掉后面对号
 
 12*intellij idea关闭field injection is not recommended警告
-files->settings->Editor->Inspections->Spring->Spring Core->Core->Field Injection warning
+files->settings->Editor->Inspections->Spring->Spring Core->Core->Non recommended 'field' injections
 
 13* 跳转到指定行
 ctrl+g

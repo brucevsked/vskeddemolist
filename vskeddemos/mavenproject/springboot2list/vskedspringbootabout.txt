@@ -1,0 +1,290 @@
+
+spring boot2默认redis连接池lettuce
+spring boot2默认数据库连接池hikari
+
+命令启动与关闭
+web模块,直接用jar包运行即可
+nohup java -jar appserverwebadmin.jar -Dspring.profiles.active ="default,dev" &
+nohup java -jar /opt/baomakuaituan/back/yami-shop-multishop-0.0.1-SNAPSHOT.jar -Dspring.profiles.active ="default,dev" > /opt/baomakuaituan/logs/yami-shop-multishop.log &
+无日志版本
+nohup kafka-server-start.sh /opt/kafka_2.12-2.3.0/config/server.properties >/dev/null 2>&1 &
+关闭后台
+ps aux|grep yami-shop-multishop|grep -v grep |awk '{print $2}'|xargs kill -9
+
+远程断点连接
+第一步启动参数中添加以下
+java -jar -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5505 appserverwebadmin.jar
+第二步myeclipse菜单中run->debug config->Remote Java Application
+第三步填写服务器ip与调试端口号
+
+ ps -ef|grep appserverwebadmin
+ kill -9 pid
+
+1* 集成shiro注意
+在shiro的realm以及各操作类中不要注入service要注入dao(或mapper)
+
+2* 关闭事务防止验证码类取不到值
+spring boot+redis时要关闭redis事务
+
+        //开启事务
+//        redisTemplate.setEnableTransactionSupport(true); //验证码bug修正不要开启!!!
+
+3*mybatis相关
+mybatis:
+  configuration:
+    call-setters-on-nulls: true #是null值也返回
+    local-cache-scope: SESSION #关闭一级缓存
+    #cache-enabled: true #开启二级缓存
+4* redis相关
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: mima
+    timeout: 10000
+
+5*数据库连按
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/appserverdev?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+6*开启热部署
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+pom文件
+        <!-- spring boot devtools 第一步添加依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>runtime</scope>
+        </dependency>
+
+            <!-- spring boot devtools 第二步添加maven插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+idea配置
+当我们修改了Java类后，IDEA默认是不自动编译的，而spring-boot-devtools又是监测classpath下的文件发生变化才会重启应用，所以需要设置IDEA的自动编译：
+（1）File-Settings-Build,Execution,Deployment-Compiler-Build Project automatically
+（2）ctrl + shift + alt + /,选择Registry,勾上 Compiler autoMake allow when app running
+如果是thymeleaf还需要
+1关闭thymeleaf缓存yml里
+  thymeleaf:
+    cache: false
+
+在启动项目前点击下拉，选edit configurations
+将当前项目里的Running application update Policies中
+on update action,
+on frame deactivation
+修改为update class and resources
+
+修改类并测试即可
+
+7* 默认tomcat最大连接数
+server:
+  port: 9010 #端口号
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000 #最大线程数
+    max-connections: 20000 #最大连接数
+  #servlet.context-path: /appserveruser  #项目名，如果不设定，默认是 /
+8* 开启spring boot+mybatis二级缓存
+application.yml
+    cache-enabled: true #开启二级缓存
+启动application添加注解
+@EnableCaching
+
+ service层方法上添加注解
+	@Cacheable(cacheNames="appModuleListExt1")
+9* thymeleaf相关
+  thymeleaf:
+    cache: false
+    prefix=classpath:/templates/
+    suffix=.html
+    mode=HTML5
+    encoding=UTF-8
+
+10* 文件上传大小限制
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5000MB
+      max-request-size: 5000MB
+
+11* 关闭自动配置
+第一种方式注解
+@EnableAutoConfiguration(exclude = {org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration})
+ 
+第二种方式配置文件
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+12* spring boot devtools热部署
+开启idea自动make功能 
+file->settings->Build,Execution,Deployment-Compiler->Build Project automatically
+第一步
+gradle是这个
+CTRL + SHIFT + A --> 查找 make project automatically --> 选中
+maven是这个
+CTRL + SHIFT + A --> 查找 build project automatically --> 选中
+第二步
+ctrl + shift + alt + / --> 查找 Registry --> 找到并勾选 compiler.automake.allow.when.app.running
+第三步添加maven插件
+            <!-- spring boot devtools 第二步添加maven插件-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+第四步添加maven依赖
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>runtime</scope>
+        </dependency>
+并开启application.yml中配置
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+第五步重启idea
+
+13* 优雅停机
+在web容器关闭时web服务器不再接受新请求,并等待活动请求完成缓冲期，spring boot 2.3及以上支持
+
+添加依赖
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+
+开启关闭端点
+server:
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "shutdown"
+
+测试关闭
+
+curl -X POST localhost:8080/actuator/shutdown
+如果显示一句说明配置成功了
+{"message":"Shutting down, bye..."}
+
+也可以使用
+kill -15 pid 来实现同样的效果
+推荐 kill -15
+
+14* 项目中不使用parent
+Using Spring Boot without the parent POM
+
+问题
+spring boot项目一般情况下的parent如下：
+
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.4.0.BUILD-SNAPSHOT</version>
+</parent>
+  但是如果这个项目是其他项目的子项目呢???，意味着pom文件里要多个parent，但是一个孩子多个亲爸的事情怎么允许在代码的世界呢;（pom中只能一个parent）；
+
+解决
+  关于spring-boot，人家官网说了，不一定非要继承spring-boot的parent pom的，人家已经考虑到你可能已经继承了其他parent的情况，并给出了dependency management的方案。
+
+http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-maven-without-a-parent
+
+Not everyone likes inheriting from the spring-boot-starter-parent POM. You may have your own corporate standard parent that you need to use, or you may just prefer to explicitly declare all your Maven configuration.
+
+If you don’t want to use the spring-boot-starter-parent, you can still keep the benefit of the dependency management (but not the plugin management) by using a scope=import dependency:
+
+<dependencyManagement>
+     <dependencies>
+        <dependency>
+            <!-- Import dependency management from Spring Boot -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>1.4.0.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+That setup does not allow you to override individual dependencies using a property as explained above. To achieve the same result, you’d need to add an entry in the dependencyManagement of your project before the spring-boot-dependencies entry. For instance, to upgrade to another Spring Data release train you’d add the following to your pom.xml.
+
+<dependencyManagement>
+    <dependencies>
+        <!-- Override Spring Data release train provided by Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-releasetrain</artifactId>
+            <version>Fowler-SR2</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>1.4.0.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+In the example above, we specify a BOM but any dependency type can be overridden that way.
+
+15* 自动执行脚本
+always为始终执行初始化
+embedded只初始化内存数据库（默认值）,如h2等
+never为不执行初始化
+
+spring:
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+
+16* spring或spring boot中取request
+RequestContextHolder.getRequestAttributes().getRequest()
+
+17* 请求参数封装为map
+get版本
+@RequestParam Map<String,Object> params
+post版本
+@RequestBody Map<String,Object> params
+
+
+--------------------------------------------------------------------------------
+解决spring boot3 调用JUL日志打印
+sun.util.logging.internal.LoggingProvider 的问题
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+			<!-- 去掉控制台与文件里以 sun.util.logging.internal 开头的日志打印-->
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j-jul</artifactId>
+					<groupId>org.apache.logging.log4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>

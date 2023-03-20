@@ -170,6 +170,9 @@ CascadeType.REFRESH
 级联刷新，保存关联关系时会更新子对象和数据库中一致
 (意思是你在父对象中添加一个只包含ID的子对象，也可以保存进去)
 
+CascadeType.DETACH
+只删除主表与中间表数据
+
 CascadeType.ALL
 包含上述所有操作
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
@@ -917,4 +920,22 @@ public class ResourceListSpecific implements Specification<ResourcePO> {
         return pall;
     }
 }
+--------------------------------------------------------------------------------
+@Query注解使用
+注解参数方案1，必须按顺序来
+    @Modifying
+    @Query("update roleResource set isDel=1 where roleId=?")
+    void updateIsDelByRoleId(Integer roleId);
+方案2，绑定名称，要用@Param
+    @Modifying
+    @Query("update RoleResourcePO set isDel=1 where roleId=:ss1")
+    void updateIsDelByRoleId1(@Param("ss1") Integer roleId);
+方案3，使用名称绑定,传对象时使用
+    @Modifying
+    @Query("update RoleResourcePO set isDel=1 where id=:#{#ss2.id}")
+    void updateIsDelByRoleId2(@Param("ss2")RolePO rolePO);
+方案4，使用原生sql处理
+    @Modifying
+    @Query(value = "update roleResource set isDel=1 where id=?",nativeQuery = true)
+    void updateIsDelByRoleId2(Integer roleId);
 --------------------------------------------------------------------------------

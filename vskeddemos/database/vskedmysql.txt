@@ -491,9 +491,12 @@ mysql -uroot -p'123456' -e "select * from mytest.student;"
 
 
 38* 设置数据库大小写不敏感
-打开my.cnf文件，加入以下语句后重启
+打开my.cnf文件，mysqld区域加入以下语句后重启
 lower_case_table_names = 0时，mysql会根据表名直接操作，大小写敏感。
 lower_case_table_names = 1时，mysql会先把表名转为小写，再执行操作。
+lower_case_table_names = 2时，windows环境下大小写敏感设置(设置完后先导出，再修改脚本，再导入)
+
+如果切换时报错 switching to a case-insensitive table name mode
 
 重启完成后可以用以下语句检查
 show global variables like '%lower_case%';
