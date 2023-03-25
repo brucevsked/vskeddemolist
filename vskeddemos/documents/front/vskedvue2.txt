@@ -1,0 +1,136 @@
+
+链接传值方案1路由导航：
+路由配置，声明参数变量par1，不声明也是可以的。也就是不写:par1
+    {
+      path: '/helloworldPage/:par1',
+      name: 'helloworldPage',
+      component: helloworldPage
+    }
+父页面代码,根据位置传入参数变量
+<router-link to="/helloworldPage/ab123方案1">method1</router-link>
+子页接值代码,根据路由参数接值
+ <h1>{{$route.params.par1}}</h1>
+路径变为
+http://localhost:8080/#/helloworldPage/ab123方案1
+
+
+链接传值方案2 push路由参数：
+路由配置，声明参数变量par1，不声明也是可以的。也就是不写:par1
+    {
+      path: '/helloworldPage/:par1',
+      name: 'helloworldPage',
+      component: helloworldPage
+    }
+父页面代码,调用方法，将变量传入方法
+<button @click="giveValue('方案2cd')">push方案</button>
+
+  methods:{
+      giveValue(par2){
+          this.$router.push({
+              path:"/helloworldPage/"+par2
+          });
+      }
+      
+  }
+子页接值代码,根据路由参数接值
+ <h1>{{$route.params.par1}}</h1>
+路径变为
+http://localhost:8080/#/helloworldPage/方案2cd
+
+链接传值方案3 路由声明中name配合params：
+路由配置，声明参数变量par1
+    {
+      path: '/helloworldPage',
+      name: 'helloworldPage',
+      component: helloworldPage
+    }
+父页面代码,调用方法，将变量传入方法
+<button @click="giveValueByName('方案3ef')">路径名配合params</button> 
+
+      giveValueByName(par1){
+          this.$router.push({
+              name:"helloworldPage",
+              params:{
+                par1:par1
+              }
+          });
+      }
+子页接值代码,根据路由参数接值
+ <h1>{{$route.params.par1}}</h1>
+路径不变
+http://localhost:8080/#/helloworldPage
+
+
+链接传值方案4 query传值：
+路由配置
+    {
+      path: '/helloworldPage',
+      name: 'helloworldPage',
+      component: helloworldPage
+    }
+父页面代码,调用方法，将变量传入方法
+<router-link :to="{path:'/helloworldPage',query:{p1:'汉语url9999'}}">GivePar</router-link> 
+
+子页接值代码,根据路由参数接值
+ <h1>{{$route.query.p1}}</h1>
+路径变为
+http://localhost:8080/#/helloworldPage?p1=汉语url9999
+
+链接传值方案5 query传值脚本版本：
+路由配置
+    {
+      path: '/helloworldPage',
+      name: 'helloworldPage',
+      component: helloworldPage
+    }
+父页面代码,调用方法，将变量传入方法
+<button @click="giveValueByQuery('方案5gh')">query配合脚本</button> &nbsp;&nbsp;
+
+      giveValueByQuery(par1){
+          this.$router.push({
+              path:"/helloworldPage/",
+              query:{
+                p1:par1
+              }
+          });
+      }
+
+子页接值代码,根据路由参数接值
+ <h1>{{$route.query.p1}}</h1>
+路径变为
+http://localhost:8080/#/helloworldPage?p1=方案5gh
+
+
+
+
+ --------------------------------------------------------------------------------
+
+mounted和created在页面加载过程只执行一次
+created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。
+mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。
+created先执行，mounted后执行,computed发生在created与mounted之间。
+--------------------------------------------------------------------------------
+
+导出变量
+const bus = new Vue();
+export default bus;
+
+//导入变量
+import bus from '../common/bus'; 
+
+导出方法
+// 登录方法
+export function login(userName, password) {
+  const data = {
+    userName,
+    password
+  }
+  return request({
+    url: '/manager/user/login',
+    method: 'post',
+    data: data
+  })
+}
+
+导入方法
+import {info} from '../../api/user'; //导入方法
