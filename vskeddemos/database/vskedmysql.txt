@@ -500,6 +500,7 @@ lower_case_table_names = 2时，windows环境下大小写敏感设置(设置完�
 
 重启完成后可以用以下语句检查
 show global variables like '%lower_case%';
+show variables like 'lower_case_table_names'
 
 38* 日期相关函数
 now()
