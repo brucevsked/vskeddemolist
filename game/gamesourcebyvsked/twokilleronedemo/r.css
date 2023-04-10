@@ -1,0 +1,77 @@
+.d0{
+	width:300px;
+	height:300px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-top:-150px;
+	margin-left:-150px;
+}
+#d1{
+  border:0px;
+	width:400px;
+	height:400px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-top:-200px;
+	margin-left:-200px;
+	border-right: 0px solid #00f;
+  border-left: 0px solid #00f;
+  border-top:0px solid #00f;
+  border-bottom: 0px solid #00f;
+}
+table {
+  border:2px;
+  border-collapse: collapse;
+  font-size:0.9em;
+  font-family: Arial, Helvetica, verdana sans-serif;
+  border-right: 2px solid #000;
+  border-left: 2px solid #000;
+  border-top:2px solid #000;
+  border-bottom: 2px solid #000;
+  width:300px;
+  height:300px;
+}
+table tr{
+}
+table tr td {
+  border-right: 2px solid #000;
+  border-left: 2px solid #000;
+  border-top:2px solid #000;
+  border-bottom: 2px solid #000;
+}
+
+#t1 {
+  border:0px;
+  border-collapse: collapse;
+  font-size:0.9em;
+  font-family: Arial, Helvetica, verdana sans-serif;
+  border-right: 2px solid #0f0;
+  border-left: 2px solid #0f0;
+  border-top:2px solid #0f0;
+  border-bottom: 2px solid #0f0;
+  width:400px;
+  height:400px;
+}
+#t1 tr{
+}
+#t1 tr td {
+  border-right: 0px solid #0f0;
+  border-left: 0px solid #0f0;
+  border-top:0px solid #0f0;
+  border-bottom: 0px solid #0f0;
+  text-align:center;
+}
+
+input[type="radio"]{
+	width:50px;
+  height:50px;
+  zoom:110%;
+}
+
+input[type="checkbox"]{
+	width:50px;
+  height:50px;
+  zoom:110%;
+}

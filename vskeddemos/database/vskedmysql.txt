@@ -1220,3 +1220,20 @@ alter table `app_user` IMPORT TABLESPACE;
 
 Page pageData= Resource.dao.paginate(pageIndex,pageSize,"select a.*,b.`name` parentname","from resource a left join resource b on a.parentId=b.id  where a.`name` like ? and a.url like ? "+(parentname.length()>0?" and ":"or b.`name` is null and ")+" b.`name` like ? order by id desc","%"+name+"%","%"+url+"%","%"+parentname+"%");
 -----------------------------------------------------------------
+
+查询所有表
+select * from information_schema.`TABLES` where table_schema='baomakuaituantest' ;
+查询所有列
+select column_name,column_type,column_comment,data_type 
+from information_schema.columns 
+where table_schema='baomakuaituantest' order by column_name;
+
+根据列名查表
+select table_name,column_name,column_type,column_comment,data_type 
+from information_schema.columns 
+where table_schema='baomakuaituantest' and column_name='water_sold_num' order by column_name;
+
+查询某张表所有列
+select table_name,column_name,column_type,column_comment,data_type 
+from information_schema.columns 
+where table_schema='baomakuaituantest' and table_name='tz_prod' order by column_name;

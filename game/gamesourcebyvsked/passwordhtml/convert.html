@@ -1,0 +1,17 @@
+<script> 
+function convertSymble(){
+  var s="1234567890abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ()[]<>?:,;%+-.={}&'\"/*#\n\r_";
+  var str="";
+  for(var i=0;i<ta_s.value.length;i++){
+      if(s.indexOf(ta_s.value.charAt(i))>=0){
+          str+=s.indexOf(ta_s.value.charAt(i))+",";
+      }else{
+       str+=("|"+ta_s.value.charAt(i)+"|");
+      }//end else
+  }//end for i
+  ta_t.value=str;
+}//end convertSymble
+</script>
+<textarea id="ta_s" rows="10" cols="60" style="width:99%; height:250px" tabindex="100" ></textarea> </br>
+<button onclick="convertSymble();">Convert</button> </br>
+<textarea id="ta_t" rows="10" cols="60" style="width:99%; height:250px" tabindex="100" ></textarea> </br>

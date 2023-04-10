@@ -1,0 +1,140 @@
+var obj=0;
+var blankStr='<div style="position:relative;width:50px;height:50px">&nbsp;<br/>&nbsp;</div>';
+var currentPlayer=1;
+
+function a(t){
+	if(t.innerHTML.indexOf("<input")<0){
+		if(isRightStep(t))switchContent(t,obj);
+		needKiller(t);
+		//d1.disabled=true;
+	}
+}
+
+function b(t){
+	if((currentPlayer==1?'radio':'checkbox')!=t.type){
+	obj=t.parentNode;
+ }
+}
+
+function killOne(t){
+	t1x=t.childNodes[0].id.substring(1,2);	
+	t.innerHTML=blankStr;
+	c=0;
+	for(i=1;i<5;i++)
+			if(document.getElementById('p'+t1x+'_'+(i))!=null)c++
+	if(c<2){
+		document.getElementById('d1').innerHTML=('<div align="center"><h1><font color="red" align="center">p'+currentPlayer+' Has Win!</font></h1><div>');
+		setTimeout("location.reload()",8000);		
+	}
+}
+
+function needKiller(t){
+	
+	tmpArray1=[0,0,0,0];
+	tmpArray2=[0,0,0,0];
+	t1x=t.id.substring(1,2);
+	t1y=t.id.substring(3,4);
+	
+	tmpEArr=[0,0,0];		
+	for(i=0;i<4;i++) tmpArray1[i]=document.getElementById('t'+t1x+'_'+(i+1)).innerHTML.indexOf("<input")<0?0:whichPlayer(document.getElementById('t'+t1x+'_'+(i+1)));
+	for(i=0;i<4;i++) tmpArray2[i]=document.getElementById('t'+(i+1)+'_'+t1y).innerHTML.indexOf("<input")<0?0:whichPlayer(document.getElementById('t'+(i+1)+'_'+t1y));
+	
+	if(isExistThree(tmpArray1) && isExistTwoCurrentPlayer(tmpArray1) && (!isExistFour(tmpArray1))){		
+			if(isNearMySelf(tmpArray1) && (isNeedKiller(tmpArray1,currentPlayer,getAnotherPlayer()) || isNeedKiller(tmpArray1,getAnotherPlayer(),currentPlayer))){			
+				selectKiller(1,t1x);
+			}
+	}
+	if(isExistThree(tmpArray2) && isExistTwoCurrentPlayer(tmpArray2) && (!isExistFour(tmpArray2))){	
+			if(isNearMySelf(tmpArray2) && (isNeedKiller(tmpArray2,currentPlayer,getAnotherPlayer()) || isNeedKiller(tmpArray2,getAnotherPlayer(),currentPlayer))){
+				selectKiller(2,t1y);
+			}
+	}
+	return false;	
+}
+
+function whichPlayer(t){
+	if(t.innerHTML.indexOf("radio")>0) return 1;
+	return 2;
+}
+
+function isExistThree(tm){
+	c=0;	
+	for(i=0;i<4;i++) c+=tm[i]>0?1:0;
+	return c>=3;
+}
+
+function isExistFour(tm){
+	c=0;	
+	for(i=0;i<4;i++) c+=tm[i]>0?1:0;
+	return c>=4;
+}
+
+function isExistTwoCurrentPlayer(tm){
+	c=0;	
+	for(i=0;i<4;i++) c+=(tm[i]==currentPlayer)?1:0;
+	return c==2;
+}
+
+function isNearMySelf(tm){
+	return tm.join(',').indexOf((currentPlayer+','+currentPlayer))>=0;
+}
+
+function isNeedKiller(tm,a,b){
+	return tm.join(',').indexOf((a+','+b))>=0;
+}
+
+function getAnotherPlayer(){
+	return currentPlayer==1?2:1;
+}
+
+function selectKiller(hOrV,mv){
+	k=getAnotherPlayer()==1?'radio':'checkbox';
+	if(hOrV==1){
+		for(i=1;i<5;i++){
+			if(document.getElementById('t'+mv+'_'+(i)).innerHTML.indexOf(k)>=0)killOne(document.getElementById('t'+mv+'_'+(i)));
+		}
+	}
+	if(hOrV==2){
+		for(i=1;i<5;i++){
+			if(document.getElementById('t'+i+'_'+(mv)).innerHTML.indexOf(k)>=0)killOne(document.getElementById('t'+i+'_'+(mv)));
+		}
+	}
+}
+
+function switchContent(a,b){
+	if(b!=0){
+	var tmp=a.innerHTML;
+	a.innerHTML=b.innerHTML;
+	b.innerHTML=tmp;
+	currentPlayer=getAnotherPlayer();
+ }
+}
+
+function isRightStep(t){
+	t1x=t.id.substring(1,2);
+	t1y=t.id.substring(3,4);
+	t2x=obj.id.substring(1,2);
+	t2y=obj.id.substring(3,4);
+	return ( ((Math.abs(t2x-t1x)==0 && Math.abs(t2y-t1y)==1) || (Math.abs(t2x-t1x)==1 && Math.abs(t2y-t1y)==0)));
+}
+
+function initGrid(){
+	var s='<div class="d0"><table>';
+	for(i=0;i<3;i++) s+='<tr><td></td><td></td><td></td></tr>';	
+	s+='</table></div>';
+	return s;
+}
+
+function initPlayerPlatform(){
+	var s='<div id="d1" ><table id="t1"><tr>';
+	for(i=1;i<5;i++) s+='<td onclick="a(this);" id="t1_'+i+'" ><input type="radio" checked id="p1_'+i+'"  onclick="b(this);" /></td>';
+	s+='</tr>';	
+	for(i=1;i<5;i++) s+='<td onclick="a(this);" id="t2_'+i+'" >'+blankStr+'</td>';
+	s+='</tr>';	
+	for(i=1;i<5;i++) s+='<td onclick="a(this);" id="t3_'+i+'" >'+blankStr+'</td>';
+	s+='</tr>';	
+	for(i=1;i<5;i++) s+='<td onclick="a(this);" id="t4_'+i+'" ><input type="checkbox" checked id="p2_'+i+'"  onclick="b(this);" /></td>';
+	s+='</tr>';
+	s+='</table></div>';
+	return s;
+}
