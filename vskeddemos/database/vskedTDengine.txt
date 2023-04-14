@@ -1,0 +1,41 @@
+
+1* 进入数据库命令行
+taos
+输入密码方式进入数据库，默认数据库用户名root密码taosdata，如果修改了密码就用下面这种连接方式
+taos -h主机ip -u用户名 -p
+回车后会提示输入密码
+taos -h127.0.0.1 -uroot -p
+windows版本
+taos -h 127.0.0.1 -u root -p
+
+2* 退出数据库命令行
+exist
+
+3* 显示所有数据库
+show databases;
+
+4* 应用数据库
+use wtss;
+
+5* 显示所有表
+show tables;
+
+show stables;
+
+6* 查看表结构
+desc automobile;
+
+7* 查看所有用户
+show users;
+
+8* 创建用户
+create user 用户名 pass '密码';
+create user test pass '123456';
+
+9* 删除用户
+drop user 用户名;
+drop user test;
+
+10* 修改用户密码
+alter user 用户名 pass '密码';
+alter user root pass 'Y4yhl9tbf110_';

@@ -1,0 +1,40 @@
+时序数据库
+TDengine
+
+上传TDengine-server-3.0.2.5-Linux-x64.tar.gz包到
+/opt
+目录下
+cd /opt
+
+tar -zxvf TDengine-server-3.0.2.5-Linux-x64.tar.gz
+rm -rf TDengine-server-3.0.2.5-Linux-x64.tar.gz
+
+cd /opt/TDengine-server-3.0.2.5
+
+./install
+安装时会提示
+Enter FQDN:port (like h1.taosdata.com:6030) of an existing TDengine cluster node to join
+OR leave it blank to build one: 这里第一次回车，表示第一次安装
+
+Enter your email address for priority support or enter empty to skip:  这里第二次回车，表示不填写邮件地址
+
+TDengine is installed successfully!
+表示安装成功
+
+vi /etc/taos/taos.cfg
+```
+firstEp                   iZ2zeed5rk8tixc9kit0e2Z:6030
+```
+
+cat /etc/taos/taos.cfg
+
+启动服务进程：
+systemctl start taosd
+停止服务进程：
+systemctl stop taosd
+重启服务进程：
+systemctl restart taosd
+查看服务状态：
+systemctl status taosd
+开机启动
+systemctl enable taosd

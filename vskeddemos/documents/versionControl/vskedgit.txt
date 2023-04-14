@@ -193,5 +193,6 @@ bin/
 classes/
 target/
 node_modules/
+package-lock.json
 
 
