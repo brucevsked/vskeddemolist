@@ -1,0 +1,15 @@
+server:
+  port: 8080 #端口号
+  
+spring:
+  kafka:
+    bootstrap-servers:
+      - bigdata1:9092
+    consumer:
+      auto-offset-reset: latest
+      enable-auto-commit: true
+      group-id: sk01
+      
+  
+logging:
+  config: classpath:log4j2.xml

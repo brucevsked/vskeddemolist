@@ -552,6 +552,10 @@ curl -H "Content-Type: application/json" -X POST -d '{"user_id": "123", "coin":1
 form请求
 curl -d'login=emma＆password=123'-X POST https://google.com/login
 
+发送get请求
+curl http://localhost:8080
+curl http://www.baidu.com
+
 33* 移动命令
 移动目录
 mv 源目录名 目标路径
@@ -1075,13 +1079,13 @@ cat /dev/null > /var/spool/mail/root
 
 --------------------------------------------------------------------------------
 安装杀毒软件
-yum install clamav
+yum -y install clamav*
 下载病毒库
 freshclam
 扫描并删除感染文件
 clamscan --remove -r / -l /opt/clamav.log
 
-查到文件后可以查找
+查到日志文件后可以查找
  FOUND
 来确认找到哪些病毒
 

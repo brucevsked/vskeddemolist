@@ -5,8 +5,15 @@ taos
 taos -h主机ip -u用户名 -p
 回车后会提示输入密码
 taos -h127.0.0.1 -uroot -p
+taos -h127.0.0.1 -p
 windows版本
 taos -h 127.0.0.1 -u root -p
+taos -h 127.0.0.1 -p
+如果是在本机想用root用户直接登录可以用
+taos -p
+
+
+
 
 2* 退出数据库命令行
 exist
@@ -15,14 +22,18 @@ exist
 show databases;
 
 4* 应用数据库
+use 数据库名;
 use wtss;
 
 5* 显示所有表
+显示普通表
 show tables;
-
+显示超级表
 show stables;
 
 6* 查看表结构
+查看普通表或超级表结构
+desc 表名;
 desc automobile;
 
 7* 查看所有用户
@@ -38,4 +49,131 @@ drop user test;
 
 10* 修改用户密码
 alter user 用户名 pass '密码';
-alter user root pass 'Y4yhl9tbf110_';
+alter user root pass 'taosdata';
+
+
+------------------------------------------------------------------------
+以指定字段为子表名
+/etc/taos/taos.cfg
+添加
+smlChildTableName 标签名
+smlChildTableName deviceId
+------------------------------------------------------------------------
+
+在无模式写入数据行协议中，field_set 中的每个数据项都需要对自身的数据类型进行描述。具体来说：
+
+如果两边有英文双引号，表示 BINARY(32) 类型。例如 "abc"。
+如果两边有英文双引号而且带有 L 前缀，表示 NCHAR(32) 类型。例如 L"报错信息"。
+对空格、等号（=）、逗号（,）、双引号（"），前面需要使用反斜杠（\）进行转义。（都指的是英文半角符号）
+数值类型将通过后缀来区分数据类型：
+序号	后缀	映射类型	大小(字节)
+1	   无或f64	double	   8
+2	   f32	   float	   4
+3	   i8/u8	TinyInt/UTinyInt	1
+4	   i16/u16	SmallInt/USmallInt	2
+5	   i32/u32	Int/UInt   4
+6	   i64/i/u64/u	BigInt/BigInt/UBigInt/UBigInt	8
+------------------------------------------------------------------------
+DROP DATABASE IF EXISTS wtss;
+create database if not exists wtss PRECISION 'ns';
+CREATE STABLE IF NOT EXISTS `automobile` (`_ts` TIMESTAMP,`inte` INT,`psst` NCHAR(4),`saco` INT,`lati` NCHAR(32),`nshe` NCHAR(4),`longi` NCHAR(32),`ewhe` NCHAR(4),`alti` DOUBLE,`spee` DOUBLE,`hoan` INT,`vean` INT,`acce` DOUBLE,`temp` DOUBLE,`status` INT) TAGS (`location` NCHAR(64),`deviceId` NCHAR(64));
+-- 这张表是kafka插件自动生成的 测试时可以跑AutomobileTest相关代码
+create table IF NOT EXISTS t1 using automobile tags( '济南', 1);
+-- 测试给数据
+insert into `t1`(`ts`,`longi`,`lati`,`status`) values(NOW,'117.12227328870772','36.65351095237262',1);
+
+InfluxDB line protocol 是一种基于文本的格式,字符串不用带双引号
+<measurement>[,<tag_key>=<tag_value>[,<tag_key>=<tag_value>]] <field_key>=<field_value>[,<field_key>=<field_value>] [<timestamp>]
+主表(不要手动去建主表信息，让他自动生成即可)
+automobile,location=jinan,deviceId=c001 inte=5i32,psst=L"A",saco=12i32,lati=L"117.0000002",nshe=L"E",longi=L"36.0000002",ewhe=L"N",alti=93.1,spee=50.0,hoan=90i32,vean=90i32,acce=25.0,temp=28.0,status=3i32 1682402249902000000
+automobile,location=jinan,deviceId=c001 inte=5i32,psst=L"A",saco=12i32,lati=L"117.0000002",nshe=L"E",longi=L"36.0000002",ewhe=L"N",alti=93.1,spee=50,hoan=90i32,vean=90i32,acce=25,temp=28,status=3i32 1682402249902000010
+以上数据格式映射可以参考：
+https://docs.taosdata.com/reference/schemaless/#%E6%97%A0%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5%E8%A1%8C%E5%8D%8F%E8%AE%AE
+
+------------------------------------------------------------------------
+
+taosdata-kafka-connect-tdengine-1.0.1
+
+配置kafka中TDengine插件
+
+mkdir -p /opt/kafka_2.12-3.1.0/plugins
+目录
+cd /opt/kafka_2.12-3.1.0/plugins/
+
+独立kafka部署参考：
+https://www.taosdata.com/chinese/12592.html
+https://www.cnblogs.com/csq-66/p/16922750.html
+https://www.taosdata.com/engineering/14798.html
+https://docs.taosdata.com/reference/schemaless/#%E6%97%A0%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5%E8%A1%8C%E5%8D%8F%E8%AE%AE
+
+
+taosdata-kafka-connect-tdengine-1.0.1.tar
+上传到
+/opt/kafka_2.12-3.1.0/plugins/
+
+tar -zxvf taosdata-kafka-connect-tdengine-1.0.1.tar.gz
+rm -rf taosdata-kafka-connect-tdengine-1.0.1.tar.gz
+
+
+配置 /opt/kafka_2.12-3.1.0/config/connect-standalone.properties
+vi /opt/kafka_2.12-3.1.0/config/connect-standalone.properties
+```
+bootstrap.servers=iZ2zeed5rk8tixc9kit0e2Z:9092
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+key.converter.schemas.enable=true
+value.converter.schemas.enable=true
+offset.storage.file.filename=/tmp/connect.offsets
+offset.flush.interval.ms=1000
+plugin.path=/opt/kafka_2.12-3.1.0/plugins
+```
+检查配置
+cat /opt/kafka_2.12-3.1.0/config/connect-standalone.properties
+
+制作插件要连接的配置文件
+vi /opt/kafka_2.12-3.1.0/config/kafkaToTdengineSink.properties
+```
+name=kafkaToTdengineSink
+connector.class=com.taosdata.kafka.connect.sink.TDengineSinkConnector
+tasks.max=1
+
+topics=wtss
+
+connection.url=jdbc:TAOS://bigdata1:6030
+connection.user=root
+connection.password=taosdata
+connection.database=wtss
+connection.attempts=3
+connection.backoff.ms=5000
+
+max.retries=3
+retry.backoff.ms=3000
+batch.size=1000
+db.charset=UTF-8
+db.timeunit=milliseconds
+db.schemaless=line
+data.precision=ns
+
+key.converter=org.apache.kafka.connect.storage.StringConverter
+value.converter=org.apache.kafka.connect.storage.StringConverter
+```
+检查配置
+cat /opt/kafka_2.12-3.1.0/config/kafkaToTdengineSink.properties
+
+启动连接器
+/opt/kafka_2.12-3.1.0/bin/connect-standalone.sh /opt/kafka_2.12-3.1.0/config/connect-standalone.properties /opt/kafka_2.12-3.1.0/config/kafkaToTdengineSink.properties
+后台启动连接器
+/opt/kafka_2.12-3.1.0/bin/connect-standalone.sh -daemon /opt/kafka_2.12-3.1.0/config/connect-standalone.properties /opt/kafka_2.12-3.1.0/config/kafkaToTdengineSink.properties
+
+ps aux|grep ConnectStandalone|grep -v grep |awk '{print $2}'|xargs kill -15
+ps aux|grep ConnectStandalone
+
+查看连接器列表
+curl http://127.0.0.1:8083/connectors
+查看指定连接器信息
+curl http://127.0.0.1:8083/connectors/kafkaToTdengineSink
+查看连接器状态
+curl http://127.0.0.1:8083/connectors/kafkaToTdengineSink/status
+查看所有task
+curl http://127.0.0.1:8083/connectors/kafkaToTdengineSink/tasks
+------------------------------------------------------------------------

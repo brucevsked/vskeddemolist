@@ -1,95 +1,33 @@
+
+配置时建议使用主机名来进行配置listener
+
 启动kafka(三台都运行)（bigdata1,bigdata2,bigdata3）
 kafka-server-start.sh -daemon /opt/kafka_2.12-2.3.1/config/server.properties
 关闭kafka(三台都运行)（bigdata1,bigdata2,bigdata3）
 /opt/kafka_2.12-2.3.1/bin/kafka-server-stop.sh
 
 创建主题
-kafka-topics.sh --create --bootstrap-server 172.22.90.44:9092 --replication-factor 1 --partitions 3 --topic mytopica01a
+kafka-topics.sh --bootstrap-server bigdata1:9092 --create --replication-factor 1 --partitions 3 --topic mytopica01a
 删除主题
-kafka-topics.sh --topic mytopica01a --delete --bootstrap-server 172.22.90.44:9092
+kafka-topics.sh --bootstrap-server bigdata1:9092 --delete --topic mytopica01a 
 查看主题列表
-kafka-topics.sh --list --bootstrap-server 172.22.90.44:9092
+kafka-topics.sh --bootstrap-server 主机名:9092 --list 
+kafka-topics.sh --bootstrap-server bigdata1:9092 --list 
+
 生产消息 按回车以后发送消息
-kafka-console-producer.sh --broker-list 172.22.90.44:9092 --topic mytopica01a
-kafka-console-producer.sh --broker-list 172.22.90.44:9092 --topic testFlink
+kafka-console-producer.sh --broker-list bigdata1:9092 --topic mytopica01a
+kafka-console-producer.sh --broker-list bigdata1:9092 --topic testFlink
 消费消息 按回车以后会收到生产者发的消息
-kafka-console-consumer.sh --bootstrap-server 172.22.90.44:9092 --topic topicName
-kafka-console-consumer.sh --zookeeper 172.22.90.44:2181 --topic topicName
+kafka-console-consumer.sh --bootstrap-server bigdata1:9092 --topic topicName
 
 
-[root@CDHNode2 ~]# kafka-console-consumer.sh
-This tool helps to read data from Kafka topics and outputs it to standard output.
-Option                                   Description                            
-------                                   -----------                            
---bootstrap-server <String: server to    REQUIRED: The server(s) to connect to. 
-  connect to>                                                                   
---consumer-property <String:             A mechanism to pass user-defined       
-  consumer_prop>                           properties in the form key=value to  
-                                           the consumer.                        
---consumer.config <String: config file>  Consumer config properties file. Note  
-                                           that [consumer-property] takes       
-                                           precedence over this config.         
---enable-systest-events                  Log lifecycle events of the consumer   
-                                           in addition to logging consumed      
-                                           messages. (This is specific for      
-                                           system tests.)                       
---formatter <String: class>              The name of a class to use for         
-                                           formatting kafka messages for        
-                                           display. (default: kafka.tools.      
-                                           DefaultMessageFormatter)             
---from-beginning                         If the consumer does not already have  
-                                           an established offset to consume     
-                                           from, start with the earliest        
-                                           message present in the log rather    
-                                           than the latest message.             
---group <String: consumer group id>      The consumer group id of the consumer. 
---help                                   Print usage information.               
---isolation-level <String>               Set to read_committed in order to      
-                                           filter out transactional messages    
-                                           which are not committed. Set to      
-                                           read_uncommittedto read all          
-                                           messages. (default: read_uncommitted)
---key-deserializer <String:                                                     
-  deserializer for key>                                                         
---max-messages <Integer: num_messages>   The maximum number of messages to      
-                                           consume before exiting. If not set,  
-                                           consumption is continual.            
---offset <String: consume offset>        The offset id to consume from (a non-  
-                                           negative number), or 'earliest'      
-                                           which means from beginning, or       
-                                           'latest' which means from end        
-                                           (default: latest)                    
---partition <Integer: partition>         The partition to consume from.         
-                                           Consumption starts from the end of   
-                                           the partition unless '--offset' is   
-                                           specified.                           
---property <String: prop>                The properties to initialize the       
-                                           message formatter. Default           
-                                           properties include:                  
-                                                print.timestamp=true|false            
-                                                print.key=true|false                  
-                                                print.value=true|false                
-                                                key.separator=<key.separator>         
-                                                line.separator=<line.separator>       
-                                                key.deserializer=<key.deserializer>   
-                                                value.deserializer=<value.            
-                                           deserializer>                        
-                                         Users can also pass in customized      
-                                           properties for their formatter; more 
-                                           specifically, users can pass in      
-                                           properties keyed with 'key.          
-                                           deserializer.' and 'value.           
-                                           deserializer.' prefixes to configure 
-                                           their deserializers.                 
---skip-message-on-error                  If there is an error when processing a 
-                                           message, skip it instead of halt.    
---timeout-ms <Integer: timeout_ms>       If specified, exit if no message is    
-                                           available for consumption for the    
-                                           specified interval.                  
---topic <String: topic>                  The topic id to consume on.            
---value-deserializer <String:                                                   
-  deserializer for values>                                                      
---version                                Display Kafka version.                 
---whitelist <String: whitelist>          Regular expression specifying          
-                                           whitelist of topics to include for   
-                                           consumption.      
+--------------------------------------------------------------------------------
+Kafka Connect 通过 Converter 将数据在Kafka（字节数组）与Task（Object）之间进行转换
+默认支持以下Converter
+AvroConverter io.confluent.connect.avro.AvroConverter: 需要使用 Schema Registry
+ProtobufConverter io.confluent.connect.protobuf.ProtobufConverter: 需要使用 Schema Registry
+JsonSchemaConverter io.confluent.connect.json.JsonSchemaConverter: 需要使用 Schema Registry
+JsonConverter org.apache.kafka.connect.json.JsonConverter (无需 Schema Registry): 转换为json结构
+StringConverter org.apache.kafka.connect.storage.StringConverter: 简单的字符串格式
+ByteArrayConverter org.apache.kafka.connect.converters.ByteArrayConverter: 不做任何转换
+--------------------------------------------------------------------------------

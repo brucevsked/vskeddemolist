@@ -35,11 +35,9 @@ source /etc/profile
 mkdir -p /data/data/kafka/log
 vi /opt/kafka_2.12-2.5.0/config/server.properties
 ```
-broker.id=1
-listeners=PLAINTEXT://0.0.0.0:9092
-# 注意这里的advertised.listeners后面写的是外网IP:外网端口号!
-advertised.listeners=PLAINTEXT://10.0.193.11:9092
-zookeeper.connect=10.0.193.11:2181
+broker.id=0
+listeners=PLAINTEXT://主机名:9092
+zookeeper.connect=主机名:2181
 listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 log.dirs=/data/data/kafka/log
 num.partitions=4
@@ -67,3 +65,96 @@ kafka-server-start.sh -daemon /opt/kafka_2.12-2.5.0/config/server.properties
 /opt/kafka_2.12-2.5.0/bin/kafka-server-stop.sh
 
 --------------------------------------------------------------------------------
+
+插件配置
+mkdir -p /opt/kafka_2.12-3.1.0/plugins
+将插件解压到这个目录如taosdata-kafka-connect-tdengine-1.0.1
+cd /opt/kafka_2.12-3.1.0/plugins
+ls
+查看插件并解包
+tar -xvf taosdata-kafka-connect-tdengine-1.0.1.tar
+rm -rf taosdata-kafka-connect-tdengine-1.0.1.tar
+
+配置kafka中TDengine插件
+
+mkdir -p /opt/kafka_2.12-3.1.0/plugins
+目录
+cd /opt/kafka_2.12-3.1.0/plugins/
+
+独立kafka部署参考：
+https://www.taosdata.com/chinese/12592.html
+https://www.cnblogs.com/csq-66/p/16922750.html
+https://www.taosdata.com/engineering/14798.html
+https://docs.taosdata.com/reference/schemaless/#%E6%97%A0%E6%A8%A1%E5%BC%8F%E5%86%99%E5%85%A5%E8%A1%8C%E5%8D%8F%E8%AE%AE
+
+
+taosdata-kafka-connect-tdengine-1.0.1.tar
+上传到
+/opt/kafka_2.12-3.1.0/plugins/
+
+tar -zxvf taosdata-kafka-connect-tdengine-1.0.1.tar.gz
+rm -rf taosdata-kafka-connect-tdengine-1.0.1.tar.gz
+
+
+配置 /opt/kafka_2.12-3.1.0/config/connect-standalone.properties
+vi /opt/kafka_2.12-3.1.0/config/connect-standalone.properties
+```
+bootstrap.servers=主机名:9092
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+key.converter.schemas.enable=true
+value.converter.schemas.enable=true
+offset.storage.file.filename=/tmp/connect.offsets
+offset.flush.interval.ms=1000
+plugin.path=/opt/kafka_2.12-3.1.0/plugins
+```
+检查配置
+cat /opt/kafka_2.12-3.1.0/config/connect-standalone.properties
+
+制作插件要连接的配置文件
+vi /opt/kafka_2.12-3.1.0/config/kafkaToTdengineSink.properties
+```
+name=kafkaToTdengineSink
+connector.class=com.taosdata.kafka.connect.sink.TDengineSinkConnector
+tasks.max=1
+
+topics=wtss
+
+connection.url=jdbc:TAOS://主机名:6030
+connection.user=root
+connection.password=taosdata
+connection.database=wtss
+connection.attempts=3
+connection.backoff.ms=5000
+
+max.retries=3
+retry.backoff.ms=3000
+batch.size=1000
+db.charset=UTF-8
+db.timeunit=milliseconds
+db.schemaless=line
+data.precision=ns
+
+key.converter=org.apache.kafka.connect.storage.StringConverter
+value.converter=org.apache.kafka.connect.storage.StringConverter
+
+```
+检查配置
+cat /opt/kafka_2.12-3.1.0/config/kafkaToTdengineSink.properties
+
+启动连接器
+/opt/kafka_2.12-3.1.0/bin/connect-standalone.sh /opt/kafka_2.12-3.1.0/config/connect-standalone.properties /opt/kafka_2.12-3.1.0/config/kafkaToTdengineSink.properties
+后台启动连接器
+/opt/kafka_2.12-3.1.0/bin/connect-standalone.sh -daemon /opt/kafka_2.12-3.1.0/config/connect-standalone.properties /opt/kafka_2.12-3.1.0/config/kafkaToTdengineSink.properties
+
+ps aux|grep ConnectStandalone|grep -v grep |awk '{print $2}'|xargs kill -15
+ps aux|grep ConnectStandalone
+
+查看连接器列表
+curl http://127.0.0.1:8083/connectors
+查看指定连接器信息
+curl http://127.0.0.1:8083/connectors/kafkaToTdengineSink
+查看连接器状态
+curl http://127.0.0.1:8083/connectors/kafkaToTdengineSink/status
+查看所有task
+curl http://127.0.0.1:8083/connectors/kafkaToTdengineSink/tasks
