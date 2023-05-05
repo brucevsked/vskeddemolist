@@ -27,6 +27,10 @@ this.$nextTick(() => {
 
 只能输入数字
 <el-input v-model="form.sequence" type="number"></el-input>
+日期1，年月日
+<el-date-picker type="date" placeholder="开始时间" v-model="startTimeValue"></el-date-picker>
+日期2，年月日时分秒
+<el-date-picker v-model="form.startTime" type="datetime" format="yyyy年MM月dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
 
 输入框默认获取焦点
 添加ref

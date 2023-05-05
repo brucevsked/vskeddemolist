@@ -1,6 +1,10 @@
 ﻿注解版本mybatis使用
 
-注意:条件表达式中大于号小于号用 gt(大于),lt(小于),gte(大于等于),lte(小于等于)
+注意:
+条件表达式中大于号小于号
+方案1：用 gt(大于),lt(小于),gte(大于等于),lte(小于等于)
+方案2推荐：<![CDATA[ > ]]>   <![CDATA[ < ]]>  <![CDATA[ >= ]]>   <![CDATA[ <= ]]>
+
 
 1* 同时删除多个 注意需要连接字符串中&allowMutiQueries=true支持
 service层

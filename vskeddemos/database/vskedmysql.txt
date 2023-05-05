@@ -373,6 +373,10 @@ select DATE_FORMAT(NOW(),'%Y-%m-%d');
 select DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%S');
 select * from appUserBalanceHisT where DATE_FORMAT(CURRENT_TIMESTAMP,'%Y-%m-%d')=DATE_FORMAT(addtime,'%Y-%m-%d');
 
+将unix时间戳转为日期格式
+SELECT FROM_UNIXTIME(1234567890,'%Y-%m-%d %H:%i:%S');
+
+
 33* 查看是否开启恢复日志bin-log日志
  show variables like 'log_bin';
 flush logs; 会多一个最新的bin-log日志
