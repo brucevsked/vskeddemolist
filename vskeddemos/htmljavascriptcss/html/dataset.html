@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+  <!-- must set here! -->
+  <base href="">
+
+  <title>自定义数据属性</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <!-- 全屏模式,不显示工具栏和菜单栏 -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- 关闭iphone电话号码链接 -->
+  <meta name="format-detection" content="telephone=no" />
+
+
+
+</head>
+
+<body>
+
+  <div id="person1" data-id="3701811" data-name="david" data-age="18"> p1</div>
+  <div id="person2" data-id="3701812" data-name="bruce" data-age="30"> p2</div>
+
+  <script>
+    "use strict"
+
+    class Test {
+      go() {
+        const el = document.querySelector('#person1');
+        console.log(el.dataset);
+        let myDataMap = el.dataset;
+        for (let mpEl in myDataMap) {
+          let key = mpEl;
+          let value = myDataMap[key];
+          console.log(key + ":" + value);
+        }
+      }
+
+      go2() {
+        const els = document.querySelectorAll('div');
+        console.log(els.length);
+        for (let index in els) {
+          let myDataMap = els[index].dataset;
+          for (let mpEl in myDataMap) {
+            let key = mpEl;
+            let value = myDataMap[key];
+            console.log(key + ":" + value);
+          }
+        }
+
+      }
+    }
+
+    var test = new Test();
+    test.go();
+    test.go2();
+
+  </script>
+
+</body>
+
+</html>
