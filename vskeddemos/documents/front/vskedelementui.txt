@@ -368,7 +368,7 @@ export const getRoleResource = (form) => {
     </template>
 
 
-规则验证
+规则验证 默认版本
 S1
              <!-- 第1步 设置要绑定的规则:rules  设置表单唯一标识 ref -->
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
@@ -428,6 +428,41 @@ S3
                     return false;
                 }
             });
+
+
+规则验证 自定义版本
+data() {
+			var checkUserName = (rule, value, callback) => {
+				if (!value) {
+					return callback(new Error('用户名不能为空'));
+				} else {
+					callback(); //自定义校验 callback 必须被调用。
+				}
+			};
+			var validatePass = (rule, value, callback) => {
+				if (value === '') {
+					callback(new Error('请输入密码'));
+				} else {
+					callback(); //自定义校验 callback 必须被调用。
+				}
+			};
+			return {
+				ruleForm: {
+					userName: 'admin',
+					password: '123456',
+				},
+				rules: {
+					userName: [{
+						validator: checkUserName,
+						trigger: 'blur'
+					}],
+					password: [{
+						validator: validatePass,
+						trigger: 'blur'
+					}]
+				}
+			}
+		},
 
 ------------------------------------
 
