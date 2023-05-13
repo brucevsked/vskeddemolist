@@ -27,3 +27,12 @@ mednafen
 EmulationStation
 EmuELEC 3.0
 
+
+Ryujinx
+yuzu-windows-msvc-early-access
+
+
+
+Ryujinx如果运行速度过快可以将v-syncy关闭
+
+
