@@ -1,121 +1,98 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.vsked</groupId>
-  <artifactId>httpunitdemo</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>httpunitdemo</name>
-  <url>http://maven.apache.org</url>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.vsked</groupId>
+	<artifactId>httpunitdemo</artifactId>
+	<version>1.0</version>
+
+	<name>${project.artifactId}</name>
+
 	<properties>
+		<!-- 声明项目配置依赖编码格式为 utf-8 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-		<slf4j.version>1.7.25</slf4j.version>
-		<log4j2.version>2.11.0</log4j2.version>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- 编译UTF-8 -->
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.install.skip>true</maven.install.skip>
+		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
+		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
+
+		<log4j.version>2.19.0</log4j.version>
+		<testng.version>7.7.1</testng.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars</groupId>
+					<artifactId>jquery</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.glassfish.web/jstl-impl -->
-		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>jstl-impl</artifactId>
-			<version>1.2</version>
-		</dependency>
-<!-- slf4j start -->
-<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>${slf4j.version}</version>
-</dependency>
-
-<!-- slf4j end -->
-		<!-- log4j2 start -->
-<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-slf4j-impl</artifactId>
-			<version>${log4j2.version}</version>
-</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>${log4j2.version}</version>
+			<version>${log4j.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>${log4j2.version}</version>
+			<version>${log4j.version}</version>
 		</dependency>
-		<!-- log4j2 end -->
-<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-<dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-lang3</artifactId>
-    <version>3.7</version>
-</dependency>
-<dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>2.6</version>
-</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
 
-<!-- https://mvnrepository.com/artifact/net.sourceforge.htmlunit/htmlunit -->
-<dependency>
-    <groupId>net.sourceforge.htmlunit</groupId>
-    <artifactId>htmlunit</artifactId>
-    <version>2.33</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
-<dependency>
-    <groupId>org.jsoup</groupId>
-    <artifactId>jsoup</artifactId>
-    <version>1.11.3</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/xml-apis/xml-apis -->
-<dependency>
-    <groupId>xml-apis</groupId>
-    <artifactId>xml-apis</artifactId>
-    <version>1.4.01</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.eclipse.jetty.websocket/websocket-client -->
-<dependency>
-    <groupId>org.eclipse.jetty.websocket</groupId>
-    <artifactId>websocket-client</artifactId>
-    <version>9.4.14.v20181114</version>
-</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
 
+		<dependency>
+			<groupId>net.sourceforge.htmlunit</groupId>
+			<artifactId>htmlunit</artifactId>
+			<version>2.70.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.16.1</version>
+		</dependency>
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.4.01</version>
+		</dependency>
 
 	</dependencies>
-  <build>
-    <finalName>httpunitdemo</finalName>
+
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mavenCompilerPlugin.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -124,34 +101,14 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			<!-- skip the test -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${mavenSurefirePlugin.version}</version>
 				<configuration>
 					<skip>true</skip>
 				</configuration>
 			</plugin>
 		</plugins>
-		<resources>
-			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.xml</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>**/*.xml</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>**/*.properties</include>
-				</includes>
-			</resource>
-		</resources>
-  </build>
+	</build>
 </project>
