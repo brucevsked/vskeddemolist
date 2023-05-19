@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+	<!-- must set here! -->
+	<base href="">
+
+	<title>random 测试</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+
+
+	<script>
+		'use strict'
+
+		class randomTest {
+			randomInt() {
+				let num = Math.floor(Math.random() * 10);//0-9随机数
+				console.log(num);
+				let num1 = this.randomNum(100,200);//10-20随机数
+				console.log(num1);
+			}
+
+			randomNum(minNum, maxNum) {
+				switch (arguments.length) {
+					case 1:
+						return parseInt(Math.random() * minNum + 1, 10);
+						break;
+					case 2:
+						return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+						break;
+					default:
+						return 0;
+						break;
+				}
+			}
+		}
+
+		let test = new randomTest();
+		test.randomInt();
+
+	</script>
+
+</body>
+
+</html>
