@@ -6,8 +6,8 @@
 <configuration status="warn" monitorInterval="60">
 	<Properties>
 	<!--<Property name="logpath">${sys:catalina.home}/logs/springbootkafka/</Property>-->
-	 <Property name="logpath">/logs/springbootkafka/</Property> 
-	 <Property name="logname">springbootkafka</Property>
+	 <Property name="logpath">/logs/springboot2kafka/</Property>
+	 <Property name="logname">springboot2kafka</Property>
 	</Properties>
     <!--先定义所有的appender-->
     <appenders>

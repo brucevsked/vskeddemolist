@@ -41,6 +41,7 @@ docker run --restart=always --net docker-net --ip 10.0.192.10 \
 
 使用zookeeper连接工具测试看效果
 ZooInspector.jar
+
 --------------------------------------------------------------------------------
 kafka 安装 docker版本 单机
 
@@ -57,3 +58,10 @@ docker run --restart=always --net docker-net --ip 10.0.192.20 \
  -e KAFKA_CFG_ZOOKEEPER_CONNECT=10.0.192.10:2181 \
  --name kafka1 -d bitnami/kafka:latest
 
+
+
+
+docker exec -i -t 容器名称/容器id /bin/bash
+docker exec -i kafka1 sh -c 'kafka-topics.sh --bootstrap-server 53ab5a1d6dd3:9092 --list'
+docker exec -i kafka1 sh -c 'kafka-console-producer.sh --broker-list 53ab5a1d6dd3:9092 --topic wtss'
+--------------------------------------------------------------------------------

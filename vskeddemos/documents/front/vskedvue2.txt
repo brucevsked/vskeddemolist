@@ -134,3 +134,112 @@ export function login(userName, password) {
 
 导入方法
 import {info} from '../../api/user'; //导入方法
+
+--------------------------------------------------------------------------------
+引入高德地图控件 方案1
+
+npm i @amap/amap-jsapi-loader
+
+import AMapLoader from '@amap/amap-jsapi-loader'
+// 初始化轨迹
+			initroad() {
+                AMapLoader.load({
+                key: '你的秘钥',
+                plugins: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor','AMap.ElasticMarker'],
+                AMapUI:{
+                  version:'1.1',
+                  plugins:['misc/PositionPicker','misc/PathSimplifier','overlay/SimpleMarker']
+                }
+                            }).then((AMap)=>{
+			  // 绘制还未经过的路线
+			  this.polyline = new AMap.Polyline({
+			    map: this.map,
+			    // path: JSON.parse(this.roadData),
+				path:this.roadData,
+			    showDir: true,
+			    strokeColor: '#28F', // 线颜色--蓝色
+			    strokeOpacity: 0,     //线透明度
+			    strokeWeight: 6, // 线宽
+			    // strokeStyle: "solid"  //线样式
+			    lineJoin: 'round' // 折线拐点的绘制样式
+			  })
+			  // 绘制路过了的轨迹
+			  var passedPolyline = new AMap.Polyline({
+			    map: this.map,
+			    strokeColor: '#AF5', // 线颜色-绿色
+			    // path: lineArr.reverse(),
+			    // strokeOpacity: 1,     //线透明度
+			    strokeWeight: 6 // 线宽
+			    // strokeStyle: "solid"  //线样式
+			  })
+			  this.marker.on('moving', e => {
+			    passedPolyline.setPath(e.passedPath)
+			  })
+			  this.map.setFitView() // 合适的视口
+              });
+			}
+
+vue.config.js中defineConfig添加
+  configureWebpack:{
+	  externals:{
+		  Amap:"Amap",
+		  AmapUI:"AmapUI"
+	  }
+  }
+--------------------------------------------------------------------------------
+引入高德地图控件 方案2 推荐
+
+npm i @amap/amap-jsapi-loader
+
+main.js文件中
+//引入vue-amap
+import VueAMap from 'vue-amap'
+
+Vue.use(VueAMap)
+
+VueAMap.initAMapApiLoader({
+	key: ''你的秘钥'',
+	plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor','AMap.ElasticMarker'],
+	uiVersion:'1.1'
+})
+
+import { lazyAMapApiLoaderInstance } from 'vue-amap';
+// 初始化轨迹
+			initroad() {
+                lazyAMapApiLoaderInstance.load().then(()=>{
+			  // 绘制还未经过的路线
+			  this.polyline = new AMap.Polyline({
+			    map: this.map,
+			    // path: JSON.parse(this.roadData),
+				path:this.roadData,
+			    showDir: true,
+			    strokeColor: '#28F', // 线颜色--蓝色
+			    strokeOpacity: 0,     //线透明度
+			    strokeWeight: 6, // 线宽
+			    // strokeStyle: "solid"  //线样式
+			    lineJoin: 'round' // 折线拐点的绘制样式
+			  })
+			  // 绘制路过了的轨迹
+			  var passedPolyline = new AMap.Polyline({
+			    map: this.map,
+			    strokeColor: '#AF5', // 线颜色-绿色
+			    // path: lineArr.reverse(),
+			    // strokeOpacity: 1,     //线透明度
+			    strokeWeight: 6 // 线宽
+			    // strokeStyle: "solid"  //线样式
+			  })
+			  this.marker.on('moving', e => {
+			    passedPolyline.setPath(e.passedPath)
+			  })
+			  this.map.setFitView() // 合适的视口
+              });
+			}
+
+vue.config.js中defineConfig添加
+  configureWebpack:{
+	  externals:{
+		  Amap:"Amap",
+		  AmapUI:"AmapUI"
+	  }
+  }
+  --------------------------------------------------------------------------------

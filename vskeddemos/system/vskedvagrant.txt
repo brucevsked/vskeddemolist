@@ -4,6 +4,7 @@ vagrant -v
 
 默认用户名与密码
 vagrant
+自己打的镜像默认root密码为vagrant
 
 Vagrant命令详解
 命令	作用

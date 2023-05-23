@@ -4,12 +4,18 @@ server:
 spring:
   kafka:
     bootstrap-servers:
-      - bigdata1:9092
+      - 10.0.193.11:9092
     consumer:
       auto-offset-reset: latest
-      enable-auto-commit: true
+      enable-auto-commit: true #不自动提交
       group-id: sk01
-      
-  
+      #max-poll-records: 3000 #一次最多消费数量
+    listener:
+      type: batch #拉取模式 single单条 batch批量
+      poll-timeout: 1000 #拉取超时
+      ack-mode: batch #批量确认模式
+      #concurrency: 3 #并发线程数，小于分区数
+      idle-between-polls: 8S #批量拉取间隔时间
+
 logging:
   config: classpath:log4j2.xml

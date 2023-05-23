@@ -154,6 +154,8 @@ docker exec -i -t 24e6fd60d600 /bin/bash
 docker exec -i -t  mynginx /bin/bash
 docker exec -i -t myredis /bin/bash
 docker exec -i -t webadmin /bin/bash
+直接执行容器内相关命令
+docker exec -i kafka1 sh -c 'ls /opt'
 
 11* 创建子网及网络相关
 docker network create --subnet=子网网段/子网掩码 网络名称

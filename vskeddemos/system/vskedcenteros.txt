@@ -395,6 +395,9 @@ systemctl stop datadisp.service
 
 
 24* 禁用ipv6
+
+查看ipv6是否启用
+ip a|grep inet6
 vi /etc/sysctl.conf
 net.ipv6.conf.all.disable_ipv6=1
 NETWORKING_IPV6=no
@@ -402,8 +405,15 @@ NETWORKING_IPV6=no
 IPV6INIT=no
 
 chkconfig ip6tables off
+systemctl disable ip6tables.service
 
 sysctl -p
+
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sysctl -w net.ipv6.conf.default.disable_ipv6=1
+重启
+
+reboot
 
 
 25* 在Linux下查看FC HBA卡的速率和状态 查看光纤卡信息
