@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>sleep测试</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+
+
+<script>
+'use strict'
+
+/*
+方案1将延时后的部分封装成一上函数，使用setTimeout进行调用实现sleep效果，不推荐，需要额外封装函数
+*/
+let beforeBusiness=function(){
+	let d=new Date();
+	console.log(d);
+	console.log("这是需要延时前部分，也可以不封装函数");
+};
+
+let afterBusiness=function(){
+	let d=new Date();
+	console.log(d);
+	console.log("这是需要延时后的代码，必须封装成一个函数。");
+};
+
+let sleep=function(afterFun,time){
+	setTimeout(function(){afterFun();},time);
+}
+
+
+let sleepFun = (time) => new Promise((resolve) => setTimeout(resolve, time));
+
+let fun = () => {
+	let d=new Date();
+	console.log('test2 after:',d);
+	console.time("延时处理的业务");
+}
+
+
+let mySleep=function(delay) {
+  var start = (new Date()).getTime();
+  while ((new Date()).getTime() - start < delay) {
+    continue;
+  }
+}
+
+
+class sleepTest{
+
+	test1(){
+		beforeBusiness();
+		sleep(afterBusiness,2000);
+	}
+	
+	test2(){
+		let d=new Date();
+	    console.log('test2 before:',d);
+		sleepFun(3000).then(fun);
+	}
+
+	test3(){
+		let d=new Date();
+	    console.log('test3 before:',d);
+		mySleep(2000);
+		d=new Date();
+	    console.log('test3 after:',d);
+	}
+
+}
+
+let test=new sleepTest();
+	//test.test1();
+	//test.test2();
+	test.test3();
+
+
+</script>
+
+</body>
+</html>

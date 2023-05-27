@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>for and foreach 测试</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+
+
+<script>
+'use strict'
+  
+class forAndForeachTest{
+
+	forTest(){
+		for(let i=0;i<10;i++){
+			console.log('current value :',i);
+		}
+	}
+
+	forTest1(){
+		for(let i=0,k=0;i<10,k<6;i++,k++){
+			console.log('i:',i,'k:',k);
+			if(k==5 && i<10){
+				k=-1;
+			}
+			if(i==9){
+				break;
+			}
+		}
+	}
+
+	foreachTest(){
+		let numArray=[9,8,7,6,5,4,3,2,1];
+		numArray.forEach((el)=>{
+			console.log('当前元素',el);
+		});
+		numArray.forEach((el,index)=>{
+			console.log('当前元素',el,'当前索引',index);
+		});
+	}
+}
+
+let test=new forAndForeachTest();
+//test.forTest();
+test.forTest1();
+//test.foreachTest();
+</script>
+
+</body>
+</html>

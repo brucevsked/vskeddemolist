@@ -5,6 +5,8 @@ public class User {
     private UserName name;
     private Account account;
 
+    //TODO user state
+
     public User(Id id, UserName name, Account account) {
         if(id==null){
             throw new IllegalArgumentException("user id not be null！");
@@ -21,6 +23,9 @@ public class User {
     }
 
     public void login(Account account){
+        //todo has permission out
+        //state can login
+
         account.validate(this.account);
     }
 

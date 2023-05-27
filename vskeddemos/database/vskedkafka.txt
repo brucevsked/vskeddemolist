@@ -5,6 +5,7 @@
 kafka-server-start.sh -daemon /opt/kafka_2.12-2.3.1/config/server.properties
 关闭kafka(三台都运行)（bigdata1,bigdata2,bigdata3）
 /opt/kafka_2.12-2.3.1/bin/kafka-server-stop.sh
+kafka-server-stop.sh
 
 创建主题
 kafka-topics.sh --bootstrap-server bigdata1:9092 --create --replication-factor 1 --partitions 3 --topic mytopica01a
