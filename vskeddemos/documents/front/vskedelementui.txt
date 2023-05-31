@@ -1,4 +1,30 @@
 
+el-col为布局控件，总计24列使命el-row使用
+                <el-row>
+                    <el-col :span="12">{{currentCar.id}}</el-col>
+                    <el-col :span="12">{{currentCar.speed}}</el-col>
+                </el-row>
+
+自定义dialog宽与背景色
+样式
+/deep/.customDialog{
+  width: 30% !important; 
+  background-color: rgb(0,38,141,0.36) !important; 
+  border: solid #77f8ef;
+}
+标签
+        <el-dialog title="当前车辆详情" custom-class="customDialog" :visible.sync="detailDialog"  center>
+                <el-row>
+                    <el-col :span="12">{{currentCar.id}}</el-col>
+                    <el-col :span="12">{{currentCar.speed}}</el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">{{currentCar.acce}}</el-col>
+                    <el-col :span="12">{{currentCar.alti}}</el-col>
+                </el-row>
+        </el-dialog>
+
+
 this.$nextTick 将回调延迟到下次DOM更新循环之后执行。在修改数据之后立即使用它，然后等待DOM更新。
                 this.$nextTick(()=>{
                     this.$refs.addName.focus();//取焦点
@@ -24,6 +50,9 @@ this.$nextTick(() => {
 
 隐藏域
 <el-input v-model="form.id" v-show="false"></el-input>
+
+文本域(多行文本框)
+<el-input type="textarea" rows="11" v-model="currentCar.info" disabled></el-input>
 
 只能输入数字
 <el-input v-model="form.sequence" type="number"></el-input>
