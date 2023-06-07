@@ -1,66 +1,76 @@
 <!DOCTYPE HTML>
 <html lang="zh">
-<head>
-<!-- must set here! -->
-<base href="">
 
-<title>String测试</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<head>
+	<!-- must set here! -->
+	<base href="">
+
+	<title>String测试</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 </head>
 
 <body>
 
-<script src="js/jquery.min.js"></script>
 
-<script>
-'use strict'
+	<script>
+		'use strict'
 
-$(function(){
+		class StringTest {
 
-	let test=new StringTest();
-	test.testSubString();
-	test.testIndexOf();
-	test.testLastIndexOf();
-	test.testParseInt();
+			testSubString() {
+				let s1 = "123456789";
+				let s2 = s1.substring(0, 3);
+				console.log("---------------from,to:", s2);
+				let s3 = s1.substring(3);
+				console.log("---------------to,end:", s3);
+				let s4 = s1.substring(s1.length - 2);
+				console.log("---------------length-2:", s4);
+			}
 
-});
-  
-class StringTest{
+			testIndexOf() {
+				let s1 = "aaabbbccc111222333aaabbbccc111222333";
+				let index = s1.indexOf('aaa');
+				console.log("---------------indexOf:", index);
+			}
 
-	testSubString(){
-		let s1="123456789";
-		let s2=s1.substring(0,3);
-		console.log("---------------from,to:",s2);
-		let s3=s1.substring(3);
-		console.log("---------------to,end:",s3);
-		let s4=s1.substring(s1.length-2);
-		console.log("---------------length-2:",s4);
-	}
+			testLastIndexOf() {
+				let s1 = "123456789123456789";
+				let index = s1.lastIndexOf('1');
+				console.log("---------------lastIndexOf:", index);
+			}
 
-	testIndexOf(){
-		let s1="aaabbbccc111222333aaabbbccc111222333";
-		let index=s1.indexOf('aaa');
-		console.log("---------------indexOf:",index);
-	}
+			testParseInt() {
+				let s1 = '110';
+				console.log('s1 value is:', s1);
+				console.log('s1 data type is:', typeof s1);
+				let v1 = parseInt(s1);
+				console.log('v1 value is:', v1);
+				console.log('v1 data type is:', typeof v1);
+			}
 
-	testLastIndexOf(){
-		let s1="123456789123456789";
-		let index=s1.lastIndexOf('1');
-		console.log("---------------lastIndexOf:",index);
-	}
+			stringToDate(){
+				let str='2023-06-06 15:32:12';
+				let d=new Date(str);
+				console.log(d);
+				console.log(d.getFullYear());
+				console.log(d.getMonth());
+				console.log(d.getDate());
+				console.log(d.getTime());//1686036732000
+			}
+		}
 
-	testParseInt(){
-		let s1='110';
-		console.log('s1 value is:',s1);
-		console.log('s1 data type is:',typeof s1);
-		let v1=parseInt(s1);
-		console.log('v1 value is:',v1);
-		console.log('v1 data type is:',typeof v1);
-	}
-}
 
-</script>
+
+		let test = new StringTest();
+		// test.testSubString();
+		// test.testIndexOf();
+		// test.testLastIndexOf();
+		// test.testParseInt();
+		test.stringToDate();
+
+	</script>
 
 </body>
+
 </html>
