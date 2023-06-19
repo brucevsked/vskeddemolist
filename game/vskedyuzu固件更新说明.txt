@@ -30,3 +30,12 @@ D:\0newdownloadgame\yuzu-windows-msvc-early-access\user\keys\
 prod.keys
 
 如果你要升级固件可以直接替换这两个文件夹里的nca文件与keys文件即可
+
+-----------------------------------
+解决合并nsp文件后显示
+The title key for this rights id could not be found
+先不要删除原始版本nsp文件，使用模拟器打开1.0版本游戏文件，这时候会自动生成titlekey文件的
+再打开升级完成后的1.0.1的文件就可以打开了。再删除升级前的1.0与1.0.1的nsp补丁即可
+-----------------------------------
+NSZ,NSP,XCI等文件互相转换，使用软件SAK_64bit 可以解决 推荐xci格式
+-----------------------------------
