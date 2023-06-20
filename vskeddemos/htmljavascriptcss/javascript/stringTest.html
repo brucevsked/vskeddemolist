@@ -58,6 +58,13 @@
 				console.log(d.getDate());
 				console.log(d.getTime());//1686036732000
 			}
+
+			stringToDouble(){
+				let s='36.53035085834927';
+				let d=parseFloat(s);
+				console.log("before:",s);
+				console.log("after:",d);
+			}
 		}
 
 
@@ -67,7 +74,8 @@
 		// test.testIndexOf();
 		// test.testLastIndexOf();
 		// test.testParseInt();
-		test.stringToDate();
+		//test.stringToDate();
+		test.stringToDouble();
 
 	</script>
 

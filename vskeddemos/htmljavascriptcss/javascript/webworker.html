@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+    <!-- must set here! -->
+    <base href="">
+
+    <title>web worker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+<button id="startBt">start work</button>
+    <script>
+        'use strict'
+
+
+        class WebWorkerTest {
+
+            isSupport() {
+                if (typeof (Worker) === "undefined") {
+                    console.log("your browser not support web worker!");
+                    return false;
+                } else {
+                    console.log("your browser support web worker!");
+                    return true;
+                }
+            }
+
+            go() {
+                var worker = new Worker('js/doWork.js');
+
+                worker.addEventListener('message', function (e) {
+                    console.log('Worker said: ', e.data);
+                }, false);
+
+                worker.postMessage('Hello World'); // Send data to our worker.
+            }
+
+        }
+
+        var test = new WebWorkerTest();
+        test.isSupport();
+
+        document.querySelector('#startBt').onclick=function(){
+            test.go();
+        };
+
+    </script>
+
+</body>
+
+</html>

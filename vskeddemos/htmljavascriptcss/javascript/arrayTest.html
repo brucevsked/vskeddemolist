@@ -1,119 +1,120 @@
 <!DOCTYPE HTML>
 <html lang="zh">
-<head>
-<!-- must set here! -->
-<base href="">
 
-<title>数组测试</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<head>
+	<!-- must set here! -->
+	<base href="">
+
+	<title>数组测试</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 </head>
 
 <body>
 
-<script src="js/jquery.min.js"></script>
 
-<script>
-'use strict'
+	<script>
+		"use strict"
 
-$(function(){
-  
-arrayTest.addTest();
-arrayTest.listTest();
-arrayTest.delTest();
-arrayTest.toStringTest();
+		class ArrayTest {
+			addTest() {
+				console.log('addTest start------------------');
+				var myArray = new Array();// 声明数组
+				myArray.push({ 'win1': '1.11' });//向数组内添加元素
+				myArray.push({ 'tie1': '2.22' });
+				myArray.push({ 'lose1': '3.33' });
+				console.log('数组元素个数为:' + myArray.length);
+				var myArray2 = [];
+				myArray2[0] = '第a个元素';
+				myArray2[1] = '第b个元素';
+				myArray2[2] = '第c个元素';
+				console.log('数组元素个数为:' + myArray2.length);
+				console.log('addTest end------------------');
+			}
 
-});
-  
-var arrayTest=new Object({
-	addTest:function(){
-		console.log('addTest start------------------');
-		var myArray=new Array();// 声明数组
-		myArray.push({'win1':'1.11'});//向数组内添加元素
-		myArray.push({'tie1':'2.22'});
-		myArray.push({'lose1':'3.33'});
-		console.log('数组元素个数为:'+myArray.length);
-		var myArray2=[];
-		myArray2[0]='第a个元素';
-		myArray2[1]='第b个元素';
-		myArray2[2]='第c个元素';
-		console.log('数组元素个数为:'+myArray2.length);
-		console.log('addTest end------------------');
-	},
-	listTest:function(){
-		console.log('listTest start------------------');
-		var myArray=new Array();// 声明数组
-		myArray.push('第a个元素');//向数组内添加元素
-		myArray.push('第b个元素');
-		myArray.push('第c个元素');
-    //第一种 效率高
-    var i=0;
-		for(i=0;i<myArray.length;i++){
-		  console.log('1-------'+myArray[i]);
+			listTest() {
+				console.log('listTest start------------------');
+				var myArray = new Array();// 声明数组
+				myArray.push('第a个元素');//向数组内添加元素
+				myArray.push('第b个元素');
+				myArray.push('第c个元素');
+				//第一种 效率高
+				var i = 0;
+				for (i = 0; i < myArray.length; i++) {
+					console.log('1-------' + myArray[i]);
+				}
+				//第二种 效率最低 ES5
+				for (var dt in myArray) {
+					console.log('2-------' + myArray[dt]);
+				}
+				//第三种 效率中等 ES5
+				myArray.forEach((dtValue, dtIndex)=>{
+					console.log('3-------' + dtValue + '|' + dtIndex);
+				});
+				console.log('listTest end------------------');
+			}
+
+			delTest() {
+				console.log('delTest start------------------');
+				var ar1 = ['01', '02', '03', '04', '06', '07'];
+				console.log('原始|' + ar1.length + '|' + ar1);
+				delete ar1[0];//删除元素数组长度不变
+				delete ar1[1];//删除元素数组长度不变
+				console.log('操作后|' + ar1.length + '|' + ar1);
+
+				var ar2 = ['01', '02', '03', '04', '06', '07'];
+				console.log('a原始|' + ar2.length + '|' + ar2);
+				ar2.length = 4;//删除最后两个元素 改变数组长度
+				console.log('a操作后|' + ar2.length + '|' + ar2);
+
+				var ar3 = ['01', '02', '03', '04', '06', '07'];
+				console.log('b原始|' + ar3.length + '|' + ar3);
+				ar3.pop();//删除最后一个可以调用多次 改变数组长度
+				console.log('b操作后|' + ar3.length + '|' + ar3);
+
+				var ar4 = ['01', '02', '03', '04', '06', '07'];
+				console.log('c原始|' + ar4.length + '|' + ar4);
+				ar4.shift();//删除第一个可以调用多次 改变数组长度
+				console.log('c操作后|' + ar4.length + '|' + ar4);
+
+				var ar5 = ['01', '02', '03', '04', '06', '07'];
+				console.log('d原始|' + ar5.length + '|' + ar5);
+				ar5.splice(2, 3);//删除第二个开始后3个元素 改变数组长度 splice(起始位置,元素个数);
+				console.log('d操作后|' + ar5.length + '|' + ar5);
+
+				//删除元素
+				var ar6 = ['01', '02', '03', '04', '18', '06', '07'];
+				console.log('e原始|' + ar6.length + '|' + ar6);
+				//不遍历删除数组内元素
+				var tmpAr6 = ar6.indexOf('18') >= 0 ? ar6.splice(ar6.indexOf('18'), 1) : ar6;
+				console.log('e操作后|' + ar6.length + '|' + ar6);
+
+				console.log('delTest end------------------');
+			}
+			toStringTest() {
+				console.log('toStringTest start------------------');
+				var a1 = new Array();
+				a1.push(9);
+				var rs1 = a1.join(',');
+				console.log(rs1);
+				var a2 = new Array();
+				a2.push(10);
+				a2.push(11);
+				a2.push(12);
+				var rs2 = a2.join(',');
+				console.log(rs2);
+				console.log('toStringTest end------------------');
+			}
 		}
-		//第二种 效率最低 ES5
-		for(var dt in myArray){
-		  console.log('2-------'+myArray[dt]);
-		}
-		//第三种 效率中等 ES5
-		myArray.forEach(function(dtValue,dtIndex){
-		  console.log('3-------'+dtValue+'|'+dtIndex);
-		});
-	  console.log('listTest end------------------');
-	},
-	delTest:function(){
-		console.log('delTest start------------------');
-	  var ar1=['01','02','03','04','06','07'];
-	  console.log('原始|'+ar1.length+'|'+ar1);
-	  delete ar1[0];//删除元素数组长度不变
-	  delete ar1[1];//删除元素数组长度不变
-		console.log('操作后|'+ar1.length+'|'+ar1);
-		
-	  var ar2=['01','02','03','04','06','07'];
-	  console.log('a原始|'+ar2.length+'|'+ar2);
-	  ar2.length=4;//删除最后两个元素 改变数组长度
-		console.log('a操作后|'+ar2.length+'|'+ar2);
-		
-	  var ar3=['01','02','03','04','06','07'];
-	  console.log('b原始|'+ar3.length+'|'+ar3);
-	  ar3.pop();//删除最后一个可以调用多次 改变数组长度
-		console.log('b操作后|'+ar3.length+'|'+ar3);
-		
-	  var ar4=['01','02','03','04','06','07'];
-	  console.log('c原始|'+ar4.length+'|'+ar4);
-	  ar4.shift();//删除第一个可以调用多次 改变数组长度
-		console.log('c操作后|'+ar4.length+'|'+ar4);
-		
-	  var ar5=['01','02','03','04','06','07'];
-	  console.log('d原始|'+ar5.length+'|'+ar5);
-	  ar5.splice(2,3);//删除第二个开始后3个元素 改变数组长度 splice(起始位置,元素个数);
-		console.log('d操作后|'+ar5.length+'|'+ar5);
-		
-	  //删除元素
-	  var ar6=['01','02','03','04','18','06','07'];
-	  console.log('e原始|'+ar6.length+'|'+ar6);
-		//不遍历删除数组内元素
-		var tmpAr6=ar6.indexOf('18')>=0?ar6.splice(ar6.indexOf('18'), 1):ar6;
-		console.log('e操作后|'+ar6.length+'|'+ar6);
-    
-	  console.log('delTest end------------------');
-	},
-	toStringTest:function(){
-		console.log('toStringTest start------------------');
-	  var a1=new Array();
-	  a1.push(9);
-	  var rs1=a1.join(',');
-	  console.log(rs1);
-	  var a2=new Array();
-	  a2.push(10);
-	  a2.push(11);
-	  a2.push(12);
-	  var rs2=a2.join(',');
-	  console.log(rs2);
-		console.log('toStringTest end------------------');
-	}
-});
-</script>
+
+		let test = new ArrayTest();
+		//test.addTest();
+		test.listTest();
+		test.delTest();
+		//test.toStringTest();
+
+	</script>
 
 </body>
+
 </html>

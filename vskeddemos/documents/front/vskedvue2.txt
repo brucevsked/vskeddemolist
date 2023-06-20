@@ -136,6 +136,11 @@ export function login(userName, password) {
 import {info} from '../../api/user'; //导入方法
 
 --------------------------------------------------------------------------------
+
+参考高德官方地址：
+https://developer.amap.com/api/jsapi-v2/guide/abc/prepare
+
+
 引入高德地图控件 方案1
 
 npm i @amap/amap-jsapi-loader
@@ -145,6 +150,7 @@ import AMapLoader from '@amap/amap-jsapi-loader'
 			initroad() {
                 AMapLoader.load({
                 key: '你的秘钥',
+                v:'2.0', //默认1.4.4
                 plugins: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor','AMap.ElasticMarker'],
                 AMapUI:{
                   version:'1.1',
@@ -199,6 +205,7 @@ Vue.use(VueAMap)
 
 VueAMap.initAMapApiLoader({
 	key: ''你的秘钥'',
+  v:'2.0', //默认1.4.4
 	plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor','AMap.ElasticMarker'],
 	uiVersion:'1.1'
 })
@@ -206,7 +213,7 @@ VueAMap.initAMapApiLoader({
 import { lazyAMapApiLoaderInstance } from 'vue-amap';
 // 初始化轨迹
 			initroad() {
-                lazyAMapApiLoaderInstance.load().then(()=>{
+                //lazyAMapApiLoaderInstance.load().then(()=>{//start s2
 			  // 绘制还未经过的路线
 			  this.polyline = new AMap.Polyline({
 			    map: this.map,
@@ -232,7 +239,7 @@ import { lazyAMapApiLoaderInstance } from 'vue-amap';
 			    passedPolyline.setPath(e.passedPath)
 			  })
 			  this.map.setFitView() // 合适的视口
-              });
+              //});//end s2
 			}
 
 vue.config.js中defineConfig添加
@@ -242,4 +249,13 @@ vue.config.js中defineConfig添加
 		  AmapUI:"AmapUI"
 	  }
   }
+  --------------------------------------------------------------------------------
+高德地图加载完成事件
+                this.map.on("complete", function(){
+                    //地图加载完成
+                   this.isMapLoad=true;
+                   console.log("地图加载完成");
+                });
+
+
   --------------------------------------------------------------------------------

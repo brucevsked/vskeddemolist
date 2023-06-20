@@ -1,6 +1,6 @@
 
 el-col为布局控件，总计24列使命el-row使用
-                <el-row>
+                <el-row type="flex" justify="center" align="middle">
                     <el-col :span="12">{{currentCar.id}}</el-col>
                     <el-col :span="12">{{currentCar.speed}}</el-col>
                 </el-row>
