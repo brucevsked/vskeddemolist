@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>九九乘法表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+
+<div id="myDiv"></div>
+
+
+<script>
+"use strict"
+
+class MultipicationTable{
+    show(){
+        let str="";
+        for(let i=1;i<9;i++){
+            for(let j=1;j<=i;j++){
+                str=str+j+"X"+i+"="+(i*j)+"&nbsp;&nbsp;";
+            }
+            str=str+"<br>";
+        }
+        document.querySelector("#myDiv").innerHTML=str;
+    }
+}
+
+let test=new MultipicationTable();
+test.show();
+
+</script>
+
+</body>
+</html>

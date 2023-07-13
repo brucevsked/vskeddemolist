@@ -106,7 +106,7 @@ mvn dependency:tree
 生成到文件
 mvn dependency:tree>>d:/mytreea.txt
 
-22*指定maven仓库
+22*指定maven仓库与build平级
 	<repositories>
 		<repository>
 			<id>repo1</id>

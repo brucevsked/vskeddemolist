@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+    <!-- must set here! -->
+    <base href="">
+
+    <title>事件绑定</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+
+    <button type="button" id="my1Bt">单击事件1</button> &nbsp;&nbsp;
+    <button type="button" id="my2Bt">单击事件2</button> &nbsp;&nbsp;
+    <button type="button" id="my3Bt">双击事件</button> &nbsp;&nbsp;
+    <button type="button" id="my4Bt">移除事件</button>&nbsp;&nbsp;
+
+    <input id="speedInp1" class="speedRange" type="range" min="100" max="10000" step="100" value="500" />
+
+    <script>
+
+        class EventBind {
+            event1(e) {
+                console.log("1this:", this);
+                console.log("2e:", e);
+                console.log("3e.target:", e.target);//触发事件元素
+                console.log("4e.currentTarget:", e.currentTarget);//绑定事件元素
+            }
+
+            event2(e) {
+                console.log("1this:", this);
+                console.log("2e:", e);
+                console.log("3e.target:", e.target);//触发事件元素
+                console.log("4e.currentTarget:", e.currentTarget);//绑定事件元素
+            }
+
+            event3(e) {
+                console.log("this:", this);
+                console.log("e:", e);
+                console.log("e.target:", e.target);//触发事件元素
+                console.log("e.currentTarget:", e.currentTarget);//绑定事件元素
+                document.querySelector("#my4Bt").removeEventListener('click', test.event3);
+                console.log("已经移除事件!");
+            }
+
+            event4(e) {
+                // console.log("this:", this);
+                // console.log("e:", e);
+                // console.log("e.target:", e.target);//触发事件元素
+                // console.log("e.currentTarget:", e.currentTarget);//绑定事件元素
+                console.log("改变后的值:",e.target.value);
+            }
+        }
+
+
+        document.querySelector("#my1Bt").addEventListener('click', (e) => {
+            console.log("this:", this);
+            console.log("e:", e);
+            console.log("e.target:", e.target);//触发事件元素
+            console.log("e.currentTarget:", e.currentTarget);//绑定事件元素
+        });
+
+        let test = new EventBind();
+        document.querySelector("#my2Bt").addEventListener('click', (e) => {
+            test.event1(e);
+        });
+        document.querySelector("#my3Bt").addEventListener('dblclick', test.event2);
+
+        document.querySelector("#my4Bt").addEventListener('click', test.event3);
+
+        document.querySelector("#speedInp1").addEventListener('change', test.event4);
+
+
+
+
+    </script>
+
+</body>
+
+</html>

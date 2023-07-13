@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>时钟</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<style>
+    #yearDiv {
+        text-align: center;
+        width: 100%;
+        font-size: 200%;
+    }
+    #timeDiv {
+        text-align: center;
+        width: 100%;
+        font-size: 500%;
+        color: blue;
+    }
+</style>
+</head>
+
+<body>
+
+<div id="yearDiv"></div>
+<div id="timeDiv"></div>
+
+<script>
+"use strict"
+class Clock{
+    show(){
+        let myDate=new Date();
+        let yearStr=myDate.getFullYear()+"年"+(myDate.getMonth()+1)+"月"+myDate.getDate()+"日";
+        document.querySelector("#yearDiv").innerHTML=yearStr;
+        let hourStr=myDate.getHours();
+        let minStr=myDate.getMinutes();
+        let secondStr=myDate.getSeconds();
+        let timeStr=(hourStr<10?"0"+hourStr:hourStr)+":"+(minStr<10?"0"+minStr:minStr)+":"+((secondStr<10?"0"+secondStr:secondStr));
+        document.querySelector("#timeDiv").innerHTML=timeStr;
+    }
+
+    show1(){
+        this.show();
+        let that=this;
+        setTimeout(function(){
+            that.show1();
+        },1000);
+    }
+}
+
+let test=new Clock();
+test.show1();
+</script>
+
+</body>
+</html>

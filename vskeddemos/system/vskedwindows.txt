@@ -59,6 +59,9 @@ C:\Users\vsked\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_c
 将文件复制出来再使用命令
 ren *.* *.png
 
+7* 桌面右键菜单注册表项目 regedit
+计算机\HKEY_CLASSES_ROOT\Directory\Background\shell
+
 
 
 

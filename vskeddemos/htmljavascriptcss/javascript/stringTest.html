@@ -65,6 +65,15 @@
 				console.log("before:",s);
 				console.log("after:",d);
 			}
+
+			stringToJson(){
+				let str='{"name":"vsked","age":18}';
+				console.log("str:",str);
+				let myJson=JSON.parse(str); //string to json
+				console.log("json:",myJson);
+				let myStr=JSON.stringify(myJson); //json to string
+				console.log("myStr:",myStr);
+			}
 		}
 
 
@@ -75,7 +84,8 @@
 		// test.testLastIndexOf();
 		// test.testParseInt();
 		//test.stringToDate();
-		test.stringToDouble();
+		//test.stringToDouble();
+		test.stringToJson();
 
 	</script>
 
