@@ -1,0 +1,13 @@
+
+fireware folder,if you want update yuzu fireware,you can install firmware to Ryujinx,then copy nca to this folder
+yuzu-windows-msvc-early-access\user\nand\system\Contents\registered\
+*.nca
+
+product keys folder,when you update fireware,must update prodduct keys
+yuzu-windows-msvc-early-access\user\keys\
+prod.keys
+
+
+log folder,when software error you can find log at here
+yuzu-windows-msvc-early-access\user\log
+
