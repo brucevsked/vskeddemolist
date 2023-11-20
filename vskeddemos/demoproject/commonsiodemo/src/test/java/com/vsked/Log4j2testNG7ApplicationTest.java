@@ -27,10 +27,10 @@ public class Log4j2testNG7ApplicationTest {
 
 		Log4j2testNG7Application log4j2testNG7Application = new Log4j2testNG7Application();
 
-		String accountName="jatCompany";
+		String accountName="vskCompany";
 		String currenAccounttName = log4j2testNG7Application.hello(accountName);
 
-		assertEquals("jatCompany", currenAccounttName);
+		assertEquals("vskCompany", currenAccounttName);
 
 		if(log.isTraceEnabled()){
 			log.trace("hello end");

@@ -1,0 +1,23 @@
+server:
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  tomcat:
+    uri-encoding: UTF-8
+  address: 127.0.0.1
+  shutdown: graceful #优雅停机
+
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  messages:
+    basename: validation
+
+logging:
+  config: classpath:log4j2.xml
+
+

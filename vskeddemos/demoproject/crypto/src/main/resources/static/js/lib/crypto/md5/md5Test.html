@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>md5编码测试</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+
+</head>
+
+<body>
+<div>md5测试注意：请将需要编码的字符串放到编码前文本域中</div>
+  <div>编码前</div>
+  <div>
+    <textarea rows="8" cols="200" id="codeBeforeArea" ></textarea>
+  </div>
+  <div>
+    <button type="button" id="encodeBt">编码</button>  &nbsp;&nbsp; 
+    <button type="button" id="cleanBt">清空</button>  &nbsp;&nbsp; 
+  </div>
+  <div>编码后</div>
+  <div>
+    <textarea rows="8" cols="200" id="codeAfterArea" ></textarea>
+  </div>
+  <script src="../../../jquery.min.js"></script>
+  <script src="md5.js"></script>
+
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+'use strict'
+
+$(function(){
+  console.log('this is test md5');
+  $('#codeBeforeArea').focus();
+  md5Test.initUI();//初始化界面
+});
+
+var md5Test=new Object({
+  md5Encode:function (){
+    //编码
+    $('#codeAfterArea').val('');//先清空原来的
+    var curStr=$('#codeBeforeArea').val();//获取要编码的字符串
+    var encodeResult=hex_md5(curStr);//对字符串进行编码
+    $('#codeAfterArea').val(encodeResult);//显示在编码后文本域
+
+  },
+  cleanArea:function(){
+    $('#codeBeforeArea').val('');
+    $('#codeAfterArea').val('');
+    $('#codeBeforeArea').focus();
+  },
+  initUI:function(){
+    $('#encodeBt').on('click',md5Test.md5Encode);
+    $('#cleanBt').on('click',md5Test.cleanArea);
+  }
+});
+</script>
+
+</body>
+</html>

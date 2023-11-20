@@ -9,7 +9,7 @@
 	<version>1.0</version>
 
 	<name>${project.artifactId}</name>
-	<url>http://www.jat168.com</url>
+	<url>https://www.vsked.cn</url>
 
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
