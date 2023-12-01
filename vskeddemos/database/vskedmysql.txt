@@ -2,6 +2,9 @@
 mysql在建数据库时应当使用utf8mb4字符集以防止emoji表情等4字节插入失败
 CREATE DATABASE appserverdev DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+windows启动命令
+"D:\MySQLServer5.5\bin\mysqld" --defaults-file="D:\MySQLServer5.5\my.ini" MySQL
+
 恢复数据前提
 在/etc/my.cnf文件里的[mysqld]区块添加：
 server-id = 101
