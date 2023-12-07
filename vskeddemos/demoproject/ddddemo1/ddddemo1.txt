@@ -1,0 +1,213 @@
+
+运行前记得检查数据库IP与连接密码
+
+http://127.0.0.1:8181/
+http://127.0.0.1:8181/index.html
+http://127.0.0.1:8181/auth/accountLogin.html
+
+要面向接口编程  
+
+spring data jpa
+hibernate
+
+
+mklink /j "D:\apacheTomcat\apache-tomcat9\webapps\bookborrow" "D:\economy\project\demoproject\ddddemo1\src\main\resources\static"
+
+http://127.0.0.1:8080/bookborrow
+http://127.0.0.1:8080/bookborrow/index.html
+http://127.0.0.1:8080/bookborrow/auth/accountLogin.html
+--------------------------------------------------------------------------------
+RequestParam 不用这种封装，只能封装单个参数
+RequestBody 不用这个，只能封装json请求的对象
+ModelAttribute 也不用这个，封闭k,v为对象
+
+我们使用命名规则来封装对象前台传过来的对象名称与后台VO对象中属性命名一致会自动封装。
+
+
+--------------------------------------------------------------------------------  
+假设我们要实现一个账户管理的密码修改功能。
+
+大致需求
+账号通过邮箱地址来识别（identifier）
+　- 密码不能为空
+
+　- 密码必须加密（这个功能暂不实现）
+
+修改密码
+
+　- 修改密码时必须输入旧密码，旧密码输入正确后才可更改密码。
+
+
+从aggregate开始
+其实建模是一个过程，而且可能是程序设计里比较难有容易被忽略的过程。
+就像很多侦探片里的推理一样，推理很难，但往往侦探片只会告诉你答案，而不是告诉你如何推理的。
+很抱歉我这里也讲不了建模的过程，这回事另一个话题。但大概我们会想到如下的model。
+
+Account aggregate
+
+Account (entity, Account aggregate的root)
+
+  因为密码可以更改可以理解为mutable，密码变化后，不代表账号就变成了另一个账号。所以把它定义成entity。
+
+AccountId (value object)
+
+  账号id生成后就不可变了。
+
+Password (value object)
+
+  密码设置后，密码本身是不可变的。
+
+  更改账号密码应该理解为，用新密码换掉账号的旧密码。而非旧密码本身做了变化。
+
+然后对应aggregate，会有AggregateRepository
+--------------------------------------------------------------------------------  
+
+控制层
+Controller
+
+领域
+Domain
+domain object首先考虑行为与属性,而不是开放好多setter
+
+聚合(也是一种实体)
+aggregation
+一个聚合对应一个仓库(Respository)
+Aggregate可以看作一个树状结构的东西。根是一个entity。Aggregate的一个作用是保持domain object的关联性的正确。
+
+实体 (有业务逻辑1)
+Entities
+必须有唯一标识，可以被跟踪的设置为实体
+
+值对象
+Value Object
+没有唯一标识，不可变的一个值
+
+防腐层
+ACL
+
+工厂
+Factories 
+工厂层负责验证构造领域对象前参数是否符合业务要求，
+当符合业务要求时通过工厂创建领域对象
+
+
+
+持久化数据(由聚合转换而来?)
+DTO
+
+仓库(持久化)
+Respository
+Respository一般会提供findById()的方法，
+但如果需要复杂查询时就需要用到Specification
+
+服务
+Services 
+
+领域服务(有业务逻辑2)
+domain services
+
+应用服务
+application services
+是应用程序的某个功能的入口，位于表现层与领域层中间
+示例：
+需求：我们要写一个api用来注册账号
+url: api/accounts
+method: post
+使用传统spring MVC实现,那Controller会调用AccountApplicationService。
+@RestController
+@RequestMapping("api/accounts")
+public class AccountController{
+  @Autowired
+  private AccountApplicationService accountApplicationService;
+
+  @RequestMapping(value ="", method = RequestMthod.POST)
+  public void register(@RequestBody AccountDTO accountDTO){
+    accountApplicationService.register(accountDTO);
+  }
+}
+使用领域驱动的方式为
+上面的代码，controller讲画面传过来的dto传给了AccountApplicationService。
+public class AccountApplicationService {
+    @Autowired
+    private IAccountRepository accountRepository;
+
+    public void register(AccountDTO accountDTO){
+        Account account = Account.createAccount(accountDTO.getEmail(), accountDTO.getPassword());
+        accountRepository.save(account);
+    }
+}
+
+基础层服务
+Infrastructure services
+infrastructure service实现不依赖于业务(domain)的功能。
+简单的例子来讲，比如打印日志（log），发送邮件（如果你的应用软件不是处理邮件问题的话）
+infrastructure service位于最底层的infrastructure层。
+打日志
+发邮件
+持久化
+
+
+--------------------------------------------------------------------------------
+
+领域驱动核心思想
+第一步 了解需求，要尽可能详细的用文档记录下需求中术语
+第二步 确认业务流程，在确认业务流程这一步的时候需要使用统一语言，并开始战略规划
+第三步 对确认的业务流程进行战术建模，从业务流程中提炼出哪些是实体，哪些是值对象，哪些是聚合根
+这一步可以将持久化对象PO与领域实体domain entity分离开(也可以在一块)
+第四步 使用提炼好的业务模型来表达出第二步的业务流程
+第五步 优化领域模型，领域服务，应用服务，编写仓库层，工厂等
+第六步 编写单元测试，编写控制层
+第七步 构造界面 组建流程
+第八步 模块测试
+
+数据运行流程
+
+从界面到数据库
+前台页面数据(view object)
+通过控制层封装(web)
+调用应用层(application service)
+应用层通过工厂(BookFactory)将前台界面数据(VO)转换为领域实体(domain Entity)
+持久层模型(PO)将领域实体转换为持久层模型
+应用层调用仓储层对持久层模型(PO)进行持久化到数据库
+
+从数据库到界面
+前台界面发送请求要绑定哪个数据模型
+通过控制层封装(web)
+调用应用层(application service)
+应用层调用仓储层从数据库查询出数据封装为持久层模型(PO)
+领域层工厂(factory)通过将查询出来的持久层模型(PO)转换为领域层模型
+应用层通过调用页面模型(VO)将领域层转换为视图层模型(VO)封装为JSON字符串
+返回给控制层，前台界面接到JSON对象后绑定到界面对应控件上数据。
+
+--------------------------------------------------------------------------------
+
+业务流程
+
+图书管理员
+图书
+借书人
+借阅信息
+
+图书管理员上架新书
+
+填写书籍相关信息
+书名
+作者
+价格
+
+控制层将书箱信息封装为VO
+
+应用层有一个方法上架方法
+VO 通过Factory转换为domain object
+
+上架调用领域层
+domain object 通过createBookPO方法转换为PO
+仓储层持久化PO
+
+
+--------------------------------------------------------------------------------
+前台也有整个对象
+
+对象放到redis里面？
+
+书是实体，但并不是聚合根

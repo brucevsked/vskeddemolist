@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>restful测试</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- 全屏模式,不显示工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- 关闭iphone电话号码链接 -->
+<meta name="format-detection" content="telephone=no" />
+
+</head>
+
+<body>
+
+<button type="button" id="getTestBt" name="getTestBt" >get获取测试</button>
+<button type="button" id="postTestBt" name="postTestBt" >post创建测试</button>
+<button type="button" id="putTestBt" name="putTestBt" >put更新测试</button>
+<button type="button" id="deleteTestBt" name="deleteTestBt" >delete删除测试</button>
+
+<br />
+<br />
+使用方式。先放根据最下面两个注意点配置项目， <br />
+一个是tomcat跨域配置，一个是spring boot跨域配置。 <br />
+配置完成后将本页面放到tomcat的webapps/ROOT目录下面，然后访问 <br />
+http://127.0.0.1:8080/SessionControllerTest.html <br />
+即可
+
+  <!-- 微软jquery CDN -->
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
+
+<!-- 使用方向键试试 或拖动看看-->
+<script>
+"use strict"
+
+  var sessionControllerTest=new Object({
+    basePath:"http://127.0.0.1:8181/",
+    getTest:function(){
+      console.log(1)
+      var reqUrl=sessionControllerTest.basePath+"session";
+      $.get(reqUrl,{"name":"vsked","password":"123456"},function(serverRespData){
+        console.log("get|"+serverRespData+"|");
+      });
+    },
+    postTest:function(){
+      var reqUrl=sessionControllerTest.basePath+"session";
+      $.post(reqUrl,{"name":"vsked","password":"123456"},function(serverRespData){
+        console.log("post|"+serverRespData+"|");
+      });
+    },
+    putTest:function(){
+      var reqUrl=sessionControllerTest.basePath+"session";
+      $.ajax({
+        type:'put',
+        url :reqUrl,
+        data:{"name":"vsked","password":"123456"},
+        success:function (serverRespData){
+          console.log("put|"+serverRespData+"|");
+        },
+        dataType: 'json'
+      });
+    },
+    deleteTest:function(){
+      var reqUrl=sessionControllerTest.basePath+"session";
+      $.ajax({
+        type:'delete',
+        url :reqUrl,
+        data:{"name":"vsked","password":"123456"},
+        success:function (serverRespData){
+          console.log("delete|"+serverRespData+"|");
+        },
+        dataType: 'json'
+      });
+    },
+    initUI:function(){
+      console.log("this is init ui method");
+      $("#getTestBt").on("click", sessionControllerTest.getTest);
+      $("#postTestBt").on("click", sessionControllerTest.postTest);
+      $("#putTestBt").on("click", sessionControllerTest.putTest);
+      $("#deleteTestBt").on("click", sessionControllerTest.deleteTest);
+    }
+  });
+
+sessionControllerTest.initUI();
+</script>
+
+
+<!--  
+  特别注意1：tomcat跨域设置
+Tomcat CORS跨域支持也可以参考https://tomcat.apache.org/tomcat-9.0-doc/config/filter.html
+Tomcat的conf目录下web.xml文件
+
+Default Session Configuration一行前面添加
+<filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+  <init-param>
+    <param-name>cors.allowed.origins</param-name>
+    <param-value>*</param-value>
+  </init-param>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+
+特别注意2：spring boot框架跨域设置
+package com.vsked.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+@Configuration
+public class CorsConfig {
+    private CorsConfiguration buildConfig() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("*"); // 1允许任何域名使用
+        corsConfiguration.addAllowedHeader("*"); // 2允许任何头
+        corsConfiguration.addAllowedMethod("*"); // 3允许任何方法（post、get等）
+        return corsConfiguration;
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", buildConfig()); // 4
+        return new CorsFilter(source);
+    }
+}
+
+
+-->
+</body>
+</html>
