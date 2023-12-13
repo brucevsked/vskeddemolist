@@ -1,0 +1,28 @@
+server:
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  undertow:
+    accesslog:
+      enabled: true
+      dir: /logs/access_log_@artifactId@
+      prefix: accesslog
+      suffix: .log
+      rotate: true
+      pattern: '%t %a %A %p %H %m %R %s %b'
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 60s #设置优雅停机缓冲时间默认30s
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+
+logging:
+  config: classpath:logback-dev.xml
+
+
