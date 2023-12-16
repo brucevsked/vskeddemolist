@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: @profiles.active@
+  lifecycle:
+    timeout-per-shutdown-phase: 60s #设置优雅停机缓冲时间默认30s
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
