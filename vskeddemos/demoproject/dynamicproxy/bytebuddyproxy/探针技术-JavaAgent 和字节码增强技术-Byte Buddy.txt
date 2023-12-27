@@ -1,0 +1,580 @@
+探针技术-JavaAgent 和字节码增强技术-Byte Buddy
+
+紧张的羊肉串aa
+发布于 6 月 17 日
+能够基于Java Agent编写出普通类的代理
+理解Byte Buddy的作用
+能够基于Byte Buddy编写动态代理
+1 Byte Buddy
+Byte Buddy 是一个代码生成和操作库，用于在 Java 应用程序运行时创建和修改 Java 类，而无需编译器的帮助。除了 Java 类库附带的代码生成实用程序外，Byte Buddy 还允许创建任意类，并且不限于实现用于创建运行时代理的接口。此外，Byte Buddy 提供了一种方便的 API，可以使用 Java 代理或在构建过程中手动更改类。
+
+无需理解字节码指令，即可使用简单的 API 就能很容易操作字节码，控制类和方法。
+已支持Java 11，库轻量，仅取决于Java字节代码解析器库ASM的访问者API，它本身不需要任何其他依赖项。
+比起JDK动态代理、cglib、Javassist，Byte Buddy在性能上具有一定的优势。
+官网：https://bytebuddy.net
+
+1.1 Byte Buddy应用场景
+Java 是一种强类型的编程语言，即要求所有变量和对象都有一个确定的类型，如果在赋值操作中出现类型不兼容的情况，就会抛出异常。强类型检查在大多数情况下是可行的，然而在某些特殊场景下，强类型检查则成了巨大的障碍。
+
+我们在做一些通用工具封装的时候，类型检查就成了很大障碍。比如我们编写一个通用的Dao实现数据操作，我们根本不知道用户要调用的方法会传几个参数、每个参数是什么类型、需求变更又会出现什么类型，几乎没法在方法中引用用户方法中定义的任何类型。我们绝大多数通用工具封装都采用了反射机制，通过反射可以知道用户调用的方法或字段，但是Java反射有很多缺陷：
+
+1:反射性能很差
+2:反射能绕开类型安全检查，不安全，比如权限暴力破解
+java编程语言代码生成库不止 Byte Buddy 一个，以下代码生成库在 Java 中也很流行：
+
+Java Proxy
+Java Proxy 是 JDK 自带的一个代理工具，它允许为实现了一系列接口的类生成代理类。Java Proxy 要求目标类必须实现接口是一个非常大限制，例如，在某些场景中，目标类没有实现任何接口且无法修改目标类的代码实现，Java Proxy 就无法对其进行扩展和增强了。
+
+CGLIB
+CGLIB 诞生于 Java 初期，但不幸的是没有跟上 Java 平台的发展。虽然 CGLIB 本身是一个相当强大的库，但也变得越来越复杂。鉴于此，导致许多用户放弃了 CGLIB 。
+
+Javassist
+Javassist 的使用对 Java 开发者来说是非常友好的，它使用Java 源代码字符串和 Javassist 提供的一些简单 API ，共同拼凑出用户想要的 Java 类，Javassist 自带一个编译器，拼凑好的 Java 类在程序运行时会被编译成为字节码并加载到 JVM 中。Javassist 库简单易用，而且使用 Java 语法构建类与平时写 Java 代码类似，但是 Javassist 编译器在性能上比不了 Javac 编译器，而且在动态组合字符串以实现比较复杂的逻辑时容易出错。
+
+Byte Buddy
+Byte Buddy 提供了一种非常灵活且强大的领域特定语言，通过编写简单的 Java 代码即可创建自定义的运行时类。与此同时，Byte Buddy 还具有非常开放的定制性，能够应付不同复杂度的需求。
+
+上面所有代码生成技术中，我们推荐使用Byte Buddy，因为Byte Buddy代码生成可的性能最高，Byte Buddy 的主要侧重点在于生成更快速的代码，如下图：
+
+file
+
+1.2 Byte Buddy学习
+我们接下来详细讲解一下Byte Buddy Api，对重要的方法和类进行深度剖析。
+
+1.2.1 ByteBuddy语法
+任何一个由 Byte Buddy 创建/增强的类型都是通过 ByteBuddy 类的实例来完成的，我们先来学习一下ByteBuddy类，如下代码：
+
+DynamicType.Unloaded<?> dynamicType = new ByteBuddy()
+        // 生成 Object的子类
+        .subclass(Object.class)
+        // 生成类的名称为"com.itheima.Type"
+        .name("com.itheima.Type")
+        .make();
+Byte Buddy 动态增强代码总共有三种方式：
+
+subclass:对应 ByteBuddy.subclass() 方法。这种方式比较好理解，就是为目标类（即被增强的类）生成一个子类，在子类方法中插入动态代码。
+
+rebasing:对应 ByteBuddy.rebasing() 方法。当使用 rebasing 方式增强一个类时，Byte Buddy 保存目标类中所有方法的实现，也就是说，当 Byte Buddy 遇到冲突的字段或方法时，会将原来的字段或方法实现复制到具有兼容签名的重新命名的私有方法中，而不会抛弃这些字段和方法实现。从而达到不丢失实现的目的。这些重命名的方法可以继续通过重命名后的名称进行调用。
+
+redefinition:对应 ByteBuddy.redefine() 方法。当重定义一个类时，Byte Buddy 可以对一个已有的类添加属性和方法，或者删除已经存在的方法实现。如果使用其他的方法实现替换已经存在的方法实现，则原来存在的方法实现就会消失。
+通过上述三种方式完成类的增强之后，我们得到的是 DynamicType.Unloaded 对象，表示的是一个未加载的类型，我们可以使用 ClassLoadingStrategy 加载此类型。Byte Buddy 提供了几种类加载策略，这些加载策略定义在 ClassLoadingStrategy.Default 中，其中：
+
+WRAPPER 策略：创建一个新的 ClassLoader 来加载动态生成的类型。
+CHILD_FIRST 策略：创建一个子类优先加载的 ClassLoader，即打破了双亲委派模型。
+INJECTION 策略：使用反射将动态生成的类型直接注入到当前 ClassLoader 中。
+实现如下：
+
+Class<?> dynamicClazz = new ByteBuddy()
+        // 生成 Object的子类
+        .subclass(Object.class)
+        // 生成类的名称为"com.itheima.Type"
+        .name("com.itheima.Type")
+        .make()
+        .load(Demo.class.getClassLoader(),
+                //使用WRAPPER 策略加载生成的动态类型
+                ClassLoadingStrategy.Default.WRAPPER)
+        .getLoaded();
+前面动态生成的 com.itheima.Type 类型只是简单的继承了 Object 类，在实际应用中动态生成新类型的一般目的就是为了增强原始的方法，下面通过一个示例展示 Byte Buddy 如何增强 toString() 方法：
+
+// 创建ByteBuddy对象
+String str = new ByteBuddy()
+        // subclass增强方式
+        .subclass(Object.class)
+        // 新类型的类名
+        .name("com.itheima.Type")
+        // 拦截其中的toString()方法
+        .method(ElementMatchers.named("toString"))
+        // 让toString()方法返回固定值
+        .intercept(FixedValue.value("Hello World!"))
+        .make()
+        // 加载新类型，默认WRAPPER策略
+        .load(ByteBuddy.class.getClassLoader())
+        .getLoaded()
+        // 通过 Java反射创建 com.xxx.Type实例
+        .newInstance()
+        // 调用 toString()方法
+        .toString();
+首先需要关注这里的 method() 方法，method() 方法可以通过传入的 ElementMatchers 参数匹配多个需要修改的方法，这里的 ElementMatchers.named("toString") 即为按照方法名匹配 toString() 方法。如果同时存在多个重载方法，则可以使用 ElementMatchers 其他 API 描述方法的签名，如下所示：
+
+// 指定方法名称
+ElementMatchers.named("toString")
+    // 指定方法的返回值
+    .and(ElementMatchers.returns(String.class))
+    // 指定方法参数
+    .and(ElementMatchers.takesArguments(0));
+接下来需要关注的是 intercept() 方法，通过 method() 方法拦截到的所有方法会由 Intercept() 方法指定的 Implementation 对象决定如何增强。这里的 FixValue.value() 会将方法的实现修改为固定值，上例中就是固定返回 “Hello World!” 字符串。
+
+Byte Buddy 中可以设置多个 method() 和 Intercept() 方法进行拦截和修改，Byte Buddy 会按照栈的顺序来进行拦截。
+
+1.2.2 ByteBuddy 案例
+创建一个项目agent-demo，添加如下坐标
+
+<dependencies>
+    <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>1.9.2</version>
+    </dependency>
+    <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy-agent</artifactId>
+        <version>1.9.2</version>
+    </dependency>
+</dependencies>
+我们先创建一个普通类，再为该类创建代理类，创建代理对方法进行拦截做处理。
+
+1)普通类
+
+创建com.itheima.service.UserService
+
+package com.itheima.service;
+
+public class UserService {
+
+    //方法1
+    public String username(){
+        System.out.println("username().....");
+        return "张三";
+    }
+
+    //方法2
+    public String address(String username){
+        System.out.println("address(String username).....");
+        return username+"来自 【湖北省-仙居-恩施土家族苗族自治州】";
+    }
+
+    //方法3
+    public String address(String username,String city){
+        System.out.println("address(String username,String city).....");
+        return username+"来自 【湖北省"+city+"】";
+    }
+}
+2)代理测试com.itheima.service.UserServiceTest
+
+public static void main(String[] args) throws IllegalAccessException, InstantiationException {
+        Class<? extends UserService> aClass = new ByteBuddy()
+                // 创建一个UserService 的子类
+                .subclass(UserService.class)
+                //指定类的名称
+                .name("com.itheima.service.UserServiceImpl")
+                // 指定要拦截的方法
+                //.method(ElementMatchers.isDeclaredBy(UserService.class))
+                .method(ElementMatchers.named("address").and(ElementMatchers.returns(String.class).and(ElementMatchers.takesArguments(1))))
+                // 为方法添加拦截器 如果拦截器方法是静态的 这里可以传 LogInterceptor.class
+                .intercept(MethodDelegation.to(new LogInterceptor()))
+                // 动态创建对象，但还未加载
+                .make()
+                // 设置类加载器 并指定加载策略(默认WRAPPER)
+                .load(ByteBuddy.class.getClassLoader(), ClassLoadingStrategy.Default.WRAPPER)
+                // 开始加载得到 Class
+                .getLoaded();
+        UserService userService = aClass.newInstance();
+
+        System.out.println(userService.username());
+        System.out.println(userService.address("唐僧老师"));
+        System.out.println(userService.address("唐僧老师","仙居恩施"));
+    }
+3）创建拦截器，编写拦截器方法：com.itheima.service.LogInterceptor
+
+package com.itheima.service;
+
+import net.bytebuddy.implementation.bind.annotation.*;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.Callable;
+
+public class LogInterceptor {
+
+    @RuntimeType //将返回值转换成具体的方法返回值类型,加了这个注解 intercept 方法才会被执行
+    public  Object intercept(
+            // 被拦截的目标对象 （动态生成的目标对象）
+            @This  Object target,
+            // 正在执行的方法Method 对象（目标对象父类的Method）
+            @Origin Method method,
+            // 正在执行的方法的全部参数
+            @AllArguments Object[] argumengts,
+            // 目标对象的一个代理
+            @Super  Object delegate,
+            // 方法的调用者对象 对原始方法的调用依靠它
+            @SuperCall Callable<?> callable) throws Exception {
+        //目标方法执行前执行日志记录
+        System.out.println("准备执行Method="+method.getName());
+        // 调用目标方法
+        Object result = callable.call();
+        //目标方法执行后执行日志记录
+        System.out.println("方法执行完成Method="+method.getName());
+        return result;
+    }
+
+}
+在程序中我们 用到ByteBuddy的MethodDelegation对象，它可以将拦截的目标方法委托给其他对象处理，这里有几个注解我们先进行说明：
+
+@RuntimeType：不进行严格的参数类型检测，在参数匹配失败时，尝试使用类型转换方式（runtime type casting）进行类型转换，匹配相应方法。
+@This：注入被拦截的目标对象（动态生成的目标对象）。
+@Origin：注入正在执行的方法Method 对象（目标对象父类的Method）。如果拦截的是字段的话，该注解应该标注到 Field 类型参数。
+@AllArguments：注入正在执行的方法的全部参数。
+@Super：注入目标对象的一个代理
+@SuperCall：这个注解比较特殊，我们要在 intercept() 方法中调用 被代理/增强 的方法的话，需要通过这种方式注入，与 Spring AOP 中的 ProceedingJoinPoint.proceed() 方法有点类似，需要注意的是，这里不能修改调用参数，从上面的示例的调用也能看出来，参数不用单独传递，都包含在其中了。另外，@SuperCall 注解还可以修饰 Runnable 类型的参数，只不过目标方法的返回值就拿不到了。
+运行测试结果：
+
+准备执行Method=username
+username().....
+方法执行完成Method=username
+张三
+准备执行Method=address
+address(String username).....
+方法执行完成Method=address
+唐僧老师来自 【湖北省-仙居-恩施土家族苗族自治州】
+准备执行Method=address
+address(String username,String city).....
+方法执行完成Method=address
+唐僧老师来自 【湖北省仙居恩施】
+2 探针技术-javaAgent
+使用Skywalking的时候，并没有修改程序中任何一行 Java 代码，这里便使用到了 Java Agent 技术，我们接下来展开对Java Agent 技术的学习。
+
+2.1 javaAgent概述
+Java Agent这个技术对大多数人来说都比较陌生，但是大家都都多多少少接触过一些，实际上我们平时用过的很多工具都是基于java Agent来实现的，例如：热部署工具JRebel，springboot的热部署插件，各种线上诊断工具（btrace, greys），阿里开源的arthas等等。
+
+其实java Agent在JDK1.5以后，我们可以使用agent技术构建一个独立于应用程序的代理程序（即Agent），用来协助监测、运行甚至替换其他JVM上的程序。使用它可以实现虚拟机级别的AOP功能，并且这种方式一个典型的优势就是无代码侵入。
+
+Agent分为两种：
+
+1、在主程序之前运行的Agent，
+
+2、在主程序之后运行的Agent（前者的升级版，1.6以后提供）。
+
+2.2 javaAgent入门
+2.2.1 premain
+premain：主程序之前运行的Agent
+
+在实际使用过程中，javaagent是java命令的一个参数。通过java 命令启动我们的应用程序的时候，可通过参数 -javaagent 指定一个 jar 包（也就是我们的代理agent），能够实现在我们应用程序的主程序运行之前来执行我们指定jar包中的特定方法，在该方法中我们能够实现动态增强Class等相关功能，并且该 jar包有2个要求：
+
+这个 jar 包的 META-INF/MANIFEST.MF 文件必须指定 Premain-Class 项，该选项指定的是一个类的全路径
+Premain-Class 指定的那个类必须实现 premain() 方法。
+
+META-INF/MANIFEST.MF
+
+Manifest-Version: 1.0
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+Premain-Class: com.itheima.PreMainAgent
+注意：最后需要多一行空行
+
+Can-Redefine-Classes ：true表示能重定义此代理所需的类，默认值为 false（可选）
+
+Can-Retransform-Classes ：true 表示能重转换此代理所需的类，默认值为 false （可选）
+
+Premain-Class ：包含 premain 方法的类（类的全路径名）
+
+从字面上理解，Premain-Class 就是运行在 main 函数之前的的类。当Java 虚拟机启动时，在执行 main 函数之前，JVM 会先运行-javaagent所指定 jar 包内 Premain-Class 这个类的 premain 方法 。
+
+我们可以通过在命令行输入java看到相应的参数，其中就有和java agent相关的
+
+file
+
+在上面-javaagent参数中提到了参阅java.lang.instrument，这是在rt.jar 中定义的一个包，该路径下有两个重要的类：
+
+file
+
+该包提供了一些工具帮助开发人员在 Java 程序运行时，动态修改系统中的 Class 类型。其中，使用该软件包的一个关键组件就是 Javaagent，如果从本质上来讲，Java Agent 是一个遵循一组严格约定的常规 Java 类。 上面说到 javaagent命令要求指定的类中必须要有premain()方法，并且对premain方法的签名也有要求，签名必须满足以下两种格式：
+
+public static void premain(String agentArgs, Instrumentation inst)
+
+public static void premain(String agentArgs)
+JVM 会优先加载 带 Instrumentation 签名的方法，加载成功忽略第二种，如果第一种没有，则加载第二种方法
+
+demo：
+
+1、在agent-demo中添加如下坐标
+
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <appendAssemblyId>false</appendAssemblyId>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+                <archive> <!--自动添加META-INF/MANIFEST.MF -->
+                    <manifest>
+                        <!-- 添加 mplementation-*和Specification-*配置项-->
+                        <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                    </manifest>
+                    <manifestEntries>
+                        <!--指定premain方法所在的类-->
+                        <Premain-Class>com.itheima.agent.PreMainAgent</Premain-Class>
+                        <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                        <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                    </manifestEntries>
+                </archive>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>make-assembly</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+2、编写一个agent程序：com.itheima.agent.PreMainAgent，完成premain方法的签名，先做一个简单的输出
+
+package com.itheima.agent;
+
+import java.lang.instrument.Instrumentation;
+
+public class PreMainAgent {
+
+    public static void premain(String agentArgs, Instrumentation inst) {
+        System.out.println("我的agent程序跑起来啦!");
+        System.out.println("收到的agent参数是:"+agentArgs);
+    }
+}
+下面先来简单介绍一下 Instrumentation 中的核心 API 方法：
+
+addTransformer()/removeTransformer() 方法：注册/注销一个 ClassFileTransformer 类的实例，该 Transformer 会在类加载的时候被调用，可用于修改类定义（修改类的字节码）。
+redefineClasses() 方法：该方法针对的是已经加载的类，它会对传入的类进行重新定义。
+getAllLoadedClasses()方法：返回当前 JVM 已加载的所有类。
+getInitiatedClasses() 方法：返回当前 JVM 已经初始化的类。
+getObjectSize()方法：获取参数指定的对象的大小。
+3、对agent-demo项目进行打包，得到 agent-demo-1.0-SNAPSHOT.jar
+
+4、创建agent-test项目，编写一个类：com.itheima.Application
+
+package com.itheima;
+
+public class Application {
+
+    public static void main(String[] args) {
+        System.out.println("main 函数 运行了 ");
+    }
+}
+5、启动运行，添加-javaagent参数
+
+-javaagent:/xxx.jar=option1=value1,option2=value2
+file
+
+运行结果为：
+
+我的agent程序跑起来啦!
+收到的agent参数是:k1=v1,k2=v2
+main 函数 运行了
+总结：
+
+这种agent JVM 会先执行 premain 方法，大部分类加载都会通过该方法，注意：是大部分，不是所有。当然，遗漏的主要是系统类，因为很多系统类先于 agent 执行，而用户类的加载肯定是会被拦截的。也就是说，这个方法是在 main 方法启动前拦截大部分类的加载活动，既然可以拦截类的加载，那么就可以去做重写类这样的操作，结合第三方的字节码编译工具，比如ASM，bytebuddy，javassist，cglib等等来改写实现类。
+
+2.2.2 agentmain（自学）
+agentmain：主程序之后运行的Agent
+
+上面介绍的是在 JDK 1.5中提供的，开发者只能在main加载之前添加手脚，在 Java SE 6 中提供了一个新的代理操作方法：agentmain，可以在 main 函数开始运行之后再运行。
+
+跟premain函数一样， 开发者可以编写一个含有agentmain函数的 Java 类，具备以下之一的方法即可
+
+public static void agentmain (String agentArgs, Instrumentation inst)
+
+public static void agentmain (String agentArgs)
+同样需要在MANIFEST.MF文件里面设置“Agent-Class”来指定包含 agentmain 函数的类的全路径。
+
+1：在agentdemo中创建一个新的类：com.itheima.agent.AgentClass，并编写方法agenmain
+
+/**
+ * Created by 传智播客*黑马程序员.
+ */
+public class AgentClass {
+
+    public static void agentmain (String agentArgs, Instrumentation inst){
+        System.out.println("agentmain runing");
+    }
+}
+2：在pom.xml中添加配置如下
+
+<plugin>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <configuration>
+        <appendAssemblyId>false</appendAssemblyId>
+        <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+        </descriptorRefs>
+        <archive> <!--自动添加META-INF/MANIFEST.MF -->
+            <manifest>
+                <!-- 添加 mplementation-*和Specification-*配置项-->
+                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+            </manifest>
+            <manifestEntries>
+                <!--指定premain方法所在的类-->
+                <Premain-Class>com.itheima.agent.PreMainAgent</Premain-Class>
+                <!--添加这个即可-->
+                <Agent-Class>com.itheima.agent.AgentClass</Agent-Class>
+                <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                <Can-Retransform-Classes>true</Can-Retransform-Classes>
+            </manifestEntries>
+        </archive>
+    </configuration>
+    <executions>
+        <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+                <goal>single</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+3：对agent-demo重新打包
+
+4：找到agent-test中的Application，修改如下：
+
+public class Application {
+
+    public static void main(String[] args) throws IOException, AttachNotSupportedException, AgentLoadException, AgentInitializationException {
+        System.out.println("main 函数 运行了 ");
+
+        //获取当前系统中所有 运行中的 虚拟机
+        List<VirtualMachineDescriptor> list = VirtualMachine.list();
+        for (VirtualMachineDescriptor vm : list) {
+            if (vm.displayName().endsWith("com.itheima.Application")) {
+                VirtualMachine virtualMachine = VirtualMachine.attach(vm.id());
+                virtualMachine.loadAgent("D:/agentdemo.jar");
+                virtualMachine.detach();
+            }
+        }
+    }
+}
+list()方法会去寻找当前系统中所有运行着的JVM进程，你可以打印vmd.displayName()看到当前系统都有哪些JVM进程在运行。因为main函数执行起来的时候进程名为当前类名，所以通过这种方式可以去找到当前的进程id。
+
+注意：在mac上安装了的jdk是能直接找到 VirtualMachine 类的，但是在windows中安装的jdk无法找到，如果你遇到这种情况，请手动将你jdk安装目录下：lib目录中的tools.jar添加进当前工程的Libraries中。
+
+之所以要这样写是因为：agent要在主程序运行后加载，我们不可能在主程序中编写加载的代码，只能另写程序，那么另写程序如何与主程序进行通信？这里用到的机制就是attach机制，它可以将JVM A连接至JVM B，并发送指令给JVM B执行。
+
+总结：
+
+以上就是Java Agent的俩个简单小栗子了，Java Agent十分强大，它能做到的不仅仅是打印几个监控数值而已，还包括使用Transformer等高级功能进行类替换，方法修改等，要使用Instrumentation的相关API则需要对字节码等技术有较深的认识。
+
+2.3 agent 案例
+需求：通过 java agent 技术实现一个统计方法耗时的案例
+
+1、在agent-test项目中添加方法：com.itheima.driver.DriverService
+
+package com.itheima.driver;
+
+import java.util.concurrent.TimeUnit;
+
+public class DriverService {
+
+
+    public void didi() {
+        System.out.println("di di di ------------");
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void dada() {
+        System.out.println("da da da ------------");
+        try {
+            TimeUnit.SECONDS.sleep(6);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+并在com.itheima.Application进行方法的调用
+
+package com.itheima;
+
+import com.itheima.service.DriverService;
+
+public class Application {
+
+    public static void main(String[] args) {
+        System.out.println("main 函数 运行了 ");
+        DriverService driverService = new DriverService();
+        driverService.didi();
+        driverService.dada();
+    }
+}
+2、在agent-demo中改造com.itheima.agent.PreMainAgent
+
+public class PreMainAgent {
+
+    /***
+     * 执行方法拦截
+     * @param agentArgs：-javaagent 命令携带的参数。在前面介绍 SkyWalking Agent 接入时提到
+     *                 agent.service_name 这个配置项的默认值有三种覆盖方式，
+     *                 其中，使用探针配置进行覆盖，探针配置的值就是通过该参数传入的。
+     * @param inst：java.lang.instrumen.Instrumentation 是 Instrumention 包中定义的一个接口，它提供了操作类定义的相关方法。
+     */
+    public static void premain(String agentArgs, Instrumentation inst){
+        //动态构建操作，根据transformer规则执行拦截操作
+        AgentBuilder.Transformer transformer = new AgentBuilder.Transformer() {
+            @Override
+            public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder,
+                                                    // 匹配上的具体的类型描述
+                                                    TypeDescription typeDescription,
+                                                    ClassLoader classLoader,
+                                                    JavaModule javaModule) {
+                //构建拦截规则
+                return builder
+                        //method()指定哪些方法需要被拦截，ElementMatchers.any()表示拦截所有方法
+                        .method(ElementMatchers.<MethodDescription>any())
+                        //intercept()指定拦截上述方法的拦截器
+                        .intercept(MethodDelegation.to(TimeInterceptor.class));
+            }
+        };
+
+        //采用Byte Buddy的AgentBuilder结合Java Agent处理程序
+        new AgentBuilder
+                //采用ByteBuddy作为默认的Agent实例
+                .Default()
+                //拦截匹配方式：类以com.itheima.driver开始（其实就是com.itheima.driver包下的所有类）
+                .type(ElementMatchers.nameStartsWith("com.itheima.driver"))
+                //拦截到的类由transformer处理
+                .transform(transformer)
+                //安装到 Instrumentation
+                .installOn(inst);
+    }
+}
+在agent-demo项目中，创建com.itheima.service.TimeInterceptor实现统计拦截，代码如下：
+
+public class TimeInterceptor {
+
+    /***
+     * 拦截方法
+     * @param method：拦截的方法
+     * @param callable：调用对象的代理对象
+     * @return
+     * @throws Exception
+     */
+    @RuntimeType // 声明为static
+    public static Object intercept(@Origin Method method,
+                                   @SuperCall Callable<?> callable) throws Exception {
+        //时间统计开始
+        long start = System.currentTimeMillis();
+        // 执行原函数
+        Object result = callable.call();
+        //执行时间统计
+        System.out.println(method.getName() + ":执行耗时" + (System.currentTimeMillis() - start) + "ms");
+        return result;
+    }
+}
+3、重新打包agent-demo，然后再次测试运行agent-test中的主类 Application
+
+试效果如下：
+
+ premain 执行了
+main 函数 运行了
+di di di ------------
+didi:执行耗时5009ms
+da da da ------------
+dada:执行耗时6002ms
+本文由传智教育博学谷 - 狂野架构师教研团队发布，转载请注明出处！
+
+如果本文对您有帮助，欢迎关注和点赞；如果您有任何建议也可留言评论或私信，您的支持是我坚持创作的动力
