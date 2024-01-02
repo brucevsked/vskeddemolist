@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.0.193.11/books
+    username: root
+    password: root
+  jackson:
+    date-format: yyyy/MM/dd HH:mm:ss
+    time-zone: GMT+8
+  main:
+    allow-circular-references: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+jwt:
+  # JWT存储的请求头
+  tokenHeader: Authorization
+  # JWT 加密使用的密钥
+  secret: wrs-secret
+  # JWT 超期限时间(60*60*24)
+  expiration: 604800
+  # JWT负载中拿到开头
+  tokenHead: Bearer
+logging:
+  config: classpath:log4j2.xml
