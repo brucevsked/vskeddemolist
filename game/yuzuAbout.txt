@@ -11,3 +11,14 @@ prod.keys
 log folder,when software error you can find log at here
 yuzu-windows-msvc-early-access\user\log
 
+
+how to use cheat code in yuzu
+
+open yuzu->find game->right click game,select open mode location->new securitySkill folder,put  the cheats in
+this folder like this
+yuzu-windows-msvc-early-access\user\load\01007B600D5BC000\securitySkill\cheats\010BCEE657EAFEDF.txt
+yuzu-windows-msvc-early-access\user\load\01007B600D5BC000\securitySkill\cheats\258d8ba560cfa34c.txt
+
+then restart yuzu ,right click game,find properties,you can see it checked
+if you want use which cheats code just put in txt file
+if close cheats,right click game in yuzu,uncheck securitySkill

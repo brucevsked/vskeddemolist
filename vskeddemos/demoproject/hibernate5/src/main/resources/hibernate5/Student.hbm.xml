@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+  <class name="com.jat.domain.Student" table="student">
+
+    <id name="id" column="id" type="java.lang.Long">
+      <generator class="org.hibernate.id.IdentityGenerator"/>
+    </id>
+
+    <property name="name" type="java.lang.String" column="name"></property>
+
+    <property name="age" type="java.lang.Integer" column="age"></property>
+
+  </class>
+</hibernate-mapping>

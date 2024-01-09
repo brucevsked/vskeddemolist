@@ -42,3 +42,14 @@ The title key for this rights id could not be found
 -----------------------------------
 NSZ,NSP,XCI等文件互相转换，使用软件SAK_64bit 可以解决 推荐xci格式
 -----------------------------------
+金手指用法yuzu or Ryujinx
+
+找到游戏->右击，选择打开Mod数据位置->新建一个文件夹叫(securitySkill)将cheats目录放进去即可，最终效果
+yuzu-windows-msvc-early-access\user\load\01007B600D5BC000\securitySkill\cheats\010BCEE657EAFEDF.txt
+yuzu-windows-msvc-early-access\user\load\01007B600D5BC000\securitySkill\cheats\258d8ba560cfa34c.txt
+将文件放进去以后，再次打开yuzu，右击游戏，属性中可以看到
+如果要用哪种就在txt文件中修改即可
+不想用了可以右击游戏，属性中去掉对号即可
+
+Ryujinx需要右击游戏选择管理作弊，将对应的代码勾选即可。不用时再关掉
+-----------------------------------
