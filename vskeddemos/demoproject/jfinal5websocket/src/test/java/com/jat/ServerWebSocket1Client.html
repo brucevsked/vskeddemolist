@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+
+<title>MyWebSocket</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+</head>
+
+<body>
+
+<div>this is client 1</div>
+<div>
+  serverurl:<input type="text" size="150" id="serverUrl" name="serverUrl" value="ws://127.0.0.1:80/websocket.ws" /><br>
+  token:<input type="text" size="150"  id="userToken" name="userToken" value="client1Token" /><br>
+  <button type="button" id="conBt">连接</button>
+  <button type="button" id="disBt">断开</button>
+</div>
+<div>
+  <textarea cols="100" rows="10" id="clientt">{"from":"client1Token","to":"client2Token","type":"1","time":"20190906140918288","data":{"url":"/api/hello","param":"ais"}}</textarea>
+</div>
+  <div>
+    <button type="button" id="sendBt">发送</button>
+  </div>
+  <div id="messages"></div>
+  
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js" ></script>
+<script>
+'use strict'
+
+$(function(){
+	$('#conBt').on('click',client.connect);
+	$('#disBt').on('click',client.discon);
+	$('#sendBt').on('click',client.send);
+});
+
+var client=new Object({
+  server:null,
+  connect:function(){
+    var serverUrl=$('#serverUrl').val();
+    serverUrl=serverUrl+'/'+$('#userToken').val();
+    client.server=new WebSocket(serverUrl);
+    client.server.onopen=function(){
+      //client.server.send('连接成功了hey');
+      console.log(client.server.readyState);//只读属性 readyState 表示连接状态0 - 表示连接尚未建立1 - 表示连接已建立，可以进行通信2 - 表示连接正在进行关闭3 - 表示连接已经关闭或者连接不能打开
+    };
+    console.log(client.server.readyState);//只读属性 readyState 表示连接状态0 - 表示连接尚未建立1 - 表示连接已建立，可以进行通信2 - 表示连接正在进行关闭3 - 表示连接已经关闭或者连接不能打开
+    client.server.onmessage=function(evt){
+      var reciveMsg=evt.data;
+      console.log('接收到消息:'+reciveMsg+'|');
+      $('#messages').html($('#messages').html()+reciveMsg+"<br>");
+    };
+    client.server.onclose=function(){
+       console.log(client.server.readyState);//只读属性 readyState 表示连接状态0 - 表示连接尚未建立1 - 表示连接已建立，可以进行通信2 - 表示连接正在进行关闭3 - 表示连接已经关闭或者连接不能打开
+    };
+  },
+  discon:function(){    
+    if(client.server!=null){
+      console.log(client.server.readyState);//只读属性 readyState 表示连接状态0 - 表示连接尚未建立1 - 表示连接已建立，可以进行通信2 - 表示连接正在进行关闭3 - 表示连接已经关闭或者连接不能打开
+      client.server.close();
+      console.log('dis');
+    }
+  },
+  send:function(){
+    client.server.send($('#clientt').val());
+  }
+  
+});
+</script>
+</body>
+</html>
