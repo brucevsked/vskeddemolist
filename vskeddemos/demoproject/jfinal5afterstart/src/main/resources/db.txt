@@ -1,0 +1,6 @@
+﻿#######Mysql数据库########
+jdbcUrl = jdbc:mysql://10.0.193.11/dramakill?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+user = root
+password = root
+devMode = true
+
