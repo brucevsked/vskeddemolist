@@ -22,3 +22,13 @@ yuzu-windows-msvc-early-access\user\load\01007B600D5BC000\securitySkill\cheats\2
 then restart yuzu ,right click game,find properties,you can see it checked
 if you want use which cheats code just put in txt file
 if close cheats,right click game in yuzu,uncheck securitySkill
+
+
+----------
+
+clean cache
+use everything software
+yuzu
+D:\0newdownloadgame\yuzu-windows-msvc-early-access\user\shader\*\vulkan*
+Ryujinx
+C:\Users\vsked\AppData\Roaming\Ryujinx\games\*\cache
