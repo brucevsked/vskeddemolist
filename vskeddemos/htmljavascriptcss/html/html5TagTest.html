@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>html5标签</title>
+</head>
+<body>
+	<h3>1、a标签：定义超链接，它用于从一个页面连接到另一个页面</h3>
+	<a href="http://www.w3school.com.cn" target="_blank">链接到百度</a>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>2、abbr标签：表示它所包含的文本是一个更长的单词或短语的缩写形式</h3>
+	<abbr title="etcetera">etc.</abbr>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>3、address标签：为文档或 section 定义联系信息</h3>
+	<h5>注意:address 通常被呈现为斜体。大多数浏览器会在 address 元素的前后添加一个换行符</h5>
+	<address>
+		此文档的作者：<a href="mailto:bill@microsoft.com">Bill Gates</a>
+	</address>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>4、applet标签：定义嵌入的 applet</h3>
+	<h5 style="color: green">HTML 5 中不支持 applet 元素</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>5、area标签：标签定义图像映射中的区域。area元素始终嵌套在 map 标签内部</h3>
+	<h5>属性</h5>
+	<p>alt:规定区域的替代文本</p>
+	<p>coords:规定区域的坐标</p>
+	<p>href:规定区域的目标 URL</p>
+	<img src="images/planets.gif" width="145" height="126" alt="Planets"
+	usemap="#planetmap">
+	<map name="planetmap">
+		<area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
+		<area shape="circle" coords="90,58,3" href="mercur.htm" alt="Mercury">
+		<area shape="circle" coords="124,58,8" href="venus.htm" alt="Venus">
+	</map>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">6、article标签：定义一个文章区域</h3>
+	<article>
+		AOL has now officially announced that they will end 
+		the development and support of all Netscape browsers.
+	</article>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">7、aside标签：定义页面的侧边栏内容</h3>
+	<aside>Aside 的内容是独立的内容，但应与文档内容相关。</aside>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">8、audio标签：定义音频内容</h3>
+	<h5>属性</h5>
+	<p>src:	规定音频文件的 URL</p>
+	<p>autoplay->值：true | false 如果是 true，则音频在就绪后马上播放</p>
+	<p>controls->值：true | false 如果是 true，则向用户显示控件，比如播放按钮</p>
+	<p>end:定义播放器在音频流中的何处停止播放。默认地，声音会播放到结尾</p>
+	<p>loopend:定义在音频流中循环播放停止的位置，默认是 end 属性的值</p>
+	<P>loopstart:定义在音频流中循环播放的开始位置。默认是 start 属性的值</P>
+	<P>playcount:定义音频片断播放多少次。默认是 1</P>
+	<P>start:定义播放器在音频流中开始播放的位置。默认地，声音在开头进行播放</P>
+	<P>实例：播放声音</P>
+	<audio controls>
+		<source src="images/horse.ogg" type="audio/ogg">
+	  您的浏览器不支持 audio 元素。
+	</audio>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>9、b标签：定义文本粗体</h3>
+	<b>and this is bold text</b>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>10、base标签：规定页面中所有链接的基准 url</h3>
+	<p>
+		例：假设图像的绝对地址是：<img src="https://techbrood.com/themes/w3school/images/planets.gif" />。现在我们在页面中的 head 部分插入 base 标签，规定页面中所有链接的基准 url---><base href="https://techbrood.com/themes/w3school/images/" />
+		在上例中的页面上插入图像时，我们必须规定相对的地址，浏览器会寻找文件所使用的完整 URL
+		<img src="planets.gif" />
+	</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>11、basefont标签：义基准字体</h3>
+	<h5 style="color: green">HTML 5 不支持 basefont 标签。请用 CSS 代替</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>12、bdo标签：覆盖默认的文本方向</h3>
+	<bdo dir="rtl">Here is some text</bdo>
+	<h5>属性</h5>
+	<p>dir ->值：ltr| rtl</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>13、big标签：作更大的文本</h3>
+	<h5 style="color: green">HTML 5 不支持 basefont 标签。请用 CSS 代替</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>14、blockquote标签：定义引用</h3>
+	<blockquote>帝国主义都是纸老虎 ... </blockquote>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>15、body标签：body 元素定义文档的主体。其中包含文档的所有内容</h3>
+	 <body>文档的内容 ......</body>
+
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>16、br标签：插入简单的换行符</h3>
+	This text contains<br />a line break
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>17、button标签：定义一个点击按钮</h3>
+	<h5>属性</h5>
+	<p style="color: red">autofocus->值：true | false 在页面加载时，是否让按钮获得焦点</p>
+	<p>disabled->值：disabled 禁用按钮</p>
+	<p>type->按钮类型：button reset submit </p>
+	<p>value->some_value：为按钮规定初始值。该值可通过脚本改变</p>
+	<button type="button">Click Me!</button>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">18、canvas标签：定义图形，比如图表和其他图像</h3>
+	<h5>属性</h5>
+	<p>height:设置 canvas 的高度</p>
+	<p>width:设置 canvas 的宽度</p>
+	通过 canvas 元素来显示一个红色按钮
+	<canvas id="myCanvas"></canvas>
+	<script type="text/javascript">
+		var canvas=document.getElementById('myCanvas');
+		var ctx=canvas.getContext('2d');
+		ctx.fillStyle='#FF0000';
+		ctx.fillRect(0,0,80,100);
+	</script>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>19、caption标签：定义表格标题</h3>
+	<h5 style="color: green">在 HTML 5 中，不支持该标签。请使用 CSS 代替</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>20、center标签：对其包围的文本进行水平居中处理</h3>
+	<h5 style="color: green">在 HTML 5 中，不支持该标签。请使用 CSS 代替</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>21、col标签：为表格中的一个或多个列定义属性值。您只能在表格或列组中使用该元素</h3>
+	<table>
+	  <col style="color:blue" />
+	  <col span="2" style="color:yellow" />
+	  <tr>
+	    <td>1</td>
+	    <td>2</td>
+	    <td>3</td>
+	    <td>4</td>
+	  </tr>
+	  <tr>
+	    <td>1</td>
+	    <td>2</td>
+	    <td>3</td>
+	    <td>4</td>
+	  </tr>
+	</table>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>22、colgroup标签：定义表格中供格式化的列组</h3>
+	<table border="1">
+	  <colgroup>
+	    <col span="2" style="background-color:red">
+	    <col style="background-color:yellow">
+	  </colgroup>
+	  <tr>
+	    <th>ISBN</th>
+	    <th>Title</th>
+	    <th>Price</th>
+	  </tr>
+	  <tr>
+	    <td>3476896</td>
+	    <td>My first HTML</td>
+	    <td>$53</td>
+	  </tr>
+	</table>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">23、command标签：定义命令按钮，比如单选按钮、复选框或按钮</h3>
+	<h5 style="color: green">目前，主流浏览器都不支持 command 标签，只有 IE 9 支持 command 标签</h5>
+	<h5>属性</h5>
+	<p>checked->值：true | false 当页面加载时，command 是否被选中。仅用于 radio 或 checkbox 类型</p>
+	<p>disabled->值：true | false 规定 command 是否可用</p>
+	<p>icon->值：URL 显示的图像的 URL</p>
+	<p>label->值：text 	必需。规定 command 的名字，对用户可见。</p>
+	<p>radiogroup->值：groupname 规定可进行切换且将被切换的 command 所属的组名。仅在类型为 radio 时使用。</p>
+	<p>type->值：checkbox、command、radio。定义 command 的类型。默认是 "command"</p>
+	<menu>
+		<command type="command" label="Save" onclick="save()">Save</command>
+	</menu>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">24、datagrid标签：定义可选数据的列表。datagrid 作为树列表来显示</h3>
+	<h5>属性</h5>
+	<p>disabled->值：true | false 如果为 true，则禁用整个 datagrid</p>
+	<p>multiple->值：true | false 如果为 true，则可以在 datagrid 中选择一个以上的项目</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">25、datalist标签：定义选项列表。请与 input 元素配合使用该元素，来定义 input 可能的值</h3>
+	
+	<input list="browsers">
+
+	<datalist id="browsers">
+	  <option value="Internet Explorer">
+	  <option value="Firefox">
+	  <option value="Chrome">
+	  <option value="Opera">
+	  <option value="Safari">
+	</datalist>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">26、datatemplate标签：标签定义数据模板的一个容器。该元素必须有定义模板的子元素：rule 元素</h3>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>27、dd标签：定义一个定义列表中对项目的描述</h3>
+	<dl>
+	  <dt>Coffee</dt>
+	  <dd>Black hot drink</dd>
+	  <dt>Milk</dt>
+	  <dd>White cold drink</dd>
+	</dl>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>28、del标签：定义被删除文本</h3>
+	<p>例：一段带有已删除部分和新插入部分的文本-->My favorite color is <del>blue</del> <ins>red</ins>!</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">29、details标签：定义元素的细节，用户可进行查看，或通过点击进行隐藏</h3>
+	<h5>属性</h5>
+	<p>open->值：open 当页面加载时，command 是否被选中。仅用于 radio 或 checkbox 类型</p>
+	<details>
+	<summary>Copyright 1999-2011.</summary>
+		<p> - by Refsnes Data. All Rights Reserved.</p>
+		<p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+	</details>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">30、dialog标签：标签定义对话，比如交谈</h3>
+	<dialog>
+	  <dt>老师</dt>
+	  <dd>2+2 等于？</dd>
+	  <dt>学生</dt>
+	  <dd>4</dd>
+	  <dt>老师</dt>
+	  <dd>答对了！</dd>
+	</dialog>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>31、dir标签：标签定义目录列表</h3>
+	<h5 style="color: green">HTML 5 不支持 dir 标签。请用 CSS 代替</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>32、div标签：定义文档中的节</h3>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>33、dl标签：定义列表详情</h3>
+	<dl>
+	  <dt>Coffee</dt>
+	    <dd>Black hot drink</dd>
+	  <dt>Milk</dt>
+	    <dd>White cold drink</dd>
+	</dl>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>34、dt标签：定义列表中的项目</h3>
+	<dl>
+	  <dt>Coffee</dt>
+	  <dd>Black hot drink</dd>
+	  <dt>Milk</dt>
+	  <dd>White cold drink</dd>
+	</dl>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">35、embed标签：定义嵌入的内容，比如插件。embed 标签必须有 src 属性</h3>
+	<embed src="horse.wav" />
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">36、event-source标签：定义由服务器发送的事件的来源</h3>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>37、em标签：呈现为被强调的文本</h3>
+	<em>Emphasized text</em>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>38、fieldset标签：定义围绕表单中元素的边框</h3>
+	<form>
+	  <fieldset>
+	    <legend>Personalia:</legend>
+	    Name: <input type="text"><br>
+	    Email: <input type="text"><br>
+	    Date of birth: <input type="text">
+	  </fieldset>
+	</form>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">39、figure标签：用于对元素进行组合</h3>
+	
+	<figure>
+	  <img src="https://techbrood.com/themes/w3school/images/img_pulpit.jpg" width="145" height="126" />
+	</figure>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>40、font标签：定义文字的字体、尺寸和颜色</h3>
+	<h5 style="color: green">HTML 5 不支持 font 标签。请用 CSS 代替</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">41、footer标签：定义 section 或 document 的页脚</h3>
+	<footer>
+	  <p>Posted by: Hege Refsnes</p>
+	  <p><time pubdate datetime="2012-03-01"></time></p>
+	</footer>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>42、form标签：创建供用户输入的表单</h3>
+	<h5>属性</h5>
+	<p>action：定义一个 URL。当点击提交按钮时，向这个 URL 发送数据</p>
+	<p>data:供自动插入数据</p>
+	<p>method:用于向 action URL 发送数据的 HTTP 方法。默认是 get。</p>
+	<P>name:规定表单的名称</P>
+	<p style="color: red">novalidate:如果使用该属性，则提交表单时不进行验证</p>
+	<p style="color: red">autocomplete->值：on  | off  。规定是否启用表单的自动完成功能</p>
+	<form action="demo_form.php" method="get">
+	  First name: <input type="text" name="fname"><br>
+	  Last name: <input type="text" name="lname"><br>
+	  <input type="submit" value="Submit">
+	</form>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>43、frame标签：定义子窗口（框架）。</h3>
+	<h5 style="color: green">由于该标签对网页可用性的负面影响，在 HTML 5 中 frame 标签没有得到支持</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>44、frameset标签：定义框架集。</h3>
+	<h5 style="color: green">由于该标签对网页可用性的负面影响，在 HTML 5 中 frameset 标签没有得到支持</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>45、head标签：定义关于文档的信息</h3>
+	<head>
+		<title>Title of the document</title>
+	</head>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3  style="color: red">46、header标签：定义 section 或 document 的页眉</h3>
+	<header>
+	    <h1>Internet Explorer 9</h1>
+	    <p><time pubdate datetime="2011-03-15"></time></p>
+	</header>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>47、h1~h6标签：定义标题。</h3>
+	<h1>这是标题 1</h1>
+	<h1>这是标题 2</h1>
+	<h2>这是标题 3</h2>
+	<h4>这是标题 4</h4>
+	<h5>这是标题 5</h5>
+	<h6>这是标题 6</h6>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>48、hr标签：定义水平线</h3>
+	<h1>HTML</h1>
+	<p>HTML is a language for describing web pages.....</p>
+	<hr>
+	<h1>CSS</h1>
+	<p>CSS defines how to display HTML elements.....</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>49、i标签：呈现斜体的文本</h3>
+	<i>The lightning</i>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>50、i标签：呈现斜体的文本</h3>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>51、iframe标签：创建包含另一个文档的行内框架</h3>
+	<iframe src="//www.techbrood.com"></iframe>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>52、img标签：定义图像</h3>
+	<img src="https://techbrood.com/themes/w3school/images/smiley.gif" alt="Smiley face" height="42" width="42">
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>52、input标签：定义输入控件</h3>
+	<h5>属性</h5>
+	<P style="color: red">autocomplete->值: on | off 。autocomplete 属性规定 input 元素输入字段是否应该启用自动完成功能</P>
+	<P style="color: red">autofocus->值: autofocus 。属性规定当页面加载时 input 元素应该自动获得焦点</P>
+	<p>checked->值: checked。checked 属性规定在页面加载时应该被预先选定的 input 元素。 (只针对 type="checkbox" 或者 type="radio")</p>
+	<p>disabled->值: disabled disabled 属性规定应该禁用的 input 元素。</p>
+	<p>
+	type:类型：button、checkbox、color、date、datetime、datetime-local、email、file、hidden、image、month、number、password、radio、range、reset、search、submit、tel、text、time、url、week</p>
+	<form action="demo_form.asp">
+	  First name: <input type="text" name="fname" autofocus><br>
+	  Last name: <input type="text" name="lname"><br>
+	  E-mail: <input type="email" name="email" autocomplete="off"><br>
+	  <input type="submit" value="Submit">
+	</form>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>53、ins标签：文档的其余部分之外的插入文本</h3>
+	<p>My favorite color is <del>blue</del> <ins>red</ins>!</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>54、kbd标签：定义键盘文本</h3>
+	<kbd>Keyboard input</kbd>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>55、keygen标签：规定用于表单的密钥对生成器字段</h3>
+	<form action="demo_keygen.asp" method="get">
+	  Username: <input type="text" name="usr_name">
+	  Encryption: <keygen name="security">
+	  <input type="submit">
+	</form>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>56、label标签：定义 input 元素的标注</h3>
+	<form action="demo_form.asp">
+	  <label for="male">Male</label>
+	  <input type="radio" name="sex" id="male" value="male"><br>
+	  <label for="female">Female</label>
+	  <input type="radio" name="sex" id="female" value="female"><br>
+	  <input type="submit" value="Submit">
+	</form>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>57、legend标签：定义 fieldset 元素的标题</h3>
+	<form>
+	  <fieldset>
+	    <legend>Personalia:</legend>
+	    Name: <input type="text" size="30"><br>
+	    Email: <input type="text" size="30"><br>
+	    Date of birth: <input type="text" size="10">
+	  </fieldset>
+	</form>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>58、li标签：定义列表的项目</h3>
+	<ul>
+	  <li>Coffee</li>
+	  <li>Tea</li>
+	  <li>Milk</li>
+	</ul>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>59、link标签：定义文档与外部资源的关系</h3>
+	<head>
+		<link rel="stylesheet" type="text/css" href="theme.css">
+	</head>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>59、map标签：定义图像映射</h3>
+	<img src="https://techbrood.com/themes/w3school/images/planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap">
+
+	<map name="planetmap">
+	  <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
+	  <area shape="circle" coords="90,58,3" href="mercur.htm" alt="Mercury">
+	  <area shape="circle" coords="124,58,8" href="venus.htm" alt="Venus">
+	</map>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">60、mark标签：定义带有记号的文本</h3>
+	<p>Do not forget to buy <mark>milk</mark> today.</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>60、menu标签：不赞成使用。定义菜单列表</h3>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>61、meta标签：定义关于 HTML 文档的元信息</h3>
+	<head>
+		<meta name="description" content="Free Web tutorials">
+		<meta name="keywords" content="HTML,CSS,XML,JavaScript">
+		<meta name="author" content="Ståle Refsnes">
+		<meta charset="UTF-8">
+	</head>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">62、meter标签：定义度量衡。仅用于已知最大和最小值的度量。</h3>
+	<meter value="2" min="0" max="10">2 out of 10</meter><br>
+	<meter value="0.6">60%</meter>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">63、nav标签：定义导航链接的部分</h3>
+	<nav>
+	  <a href="/h5b2a?t=">HTML</a> |
+	  <a href="/h5b2a?t=">CSS</a> |
+	  <a href="/h5b2a?t=">JavaScript</a> |
+	  <a href="/jquery/">jQuery</a>
+	</nav>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>64、noframes标签：定义针对不支持框架的用户的替代内容。</h3>
+	<h5 style="color: green">HTML5不支持</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>64、noscript标签：来定义在脚本未被执行时的替代内容（文本）。此标签用于可识别 script标签但无法支持其中脚本的浏览器</h3>
+	<script>
+		document.write("Hello World!")
+	</script>
+	<noscript>Your browser does not support JavaScript!</noscript>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>65、object标签：定义内嵌对象</h3>
+	<object width="400" height="400" data="helloworld.swf"></object>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>66、ol标签：定义有序列表</h3>
+	<ol>
+	  <li>Coffee</li>
+	  <li>Tea</li>
+	  <li>Milk</li>
+	</ol>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>67、optgroup标签：定义选项组</h3>
+	<select>
+	  <optgroup label="Swedish Cars">
+	    <option value="volvo">Volvo</option>
+	    <option value="saab">Saab</option>
+	  </optgroup>
+	  <optgroup label="German Cars">
+	    <option value="mercedes">Mercedes</option>
+	    <option value="audi">Audi</option>
+	  </optgroup>
+	</select>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>68、option标签：定义下拉列表中的一个选项</h3>
+	<select>
+	  <option value="volvo">Volvo</option>
+	  <option value="saab">Saab</option>
+	  <option value="opel">Opel</option>
+	  <option value="audi">Audi</option>
+	</select>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>69、output标签：定义不同类型的输出，比如脚本的输出</h3>
+	将计算结果显示在 output 元素中
+	<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+	  <input type="range" id="a" value="50">100
+	  +<input type="number" id="b" value="50">
+	  =<output name="x" for="a b"></output>
+	</form>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>70、p标签：定义段落</h3>
+	<p>This is some text in a paragraph.</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>71、param标签：定义对象的参数</h3>
+	<object data="https://techbrood.com/themes/w3school/libs/jsref/horse.wav">
+	  <param name="autoplay" value="true">
+	</object>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>72、pre标签：定义预格式文本</h3>
+	<pre>
+	Text in a pre element
+	is displayed in a fixed-width
+	font, and it preserves
+	both      spaces and
+	line breaks
+	</pre>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">73、progress标签：运行中的进程</h3>
+	<progress value="22" max="100"></progress>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>74、q标签：定义短的引用</h3>
+	<p>WWF's goal is to:
+	<q>Build a future where people live in harmony with nature.</q>
+	We hope they succeed.</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">75、rule标签：更新数据模板的规则</h3>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>75、s标签：定义加删除线的文本</h3>
+	<h5 style="color: green">HTML5不支持</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>76、script标签：客户端脚本</h3>
+	<script>
+		document.write("Hello World!")
+	</script>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">77、section标签：标签定义文档中的节（section）。比如章节、页眉、页脚或文档中的其他部分。</h3>
+	<section>
+		<h1>WWF</h1>
+		<p>The World Wide Fund for Nature (WWF) is....</p>
+	</section>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>78、select标签：创建下拉列表</h3>
+	<select>
+		<option value="volvo">Volvo</option>
+		<option value="saab">Saab</option>
+		<option value="mercedes">Mercedes</option>
+		<option value="audi">Audi</option>
+	</select>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>79、select标签：创建下拉列表</h3>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>80、small标签：制作更小字号的文本</h3>
+	<h5 style="color: green">HTML5不支持</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">81、source标签：标签为媒介元素（比如 video 和 audio）定义媒介资源</h3>
+	<audio controls>
+		<source src="https://techbrood.com/themes/w3school/libs/jsref/horse.ogg" type="audio/ogg">
+		<source src="https://techbrood.com/themes/w3school/libs/jsref/horse.mp3" type="audio/mpeg">
+		您的浏览器不支持 audio 元素。
+	</audio>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>82、span标签：定义文档中的节</h3>
+	<p>我的母亲有 <span style="color:blue">蓝色</span> 的眼睛。</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>83、strike标签：定义加删除线的文本</h3>
+	<h5 style="color: green">HTML5不支持</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>84、style标签：定义文档中的样式</h3>
+	<style type="text/css">
+		h6 {color:red;}
+	</style>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>85、sup标签：定义上标文本</h3>
+	<p>This text contains <sub>subscript</sub> text.</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>86、table标签：定义表格</h3>
+	<h5 style="color: green">在 HTML 5 中，不支持 table 标签的任何属性</h5>
+	<table border="1">
+		<tr>
+			<th>Month</th>
+			<th>Savings</th>
+		</tr>
+		<tr>
+			<td>January</td>
+			<td>$100</td>
+		</tr>
+	</table>
+
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>87、tbody标签：定义一段表格主体</h3>
+	<h5 style="color: green">在 HTML 5 中，不支持 tbody 标签的任何属性</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>88、td标签：表格中的一个单元格</h3>
+	<h5 style="color: green">在 HTML 5 中，仅仅支持 "colspan" 和 "rowspan" 属性</h5>
+	<table>
+	  <tr>
+	    <td>Cell A</td>
+	    <td>Cell B</td>
+	  </tr>
+	</table>
+
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>89、textarea标签：定义一个文本区域</h3>
+	<textarea rows="10" cols="30">
+		我是一个文本框。
+	</textarea>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>90、tfoot标签：定义表格的页脚</h3>
+	<table>
+
+	  <thead>
+	    <tr>
+	      <td>THEAD 中的文本</td>
+	    </tr>
+	  </thead>
+
+	  <tfoot>
+	    <tr>
+	      <td>TFOOT 中的文本</td>
+	    </tr>
+	  </tfoot>
+
+	  <tbody>
+	    <tr>
+	      <td>TBODY 中的文本</td> 
+	    </tr>
+	  </tbody>
+
+	</table>
+
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>91、th标签：定义表格内的表头单元格。此 th 元素内部的文本通常会呈现为粗体</h3>
+	<table>
+	  <tr>
+	    <th>Header 1</th>
+	    <th>Header 2</th>
+	  </tr>
+
+	  <tr>
+	    <td>Cell A</td>
+	    <td>Cell B</td>
+	  </tr>
+	</table>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>92、thead标签：定义表格的表头</h3>
+	<h5 style="color: green">在 HTML 5 中，不支持 thead 标签的任何属性</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">93、time标签：定义日期或时间</h3>
+	<p>We open at <time>10:00</time> every morning.</p>
+
+	<p>I have a date on <time datetime="2021-11-22">Valentines day</time>.</p>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>94、tr标签：定义表格中的行</h3>
+	<table>
+	  <tr>
+	    <td>Cell A</td>
+	    <td>Cell B</td>
+	  </tr>
+	</table>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>95、tt标签：定义打字机文本</h3>
+	<h5 style="color: green">在 HTML 5 中，不支持</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>95、u标签：定义下划线文本</h3>
+	<h5 style="color: green">在 HTML 5 中，不支持</h5>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3>96、ul标签：定义标签无序列表</h3>
+	<ul>
+	   <li>Coffee</li>
+	   <li>Tea</li>
+	</ul>
+	<br />
+	-------------------------------------------
+	<br />
+	<h3 style="color: red">97、video标签：定义视频，比如电影片段或其他视频流</h3>
+	<video width="320" height="240" controls>
+		<source src="https://techbrood.com/themes/w3school/libs/jsref/movie.mp4" type="video/mp4">
+		<source src="https://techbrood.com/themes/w3school/libs/jsref/movie.ogg" type="video/ogg">
+		您的浏览器不支持 video 标签。
+	</video>
+</body>
+
+</html>
