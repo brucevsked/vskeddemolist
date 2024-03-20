@@ -1,0 +1,17 @@
+
+
+https://www.youtube.com/watch?v=vtWKlgEi9js&list=PLPedo-T7QiNsIji329HyTzbKBuCAHwNFC
+
+Installing MASM32 SDK
+https://www.masm32.com/
+
+enter website then click Download ,
+then select US Site 1 ( For American and international programmers from around the world).
+save file to file,The file name is masm32v11r.zip
+unzip masm32v11r.zip file, double click install.exe
+always click ok,until Install MASM32 SDK Version 11.0.
+click Extract button,then click ok
+
+if you finished install ,you can find MASM32 Editor icon on you desktop.
+
+enviroment is ok
