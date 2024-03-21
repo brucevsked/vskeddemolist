@@ -1,0 +1,23 @@
+Integer Constants(or Integer literal) = Is made up of an optional leading sign,
+one or more digits,and an optional suffix character(called a radix)
+indicating the number base.
+
+Radix may be one of the following(uppercase or lowercase)
+h Hexadecimal (0-9,A-F),begin with "0x" or "0X" followed by one or more hexadecimal digits
+q/o Octal (0-7)
+d Decimal (0-9)
+b Binary (0,1)
+r Encoded real
+t Decimal(alternate) (0-9)
+y Binary(alternate) (0,1)
+
+
+Examples of using different radixes:
+
+26 Decimal
+26d Decimal
+11010011b Binary
+42q Octal
+42o Octal
+1Ah Hexadecimal
+0A3h Hexadecimal
