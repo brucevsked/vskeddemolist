@@ -62,6 +62,11 @@ ren *.* *.png
 7* 桌面右键菜单注册表项目 regedit
 计算机\HKEY_CLASSES_ROOT\Directory\Background\shell
 
+8* 删除无法删除的文件夹
+先右击->属性->安全选项卡->高级 设置所有者为administrators，
+并将替换子容器和对象的所有者打对号，同时将使用可从此对象继承的权限项目替换所有子对象的权限项目（最下面）
+点确定再去删除
+
 
 
 
