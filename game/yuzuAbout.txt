@@ -13,7 +13,7 @@ yuzu-windows-msvc-early-access\user\log
 
 
 how to use cheat code in yuzu
-first use ryujinx find the bid(you must use the same bid cheat code)
+first use ryujinx find the bid(you must use the same bid cheat code) file name must use bid name
 
 open yuzu->find game->right click game,select open mode location->new securitySkill folder,put  the cheats in
 this folder like this
