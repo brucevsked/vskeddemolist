@@ -112,3 +112,7 @@ rd DetectionHistory /s
 
 超级管理员模式打开命令提示符 e为你要修复的盘符
 icacls e:\ /setintegritylevel M
+--------------------------------------------------------------------------------
+修复系统dll相关问题，丢失或损坏
+dism /online /cleanup-image /scanhealth
+sfc /scannow
