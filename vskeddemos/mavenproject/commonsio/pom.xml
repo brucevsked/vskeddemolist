@@ -27,7 +27,7 @@
 
 		<log4j.version>2.19.0</log4j.version>
 		<testng.version>7.5</testng.version>
-		<commonsio.version>2.11.0</commonsio.version>
+		<commonsio.version>2.16.1</commonsio.version>
 	</properties>
 
 	<dependencies>
