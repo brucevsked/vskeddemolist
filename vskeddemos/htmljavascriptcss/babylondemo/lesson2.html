@@ -1,0 +1,87 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<!-- must set here! -->
+<base href="">
+
+<title>lesson2 添加材质</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+	html, body {
+overflow: hidden;
+width : 100%;
+height: 100%;
+margin: 0;
+padding : 0;
+}
+
+#renderCanvas {
+width : 100%;
+height: 100%;
+touch-action: none;
+}
+</style>
+</head>
+
+<body>
+<!-- 使用方向键试试 或拖动看看-->
+<canvas id="renderCanvas"></canvas>
+
+<script type="text/javascript" charset="UTF-8" src="js/babylon.custom.js"></script>
+
+<script type="text/javascript">
+	
+function test1(){
+	var canvas = document.querySelector('#renderCanvas');
+	var engine = new BABYLON.Engine(canvas, true);
+  var createScene = function() {
+  // 创建一个基本的Scene对象，用来容纳所有其他对象
+  var scene = new BABYLON.Scene(engine);
+
+  // 创建一个相机，设置其位置为(x:0, y:5, z:-10)
+  var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5,-10), scene);
+
+  // 相机聚焦在场景原点位置
+  camera.setTarget(BABYLON.Vector3.Zero());
+
+  // 使得我们可以控制相机拍摄角度，和three.js中的OrbitsControl效果类似，但简单得多
+  camera.attachControl(canvas, false);
+
+  // 创建一个半球形光源,朝向为天空
+  var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,1,0), scene);
+  
+  var sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial", scene);
+  sphereMaterial.diffuseColor = new BABYLON.Color3(0.6, 0.2, 0.2);
+  sphereMaterial.specularPower = 128;
+
+
+  // 创建一个内置的“球”体；其构造函数的参数：名称、宽度、深度、精度，场景，其中精度表示表面细分数。
+  var sphere = BABYLON.Mesh.CreateSphere('sphere1', 16, 2, scene);
+
+  // 设置球体位置，使其位于平面之上
+  sphere.position.y = 1;
+  sphere.material = sphereMaterial;
+  
+  //添加材质
+  var groundMaterial = new BABYLON.StandardMaterial("groundMaterial", scene);  
+  groundMaterial.diffuseColor = new BABYLON.Color3(0.1, 0.3, 0.1);  
+  // 创建一个内置的“地面”形状；其构造函数的5个参数和球体一样
+  var ground = BABYLON.Mesh.CreateGround("ground", 10, 10, 2, scene);  
+  ground.material = groundMaterial;  
+  ground.receiveShadows = true;
+  
+  return scene;
+  };
+
+
+  var scene = createScene();
+
+  engine.runRenderLoop(function() {  
+    scene.render();  
+  }); 
+};
+test1();
+</script>
+
+</body>
+</html>
