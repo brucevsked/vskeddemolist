@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.6.10
+ * EasyUI for jQuery 1.10.19
  * 
- * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2024 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -51,7 +51,31 @@ var _18=_17.selections[_17.highlight];
 var s1=s.substring(0,_18[0]);
 var s2=s.substring(_18[0],_18[1]);
 var s3=s.substring(_18[1]);
-var v=s1+((parseInt(s2,10)||0)+_17.increment*(_16?-1:1))+s3;
+if(s2==_17.ampm[0]){
+s2=_17.ampm[1];
+}else{
+if(s2==_17.ampm[1]){
+s2=_17.ampm[0];
+}else{
+s2=parseInt(s2,10)||0;
+if(_17.selections.length-4==_17.highlight&&_17.hour12){
+if(s2==12){
+s2=0;
+}else{
+if(s2==11&&!_16){
+var tmp=s3.replace(_17.ampm[0],_17.ampm[1]);
+if(s3!=tmp){
+s3=tmp;
+}else{
+s3=s3.replace(_17.ampm[1],_17.ampm[0]);
+}
+}
+}
+}
+s2=s2+_17.increment*(_16?-1:1);
+}
+}
+var v=s1+s2+s3;
 $(_15).timespinner("setValue",v);
 _a(_15);
 };
@@ -96,7 +120,7 @@ var _24=_23.parser.call(jq[0],jq.timespinner("getValue"));
 return _24?_24.getSeconds():null;
 }};
 $.fn.timespinner.parseOptions=function(_25){
-return $.extend({},$.fn.spinner.parseOptions(_25),$.parser.parseOptions(_25,["separator",{showSeconds:"boolean",highlight:"number"}]));
+return $.extend({},$.fn.spinner.parseOptions(_25),$.parser.parseOptions(_25,["separator",{hour12:"boolean",showSeconds:"boolean",highlight:"number"}]));
 };
 $.fn.timespinner.defaults=$.extend({},$.fn.spinner.defaults,{inputEvents:$.extend({},$.fn.spinner.defaults.inputEvents,{click:function(e){
 _5.call(this,e);
@@ -113,37 +137,63 @@ if(!_26){
 return "";
 }
 var _27=$(this).timespinner("options");
-var tt=[_28(_26.getHours()),_28(_26.getMinutes())];
-if(_27.showSeconds){
-tt.push(_28(_26.getSeconds()));
+var _28=_26.getHours();
+var _29=_26.getMinutes();
+var _2a=_26.getSeconds();
+var _2b="";
+if(_27.hour12){
+_2b=_28>=12?_27.ampm[1]:_27.ampm[0];
+_28=_28%12;
+if(_28==0){
+_28=12;
 }
-return tt.join(_27.separator);
-function _28(_29){
-return (_29<10?"0":"")+_29;
+}
+var tt=[_2c(_28),_2c(_29)];
+if(_27.showSeconds){
+tt.push(_2c(_2a));
+}
+var s=tt.join(_27.separator)+" "+_2b;
+return $.trim(s);
+function _2c(_2d){
+return (_2d<10?"0":"")+_2d;
 };
 },parser:function(s){
-var _2a=$(this).timespinner("options");
-var _2b=_2c(s);
-if(_2b){
-var min=_2c(_2a.min);
-var max=_2c(_2a.max);
-if(min&&min>_2b){
-_2b=min;
+var _2e=$(this).timespinner("options");
+var _2f=_30(s);
+if(_2f){
+var min=_30(_2e.min);
+var max=_30(_2e.max);
+if(min&&min>_2f){
+_2f=min;
 }
-if(max&&max<_2b){
-_2b=max;
+if(max&&max<_2f){
+_2f=max;
 }
 }
-return _2b;
-function _2c(s){
+return _2f;
+function _30(s){
 if(!s){
 return null;
 }
-var tt=s.split(_2a.separator);
-return new Date(1900,0,0,parseInt(tt[0],10)||0,parseInt(tt[1],10)||0,parseInt(tt[2],10)||0);
+var ss=s.split(" ");
+var tt=ss[0].split(_2e.separator);
+var _31=parseInt(tt[0],10)||0;
+var _32=parseInt(tt[1],10)||0;
+var _33=parseInt(tt[2],10)||0;
+if(_2e.hour12){
+var _34=ss[1];
+if(_34==_2e.ampm[1]&&_31<12){
+_31+=12;
+}else{
+if(_34==_2e.ampm[0]&&_31==12){
+_31-=12;
+}
+}
+}
+return new Date(1900,0,0,_31,_32,_33);
 };
-},selections:[[0,2],[3,5],[6,8]],separator:":",showSeconds:false,highlight:0,spin:function(_2d){
-_14(this,_2d);
+},selections:[[0,2],[3,5],[6,8],[9,11]],separator:":",showSeconds:false,highlight:0,hour12:false,ampm:["AM","PM"],spin:function(_35){
+_14(this,_35);
 }});
 })(jQuery);
 

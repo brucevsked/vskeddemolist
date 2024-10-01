@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.6.10
+ * EasyUI for jQuery 1.10.19
  * 
- * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2024 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -62,7 +62,7 @@ $.fn.resizable.isResizing=false;
 _1(e,true);
 _6(e);
 $.data(e.data.target,"resizable").options.onStopResize.call(e.data.target,e);
-$(document).unbind(".resizable");
+$(document)._unbind(".resizable");
 $("body").css("cursor","");
 return false;
 };
@@ -111,7 +111,7 @@ return this.each(function(){
 var _16=null;
 var _17=$.data(this,"resizable");
 if(_17){
-$(this).unbind(".resizable");
+$(this)._unbind(".resizable");
 _16=$.extend(_17.options,_14||{});
 }else{
 _16=$.extend({},$.fn.resizable.defaults,$.fn.resizable.parseOptions(this),_14||{});
@@ -120,15 +120,15 @@ $.data(this,"resizable",{options:_16});
 if(_16.disabled==true){
 return;
 }
-$(this).bind("mousemove.resizable",{target:this},function(e){
+$(this)._bind("mousemove.resizable",{target:this},function(e){
 if($.fn.resizable.isResizing){
 return;
 }
 var dir=_b(e);
 $(e.data.target).css("cursor",dir?dir+"-resize":"");
-}).bind("mouseleave.resizable",{target:this},function(e){
+})._bind("mouseleave.resizable",{target:this},function(e){
 $(e.data.target).css("cursor","");
-}).bind("mousedown.resizable",{target:this},function(e){
+})._bind("mousedown.resizable",{target:this},function(e){
 var dir=_b(e);
 if(dir==""){
 return;
@@ -142,9 +142,9 @@ return val;
 }
 };
 var _19={target:e.data.target,dir:dir,startLeft:_18("left"),startTop:_18("top"),left:_18("left"),top:_18("top"),startX:e.pageX,startY:e.pageY,startWidth:$(e.data.target).outerWidth(),startHeight:$(e.data.target).outerHeight(),width:$(e.data.target).outerWidth(),height:$(e.data.target).outerHeight(),deltaWidth:$(e.data.target).outerWidth()-$(e.data.target).width(),deltaHeight:$(e.data.target).outerHeight()-$(e.data.target).height()};
-$(document).bind("mousedown.resizable",_19,_8);
-$(document).bind("mousemove.resizable",_19,_9);
-$(document).bind("mouseup.resizable",_19,_a);
+$(document)._bind("mousedown.resizable",_19,_8);
+$(document)._bind("mousemove.resizable",_19,_9);
+$(document)._bind("mouseup.resizable",_19,_a);
 $("body").css("cursor",dir+"-resize");
 });
 });

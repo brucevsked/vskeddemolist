@@ -289,3 +289,17 @@
 .datagrid-header .datagrid-filter-row td.datagrid-header-over {
   background: inherit;
 }
+.datagrid-split-proxy {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  border-left: 1px solid #ffab3f;
+}
+.datagrid-moving-proxy {
+  border: 1px solid #ffab3f;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 4px;
+}

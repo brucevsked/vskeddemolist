@@ -49,10 +49,22 @@
 	-moz-align-items: center;
 	align-items: center;
 }
+.f-vcenter{
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	align-items: center;
+}
 .f-full{
 	-webkit-box-flex: 1 1 auto;
 	-ms-flex: 1 1 auto;
 	flex: 1 1 auto;
+}
+.f-none{
+	-webkit-box-flex: none;
+	-ms-flex: none;
+	flex: none;
 }
 .f-hide{
 	display: none;
@@ -96,6 +108,14 @@
 .f-field{
 	width: 12em;
 	height: 30px;
+}
+.f-vtitle{
+	-ms-writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	writing-mode: vertical-lr;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .scroll-body{
@@ -297,6 +317,15 @@
 .window .window-footer{
 	top: 0;
 }
+.window.inline{
+	position: absolute;
+}
+.window-mask.inline{
+	position: absolute;
+}
+.drawer.inline{
+	position: absolute;
+}
 .dialog-toolbar{
 	border-width: 0 0 1px 0;
 }
@@ -320,7 +349,7 @@
 .tabs li{
 	display: inherit;
 }
-.tabs li a.tabs-inner{
+.tabs li .tabs-inner{
 	height: auto;
 	line-height: normal;
 	display: inherit;
@@ -339,14 +368,70 @@
 	display: block;
 	width: 21px;
 	height: 100%;
+	top: -3px;
+	height: calc(100% + 3px);
 }
 .tabs-header-left .tabs li{
 	right: -1px;
 }
 .tabs-header-left .tabs li,.tabs-header-right .tabs li,
-.tabs-header-left .tabs li a.tabs-inner,
-.tabs-header-right .tabs li a.tabs-inner{
+.tabs-header-left .tabs li .tabs-inner,
+.tabs-header-right .tabs li .tabs-inner{
 	display: inherit;
+}
+.tabs-scroller-left{
+	border-left-width: 0;
+}
+.tabs-scroller-right{
+	border-right-width: 0;
+}
+.tabs-header-plain .tabs-scroller-left{
+	border-left-width: 1px;
+}
+.tabs-header-plain .tabs-scroller-right{
+	border-right-width: 1px;
+}
+.tabs-tool{
+	position: relative;
+	top: -3px;
+	bottom: 0;
+	height: calc(100% + 3px);
+	border-right-width: 0;
+}
+.tabs-header-plain .tabs-scroller-left,
+.tabs-header-plain .tabs-scroller-right,
+.tabs-header-narrow .tabs-scroller-left,
+.tabs-header-narrow .tabs-scroller-right,
+.tabs-header-plain .tabs-tool,
+.tabs-header-narrow .tabs-tool{
+	top: 0;
+	height: 100%;
+}
+.tabs-header-left .tabs-tool{
+	border-left-width: 0;
+	border-right-width: 1px;
+	border-bottom-width: 0;
+	height: auto;
+	top: 0;
+}
+.tabs-header-right .tabs-tool{
+	border-left-width: 1px;
+	border-right-width: 0;
+	border-bottom-width: 0;
+	height: auto;
+	top: 0;
+}
+.tabs-header-plain .tabs-tool{
+	border-left-width: 0;
+	border-right-width: 1px;
+}
+.tabs-header-left.tabs-header-plain .tabs-tool{
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+}
+.tabs-header-right.tabs-header-plain .tabs-tool{
+	border-left-width: 1px;
+	border-bottom-width: 1px;
 }
 
 .combo-panel{
@@ -380,7 +465,23 @@
 	height: 20px;
 	line-height: 20px;
 }
-
+.tree-editing.tree-title{
+	position: relative;
+	margin: 0;
+	padding: 0;
+	height: 26px;
+	line-height: 26px;
+	overflow: hidden;
+}
+.tree-editing .f-field{
+	width: 100%;
+	border-radius: 0;
+	height: auto;
+	vertical-align: top;
+}
+.tree-editing .textbox-text{
+	line-height: 24px;
+}
 .datagrid,
 .datagrid-view,.datagrid-view1,.datagrid-view2{
 	position: relative;
@@ -455,6 +556,10 @@
 	padding: 0 5px 0 30px;
 	z-index: 9;
 }
+.datagrid-empty{
+	top: 50%;
+	margin-top: -20px;
+}
 .datagrid-body .datagrid-td-group{
 	border-left-color: transparent;
 	border-right-color: transparent;
@@ -476,6 +581,7 @@
 	position: relative;
 }
 .datagrid-editable> .f-field,
+.datagrid-editable>form> .f-field,
 .datagrid-editable> *{
 	width: 100%;
 	height: 31px;
@@ -632,3 +738,21 @@
 	transform: translate3d(0, 100%, 0)
 }
 
+.form-field{
+	margin-bottom: 28px;
+}
+.form-field-haserror{
+	margin-bottom: 4px;
+}
+.form-field-error{
+	font-size: 14px;
+	color: #ed4014;
+	height: 24px;
+	line-height: 24px;
+}
+.form-field .f-field{
+	width: auto;
+	-webkit-box-flex: 1 1 auto;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+}

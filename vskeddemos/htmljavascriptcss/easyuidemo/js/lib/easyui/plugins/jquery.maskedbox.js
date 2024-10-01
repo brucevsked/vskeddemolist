@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.6.10
+ * EasyUI for jQuery 1.10.19
  * 
- * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2024 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -172,9 +172,9 @@ var _2b=this;
 var _2c=$.extend({},$.fn.maskedbox.defaults,_2a);
 $.data(_2b,"maskedbox",{options:_2c});
 var _2d=$(_2b).textbox("textbox");
-_2d.unbind(".maskedbox");
+_2d._unbind(".maskedbox");
 for(var _2e in _2c.inputEvents){
-_2d.bind(_2e+".maskedbox",{target:_2b},_2c.inputEvents[_2e]);
+_2d._bind(_2e+".maskedbox",{target:_2b},_2c.inputEvents[_2e]);
 }
 });
 }});

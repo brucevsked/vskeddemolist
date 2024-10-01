@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.6.10
+ * EasyUI for jQuery 1.10.19
  * 
- * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2024 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -9,7 +9,7 @@
  */
 (function($){
 $(function(){
-$(document).unbind(".combo").bind("mousedown.combo mousewheel.combo",function(e){
+$(document)._unbind(".combo")._bind("mousedown.combo mousewheel.combo",function(e){
 var p=$(e.target).closest("span.combo,div.combo-p,div.menu");
 if(p.length){
 _1(p);
@@ -22,7 +22,7 @@ function _2(_3){
 var _4=$.data(_3,"combo");
 var _5=_4.options;
 if(!_4.panel){
-_4.panel=$("<div class=\"combo-panel\"></div>").appendTo("body");
+_4.panel=$("<div class=\"combo-panel\"></div>").appendTo("html>body");
 _4.panel.panel({minWidth:_5.panelMinWidth,maxWidth:_5.panelMaxWidth,minHeight:_5.panelMinHeight,maxHeight:_5.panelMaxHeight,doSize:false,closed:true,cls:"combo-p",style:{position:"absolute",zIndex:10},onOpen:function(){
 var _6=$(this).panel("options").comboTarget;
 var _7=$.data(_6,"combo");
@@ -50,9 +50,9 @@ $(_3).addClass("combo-f").textbox($.extend({},_5,{icons:_a,onChange:function(){
 $(_3).attr("comboName",$(_3).attr("textboxName"));
 _4.combo=$(_3).next();
 _4.combo.addClass("combo");
-_4.panel.unbind(".combo");
+_4.panel._unbind(".combo");
 for(var _b in _5.panelEvents){
-_4.panel.bind(_b+".combo",{target:_3},_5.panelEvents[_b]);
+_4.panel._bind(_b+".combo",{target:_3},_5.panelEvents[_b]);
 }
 };
 function _c(_d){
@@ -170,10 +170,10 @@ _26.panel("resize",{width:(_27.panelWidth?_27.panelWidth:_25._outerWidth()),heig
 _26.panel("panel").hide();
 _26.panel("open");
 }
-(function(){
+(function f(){
 if(_28.comboTarget==_23&&_26.is(":visible")){
 _26.panel("move",{left:_29(),top:_2a()});
-setTimeout(arguments.callee,200);
+setTimeout(f,200);
 }
 })();
 function _29(){
@@ -334,7 +334,7 @@ _4b(this);
 };
 $.fn.combo.methods={options:function(jq){
 var _53=jq.textbox("options");
-return $.extend($.data(jq[0],"combo").options,{width:_53.width,height:_53.height,disabled:_53.disabled,readonly:_53.readonly});
+return $.extend($.data(jq[0],"combo").options,{width:_53.width,height:_53.height,disabled:_53.disabled,readonly:_53.readonly,editable:_53.editable});
 },cloneFrom:function(jq,_54){
 return jq.each(function(){
 $(this).textbox("cloneFrom",_54);

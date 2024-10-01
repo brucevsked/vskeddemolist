@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.6.10
+ * EasyUI for jQuery 1.10.19
  * 
- * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2024 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -54,8 +54,8 @@ var _b=$.fn.datebox.defaults.parser.call(this,dt[0]);
 if(dt.length<2){
 return _b;
 }
-var _c=$.fn.timespinner.defaults.parser.call(this,dt[1]);
+var _c=$.fn.timespinner.defaults.parser.call(this,dt[1]+(dt[2]?" "+dt[2]:""));
 return new Date(_b.getFullYear(),_b.getMonth(),_b.getDate(),_c.getHours(),_c.getMinutes(),_c.getSeconds());
-},selections:[[0,2],[3,5],[6,10],[11,13],[14,16],[17,19]]});
+},selections:[[0,2],[3,5],[6,10],[11,13],[14,16],[17,19],[20,22]]});
 })(jQuery);
 

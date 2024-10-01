@@ -120,6 +120,7 @@
 }
 .panel-header {
   background-color: #fafafa;
+  color: #404040;
 }
 .panel-body {
   background-color: #ffffff;
@@ -137,6 +138,7 @@
   border: 1px solid #dfdfdf;
   overflow: hidden;
   background: #fafafa;
+  color: #404040;
 }
 .panel-footer-noborder {
   border-width: 1px 0 0 0;

@@ -49,10 +49,22 @@
 	-moz-align-items: center;
 	align-items: center;
 }
+.f-vcenter{
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	align-items: center;
+}
 .f-full{
 	-webkit-box-flex: 1 1 auto;
 	-ms-flex: 1 1 auto;
 	flex: 1 1 auto;
+}
+.f-none{
+	-webkit-box-flex: none;
+	-ms-flex: none;
+	flex: none;
 }
 .f-hide{
 	display: none;
@@ -97,7 +109,14 @@
 	width: 12em;
 	height: 30px;
 }
-
+.f-vtitle{
+	-ms-writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	writing-mode: vertical-lr;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 .scroll-body{
 	overflow: auto;
 	position: relative;
@@ -320,7 +339,7 @@
 .tabs li{
 	display: inherit;
 }
-.tabs li a.tabs-inner{
+.tabs li .tabs-inner{
 	height: auto;
 	line-height: normal;
 	display: inherit;
@@ -344,9 +363,16 @@
 	right: -1px;
 }
 .tabs-header-left .tabs li,.tabs-header-right .tabs li,
-.tabs-header-left .tabs li a.tabs-inner,
-.tabs-header-right .tabs li a.tabs-inner{
+.tabs-header-left .tabs li .tabs-inner,
+.tabs-header-right .tabs li .tabs-inner{
 	display: inherit;
+}
+.tabs-tool{
+	position: relative;
+}
+.tabs-header:not(.tabs-header-plain) .tabs-tool{
+	border-top-color: transparent;
+	border-right-color: transparent;
 }
 
 .combo-panel{
@@ -383,7 +409,23 @@
 	height: 20px;
 	line-height: 20px;
 }
-
+.tree-editing.tree-title{
+	position: relative;
+	margin: 0;
+	padding: 0;
+	height: 26px;
+	line-height: 26px;
+	overflow: hidden;
+}
+.tree-editing.tree-title > *{
+	flex: 1 1 auto;
+	height: auto;
+	overflow: hidden;
+}
+.tree-editing.tree-title .textbox-text{
+	height: 24px;
+	line-height: 24px;
+}
 .datagrid,
 .datagrid-view,.datagrid-view1,.datagrid-view2{
 	position: relative;
@@ -425,6 +467,7 @@
 .datagrid-header td.datagrid-field-td{
 	border-bottom: 0;
 }
+  
 .datagrid-cell{
 	text-align: left;
 	height: auto;
@@ -599,6 +642,12 @@
 .layout{
 	height: 100%;
 }
+.layout-mask{
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
 .layout-animate{
 	transition: transform 400ms;
 }
@@ -634,4 +683,22 @@
 .layout-panel-south.layout-collapsed{
 	transform: translate3d(0, 100%, 0)
 }
+.layout-expand .panel-tool{
+	right: 6px;
+}
 
+.form-field{
+	margin-bottom: 28px;
+}
+.form-field-haserror{
+	margin-bottom: 4px;
+}
+.form-field-error{
+	font-size: 14px;
+	color: #ed4014;
+	height: 24px;
+	line-height: 24px;
+}
+.form-field .f-field{
+	width: auto;
+}

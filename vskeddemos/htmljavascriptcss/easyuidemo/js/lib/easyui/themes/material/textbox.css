@@ -30,6 +30,14 @@
 .textbox textarea.textbox-text {
   line-height: normal;
 }
+.textbox.textbox-autoheight {
+  height: auto;
+}
+.textbox.textbox-autoheight textarea.textbox-text {
+  padding: 6px 4px;
+  overflow: hidden;
+  line-height: 16px;
+}
 .textbox .textbox-text::-ms-clear,
 .textbox .textbox-text::-ms-reveal {
   display: none;
@@ -141,4 +149,25 @@
 .textbox-invalid {
   border-color: #ffa8a8;
   background-color: #fff;
+}
+.form-floating-label.form-field .textbox-text {
+  padding: 0;
+}
+.form-floating-label.form-field .textbox-label {
+  position: relative;
+  height: 20px;
+  line-height: 20px;
+  transition: all .3s;
+  font-size: 12px;
+  z-index: 9;
+}
+.form-floating-label.form-field-empty .textbox-label {
+  cursor: text;
+  font-size: 14px;
+  transform: translate(0,25px);
+}
+.form-floating-label.form-field-empty.form-field-focused .textbox-label {
+  cursor: default;
+  font-size: 12px;
+  transform: translate(0,0);
 }

@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.6.10
+ * EasyUI for jQuery 1.10.19
  * 
- * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2024 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -205,7 +205,7 @@ if($.fn.draggable.timer){
 clearTimeout($.fn.draggable.timer);
 $.fn.draggable.timer=undefined;
 }
-$(document).unbind(".draggable");
+$(document)._unbind(".draggable");
 $.fn.draggable.isDragging=false;
 setTimeout(function(){
 $("body").css("cursor","");
@@ -219,7 +219,7 @@ return this.each(function(){
 var _22;
 var _23=$.data(this,"draggable");
 if(_23){
-_23.handle.unbind(".draggable");
+_23.handle._unbind(".draggable");
 _22=$.extend(_23.options,_20);
 }else{
 _22=$.extend({},$.fn.draggable.defaults,$.fn.draggable.parseOptions(this),_20||{});
@@ -230,7 +230,7 @@ if(_22.disabled){
 $(this).css("cursor","");
 return;
 }
-_24.unbind(".draggable").bind("mousemove.draggable",{target:this},function(e){
+_24._unbind(".draggable")._bind("mousemove.draggable",{target:this},function(e){
 if($.fn.draggable.isDragging){
 return;
 }
@@ -240,9 +240,9 @@ $(this).css("cursor",_25.cursor);
 }else{
 $(this).css("cursor","");
 }
-}).bind("mouseleave.draggable",{target:this},function(e){
+})._bind("mouseleave.draggable",{target:this},function(e){
 $(this).css("cursor","");
-}).bind("mousedown.draggable",{target:this},function(e){
+})._bind("mousedown.draggable",{target:this},function(e){
 if(_26(e)==false){
 return;
 }
@@ -255,9 +255,9 @@ var _2a=$.data(e.data.target,"draggable").options;
 if(_2a.onBeforeDrag.call(e.data.target,e)==false){
 return;
 }
-$(document).bind("mousedown.draggable",e.data,_c);
-$(document).bind("mousemove.draggable",e.data,_12);
-$(document).bind("mouseup.draggable",e.data,_16);
+$(document)._bind("mousedown.draggable",e.data,_c);
+$(document)._bind("mousemove.draggable",e.data,_12);
+$(document)._bind("mouseup.draggable",e.data,_16);
 $.fn.draggable.timer=setTimeout(function(){
 $.fn.draggable.isDragging=true;
 _c(e);

@@ -126,6 +126,7 @@
   background: linear-gradient(to bottom,#EFF5FF 0,#E0ECFF 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EFF5FF,endColorstr=#E0ECFF,GradientType=0);
+  color: #0E2D5F;
 }
 .panel-body {
   background-color: #ffffff;
@@ -143,6 +144,7 @@
   border: 1px solid #95B8E7;
   overflow: hidden;
   background: #F4F4F4;
+  color: #000000;
 }
 .panel-footer-noborder {
   border-width: 1px 0 0 0;

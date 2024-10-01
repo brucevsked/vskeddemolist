@@ -75,3 +75,9 @@
 .switchbutton-readonly {
   cursor: default;
 }
+.switchbutton:focus {
+  -moz-box-shadow: 0 0 3px 0 #dfdfdf;
+  -webkit-box-shadow: 0 0 3px 0 #dfdfdf;
+  box-shadow: 0 0 3px 0 #dfdfdf;
+  outline: none;
+}

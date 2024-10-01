@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.6.10
+ * EasyUI for jQuery 1.10.19
  * 
- * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2024 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -26,7 +26,14 @@ _3.searchbox.addClass("searchbox");
 _a(_8);
 function _7(){
 if(_4.menu){
+if(typeof _4.menu=="string"){
 _3.menu=$(_4.menu).menu();
+}else{
+if(!_3.menu){
+_3.menu=$("<div></div>").appendTo("body").menu();
+}
+_3.menu.menu("clear").menu("appendItems",_4.menu);
+}
 var _b=_3.menu.menu("options");
 var _c=_b.onClick;
 _b.onClick=function(_d){
@@ -59,7 +66,7 @@ function _a(_10){
 if(!_10){
 return;
 }
-$(_2).textbox("button").menubutton({text:_10.text,iconCls:(_10.iconCls||null),menu:_3.menu,menuAlign:_4.buttonAlign,plain:false});
+$(_2).textbox("button").menubutton({text:_10.text,iconCls:(_10.iconCls||null),menu:_3.menu,menuAlign:_4.buttonAlign,duration:_4.duration,showEvent:_4.showEvent,hideEvent:_4.hideEvent,plain:false});
 _3.searchbox.find("input.textbox-value").attr("name",_10.name||_10.text);
 $(_2).searchbox("resize");
 };
@@ -115,7 +122,7 @@ $(this).textbox("destroy");
 }};
 $.fn.searchbox.parseOptions=function(_1a){
 var t=$(_1a);
-return $.extend({},$.fn.textbox.parseOptions(_1a),$.parser.parseOptions(_1a,["menu"]),{searcher:(t.attr("searcher")?eval(t.attr("searcher")):undefined)});
+return $.extend({},$.fn.textbox.parseOptions(_1a),$.parser.parseOptions(_1a,["menu",{duration:"number"}]),{searcher:(t.attr("searcher")?eval(t.attr("searcher")):undefined)});
 };
 $.fn.searchbox.defaults=$.extend({},$.fn.textbox.defaults,{inputEvents:$.extend({},$.fn.textbox.defaults.inputEvents,{keydown:function(e){
 if(e.keyCode==13){
@@ -126,7 +133,7 @@ t.searchbox("setValue",$(this).val());
 _1b.searcher.call(e.data.target,t.searchbox("getValue"),t.searchbox("getName"));
 return false;
 }
-}}),buttonAlign:"left",menu:null,searcher:function(_1c,_1d){
+}}),buttonAlign:"left",menu:null,duration:100,showEvent:"mouseenter",hideEvent:"mouseleave",searcher:function(_1c,_1d){
 }});
 })(jQuery);
 

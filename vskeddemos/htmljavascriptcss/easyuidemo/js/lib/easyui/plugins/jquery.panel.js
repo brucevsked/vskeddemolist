@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.6.10
+ * EasyUI for jQuery 1.10.19
  * 
- * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2024 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -106,7 +106,7 @@ function _1b(_1c){
 $(_1c).addClass("panel-body")._size("clear");
 var _1d=$("<div class=\"panel\"></div>").insertBefore(_1c);
 _1d[0].appendChild(_1c);
-_1d.bind("_resize",function(e,_1e){
+_1d._bind("_resize",function(e,_1e){
 if($(this).hasClass("easyui-fluid")||_1e){
 _3(_1c,{});
 }
@@ -168,7 +168,7 @@ if(_22.halign=="left"||_22.halign=="right"){
 _2a.addClass("panel-title-"+_22.titleDirection);
 }
 var _2b=$("<div class=\"panel-tool\"></div>").appendTo(_29);
-_2b.bind("click",function(e){
+_2b._bind("click",function(e){
 e.stopPropagation();
 });
 if(_22.tools){
@@ -216,7 +216,7 @@ _23.children("div.panel-body").removeClass("panel-body-noheader");
 };
 function _2c(c,_2d,_2e){
 var a=$("<a href=\"javascript:;\"></a>").addClass(_2d).appendTo(c);
-a.bind("click",_2e);
+a._bind("click",_2e);
 };
 function _25(){
 if(_22.footer){
@@ -511,7 +511,7 @@ $.data(_6c,"panel").options.title=_6d;
 $(_6c).panel("header").find("div.panel-title").html(_6d);
 };
 var _6e=null;
-$(window).unbind(".panel").bind("resize.panel",function(){
+$(window)._unbind(".panel")._bind("resize.panel",function(){
 if(_6e){
 clearTimeout(_6e);
 }

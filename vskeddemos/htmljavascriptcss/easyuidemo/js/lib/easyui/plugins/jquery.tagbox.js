@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.6.10
+ * EasyUI for jQuery 1.10.19
  * 
- * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2024 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -70,7 +70,7 @@ _15.find(".textbox-button").linkbutton("resize",{height:"100%"});
 };
 function _1c(_1d){
 var _1e=$(_1d).next();
-_1e.unbind(".tagbox").bind("click.tagbox",function(e){
+_1e._unbind(".tagbox")._bind("click.tagbox",function(e){
 var _1f=$(_1d).tagbox("options");
 if(_1f.disabled||_1f.readonly){
 return;
@@ -93,15 +93,15 @@ _1f.onClickTag.call(_1d,_21[_20]);
 }
 }
 $(this).find(".textbox-text").focus();
-}).bind("keyup.tagbox",function(e){
+})._bind("keyup.tagbox",function(e){
 _23(_1d);
-}).bind("mouseover.tagbox",function(e){
+})._bind("mouseover.tagbox",function(e){
 if($(e.target).closest(".textbox-button,.textbox-addon,.tagbox-label").length){
 $(this).triggerHandler("mouseleave");
 }else{
 $(this).find(".textbox-text").triggerHandler("mouseenter");
 }
-}).bind("mouseleave.tagbox",function(e){
+})._bind("mouseleave.tagbox",function(e){
 $(this).find(".textbox-text").triggerHandler("mouseleave");
 });
 };

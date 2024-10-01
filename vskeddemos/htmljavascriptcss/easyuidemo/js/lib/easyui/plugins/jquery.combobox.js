@@ -1,7 +1,7 @@
 /**
- * EasyUI for jQuery 1.6.10
+ * EasyUI for jQuery 1.10.19
  * 
- * Copyright (c) 2009-2018 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2024 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
@@ -378,7 +378,7 @@ _30(this);
 };
 $.fn.combobox.methods={options:function(jq){
 var _60=jq.combo("options");
-return $.extend($.data(jq[0],"combobox").options,{width:_60.width,height:_60.height,originalValue:_60.originalValue,disabled:_60.disabled,readonly:_60.readonly});
+return $.extend($.data(jq[0],"combobox").options,{width:_60.width,height:_60.height,originalValue:_60.originalValue,disabled:_60.disabled,readonly:_60.readonly,editable:_60.editable});
 },cloneFrom:function(jq,_61){
 return jq.each(function(){
 $(this).combo("cloneFrom",_61);
@@ -485,20 +485,21 @@ var _73=0;
 var _74={render:function(_75,_76,_77){
 var _78=$.data(_75,"combobox");
 var _79=_78.options;
+var _7a=$(_75).attr("id")||"";
 _73++;
-_78.itemIdPrefix="_easyui_combobox_i"+_73;
-_78.groupIdPrefix="_easyui_combobox_g"+_73;
+_78.itemIdPrefix=_7a+"_easyui_combobox_i"+_73;
+_78.groupIdPrefix=_7a+"_easyui_combobox_g"+_73;
 _78.groups=[];
 var dd=[];
-var _7a=undefined;
+var _7b=undefined;
 for(var i=0;i<_77.length;i++){
 var row=_77[i];
 var v=row[_79.valueField]+"";
 var s=row[_79.textField];
 var g=row[_79.groupField];
 if(g){
-if(_7a!=g){
-_7a=g;
+if(_7b!=g){
+_7b=g;
 _78.groups.push({value:g,startIndex:i,count:1});
 dd.push("<div id=\""+(_78.groupIdPrefix+"_"+(_78.groups.length-1))+"\" class=\"combobox-group\">");
 dd.push(_79.groupFormatter?_79.groupFormatter.call(_75,g):g);
@@ -507,7 +508,7 @@ dd.push("</div>");
 _78.groups[_78.groups.length-1].count++;
 }
 }else{
-_7a=undefined;
+_7b=undefined;
 }
 var cls="combobox-item"+(row.disabled?" combobox-item-disabled":"")+(g?" combobox-gitem":"");
 dd.push("<div id=\""+(_78.itemIdPrefix+"_"+i)+"\" class=\""+cls+"\">");
@@ -519,8 +520,8 @@ dd.push("</div>");
 }
 $(_76).html(dd.join(""));
 }};
-$.fn.combobox.defaults=$.extend({},$.fn.combo.defaults,{valueField:"value",textField:"text",groupPosition:"static",groupField:null,groupFormatter:function(_7b){
-return _7b;
+$.fn.combobox.defaults=$.extend({},$.fn.combo.defaults,{valueField:"value",textField:"text",groupPosition:"static",groupField:null,groupFormatter:function(_7c){
+return _7c;
 },mode:"local",method:"post",url:null,data:null,queryParams:{},showItemIcon:false,limitToList:false,unselectedValues:[],mappingRows:[],view:_74,keyHandler:{up:function(e){
 _b(this,"prev");
 e.preventDefault();
@@ -535,30 +536,30 @@ _41(this);
 _36(this,q);
 }},inputEvents:$.extend({},$.fn.combo.defaults.inputEvents,{blur:function(e){
 $.fn.combo.defaults.inputEvents.blur(e);
-var _7c=e.data.target;
-var _7d=$(_7c).combobox("options");
-if(_7d.reversed||_7d.limitToList){
-if(_7d.blurTimer){
-clearTimeout(_7d.blurTimer);
+var _7d=e.data.target;
+var _7e=$(_7d).combobox("options");
+if(_7e.reversed||_7e.limitToList){
+if(_7e.blurTimer){
+clearTimeout(_7e.blurTimer);
 }
-_7d.blurTimer=setTimeout(function(){
-var _7e=$(_7c).parent().length;
-if(_7e){
-if(_7d.reversed){
-$(_7c).combobox("setValues",$(_7c).combobox("getValues"));
+_7e.blurTimer=setTimeout(function(){
+var _7f=$(_7d).parent().length;
+if(_7f){
+if(_7e.reversed){
+$(_7d).combobox("setValues",$(_7d).combobox("getValues"));
 }else{
-if(_7d.limitToList){
+if(_7e.limitToList){
 var vv=[];
-$.map($(_7c).combobox("getValues"),function(v){
-var _7f=$.easyui.indexOfArray($(_7c).combobox("getData"),_7d.valueField,v);
-if(_7f>=0){
+$.map($(_7d).combobox("getValues"),function(v){
+var _80=$.easyui.indexOfArray($(_7d).combobox("getData"),_7e.valueField,v);
+if(_80>=0){
 vv.push(v);
 }
 });
-$(_7c).combobox("setValues",vv);
+$(_7d).combobox("setValues",vv);
 }
 }
-_7d.blurTimer=null;
+_7e.blurTimer=null;
 }
 },50);
 }
@@ -566,46 +567,46 @@ _7d.blurTimer=null;
 e.preventDefault();
 e.stopPropagation();
 },click:_4e,scroll:_53},filter:function(q,row){
-var _80=$(this).combobox("options");
-return row[_80.textField].toLowerCase().indexOf(q.toLowerCase())>=0;
-},formatter:function(row){
 var _81=$(this).combobox("options");
-return row[_81.textField];
-},loader:function(_82,_83,_84){
-var _85=$(this).combobox("options");
-if(!_85.url){
+return row[_81.textField].toLowerCase().indexOf(q.toLowerCase())>=0;
+},formatter:function(row){
+var _82=$(this).combobox("options");
+return row[_82.textField];
+},loader:function(_83,_84,_85){
+var _86=$(this).combobox("options");
+if(!_86.url){
 return false;
 }
-$.ajax({type:_85.method,url:_85.url,data:_82,dataType:"json",success:function(_86){
-_83(_86);
+$.ajax({type:_86.method,url:_86.url,data:_83,dataType:"json",success:function(_87){
+_84(_87);
 },error:function(){
-_84.apply(this,arguments);
+_85.apply(this,arguments);
 }});
-},loadFilter:function(_87){
-return _87;
-},finder:{getEl:function(_88,_89){
-var _8a=_1(_88,_89);
-var id=$.data(_88,"combobox").itemIdPrefix+"_"+_8a;
+},loadFilter:function(_88){
+return _88;
+},finder:{getEl:function(_89,_8a){
+var _8b=_1(_89,_8a);
+var id=$.data(_89,"combobox").itemIdPrefix+"_"+_8b;
 return $("#"+id);
-},getGroupEl:function(_8b,_8c){
-var _8d=$.data(_8b,"combobox");
-var _8e=$.easyui.indexOfArray(_8d.groups,"value",_8c);
-var id=_8d.groupIdPrefix+"_"+_8e;
+},getGroupEl:function(_8c,_8d){
+var _8e=$.data(_8c,"combobox");
+var _8f=$.easyui.indexOfArray(_8e.groups,"value",_8d);
+var id=_8e.groupIdPrefix+"_"+_8f;
 return $("#"+id);
-},getGroup:function(_8f,p){
-var _90=$.data(_8f,"combobox");
-var _91=p.attr("id").substr(_90.groupIdPrefix.length+1);
-return _90.groups[parseInt(_91)];
-},getRow:function(_92,p){
-var _93=$.data(_92,"combobox");
-var _94=(p instanceof $)?p.attr("id").substr(_93.itemIdPrefix.length+1):_1(_92,p);
-return _93.data[parseInt(_94)];
-}},onBeforeLoad:function(_95){
-},onLoadSuccess:function(_96){
+},getGroup:function(_90,p){
+var _91=$.data(_90,"combobox");
+var _92=p.attr("id").substr(_91.groupIdPrefix.length+1);
+return _91.groups[parseInt(_92)];
+},getRow:function(_93,p){
+var _94=$.data(_93,"combobox");
+var _95=(p instanceof $)?p.attr("id").substr(_94.itemIdPrefix.length+1):_1(_93,p);
+return _94.data[parseInt(_95)];
+}},onBeforeLoad:function(_96){
+},onLoadSuccess:function(_97){
 },onLoadError:function(){
-},onSelect:function(_97){
-},onUnselect:function(_98){
-},onClick:function(_99){
+},onSelect:function(_98){
+},onUnselect:function(_99){
+},onClick:function(_9a){
 }});
 })(jQuery);
 
