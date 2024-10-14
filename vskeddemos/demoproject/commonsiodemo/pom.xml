@@ -28,7 +28,7 @@
 		<log4j.version>2.14.0</log4j.version>
 		<testng.version>7.4.0</testng.version>
 
-		<commonsIO.version>2.11.0</commonsIO.version>
+		<commonsIO.version>2.16.1</commonsIO.version>
 	</properties>
 
 	<dependencies>

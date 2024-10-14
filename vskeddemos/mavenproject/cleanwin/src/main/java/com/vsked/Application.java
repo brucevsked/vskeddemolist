@@ -14,6 +14,9 @@ public class Application {
 	public String getCurrentOSUserName(){
         return System.getProperty("user.name");
 	}
+
+
+
 	public void cleanDump(){
 		log.info("start clean dump folder");
 		String currentOSUserName = getCurrentOSUserName();

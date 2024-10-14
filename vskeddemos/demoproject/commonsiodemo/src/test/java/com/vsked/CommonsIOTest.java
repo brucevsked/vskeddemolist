@@ -84,6 +84,17 @@ public class CommonsIOTest {
 
 	}
 
+	@Test
+	public void listFileNameInFolder(){
+		String path="E:/novel";
+		List<File> fileList= (List<File>) FileUtils.listFiles(new File(path),null,true);
+		for(File file:fileList){
+			log.info(file.getAbsolutePath());
+			log.info(file.getName());
+		}
+
+	}
+
 
 	
 }

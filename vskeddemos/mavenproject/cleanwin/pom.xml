@@ -27,6 +27,8 @@
 
 		<log4j.version>2.19.0</log4j.version>
 		<testng.version>7.7.1</testng.version>
+
+		<commonsIO.version>2.16.1</commonsIO.version>
 	</properties>
 
 	<dependencies>
@@ -56,6 +58,11 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commonsIO.version}</version>
 		</dependency>
 	</dependencies>
 
