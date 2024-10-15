@@ -1,6 +1,7 @@
 package com.vsked;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,9 +27,7 @@ public class Application {
 
 	public void cleanAll() {
 		cleanDump();
-		//TODO remove folder from windows temp
 		cleanWindowsTemp();
-		//TODO remove folder from user temp
 		cleanUserTemp();
 	}
 
@@ -54,18 +53,26 @@ public class Application {
 		String currentOSUserName = getCurrentOSUserName();
 		String currentUserTempPath="C:/Users/"+currentOSUserName+"/AppData/Local/Temp";
 
-		List<File> fileLists= (List<File>) FileUtils.listFiles(new File(currentUserTempPath),null,true);
+		List<File> fileLists= (List<File>) FileUtils.listFilesAndDirs(new File(currentUserTempPath), TrueFileFilter.INSTANCE,TrueFileFilter.INSTANCE);
 		String currentFilePath="";
 		ChronoZonedDateTime deleteTime=ZonedDateTime.now().minusDays(3);
 		for(File file:fileLists){
 			currentFilePath=file.getAbsolutePath();
+
 			Path prepareDeleteFile= Paths.get(currentFilePath);
+
 			try {
 				BasicFileAttributes basicFileAttributes= Files.readAttributes(prepareDeleteFile, BasicFileAttributes.class);
 				ZonedDateTime zdt=ZonedDateTime.parse(basicFileAttributes.lastModifiedTime().toString());
+
 				if(zdt.isBefore(deleteTime)){
 					log.info("new clean:{},{}",file.getAbsolutePath(),zdt.toString());
-					file.delete();//delete file
+					if(file.isDirectory()){
+						FileUtils.cleanDirectory(file);
+						FileUtils.deleteDirectory(file);
+					}else{
+						file.delete();//delete file
+					}
 				}
 
 			} catch (IOException e) {
@@ -82,7 +89,7 @@ public class Application {
 
 		String windowsTempPath="C:/Windows/Temp";
 
-		List<File> fileLists= (List<File>) FileUtils.listFiles(new File(windowsTempPath),null,true);
+		List<File> fileLists= (List<File>) FileUtils.listFilesAndDirs(new File(windowsTempPath),TrueFileFilter.INSTANCE,TrueFileFilter.INSTANCE);
         String currentFilePath="";
 		ChronoZonedDateTime deleteTime=ZonedDateTime.now().minusDays(3);
 		for(File file:fileLists){
@@ -93,7 +100,12 @@ public class Application {
 				ZonedDateTime zdt=ZonedDateTime.parse(basicFileAttributes.lastModifiedTime().toString());
 				if(zdt.isBefore(deleteTime)){
 					log.info("new clean:{},{}",file.getAbsolutePath(),zdt.toString());
-					file.delete();//delete file
+					if(file.isDirectory()){
+						FileUtils.cleanDirectory(file);
+						FileUtils.deleteDirectory(file);
+					}else{
+						file.delete();//delete file
+					}
 				}
 
             } catch (IOException e) {

@@ -1,6 +1,7 @@
 package com.vsked;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -55,6 +56,19 @@ public class ApplicationTest {
 		 *  @param recursive  如果为true，则递归搜索所有子目录
 		 */
 		List<File> fileLists= (List<File>) FileUtils.listFiles(new File(path),null,true);
+
+		for(File file:fileLists){
+			log.info(file.getAbsolutePath());
+		}
+
+	}
+
+	@Test
+	public void readFileNameIncludeFolderToList(){
+		String userName = app.getCurrentOSUserName();
+		String path="C:/Users/"+userName+"/AppData/Local/Temp/";
+
+		List<File> fileLists= (List<File>) FileUtils.listFilesAndDirs(new File(path),TrueFileFilter.INSTANCE,TrueFileFilter.INSTANCE);
 
 		for(File file:fileLists){
 			log.info(file.getAbsolutePath());
