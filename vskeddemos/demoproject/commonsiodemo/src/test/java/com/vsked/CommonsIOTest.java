@@ -5,6 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
 
 
@@ -92,8 +97,21 @@ public class CommonsIOTest {
 			log.info(file.getAbsolutePath());
 			log.info(file.getName());
 		}
-
 	}
+
+	@Test
+	public void fileTimeAbout(){
+		String path="E:/H2.7z";
+		Path file= Paths.get(path);
+        try {
+            BasicFileAttributes basicFileAttributes= Files.readAttributes(file, BasicFileAttributes.class);
+			log.info("create time:"+basicFileAttributes.creationTime());
+			log.info("last modify time:"+basicFileAttributes.lastModifiedTime());
+			log.info("last access time:"+basicFileAttributes.lastAccessTime());
+        } catch (IOException e) {
+            log.error("file get attribute error:",e);
+        }
+    }
 
 
 	

@@ -3,7 +3,6 @@ package com.jat.java.time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -88,6 +87,15 @@ public class ZonedDateTimeTest {
         ZoneId zoneIdLondon=ZoneId.of("UTC+00:00");
         ZonedDateTime londonZDT=shangHai.withZoneSameInstant(zoneIdLondon);
         log.info("{}", londonZDT);//2023-06-19T06:09:08.849834800Z[UTC]
+    }
+
+    @Test
+    public void beforeDateTime(){
+        String s="2024-07-05T01:09:03.6181857Z";
+        ZonedDateTime zdt=ZonedDateTime.parse(s);
+        log.info("{}",zdt);
+        log.info("{}",zdt.isBefore(ZonedDateTime.now()));
+        log.info("{}",zdt.isBefore(ZonedDateTime.now().minusDays(3)));
     }
 
 }

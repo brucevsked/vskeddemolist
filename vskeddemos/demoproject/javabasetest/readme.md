@@ -1,6 +1,6 @@
-## 所用技术
+## technology
 maven    
 Log4j  
 TestNG  
-java基本测试  
+jdk test  
 

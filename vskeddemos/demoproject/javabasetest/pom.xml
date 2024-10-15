@@ -28,7 +28,7 @@
 		<!-- 解决pom头部unkonow错误 -->
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<log4j.version>2.19.0</log4j.version>
-		<testng.version>7.6.1</testng.version>
+		<testng.version>7.7.1</testng.version>
 		<log4jslf4j.version>2.11.0</log4jslf4j.version>
 	</properties>
 
@@ -38,6 +38,12 @@
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars</groupId>
+					<artifactId>jquery</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
