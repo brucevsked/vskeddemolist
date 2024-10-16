@@ -1,10 +1,5 @@
 # vskeddemolist
 
-contact me qq1485559892 or send email vsked@163.com to me  
-this is alot of demo my name is vsked now u can see the java   project at this list  
-
-## Thank for JetBrains support idea license
-
 ## at first please look at the(索引请查看以下文档)  
 vskeddemos/documents/demo工程列表说明.docx  
 vskeddemos/documents/mavenproject工程列表说明.docx    
@@ -211,7 +206,7 @@ websocketdemo
 xmldemo  
 youtudemo  
 zookeeperdemo  
-使用spring boot相关的项目如前后端分离，多数据源等示例  
+使用spring boot相关的项目如前后端分离多数据源等示例  
 vskeddemolist/vskeddemos/mavenproject/springboot2list 
 mybatisdemo  
 mybatismutids  
@@ -333,7 +328,3 @@ vskedrequest
 vskedtemplate  
 webservice  
 xmldemo  
-
-
-其他技术选型与管理流程，知识模型等可参考以下网站  
-https://devops.phodal.com/home  
