@@ -20,6 +20,11 @@ public class ApplicationTest {
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 
 	Application app = new Application();
+	
+	@Test
+	public void cleanAll() {
+		app.cleanAll();
+	}
 
 	@Test
 	public void cleanDump(){

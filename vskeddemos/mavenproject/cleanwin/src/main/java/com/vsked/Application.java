@@ -42,7 +42,7 @@ public class Application {
 		List<File> fileLists= (List<File>) FileUtils.listFiles(new File(dumpPath),null,true);
 
 		for(File file:fileLists){
-			log.info("new clean:{}",file.getAbsolutePath());
+			log.info("now clean:{}",file.getAbsolutePath());
 			file.delete();//delete file
 		}
 		log.info("end clean dump folder");
@@ -66,7 +66,7 @@ public class Application {
 				ZonedDateTime zdt=ZonedDateTime.parse(basicFileAttributes.lastModifiedTime().toString());
 
 				if(zdt.isBefore(deleteTime)){
-					log.info("new clean:{},{}",file.getAbsolutePath(),zdt.toString());
+					log.info("now clean:{},{}",file.getAbsolutePath(),zdt.toString());
 					if(file.isDirectory()){
 						FileUtils.cleanDirectory(file);
 						FileUtils.deleteDirectory(file);
@@ -99,7 +99,7 @@ public class Application {
                 BasicFileAttributes basicFileAttributes= Files.readAttributes(prepareDeleteFile, BasicFileAttributes.class);
 				ZonedDateTime zdt=ZonedDateTime.parse(basicFileAttributes.lastModifiedTime().toString());
 				if(zdt.isBefore(deleteTime)){
-					log.info("new clean:{},{}",file.getAbsolutePath(),zdt.toString());
+					log.info("now clean:{},{}",file.getAbsolutePath(),zdt.toString());
 					if(file.isDirectory()){
 						FileUtils.cleanDirectory(file);
 						FileUtils.deleteDirectory(file);
