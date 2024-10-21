@@ -4,7 +4,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,6 +28,7 @@ public class Application {
 		cleanDump();
 		cleanWindowsTemp();
 		cleanUserTemp();
+		cleanSteamTemp();
 	}
 
 	public String getCurrentOSUserName(){
@@ -50,21 +50,52 @@ public class Application {
 
 	public void cleanUserTemp(){
 		log.info("start clean current user temp folder");
+
 		String currentOSUserName = getCurrentOSUserName();
 		String currentUserTempPath="C:/Users/"+currentOSUserName+"/AppData/Local/Temp";
 
-		List<File> fileLists= (List<File>) FileUtils.listFilesAndDirs(new File(currentUserTempPath), TrueFileFilter.INSTANCE,TrueFileFilter.INSTANCE);
+		cleanPathFrom(currentUserTempPath);
+
+		log.info("end clean current user temp folder");
+	}
+
+	public void cleanWindowsTemp(){
+		log.info("start clean window temp folder");
+
+		String windowsTempPath="C:/Windows/Temp";
+
+		cleanPathFrom(windowsTempPath);
+
+		log.info("end clean window temp folder");
+	}
+
+	public void cleanSteamTemp(){
+		log.info("start clean steam temp folder");
+
+		String currentOSUserName = getCurrentOSUserName();
+		String steamPath="C:/Users/"+currentOSUserName+"/AppData/Local/Steam/htmlcache/Cache/Cache_Data";
+
+		cleanPathFrom(steamPath);
+		String steamJsCache="C:/Users/"+currentOSUserName+"/AppData/Local/Steam/htmlcache/Code Cache/js";
+		cleanPathFrom(steamJsCache);
+
+		log.info("end clean steam temp folder");
+	}
+
+	public void cleanPathFrom(String cleanPath){
+		log.info("start clean window temp folder");
+
+		String windowsTempPath=cleanPath;
+
+		List<File> fileLists= (List<File>) FileUtils.listFilesAndDirs(new File(windowsTempPath),TrueFileFilter.INSTANCE,TrueFileFilter.INSTANCE);
 		String currentFilePath="";
-		ChronoZonedDateTime deleteTime=ZonedDateTime.now().minusDays(3);
+		ChronoZonedDateTime deleteTime=ZonedDateTime.now().minusDays(2);
 		for(File file:fileLists){
 			currentFilePath=file.getAbsolutePath();
-
 			Path prepareDeleteFile= Paths.get(currentFilePath);
-
 			try {
 				BasicFileAttributes basicFileAttributes= Files.readAttributes(prepareDeleteFile, BasicFileAttributes.class);
 				ZonedDateTime zdt=ZonedDateTime.parse(basicFileAttributes.lastModifiedTime().toString());
-
 				if(zdt.isBefore(deleteTime)){
 					log.info("now clean:{},{}",file.getAbsolutePath(),zdt.toString());
 					if(file.isDirectory()){
@@ -78,39 +109,6 @@ public class Application {
 			} catch (IOException e) {
 				log.error("file get attribute error:",e);
 			}
-
-		}
-
-		log.info("end clean current user temp folder");
-	}
-
-	public void cleanWindowsTemp(){
-		log.info("start clean window temp folder");
-
-		String windowsTempPath="C:/Windows/Temp";
-
-		List<File> fileLists= (List<File>) FileUtils.listFilesAndDirs(new File(windowsTempPath),TrueFileFilter.INSTANCE,TrueFileFilter.INSTANCE);
-        String currentFilePath="";
-		ChronoZonedDateTime deleteTime=ZonedDateTime.now().minusDays(3);
-		for(File file:fileLists){
-			currentFilePath=file.getAbsolutePath();
-			Path prepareDeleteFile= Paths.get(currentFilePath);
-            try {
-                BasicFileAttributes basicFileAttributes= Files.readAttributes(prepareDeleteFile, BasicFileAttributes.class);
-				ZonedDateTime zdt=ZonedDateTime.parse(basicFileAttributes.lastModifiedTime().toString());
-				if(zdt.isBefore(deleteTime)){
-					log.info("now clean:{},{}",file.getAbsolutePath(),zdt.toString());
-					if(file.isDirectory()){
-						FileUtils.cleanDirectory(file);
-						FileUtils.deleteDirectory(file);
-					}else{
-						file.delete();//delete file
-					}
-				}
-
-            } catch (IOException e) {
-				log.error("file get attribute error:",e);
-            }
 
 		}
 

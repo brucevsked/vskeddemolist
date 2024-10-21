@@ -42,6 +42,11 @@ public class ApplicationTest {
 	}
 
 	@Test
+	public void cleanSteamTemp(){
+		app.cleanSteamTemp();
+	}
+
+	@Test
 	public void getCurrentOSUserName() {
 		String userName = app.getCurrentOSUserName();
 		log.info(userName);
