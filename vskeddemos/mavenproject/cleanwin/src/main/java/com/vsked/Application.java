@@ -27,6 +27,7 @@ public class Application {
 	public void cleanAll() {
 		cleanDump();
 		cleanWindowsTemp();
+		cleanWindowsSystemTemp();
 		cleanUserTemp();
 		cleanSteamTemp();
 	}
@@ -67,6 +68,16 @@ public class Application {
 		cleanPathFrom(windowsTempPath);
 
 		log.info("end clean window temp folder");
+	}
+
+	public void cleanWindowsSystemTemp(){
+		log.info("start clean window system temp folder");
+
+		String windowsTempPath="C:/Windows/SystemTemp";
+
+		cleanPathFrom(windowsTempPath);
+
+		log.info("end clean window system temp folder");
 	}
 
 	public void cleanSteamTemp(){

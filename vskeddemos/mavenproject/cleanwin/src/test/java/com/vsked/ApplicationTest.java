@@ -37,6 +37,11 @@ public class ApplicationTest {
 	}
 
 	@Test
+	public void cleanWindowsSystemTemp(){
+		app.cleanWindowsSystemTemp();
+	}
+
+	@Test
 	public void cleanUserTemp(){
 		app.cleanUserTemp();
 	}
