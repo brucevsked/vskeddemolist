@@ -47,6 +47,11 @@ public class ApplicationTest {
 	}
 
 	@Test
+	public void cleanNvidiaTemp(){
+		app.cleanNvidiaTemp();
+	}
+
+	@Test
 	public void cleanSteamTemp(){
 		app.cleanSteamTemp();
 	}

@@ -29,6 +29,7 @@ public class Application {
 		cleanWindowsTemp();
 		cleanWindowsSystemTemp();
 		cleanUserTemp();
+		cleanNvidiaTemp();
 		cleanSteamTemp();
 	}
 
@@ -58,6 +59,17 @@ public class Application {
 		cleanPathFrom(currentUserTempPath);
 
 		log.info("end clean current user temp folder");
+	}
+
+	public void cleanNvidiaTemp(){
+		log.info("start clean nvidia temp folder");
+
+		String currentOSUserName = getCurrentOSUserName();
+		String nvidiaTempPath="C:/Users/"+currentOSUserName+"/AppData/Local/NVIDIA Corporation/NVIDIA GeForce Experience/CefCache/Cache";
+
+		cleanPathFrom(nvidiaTempPath);
+
+		log.info("end clean nvidia temp folder");
 	}
 
 	public void cleanWindowsTemp(){
