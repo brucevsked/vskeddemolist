@@ -5,6 +5,7 @@
 *.project
 *.prefs
 *.component
+*.factorypath
 
 *.iml
 

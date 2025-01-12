@@ -13,6 +13,8 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 
 public class ApplicationTest {
@@ -117,6 +119,13 @@ public class ApplicationTest {
 		log.info("{}",zdt);
 		log.info("{}",zdt.isBefore(ZonedDateTime.now()));
 		log.info("{}",zdt.isBefore(ZonedDateTime.now().minusDays(3)));
+	}
+
+	@Test
+	public void readRegeditKey() throws Exception {
+		String command1="reg query HKEY_CLASSES_ROOT\\cfg_auto_file\\shell\\open /s";
+		String result=ShellTool.exeWin(command1);
+		log.info(result);
 	}
 
 	
