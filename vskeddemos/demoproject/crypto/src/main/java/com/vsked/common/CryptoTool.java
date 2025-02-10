@@ -1,7 +1,16 @@
 package com.vsked.common;
 
 import java.security.Key;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
 import java.security.SecureRandom;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -175,5 +184,28 @@ public class CryptoTool {
 		System.arraycopy(encryptData, 0, message, 12, encryptData.length);
 		return base64Encode(message);
 	}
+	
+	public static String RSAEncode(String publicKey,String base64Content) throws Exception {
+        // base64编码的公钥
+        byte[] decoded = Base64.decodeBase64(publicKey);
+        RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(decoded));
+        // RSA加密
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.ENCRYPT_MODE, pubKey);
+        return Base64.encodeBase64String(cipher.doFinal(base64Content.getBytes("UTF-8")));
+		
+	}
+	
+    public static String RSADecode(String privateKey,String encodeContent) throws Exception {
+        // 64位解码加密后的字符串
+        byte[] inputByte = Base64.decodeBase64(encodeContent.getBytes("UTF-8"));
+        // base64编码的私钥
+        byte[] decoded = Base64.decodeBase64(privateKey);
+        RSAPrivateKey priKey = (RSAPrivateKey) KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(decoded));
+        // RSA解密
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.DECRYPT_MODE, priKey);
+        return new String(cipher.doFinal(inputByte));
+    }
 
 }

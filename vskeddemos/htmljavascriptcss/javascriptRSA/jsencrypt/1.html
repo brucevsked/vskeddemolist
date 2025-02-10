@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+  <!-- must set here! -->
+  <base href="">
+
+  <title>javascrit RSA</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- 使用 viewport meta 标签在手机浏览器上控制布局 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <!-- 全屏模式,不显示工具栏和菜单栏 -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- 关闭iphone电话号码链接 -->
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- 
+<link rel="stylesheet" href="js/lib/bootstrap/css/bootstrap.min.css" >
+ -->
+
+</head>
+
+<body>
+
+  <script src="lib/jsencrypt.min.js"></script>
+  <script src="lib/base64.js"></script>
+
+  <!-- 使用方向键试试 或拖动看看-->
+  <script>
+    "use strict"
+
+    function testRSA() {
+      var publicKeyStr="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7WyrYFsxgJxSaWDGQkOpGM+IzsLG6Bbq0mIcaNwMJ/L45jJ1TXiXLUfM/+I8iGZnPN5jk3ACcCtoKnhTHEi4Ngyd2iZfEEhH7Tv1y0Zkv1WcR8rZyg1xYdqnYos1mTYeJsO97Yj1PrkhyoH6XyAQC0zu33Am7nfBEVtZXbWUX9YcPka4BqzhKET3X7x0vTJ6fEMLSbNoO1/oW3TxyVMbXvAcyDulOHhpM2avr6wJYAdN9ZRKj3YUc0qC3kMWvZtuF+p9lwgFlCeeva8Tyh7vycOe+LPyIuOHUFmNmkJZZgu8bDj2u/JkXh8kRgpFbar4kLUFiZ8gCJ6j8vYQsyEt3QIDAQAB";
+      var privateKeyStr="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDtbKtgWzGAnFJpYMZCQ6kYz4jOwsboFurSYhxo3Awn8vjmMnVNeJctR8z/4jyIZmc83mOTcAJwK2gqeFMcSLg2DJ3aJl8QSEftO/XLRmS/VZxHytnKDXFh2qdiizWZNh4mw73tiPU+uSHKgfpfIBALTO7fcCbud8ERW1ldtZRf1hw+RrgGrOEoRPdfvHS9Mnp8QwtJs2g7X+hbdPHJUxte8BzIO6U4eGkzZq+vrAlgB031lEqPdhRzSoLeQxa9m24X6n2XCAWUJ569rxPKHu/Jw574s/Ii44dQWY2aQllmC7xsOPa78mReHyRGCkVtqviQtQWJnyAInqPy9hCzIS3dAgMBAAECggEAMjCMsdvVRRjGmxwoDQ38ixAkHYEzRxDBJyQyWUBbGX7VeuQjw/LAEoRhI56RqUvsewOQDTTabxfd90xkVVBSEKruG5WM9wYwnkfUl9oTphbU6KBLFdltpH/ybnR7Kh40lYE/fx06qr28FPERGlbOzXS/8l/k+vg5yg+DfrnJ2dAi/f2IPCjKMz4/87C1wOXT/FdyPfjHyvrgxNzmLOE0PF8H+YZqhp1bROV78xE1h5ig+JTKgm9URq8PT5mobNUB3N8UomKEpINy9lPaFl4KQGtjA8KhF8zeORUF3T1lbcMjd8vEJZ+h6NxlWlCj0JluQPuznMB4owtzxpluTngjAQKBgQD5789jxrUgVbBKmPqeMHMdV7f7hdg6n16agw8tvTTn4hfAAO58GnaB6gVK2xppjYo69bWNmj7dvXb6u6sqltOvj1naQSDyEICg/+JxNNkjJPQr9J92zEBbu1Zso9p6wHrQfDe2Uxre///j389zRTnguoec04MO7humTLR/KL10/QKBgQDzLydsnDFvqi26YKuQOmpYx1k7pMGuqsaCqVIV6SsUFQwFjNQWzfYK3xQjcYpCRQPO8ImRxQbl4qrOMW6kJogz36eiYnJY+VuuzkReGRhnq1JJdIvWK57PFH2DJugicO3YaDPiLk5rc6mKQ05CAN/8HIHOtC+zwnEgIRQO03tiYQKBgDU1WHFlXCoGFAHNj40dw2P7yK9DT0UrqHg8bn7OSPUUrPmzORIykAgYSgglnPnbqBHlPUFoFPof27SFP2tRsL8vRXGxa9IcsUWVNB/loFRbCaBR86DW2tyshTmbqGd5kqvPxgyKpK3U0iUxAHkJw8iT7Ur1vHDxP/GnYsWvZqYBAoGAaWDilZbteTTmUeA4F+yoTsY7rbPMVhMcqFwU/PeoOjCQoAsRkLw5RSa7xEwcHHFpoA/tnSQixBU/7M/Q4QLtfIULUDuWz2VmzE4HpDr9r1a29quxOOJ4E8YOSXnfl6UV+/PTn8xvIPLi4c4eqE1WwhncSiUckqnMeZ674VzVF6ECgYEA9s06ffgMk8lh4jyZ24xmLM5tNb9yPJ1O7jgxeWOvA2YFjZB09WLw5t9RIm4X8xLsQm0CtmmbmeIkKdC/DAM7OT60+ftJtM5MVdB0wGMuLhAPEgLaGI3stmDhcRVe/uFVYlkD0UvCkCv4rYra7icCEWGzJxzNVnnobarY4HAjVD4=";
+      // Create the encryption object.
+      var crypt = new JSEncrypt();
+
+      // Set the private.
+      crypt.setPrivateKey(privateKeyStr);
+      
+      var inputStr="this is your user password";
+
+      var crypted=crypt.encrypt(inputStr);
+      console.log("crypted result:"+crypted);
+
+      var decrypted=crypt.decrypt(crypted);
+      console.log("decrypted result:"+decrypted);
+
+    }
+
+    function testDecode() {
+      var publicKeyStr="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7WyrYFsxgJxSaWDGQkOpGM+IzsLG6Bbq0mIcaNwMJ/L45jJ1TXiXLUfM/+I8iGZnPN5jk3ACcCtoKnhTHEi4Ngyd2iZfEEhH7Tv1y0Zkv1WcR8rZyg1xYdqnYos1mTYeJsO97Yj1PrkhyoH6XyAQC0zu33Am7nfBEVtZXbWUX9YcPka4BqzhKET3X7x0vTJ6fEMLSbNoO1/oW3TxyVMbXvAcyDulOHhpM2avr6wJYAdN9ZRKj3YUc0qC3kMWvZtuF+p9lwgFlCeeva8Tyh7vycOe+LPyIuOHUFmNmkJZZgu8bDj2u/JkXh8kRgpFbar4kLUFiZ8gCJ6j8vYQsyEt3QIDAQAB";
+      var privateKeyStr="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDtbKtgWzGAnFJpYMZCQ6kYz4jOwsboFurSYhxo3Awn8vjmMnVNeJctR8z/4jyIZmc83mOTcAJwK2gqeFMcSLg2DJ3aJl8QSEftO/XLRmS/VZxHytnKDXFh2qdiizWZNh4mw73tiPU+uSHKgfpfIBALTO7fcCbud8ERW1ldtZRf1hw+RrgGrOEoRPdfvHS9Mnp8QwtJs2g7X+hbdPHJUxte8BzIO6U4eGkzZq+vrAlgB031lEqPdhRzSoLeQxa9m24X6n2XCAWUJ569rxPKHu/Jw574s/Ii44dQWY2aQllmC7xsOPa78mReHyRGCkVtqviQtQWJnyAInqPy9hCzIS3dAgMBAAECggEAMjCMsdvVRRjGmxwoDQ38ixAkHYEzRxDBJyQyWUBbGX7VeuQjw/LAEoRhI56RqUvsewOQDTTabxfd90xkVVBSEKruG5WM9wYwnkfUl9oTphbU6KBLFdltpH/ybnR7Kh40lYE/fx06qr28FPERGlbOzXS/8l/k+vg5yg+DfrnJ2dAi/f2IPCjKMz4/87C1wOXT/FdyPfjHyvrgxNzmLOE0PF8H+YZqhp1bROV78xE1h5ig+JTKgm9URq8PT5mobNUB3N8UomKEpINy9lPaFl4KQGtjA8KhF8zeORUF3T1lbcMjd8vEJZ+h6NxlWlCj0JluQPuznMB4owtzxpluTngjAQKBgQD5789jxrUgVbBKmPqeMHMdV7f7hdg6n16agw8tvTTn4hfAAO58GnaB6gVK2xppjYo69bWNmj7dvXb6u6sqltOvj1naQSDyEICg/+JxNNkjJPQr9J92zEBbu1Zso9p6wHrQfDe2Uxre///j389zRTnguoec04MO7humTLR/KL10/QKBgQDzLydsnDFvqi26YKuQOmpYx1k7pMGuqsaCqVIV6SsUFQwFjNQWzfYK3xQjcYpCRQPO8ImRxQbl4qrOMW6kJogz36eiYnJY+VuuzkReGRhnq1JJdIvWK57PFH2DJugicO3YaDPiLk5rc6mKQ05CAN/8HIHOtC+zwnEgIRQO03tiYQKBgDU1WHFlXCoGFAHNj40dw2P7yK9DT0UrqHg8bn7OSPUUrPmzORIykAgYSgglnPnbqBHlPUFoFPof27SFP2tRsL8vRXGxa9IcsUWVNB/loFRbCaBR86DW2tyshTmbqGd5kqvPxgyKpK3U0iUxAHkJw8iT7Ur1vHDxP/GnYsWvZqYBAoGAaWDilZbteTTmUeA4F+yoTsY7rbPMVhMcqFwU/PeoOjCQoAsRkLw5RSa7xEwcHHFpoA/tnSQixBU/7M/Q4QLtfIULUDuWz2VmzE4HpDr9r1a29quxOOJ4E8YOSXnfl6UV+/PTn8xvIPLi4c4eqE1WwhncSiUckqnMeZ674VzVF6ECgYEA9s06ffgMk8lh4jyZ24xmLM5tNb9yPJ1O7jgxeWOvA2YFjZB09WLw5t9RIm4X8xLsQm0CtmmbmeIkKdC/DAM7OT60+ftJtM5MVdB0wGMuLhAPEgLaGI3stmDhcRVe/uFVYlkD0UvCkCv4rYra7icCEWGzJxzNVnnobarY4HAjVD4=";
+      // Create the encryption object.
+      var crypt = new JSEncrypt();
+
+      // Set the private.
+      crypt.setPrivateKey(privateKeyStr);
+
+      var crypted="1NPsoa3c04xkRjp4JJBoseoVUh3eIzotDMVjZPhhHfiEdj/tGVjZY+6yW3gEs+74mzwj19ItUwvlgF/lep2FH34jzE1q0qspv8rA1MOfZAvT08IPhxmf7dyEkiRyZoKK9mlOwyoW4MGbCSE6xMqVPKILLd4+HuMe4JhEQdMwMbu3uXxnf1uEK9s4WgCaVwCTacGBrOKYsFDsDqFqhYXcL71Lir1Js2/sPabj58ed9UKDpdtsKOUxmZ0DjzuPdhDn98zWQG0TlMkWdeAViaCwz/BAzpPPY/M0PbGo/noqe6wlSGN1Q5zG5kA2FNktcq7AoI0E6qpKIIsFSUchUYPjuQ==";
+
+      var decryptedBase64=crypt.decrypt(crypted);
+
+      var base = new Base64();
+
+      var content=base.decode(decryptedBase64);
+      console.log("decrypted result:"+content);
+
+    }
+
+    testRSA();
+    testDecode();
+  </script>
+
+</body>
+
+</html>
