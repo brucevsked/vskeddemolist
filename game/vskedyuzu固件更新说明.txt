@@ -44,6 +44,9 @@ NSZ,NSP,XCI等文件互相转换，使用软件SAK_64bit 可以解决 推荐xci�
 -----------------------------------
 金手指用法yuzu or Ryujinx
 
+先在ryujinx模拟器中找到bid(必须相同版本的bid金手指才会生效，右击游戏，管理金手指可以看到)，金手指文件名必须是游戏bid名称
+first use ryujinx find the bid(you must use the same bid cheat code) file name must use bid name
+
 找到游戏->右击，选择打开Mod数据位置->新建一个文件夹叫(securitySkill)将cheats目录放进去即可，最终效果
 yuzu-windows-msvc-early-access\user\load\01007B600D5BC000\securitySkill\cheats\010BCEE657EAFEDF.txt
 yuzu-windows-msvc-early-access\user\load\01007B600D5BC000\securitySkill\cheats\258d8ba560cfa34c.txt
