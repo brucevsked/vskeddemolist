@@ -6,14 +6,13 @@ import org.testng.annotations.Test;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MyPageManagerTest {
+public class MyVPageTest {
 
-    private static final Logger log = LoggerFactory.getLogger(MyPageManagerTest.class);
+    private static final Logger log = LoggerFactory.getLogger(MyVPageTest.class);
 
     @Test
     public void test1(){
-        MyPageManager myPageManager=new MyPageManager();
-        MyPage<String> myPage=myPageManager.create(1,20);
+        MyPage<String> myPage=new MyPage<>(1,10);
         List<String> dataList=new LinkedList<>();
         dataList.add("数据1");
         dataList.add("数据2");
@@ -22,6 +21,6 @@ public class MyPageManagerTest {
         myPage.setData(dataList);
 
         log.info("{}",myPage);
-    }
 
+    }
 }

@@ -30,8 +30,9 @@ File-Settings-build,execution,deployment->Compiler->Build Project automatically�
 File-Settings-Advaced Settings-Allow auto-make to start even if developed application is currently running
 
 CTRL + SHIFT + A 选择Registry
-compile.document.save.trigger.delay 设置为100
 compile.automake.save.trigger.delay 设置为100
+compile.document.save.trigger.delay 设置为100
+
 
 
 8*全局查找

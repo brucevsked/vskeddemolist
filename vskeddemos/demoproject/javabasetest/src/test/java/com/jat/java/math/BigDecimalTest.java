@@ -189,4 +189,12 @@ public class BigDecimalTest {
          */
 
     }
+
+    @Test
+    public void divideTest1(){
+        BigDecimal b1=new BigDecimal(22);
+        BigDecimal b2=new BigDecimal(10);
+        BigDecimal b3=b1.divide(b2).setScale(0,RoundingMode.CEILING);
+        log.info(b3.intValue()+"");
+    }
 }
