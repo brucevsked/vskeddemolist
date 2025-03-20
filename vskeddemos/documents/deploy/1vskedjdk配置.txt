@@ -26,5 +26,20 @@ source /etc/profile
 测试安装结果,查看java版本号
 java -version
 
+--------------------------------------------------------------------------------
+
+For windows version
+
+download jdk21 to your local disk
+Install jdk21 to disk D
+right click my computer configuration system environment
+JAVA_HOME
+D:\Programs\Java\jdk-21
+CLASSPATH
+.;%JAVA_HOME%\lib
+add java home to PATH
+%JAVA_HOME%\bin
+
+
 
 

@@ -10,7 +10,7 @@
 	<version>1.0</version>
 
 	<name>${project.artifactId}</name>
-	<url>https://junantaikeji.com/</url>
+	<url>https://vsked.cn/</url>
 
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
@@ -29,7 +29,7 @@
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
 
 		<testng.version>7.7.0</testng.version>
-		<springboot.version>3.0.5</springboot.version>
+		<springboot.version>3.4.3</springboot.version>
 	</properties>
 
 	<dependencyManagement>
@@ -149,7 +149,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${springboot.version}</version>
 				<configuration>
-					<mainClass>com.jat.Application</mainClass>
+					<mainClass>com.vsked.Application</mainClass>
 					<!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去
 					<fork>true</fork>-->
 				</configuration>

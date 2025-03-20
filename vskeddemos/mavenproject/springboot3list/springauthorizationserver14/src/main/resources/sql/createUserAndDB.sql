@@ -1,0 +1,7 @@
+create user springauthorizationserver14 with password 'springauthorizationserver14';
+
+create database springauthorizationserver14 owner springauthorizationserver14;
+
+create ROLE springauthorizationserver14role;
+
+GRANT springauthorizationserver14role TO springauthorizationserver14;

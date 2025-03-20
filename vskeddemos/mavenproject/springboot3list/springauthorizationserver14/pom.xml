@@ -5,8 +5,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.jat</groupId>
-	<artifactId>log4j2testng7springboot2simple</artifactId>
+	<groupId>com.vsked</groupId>
+	<artifactId>springauthorizationserver14</artifactId>
 	<version>1.0</version>
 
 	<name>${project.artifactId}</name>
@@ -20,16 +20,18 @@
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 
 		<!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
-		<java.version>17</java.version>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
 	    <mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
 
-		<testng.version>7.6.1</testng.version>
-		<springboot.version>2.7.6</springboot.version>
+		<testng.version>7.7.0</testng.version>
+		<springboot.version>3.4.3</springboot.version>
+		<spring.authorizationserver.version>1.4.2</spring.authorizationserver.version>
+		<r2dbc.postgresql.version>1.0.7.RELEASE</r2dbc.postgresql.version>
 	</properties>
 
 	<dependencyManagement>
@@ -62,7 +64,15 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-authorization-server</artifactId>
+			<version>${spring.authorizationserver.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -99,11 +109,33 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-r2dbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>r2dbc-postgresql</artifactId>
+			<version>${r2dbc.postgresql.version}</version>
+		</dependency>
 		<!-- TestNG start -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars</groupId>
+					<artifactId>jquery</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- TestNG end -->
 		<!-- log4j start -->
@@ -143,8 +175,8 @@
 				<version>${springboot.version}</version>
 				<configuration>
 					<mainClass>com.vsked.Application</mainClass>
-					<!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
-					<fork>true</fork>
+					<!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去
+					<fork>true</fork>-->
 				</configuration>
 			</plugin>
 		</plugins>
