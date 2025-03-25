@@ -72,7 +72,7 @@ public class AuthorizationServerConfig {
 	private static final String CUSTOM_CONSENT_PAGE_URI = "/oauth2/consent";//这个是授权页
 
 	//这个就是oauth2 授权服务的一个配置核心了
-	// 官方网站的说明更具体 https://docs.spring.io/spring-authorization-server/docs/current/reference/html/protocol-endpoints.html
+	// 官方网站的说明更具体 https://docs.spring.io/spring-authorization-server/reference/protocol-endpoints.html
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
 	public SecurityFilterChain authorizationServerSecurityFilterChain(
@@ -80,10 +80,10 @@ public class AuthorizationServerConfig {
 			AuthorizationServerSettings authorizationServerSettings) throws Exception {
 
 		OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer.authorizationServer();
-		http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher()).with(authorizationServerConfigurer, Customizer.withDefaults()).authorizeHttpRequests((authorize) -> ((AuthorizeHttpRequestsConfigurer.AuthorizedUrl)authorize.anyRequest()).authenticated());
-
-
-//		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+		http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
+				.with(authorizationServerConfigurer, Customizer.withDefaults())
+				.authorizeHttpRequests((authorize) ->
+						((AuthorizeHttpRequestsConfigurer.AuthorizedUrl)authorize.anyRequest()).authenticated());
 
 		DeviceClientAuthenticationConverter deviceClientAuthenticationConverter =
 				new DeviceClientAuthenticationConverter(
