@@ -129,6 +129,34 @@ FROM pg_class as c,pg_attribute as a where c.relname = 'sysmenut' and a.attrelid
 insert into sysusert(sysuserid,sysusername,sysuserpwd) values('1000','vskeda','0000') ON CONFLICT(sysuserid) 
 do update set sysusername='kkkkkkkkj',sysuserpwd='oooooooooo';
 
+15* 创建序列 create sequence
+
+CREATE SEQUENCE my_sequence;
+
+CREATE SEQUENCE sys_user_id_seq;
+
+你可以在创建序列时指定多个选项，比如起始值、增量、最大值、最小值等。以下是一些常用的选项：
+
+START WITH: 指定序列的起始值。
+INCREMENT BY: 指定每次增加的值。
+MINVALUE 和 MAXVALUE: 指定序列的最小值和最大值。
+CACHE 和 CYCLE: 用于控制性能和循环行为。
+例如，创建一个从1开始，每次增加1，最大值为1000的序列：
+CREATE SEQUENCE my_sequence
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 1000;
+
+  使用序列
+  INSERT INTO users (id, name) VALUES (NEXTVAL('my_sequence'), 'John Doe');
+  INSERT INTO users (id, name) VALUES (NEXTVAL('sys_user_id_seq'), 'John Doe');
+
+  建表时使用序列为默认值
+  CREATE TABLE my_table (
+    id INT PRIMARY KEY DEFAULT nextval('my_sequence'),
+    name VARCHAR(100)
+);
 
 
 

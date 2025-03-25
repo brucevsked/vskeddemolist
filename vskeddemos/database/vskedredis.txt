@@ -700,3 +700,17 @@ hz 10
 dynamic-hz yes
 aof-rewrite-incremental-fsync yes
 rdb-save-incremental-fsync yes
+
+------------------------------------------------------------
+redis windows 单机版本
+
+下载redis一般找最新一个版本就可以,如Redis-7.4.2-Windows-x64-cygwin-with-Service.zip
+https://github.com/redis-windows/redis-windows/releases
+
+下载完成后解压到一个没空格，没中文的目录，如下
+D:\Programs\Redis
+运行安装目录下的start.bat就可以启动了
+启动完成后检查端口使用情况
+netstat -ano|findstr 6379
+
+连接工具，现在可以使用navicat17来管理redis数据库了
