@@ -53,14 +53,14 @@ public class TestControllerTest extends BaseTestWithoutTransactional {
 	}
 
 	@Test
-	public void test2() throws Exception {
+	public void test3() throws Exception {
 		log.info("TestControllerTest test2 start ");
 		// 用来测试get,前端在请求路径或问号后面传参数时，
-		// 后端封装用@PathVariable("ida") String id 或 @Param("username") String username
+		// 后端封装用@PathVariable("ida") String id 或 @RequestParam("username") String username
 		RequestBuilder request = get("/test/9631").param("username", "vskeda1username").param("password",
 				"mypassword is unknown");
 		mvc.perform(request).andExpect(status().isOk())
-				.andExpect(content().string(equalTo("9631testok2vskeda1username")));
+				.andExpect(content().string(equalTo("9631testokvskeda1usernamemypassword is unknown")));
 		log.info("TestControllerTest test2 end ");
 	}
 

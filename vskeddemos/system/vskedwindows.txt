@@ -67,6 +67,10 @@ ren *.* *.png
 并将替换子容器和对象的所有者打对号，同时将使用可从此对象继承的权限项目替换所有子对象的权限项目（最下面）
 点确定再去删除
 
+9* windows10任务栏显示秒
+Win+X打开菜单，然后选择：Windows Power Shell（管理员），在该窗口中输入以下命令回车后重启即可
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowSecondsInSystemClock /t REG_DWORD /d 1 /f
+
 
 
 

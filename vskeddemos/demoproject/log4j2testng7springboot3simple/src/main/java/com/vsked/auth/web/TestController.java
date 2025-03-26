@@ -31,6 +31,20 @@ public class TestController {
         return accountId;
     }
 
+    @GetMapping("/test/{ida}")
+    @ResponseBody
+    public String test3(@PathVariable("ida") String id,@RequestParam("username") String username,@RequestParam("password") String password){
+        if(log.isTraceEnabled()){
+            log.trace("start");
+        }
+
+        if(log.isInfoEnabled()){
+            log.info(id+"testok"+username+password);
+        }
+
+        return id+"testok"+username+password;
+    }
+
     @GetMapping("/test2")
     @ResponseBody
     public String test2(){

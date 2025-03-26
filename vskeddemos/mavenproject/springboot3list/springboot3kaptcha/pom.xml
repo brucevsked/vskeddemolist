@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.vsked</groupId>
-	<artifactId>log4j2testng7springboot2simple</artifactId>
+	<artifactId>springboot3kaptcha</artifactId>
 	<version>1.0</version>
 
 	<name>${project.artifactId}</name>
@@ -25,11 +25,12 @@
 		<maven.compiler.target>21</maven.compiler.target>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
-	    <mavenCompilerPlugin.version>3.14.0</mavenCompilerPlugin.version>
+		<mavenCompilerPlugin.version>3.14.0</mavenCompilerPlugin.version>
 		<mavenSurefirePlugin.version>3.5.2</mavenSurefirePlugin.version>
 
 		<testng.version>7.11.0</testng.version>
-		<springboot.version>2.7.18</springboot.version>
+		<springboot.version>3.4.4</springboot.version>
+		<kaptcha.version>2.3.2</kaptcha.version>
 	</properties>
 
 	<dependencyManagement>
@@ -51,7 +52,7 @@
 			<optional>true</optional>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- spring boot核心,包括自动配置支持，日志和YAML -->
+		<!-- spring boot核心,包括自动配置支持日志和YAML -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -83,7 +84,7 @@
 			</exclusions>
 		</dependency>
 
-		<!-- 对web开发的支持，包含了spring webmvc和tomcat等web开发的特性 -->
+		<!-- 对web开发的支持包含了spring webmvc和tomcat等web开发的特性 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -99,19 +100,27 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
-		<!-- TestNG start -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars</groupId>
+					<artifactId>jquery</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		<!-- TestNG end -->
-		<!-- log4j start -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
-		<!-- log4j end -->
+		<dependency>
+			<groupId>com.github.penggle</groupId>
+			<artifactId>kaptcha</artifactId>
+			<version>${kaptcha.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -134,6 +143,7 @@
 				<version>${mavenSurefirePlugin.version}</version>
 				<configuration>
 					<skip>true</skip>
+					<argLine>-javaagent:"${settings.localRepository}/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar"</argLine>
 				</configuration>
 			</plugin>
 			<!-- spring boot devtools 第二步添加maven插件 -->
@@ -143,8 +153,8 @@
 				<version>${springboot.version}</version>
 				<configuration>
 					<mainClass>com.vsked.Application</mainClass>
-					<!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
-					<fork>true</fork>
+					<!--fork如果没有该项配置,这个devtools不会起作用即应用不会restart这个要手动加进去
+					<fork>true</fork>-->
 				</configuration>
 			</plugin>
 		</plugins>

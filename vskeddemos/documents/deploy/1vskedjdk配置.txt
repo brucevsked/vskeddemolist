@@ -39,6 +39,8 @@ CLASSPATH
 .;%JAVA_HOME%\lib
 add java home to PATH
 %JAVA_HOME%\bin
+add classpath to PATH
+%CLASSPATH%
 
 
 

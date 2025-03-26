@@ -20,16 +20,16 @@
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 
 		<!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
-		<java.version>17</java.version>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
-	    <mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
-		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
+	    <mavenCompilerPlugin.version>3.14.0</mavenCompilerPlugin.version>
+		<mavenSurefirePlugin.version>3.5.2</mavenSurefirePlugin.version>
 
-		<testng.version>7.7.0</testng.version>
-		<springboot.version>3.2.0</springboot.version>
+		<testng.version>7.11.0</testng.version>
+		<springboot.version>3.4.4</springboot.version>
 	</properties>
 
 	<dependencyManagement>
@@ -67,20 +67,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>mockito-junit-jupiter</artifactId>
-					<groupId>org.mockito</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>junit-vintage-engine</artifactId>
-					<groupId>org.junit.vintage</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>junit-jupiter</artifactId>
-					<groupId>org.junit.jupiter</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- 对web开发的支持包含了spring webmvc和tomcat等web开发的特性 -->
@@ -141,6 +127,7 @@
 				<version>${mavenSurefirePlugin.version}</version>
 				<configuration>
 					<skip>true</skip>
+					<argLine>-javaagent:"${settings.localRepository}/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar"</argLine>
 				</configuration>
 			</plugin>
 			<!-- spring boot devtools 第二步添加maven插件 -->

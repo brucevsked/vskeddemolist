@@ -627,6 +627,14 @@ skip-grant-tables
 mysql -u root -p
 直接回车即可
 
+9* 1045 - Access denied for user 'root@localhost'(using password:YES)
+找到mysql安装目录，运行里面的mysql
+C:\env\MySQL\MySQL Server 8.4\bin>mysql -u root
+mysql> show databases;
+mysql> use mysql;
+mysql> alter user 'root'@'localhost' identified by 'Y4yhl9tbf110';
+
+
 
 
 某一字段设置成一个值
@@ -1244,3 +1252,4 @@ where table_schema='baomakuaituantest' and column_name='water_sold_num' order by
 select table_name,column_name,column_type,column_comment,data_type 
 from information_schema.columns 
 where table_schema='baomakuaituantest' and table_name='tz_prod' order by column_name;
+-----------------------------------------------------------------
