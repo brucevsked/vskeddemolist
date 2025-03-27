@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.jat</groupId>
+	<artifactId>jatjfinaladmin</artifactId>
+	<version>1.0</version>
+
+	<name>${project.artifactId}</name>
+
+	<properties>
+		<!-- 声明项目配置依赖编码格式为 utf-8 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- 编译UTF-8 -->
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
+		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.install.skip>true</maven.install.skip>
+		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
+		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
+		<mavenAssemblyPluging.version>2.5.5</mavenAssemblyPluging.version>
+        <alioss.version>3.8.1</alioss.version>
+
+		<jfinal.version>5.1.0</jfinal.version>
+		<jfinalcos.version>2022.2</jfinalcos.version>
+		<jfinalundertow.version>3.3</jfinalundertow.version>
+		<jfinalweixin.version>3.4</jfinalweixin.version>
+
+		<log4j.version>2.17.2</log4j.version>
+		<testng.version>7.5</testng.version>
+
+		<druid.version>1.2.15</druid.version>
+		<mysqlConnector.version>8.0.28</mysqlConnector.version>
+		<jwt.version>3.2.0</jwt.version>
+        <jjwt.version>0.6.0</jjwt.version>
+
+		<fastjson.version>2.0.23</fastjson.version>
+		<commonslang3.version>3.12.0</commonslang3.version>
+		<commonscodec.version>1.15</commonscodec.version>
+		<fst.version>2.57</fst.version>
+		<jedis.version>3.8.0</jedis.version>
+		<okio.version>3.2.0</okio.version>
+		<okhttp3.version>4.10.0</okhttp3.version>
+
+
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jfinal</artifactId>
+			<version>${jfinal.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.jfinal</groupId>
+		    <artifactId>cos</artifactId>
+		    <version>${jfinalcos.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysqlConnector.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jfinal-undertow</artifactId>
+			<version>${jfinalundertow.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+		 <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jfinal-weixin</artifactId>
+			<version>${jfinalweixin.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>${alioss.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commonslang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okio</groupId>
+			<artifactId>okio</artifactId>
+			<version>${okio.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>${okhttp3.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis.version}</version>
+        </dependency>
+
+		<dependency>
+			<groupId>de.ruedigermoeller</groupId>
+			<artifactId>fst</artifactId>
+			<version>${fst.version}</version>
+		</dependency>
+        <dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commonscodec.version}</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mavenCompilerPlugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<!-- true:跳过测试 -->
+					<skip>true</skip>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${mavenSurefirePlugin.version}</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${mavenAssemblyPluging.version}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.jat.Application</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

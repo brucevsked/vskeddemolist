@@ -9,6 +9,6 @@
 
 CREATE USER 'springmvcmybatis'@'%' IDENTIFIED BY 'springmvcmybatismysql'; 
 
-CREATE DATABASE springmvcmybatismysql DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE springmvcmybatismysql DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 grant all  on springmvcmybatismysql.* to 'springmvcmybatis'@'%' ;

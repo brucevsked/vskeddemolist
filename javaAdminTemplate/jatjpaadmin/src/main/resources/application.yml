@@ -1,0 +1,18 @@
+server:
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+spring:
+  profiles:
+    active: dev
+  lifecycle:
+    timeout-per-shutdown-phase: 60s #设置优雅停机缓冲时间默认30s
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "shutdown"

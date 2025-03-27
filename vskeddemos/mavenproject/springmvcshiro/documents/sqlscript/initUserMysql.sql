@@ -9,6 +9,6 @@
 
 CREATE USER 'springmvcshiro'@'%' IDENTIFIED BY 'springmvcshiro'; 
 
-CREATE DATABASE springmvcshiro DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE springmvcshiro DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 grant all  on springmvcshiro.* to 'springmvcshiro'@'%' ;

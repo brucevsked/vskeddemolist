@@ -1,0 +1,30 @@
+server:
+  port: 80
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://10.0.193.11:3306/userrestddd?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
+    username: root
+    password: Y4yhl9tbf110_
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: select 1
+  data:
+    redis:
+      host: 10.0.193.11
+      port: 6379
+      password: Y4yhl9tbf110_
+
+cache:
+  cacheName: "jatJfinalAdmin"

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.jat</groupId>
+	<artifactId>jatjpaadmin</artifactId>
+	<version>1.0</version>
+
+	<name>${project.artifactId}</name>
+	<url>https://www.jat168.com</url>
+
+	<properties>
+		<!-- 声明项目配置依赖编码格式为 utf-8 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- 编译UTF-8 -->
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.install.skip>true</maven.install.skip>
+
+		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
+		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
+
+		<commonscodec.version>1.15</commonscodec.version>
+		<testng.version>7.7.1</testng.version>
+		<jasypt.version>3.0.5</jasypt.version>
+		<mysqlConnector.version>8.0.32</mysqlConnector.version>
+		<h2.version>2.1.214</h2.version>
+		<jjwt.version>0.6.0</jjwt.version>
+
+	</properties>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.0.2</version>
+		<relativePath />
+		<!-- lookup parent from repository -->
+	</parent>
+	<dependencies>
+		<!-- spring boot devtools 第一步添加依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- spring boot核心,包括自动配置支持，日志和YAML -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- test start -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>jquery</artifactId>
+					<groupId>org.webjars</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>mockito-junit-jupiter</artifactId>
+					<groupId>org.mockito</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>junit-vintage-engine</artifactId>
+					<groupId>org.junit.vintage</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>junit-jupiter</artifactId>
+					<groupId>org.junit.jupiter</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+        <!-- test end -->
+		<!-- 对web开发的支持，包含了spring webmvc和tomcat等web开发的特性 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		    <!-- 排除Tomcat依赖 -->
+			<exclusions>
+				<exclusion>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+			<!-- 去掉控制台与文件里以 sun.util.logging.internal 开头的日志打印-->
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j-jul</artifactId>
+					<groupId>org.apache.logging.log4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysqlConnector.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- 数据库加密 start -->
+		<dependency>
+   			<groupId>com.github.ulisesbocchio</groupId>
+    		<artifactId>jasypt-spring-boot-starter</artifactId>
+    		<version>${jasypt.version}</version>
+		</dependency>
+		<!-- 数据库加密 end -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commonscodec.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mavenCompilerPlugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<!-- true:跳过测试 -->
+					<skip>true</skip>
+					<encoding>${maven.compiler.encoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${mavenSurefirePlugin.version}</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- spring boot devtools 第二步添加maven插件 -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.jat.Application</mainClass>
+					<!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
+					<fork>true</fork>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
