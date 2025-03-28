@@ -3,7 +3,7 @@
   "version": "4.2.0",
   "private": true,
   "scripts": {
-    "dev": "npm run serve",
+    "dev": "set NODE_OPTIONS=--openssl-legacy-provider&npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },

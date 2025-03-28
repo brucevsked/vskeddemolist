@@ -27,7 +27,7 @@
 		<mavenAssemblyPluging.version>2.5.5</mavenAssemblyPluging.version>
         <alioss.version>3.8.1</alioss.version>
 
-		<jfinal.version>5.1.0</jfinal.version>
+		<jfinal.version>5.2.4</jfinal.version>
 		<jfinalcos.version>2022.2</jfinalcos.version>
 		<jfinalundertow.version>3.3</jfinalundertow.version>
 		<jfinalweixin.version>3.4</jfinalweixin.version>
