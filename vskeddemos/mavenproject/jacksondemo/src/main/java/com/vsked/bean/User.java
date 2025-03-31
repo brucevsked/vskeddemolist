@@ -1,6 +1,7 @@
 package com.vsked.bean;
 
 public class User {
+
 	String userName;
 	int userAge;
 	

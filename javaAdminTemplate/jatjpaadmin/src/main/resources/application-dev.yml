@@ -7,6 +7,8 @@ server:
       force: true
 
 spring:
+  main:
+    allow-circular-references: true
   jpa:
     hibernate:
       naming:
@@ -14,17 +16,17 @@ spring:
       ddl-auto: none
     show-sql: true
   datasource:
-    url: jdbc:mysql://10.0.193.11:3306/userrestddd?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
-    username: root
-    password: Y4yhl9tbf110_
+    url: jdbc:mysql://127.0.0.1:3306/vskedadmin?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
+    username: vskedadmin
+    password: vskedadmin
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1
-  data:
-    redis:
-      host: 10.0.193.11
-      port: 6379
-      password: Y4yhl9tbf110_
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: Y4yhl9tbf110_
+    database: 0
 
 cache:
-  cacheName: "jatJfinalAdmin"
+  cacheName: "technology"

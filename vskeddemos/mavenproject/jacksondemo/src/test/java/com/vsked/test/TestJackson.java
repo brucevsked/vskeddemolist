@@ -1,7 +1,5 @@
 package com.vsked.test;
 
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -20,11 +18,10 @@ public class TestJackson {
 	private  final Logger log=LogManager.getLogger(TestJackson.class);
 	
 	ObjectMapper jackson = new ObjectMapper();
-	Writer strWriter = new StringWriter();
 	
 	@Test
 	public void objectToJson() throws Exception{
-		String s=jackson.writeValueAsString(new User("smallvill", 18));
+		String s=jackson.writeValueAsString(new User("smallVillage", 18));
 		log.debug(s);
 	}
 	
@@ -33,15 +30,15 @@ public class TestJackson {
 		
 		jackson.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 
-		//String s="{\"userName\":\"smallvillc\",\"userAge\":26}";
-		String s="{'userName':'smallvillc','userAge':26}";
+		//String s="{\"userName\":\"smallVillage\",\"userAge\":26}";
+		String s="{'userName':'smallVillage','userAge':26}";
 		User u=jackson.readValue(s, User.class);
-		log.debug(u.getUserName()+"|"+u.getUserAge());
+        log.debug("{}|{}", u.getUserName(), u.getUserAge());
 	}
 	
 	@Test
 	public void listToJson() throws Exception{
-		List<User> userList=new ArrayList<User>();
+		List<User> userList=new ArrayList<>();
 		for(int i=0;i<10;i++)
 			userList.add(new User("user"+i,20+i));
 		
@@ -51,14 +48,14 @@ public class TestJackson {
 	
 	@Test
 	public void listToJson1() throws Exception{
-		List<Map<String, Object>> dataList=new LinkedList<Map<String,Object>>();
+		List<Map<String, Object>> dataList=new LinkedList<>();
 		
-		Map<String, Object> data=null;
+		Map<String, Object> data;
 		for(int i=0;i<10;i++){
-			data=new HashMap<String, Object>();
+			data=new HashMap<>();
 			data.put("name", "x"+i);
 			data.put("seq", i);
-			data.put("isAllright", true);
+			data.put("isAllRight", true);
 			dataList.add(data);
 		}
 		String s=jackson.writeValueAsString(dataList);
@@ -71,20 +68,19 @@ public class TestJackson {
 		List<User> userList=jackson.readValue(s, new TypeReference<List<User>>(){});
 		
 //		List<User> userList=jackson.readValue(s, jackson.getTypeFactory().constructCollectionType(List.class, User.class));
-		
-	    for(int i=0;i<userList.size();i++){
-	    	User u=userList.get(i);
-	    	log.debug(u.getUserName()+"|"+u.getUserAge());
-	    }
+
+        for (User u : userList) {
+            log.debug("{}|{}", u.getUserName(), u.getUserAge());
+        }
 	    
 	}
 	
 	@Test
 	public void mapToJson() throws Exception{
 		
-		Map<String, Integer> m=new HashMap<String, Integer>();
-		m.put("smallvillm1", 25);
-		m.put("smallvillm2", 26);
+		Map<String, Integer> m=new HashMap<>();
+		m.put("smallVillage1", 25);
+		m.put("smallVillage2", 26);
 		String s=jackson.writeValueAsString(m);
 		log.debug(s);
 		
@@ -93,11 +89,11 @@ public class TestJackson {
 	@Test
 	public void jsonToMap() throws Exception{
 		
-		String s="{\"smallvillm1\":25,\"smallvillm2\":26}";
+		String s="{\"smallVillage1\":25,\"smallVillage2\":26}";
 		
 		Map<String, Integer> m=jackson.readValue(s, new TypeReference<Map<String, Integer>>(){});
-		
-		log.debug(m.get("smallvillm1")+"|"+m.get("smallvillm2"));	
+
+        log.debug("{}|{}", m.get("smallVillage1"), m.get("smallVillage2"));
 		
 	}
 

@@ -1,6 +1,6 @@
 package com.jat.repository.model;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable

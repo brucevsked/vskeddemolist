@@ -5,7 +5,7 @@ import com.jat.controller.model.TableView;
 import com.jat.service.UserService;
 import com.jat.util.JsonUtil;
 import com.jat.util.Response;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

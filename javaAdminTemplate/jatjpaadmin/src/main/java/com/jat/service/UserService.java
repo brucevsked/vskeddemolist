@@ -19,7 +19,6 @@ import com.jat.system.model.user.UserId;
 import com.jat.system.model.user.UserName;
 import com.jat.system.model.userAccount.UserAccount;
 import com.jat.system.model.userRole.UserRole;
-import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -162,7 +163,7 @@ public class UserService extends BaseService{
         userRoleService.save(userRolePosDel);//用户角色
     }
 
-    public void changepwd(HttpServletRequest req,Map<String,Object> params){
+    public void changepwd(HttpServletRequest req, Map<String,Object> params){
         UserView userView=jwtKit.getUser(req);
         UserPO userPO=userRepository.findById(userView.getId()).orElse(null);
 

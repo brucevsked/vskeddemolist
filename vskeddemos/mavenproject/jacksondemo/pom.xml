@@ -9,8 +9,7 @@
     <artifactId>jacksondemo</artifactId>
     <version>1.0</version>
 
-    <name>jacksondemo</name>
-    <url>http://www.jat168.com</url>
+    <name>jacksonDemo</name>
 
     <properties>
         <!-- 声明项目配置依赖编码格式为 utf-8 -->
@@ -19,16 +18,11 @@
         <!-- 编译UTF-8 -->
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 
-        <!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
-        <java.version>1.8</java.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
         <maven.deploy.skip>true</maven.deploy.skip>
         <maven.install.skip>true</maven.install.skip>
-        <!-- 解决pom头部unkonow错误 -->
-        <log4j.version>2.14.0</log4j.version>
-        <testng.version>7.3.0</testng.version>
-        <jackson.version>2.12.0</jackson.version>
+        <log4j.version>2.24.3</log4j.version>
+        <testng.version>7.11.0</testng.version>
+        <jackson.version>2.18.3</jackson.version>
     </properties>
 
     <dependencies>
@@ -58,19 +52,16 @@
         </dependency>
 
         <!-- jackson start -->
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
@@ -86,8 +77,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
                     <!-- true:跳过测试 -->
                     <skip>true</skip>
                     <encoding>UTF-8</encoding>
