@@ -46,7 +46,7 @@ public class RetrofitDemoTest {
             parMap.put("post参数1", "a1");
             parMap.put("postb", "参数值b1");
             parMap.put("postc", "c1");
-            String myUrl="http://localhost:8080/retrofitdemo/proc/test1proc1.jsp";
+            String myUrl="http://localhost:8181/test/proc";
             String result=RetrofitDemoImpl.post1(myUrl,parMap);
             log.debug("|"+result+"|");
         }catch(Exception e){
@@ -58,7 +58,7 @@ public class RetrofitDemoTest {
     public void post2(){
         try{
             String myContent="{\"测试key\":\"valkue小二上菜\",\"来啊key\":\"来了\",\"去吧key\":\"听说valkue\"}";
-            String myUrl="http://localhost:8080/retrofitdemo/proc/test1proc1.jsp";
+            String myUrl="http://localhost:8181/test/procJson";
             String result=RetrofitDemoImpl.post2(myUrl,myContent);
             log.debug("|"+result+"|");
         }catch(Exception e){
@@ -83,6 +83,19 @@ public class RetrofitDemoTest {
             filePathList.add("e:/ocr_id_02.jpg");
             String myUrl="http://localhost:8080/retrofitdemo/proc/test1proc1.jsp";
             String result=RetrofitDemoImpl.post3(myUrl,parMap,filePathList);
+            log.debug("|"+result+"|");
+        }catch(Exception e){
+            log.error(e.getMessage(),e);
+        }
+    }
+
+    @Test
+    public void post4(){
+        try{
+            String myUrl="http://localhost:8181/test/procHeader1";
+            String token="---------------------token789110--------------";
+            String param1="$$$$$$$$$$$$$$$$$$param88888$$$$$$$$$$$$$$$$$$";
+            String result=RetrofitDemoImpl.post4(myUrl,token,param1);
             log.debug("|"+result+"|");
         }catch(Exception e){
             log.error(e.getMessage(),e);

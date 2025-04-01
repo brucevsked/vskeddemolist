@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -43,5 +44,9 @@ public interface RetrofitDemo {
     @POST
     @Multipart
     Call<ResponseBody> post3(@Url String myUrl,@PartMap() Map<String, RequestBody>  parMap, @Part List<MultipartBody.Part> myFileList);
+
+    @POST
+    @Headers ({"Content-Type: application/json; charset=utf-8","Accept: application/json"}) //修正请求乱码
+    Call<ResponseBody> post4(@Url String myUrl,@Header("Authorization") String token, @Header("param1") String param1);
 
 }

@@ -174,6 +174,25 @@ public class RetrofitDemoImpl {
         return result;
     }
 
+    public static String post4(String myUrl,String token,String param1) throws Exception{
+
+        OkHttpClient client = new OkHttpClient.Builder().
+                connectTimeout(180, TimeUnit.SECONDS).
+                readTimeout(180, TimeUnit.SECONDS).
+                writeTimeout(180, TimeUnit.SECONDS).addInterceptor(new ResponseInterceptor("GBK")).build();
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://www.baidu.com/").client(client).build();
+        RetrofitDemo service=retrofit.create(RetrofitDemo.class);
+        Call<ResponseBody> call=service.post4(myUrl,token,param1);
+        Response<ResponseBody> response=call.execute();
+        String result="";
+        ResponseBody responseBody=response.body();
+        if(responseBody!=null){
+            result=responseBody.string();
+        }
+        return result;
+    }
+
 
     public static byte[] fileToByte(String filename) throws Exception{
         FileChannel fc = null;
