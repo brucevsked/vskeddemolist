@@ -6,11 +6,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.vsked</groupId>
-	<artifactId>crypto</artifactId>
+	<artifactId>springboot2mybatis</artifactId>
 	<version>1.0</version>
 
-	<name>crypto</name>
-	<url>https://www.vsked.cn</url>
+	<name>${project.artifactId}</name>
 
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
@@ -25,18 +24,26 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
-		<!-- 解决pom头部unkonow错误 -->
-		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-		<testng.version>7.1.0</testng.version>
+	    <mavenCompilerPlugin.version>3.14.0</mavenCompilerPlugin.version>
+		<mavenSurefirePlugin.version>3.5.2</mavenSurefirePlugin.version>
+
+		<testng.version>7.11.0</testng.version>
+		<springboot.version>2.7.18</springboot.version>
+		<mybatisSpringBootStart.version>2.3.2</mybatisSpringBootStart.version>
+		<mysqlConnect.version>8.0.33</mysqlConnect.version>
 	</properties>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.3.RELEASE</version>
-		<relativePath />
-		<!-- lookup parent from repository -->
-	</parent>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${springboot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<!-- spring boot devtools 第一步添加依赖 -->
 		<dependency>
@@ -60,15 +67,40 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>mockito-junit-jupiter</artifactId>
+					<groupId>org.mockito</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>junit-vintage-engine</artifactId>
+					<groupId>org.junit.vintage</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>junit-jupiter</artifactId>
+					<groupId>org.junit.jupiter</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- 对web开发的支持，包含了spring webmvc和tomcat等web开发的特性 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- 排除Tomcat依赖 -->
+			<exclusions>
+				<exclusion>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 		<!-- TestNG start -->
-		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
@@ -76,40 +108,30 @@
 		</dependency>
 		<!-- TestNG end -->
 		<!-- log4j start -->
-		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		<!-- log4j end -->
-
+		<!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
 		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.18.0</version>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatisSpringBootStart.version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.bouncycastle</groupId>
-			<artifactId>bcprov-jdk15on</artifactId>
-			<version>1.59</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysqlConnect.version}</version>
 		</dependency>
-		
-
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>com.vsked.Application</mainClass>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mavenCompilerPlugin.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -118,10 +140,10 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			<!-- skip the test -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${mavenSurefirePlugin.version}</version>
 				<configuration>
 					<skip>true</skip>
 				</configuration>
@@ -130,11 +152,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${springboot.version}</version>
 				<configuration>
+					<mainClass>com.vsked.Application</mainClass>
 					<!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
 					<fork>true</fork>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	
 </project>
