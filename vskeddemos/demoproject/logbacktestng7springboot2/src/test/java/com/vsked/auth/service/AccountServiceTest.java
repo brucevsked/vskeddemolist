@@ -24,6 +24,14 @@ public class AccountServiceTest extends BaseTestWithoutTransactional {
 		String accountId=accountService.getAccountId();
     	log.info("accountId is :{}" ,accountId );
 
+		if(log.isErrorEnabled()){
+			log.error("this is error message");
+		}
+
+		if(log.isWarnEnabled()){
+			log.warn("warn warn you had a baby");
+		}
+
 		if(log.isTraceEnabled()){
 			log.trace("end");
 		}
