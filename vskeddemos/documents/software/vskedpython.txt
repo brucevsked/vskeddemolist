@@ -16,6 +16,7 @@ pip install lxml
 
 
 升级pip
+python -m pip install --upgrade pip
 python2 -m pip install --upgrade pip
 
 如果同时有两版本用
@@ -139,3 +140,22 @@ Python3:
 python3 -m pip install XXX
 
 --------------------------------------------------------------------------------
+mkdocs 为技术项目量身定做的文档工具
+安装
+pip install --upgrade pip
+pip install mkdocs
+pip install click-man
+mkdocs new yunzedocs
+cd yunzedocs
+启动服务器
+mkdocs serve
+http://127.0.0.1:8000/
+
+mkdocs serve -a 192.168.100.201:8000
+http://192.168.100.201:8000/
+
+生成站点
+mkdocs build
+
+
+

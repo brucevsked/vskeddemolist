@@ -1,0 +1,21 @@
+server:
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+
+logging:
+  config: classpath:log4j2.xml
+
+
+spring:
+  r2dbc:
+    url: r2dbc:mysql://127.0.0.1:3306/springboot3r2dbc?serverTimezone=UTC&useSSL=false
+    username: springboot3r2dbc
+    password: springboot3r2dbc
+  transaction:
+    r2dbc:
+      enabled: true

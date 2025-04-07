@@ -1,0 +1,22 @@
+server:
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: Y4yhl9tbf110_
+    timeout: 10000
+logging:
+  config: classpath:log4j2.xml
+
+

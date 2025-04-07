@@ -1,0 +1,30 @@
+
+站点文件在
+E:\yunzemkdoc\yunzedocs\docs
+修改这里面的index.md就可以，也可以添加其他文件
+
+打开桌面cmd
+输入以下命令
+
+生成站点
+mkdocs build
+
+启动服务
+mkdocs serve -a 192.168.100.201:8000
+访问地址
+http://192.168.100.201:8000/
+
+
+默认主题位置
+D:\env\Python\Python312\Lib\site-packages\mkdocs\themes\mkdocs
+material主题位置
+D:\env\Python\Python312\Lib\site-packages\material\templates
+
+
+安装material主题
+pip install mkdocs-material
+
+默认主题修改foot
+D:\env\Python\Python312\Lib\site-packages\mkdocs\themes\mkdocs\base.html
+material主题修改foot
+D:\env\Python\Python312\Lib\site-packages\material\templates\partials\copyright.html
