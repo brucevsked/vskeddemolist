@@ -1,5 +1,6 @@
 package com.vsked.auth.service;
 
+import com.vsked.tool.MDCTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ public class AccountServiceTest extends BaseTestWithoutTransactional {
 	
     @Test
     public void test1() throws Exception {
+		MDCTool.beginTrace();
 		if(log.isTraceEnabled()){
 			log.trace("start");
 		}
@@ -22,9 +24,18 @@ public class AccountServiceTest extends BaseTestWithoutTransactional {
 		String accountId=accountService.getAccountId();
     	log.info("accountId is :{}" ,accountId );
 
+		if(log.isErrorEnabled()){
+			log.error("this is error message");
+		}
+
+		if(log.isWarnEnabled()){
+			log.warn("warn warn you had a baby");
+		}
+
 		if(log.isTraceEnabled()){
 			log.trace("end");
 		}
+		MDCTool.endTrace();
     }
 
 }

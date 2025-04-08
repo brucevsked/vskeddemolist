@@ -30,7 +30,7 @@
 		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
 		<testng.version>7.5</testng.version>
-		<commonslang3.version>3.12.0</commonslang3.version>
+		<commonslang3.version>3.17.0</commonslang3.version>
 	</properties>
 
 	<parent>

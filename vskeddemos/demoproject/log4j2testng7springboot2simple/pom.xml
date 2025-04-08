@@ -30,6 +30,7 @@
 
 		<testng.version>7.11.0</testng.version>
 		<springboot.version>2.7.18</springboot.version>
+		<commonslang3.version>3.17.0</commonslang3.version>
 	</properties>
 
 	<dependencyManagement>
@@ -112,6 +113,11 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		<!-- log4j end -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commonslang3.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

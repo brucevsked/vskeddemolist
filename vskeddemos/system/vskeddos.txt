@@ -399,6 +399,14 @@ type readme.txt
 more 文件名
 more readme.txt
 
+63* 通过IP查找MAC
+先确认IP可以ping通
+ping IP地址
+ping 192.168.100.99
+再使用
+arp -a IP地址就可以看到MAC地址
+arp -a 192.168.100.99
+
 
 
 
