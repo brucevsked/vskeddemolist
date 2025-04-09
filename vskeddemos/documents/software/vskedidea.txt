@@ -83,6 +83,7 @@ file->settings->editor->File Encodings
 Global Encoding: UTF-8
 Project Encoding: UTF-8
 Default encoding for properties fies: UTF-8  
+勾选Transparent native-to-ascii conversion
 
 21* 开启控制台单元测试输入(解决idea单元测试不能使用Scanner)
 第一步打开idea选择菜单help-> Edit Customer VM Options菜单
