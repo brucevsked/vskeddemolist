@@ -17,17 +17,19 @@
 		<!-- 编译UTF-8 -->
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 		<!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
-		<java.version>1.8</java.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
 		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
 
+		<slf4j.api.version>1.7.36</slf4j.api.version>
 		<log4j.version>2.17.2</log4j.version>
-		<testng.version>7.5</testng.version>
+		<testng.version>7.11.0</testng.version>
 		<jfinal.version>5.2.4</jfinal.version>
+		<jfinal.undertow.version>3.7</jfinal.undertow.version>
 		<mysqlConnector.version>8.0.28</mysqlConnector.version>
 	</properties>
 
@@ -37,6 +39,11 @@
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -62,7 +69,7 @@
 		<dependency>
 			<groupId>com.jfinal</groupId>
 			<artifactId>jfinal-undertow</artifactId>
-			<version>3.0</version>
+			<version>${jfinal.undertow.version}</version>
 		</dependency>
 	</dependencies>
 
