@@ -73,7 +73,10 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
 		<!-- 对web开发的支持包含了spring webmvc和tomcat等web开发的特性 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -91,7 +94,6 @@
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 		<!-- TestNG start -->
-		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>

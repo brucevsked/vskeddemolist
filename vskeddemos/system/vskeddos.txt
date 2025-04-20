@@ -407,6 +407,13 @@ ping 192.168.100.99
 arp -a IP地址就可以看到MAC地址
 arp -a 192.168.100.99
 
+64* 查看系统架构
+systeminfo
+
+65* 查看组策略，并强制更新
+gpedit.msc
+gpupdate /force
+
 
 
 
