@@ -2,7 +2,9 @@
 
 # 管理后台接口项目  
 
-注意本项目需要使用jdk8
+注意本项目需要使用jdk21  
+
+--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.sql/java.sql=ALL-UNNAMED
 
 一个用户只允许拥有一个角色  
 

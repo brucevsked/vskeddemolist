@@ -113,7 +113,7 @@ public class UserAPI extends Controller {
         String accountName=HttpRequest.getParam(getPara("accountName"));
         String phone=HttpRequest.getParam(getPara("phone"));
 
-        Page pageData=User.dao.paginate(pageIndex,pageSize,"select a.id,a.name,a.phone,GROUP_CONCAT(c.name) rolename,e.name accountname ","from `user` a left join userRole b on a.id=b.userId left join role c on b.roleId=c.id left join userAccount d on a.id=d.userId left join account e on d.accountId=e.id where a.isDel=0 and b.isDel=0 and c.isDel=0 and d.isDel=0 and e.isDel=0 and (a.`name` like ? "+(name.length()>0?"":" or a.`name` is null ")+") and (e.`name` like ? "+(accountName.length()>0?"":" or e.`name` is null ")+") and (a.phone like ? "+(phone.length()>0?"":" or a.phone is null ")+")  group by a.id order by a.id desc","%"+name+"%","%"+accountName+"%","%"+phone+"%");
+        Page pageData=User.dao.paginate(pageIndex,pageSize,"select a.id,a.name,a.phone,GROUP_CONCAT(c.name) rolename,e.name accountname ","from `user` a left join userRole b on a.id=b.userId left join role c on b.roleId=c.id left join userAccount d on a.id=d.userId left join account e on d.accountId=e.id where a.isDel=0 and b.isDel=0 and c.isDel=0 and d.isDel=0 and e.isDel=0 and (a.`name` like ? "+(name.length()>0?"":" or a.`name` is null ")+") and (e.`name` like ? "+(accountName.length()>0?"":" or e.`name` is null ")+") and (a.phone like ? "+(phone.length()>0?"":" or a.phone is null ")+")  group by a.id,e.name order by a.id desc","%"+name+"%","%"+accountName+"%","%"+phone+"%");
 
         TableView tableView=new TableView(pageData.getTotalRow(),pageData.getList());
 

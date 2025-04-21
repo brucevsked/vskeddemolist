@@ -1,11 +1,11 @@
 ﻿#######Mysql数据库########
-jdbcUrl = jdbc:mysql://10.0.193.11/jatjfinaladmin?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
-user = root
-password = root
+jdbcUrl = jdbc:mysql://127.0.0.1/jatjfinaladmin?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&&useTimezone=true&serverTimezone=GMT%2B8
+user = jatjfinaladmin
+password = jatjfinaladmin
 
 #######Redis配置########
-redisHost = 10.0.193.11
+redisHost = 127.0.0.1
 redisPort = 6379
-redisPass = redisPassword
+redisPass = Y4yhl9tbf110_
 cacheName=jatJfinalAdmin
 
