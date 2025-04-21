@@ -9,21 +9,20 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseTest1Jat<M extends BaseTest1Jat<M>> extends Model<M> implements IBean {
 
-	public void setId(Integer id) {
-		set("id", id);
-	}
-	
-	public Integer getId() {
-		return getInt("id");
-	}
-	
-	public void setName(String name) {
-		set("name", name);
-	}
-	
-	public String getName() {
-		return getStr("name");
-	}
-	
-}
+    public void setId(Integer id) {
+        set("id", id);
+    }
 
+    public Integer getId() {
+        return getInt("id");
+    }
+
+    public void setName(String name) {
+        set("name", name);
+    }
+
+    public String getName() {
+        return getStr("name");
+    }
+
+}

@@ -1,6 +1,5 @@
 package com.jat.model1;
 
-
 import com.jat.model1.base.BaseTest1Jat;
 
 /**
@@ -9,6 +8,5 @@ import com.jat.model1.base.BaseTest1Jat;
  */
 @SuppressWarnings("serial")
 public class Test1Jat extends BaseTest1Jat<Test1Jat> {
-	
-}
 
+}

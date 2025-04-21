@@ -2,7 +2,6 @@ package com.jat;
 
 import com.jat.config.Slf4jLogFactory;
 import com.jat.interceptor.CrossInterceptor;
-import com.jat.model1.Test1Jat;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -10,8 +9,6 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.json.JFinalJson;
-import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 
 public class DbConfig extends JFinalConfig {
