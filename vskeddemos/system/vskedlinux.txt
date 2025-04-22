@@ -527,6 +527,8 @@ lsof -i:[端口号]
 lsof -i:3306
 
 77* curl访问网站信息
+直接发送get请求
+curl http://www.baidu.com
 查看http响应头
 curl -i http://www.baidu.com
 查看交互过程

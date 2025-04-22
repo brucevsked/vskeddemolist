@@ -17,18 +17,18 @@
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 
 		<!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
-		<java.version>17</java.version>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
 
-		<log4j.version>2.20.0</log4j.version>
+		<log4j.version>2.24.3</log4j.version>
 		<testng.version>7.8.0</testng.version>
 
-		<commonIO.version>2.13.0</commonIO.version>
-		<okio.version>2.6.0</okio.version>
-		<okhttp.version>4.7.2</okhttp.version>
+		<commonIO.version>2.19.0</commonIO.version>
+		<okio.version>3.11.0</okio.version>
+		<okhttp.version>4.12.0</okhttp.version>
 		<retrofit.version>2.9.0</retrofit.version>
 	</properties>
 	

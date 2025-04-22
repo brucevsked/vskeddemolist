@@ -6,8 +6,8 @@
 <configuration status="warn" monitorInterval="60">
     <Properties>
         <!--<Property name="logpath">${sys:catalina.home}/logs/mybatismutids/</Property>-->
-        <Property name="logpath">/logs/springboot3kaptcha/</Property>
-        <Property name="logname">springboot3kaptcha</Property>
+        <Property name="logpath">/logs/springboot3r2dbc/</Property>
+        <Property name="logname">springboot3r2dbc</Property>
     </Properties>
     <!--先定义所有的appender-->
     <appenders>
