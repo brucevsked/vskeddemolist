@@ -7,8 +7,8 @@
 */
 
 
-CREATE USER 'shirorestful'@'%' IDENTIFIED BY 'shirorestful'; 
+CREATE USER 'shirorestful'@'localhost' IDENTIFIED BY 'shirorestful'; 
 
 CREATE DATABASE shirorestful DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-grant all  on shirorestful.* to 'shirorestful'@'%' ;
+grant all  on shirorestful.* to 'shirorestful'@'localhost' ;

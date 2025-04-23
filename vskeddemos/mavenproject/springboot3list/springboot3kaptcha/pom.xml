@@ -10,7 +10,6 @@
 	<version>1.0</version>
 
 	<name>${project.artifactId}</name>
-	<url>https://vsked.cn/</url>
 
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
@@ -153,8 +152,8 @@
 				<version>${springboot.version}</version>
 				<configuration>
 					<mainClass>com.vsked.Application</mainClass>
-					<!--fork如果没有该项配置,这个devtools不会起作用即应用不会restart这个要手动加进去
-					<fork>true</fork>-->
+					<!--addResources如果没有该项配置,这个devtools不会起作用即应用不会restart这个要手动加进去 3.0版本用这个配置 -->
+					<addResources>true</addResources>
 				</configuration>
 			</plugin>
 		</plugins>

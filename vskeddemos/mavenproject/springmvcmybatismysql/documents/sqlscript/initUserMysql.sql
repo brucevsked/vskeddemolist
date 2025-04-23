@@ -7,8 +7,8 @@
 */
 
 
-CREATE USER 'springmvcmybatis'@'%' IDENTIFIED BY 'springmvcmybatismysql'; 
+CREATE USER 'springmvcmybatis'@'localhost' IDENTIFIED BY 'springmvcmybatismysql'; 
 
 CREATE DATABASE springmvcmybatismysql DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-grant all  on springmvcmybatismysql.* to 'springmvcmybatis'@'%' ;
+grant all  on springmvcmybatismysql.* to 'springmvcmybatis'@'localhost' ;

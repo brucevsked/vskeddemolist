@@ -7,11 +7,11 @@
 */
 
 
-CREATE USER 'springnoxmljdbc'@'%' IDENTIFIED BY 'springnoxmljdbc'; 
+CREATE USER 'springnoxmljdbc'@'localhost' IDENTIFIED BY 'springnoxmljdbc'; 
 
 CREATE DATABASE springnoxmljdbc DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-grant all  on springnoxmljdbc.* to 'springnoxmljdbc'@'%' ;
+grant all  on springnoxmljdbc.* to 'springnoxmljdbc'@'localhost' ;
 
 use springnoxmljdbc;
 
