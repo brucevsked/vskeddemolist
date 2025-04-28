@@ -50,4 +50,23 @@ public class UserDaoTest extends BaseTestWithTransactional {
         int row=userDao.insertUsers(dataMap);
         log.debug("{}",row);
     }
+
+    @Rollback(value = false) //事务不回滚
+    @Test
+    public void updateBatch(){
+        List<Map<String,Object>> userList=new LinkedList<>();
+
+        for(int i=0;i<100;i++){
+            Map<String,Object> user=new HashMap<>();
+            user.put("uid","1"+i);
+            user.put("upass","passzzzzzzzzz1"+i);
+            userList.add(user);
+        }
+
+        Map<String,Object> dataMap=new HashMap<>();
+        dataMap.put("myList",userList);
+
+        int row=userDao.updateUsers(dataMap);
+        log.debug("{}",row);
+    }
 }

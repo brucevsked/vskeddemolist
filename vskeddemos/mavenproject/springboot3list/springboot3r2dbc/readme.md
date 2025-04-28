@@ -1,6 +1,7 @@
 
-Spring boot3+r2dbc+mysql技术示例  
-对象存在主键时是更新操作，对象不存在主键时是保存操作    
+maven+Spring boot3+r2dbc+mysql技术示例   
+使用usersRepository时，如果表ID为自增字段，有ID时会做更新操作，无ID时会做插入操作。  
+使用R2dbcEntityTemplate entityTemplate时，不管表是否自增，都可以插入或更新。  
 
 
 下面这个不带事务管理的  

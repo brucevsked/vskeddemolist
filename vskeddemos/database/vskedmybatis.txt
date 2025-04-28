@@ -71,5 +71,39 @@ java代码dao里这样写
     @Update("<script>  <if test=\"suid gte 1\">update sysusert set sysusername=#{sysusername}, sysuserpwd=#{sysuserpwd} where sysuserid=#{sysuserid} </if> <if test=\"suid lt 1 \"> INSERT INTO sysusert(sysuserid, sysusername, sysuserpwd) VALUES (#{sysuserid}, #{sysusername}, #{sysuserpwd})</if></script>")
     int saveOrUpdate(Map<String, Object> m);
 
+13* 批量更新
+    @Update("<script>" +
+            "UPDATE users " +
+            "SET upass = CASE uid " +
+            "<foreach collection='myList' item='emp'>" +
+            "WHEN #{emp.uid,jdbcType=INTEGER} THEN #{emp.upass} " +
+            "</foreach> " +
+            "END " +
+            "WHERE uid IN " +
+            "<foreach collection='myList' item='emp' open='(' separator=',' close=')'>" +
+            "#{emp.uid,jdbcType=INTEGER}" +
+            "</foreach>" +
+            "</script>")
+    int updateUsers(Map<String, Object> dataMap);
+
+    单元测试
+        @Rollback(value = false) //事务不回滚
+    @Test
+    public void updateBatch(){
+        List<Map<String,Object>> userList=new LinkedList<>();
+
+        for(int i=0;i<100;i++){
+            Map<String,Object> user=new HashMap<>();
+            user.put("uid","1"+i);
+            user.put("upass","passzzzzzzzzz1"+i);
+            userList.add(user);
+        }
+
+        Map<String,Object> dataMap=new HashMap<>();
+        dataMap.put("myList",userList);
+
+        int row=userDao.updateUsers(dataMap);
+        log.debug("{}",row);
+    }
 
 

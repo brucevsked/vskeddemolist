@@ -5,6 +5,8 @@ import com.vsked.test.BaseTestWithoutTransactional;
 import jakarta.annotation.Resource;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.testng.annotations.Test;
 import reactor.core.publisher.Mono;
 
@@ -15,6 +17,9 @@ public class UserRepositoryTest extends BaseTestWithoutTransactional {
     @Resource
     UsersRepository usersRepository;
 
+    @Autowired
+    private R2dbcEntityTemplate entityTemplate;
+
     @Test
     public void save(){
         String userName="userSs1a55666";
@@ -23,6 +28,15 @@ public class UserRepositoryTest extends BaseTestWithoutTransactional {
         usersRepository.save(myUser).subscribe();
         Mono<Users> usersMono=usersRepository.findByUserName(userName);
         log.debug("{}",usersMono.block());
+    }
+
+    @Test
+    public void saveWithId(){
+        String userName="hasIdUserName";
+        Users myUser=new Users(21,userName,"password2");
+        log.debug("{}",myUser);
+        Mono<Void> userMono=entityTemplate.insert(Users.class).using(myUser).then();
+        log.debug("{}",userMono.block());
     }
 
     @Test
