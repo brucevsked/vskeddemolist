@@ -119,7 +119,7 @@ Serializable class without 'serialVersionUID' 打对号
  点击 File ->Settings ->editor - >General->Console   选中如下图 idea默认的输出缓存区大小只有1024KB
  修改为 20480 并所下面编码设置为utf-8
 
-25* delete current line
+25* delete current line 删除当前行
 ctrl+y
 
 
