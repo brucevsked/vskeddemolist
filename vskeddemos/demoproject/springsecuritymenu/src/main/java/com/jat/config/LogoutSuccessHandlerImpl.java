@@ -40,7 +40,6 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
             response.getWriter().print(msg);
-            return;
         } catch (Exception e) {
             String msg = "{\"code\":\"500\",\"msg\":\"退出失败，不能识别的凭证！\"}";
 
@@ -48,7 +47,6 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
             response.getWriter().print(msg);
-            return;
         }
 
     }

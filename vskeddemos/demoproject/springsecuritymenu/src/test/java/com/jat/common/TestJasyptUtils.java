@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-
 public class TestJasyptUtils extends BaseTestWithoutTransactional {
 
 	private static final Logger log = LoggerFactory.getLogger(TestJasyptUtils.class);

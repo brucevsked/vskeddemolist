@@ -1,4 +1,4 @@
-package com.vsked.tool;
+package com.jat.common;
 
 import java.util.concurrent.atomic.AtomicLong;
 
