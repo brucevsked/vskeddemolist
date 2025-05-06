@@ -24,13 +24,20 @@ systemctl restart docker.service
 加快拉取镜像
 vi /etc/docker/daemon.json
 {
-    "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"]
+  "registry-mirrors": ["https://hub-mirror.c.163.com"]
 }
 如果需要添加一个私有的仓库reg.docker.tb以同样的方法
 {
     "insecure-registries":["reg.docker.tb"],
     "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"]
 }
+20250506可以使用的docker仓库
+
+ {
+  "registry-mirrors": ["https://docker.1ms.run"]
+}
+
+docker pull docker.1ms.run/library/redis:latest
 
 安装docker-compose(集群管理)Compose 是用于定义和运行多容器 Docker 应用程序的工具
 yum install -y epel-release

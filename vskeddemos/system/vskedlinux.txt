@@ -542,6 +542,9 @@ curl -l -H "Content-type: application/json" -X POST -d '{"phone":"13521389587","
 http://domain/apis/users.json
 只显示头部信息
 curl -l "http://www.baidu.com" 
+发送get请求并带头部token信息
+curl -X GET http://localhost:8181/me -H "Authorization: Bearer your token"
+curl -X GET http://localhost:8181/me -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiUk9MRV9hZG1pbiIsImlhdCI6MTc0NTkxMjc5MiwiZXhwIjoxNzQ1OTE2MzkyfQ.XvTP1jY8F4eIWRIkQlNgvgpr_YKqVO-3hBn2Io3nqXE"
 
 
 78* 启动svn服务器

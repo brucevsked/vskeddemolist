@@ -2,6 +2,9 @@
 mysql在建数据库时应当使用utf8mb4字符集以防止emoji表情等4字节插入失败
 CREATE DATABASE appserverdev DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+安装完mysql后要先把表名大小写设置为区分大小写,my.ini或my.cnf
+lower_case_table_names = 0
+
 windows启动命令
 "D:\MySQLServer5.5\bin\mysqld" --defaults-file="D:\MySQLServer5.5\my.ini" MySQL
 
