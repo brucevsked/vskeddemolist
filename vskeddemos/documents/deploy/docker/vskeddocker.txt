@@ -33,7 +33,7 @@ vi /etc/docker/daemon.json
 }
 20250506可以使用的docker仓库
 
- {
+{
   "registry-mirrors": ["https://docker.1ms.run"]
 }
 

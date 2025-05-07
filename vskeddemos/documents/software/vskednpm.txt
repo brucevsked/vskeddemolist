@@ -57,6 +57,11 @@ npm config set registry https://registry.npm.taobao.org
 
 npm config set registry https://registry.npmjs.org/
 
+13* 将安装的包名及其版本号自动写入当前项目的 package.json 文件的 dependencies 字段中。
+npm install --save <包名>
+npm install --save rsocket-core
+npm install --save rsocket-websocket-client
+
 
 
 

@@ -1,0 +1,25 @@
+server:
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+
+spring:
+  r2dbc:
+    url: r2dbc:mysql://127.0.0.1:3306/springsecurityreactive2
+    username: springsecurityreactive2
+    password: springsecurityreactive2
+    pool:
+      max-idle-time: 30m
+      max-lifetime: 1h
+      max-size: 10
+      validation-query: "select 1"
+  transaction:
+    r2dbc:
+      enabled: true
+
+logging:
+  config: classpath:log4j2.xml

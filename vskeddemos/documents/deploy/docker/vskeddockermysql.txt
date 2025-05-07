@@ -1,4 +1,16 @@
 --------------------------------------------------------------------------------
+docker 安装mysql9
+拉取镜像
+docker pull docker.1ms.run/library/mysql:latest
+
+
+启动镜像多行版本
+
+docker run --restart=always --name mymysql -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ -d docker.1ms.run/library/mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+docker exec -i -t mymysql /bin/bash
+
+--------------------------------------------------------------------------------
 docker 安装mysql8
 拉取镜像
 docker pull mysql
