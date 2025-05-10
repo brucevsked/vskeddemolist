@@ -1,16 +1,19 @@
-fc
-sfc
-md
+原平台名称，推荐模拟器
+fc,Mesen
+sfc,Mesen-S
+md,gens
 dc
-pce
-ps1
+pce,Ootake
+ps1,pcsxr
 ps2
 psp
-wii
+wii,dolphin
+wii U,cemu
+switch,Ryujinx
 mamep
 demul
-gba
-nds
+gba,visualboyadvance-m
+nds,DeSmuME
 nebula
 fba
 zinc
