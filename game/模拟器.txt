@@ -11,7 +11,7 @@ psp
 wii,dolphin
 wii U,cemu
 switch,Ryujinx,.nsp|.xci
-gba,visualboyadvance-m,.gba
+gba|gbc,visualboyadvance-m,.gba|.gbc
 nds,DeSmuME,.nds
 n64,Project64,.n64
 
