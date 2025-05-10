@@ -1,23 +1,26 @@
-原平台名称，推荐模拟器
-fc,Mesen
-sfc,Mesen-S
-md,gens
+原平台名称，推荐模拟器，常用格式
+fc|nes,Mesen,.nes
+sfc|snes,Mesen-S|snes9x,.sfc|smc
+md,gens,.smd|.gen|.md
 dc
-pce,Ootake
+pce,Ootake,.pce
 ps1,pcsxr
 ps2
+ps3,rpcs3
 psp
 wii,dolphin
 wii U,cemu
-switch,Ryujinx
-mamep
-demul
-gba,visualboyadvance-m
-nds,DeSmuME
+switch,Ryujinx,.nsp|.xci
+gba,visualboyadvance-m,.gba
+nds,DeSmuME,.nds
+n64,Project64,.n64
+
+
 nebula
 fba
 zinc
-n64
+mamep
+demul
 
 月光宝盒千机变
 
