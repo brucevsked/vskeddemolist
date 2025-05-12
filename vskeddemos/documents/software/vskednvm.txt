@@ -5,7 +5,9 @@ nvm -v
 nvm --config
 
  查看已安装node版本列表
+nvm ls
 nvm list
+
 
 下载对应node版本
 nvm install 版本号
