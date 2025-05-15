@@ -29,7 +29,7 @@
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
 
 		<testng.version>7.5</testng.version>
-		<springboot.version>2.7.10</springboot.version>
+		<springboot.version>2.7.18</springboot.version>
 	</properties>
 
 	<dependencyManagement>

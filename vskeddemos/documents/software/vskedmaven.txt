@@ -246,6 +246,57 @@ log4j2-test.xml
 第三步使用
 mvn package –P要激活的环境，这个在第一步中定义activatedProperties时候写的
 mvn package –Pdev
+
+
+
+
+26* 打spring boot 2 的项目为可执行的jar包
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mavenCompilerPlugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<!-- true:跳过测试 -->
+					<skip>true</skip>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${mavenSurefirePlugin.version}</version>
+				<configuration>
+					<!-- true:跳过测试 -->
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- spring boot devtools 第二步添加maven插件 -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${springboot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<!-- 必须包含 repackage 目标 -->
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.yunze.Application</mainClass>
+					<!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
+					<fork>true</fork>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 --------------------------------------------------------------------------------
 idea依赖解决插件
 Maven Helper

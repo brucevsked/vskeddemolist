@@ -273,6 +273,53 @@ get版本
 post版本
 @RequestBody Map<String,Object> params
 
+18* 打可执行jar包
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mavenCompilerPlugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<!-- true:跳过测试 -->
+					<skip>true</skip>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${mavenSurefirePlugin.version}</version>
+				<configuration>
+					<!-- true:跳过测试 -->
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- spring boot devtools 第二步添加maven插件 -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${springboot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<!-- 必须包含 repackage 目标 -->
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.yunze.Application</mainClass>
+					<!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
+					<fork>true</fork>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 
 --------------------------------------------------------------------------------
 解决spring boot3 调用JUL日志打印
