@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * list是有序的
@@ -61,6 +62,19 @@ public class ListTest {
         }
 
         log.info("当前是有顺序的:{}",userEntityLinkedList);//可以在这里打个断点看下内存中是否有序
+    }
+
+    @Test
+    public void clear(){
+        List<String> dataList=new LinkedList<>();
+        dataList.add("a");
+        dataList.add("b");
+        dataList.add("c");
+        dataList.add("d");
+        log.info("|{}|",dataList);
+        dataList.clear();
+        log.info("|{}|",dataList);
+
     }
 
 }

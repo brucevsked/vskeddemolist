@@ -12,6 +12,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * HashMap是无序的（只是说不是你插入时的顺序）；
@@ -22,6 +24,29 @@ public class MapTest {
 
     private static final Logger log = LoggerFactory.getLogger(MapTest.class);
 
+    @Test
+    public void getKeyByValue(){
+        Map<String, String> map = new HashMap<>();
+        map.put("A", "123");
+        map.put("B", "456");
+        map.put("C", "789");
+
+        String targetValue = "456";
+
+        String foundKey = null;
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (targetValue.equals(entry.getValue())) {
+                foundKey = entry.getKey();
+                break;
+            }
+        }
+
+        if (foundKey != null) {
+            log.info("Found key: " + foundKey);
+        } else {
+            log.info("Value not found");
+        }
+    }
 
     @Test
     public void sortKey(){
@@ -88,6 +113,54 @@ public class MapTest {
         for (Map.Entry<String, Integer> t : list) {
             log.debug(t.getKey() + ":" + t.getValue());
         }
+    }
+
+    @Test
+    public void deleteByValueForEach(){
+        Map<String,String> dataMap=new ConcurrentHashMap<>();
+        dataMap.put("k1","v1");
+        dataMap.put("k2","v2");
+        dataMap.put("k3","v3");
+        dataMap.put("k34","v4");
+
+        log.info("{}",dataMap);
+
+        String removeValue="v3";
+
+        dataMap.forEach((key,value)->{
+            if(removeValue.equals(value)){
+                dataMap.remove(key);
+            }
+        });
+
+        log.info("{}",dataMap);
+
+    }
+
+    @Test
+    public void deleteByValueIterator(){
+        Map<String,String> dataMap=new ConcurrentHashMap<>();
+        dataMap.put("k1","v1");
+        dataMap.put("k2","v2");
+        dataMap.put("k3","v3");
+        dataMap.put("k34","v4");
+
+        log.info("{}",dataMap);
+
+        String removeValue="v3";
+
+        Iterator<Map.Entry<String, String>> iterator = dataMap.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> entry = iterator.next();
+            if (removeValue.equals(entry.getValue())) {
+                // 安全删除
+                iterator.remove();
+            }
+        }
+
+        log.info("{}",dataMap);
+
     }
 
 
