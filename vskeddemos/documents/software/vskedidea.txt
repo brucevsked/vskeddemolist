@@ -138,4 +138,5 @@ file->Invalidate Caches->Clear file system cache and local history
 statistic 代码统计插件
 maven helper 包依赖查看 安装完以后重启idea打开pom文件后，最下面会显示分析pom
 mybatisx 增强mybatis在java代码与xml文件之间跳转
+linngma 通义灵码，AI代码插件
 --------------------------------------------------------------------------------
