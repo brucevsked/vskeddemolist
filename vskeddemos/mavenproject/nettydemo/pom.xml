@@ -4,12 +4,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.jat</groupId>
+	<groupId>com.vsked</groupId>
 	<artifactId>nettydemo</artifactId>
 	<version>1.0</version>
 
 	<name>${project.artifactId}</name>
-	<url>http://www.jat168.com</url>
 
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
@@ -26,10 +25,10 @@
 
 		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
-		<log4j.version>2.14.1</log4j.version>
-		<testng.version>7.4.0</testng.version>
 
-		<netty.version>4.1.72.Final</netty.version>
+		<log4j.version>2.14.1</log4j.version>
+		<testng.version>7.5</testng.version>
+		<netty.version>4.1.100.Final</netty.version>
 	</properties>
 
 	<dependencies>

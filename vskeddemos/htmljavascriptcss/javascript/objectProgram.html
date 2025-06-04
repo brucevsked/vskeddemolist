@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+	<!-- must set here! -->
+	<base href="">
+
+	<title>面向对象编程</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<div id="content"></div>
+
+<body>
+
+	<script>
+		"use strict"
+        //新方案
+		class Person {
+
+			userName = "vsked";
+
+			constructor(nameStr) {
+				this.userName = nameStr;
+			}
+
+			say(str) {
+				console.log(this.userName + " say :" + str);
+				document.querySelector("#content").innerHTML=document.querySelector("#content").innerHTML+"|"+this.userName + " say :" + str+"<br>";
+			}
+
+			static run() {
+				console.log("has run ");
+				document.querySelector("#content").innerHTML=document.querySelector("#content").innerHTML+"|has run <br>";
+			}
+		}
+
+		var curPersion = new Person("sam");
+		curPersion.say("hello");
+
+		Person.run();
+
+		console.log("---------|"+curPersion.userName);
+
+
+    //老方案
+	var user=new Object({
+		id:1168,
+		name:"vsked",
+		age:18,
+		login:function(){
+			console.log(user.id+"|"+user.name+"|"+user.age);
+			document.querySelector("#content").innerHTML=document.querySelector("#content").innerHTML+"|"+user.id+"|"+user.name+"|"+user.age+"<br>";
+		},
+		setRole:function(role){
+			console.log("old brother you has set role to:"+role);
+			document.querySelector("#content").innerHTML=document.querySelector("#content").innerHTML+"|"+"old brother you has set role to:"+role+"<br>";
+		}
+	});
+
+	console.log("my name is:"+user.name);
+	user.login();
+	user.setRole("administrator");
+
+	</script>
+
+</body>
+
+</html>

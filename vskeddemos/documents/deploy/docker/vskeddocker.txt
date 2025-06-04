@@ -38,6 +38,9 @@ vi /etc/docker/daemon.json
 }
 
 docker pull docker.1ms.run/library/redis:latest
+docker pull docker.1ms.run/emqx/emqx:latest
+
+docker run -d --name emqx -p 18083:18083 -p 12387:1883 emqx/emqx:latest
 
 安装docker-compose(集群管理)Compose 是用于定义和运行多容器 Docker 应用程序的工具
 yum install -y epel-release
