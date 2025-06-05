@@ -69,7 +69,7 @@ class IndexedDB {
     } 
     request.onupgradeneeded = function(event) {
            alert("版本变化！");
-           db = event.target.result;
+           db = event.target.result;    //keyPath 为设置主键
            objectStore = db.createObjectStore("info", {keyPath: "userId",autoIncrement: true});
      }
 }
@@ -108,9 +108,10 @@ class IndexedDB {
         if (!!result == false)
             return;
 
-            debugger
            var p=document.getElementById("display");
-           p.innerHTML+="姓名:"+result.value.name+" 年龄:"+result.value.age+" 性别:"+result.value.xb+"<br />";
+           const recordId = result.value.userId;
+           var delBt="<button type='button' onClick='testIndexDB._delRecord("+recordId+")'>删除</button>";
+           p.innerHTML+="姓名:"+result.value.name+" 年龄:"+result.value.age+" 性别:"+result.value.xb+delBt+"<br />";
 
         result.continue();//这边执行轮询读取
     };
@@ -144,6 +145,14 @@ class IndexedDB {
        objectStore = transaction.objectStore("info");
        objectStore.add(detail);
     alert("添加成功！");
+}
+
+_delRecord(argument){
+  var transaction = db.transaction(["info"], "readwrite");
+  objectStore = transaction.objectStore("info");
+  objectStore.delete(argument);
+  alert("删除成功！");
+  testIndexDB._get()
 }
 
 
