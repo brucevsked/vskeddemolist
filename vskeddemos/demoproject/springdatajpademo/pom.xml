@@ -153,7 +153,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>2.4.3</version>
 				<configuration>
-					<mainClass>com.jat.Application</mainClass>
+					<mainClass>com.vsked.Application</mainClass>
 					<!--fork如果没有该项配置,这个devtools不会起作用，即应用不会restart这个要手动加进去 -->
 					<fork>true</fork>
 				</configuration>

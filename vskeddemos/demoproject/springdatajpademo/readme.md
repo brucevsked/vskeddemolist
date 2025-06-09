@@ -87,3 +87,22 @@ Set<Permission> permissions= new HashSet<>();
         roleManager.save(role1);
 
 role1.addPermission(p1);//要添加的新权限
+
+Map与List相关查询
+@Query(value = "SELECT id, adminName, loginName FROM users WHERE id = :id", nativeQuery = true)
+Map<String, Object> findUserAsMapByIdNative(@Param("id") Long id);
+
+    @Query(value = "SELECT id, adminName, loginName FROM users ", nativeQuery = true)
+    List<Map<String, Object>> findUserAsListByIdNative();
+
+    @Test
+    public void findMapByUserId(){
+        Map<String, Object> map = usersRepository.findUserAsMapByIdNative(2L);
+        log.info("查询结果a: {}", map);
+    }
+
+    @Test
+    public void findList(){
+        List<Map<String, Object>> list = usersRepository.findUserAsListByIdNative();
+        log.info("查询结果b: {}", list);
+    }
