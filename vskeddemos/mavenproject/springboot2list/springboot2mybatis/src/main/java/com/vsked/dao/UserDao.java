@@ -2,8 +2,13 @@ package com.vsked.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -28,6 +33,17 @@ public interface UserDao {
             "</foreach>" +
             "</script>")
     int updateUsers(Map<String, Object> dataMap);
+
+    @Select("SELECT uid, uname, upass FROM users WHERE uid = #{id}")
+    @Results({
+            @Result(column = "uid", property = "id"),
+            @Result(column = "uname", property = "uname"),
+            @Result(column = "upass", property = "upass")
+    })
+    Map<String, Object> getUserById(@Param("id") Long id);
+
+    @Select("${sql}")
+    List<Map<String,Object>> listvsked(Map<String, Object> m);
 
 
 }

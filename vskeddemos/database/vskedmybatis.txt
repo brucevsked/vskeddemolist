@@ -106,4 +106,12 @@ java代码dao里这样写
         log.debug("{}",row);
     }
 
+14* 查询结果返回为map 未测试
+    @Select("SELECT id, name, age FROM user WHERE id = #{id}")
+    @Results({
+            @Result(column = "id", property = "id"),
+            @Result(column = "uname", property = "uname"),
+            @Result(column = "upass", property = "upass")
+    })
+    Map<String, Object> getUserById(@Param("id") Long id);
 

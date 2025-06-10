@@ -23,9 +23,9 @@ public class UserDaoTest extends BaseTestWithTransactional {
     @Test
     public void insert(){
         Map<String,Object> user=new HashMap<>();
-        user.put("uid","1");
-        user.put("uname","user1");
-        user.put("upass","pass1");
+        user.put("uid","2");
+        user.put("uname","useraaaaaa");
+        user.put("upass","passbbbb");
         user.put("ubirth","1988-03-02");
         userDao.insertUser(user);
     }
@@ -35,7 +35,7 @@ public class UserDaoTest extends BaseTestWithTransactional {
     public void insertBatch(){
         List<Map<String,Object>> userList=new LinkedList<>();
 
-        for(int i=0;i<100000;i++){
+        for(int i=0;i<100;i++){
             Map<String,Object> user=new HashMap<>();
             user.put("uid","1"+i);
             user.put("uname","user1"+i);
@@ -68,5 +68,28 @@ public class UserDaoTest extends BaseTestWithTransactional {
 
         int row=userDao.updateUsers(dataMap);
         log.debug("{}",row);
+    }
+
+    @Test
+    public void getUserById(){
+        Map<String,Object> user=userDao.getUserById(2L);
+        log.debug("{}",user);
+    }
+
+    @Test
+    public void listvsked(){
+        Map<String,Object> parMap=new HashMap<>();
+        parMap.put("sql","select * from users");
+        List<Map<String,Object>> dataList=userDao.listvsked(parMap);
+        log.debug("{}",dataList);
+    }
+
+    @Rollback(value = false) //事务不回滚
+    @Test
+    public void list1vsked(){
+        Map<String,Object> parMap=new HashMap<>();
+        parMap.put("sql","insert into users values(55,'mynameisvsked','password',null)");
+        List<Map<String,Object>> dataList=userDao.listvsked(parMap);
+        log.debug("{}",dataList);
     }
 }
