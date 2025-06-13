@@ -134,10 +134,12 @@ docker ps
 查看当前容器列表
 docker ps -a
 
-6* 运行容器中镜像ubuntu
+6* 进入容器中执行操作
 docker run -it repository名称:tag /bin/bash
 docker run -it hub.c.163.com/nce2/ubuntu:16.04 /bin/bash
 docker run -it ubuntu-upstart:latest /bin/bash
+
+docker exec -it <容器ID或名称> bash
 
 7* 删除镜像
 docker rmi repository名称
