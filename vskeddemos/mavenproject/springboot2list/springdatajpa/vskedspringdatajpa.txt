@@ -944,3 +944,114 @@ public class ResourceListSpecific implements Specification<ResourcePO> {
     @Query(value = "update roleResource set isDel=1 where id=?",nativeQuery = true)
     void updateIsDelByRoleId2(Integer roleId);
 --------------------------------------------------------------------------------
+自定义投影映射，用于多张表结果合并成一张表
+第一步定义投影DTO
+
+public interface MeterDetailDTO {
+    Long getId();
+    Integer getMeterType();
+    Integer getSuppleMode();
+    Integer getMk_id();
+    Integer getMeterSolid();
+    Integer getLihua();
+    Boolean getIsValve();
+    Integer getDeductionStyle();
+    Integer getValveOffthre();
+    Integer getTimerSwitch();
+    Integer getTimer();
+    Integer getOverflow();
+
+    // DTU 信息
+    Long getDtuid();
+    Long getImei();
+    String getDtusAddr();
+    String getIP();
+    Integer getPort();
+    Integer getWorktype();
+    Boolean getIsonline();
+
+    // Customer 信息
+    Long getCustomerId();
+    String getCustomerName();
+    String getCustomerMobile();
+    String getCustomerAddr();
+
+    // Price 信息
+    Long getPriceId();
+    String getPriceName();
+    Integer getA();
+    Integer getAx();
+    Integer getB();
+    Integer getBx();
+    Integer getC();
+    Integer getCx();
+}
+
+第二步编写@Query注解
+    @Query(value = "SELECT m.id AS id, "
+            + "m.meterType AS meterType, "
+            + "m.suppleMode AS suppleMode, "
+            + "m.mk_id AS mk_id, "
+            + "m.meterSolid AS meterSolid, "
+            + "m.lihu AS lihua, "
+            + "m.isValve AS isValve, "
+            + "m.deductionStyle AS deductionStyle, "
+            + "m.valveOffthre AS valveOffthre, "
+            + "m.timerSwitch AS timerSwitch, "
+            + "m.timer AS timer, "
+            + "m.overflow AS overflow, "
+
+            + "d.id AS dtuid, "
+            + "d.imei AS imei, "
+            + "d.addr AS dtusAddr, "
+            + "d.IP AS IP, "
+            + "d.port AS port, "
+            + "d.worktype AS worktype, "
+            + "d.isonline AS isonline, "
+
+            + "c.id AS customerId, "
+            + "c.customerName AS customerName, "
+            + "c.customerMobile AS customerMobile, "
+            + "c.customerAddr AS customerAddr, "
+
+            + "p.id AS priceId, "
+            + "p.name AS priceName, "
+            + "p.a AS a, "
+            + "p.ax AS ax, "
+            + "p.b AS b, "
+            + "p.bx AS bx, "
+            + "p.c AS c, "
+            + "p.cx AS cx "
+
+            + "FROM meters m "
+            + "LEFT JOIN metersdtu md ON m.id = md.meterid "
+            + "LEFT JOIN dtus d ON d.id = md.dtuid "
+            + "LEFT JOIN meterprice mp ON m.id = mp.meterid "
+            + "LEFT JOIN price p ON p.id = mp.priceid "
+            + "LEFT JOIN customermeter cm ON m.id = cm.meterid "
+            + "LEFT JOIN customers c ON c.id = cm.customerid "
+            + "WHERE (:customerName IS NULL OR c.customerName LIKE %:customerName%) "
+            + "AND (:meterAddr IS NULL OR m.meterAddr LIKE %:meterAddr%) ",
+
+            countQuery = "SELECT COUNT(DISTINCT m.id) "
+                    + "FROM meters m "
+                    + "LEFT JOIN customermeter cm ON m.id = cm.meterid "
+                    + "LEFT JOIN customers c ON c.id = cm.customerid "
+                    + "WHERE (:customerName IS NULL OR c.customerName LIKE %:customerName%) "
+                    + "AND (:meterAddr IS NULL OR m.meterAddr LIKE %:meterAddr%) ",
+
+            nativeQuery = true)
+    Page<MeterDetailDTO> findMeterDetails(
+            @Param("customerName") String customerName,
+            @Param("meterAddr") String meterAddr,
+            @Param("pageable") Pageable pageable);
+
+第三步调用即可
+        Page<MeterDetailDTO> result = meterRepository.findMeterDetails(
+                customerName,
+                meterAddr,
+                PageRequest.of(page - 1, rows)
+        );
+
+
+--------------------------------------------------------------------------------

@@ -27,6 +27,13 @@ Language Packs
 先右击第一个源文件，点选择以进行比较
 再右击要比较的目标文件，点与已选项目进行比较即可
 
+6* 列编辑模式
+按ctrl+shift+p
+输入column selection
+选择column selection Mode
+点击后你就进入了列编辑模式。
+如果想要退出列编辑模式，再按一次ctrl+shift+p然后再点一次column selection mode就可以了
+
 
 
 
