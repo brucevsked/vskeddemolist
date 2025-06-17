@@ -174,7 +174,9 @@ git show a03a3ef4702d2ea11e2480a91995cec98444901c
 按提交作者输出汇总信息
 git shortlog
 
-
+18* 创建与提交tag
+git tag -a v20250617 -m "my version 20250617"
+git push origin v20250617
 
 
 git常用忽略提交文件列表

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>MSW Without NPM</title>
+
+</head>
+<body>
+  <h1>MSW without npm demo</h1>
+  <!-- 引入 MSW 浏览器构建版本 -->
+  <script src="msw.js"></script> 
+  <script>
+    // 创建 handlers 模拟请求
+    const { setupWorker, rest } = window.msw;
+    const { http, HttpResponse } = window.msw;
+
+    const worker = setupWorker(
+      rest.get('/api/user', (req, res, ctx) => {
+        return res(
+          ctx.json({
+            id: 1,
+            name: '张三',
+            email: 'zhangsan@example.com'
+          })
+        );
+      }),
+
+      rest.post('/login', (req, res, ctx) => {
+        return res(
+          ctx.status(200),
+          ctx.json({ success: true, token: 'mocked-jwt-token' })
+        );
+      })
+    );
+
+    // 启动 Mock Service Worker
+    worker.start();
+  </script>
+
+  <script>
+    // 测试调用 mock 接口
+    fetch('/api/user')
+      .then(res => res.json())
+      .then(data => console.log('获取用户信息:', data));
+
+    fetch('/login', {
+      method: 'POST'
+    })
+      .then(res => res.json())
+      .then(data => console.log('登录结果:', data));
+  </script>
+</body>
+</html>
