@@ -34,6 +34,12 @@ public interface UserDao {
             "</script>")
     int updateUsers(Map<String, Object> dataMap);
 
+    /**
+     * 根据id查询用户,也可以不写Results注解，默认会根据属性名映射字段名
+     *
+     * @param id
+     * @return
+     */
     @Select("SELECT uid, uname, upass FROM users WHERE uid = #{id}")
     @Results({
             @Result(column = "uid", property = "id"),
@@ -44,6 +50,9 @@ public interface UserDao {
 
     @Select("${sql}")
     List<Map<String,Object>> listvsked(Map<String, Object> m);
+
+    @Select("select * from users")
+    List<Map<String,Object>> findAll();
 
 
 }

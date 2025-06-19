@@ -52,9 +52,9 @@ spring:
       connection-test-query: select 1
 
 编写用户模型
-com.vsked.business.model.User
+com.vsked.business.model.Users
 编写映射接口文件继承BaseMapper 也可以编写自定义查询
 com.vsked.business.mapper.UserMapper
 
 编写单元测试
-com.vsked.business.mapper.UserMapperTest
+com.vsked.business.mapper.UsersMapperTest

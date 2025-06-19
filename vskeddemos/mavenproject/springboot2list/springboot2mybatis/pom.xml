@@ -27,7 +27,7 @@
 	    <mavenCompilerPlugin.version>3.14.0</mavenCompilerPlugin.version>
 		<mavenSurefirePlugin.version>3.5.2</mavenSurefirePlugin.version>
 
-		<testng.version>7.11.0</testng.version>
+		<testng.version>7.5</testng.version>
 		<springboot.version>2.7.18</springboot.version>
 		<mybatisSpringBootStart.version>2.3.2</mybatisSpringBootStart.version>
 		<mysqlConnect.version>8.0.33</mysqlConnect.version>
@@ -100,20 +100,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
-		<!-- TestNG start -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
 		</dependency>
-		<!-- TestNG end -->
-		<!-- log4j start -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
-		<!-- log4j end -->
-		<!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -123,6 +118,11 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysqlConnect.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>2.1.0</version>
 		</dependency>
 	</dependencies>
 

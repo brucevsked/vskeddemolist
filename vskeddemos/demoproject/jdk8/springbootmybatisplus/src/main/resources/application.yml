@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: test
   lifecycle:
     timeout-per-shutdown-phase: 60s #设置优雅停机缓冲时间默认30s
   devtools:

@@ -1,5 +1,7 @@
 package com.vsked.dao;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.vsked.test.BaseTestWithTransactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,4 +94,15 @@ public class UserDaoTest extends BaseTestWithTransactional {
         List<Map<String,Object>> dataList=userDao.listvsked(parMap);
         log.debug("{}",dataList);
     }
+
+    @Test
+    public void pageTest(){
+        int pageNum = 1;
+        int pageSize = 10;
+        PageHelper.startPage(pageNum, pageSize);
+        List<Map<String,Object>> users = userDao.findAll(); // 查询后自动分页
+        PageInfo<Map<String,Object>> pageInfo = new PageInfo<>(users);
+        log.debug("{}",pageInfo);
+    }
+
 }

@@ -1,11 +1,15 @@
 package com.vsked.business.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.vsked.business.model.User;
+import com.vsked.business.model.Users;
 import org.apache.ibatis.annotations.Select;
+import java.util.Map;
 
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<Users> {
 
-    @Select("select * from user where id=1")
-    public User test();
+    @Select("select * from users where uid=2")
+    Users test();
+
+    @Select("select * from users where uid=#{uid}")
+    Map<String, String> queryById(long uid);
 }

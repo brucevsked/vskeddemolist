@@ -29,8 +29,8 @@
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
 
 		<testng.version>7.5</testng.version>
-		<springboot.version>2.7.13</springboot.version>
-		<mybatisPlusStart.version>3.5.3.1</mybatisPlusStart.version>
+		<springboot.version>2.7.18</springboot.version>
+		<mybatisPlusStart.version>3.5.12</mybatisPlusStart.version>
 
 		<mysqlConnector.version>8.0.33</mysqlConnector.version>
 	</properties>
@@ -102,7 +102,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
-		<!-- TestNG start -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
@@ -115,16 +114,18 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- TestNG end -->
-		<!-- log4j start -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
-		<!-- log4j end -->
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>${mybatisPlusStart.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-jsqlparser</artifactId>
 			<version>${mybatisPlusStart.version}</version>
 		</dependency>
 		<dependency>
@@ -132,7 +133,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysqlConnector.version}</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
