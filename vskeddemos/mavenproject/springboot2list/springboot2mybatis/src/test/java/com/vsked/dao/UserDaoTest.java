@@ -101,8 +101,9 @@ public class UserDaoTest extends BaseTestWithTransactional {
         int pageSize = 10;
         PageHelper.startPage(pageNum, pageSize);
         List<Map<String,Object>> users = userDao.findAll(); // 查询后自动分页
-        PageInfo<Map<String,Object>> pageInfo = new PageInfo<>(users);
-        log.debug("{}",pageInfo);
+        PageInfo<Map<String,Object>> pageInfo = new PageInfo<>(users); // 获取分页信息 包括总条数，总页数，每页条数，当前页等信息
+        log.debug("{}",pageInfo); // 打印分页信息
+        //PageInfo{pageNum=1, pageSize=10, size=10, startRow=1, endRow=10, total=100, pages=10, list=Page{count=true, pageNum=1, pageSize=10, startRow=0, endRow=10, total=100, pages=10, reasonable=false, pageSizeZero=false}[{uid=0, upass=pass10, uname=user10, ubirth=1988-03-02}, {uid=1, upass=pass11, uname=user11, ubirth=1988-03-02}, {uid=2, upass=pass12, uname=user12, ubirth=1988-03-02}, {uid=3, upass=pass13, uname=user13, ubirth=1988-03-02}, {uid=4, upass=pass14, uname=user14, ubirth=1988-03-02}, {uid=5, upass=pass15, uname=user15, ubirth=1988-03-02}, {uid=6, upass=pass16, uname=user16, ubirth=1988-03-02}, {uid=7, upass=pass17, uname=user17, ubirth=1988-03-02}, {uid=8, upass=pass18, uname=user18, ubirth=1988-03-02}, {uid=9, upass=pass19, uname=user19, ubirth=1988-03-02}], prePage=0, nextPage=2, isFirstPage=true, isLastPage=false, hasPreviousPage=false, hasNextPage=true, navigatePages=8, navigateFirstPage=1, navigateLastPage=8, navigatepageNums=[1, 2, 3, 4, 5, 6, 7, 8]}
     }
 
 }
