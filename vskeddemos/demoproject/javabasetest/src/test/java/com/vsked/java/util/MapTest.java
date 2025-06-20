@@ -160,10 +160,19 @@ public class MapTest {
         }
 
         log.info("{}",dataMap);
-
     }
 
+    @Test
+    public void cleanAllData(){
+        Map<String,String> dataMap=new ConcurrentHashMap<>();
+        dataMap.put("k1","v1");
+        dataMap.put("k2","v2");
+        dataMap.put("k3","v3");
+        dataMap.put("k34","v4");
 
-
+        log.info("{}",dataMap);
+        dataMap.clear();
+        log.info("{}",dataMap);
+    }
 
 }
