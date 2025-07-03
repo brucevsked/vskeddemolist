@@ -1,15 +1,23 @@
 package com.vsked.test;
 
 import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.vsked.util.ExcelUtil;
 import org.slf4j.Logger;
@@ -240,7 +248,7 @@ public class ExcelUtilTest {
 	@Test
 	public void xssfWrite(){
 		try{
-			String fname="c:/test/t2a1.xlsx";
+			String fname="c:/test/test1.xlsx";
 			Map<String, String[][]> sheetData=new HashMap<>();
 			int rowCount=10;
 			int colCount=5;
@@ -266,7 +274,7 @@ public class ExcelUtilTest {
 	@Test
 	public void xssfWrite1(){
 		try{
-			String fname="c:/test/t2a1.xlsx";
+			String fname="c:/test/test2.xlsx";
 			Map<String, List<String[]>> sheetData=new HashMap<>();
 			int rowCount=10;
 			int colCount=5;
@@ -283,7 +291,7 @@ public class ExcelUtilTest {
 			for(int rowIndex=1;rowIndex<rowCount;rowIndex++){
 				String[] colData=new String[colCount];
 				for(int columnIndex=0;columnIndex<colCount;columnIndex++){
-					colData[columnIndex]=rowIndex+columnIndex+"";
+					colData[columnIndex]=rowIndex+":"+columnIndex;
 				}
 				rowData.add(colData);
 			}
@@ -296,7 +304,41 @@ public class ExcelUtilTest {
 	}
 
 	@Test
-	public void t1(){
-		log.debug("11");
+	public void writeNumberToString() throws Exception {
+		String fname="c:/test/test3.xlsx";
+		String sheetName= LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		FileOutputStream fos = new FileOutputStream(fname);
+		XSSFWorkbook wb=new XSSFWorkbook();
+		XSSFSheet sheet=wb.createSheet(sheetName);
+		XSSFRow row=sheet.createRow(0);
+		XSSFCell cell=row.createCell(0);
+		cell.setCellValue("水表号");
+
+		cell=row.createCell(1);
+		cell.setCellValue("水表值");
+
+		// 设置列宽
+		sheet.setColumnWidth(0, 25 * 256); // "水表号" 列宽 25 字符
+		sheet.setColumnWidth(1, 15 * 256); // "水表值" 列宽 15 字符
+
+		DataFormat format = wb.createDataFormat();
+		CellStyle cellStyle = wb.createCellStyle();
+		cellStyle.setDataFormat(format.getFormat("0")); // 设置为整数格式
+
+		Random r=new Random();
+		long tmpNumber=900000000000L;
+
+		for(int i=1;i<=200;i++){
+			row=sheet.createRow(i);
+			cell=row.createCell(0);
+			cell.setCellStyle(cellStyle);
+			cell.setCellValue(tmpNumber+r.nextInt(90000000));
+			cell=row.createCell(1);
+			cell.setCellValue(r.nextInt(9999));
+		}
+
+		wb.write(fos);
+		fos.close();
+		wb.close();
 	}
 }
