@@ -16,11 +16,23 @@ public class TaskList {
     public void task1(){
         try {
             log.info("task start at {}   task name is :{}",new Date(),Thread.currentThread().getName());
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             log.error("task error",e);
         }
         log.info("---------------------------task end at {}, task name is:{}",new Date(),Thread.currentThread().getName());
+
+    }
+
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void task2(){
+        try {
+            log.info("||||||||||task start at {}   task name is :{}",new Date(),Thread.currentThread().getName());
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            log.error("task error",e);
+        }
+        log.info("||||||||||||||||||||||||||||||task end at {}, task name is:{}",new Date(),Thread.currentThread().getName());
 
     }
 }

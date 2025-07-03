@@ -240,17 +240,22 @@ public class ExcelUtilTest {
 	@Test
 	public void xssfWrite(){
 		try{
-			String fname="e:/t2a1.xlsx";
+			String fname="c:/test/t2a1.xlsx";
 			Map<String, String[][]> sheetData=new HashMap<>();
 			int rowCount=10;
 			int colCount=5;
 			String[][] rowData=new String[rowCount][colCount];
-			for(int rowIndex=0;rowIndex<rowCount;rowIndex++){
+			rowData[0][0]="列1数据";
+			rowData[0][1]="列2数据";
+			rowData[0][2]="列3数据";
+			rowData[0][3]="列4数据";
+			rowData[0][4]="列5数据";
+			for(int rowIndex=1;rowIndex<rowCount;rowIndex++){
 				for(int columnIndex=0;columnIndex<colCount;columnIndex++){
 					rowData[rowIndex][columnIndex]=rowIndex+columnIndex+"";
 				}
 			}
-			sheetData.put("mydata2017", rowData);
+			sheetData.put("myData2017", rowData);
 
 			ExcelUtil.xssfWrite(fname, sheetData);
 		}catch(Exception e){
@@ -261,20 +266,28 @@ public class ExcelUtilTest {
 	@Test
 	public void xssfWrite1(){
 		try{
-			String fname="e:/xxffw178.xlsx";
+			String fname="c:/test/t2a1.xlsx";
 			Map<String, List<String[]>> sheetData=new HashMap<>();
 			int rowCount=10;
 			int colCount=5;
 
 			List<String[]> rowData=new LinkedList<>();
-			for(int rowIndex=0;rowIndex<rowCount;rowIndex++){
+			String[] colDataHead=new String[colCount];
+			colDataHead[0]="列1数据F1";
+			colDataHead[1]="列2数据F2";
+			colDataHead[2]="列3数据F3";
+			colDataHead[3]="列4数据F4";
+			colDataHead[4]="列5数据F5";
+			rowData.add(colDataHead);
+
+			for(int rowIndex=1;rowIndex<rowCount;rowIndex++){
 				String[] colData=new String[colCount];
 				for(int columnIndex=0;columnIndex<colCount;columnIndex++){
 					colData[columnIndex]=rowIndex+columnIndex+"";
 				}
 				rowData.add(colData);
 			}
-			sheetData.put("whocare", rowData);
+			sheetData.put("whoCare", rowData);
 
 			ExcelUtil.xssfWrite1(fname, sheetData);
 		}catch(Exception e){
