@@ -2,13 +2,11 @@ package com.vsked.util;
 
 import fr.opensagres.poi.xwpf.converter.xhtml.XHTMLConverter;
 import fr.opensagres.poi.xwpf.converter.xhtml.XHTMLOptions;
-import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 public class WordUtil {
 
@@ -21,7 +19,7 @@ public class WordUtil {
 //            return ""; //解决空文件异常问题
         }
 
-        InputStream is = new FileInputStream(docxFile);
+        InputStream is = Files.newInputStream(docxFile.toPath());
         XWPFDocument doc = new XWPFDocument(is);
 
         XHTMLOptions options=XHTMLOptions.create();
@@ -34,12 +32,13 @@ public class WordUtil {
 
         File htmlFile=new File(tmpSavePath+tmpSaveFileName);
 
-        OutputStream outputStream=new FileOutputStream(htmlFile);
+        OutputStream outputStream= Files.newOutputStream(htmlFile.toPath());
         XHTMLConverter.getInstance().convert(doc,outputStream,options);
         System.out.println("----------------");
-        if (is != null) {
-            try { is.close();
-            } catch (Exception e) { e.printStackTrace(); }
+        try {
+            is.close();
+        } catch (Exception e) {
+            System.out.println("关闭文件流异常"+e.getMessage());
         }
 
     }
