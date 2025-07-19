@@ -78,6 +78,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Sh
 C:\Users\vsked\AppData\Local\CrashDumps
 
 
+# 获取所有事件日志并清除
+wevtutil el | ForEach-Object { wevtutil cl "$_" }
+
+
 --------------------------------------------------------------------------------
 win10 远程远程桌面 CredSSP加密 Oracle修正
 按win+R 打开运行窗口，输入gpedit.msc回车
