@@ -1,18 +1,24 @@
 
 
 1*流程图
-
-工程树一侧新建图标（CreateDiagarm）->选择策略模型（StrategicModeling）->选择流对话图标（Flow Chart）
+右击Model -> 添加视图(Add View) -> 创建图解(create Diagram) ->->选择策略模型（StrategicModeling）->选择流对话图标（Flow Chart）
 
 
 2*类图
-
-工程树一侧新建图标（CreateDiagarm）->选择UML结构模型（UML Structural）->选择类图（Class）
+右击Model -> 添加视图(Add View) -> 创建图解(create Diagram) ->->选择UML结构模型（UML Structural）->选择类图（Class）
 
 3* 活动图与泳道图
-
-工程树一侧新建图标(CreateDiagarm) ->选择UML行为模型(UML Behavioral) ->选择活动图(Activity)
+右击Model -> 添加视图(Add View) -> 创建图解(create Diagram) ->->选择UML行为模型(UML Behavioral) ->选择活动图(Activity)
 如果是泳道图的话，在空白处右击->选择泳道与矩阵（Swimlanes and Martix...）
+
+4* window界面设计
+右击Model -> 添加视图(Add View) -> 创建图解(create Diagram) -> 用户界面windows32( UserInterface Win32)
+
+5* 简单用户界面
+右击Model -> 添加视图(Add View) -> 创建图解(create Diagram) -> 简单用户界面(UserInterface Simple)
+
+6* 用户界面
+右击Model -> 添加视图(Add View) -> 创建图解(create Diagram) -> 扩展(Extended) -> 用户界面(UserInterface)
 
 
 
