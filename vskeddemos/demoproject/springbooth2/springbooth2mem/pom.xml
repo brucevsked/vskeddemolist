@@ -28,7 +28,7 @@
 		<mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
 		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
 		<testng.version>7.5</testng.version>
-		<h2.version>2.1.214</h2.version>
+		<h2.version>2.3.232</h2.version>
 	</properties>
 
 	<parent>
