@@ -1,5 +1,6 @@
 package com.vsked.test;
 
+import java.awt.*;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,11 +12,16 @@ import java.util.Random;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.DefaultIndexedColorMap;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -23,6 +29,7 @@ import com.vsked.util.ExcelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+
 
 public class ExcelUtilTest {
 
@@ -89,7 +96,7 @@ public class ExcelUtilTest {
 	@Test
 	public void xssfRead1(){
 		try{
-		String filePath="e:/yuante.xlsx";
+		String filePath="e:/YT.xlsx";
 		long start=System.currentTimeMillis();
 		Map<String, List<String[]>> dataMapAll=ExcelUtil.xssfRead1(filePath);
 		log.debug("{}",dataMapAll.size());
@@ -162,7 +169,7 @@ public class ExcelUtilTest {
 
 	        Row row1 = sheet.createRow(1); //创建第2行
 	        Cell cell1_0 = row1.createCell(0);//第2行第1列 也就是合并以后的那个
-	        cell1_0.setCellValue("qudao1"); //设置单元格内容
+	        cell1_0.setCellValue("channel1"); //设置单元格内容
 
 	        /*
 	         * 设定合并单元格区域范围
@@ -176,10 +183,10 @@ public class ExcelUtilTest {
 	        sheet.addMergedRegion(cra21);//合并区域添加到工作表
 
 	        Cell cell1_1 = row1.createCell(1);//第2行第2列 也就是合并以后的那个
-	        cell1_1.setCellValue("kehu1"); //设置第2行第2列内容
+	        cell1_1.setCellValue("customer1"); //设置第2行第2列内容
 
 	        Cell cell1_2 = row1.createCell(2);//第2行第3列
-	        cell1_2.setCellValue("yuante1");//设置第2行第3列内容
+	        cell1_2.setCellValue("YT1");//设置第2行第3列内容
 	        //----------------日期数据部分start
 	        Cell cell1_3 = row1.createCell(3);//第2行第4列
 	        cell1_3.setCellValue(24);//设置第2行第4列内容  注意这里加的是数字不是文本
@@ -218,7 +225,7 @@ public class ExcelUtilTest {
 
 	        Row row3 = sheet.createRow(3); //创建第4行
 	        Cell cell3_2 = row3.createCell(2);//第4行第3列
-	        cell3_2.setCellValue("dijia1");//第4行第3列内容
+	        cell3_2.setCellValue("DJ1");//第4行第3列内容
 
 	        //----------------日期数据部分start
 	        Cell cell3_3 = row3.createCell(3);//第4行第4列
@@ -248,7 +255,7 @@ public class ExcelUtilTest {
 	@Test
 	public void xssfWrite(){
 		try{
-			String fname="c:/test/test1.xlsx";
+			String fileName="c:/test/test1.xlsx";
 			Map<String, String[][]> sheetData=new HashMap<>();
 			int rowCount=10;
 			int colCount=5;
@@ -265,7 +272,7 @@ public class ExcelUtilTest {
 			}
 			sheetData.put("myData2017", rowData);
 
-			ExcelUtil.xssfWrite(fname, sheetData);
+			ExcelUtil.xssfWrite(fileName, sheetData);
 		}catch(Exception e){
 			log.error(e.getMessage());
 		}
@@ -274,7 +281,7 @@ public class ExcelUtilTest {
 	@Test
 	public void xssfWrite1(){
 		try{
-			String fname="c:/test/test2.xlsx";
+			String fileName="c:/test/test2.xlsx";
 			Map<String, List<String[]>> sheetData=new HashMap<>();
 			int rowCount=10;
 			int colCount=5;
@@ -297,7 +304,7 @@ public class ExcelUtilTest {
 			}
 			sheetData.put("whoCare", rowData);
 
-			ExcelUtil.xssfWrite1(fname, sheetData);
+			ExcelUtil.xssfWrite1(fileName, sheetData);
 		}catch(Exception e){
 			log.error(e.getMessage());
 		}
@@ -305,9 +312,9 @@ public class ExcelUtilTest {
 
 	@Test
 	public void writeNumberToString() throws Exception {
-		String fname="c:/test/test3.xlsx";
+		String fileName="c:/test/test3.xlsx";
 		String sheetName= LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		FileOutputStream fos = new FileOutputStream(fname);
+		FileOutputStream fos = new FileOutputStream(fileName);
 		XSSFWorkbook wb=new XSSFWorkbook();
 		XSSFSheet sheet=wb.createSheet(sheetName);
 		XSSFRow row=sheet.createRow(0);
@@ -340,5 +347,99 @@ public class ExcelUtilTest {
 		wb.write(fos);
 		fos.close();
 		wb.close();
+	}
+
+	@Test
+	public void writeColourCell() throws Exception {
+		String fileName="c:/test/test4.xlsx";
+		String sheetName= LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		FileOutputStream fos = new FileOutputStream(fileName);
+		XSSFWorkbook wb=new XSSFWorkbook();
+		XSSFSheet sheet=wb.createSheet(sheetName);
+
+		// 创建一个数据格式，指定为文本（@ 代表文本格式）
+		DataFormat formatText = wb.createDataFormat();
+		CellStyle textCellStyle = wb.createCellStyle();
+		textCellStyle.setDataFormat(formatText.getFormat("@")); //第一步设置单元格样式成文本
+		// 也可以使用 format.getFormat("TEXT")，但 "@" 是标准的文本格式代码
+
+		// 2. 创建“成功”和“失败”的样式
+		//CellStyle successStyle = createColoredCellStyle(wb, IndexedColors.LIGHT_GREEN); // 使用内置的亮绿色
+		CellStyle successStyle = createCustomColoredCellStyle(wb, new byte[]{(byte) 198, (byte) 239, (byte) 206}); //RGB(198, 239, 206)
+
+		//CellStyle failStyle = createColoredCellStyle(wb, IndexedColors.LIGHT_ORANGE); // 使用内置的浅色
+		CellStyle failStyle = createCustomColoredCellStyle(wb, new byte[]{(byte) 255, (byte) 199, (byte) 206}); // 使用您指定的 RGB (255, 199, 206)
+
+
+		XSSFRow row=sheet.createRow(0);
+		XSSFCell cell=row.createCell(0);
+		cell.setCellValue("水表号");
+
+		cell=row.createCell(1);
+		cell.setCellValue("dtu");
+
+		cell=row.createCell(2);
+		cell.setCellValue("状态");
+
+		// 设置列宽
+		sheet.setColumnWidth(0, 25 * 256); // "水表号" 列宽 25 字符
+		sheet.setColumnWidth(1, 15 * 256); // "水表值" 列宽 15 字符
+		sheet.setColumnWidth(2, 25 * 256); // "状态" 列宽 25 字符
+
+		DataFormat format = wb.createDataFormat();
+		CellStyle cellStyle = wb.createCellStyle();
+		cellStyle.setDataFormat(format.getFormat("0")); // 设置为整数格式
+
+		Random r=new Random();
+		long tmpNumber=900000000000L;
+
+		for(int i=1;i<=200;i++){
+			row=sheet.createRow(i);
+			cell=row.createCell(0);
+			cell.setCellStyle(cellStyle);
+			cell.setCellValue(tmpNumber+r.nextInt(90000000));
+			cell=row.createCell(1);
+			cell.setCellStyle(textCellStyle);  //设置为文本格式，不显示科学计数法
+			cell.setCellValue(String .valueOf(r.nextLong())); //第二步，将单元格的值转换成文本格式
+
+			// 状态 (示例：随机生成成功或失败)
+			cell = row.createCell(2);
+			boolean isSuccess = r.nextBoolean(); // 随机决定成功或失败，您可以替换为您的业务逻辑
+			cell.setCellValue(isSuccess ? "成功" : "失败");
+			// 根据结果应用不同的样式
+			cell.setCellStyle(isSuccess ? successStyle : failStyle);
+		}
+
+		wb.write(fos);
+		fos.close();
+		wb.close();
+	}
+
+	/**
+	 * 创建一个使用内置颜色索引的单元格样式。
+	 * @param workbook 工作簿
+	 * @param color 内置颜色
+	 * @return CellStyle
+	 */
+	private CellStyle createColoredCellStyle(XSSFWorkbook workbook, IndexedColors color) {
+		CellStyle style = workbook.createCellStyle();
+		style.setFillForegroundColor(color.getIndex());
+		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		return style;
+	}
+
+	/**
+	 * 创建一个使用自定义RGB颜色的单元格样式。
+	 * @param workbook 工作簿
+	 * @param rgb 颜色数组 {R, G, B}，每个值为byte类型 (0-255)
+	 * @return CellStyle
+	 */
+	private CellStyle createCustomColoredCellStyle(XSSFWorkbook workbook, byte[] rgb) {
+		// 在工作簿中注册自定义颜色
+		XSSFColor customColor = new XSSFColor(rgb, new DefaultIndexedColorMap());
+		CellStyle style = workbook.createCellStyle();
+		style.setFillForegroundColor(customColor);
+		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		return style;
 	}
 }

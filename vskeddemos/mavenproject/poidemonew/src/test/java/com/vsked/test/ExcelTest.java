@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-
 public class ExcelTest {
 
     private static final Logger log = LoggerFactory.getLogger(ExcelTest.class);
@@ -89,7 +88,7 @@ public class ExcelTest {
                 cell2_3.setCellValue("渠道经理a" + i);
 
                 Cell cell2_4 = row2.createCell(4); //创建第3行第5列
-                cell2_4.setCellValue("SAAA10卡潍坊1715555" + "|" + i);
+                cell2_4.setCellValue("S10卡潍坊1715555" + "|" + i);
 
                 Cell cell2_5 = row2.createCell(5); //创建第3行第6列
                 cell2_5.setCellValue(i + 100);
