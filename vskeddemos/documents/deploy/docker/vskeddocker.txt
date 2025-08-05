@@ -2,6 +2,8 @@
 win10 下载以后环境存放路径
 C:\Users\Public\Documents\Hyper-V\Virtual hard disks
 
+Portainer 是一款开源的容器管理平台
+
 centos7安装docker
 
 docker安装

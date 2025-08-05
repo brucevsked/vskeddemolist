@@ -10,6 +10,10 @@ docker run --restart=always --name mymysql -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ 
 
 docker exec -i -t mymysql /bin/bash
 
+
+mkdir -p /data/docker/mysql/data
+docker run --restart=always  --name mysql1  -p 3306:3306 -v /data/docker/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=Y4yhl9tbf110_ -e TZ=Asia/Shanghai -d docker.1ms.run/library/mysql:latest
+
 --------------------------------------------------------------------------------
 docker 安装mysql8
 拉取镜像
