@@ -1,0 +1,26 @@
+
+<script>
+// 将十六进制转换为字节数组
+function hexToBytes(hex) {
+    const bytes = [];
+    for (let i = 0; i < hex.length; i += 2) {
+        bytes.push(parseInt(hex.substr(i, 2), 16));
+    }
+    return new Uint8Array(bytes);
+}
+
+// 解码UTF-16BE
+function decodeUTF16BE(hex) {
+    const bytes = hexToBytes(hex);
+    let str = '';
+    for (let i = 0; i < bytes.length; i += 2) {
+        const code = (bytes[i] << 8) | bytes[i + 1];
+        str += String.fromCharCode(code);
+    }
+    return str;
+}
+
+const result = decodeUTF16BE("6D4B8BD551855BB9FF1A003100320033003400353010726980547F515F00653E5E7353F03011");
+console.log(result);
+document.write(result)
+</script>
