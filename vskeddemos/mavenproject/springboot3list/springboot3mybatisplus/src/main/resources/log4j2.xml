@@ -6,8 +6,8 @@
 <configuration status="warn" monitorInterval="60">
     <Properties>
         <!--<Property name="logpath">${sys:catalina.home}/logs/mybatismutids/</Property>-->
-        <Property name="logpath">/logs/log4j2testng7-test/</Property>
-        <Property name="logname">log4j2testng7-test</Property>
+        <Property name="logpath">/logs/springboot3mybatisplus/</Property>
+        <Property name="logname">springboot3mybatisplus</Property>
     </Properties>
     <!--先定义所有的appender-->
     <appenders>
@@ -69,8 +69,17 @@
     <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
         <!--过滤掉spring和hibernate的一些无用的debug信息-->
-        <logger name="org.springframework" level="ERROR" />
-
+        <logger name="org.springframework" level="ERROR"/>
+        <logger name="org.hibernate" level="ERROR"/>
+        <logger name="com.zaxxer" level="ERROR"/>
+        <logger name="org.mybatis" level="ERROR"/>
+        <logger name="io.netty" level="ERROR"/>
+        <logger name="io.lettuce" level="ERROR"/>
+        <logger name="org.xnio" level="ERROR"/>
+        <logger name="org.apache" level="ERROR"/>
+        <logger name="org.jboss" level="ERROR"/>
+        <!-- 不打印本项目sql语句,需要时请调整为debug -->
+        <logger name="com.vsked.dao" level="ALL" additivity="true" />
         <root level="all">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
