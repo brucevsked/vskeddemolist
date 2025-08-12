@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.vsked</groupId>
+    <artifactId>multimodule</artifactId>
+    <version>1.0</version>
+  </parent>
+  
+  <artifactId>service</artifactId>
+  <name>${project.artifactId}</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.vsked</groupId>
+      <artifactId>datajpa</artifactId>
+      <version>${global.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vsked</groupId>
+      <artifactId>mybatisplus</artifactId>
+      <version>${global.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${mavenCompilerPlugin.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <release>${java.version}</release>
+          <!-- true:跳过测试 -->
+          <skip>true</skip>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${mavenSurefirePlugin.version}</version>
+        <configuration>
+          <skip>true</skip>
+          <argLine>-javaagent:"${settings.localRepository}/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar"</argLine>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${springboot.version}</version>
+        <configuration>
+          <mainClass>com.vsked.ServiceApplication</mainClass>
+          <!--addResources如果没有该项配置,这个devtools不会起作用即应用不会restart这个要手动加进去 3.0版本用这个配置 -->
+          <addResources>true</addResources>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
