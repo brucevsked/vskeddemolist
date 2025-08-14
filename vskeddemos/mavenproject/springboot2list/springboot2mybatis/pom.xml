@@ -30,7 +30,7 @@
 		<testng.version>7.5</testng.version>
 		<springboot.version>2.7.18</springboot.version>
 		<mybatisSpringBootStart.version>2.3.2</mybatisSpringBootStart.version>
-		<mysqlConnect.version>8.0.33</mysqlConnect.version>
+		<mysqlConnector.version>9.4.0</mysqlConnector.version>
 	</properties>
 
 	<dependencyManagement>
@@ -115,9 +115,9 @@
 			<version>${mybatisSpringBootStart.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysqlConnect.version}</version>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>${mysqlConnector.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>

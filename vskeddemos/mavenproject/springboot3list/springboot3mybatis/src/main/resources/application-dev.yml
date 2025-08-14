@@ -1,0 +1,22 @@
+server:
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+
+mybatis:
+  configuration:
+    call-setters-on-nulls: true
+logging:
+  config: classpath:log4j2.xml
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/springboot3mybatis?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
+    username: springboot3mybatis
+    password: springboot3mybatis

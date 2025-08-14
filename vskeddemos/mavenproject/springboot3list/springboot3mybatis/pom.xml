@@ -6,11 +6,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.vsked</groupId>
-	<artifactId>springauthorizationserver14</artifactId>
+	<artifactId>springboot3mybatis</artifactId>
 	<version>1.0</version>
 
 	<name>${project.artifactId}</name>
-	<url>https://vsked.cn/</url>
 
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
@@ -25,13 +24,15 @@
 		<maven.compiler.target>21</maven.compiler.target>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
-	    <mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
-		<mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
+	    <mavenCompilerPlugin.version>3.14.0</mavenCompilerPlugin.version>
+		<mavenSurefirePlugin.version>3.5.2</mavenSurefirePlugin.version>
 
 		<testng.version>7.11.0</testng.version>
-		<springboot.version>3.4.3</springboot.version>
-		<spring.authorizationserver.version>1.4.2</spring.authorizationserver.version>
-		<r2dbc.postgresql.version>1.0.7.RELEASE</r2dbc.postgresql.version>
+		<springboot.version>3.5.4</springboot.version>
+		<mybatisSpringBootStart.version>2.3.2</mybatisSpringBootStart.version>
+		<mybatisSrping.version>3.0.5</mybatisSrping.version>
+		<pagehelper.springbootstart.version>2.1.1</pagehelper.springbootstart.version>
+		<mysqlConnector.version>9.4.0</mysqlConnector.version>
 	</properties>
 
 	<dependencyManagement>
@@ -64,15 +65,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-oauth2-authorization-server</artifactId>
-			<version>${spring.authorizationserver.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -109,41 +102,35 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-r2dbc</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>r2dbc-postgresql</artifactId>
-			<version>${r2dbc.postgresql.version}</version>
-		</dependency>
-		<!-- TestNG start -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.webjars</groupId>
-					<artifactId>jquery</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
-		<!-- TestNG end -->
-		<!-- log4j start -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
-		<!-- log4j end -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatisSpringBootStart.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatisSrping.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>${mysqlConnector.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>${pagehelper.springbootstart.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -174,6 +161,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${springboot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<!-- 必须包含 repackage 目标 -->
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<mainClass>com.vsked.Application</mainClass>
 					<!--addResources如果没有该项配置,这个devtools不会起作用即应用不会restart这个要手动加进去 3.0版本用这个配置 -->
