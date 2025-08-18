@@ -1,0 +1,25 @@
+server:
+  port: 8181 #端口号
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+
+logging:
+  config: classpath:log4j2.xml
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://iotlink.mysql.polardb.cn-chengdu.rds.aliyuncs.com:3306/testdev1?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
+    username: testdev1
+    password: testdev1
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+    show-sql: true
+
