@@ -1,0 +1,78 @@
+
+
+vue-element-plus-admin-master 2.9.0
+
+nodejs 20.19.1
+npm 11.3.0
+pnpm 10.10.0
+typescript 5.8.3
+
+
+
+nvm install 20.19.1
+nvm use 20.19.1
+node -v
+npm install -g pnpm
+npm install -g typescript
+tsc -v
+配置nodejs\node_global到环境变量中去
+pnpm -v
+
+进入前端项目目录
+
+
+- 安装依赖
+
+```bash
+pnpm install
+
+```
+
+- 运行
+
+```bash
+pnpm run dev
+```
+
+- 打包
+
+```bash
+pnpm run build:pro
+```
+
+前端项目如果要修改显示标题，需要修改.env开头的文件中对应VITE_APP_TITLE属性
+
+.env.base 基础开发环境
+.env.dev 开发环境
+.env.gitee 上传gitee时用的环境，不用管这个
+.env.pro 生产环境
+.env.test 测试环境
+
+
+当发现检查有错误时可以重启项目，或先用检查异常或警告出现在哪儿
+npx prettier --check ./src/views/Login/components/LoginForm.vue --log-level debug
+再用回写命令重写符合规则的文件
+npx prettier --write ./src/views/Login/components/LoginForm.vue
+
+前端代码运行相关流程
+vite.config.ts 
+server部分
+定义了客户端访问接口4000与客户端访问地址0.0.0.0表示绑定到本地所有IPV4地址上
+定义了服务端代理接口请求前缀/api与服务端地址端口号信息http://127.0.0.1:8181
+vue3默认会调用
+src/main.ts
+在这里面会初始化各类全局组件，并以下面的文件创建一个应用
+src/App.vue
+创建完应用后，由于使用了vue-router
+将会自动调用
+src/permission.ts
+通过路由信息
+src/router/index.ts
+就跳转到了登录页面
+src/views/Login/Login.vue
+页面上加载国际化信息时，相关国际化信息存储在
+src/locales/zh-CN.ts 中文配置文件
+src/locales/en.ts 英文配置文件
+
+
+调用后台接口时应当添加上/api前缀，如后台实际地址是/jwt那前台使用时应当访问/api/jwt

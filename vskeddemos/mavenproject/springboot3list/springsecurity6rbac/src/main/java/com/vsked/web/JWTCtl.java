@@ -33,7 +33,12 @@ public class JWTCtl {
             );
             if (authentication.isAuthenticated()) {
                 String token = JwtUtils.generateToken(authRequest.username());
-                LoginResponseDTO loginResponseDTO = new LoginResponseDTO(token);
+                String username=authRequest.username();
+                String password="1";
+                String role="admin";
+                String roleId="1";
+                String[] permissions={"*.*.*"};
+                LoginResponseDTO loginResponseDTO = new LoginResponseDTO(token,username,password,role,roleId,permissions);
                 return new Response<>(200, "登录成功", loginResponseDTO);
             } else {
                 return new Response<>(401, "认证失败", null);

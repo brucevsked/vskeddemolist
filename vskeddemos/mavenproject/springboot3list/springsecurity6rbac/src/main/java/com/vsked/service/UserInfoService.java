@@ -35,7 +35,7 @@ public class UserInfoService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> getAuthorities(SysUser user) {
         List<SysRole> roles=roleRepository.findRolesByUserId(user.getId());
         return roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
+                .map(role -> new SimpleGrantedAuthority(role.getId()+""))
                 .collect(Collectors.toList());
     }
 }

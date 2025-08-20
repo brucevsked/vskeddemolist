@@ -10,12 +10,14 @@ import java.util.List;
 @Repository
 public interface SysMenuRepository extends JpaRepository<SysMenu, Long> {
 
-    @Query("SELECT DISTINCT m FROM SysMenu m " +
-            "JOIN SysRolePermission rp ON rp.permissionid = m.id " +
-            "JOIN SysUserRole ur ON ur.roleid = rp.roleid " +
-            "WHERE ur.userid = :userId AND m.status = 1 " +
-            "ORDER BY m.sort ASC")
-    List<SysMenu> findMenusByUserId(@Param("userId") Long userId);
+    @Query(value = "select * from sysmenu " +
+            "where id in" +
+            "(select resourceid from syspermission where resourcetype=2 and id in " +
+            "(select permissionid from sysrolepermission where roleid in" +
+            "(select roleid from sysuserrole where userid=" +
+            "(select id from sysuser where `name`=:userName" +
+            "))))",nativeQuery = true)
+    List<SysMenu> findMenusByUserName(@Param("userName") String userName);
 
     List<SysMenu> findByStatusOrderBySort(Byte status);
 }
