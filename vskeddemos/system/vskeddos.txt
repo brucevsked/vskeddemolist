@@ -414,6 +414,11 @@ systeminfo
 gpedit.msc
 gpupdate /force
 
+66* 通过IP找主机名
+方案1
+ping -a IP
+ping -a 192.168.100.29
+
 
 
 

@@ -22,7 +22,7 @@ public class MDCAop {
     // @Autowired
     //RedisTemplate<String, Object> redisTemplate;
 	
-    @Pointcut("execution(public * com..*.web..*.*(..))")
+    @Pointcut("execution(public * com..vsked.web..*.*(..))")
     public void webLog(){}
     
     @Before("webLog()")

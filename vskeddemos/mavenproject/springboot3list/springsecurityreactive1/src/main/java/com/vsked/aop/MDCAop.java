@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MDCAop {
 	
-    @Pointcut("execution(public * com..*..*.*(..))")
+    @Pointcut("execution(public * com..vsked..*.*(..))")
     public void webLog(){}
     
     @Before("webLog()")

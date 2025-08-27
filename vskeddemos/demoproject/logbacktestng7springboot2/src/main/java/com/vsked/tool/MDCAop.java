@@ -18,7 +18,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Component
 public class MDCAop {
 	
-    @Pointcut("execution(public * com..*.web..*.*(..))")
+    @Pointcut("execution(public * com..vsked.web..*.*(..))")
     public void webLog(){}
     
     @Before("webLog()")
