@@ -16,3 +16,9 @@ http://127.0.0.1/prod-api/test2
 http://127.0.0.1/prod-api/profile/images/tiding.png
 
 
+
+
+UsersMapperTest 测试批量插入与查询
+A1B1RepositoryTest 测试中间表联合主键时扩展字段的更新
+
+

@@ -1,7 +1,6 @@
-package com.vsked.business.mapper;
+package com.vsked.jpa.repository;
 
 import com.vsked.jpa.model.Users;
-import com.vsked.jpa.repository.UsersRepository;
 import com.vsked.test.BaseTestWithTransactional;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
