@@ -363,6 +363,8 @@ chkconfig --add filename
 ps:remember the file right and own
 
 54* view folder size (查看文件夹大小,磁盘空间不足时使用此命令配合)
+查找系统中最大的20个文件
+find / -type f -exec du -h {} + 2>/dev/null | sort -hr | head -20
 du -sh [foldername]
 du -ms *
 du -sh *

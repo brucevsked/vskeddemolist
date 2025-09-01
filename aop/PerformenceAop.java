@@ -1,8 +1,6 @@
-package com.vsked.domain.shared.log;
+package com.vsked.config;
 
 import java.util.concurrent.TimeUnit;
-
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,24 +9,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-/**
- *切面类统计每个方法执行了多长时间 
- * @author brucevsked
- *
- */
 @Aspect
 @Component
-public class PerformenceMonitor {
+public class PerformenceAop {
 
-    private static final Logger log = LoggerFactory.getLogger(PerformenceMonitor.class);
-	
-    @Pointcut("execution(* com.vsked..*.*(..))")    
-    private void pointCutMethod() {    
+    private static final Logger log = LoggerFactory.getLogger(PerformenceAop.class);
+
+    @Pointcut("execution(* com.vsked.web..*.*(..)) || execution(* com.vsked.service..*.*(..))")
+    private void pointCutMethod() {
     }
-    
-    //声明环绕通知    
-   @Around("pointCutMethod()")    
-   public Object doAround(ProceedingJoinPoint pjp) throws Throwable {    
+
+   @Around("pointCutMethod()")
+   public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
        long begin = System.nanoTime();
        Object o = pjp.proceed();
        long end = System.nanoTime();

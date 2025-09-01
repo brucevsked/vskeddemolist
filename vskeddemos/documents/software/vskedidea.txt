@@ -116,15 +116,78 @@ Serializable class without 'serialVersionUID' 打对号
 'serialVersionUID' field not declared 'private static final long'打对号
 
 24* 控制台行数设置与编码设置
- 点击 File ->Settings ->editor - >General->Console   选中如下图 idea默认的输出缓存区大小只有1024KB
+ 点击 File ->Settings ->editor ->General->Console   选中如下图 idea默认的输出缓存区大小只有1024KB
  修改为 20480 并所下面编码设置为utf-8
 
 25* delete current line 删除当前行
 ctrl+y
 
+26* 修改toString模板
 
+类中右击-> toString() -> 在弹出的对话框中选 Settings ->String concat(+)将原来的这部分
 
+public java.lang.String toString() {
+#if ( $members.size() > 0 )
+#set ( $i = 0 )
+    return "$classname{" +
+#foreach( $member in $members )
+#if ( $i == 0 )
+    "##
+#else
+    ", ##
+#end
+#if ( $member.objectArray )
+#if ($java_version < 5)
+$member.name=" + ($member.accessor == null ? null : java.util.Arrays.asList($member.accessor)) +
+#else
+$member.name=" + java.util.Arrays.toString($member.accessor) +
+#end
+#elseif ( $member.primitiveArray && $java_version >= 5)
+$member.name=" + java.util.Arrays.toString($member.accessor) +
+#elseif ( $member.string )
+$member.name='" + $member.accessor + '\'' +
+#else
+$member.name=" + $member.accessor +
+#end
+#set ( $i = $i + 1 )
+#end
+    '}';
+#else
+    return "$classname{}";
+#end
+}
 
+修改为
+public java.lang.String toString() {
+#if ( $members.size() > 0 )
+#set ( $i = 0 )
+    return "" +
+#foreach( $member in $members )
+#if ( $i == 0 )
+    "##
+#else
+    ", ##
+#end
+#if ( $member.objectArray )
+#if ($java_version < 5)
+" + ($member.accessor == null ? null : java.util.Arrays.asList($member.accessor)) +
+#else
+" + java.util.Arrays.toString($member.accessor) +
+#end
+#elseif ( $member.primitiveArray && $java_version >= 5)
+" + java.util.Arrays.toString($member.accessor) +
+#elseif ( $member.string )
+" + $member.accessor
+#else
+" + $member.accessor +
+#end
+#set ( $i = $i + 1 )
+#end
+    "";
+#else
+    return "$classname{}";
+#end
+}
 
 --------------------------------------------------------------------------------
 本项目类导入不识别解决方案
