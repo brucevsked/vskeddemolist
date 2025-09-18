@@ -222,3 +222,5 @@ CDN
 
 安全检测方案
 mitre CWE4.6
+
+Burpsuite (http攻击如重放攻击)
