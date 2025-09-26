@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.vsked</groupId>
-	<artifactId>log4j2testng7springboot3simple</artifactId>
+	<artifactId>springboot3redis</artifactId>
 	<version>1.0</version>
 
 	<name>${project.artifactId}</name>
@@ -105,6 +105,10 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		<!-- log4j end -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
