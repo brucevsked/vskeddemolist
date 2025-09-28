@@ -1,4 +1,4 @@
-package com.vsked.draws;
+package com.vsked;
 
 import java.awt.Color;
 import java.awt.Graphics;

@@ -1,4 +1,4 @@
-package com.vsked.GUI;
+package com.vsked;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import com.vsked.draws.DrawCircles;
 
 public class MainFrame extends JFrame implements KeyListener, Runnable,ActionListener {
 	DrawCircles[] dc = new DrawCircles[9];
