@@ -43,7 +43,7 @@ public class ListTest {
     }
 
     @Test
-    public void remove(){
+    public void remove1(){
 
         LinkedList<UserEntity> userEntityLinkedList=new LinkedList<>();
         for(int i=0;i<10;i++){
@@ -63,6 +63,7 @@ public class ListTest {
 
         log.info("当前是有顺序的:{}",userEntityLinkedList);//可以在这里打个断点看下内存中是否有序
     }
+
 
     @Test
     public void clear(){

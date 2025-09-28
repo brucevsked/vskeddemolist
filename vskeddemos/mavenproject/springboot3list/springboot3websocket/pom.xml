@@ -6,10 +6,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.vsked</groupId>
-	<artifactId>springboot3globalerror</artifactId>
+	<artifactId>springboot3websocket</artifactId>
 	<version>1.0</version>
 
 	<name>${project.artifactId}</name>
+	<url>https://vsked.cn/</url>
 
 	<properties>
 		<!-- 声明项目配置依赖编码格式为 utf-8 -->
@@ -28,7 +29,7 @@
 		<mavenSurefirePlugin.version>3.5.2</mavenSurefirePlugin.version>
 
 		<testng.version>7.11.0</testng.version>
-		<springboot.version>3.4.4</springboot.version>
+		<springboot.version>3.5.6</springboot.version>
 	</properties>
 
 	<dependencyManagement>
@@ -104,6 +105,10 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		<!-- log4j end -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
