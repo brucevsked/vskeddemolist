@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顶石头游戏 - 单人/双人模式</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+         
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+         
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+         
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+         
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+        }
+         
+        .game-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+         
+        .player-info {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+         
+        .player1 {
+            background: rgba(65, 105, 225, 0.3);
+            border: 2px solid rgba(65, 105, 225, 0.5);
+        }
+         
+        .player2 {
+            background: rgba(220, 20, 60, 0.3);
+            border: 2px solid rgba(220, 20, 60, 0.5);
+        }
+         
+        .active {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+         
+        .player-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+         
+        .player-count {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+        }
+         
+        .game-board {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+         
+        .board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 5px;
+            width: 400px;
+            height: 400px;
+        }
+         
+        .cell {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            border: 2px solid transparent;
+        }
+         
+        .cell:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.03);
+        }
+         
+        .cell.selected {
+            border-color: gold;
+            box-shadow: 0 0 10px gold;
+        }
+         
+        .cell.computer-move {
+            border-color: #ff9800;
+            box-shadow: 0 0 10px #ff9800;
+            animation: pulse 1s infinite;
+        }
+         
+        .piece {
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+         
+        .player1-piece {
+            background: radial-gradient(circle at 30% 30%, #4a6ee0, #1e3a8a);
+        }
+         
+        .player2-piece {
+            background: radial-gradient(circle at 30% 30%, #e63946, #9d174d);
+        }
+         
+        .rules {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            max-width: 800px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+         
+        .rules h2 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+         
+        .rules ul {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+         
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+         
+        .mode-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+         
+        .mode-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+         
+        .mode-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+         
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+         
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+         
+        .win-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+         
+        .win-content {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: popIn 0.5s ease-out;
+        }
+         
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+         
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px #ff9800; }
+            50% { box-shadow: 0 0 20px #ff9800; }
+            100% { box-shadow: 0 0 5px #ff9800; }
+        }
+         
+        .win-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+         
+        .win-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+         
+        [url=home.php?mod=space&uid=945662]@media[/url] (max-width: 768px) {
+            .game-container {
+                flex-direction: column;
+                align-items: center;
+            }
+             
+            .board {
+                width: 300px;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>顶石头游戏</h1>
+        <p>策略与智慧的较量</p>
+    </div>
+     
+    <div class="game-container">
+        <div class="game-info">
+            <div class="mode-selector">
+                <button class="mode-btn active" id="two-player-btn">双人游戏</button>
+                <button class="mode-btn" id="one-player-btn">单人游戏 (对战电脑)</button>
+            </div>
+             
+            <div class="player-info player1 active" id="player1-info">
+                <div class="player-title">
+                    <div class="piece player1-piece" style="width: 20px; height: 20px;"></div>
+                    <span>玩家 1</span>
+                </div>
+                <div class="player-count" id="player1-count">4 颗棋子</div>
+                <p>当前回合</p>
+            </div>
+             
+            <div class="player-info player2" id="player2-info">
+                <div class="player-title">
+                    <div class="piece player2-piece" style="width: 20px; height: 20px;"></div>
+                    <span id="player2-label">玩家 2</span>
+                </div>
+                <div class="player-count" id="player2-count">4 颗棋子</div>
+                <p id="player2-status">等待中</p>
+            </div>
+             
+            <div class="controls">
+                <button id="restart-btn">重新开始</button>
+                <button id="hint-btn">提示</button>
+            </div>
+        </div>
+         
+        <div class="game-board">
+            <div class="board" id="game-board">
+                <!-- 游戏棋盘将通过JavaScript生成 -->
+            </div>
+        </div>
+    </div>
+     
+    <div class="rules">
+        <h2>游戏规则</h2>
+        <ul>
+            <li>两名玩家轮流移动自己的棋子</li>
+            <li>每次只能将棋子移动到相邻的空格</li>
+            <li>当一列或一行有三个棋子，且其中两个是当前玩家的相邻棋子，同时还有一个是对手的棋子时，可以吃掉对手的棋子</li>
+            <li>当一名玩家的棋子数量少于2时，游戏结束，对方获胜</li>
+        </ul>
+    </div>
+     
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 游戏状态
+            const gameState = {
+                currentPlayer: 1,
+                selectedPiece: null,
+                board: Array(4).fill().map(() => Array(4).fill(0)),
+                playerPieces: {
+                    1: 4,
+                    2: 4
+                },
+                gameMode: 'two-player', // 'two-player' 或 'one-player'
+                isComputerThinking: false
+            };
+             
+            // 初始化棋盘
+            function initBoard() {
+                const boardElement = document.getElementById('game-board');
+                boardElement.innerHTML = '';
+                 
+                // 初始化棋盘状态
+                for (let i = 0; i < 4; i++) {
+                    for (let j = 0; j < 4; j++) {
+                        const cell = document.createElement('div');
+                        cell.className = 'cell';
+                        cell.dataset.row = i;
+                        cell.dataset.col = j;
+                         
+                        // 设置初始棋子位置
+                        if (i === 0) {
+                            gameState.board[i][j] = 1; // 玩家1的棋子
+                        } else if (i === 3) {
+                            gameState.board[i][j] = 2; // 玩家2的棋子
+                        }
+                         
+                        cell.addEventListener('click', () => handleCellClick(i, j));
+                        boardElement.appendChild(cell);
+                    }
+                }
+                 
+                updateBoard();
+                updatePlayerInfo();
+            }
+             
+            // 更新棋盘显示
+            function updateBoard() {
+                const cells = document.querySelectorAll('.cell');
+                 
+                cells.forEach(cell => {
+                    const row = parseInt(cell.dataset.row);
+                    const col = parseInt(cell.dataset.col);
+                    const value = gameState.board[row][col];
+                     
+                    // 清除之前的内容
+                    cell.innerHTML = '';
+                    cell.classList.remove('selected', 'computer-move');
+                     
+                    // 如果有棋子
+                    if (value !== 0) {
+                        const piece = document.createElement('div');
+                        piece.className = `piece ${value === 1 ? 'player1-piece' : 'player2-piece'}`;
+                        piece.textContent = value === 1 ? '1' : '2';
+                        cell.appendChild(piece);
+                    }
+                     
+                    // 标记选中的棋子
+                    if (gameState.selectedPiece && 
+                        gameState.selectedPiece.row === row && 
+                        gameState.selectedPiece.col === col) {
+                        cell.classList.add('selected');
+                    }
+                });
+            }
+             
+            // 更新玩家信息
+            function updatePlayerInfo() {
+                document.getElementById('player1-count').textContent = `${gameState.playerPieces[1]} 颗棋子`;
+                document.getElementById('player2-count').textContent = `${gameState.playerPieces[2]} 颗棋子`;
+                 
+                // 更新当前玩家高亮
+                if (gameState.currentPlayer === 1) {
+                    document.getElementById('player1-info').classList.add('active');
+                    document.getElementById('player2-info').classList.remove('active');
+                } else {
+                    document.getElementById('player1-info').classList.remove('active');
+                    document.getElementById('player2-info').classList.add('active');
+                }
+                 
+                // 更新玩家2标签
+                const player2Label = document.getElementById('player2-label');
+                const player2Status = document.getElementById('player2-status');
+                 
+                if (gameState.gameMode === 'one-player') {
+                    player2Label.textContent = '电脑';
+                    if (gameState.currentPlayer === 2) {
+                        player2Status.textContent = '思考中...';
+                    } else {
+                        player2Status.textContent = '等待中';
+                    }
+                } else {
+                    player2Label.textContent = '玩家 2';
+                    player2Status.textContent = gameState.currentPlayer === 2 ? '当前回合' : '等待中';
+                }
+            }
+             
+            // 处理格子点击
+            function handleCellClick(row, col) {
+                // 如果电脑正在思考，忽略点击
+                if (gameState.isComputerThinking) return;
+                 
+                // 如果是单人模式且当前是电脑回合，忽略点击
+                if (gameState.gameMode === 'one-player' && gameState.currentPlayer === 2) return;
+                 
+                const cellValue = gameState.board[row][col];
+                 
+                // 如果点击的是当前玩家的棋子
+                if (cellValue === gameState.currentPlayer) {
+                    gameState.selectedPiece = { row, col };
+                    updateBoard();
+                    return;
+                }
+                 
+                // 如果已经选择了棋子并且点击的是空位
+                if (gameState.selectedPiece && cellValue === 0) {
+                    // 检查移动是否合法（相邻移动）
+                    const { row: selectedRow, col: selectedCol } = gameState.selectedPiece;
+                    const rowDiff = Math.abs(selectedRow - row);
+                    const colDiff = Math.abs(selectedCol - col);
+                     
+                    if ((rowDiff === 1 && colDiff === 0) || (rowDiff === 0 && colDiff === 1)) {
+                        // 执行移动
+                        makeMove(selectedRow, selectedCol, row, col);
+                    }
+                }
+            }
+             
+            // 执行移动
+            function makeMove(fromRow, fromCol, toRow, toCol) {
+                // 更新棋盘状态
+                gameState.board[toRow][toCol] = gameState.currentPlayer;
+                gameState.board[fromRow][fromCol] = 0;
+                 
+                // 检查是否可以吃子
+                checkForCapture(toRow, toCol);
+                 
+                // 切换玩家
+                gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
+                gameState.selectedPiece = null;
+                 
+                updateBoard();
+                updatePlayerInfo();
+                 
+                // 检查游戏是否结束
+                if (!checkGameEnd()) {
+                    // 如果是单人模式且当前是电脑回合，触发电脑移动
+                    if (gameState.gameMode === 'one-player' && gameState.currentPlayer === 2) {
+                        setTimeout(computerMove, 1000);
+                    }
+                }
+            }
+             
+            // 检查是否可以吃子
+            function checkForCapture(row, col) {
+                // 检查行
+                checkLineForCapture(row, true);
+                 
+                // 检查列
+                checkLineForCapture(col, false);
+            }
+             
+            // 检查行或列是否可以吃子
+            function checkLineForCapture(index, isRow) {
+                const line = isRow ? 
+                    gameState.board[index] : 
+                    [0, 1, 2, 3].map(i => gameState.board[i][index]);
+                 
+                // 检查是否有三个棋子
+                const pieceCount = line.filter(cell => cell !== 0).length;
+                if (pieceCount !== 3) return;
+                 
+                // 检查是否有两个当前玩家的相邻棋子
+                let currentPlayerAdjacent = false;
+                let opponentPieceIndex = -1;
+                 
+                for (let i = 0; i < 3; i++) {
+                    if (line[i] === gameState.currentPlayer && 
+                        line[i+1] === gameState.currentPlayer) {
+                        currentPlayerAdjacent = true;
+                         
+                        // 检查相邻位置是否有对手棋子
+                        if (i > 0 && line[i-1] !== 0 && line[i-1] !== gameState.currentPlayer) {
+                            opponentPieceIndex = i-1;
+                        } else if (i < 2 && line[i+2] !== 0 && line[i+2] !== gameState.currentPlayer) {
+                            opponentPieceIndex = i+2;
+                        }
+                    }
+                }
+                 
+                // 如果可以吃子
+                if (currentPlayerAdjacent && opponentPieceIndex !== -1) {
+                    if (isRow) {
+                        gameState.board[index][opponentPieceIndex] = 0;
+                    } else {
+                        gameState.board[opponentPieceIndex][index] = 0;
+                    }
+                     
+                    // 更新棋子计数
+                    const opponent = gameState.currentPlayer === 1 ? 2 : 1;
+                    gameState.playerPieces[opponent]--;
+                     
+                    // 显示吃子动画
+                    showCaptureAnimation(isRow ? index : opponentPieceIndex, isRow ? opponentPieceIndex : index);
+                }
+            }
+             
+            // 显示吃子动画
+            function showCaptureAnimation(row, col) {
+                const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
+                cell.style.animation = 'shake 0.5s';
+                 
+                setTimeout(() => {
+                    cell.style.animation = '';
+                }, 500);
+            }
+             
+            // 检查游戏是否结束
+            function checkGameEnd() {
+                if (gameState.playerPieces[1] < 2) {
+                    showWinMessage(2);
+                    return true;
+                } else if (gameState.playerPieces[2] < 2) {
+                    showWinMessage(1);
+                    return true;
+                }
+                return false;
+            }
+             
+            // 显示获胜消息
+            function showWinMessage(winner) {
+                const winMessage = document.createElement('div');
+                winMessage.className = 'win-message';
+                 
+                let winnerText = '';
+                if (gameState.gameMode === 'one-player' && winner === 2) {
+                    winnerText = '电脑获胜!';
+                } else if (gameState.gameMode === 'one-player' && winner === 1) {
+                    winnerText = '恭喜你获胜!';
+                } else {
+                    winnerText = `玩家 ${winner} 获胜!`;
+                }
+                 
+                winMessage.innerHTML = `
+                    <div class="win-content">
+                        <h2>游戏结束!</h2>
+                        <p>${winnerText}</p>
+                        <button id="play-again-btn">再玩一次</button>
+                    </div>
+                `;
+                 
+                document.body.appendChild(winMessage);
+                 
+                document.getElementById('play-again-btn').addEventListener('click', () => {
+                    document.body.removeChild(winMessage);
+                    resetGame();
+                });
+            }
+             
+            // 电脑移动
+            function computerMove() {
+                if (gameState.isComputerThinking) return;
+                 
+                gameState.isComputerThinking = true;
+                updatePlayerInfo();
+                 
+                // 延迟执行，让玩家看到电脑正在思考
+                setTimeout(() => {
+                    // 获取所有可能的移动
+                    const possibleMoves = getAllPossibleMoves(2);
+                     
+                    if (possibleMoves.length === 0) {
+                        gameState.isComputerThinking = false;
+                        return;
+                    }
+                     
+                    // 评估每个移动的得分
+                    const scoredMoves = possibleMoves.map(move => {
+                        return {
+                            move,
+                            score: evaluateMove(move)
+                        };
+                    });
+                     
+                    // 按得分排序（从高到低）
+                    scoredMoves.sort((a, b) => b.score - a.score);
+                     
+                    // 选择得分最高的移动
+                    const bestMove = scoredMoves[0].move;
+                     
+                    // 高亮显示电脑的移动
+                    const fromCell = document.querySelector(`.cell[data-row="${bestMove.fromRow}"][data-col="${bestMove.fromCol}"]`);
+                    const toCell = document.querySelector(`.cell[data-row="${bestMove.toRow}"][data-col="${bestMove.toCol}"]`);
+                     
+                    fromCell.classList.add('computer-move');
+                    toCell.classList.add('computer-move');
+                     
+                    // 延迟执行移动，让玩家看到高亮
+                    setTimeout(() => {
+                        makeMove(bestMove.fromRow, bestMove.fromCol, bestMove.toRow, bestMove.toCol);
+                        gameState.isComputerThinking = false;
+                    }, 1000);
+                     
+                }, 1000);
+            }
+             
+            // 获取所有可能的移动
+            function getAllPossibleMoves(player) {
+                const moves = [];
+                 
+                // 遍历所有格子
+                for (let row = 0; row < 4; row++) {
+                    for (let col = 0; col < 4; col++) {
+                        // 如果这个格子是当前玩家的棋子
+                        if (gameState.board[row][col] === player) {
+                            // 检查四个方向的相邻格子
+                            const directions = [
+                                { row: row-1, col: col }, // 上
+                                { row: row+1, col: col }, // 下
+                                { row: row, col: col-1 }, // 左
+                                { row: row, col: col+1 }  // 右
+                            ];
+                             
+                            // 检查每个方向
+                            directions.forEach(dir => {
+                                if (dir.row >= 0 && dir.row < 4 && dir.col >= 0 && dir.col < 4) {
+                                    // 如果目标格子是空的
+                                    if (gameState.board[dir.row][dir.col] === 0) {
+                                        moves.push({
+                                            fromRow: row,
+                                            fromCol: col,
+                                            toRow: dir.row,
+                                            toCol: dir.col
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+                 
+                return moves;
+            }
+             
+            // 评估移动的得分
+            function evaluateMove(move) {
+                let score = 0;
+                 
+                // 临时执行移动
+                const tempBoard = JSON.parse(JSON.stringify(gameState.board));
+                tempBoard[move.toRow][move.toCol] = 2;
+                tempBoard[move.fromRow][move.fromCol] = 0;
+                 
+                // 检查是否能够吃子
+                if (canCaptureAfterMove(tempBoard, move.toRow, move.toCol, 2)) {
+                    score += 100; // 能吃子给高分
+                }
+                 
+                // 检查是否阻止玩家吃子
+                if (canCaptureAfterMove(tempBoard, move.toRow, move.toCol, 1)) {
+                    score += 50; // 阻止玩家吃子给中等分
+                }
+                 
+                // 中心位置得分更高
+                if ((move.toRow === 1 || move.toRow === 2) && (move.toCol === 1 || move.toCol === 2)) {
+                    score += 10;
+                }
+                 
+                // 随机因素，避免完全可预测
+                score += Math.random() * 5;
+                 
+                return score;
+            }
+             
+            // 检查移动后是否可以吃子
+            function canCaptureAfterMove(board, row, col, player) {
+                // 检查行
+                const rowLine = board[row];
+                if (canCaptureInLine(rowLine, player)) return true;
+                 
+                // 检查列
+                const colLine = [0, 1, 2, 3].map(i => board[i][col]);
+                if (canCaptureInLine(colLine, player)) return true;
+                 
+                return false;
+            }
+             
+            // 检查一行或一列是否可以吃子
+            function canCaptureInLine(line, player) {
+                // 检查是否有三个棋子
+                const pieceCount = line.filter(cell => cell !== 0).length;
+                if (pieceCount !== 3) return false;
+                 
+                // 检查是否有两个当前玩家的相邻棋子
+                for (let i = 0; i < 3; i++) {
+                    if (line[i] === player && line[i+1] === player) {
+                        // 检查相邻位置是否有对手棋子
+                        if (i > 0 && line[i-1] !== 0 && line[i-1] !== player) {
+                            return true;
+                        } else if (i < 2 && line[i+2] !== 0 && line[i+2] !== player) {
+                            return true;
+                        }
+                    }
+                }
+                 
+                return false;
+            }
+             
+            // 重置游戏
+            function resetGame() {
+                gameState.currentPlayer = 1;
+                gameState.selectedPiece = null;
+                gameState.board = Array(4).fill().map(() => Array(4).fill(0));
+                gameState.playerPieces = { 1: 4, 2: 4 };
+                gameState.isComputerThinking = false;
+                 
+                initBoard();
+            }
+             
+            // 提示功能
+            document.getElementById('hint-btn').addEventListener('click', showHint);
+             
+            function showHint() {
+                // 如果是电脑回合，不显示提示
+                if (gameState.gameMode === 'one-player' && gameState.currentPlayer === 2) return;
+                 
+                // 简单的提示：高亮当前玩家可以移动的棋子
+                const cells = document.querySelectorAll('.cell');
+                 
+                cells.forEach(cell => {
+                    const row = parseInt(cell.dataset.row);
+                    const col = parseInt(cell.dataset.col);
+                     
+                    if (gameState.board[row][col] === gameState.currentPlayer) {
+                        cell.style.boxShadow = '0 0 10px gold';
+                         
+                        setTimeout(() => {
+                            cell.style.boxShadow = '';
+                        }, 2000);
+                    }
+                });
+            }
+             
+            // 模式切换
+            document.getElementById('two-player-btn').addEventListener('click', function() {
+                if (gameState.gameMode !== 'two-player') {
+                    gameState.gameMode = 'two-player';
+                    this.classList.add('active');
+                    document.getElementById('one-player-btn').classList.remove('active');
+                    resetGame();
+                }
+            });
+             
+            document.getElementById('one-player-btn').addEventListener('click', function() {
+                if (gameState.gameMode !== 'one-player') {
+                    gameState.gameMode = 'one-player';
+                    this.classList.add('active');
+                    document.getElementById('two-player-btn').classList.remove('active');
+                    resetGame();
+                }
+            });
+             
+            // 重新开始按钮
+            document.getElementById('restart-btn').addEventListener('click', resetGame);
+             
+            // 初始化游戏
+            initBoard();
+             
+            // 添加动画样式
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

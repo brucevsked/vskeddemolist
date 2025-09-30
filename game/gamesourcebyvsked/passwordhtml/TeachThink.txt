@@ -1,17 +1,17 @@
-ÉêÇë¼Ó¾« ÓÆÓÆËêÔÂÖ®ÄÇÐ©ÄêÄÇÐ©Å£ÈËÐ´µÄcode
-ÄÇÊ±ºòµÄ¸ç»¹ÔÚÑ§Ð£ÉÏÑ§µÄÊ±ºò£¬ÓÐÌì¿´µ½Ò»¸öÓÃvbsÐ´µÄuÅÌ²¡¶¾.ÀïÃæµÄ×÷ÕßÓÃÁËÒ»ÖÖ°³ÈÏÎªºÝÅ£XµÄ´úÂëÐ´·¨
-1 ½«ascii×Ö·û¶¨Òå³ÉÒ»¸öÊý×éÐÔÖÊµÄ¶«Î÷
-2 ½«ÒªÐ´µÄ´úÂë¶ÔÓ¦µÄasciiµÄÏÂ±êÐ´ÏÂÀ´.
-3ÓÃÒ»¸öfor »òwhile¶ÁÈ¡³öËùÓÐ×Ö·û²¢½«³ÌÐòÆ´³öÀ´
-4Ð´Ò»¸öÖ´ÐÐ
-Ê¾Àý´úÂë:
+ç”³è¯·åŠ ç²¾ æ‚ æ‚ å²æœˆä¹‹é‚£äº›å¹´é‚£äº›ç‰›äººå†™çš„code
+é‚£æ—¶å€™çš„å“¥è¿˜åœ¨å­¦æ ¡ä¸Šå­¦çš„æ—¶å€™ï¼Œæœ‰å¤©çœ‹åˆ°ä¸€ä¸ªç”¨vbså†™çš„uç›˜ç—…æ¯’.é‡Œé¢çš„ä½œè€…ç”¨äº†ä¸€ç§ä¿ºè®¤ä¸ºç‹ ç‰›Xçš„ä»£ç å†™æ³•
+1 å°†asciiå­—ç¬¦å®šä¹‰æˆä¸€ä¸ªæ•°ç»„æ€§è´¨çš„ä¸œè¥¿
+2 å°†è¦å†™çš„ä»£ç å¯¹åº”çš„asciiçš„ä¸‹æ ‡å†™ä¸‹æ¥.
+3ç”¨ä¸€ä¸ªfor æˆ–whileè¯»å–å‡ºæ‰€æœ‰å­—ç¬¦å¹¶å°†ç¨‹åºæ‹¼å‡ºæ¥
+4å†™ä¸€ä¸ªæ‰§è¡Œ
+ç¤ºä¾‹ä»£ç :
 for i=1 toUBound(strs):runner=runner&chrlstrs(i):next;
 excute runner
 
-ÕâÊÇÒ»ÖÖ´úÂë¼ÓÃÜµÄË¼Ïë.¸ç¾ÍÔÚÏëÄÇ.ÔÛÒ²¿ÉÒÔÐ´Ò»¸öÕâÖÖ³ÌÐò
-1Ô­´úÂë
-2ÔÛÐ´µÄÈí¼þ
-3 ÔÛÐ´µÄÄÇÈí¼þprocess(Ô­´úÂë)=asciiµÄArray+runner
+è¿™æ˜¯ä¸€ç§ä»£ç åŠ å¯†çš„æ€æƒ³.å“¥å°±åœ¨æƒ³é‚£.å’±ä¹Ÿå¯ä»¥å†™ä¸€ä¸ªè¿™ç§ç¨‹åº
+1åŽŸä»£ç 
+2å’±å†™çš„è½¯ä»¶
+3 å’±å†™çš„é‚£è½¯ä»¶process(åŽŸä»£ç )=asciiçš„Array+runner
 
 <script>
 function run(){
@@ -104,7 +104,7 @@ run();
    eval(str);
   }
   */
-  //³éÏóÒÔÉÏÁ½·½·¨
+  //æŠ½è±¡ä»¥ä¸Šä¸¤æ–¹æ³•
   function initAscii(vName,vForCount,vStartIndex){
    var str=vName+"={";
    for( var i=0;i<vForCount;i++)
@@ -122,13 +122,13 @@ function run(){
 run();
 </script>
 
-³éÏóÒÔºó¼°µ÷ÓÃ½á¹û
+æŠ½è±¡ä»¥åŽåŠè°ƒç”¨ç»“æžœ
 
 <script>
   
   var numAscii={};
   var letterAscii={};
-  //³éÏóÒÔÉÏÁ½·½·¨
+  //æŠ½è±¡ä»¥ä¸Šä¸¤æ–¹æ³•
   function initAscii(vName,vForCount,vStartIndex){
    var str=vName+"={";
    for( var i=0;i<vForCount;i++)
@@ -146,8 +146,8 @@ function run(){
 run();
 </script>
 
-ÉêÇë¼Ó¾« ÓÆÓÆËêÔÂ¸Ä×°50ÐÐ´úÂëÐ´ÓÎÏ·follow me
-1 Ò»²½Ò»¸ö½ÅÓ¡ Äã»á×ßÉÏÉñµÄµÀÂ·¹þ¹þ¹þ¹þ
+ç”³è¯·åŠ ç²¾ æ‚ æ‚ å²æœˆæ”¹è£…50è¡Œä»£ç å†™æ¸¸æˆfollow me
+1 ä¸€æ­¥ä¸€ä¸ªè„šå° ä½ ä¼šèµ°ä¸Šç¥žçš„é“è·¯å“ˆå“ˆå“ˆå“ˆ
 
 <script>
 function run(){
@@ -156,31 +156,31 @@ function run(){
 }
 run();
 </script>
-´úÂëÏê½â
-½¨Á¢Ò»¸ö¿Õ°×ÎÄ¼þÀ©Õ¹ÃûÎª.html»ò.htm
-htmlÊÇhyper text mark languageËõÐ´(ºÃÏñÕâÃ´Ð´ )
-script ½Å±¾µÄÒâË¼ scriptÖÐÊ²Ã´²ÎÊý¶¼²»Ð´µÄ»°Ä¬ÈÏÎªjavascript
+ä»£ç è¯¦è§£
+å»ºç«‹ä¸€ä¸ªç©ºç™½æ–‡ä»¶æ‰©å±•åä¸º.htmlæˆ–.htm
+htmlæ˜¯hyper text mark languageç¼©å†™(å¥½åƒè¿™ä¹ˆå†™ )
+script è„šæœ¬çš„æ„æ€ scriptä¸­ä»€ä¹ˆå‚æ•°éƒ½ä¸å†™çš„è¯é»˜è®¤ä¸ºjavascript
 function run(){}
-javascriptÓï·¨:
-½¨Á¢Ò»¸öº¯Êý
-1 function ÒªÐ´µ½scriptÖÐ¼ä
-2 ×¢ÒâÄãµÄscript±ÕºÏ Ð¡ÓÚºÅscript´óÓÚºÅ ÕâÊÇÆðÊ¼½Å±¾±ê¼Ç ±ê¼ÇÒ»°ã¶¼ÊÇ³É¶Ô³öÏÖµÄ µ±È»Ò²»áÓÐ×Ô·â±ÕµÄ±êÇ©
-Ð¡ÓÚºÅ·´Ð±¸Ü±ê¼ÇÃû´óÓÚºÅÎª¹Ø±Õ´Ë±êÇ©
-3functionÓÃ·¨
-function¿Õ¸ñº¯ÊýÃû(²ÎÊý1,²ÎÊý2....²ÎÊýn){
-º¯ÊýÌå
-}//º¯Êý½áÊø±ê¼Ç
-4 Ë«·´Ð±¸ÜºóÃæÄÚÈÝ²»»á±»±àÒëÒ²¾ÍÊÇ×¢ÊÍ /* Óë*/Ö®¼äÒ²²»»á±»±àÒë
-/*Óë*/¿É×¢ÊÍ¶àÐÐ ´úÂëÐ´¶àÁËÎªÁË±ãÓÚÎ¬»¤»¹ÊÇÐ´ºÃ×¢ÊÍ°É 
-5 var ¶¨Òå±äÁ¿ jsÊôÓÚÈõÀàÐÍÓïÑÔËùÒÔ²»ÐèÒªÖªµÀÄã¶¨ÒåµÄÊÇÉñÂíÀàÐÍ
-6 varÓï·¨:
-var ±äÁ¿Ãû = ±äÁ¿Öµ;
-7 ÒÔÉÏÊ¾ÀýÖÐ×îºóÓÃµ½ÁËÕýÐ±¸Ü ´ú±í×ªÒå ÓÐÐ©Ê±ºòÐèÒªÌØÊâ×Ö·ûÊ±ÒªÓÃµ½(rember it)
-8 Ã¿Ò»ÐÐ´úÂëÒ»°ãÒÔ·ÖºÅ½áÎ²´ú±íÕâÐÐ´úÂëÒÑ¾­Ð´Íê
-9 alert();µ¯³ö¿ò
-10 alertÓÃ·¨Ö®Ë«´ò alert(alert);ÊÔÊÔÐ§¹û°ÉºÇºÇÃ»ÓÃ¹ý°É(ÒÔºó»áÓÃµ½àÞ)
-11 alertÊÇÒ»¸öº¯ÊýjsÄÚÖÃµÄalert(ÄãÒªµ¯³öµÄÄÚÈÝ);
-2 Ãü¿à²»ÄÜÔ¸zf,µã±»²»ÄÜÔ¸É«»á´«ËµÖÐµÄdoucment
+javascriptè¯­æ³•:
+å»ºç«‹ä¸€ä¸ªå‡½æ•°
+1 function è¦å†™åˆ°scriptä¸­é—´
+2 æ³¨æ„ä½ çš„scripté—­åˆ å°äºŽå·scriptå¤§äºŽå· è¿™æ˜¯èµ·å§‹è„šæœ¬æ ‡è®° æ ‡è®°ä¸€èˆ¬éƒ½æ˜¯æˆå¯¹å‡ºçŽ°çš„ å½“ç„¶ä¹Ÿä¼šæœ‰è‡ªå°é—­çš„æ ‡ç­¾
+å°äºŽå·åæ–œæ æ ‡è®°åå¤§äºŽå·ä¸ºå…³é—­æ­¤æ ‡ç­¾
+3functionç”¨æ³•
+functionç©ºæ ¼å‡½æ•°å(å‚æ•°1,å‚æ•°2....å‚æ•°n){
+å‡½æ•°ä½“
+}//å‡½æ•°ç»“æŸæ ‡è®°
+4 åŒåæ–œæ åŽé¢å†…å®¹ä¸ä¼šè¢«ç¼–è¯‘ä¹Ÿå°±æ˜¯æ³¨é‡Š /* ä¸Ž*/ä¹‹é—´ä¹Ÿä¸ä¼šè¢«ç¼–è¯‘
+/*ä¸Ž*/å¯æ³¨é‡Šå¤šè¡Œ ä»£ç å†™å¤šäº†ä¸ºäº†ä¾¿äºŽç»´æŠ¤è¿˜æ˜¯å†™å¥½æ³¨é‡Šå§ 
+5 var å®šä¹‰å˜é‡ jså±žäºŽå¼±ç±»åž‹è¯­è¨€æ‰€ä»¥ä¸éœ€è¦çŸ¥é“ä½ å®šä¹‰çš„æ˜¯ç¥žé©¬ç±»åž‹
+6 varè¯­æ³•:
+var å˜é‡å = å˜é‡å€¼;
+7 ä»¥ä¸Šç¤ºä¾‹ä¸­æœ€åŽç”¨åˆ°äº†æ­£æ–œæ  ä»£è¡¨è½¬ä¹‰ æœ‰äº›æ—¶å€™éœ€è¦ç‰¹æ®Šå­—ç¬¦æ—¶è¦ç”¨åˆ°(rember it)
+8 æ¯ä¸€è¡Œä»£ç ä¸€èˆ¬ä»¥åˆ†å·ç»“å°¾ä»£è¡¨è¿™è¡Œä»£ç å·²ç»å†™å®Œ
+9 alert();å¼¹å‡ºæ¡†
+10 alertç”¨æ³•ä¹‹åŒæ‰“ alert(alert);è¯•è¯•æ•ˆæžœå§å‘µå‘µæ²¡ç”¨è¿‡å§(ä»¥åŽä¼šç”¨åˆ°å™¢)
+11 alertæ˜¯ä¸€ä¸ªå‡½æ•°jså†…ç½®çš„alert(ä½ è¦å¼¹å‡ºçš„å†…å®¹);
+2 å‘½è‹¦ä¸èƒ½æ„¿zf,ç‚¹è¢«ä¸èƒ½æ„¿è‰²ä¼šä¼ è¯´ä¸­çš„doucment
 <script>
 function run(){
 var s="0123456789abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ()[]<>?:,;%+-.={}&'\"";
@@ -190,25 +190,25 @@ document.write("i :"+i+"\t\t v:"+s.charAt(i)+"</br>");
 }//end run
 run();
 </script>
-ÕâÀïÃæÐÂÌí¼ÓµÄÊÇfor
-1javascript¼ò³Æjs¿É²»ÊÇ¼éÉÌàÞ....ÒÔºó¸ç¾Íjs´újavascriptà¶
-2jsÖÐfor: for ÊÇÒ»ÖÖÑ­»·½á¹¹»ù±¾Óï·¨
-  for(±äÁ¿Ãû=ÆðÊ¼±äÁ¿Öµ ; Ìõ¼þ±í´ïÊ½ ; ±äÁ¿²½½øÖµ){
-    Ñ­»·Ìå
+è¿™é‡Œé¢æ–°æ·»åŠ çš„æ˜¯for
+1javascriptç®€ç§°jså¯ä¸æ˜¯å¥¸å•†å™¢....ä»¥åŽå“¥å°±jsä»£javascriptå–½
+2jsä¸­for: for æ˜¯ä¸€ç§å¾ªçŽ¯ç»“æž„åŸºæœ¬è¯­æ³•
+  for(å˜é‡å=èµ·å§‹å˜é‡å€¼ ; æ¡ä»¶è¡¨è¾¾å¼ ; å˜é‡æ­¥è¿›å€¼){
+    å¾ªçŽ¯ä½“
    }//end for XX
-3 ±äÁ¿Ãû Èçi (var i¿ÉÒÔ¼òÐ´³Éiµ«ÎªÁË±à³Ì·ç¸ñ¼°Ð§ÂÊµÈ·½Ãæ¿¼ÂÇ×îºÃÐ´ÉÏ¹þ)
-4 ÆðÊ¼±äÁ¿Öµ ¾ÍÊÇ±äÁ¿Ò»¿ªÊ¼¶à´ó ¿ÉÒÔÊÇÈÎÒâÊýÃ´....
-5 ±äÁ¿²½½øÖµ ¾ÍÊÇ±äÁ¿Ò»´ÎÔö´ó»òÊÇ¼õÐ¡¶àÉÙ ++´ú±í×Ô¶¯¼Ó1,+2´ú±í×Ô¶¯¼Ó2 
-È«Ð´Ò²¾ÍÊÇi=i+1ÕâÊÇ++µÄÊ±ºò i=i+2 ÕâÊÇ+2µÄÊ±ºò
-6 documentÎÄµµ¶ÔÏó ÍøÒ³¿ÉÒÔ¿´×÷documentÀïÃæµÄ¿Ø¼þÈçÎÄ±¾¿ò °´Å¥ ¿ÉÒÔ¿´×÷ÊÇÔªËØ
-7 document.write("ÄÚÈÝ"); ½«ÄÚÈÝÐ´µ½ÍøÒ³ÉÏ ÍøÒ³¾ÍÊÇÒ»ÕÅ°×Ö½. write¾ÍÊÇÄÇÖ§2B....Ð¡Ç¦±ÊÍ·
-8 sÏÖÔÚÊÇÒ»¸ö×Ö·û´® ÉñÂí×Ö·û´®.ÉÏÍ·ÄúÀÏ²»ÊÇËµjsÊÇÈõÀàÐÍ¶¯Ì¬ÓïÑÔÕâÕ¦³öÀ´¸ö×Ö·û´®(String)ÀàÐÍ?
-    ÈõÀàÐÍ²»´ú±íÄ¾ÓÍÀàÐÍ.¿´¿´Ç°±²ÃÇµÄÃèÊö°É¡£Ë³±ãÓÃÒ»¸öËÑË÷¹¦ÄÜ¿´¿´ÒÔÇ°ÀÏÔ±¹¤ÃÇÊÇÕ¦ÏêÏ¸½âËµdi..
-9 s.charAt(X);  È¡X´¦µÄ×Ö·ûÒ»¸ö ÊÊÓÃÀàÐÍ×Ö·û´®.Êý×Ö¿ÉÒÔÓÃÃþ...Äã44°É¹þ¹þ¹þ¹þ¶à¶¯ÊÖ³¤¼ûÊ¶ÂïÒª²»Ó¡Ïó²»Éî¿ÌÄÇ
-10 ÕâÀïÓÃµ½Ò»¸ö×Ô·â±ê¼Ç htmlÖÐ brÊÇ»»ÐÐ±ê¼Ç
-11µ÷ÓÃ¸Õ²Å×Ô¼º¶¨ÒåµÄº¯Êý¿´¿´Ð§¹û°É
-3ÎÂÏ°¹¦¿Ì ´çÓÐËù³¤
-¿´¿´ÕâÀïÃæÓÐÄÄÐ©ÒÔÇ°¸ç½²¹ýµÄ¶«¶«..¿´¿´ÓÐÉñÂí²»»áµÄ¶«¶«.ÇÒÌýÊ×¸èÂýÂýÌý¸ç¸øÄãËµÐÂ¼ÓµÄ¶«¶«
+3 å˜é‡å å¦‚i (var iå¯ä»¥ç®€å†™æˆiä½†ä¸ºäº†ç¼–ç¨‹é£Žæ ¼åŠæ•ˆçŽ‡ç­‰æ–¹é¢è€ƒè™‘æœ€å¥½å†™ä¸Šå“ˆ)
+4 èµ·å§‹å˜é‡å€¼ å°±æ˜¯å˜é‡ä¸€å¼€å§‹å¤šå¤§ å¯ä»¥æ˜¯ä»»æ„æ•°ä¹ˆ....
+5 å˜é‡æ­¥è¿›å€¼ å°±æ˜¯å˜é‡ä¸€æ¬¡å¢žå¤§æˆ–æ˜¯å‡å°å¤šå°‘ ++ä»£è¡¨è‡ªåŠ¨åŠ 1,+2ä»£è¡¨è‡ªåŠ¨åŠ 2 
+å…¨å†™ä¹Ÿå°±æ˜¯i=i+1è¿™æ˜¯++çš„æ—¶å€™ i=i+2 è¿™æ˜¯+2çš„æ—¶å€™
+6 documentæ–‡æ¡£å¯¹è±¡ ç½‘é¡µå¯ä»¥çœ‹ä½œdocumenté‡Œé¢çš„æŽ§ä»¶å¦‚æ–‡æœ¬æ¡† æŒ‰é’® å¯ä»¥çœ‹ä½œæ˜¯å…ƒç´ 
+7 document.write("å†…å®¹"); å°†å†…å®¹å†™åˆ°ç½‘é¡µä¸Š ç½‘é¡µå°±æ˜¯ä¸€å¼ ç™½çº¸. writeå°±æ˜¯é‚£æ”¯2B....å°é“…ç¬”å¤´
+8 sçŽ°åœ¨æ˜¯ä¸€ä¸ªå­—ç¬¦ä¸² ç¥žé©¬å­—ç¬¦ä¸².ä¸Šå¤´æ‚¨è€ä¸æ˜¯è¯´jsæ˜¯å¼±ç±»åž‹åŠ¨æ€è¯­è¨€è¿™å’‹å‡ºæ¥ä¸ªå­—ç¬¦ä¸²(String)ç±»åž‹?
+    å¼±ç±»åž‹ä¸ä»£è¡¨æœ¨æ²¹ç±»åž‹.çœ‹çœ‹å‰è¾ˆä»¬çš„æè¿°å§ã€‚é¡ºä¾¿ç”¨ä¸€ä¸ªæœç´¢åŠŸèƒ½çœ‹çœ‹ä»¥å‰è€å‘˜å·¥ä»¬æ˜¯å’‹è¯¦ç»†è§£è¯´di..
+9 s.charAt(X);  å–Xå¤„çš„å­—ç¬¦ä¸€ä¸ª é€‚ç”¨ç±»åž‹å­—ç¬¦ä¸².æ•°å­—å¯ä»¥ç”¨æ‘¸...ä½ 44å§å“ˆå“ˆå“ˆå“ˆå¤šåŠ¨æ‰‹é•¿è§è¯†å˜›è¦ä¸å°è±¡ä¸æ·±åˆ»é‚£
+10 è¿™é‡Œç”¨åˆ°ä¸€ä¸ªè‡ªå°æ ‡è®° htmlä¸­ bræ˜¯æ¢è¡Œæ ‡è®°
+11è°ƒç”¨åˆšæ‰è‡ªå·±å®šä¹‰çš„å‡½æ•°çœ‹çœ‹æ•ˆæžœå§
+3æ¸©ä¹ åŠŸåˆ» å¯¸æœ‰æ‰€é•¿
+çœ‹çœ‹è¿™é‡Œé¢æœ‰å“ªäº›ä»¥å‰å“¥è®²è¿‡çš„ä¸œä¸œ..çœ‹çœ‹æœ‰ç¥žé©¬ä¸ä¼šçš„ä¸œä¸œ.ä¸”å¬é¦–æ­Œæ…¢æ…¢å¬å“¥ç»™ä½ è¯´æ–°åŠ çš„ä¸œä¸œ
 <script>
 function run(){
 /*
@@ -227,24 +227,24 @@ alert(ta_s.value);
 <button onclick="cot();">Convert</button> </br>
 <textarea id="ta_t" rows="10" cols="60" style="width:99%; height:250px" tabindex="100" ></textarea> </br>
 
-Õâ´ÎÎÒÃÇÓÃÒÔÇ°Ñ§µ½µÄjsÐ´Ò»¸ö×ª»»Æ÷µÄ³õÊ¼°æ±¾.ÊÇÉñÂí×ª»»Æ÷.ÒÔºó¸ç»á¸æËßÄã.ÁôÏÂÐþÄî²»È»Ä¾·¨ÈÃ´ó¼ÒÌìÌì¿´¹þ¹þ¹þ¹þ
-1ÕâÀïÃæÕâ´ÎÓÃµ½ÁËÒ»¸ö±êÇ©½Ðtextarea
-   textarea ÕâÊÇÒ»¸öÎÄ±¾Óò.¶àÐÐµÄàÞ. idÊÇÕâ¸öÎÄ±¾ÓòµÄÉí·ÝÖ¤±àºÅ
-   rowsÊÇÕâ¸öÎÄ±¾ÓòÓÐ¶àÉÙÐÐ
-   colsÊÇcolumnsµÄËõÐ´´ú±íÓÐ¶àÉÙÁÐ
-   styleÊÇÑùÊ½
-        width:99%ÊÇ¿í¶È:ÖµÊÇ99%;
-        height:250px ¸ß¶È 250ÏñËØ
-        tabindex: Õâ¸öÄãbaidu»ògoogle°É.¸ç²»ÊÇÍòÄÜµÄ..Ä¾ÓÍ¸çÊÇÍòÍò²»ÄÜµÄ..
-   button±êÇ© °´Å¥±êÇ© ´ó¼ÒÒ²¿ÉÒÔÓÃinput±êÇ© ÕâÀï¸çÓÃµÄ±ð¾ßÒ»¸ñµÄbutton±êÇ©àÞºÃ´¦ÓÐÉñÂí?
-   ÑùÊ½ÃÀ¹¤ÔÚ×öÑùÊ½µÄÊ±ºòÊÇÓÃcss¿ØÖÆµÄÈç¹ûinputºÜ¶àµÄÊ±ºò¶ÔÓÚÃÀ¹¤À´ËµÃÀ»¯½çÃæÑ¹Á¦»áÔö´ó
-   Èç¹ûÓÃÁËbuttonÕâÑùµÄ×¨Êô±êÇ©ÃÀ¹¤Ñ¹Á¦¾ÍÐ¡ÁËÄÇ.ps:ÍÅ¶ÓÒª½²¾¿ÅäºÏ¶®µÃ...
-   ²»ÒªÈÃ±ðÈÃ¸úÄãºÏ×÷Ì«ÀÛËùÒÔÓÐÐ©Ê±ºò¶àÎªÆäËûÒøÌ«ÀÛe..
-buttonÖÐÓÐ¸öÊôÐÔ½ÐonclickÕâÊÇÒ»¸öÊÂ¼þ.ÔÚÊó±êµã»÷°´Å¥µÄÊ±ºò³öÏÖon´¥·¢ clickµ¥»÷.ºÏÆðÀ´¾ÍÊÇµ¥»÷ÊÂ¼þµÄ´¥·¢À²
-onkeypressÄÇ.on´¥·¢ key ¼ü press°´ Ñ¹.¼üÅÌ°´ÏÂÈ¥µÄÊ±ºò´¥·¢à¶
-´¥·¢µÄÊÇÒ»¸öÊÂ¼þÕâÀïÎÒÃÇ´¥·¢ÎÒÃÇÐ´µÄº¯Êý(º¯ÊýÃüÃû²»¹æ·¶°¥Ñ½Ñ½)¹øenglishË®Æ½²îÃ´..»áÂýÂýÌá¸ßdi..ºÙºÙ
+è¿™æ¬¡æˆ‘ä»¬ç”¨ä»¥å‰å­¦åˆ°çš„jså†™ä¸€ä¸ªè½¬æ¢å™¨çš„åˆå§‹ç‰ˆæœ¬.æ˜¯ç¥žé©¬è½¬æ¢å™¨.ä»¥åŽå“¥ä¼šå‘Šè¯‰ä½ .ç•™ä¸‹çŽ„å¿µä¸ç„¶æœ¨æ³•è®©å¤§å®¶å¤©å¤©çœ‹å“ˆå“ˆå“ˆå“ˆ
+1è¿™é‡Œé¢è¿™æ¬¡ç”¨åˆ°äº†ä¸€ä¸ªæ ‡ç­¾å«textarea
+   textarea è¿™æ˜¯ä¸€ä¸ªæ–‡æœ¬åŸŸ.å¤šè¡Œçš„å™¢. idæ˜¯è¿™ä¸ªæ–‡æœ¬åŸŸçš„èº«ä»½è¯ç¼–å·
+   rowsæ˜¯è¿™ä¸ªæ–‡æœ¬åŸŸæœ‰å¤šå°‘è¡Œ
+   colsæ˜¯columnsçš„ç¼©å†™ä»£è¡¨æœ‰å¤šå°‘åˆ—
+   styleæ˜¯æ ·å¼
+        width:99%æ˜¯å®½åº¦:å€¼æ˜¯99%;
+        height:250px é«˜åº¦ 250åƒç´ 
+        tabindex: è¿™ä¸ªä½ baiduæˆ–googleå§.å“¥ä¸æ˜¯ä¸‡èƒ½çš„..æœ¨æ²¹å“¥æ˜¯ä¸‡ä¸‡ä¸èƒ½çš„..
+   buttonæ ‡ç­¾ æŒ‰é’®æ ‡ç­¾ å¤§å®¶ä¹Ÿå¯ä»¥ç”¨inputæ ‡ç­¾ è¿™é‡Œå“¥ç”¨çš„åˆ«å…·ä¸€æ ¼çš„buttonæ ‡ç­¾å™¢å¥½å¤„æœ‰ç¥žé©¬?
+   æ ·å¼ç¾Žå·¥åœ¨åšæ ·å¼çš„æ—¶å€™æ˜¯ç”¨cssæŽ§åˆ¶çš„å¦‚æžœinputå¾ˆå¤šçš„æ—¶å€™å¯¹äºŽç¾Žå·¥æ¥è¯´ç¾ŽåŒ–ç•Œé¢åŽ‹åŠ›ä¼šå¢žå¤§
+   å¦‚æžœç”¨äº†buttonè¿™æ ·çš„ä¸“å±žæ ‡ç­¾ç¾Žå·¥åŽ‹åŠ›å°±å°äº†é‚£.ps:å›¢é˜Ÿè¦è®²ç©¶é…åˆæ‡‚å¾—...
+   ä¸è¦è®©åˆ«è®©è·Ÿä½ åˆä½œå¤ªç´¯æ‰€ä»¥æœ‰äº›æ—¶å€™å¤šä¸ºå…¶ä»–é“¶å¤ªç´¯e..
+buttonä¸­æœ‰ä¸ªå±žæ€§å«onclickè¿™æ˜¯ä¸€ä¸ªäº‹ä»¶.åœ¨é¼ æ ‡ç‚¹å‡»æŒ‰é’®çš„æ—¶å€™å‡ºçŽ°onè§¦å‘ clickå•å‡».åˆèµ·æ¥å°±æ˜¯å•å‡»äº‹ä»¶çš„è§¦å‘å•¦
+onkeypressé‚£.onè§¦å‘ key é”® pressæŒ‰ åŽ‹.é”®ç›˜æŒ‰ä¸‹åŽ»çš„æ—¶å€™è§¦å‘å–½
+è§¦å‘çš„æ˜¯ä¸€ä¸ªäº‹ä»¶è¿™é‡Œæˆ‘ä»¬è§¦å‘æˆ‘ä»¬å†™çš„å‡½æ•°(å‡½æ•°å‘½åä¸è§„èŒƒå“Žå‘€å‘€)é”…englishæ°´å¹³å·®ä¹ˆ..ä¼šæ…¢æ…¢æé«˜di..å˜¿å˜¿
 
-4 ×ª»»Íê³Éºó´úÂë³ÉÁË½ü10ÐÐ..ºÇºÇ..ÕâÀï¾ÍÊÇ´«ËµÖÐµÄ×ª»»Æ÷
+4 è½¬æ¢å®ŒæˆåŽä»£ç æˆäº†è¿‘10è¡Œ..å‘µå‘µ..è¿™é‡Œå°±æ˜¯ä¼ è¯´ä¸­çš„è½¬æ¢å™¨
 
 <script> 
 function convertSymble(){
