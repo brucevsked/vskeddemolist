@@ -1,5 +1,5 @@
 server:
-  port: 8181 #端口号
+  port: 80 #端口号
   servlet:
     encoding:
       charset: UTF-8

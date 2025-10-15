@@ -24,7 +24,7 @@
         <maven.install.skip>true</maven.install.skip>
         <log4j.version>2.24.3</log4j.version>
         <testng.version>7.11.0</testng.version>
-        <jackson.version>2.18.3</jackson.version>
+        <jackson.version>2.20.0</jackson.version>
         <slf4j.version>2.0.17</slf4j.version>
     </properties>
 
@@ -63,21 +63,21 @@
             <scope>compile</scope>
         </dependency>
         <!-- jackson start -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.20</version>
+		</dependency>
         <!-- jackson end -->
 
     </dependencies>

@@ -1,5 +1,6 @@
 package com.vsked.auth.web;
 
+import com.vsked.auth.web.model.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,11 @@ public class TestController {
         return id+"testok"+username+password;
     }
 
-    @GetMapping("/test2")
+    @PostMapping("/test2")
     @ResponseBody
-    public String test2(){
+    public String test2(@RequestBody UserDto userDto){
+        log.info("{}",  userDto);
+        //通过本示例验证，DTO这一层就可以直接用领域模型或对象模型
         return "test2ok";
     }
 

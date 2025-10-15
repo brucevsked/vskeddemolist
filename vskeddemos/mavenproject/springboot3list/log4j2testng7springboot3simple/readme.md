@@ -5,9 +5,10 @@ AbstractTransactionalTestNGSpringContextTests
 下面这个不带事务管理的  
 AbstractTestNGSpringContextTests  
 
-http://127.0.0.1:8181
+http://127.0.0.1:80
 
-http://127.0.0.1:8181/test2
+这个需要传json参数且需要post方法
+http://127.0.0.1:80/test2
 
 http://127.0.0.1/prod-api/test2
 
