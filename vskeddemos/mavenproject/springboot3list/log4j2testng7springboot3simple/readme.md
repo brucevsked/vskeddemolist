@@ -7,6 +7,8 @@ AbstractTestNGSpringContextTests
 
 http://127.0.0.1:80
 
+http://127.0.0.1:80/test
+
 这个需要传json参数且需要post方法
 http://127.0.0.1:80/test2
 
