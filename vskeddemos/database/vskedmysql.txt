@@ -521,7 +521,7 @@ now()
 sysdate()
 select DATE_ADD(NOW(),INTERVAL 1 DAY);
 
-3* 联合主键与外键
+39* 联合主键与外键
 
 CREATE TABLE IF NOT EXISTS `account`
 (
@@ -546,6 +546,16 @@ CREATE TABLE IF NOT EXISTS `userAccount`
     foreign key (`userId`) references `user`(`id`),
     foreign key (`accountName`) references `account`(`accountName`)
 ) engine = InnoDB,COMMENT='用户账号';
+
+
+40* 递归查询
+WITH RECURSIVE dept_cte AS (
+  SELECT id, name, pid FROM dept WHERE pid IS NULL
+  UNION ALL
+  SELECT child.id, child.name, child.pid FROM dept JOIN dept_cte ON child.pid = dept_cte.id
+)
+SELECT * FROM dept_cte;
+
 
 --------------------------------
 problem

@@ -1055,3 +1055,62 @@ public interface MeterDetailDTO {
 
 
 --------------------------------------------------------------------------------
+将多表数据合并为一张表，使用自定义类实现方案，与上面自定义投影可以互相替换
+
+第一步创建一个封装查询数据的类
+package com.yunze.web.dto;
+
+import java.time.LocalDateTime;
+
+public class DepartmentVO {
+
+    private Long id;
+    private String name;
+    private Byte status;
+    private String remark;
+    private Long parentId;
+    private Long createUserId;
+    private LocalDateTime createTime;
+    private Boolean isDel;
+    private LocalDateTime lastModifyTime;
+    private LocalDateTime delTime;
+    private String createUserName;
+
+    public DepartmentVO() {
+    }
+    //注意这个构建方法，第二步要用到
+    public DepartmentVO(Long id, String name, Byte status, String remark, Long parentId, Long createUserId, LocalDateTime createTime, Boolean isDel, LocalDateTime lastModifyTime, LocalDateTime delTime, String createUserName) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.remark = remark;
+        this.parentId = parentId;
+        this.createUserId = createUserId;
+        this.createTime = createTime;
+        this.isDel = isDel;
+        this.lastModifyTime = lastModifyTime;
+        this.delTime = delTime;
+        this.createUserName = createUserName;
+    }
+
+   省略其他代码
+    @Override
+    public String toString() {
+        return id + "," +
+                name + "," +
+                status + "," +
+                remark + "," +
+                parentId + "," +
+                createUserId + "," +
+                createTime + "," +
+                isDel + "," +
+                lastModifyTime + "," +
+                delTime + "," +
+                createUserName;
+    }
+}
+
+第二步，编写自定义查询，通过上面自定义构造创建对象
+    @Query("SELECT new com.yunze.web.dto.DepartmentVO(d.id, d.name, d.status, d.remark, d.parentId, d.createuserid, d.createTime, d.isDel, d.lastModifyTime, d.delTime, u.name) FROM SysDepartment d LEFT JOIN SysUser u ON d.createuserid = u.id")
+    List<DepartmentVO> findAllForAdmin();
+--------------------------------------------------------------------------------
