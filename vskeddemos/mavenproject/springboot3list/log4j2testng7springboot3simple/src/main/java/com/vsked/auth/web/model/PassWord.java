@@ -14,7 +14,7 @@ public class PassWord {
     public PassWord(String password) {
         this.password = password;
     }
-
+    //必须要有空构造方法才可以
     public PassWord() {
     }
 

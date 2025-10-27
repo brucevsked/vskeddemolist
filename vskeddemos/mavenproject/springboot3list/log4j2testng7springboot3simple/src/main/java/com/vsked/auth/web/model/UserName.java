@@ -14,7 +14,7 @@ public class UserName {
     public UserName(String username) {
         this.username = username;
     }
-
+    //必须要有空构造方法才可以
     public UserName() {
     }
 
