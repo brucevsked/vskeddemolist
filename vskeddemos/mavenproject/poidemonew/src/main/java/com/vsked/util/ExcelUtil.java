@@ -26,9 +26,13 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *大数据写入要使用SXSSF
+ */
 public class ExcelUtil {
 
 	private static final Logger log = LoggerFactory.getLogger(ExcelUtil.class);
@@ -185,7 +189,7 @@ public class ExcelUtil {
 					}
 					if(isNumber(sheetData[rowIndex][columnIndex])){
 						cell.setCellType(CellType.NUMERIC);
-						cell.setCellValue(sheetData[rowIndex][columnIndex].indexOf(".")>0?new Double(sheetData[rowIndex][columnIndex]):new Integer(sheetData[rowIndex][columnIndex]));
+						cell.setCellValue(sheetData[rowIndex][columnIndex].indexOf(".")>0?Double.parseDouble(sheetData[rowIndex][columnIndex]):Integer.valueOf(sheetData[rowIndex][columnIndex]));
 					}else{
 						cell.setCellType(CellType.STRING);
 						cell.setCellValue(sheetData[rowIndex][columnIndex]);
@@ -217,7 +221,7 @@ public class ExcelUtil {
 					}
 					if(isNumber(sheetData.get(rowIndex)[columnIndex])){
 						cell.setCellType(CellType.NUMERIC);
-						cell.setCellValue(sheetData.get(rowIndex)[columnIndex].indexOf(".")>0?new Double(sheetData.get(rowIndex)[columnIndex]):new Integer(sheetData.get(rowIndex)[columnIndex]));
+						cell.setCellValue(sheetData.get(rowIndex)[columnIndex].indexOf(".")>0?Double.parseDouble(sheetData.get(rowIndex)[columnIndex]):Integer.parseInt(sheetData.get(rowIndex)[columnIndex]));
 					}else{
 						cell.setCellType(CellType.STRING);
 						cell.setCellValue(sheetData.get(rowIndex)[columnIndex]);
@@ -272,5 +276,25 @@ public class ExcelUtil {
 		return m.matches();
 	}
 
-
+	/**
+	 * 适合大数据写入时使用
+	 * @param data 要写入的数据
+	 * @param cacheRowCount (-1 no cache)
+	 * @param savePath 保存路径
+     */
+	public static void SXSSFWrite1(String[][] data,int cacheRowCount,String savePath) throws Exception{
+		SXSSFWorkbook wb = new SXSSFWorkbook(cacheRowCount);
+		Sheet sh = wb.createSheet();
+		for(int rownum = 0; rownum < data.length; rownum++){
+			Row row = sh.createRow(rownum);
+			for(int cellnum = 0; cellnum < data[0].length; cellnum++){
+				Cell cell = row.createCell(cellnum);
+				cell.setCellValue(data[rownum][cellnum]);
+			}
+		}
+		FileOutputStream out = new FileOutputStream(savePath);
+		wb.write(out);
+		out.close();
+		wb.close();
+	}
 }

@@ -1,6 +1,5 @@
 package com.vsked.test;
 
-import java.awt.*;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +12,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -30,10 +28,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-
 public class ExcelUtilTest {
 
 	private static final Logger log = LoggerFactory.getLogger(ExcelUtilTest.class);
+
+	@Test
+	public static void SXSSFWrite1Test() throws Exception{
+		int cacheRowCount=1000; //-1 is no cache
+		String savePath="sxssfTest.xlsx";
+		int rowNum=100000;
+		int colNum=5;
+		String[][] data=new String[rowNum][colNum];
+		for(int rowIndex=0;rowIndex<rowNum;rowIndex++){
+			for(int colIndex=0;colIndex<colNum;colIndex++){
+				data[rowIndex][colIndex]="|"+rowIndex+"|"+colIndex;
+			}
+
+		}
+		System.out.println(data.length);
+		System.out.println(data[0].length);
+		long writeStartTime=System.currentTimeMillis();
+		ExcelUtil.SXSSFWrite1(data, cacheRowCount, savePath);
+		System.out.println("耗时 :"+(System.currentTimeMillis()-writeStartTime)/1000f+" 秒 ");
+	}
 
 	@Test
 	public void readExcel03And07(){
