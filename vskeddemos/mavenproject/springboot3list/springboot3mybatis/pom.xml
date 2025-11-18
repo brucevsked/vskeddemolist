@@ -28,9 +28,8 @@
 		<mavenSurefirePlugin.version>3.5.2</mavenSurefirePlugin.version>
 
 		<testng.version>7.11.0</testng.version>
-		<springboot.version>3.5.4</springboot.version>
-		<mybatisSpringBootStart.version>2.3.2</mybatisSpringBootStart.version>
-		<mybatisSrping.version>3.0.5</mybatisSrping.version>
+		<springboot.version>3.5.7</springboot.version>
+		<mybatisSpringBootStart.version>3.5.14</mybatisSpringBootStart.version>
 		<pagehelper.springbootstart.version>2.1.1</pagehelper.springbootstart.version>
 		<mysqlConnector.version>9.4.0</mysqlConnector.version>
 	</properties>
@@ -112,14 +111,9 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-spring-boot3-starter</artifactId>
 			<version>${mybatisSpringBootStart.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>${mybatisSrping.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.mysql</groupId>
@@ -161,14 +155,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${springboot.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<!-- 必须包含 repackage 目标 -->
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 				<configuration>
 					<mainClass>com.vsked.Application</mainClass>
 					<!--addResources如果没有该项配置,这个devtools不会起作用即应用不会restart这个要手动加进去 3.0版本用这个配置 -->

@@ -96,7 +96,7 @@ public class UserDaoTest extends BaseTestWithTransactional {
 
     @Test
     public void pageTest(){
-        int pageNum = 1;
+        int pageNum = 2;
         int pageSize = 10;
         PageHelper.startPage(pageNum, pageSize);
         List<Map<String,Object>> users = userDao.findAll(); // 查询后自动分页
