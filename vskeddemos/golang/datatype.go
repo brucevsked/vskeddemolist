@@ -2,6 +2,27 @@ package main
 
 import "fmt"
 
+type Rectangle struct {
+	Width  float64
+	Height float64
+}
+
+// 计算面积的方法
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+
+// 计算周长的方法
+func (r Rectangle) Perimeter() float64 {
+	return 2 * (r.Width + r.Height)
+}
+
+// 修改矩形尺寸的方法（指针接收者）
+func (r *Rectangle) Scale(factor float64) {
+	r.Width *= factor
+	r.Height *= factor
+}
+
 func main() {
 	var myBool bool = false 
 	fmt.Println("myBool:" + fmt.Sprintf("%t", myBool))
@@ -95,4 +116,16 @@ func main() {
 	for index, value := range numbersArray2 {
 		fmt.Printf("Index %d: Value %d\n", index, value)
 	}
+
+	rect := Rectangle{Width: 10, Height: 5}
+	
+	fmt.Printf("矩形: %+v\n", rect)
+	fmt.Printf("面积: %.2f\n", rect.Area())
+	fmt.Printf("周长: %.2f\n", rect.Perimeter())
+
+	// 使用指针方法修改矩形
+	rect.Scale(2)
+	fmt.Printf("缩放后矩形: %+v\n", rect)
+	fmt.Printf("缩放后面积: %.2f\n", rect.Area())
+
 }
