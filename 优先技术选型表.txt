@@ -169,8 +169,11 @@ InterSystems Caché数据库
 数据分析类数据库（列式存储）
 
 clickhouse 灵活
-Apache Kylin 成本
+Apache Kylin 成本 不推荐，基于hadoop
 Kyligence 未调研
+
+数据仓库
+Apache doris
 
 
 
