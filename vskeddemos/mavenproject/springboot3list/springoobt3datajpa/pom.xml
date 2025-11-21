@@ -25,14 +25,14 @@
 		<maven.compiler.target>21</maven.compiler.target>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
-	    <mavenCompilerPlugin.version>3.14.0</mavenCompilerPlugin.version>
-		<mavenSurefirePlugin.version>3.5.3</mavenSurefirePlugin.version>
+	    <mavenCompilerPlugin.version>3.14.1</mavenCompilerPlugin.version>
+		<mavenSurefirePlugin.version>3.5.4</mavenSurefirePlugin.version>
 
 		<testng.version>7.11.0</testng.version>
-		<springboot.version>3.5.6</springboot.version>
+		<springboot.version>3.5.8</springboot.version>
 
 		<jasypt.version>3.0.5</jasypt.version>
-		<mysqlConnector.version>9.4.0</mysqlConnector.version>
+		<mysqlConnector.version>9.5.0</mysqlConnector.version>
 	</properties>
 
 	<dependencyManagement>
@@ -166,14 +166,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${springboot.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<!-- 必须包含 repackage 目标 -->
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 				<configuration>
 					<mainClass>com.vsked.Application</mainClass>
 					<!--addResources如果没有该项配置,这个devtools不会起作用即应用不会restart这个要手动加进去 3.0版本用这个配置 -->
