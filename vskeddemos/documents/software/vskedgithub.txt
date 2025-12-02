@@ -81,6 +81,11 @@ config.php:     表示忽略当前路径的 config.php 文件
  
 假设我们只有过滤规则，而没有添加规则，那么我们就需要把/mtk/目录下除了one.txt以外的所有文件都写出来！
 注意上面的/mtk/*不能写为/mtk/，否则父目录被前面的规则排除掉了，one.txt文件虽然加了!过滤规则，也不会生效！
+
+
+Merge into current branch菜单 ， 相当于git merge 命令 ，保留所有提交 + 生成 merge commit ，会保留分支结构，不会改写历史，需要完整历史，团队协作时使用
+Squash and merge菜单 ，相当于git merge --squash ，多个提交 → 1 个提交 ，不会保留分支结构
+Rebase current branch菜单，相当于git rebase ， 线性提交（无 merge commit）
  
 ----------------------------------------------------------------------------------
 还有一些规则如下：
