@@ -56,6 +56,20 @@ nginx.exe -s reload
 
 
 
+startNginx.cmd
+@echo off
+cd /d %~dp0
+echo start Nginx(log will show this window)...
+nginx.exe
+echo Nginx has exit
+pause
+
+stopNginx.cmd
+@echo off
+cd /d %~dp0
+taskkill /im nginx.exe /f >nul
+echo Nginx stopped.
+
 --------------------------------------------------------------------------------centos安装
 yum install yum-utils
 //如果报错就先用本机下载rpm包，上传到服务器上再安装
