@@ -556,6 +556,17 @@ WITH RECURSIVE dept_cte AS (
 )
 SELECT * FROM dept_cte;
 
+验证数据库是否支持递归查询，注意下面这一段是一条sql语句
+WITH RECURSIVE nums AS (
+  SELECT 1 AS n
+  UNION ALL
+  SELECT n + 1 FROM nums WHERE n < 10
+)
+SELECT * FROM nums;
+
+
+41*
+
 
 --------------------------------
 problem
