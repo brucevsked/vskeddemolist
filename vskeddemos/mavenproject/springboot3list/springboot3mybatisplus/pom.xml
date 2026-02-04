@@ -29,8 +29,8 @@
 		<mavenSurefirePlugin.version>3.5.3</mavenSurefirePlugin.version>
 
 		<testng.version>7.11.0</testng.version>
-		<springboot.version>3.5.4</springboot.version>
-		<mybatisPlusStart.version>3.5.12</mybatisPlusStart.version>
+		<springboot.version>3.5.10</springboot.version>
+		<mybatisPlusStart.version>3.5.16</mybatisPlusStart.version>
 		<mybatisSrping.version>3.0.5</mybatisSrping.version>
 
 		<mysqlConnector.version>9.4.0</mysqlConnector.version>
@@ -121,7 +121,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<artifactId>mybatis-plus-spring-boot3-starter</artifactId>
 			<version>${mybatisPlusStart.version}</version>
 		</dependency>
 		<dependency>

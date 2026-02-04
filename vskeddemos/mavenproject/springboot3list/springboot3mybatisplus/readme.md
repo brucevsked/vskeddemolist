@@ -24,7 +24,7 @@ http://127.0.0.1/prod-api/profile/images/tiding.png
 
 		<dependency>
 			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<artifactId>mybatis-plus-spring-boot3-starter</artifactId>
 			<version>${mybatisPlusStart.version}</version>
 		</dependency>
 		<dependency>
@@ -57,7 +57,7 @@ spring:
   datasource:
     url: jdbc:mysql://10.0.193.11:3306/mybatis_plus1?useUnicode=true&characterEncoding=utf8&allowMutiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
     username: root
-    password: Y4yhl9tbf110_
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1
