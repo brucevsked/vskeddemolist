@@ -1,8 +1,12 @@
 package com.vsked.http;
 
+import okhttp3.ResponseBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+import retrofit2.Call;
+import retrofit2.Callback;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,6 +53,37 @@ public class RetrofitDemoTest {
             String myUrl="http://localhost:8181/test/proc";
             String result=RetrofitDemoImpl.post1(myUrl,parMap);
             log.debug("|"+result+"|");
+        }catch(Exception e){
+            log.error(e.getMessage(),e);
+        }
+    }
+
+
+    public void postAsync(){
+        try{
+            String myContent="{\"测试key\":\"valkue小二上菜\",\"来啊key\":\"来了\",\"去吧key\":\"听说valkue\"}";
+            String myUrl="http://localhost:8181/test/procJson";
+            Callback<ResponseBody> callback=new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                    try{
+                        ResponseBody responseBody=response.body();
+                        String result="";
+                        if(responseBody!=null){
+                            result=responseBody.string();
+                        }
+                        log.debug("|"+result+"|");
+                    }catch(Exception e){
+                        log.error(e.getMessage(),e);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable throwable) {
+
+                }
+            };
+            RetrofitDemoImpl.postAsync(myUrl,myContent,callback);
         }catch(Exception e){
             log.error(e.getMessage(),e);
         }

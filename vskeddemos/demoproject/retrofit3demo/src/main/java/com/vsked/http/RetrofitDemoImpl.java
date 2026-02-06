@@ -18,6 +18,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -127,6 +128,16 @@ public class RetrofitDemoImpl {
             result=responseBody.string();
         }
         return result;
+    }
+
+    public static void postAsync(String myUrl, String parString, Callback<ResponseBody> callback) throws Exception{
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://www.baidu.com/").client(client).build();
+        RetrofitDemo service=retrofit.create(RetrofitDemo.class);
+        byte[] contentByteArray=parString.getBytes("utf-8");
+        RequestBody body=RequestBody.create(contentByteArray, MediaType.parse("application/json; charset=utf-8"), 0, contentByteArray.length);
+        Call<ResponseBody> call=service.post2(myUrl,body);
+        // 使用异步调用替换同步调用
+        call.enqueue(callback);
     }
 
     /**
