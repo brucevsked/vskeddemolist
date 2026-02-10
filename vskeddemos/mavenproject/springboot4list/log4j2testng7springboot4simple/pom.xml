@@ -69,7 +69,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<!-- 对web开发的支持包含了spring webmvc和tomcat等web开发的特性 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
