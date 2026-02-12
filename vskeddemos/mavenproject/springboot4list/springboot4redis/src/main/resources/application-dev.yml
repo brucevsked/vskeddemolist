@@ -1,11 +1,7 @@
 server:
   port: 8181 #端口号
-  servlet:
-    encoding:
-      charset: UTF-8
-      enabled: true
-      force: true
   shutdown: graceful #开启优雅停机 默认为immediate立即停机
+
 spring:
   devtools:
     restart:
@@ -17,6 +13,7 @@ spring:
       port: 6379
       password: 8x#L9q$vN2!pK@mW
       timeout: 10000
+
 logging:
   config: classpath:log4j2.xml
 

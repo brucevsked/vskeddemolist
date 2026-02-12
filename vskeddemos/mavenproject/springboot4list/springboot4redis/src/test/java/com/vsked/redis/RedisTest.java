@@ -48,7 +48,7 @@ public class RedisTest extends BaseTestWithoutTransactional {
 
     @Test
     public void saveString(){
-        String redisKey="springBoot2Redis:module1:userNameF1";
+        String redisKey="springBoot4Redis:module1:userNameF1";
         String redisValue="myNameIsBruce";
         redisTemplate.opsForValue().set(redisKey,redisValue);
         log.info("{}",redisTemplate.opsForValue().get(redisKey));
@@ -64,21 +64,21 @@ public class RedisTest extends BaseTestWithoutTransactional {
 
     @Test
     public void delString(){
-        String redisKey="springBoot2Redis:module1:userNameF1";
+        String redisKey="springBoot4Redis:module1:userNameF1";
         redisTemplate.delete(redisKey);
         log.info("{}",redisTemplate.opsForValue().get(redisKey));
     }
 
     @Test
     public void save2String(){
-        String redisKey="springBoot2Redis:module1:userName15";
+        String redisKey="springBoot4Redis:module1:userName15";
         String redisValue="myNameIsBruce5s";
         redisTemplate.opsForValue().set(redisKey,redisValue,15, TimeUnit.SECONDS);
     }
 
     @Test
     public void saveList(){
-        String redisKey="springBoot2Redis:module1:userList1";
+        String redisKey="springBoot4Redis:module1:userList1";
         List<Map<String,Object>> testDataList=new LinkedList<>();
         for(int i=0;i<10;i++){
             Map<String,Object> dataMap=new HashMap<>();
@@ -90,12 +90,9 @@ public class RedisTest extends BaseTestWithoutTransactional {
 
     @Test
     public void getList(){
-        String redisKey="springBoot2Redis:module1:userList1";
+        String redisKey="springBoot4Redis:module1:userList1";
         List<Map<String,Object>> testDataList= (List<Map<String, Object>>) redisTemplate.opsForValue().get(redisKey);
         log.info("{}",testDataList);
     }
-
-
-
 
 }
