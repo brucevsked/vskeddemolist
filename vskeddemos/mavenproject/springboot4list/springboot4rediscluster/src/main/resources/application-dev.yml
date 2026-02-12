@@ -1,0 +1,23 @@
+server:
+  port: 8181 #端口号
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+
+spring:
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  data:
+    redis:
+      password: helloWorld666
+      cluster:
+        nodes: 127.0.0.1:6379,127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384
+      ssl:
+        enabled: false
+      connect-timeout: 10s
+      timeout: 5s
+      database: 0 #集群模式只能配置0号库
+
+logging:
+  config: classpath:log4j2.xml
+
+
