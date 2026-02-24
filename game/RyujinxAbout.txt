@@ -1,0 +1,35 @@
+
+当游戏语言不能设置中文的时候，要把设置中，系统语言设置成简体中文
+
+
+在Ryujinx或yuzu模拟器中
+准确的说是在switch的模拟器中固件与产品号是需要对应的
+如果只升级对应的固件没有配置对产品号也是不能启动游戏的
+固件是指Firmware 13.2.0
+后面是版本号
+产品号是指
+prod.keys
+
+Ryujinx固件版本号在界面右下角状态栏
+
+
+固件扩展名为.nca
+两个模拟器的固件与产品号都是可以互相替换的
+
+Ryujinx固件与产品号所在路径
+C:\Users\vsked\AppData\Roaming\Ryujinx\bis\system\Contents\registered\
+*.nca
+C:\Users\vsked\AppData\Roaming\Ryujinx\system\
+prod.keys
+如果你使用的是Ryujinx模拟器，要自己安装固件，那就先复制prod.keys进去，再用菜单安装固件的zip即可
+
+如何使用作弊代码
+how to use cheat code in ryujinx
+
+找到游戏，右击，选择打开mod目录，然后复制文件到以下路径
+find game,right click,select open mod directory,then copy to file to there
+Ryujinx\mods\contents\010007b010fcc000\cheats\4eea2970df38ece1.txt
+
+
+Ryujinx缓存清除
+C:\Users\vsked\AppData\Roaming\Ryujinx\games\*\cache
