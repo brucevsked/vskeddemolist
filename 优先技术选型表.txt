@@ -116,6 +116,8 @@ redis
 
 容器化
 docker
+私有化容器镜像管理
+Harbor
 
 单元测试
 TestNG
