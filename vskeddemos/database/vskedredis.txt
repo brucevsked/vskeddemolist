@@ -68,11 +68,11 @@ jat:system:id:apiId
 
 
 集群安全关闭
-/opt/redis-5.0.7/bin/redis-cli -p 6379 -a Y4yhl9tbf110_ shutdown
-/opt/redis-5.0.7/bin/redis-cli -p 6380 -a Y4yhl9tbf110_ shutdown
+/opt/redis-5.0.7/bin/redis-cli -p 6379 -a "yourpassword1" shutdown
+/opt/redis-5.0.7/bin/redis-cli -p 6380 -a "yourpassword1" shutdown
 
 15* 查看集群信息
-/opt/redis-5.0.7/bin/redis-cli --cluster info 10.0.192.31:6379 -a Y4yhl9tbf110_
+/opt/redis-5.0.7/bin/redis-cli --cluster info 10.0.192.31:6379 -a "yourpassword1"
 
 16* 选择数据库,切换数据库
 SELECT index
@@ -114,9 +114,9 @@ nohup /opt/redis-5.0.7/bin/redis-server /data/redis/redis6379/config/redis.conf 
 nohup /opt/redis-5.0.7/bin/redis-server /data/redis/redis6380/config/redis.conf >/dev/null 2>&1 &
 
 创建集群
-/opt/redis-5.0.7/bin/redis-cli --cluster create 192.168.111.95:6379 192.168.111.96:6379 192.168.111.97:6379 192.168.111.95:6380 192.168.111.96:6380 192.168.111.97:6380 --cluster-replicas 1 -a Y4yhl9tbf110_
+/opt/redis-5.0.7/bin/redis-cli --cluster create 192.168.111.95:6379 192.168.111.96:6379 192.168.111.97:6379 192.168.111.95:6380 192.168.111.96:6380 192.168.111.97:6380 --cluster-replicas 1 -a "yourpassword1"
 注意上一句中间要输入yes
-/opt/redis-5.0.7/bin/redis-cli --cluster info 192.168.111.95:6379 -a Y4yhl9tbf110_
+/opt/redis-5.0.7/bin/redis-cli --cluster info 192.168.111.95:6379 -a "yourpassword1"
 
 配置文件6379示例
 protected-mode no
@@ -125,8 +125,8 @@ port 6379
 cluster-config-file /data/redis/redis6379/data/nodes-10.conf
 pidfile /data/redis/redis6379/data/redis10.pid
 logfile /data/redis/redis6379/data/redis10.log
-masterauth Y4yhl9tbf110_
-requirepass Y4yhl9tbf110_
+masterauth yourpassword1
+requirepass yourpassword1
 dir /data/redis/redis6379/data
 
 tcp-backlog 511
@@ -195,8 +195,8 @@ port 6380
 cluster-config-file /data/redis/redis6379/data/nodes-11.conf
 pidfile /data/redis/redis6379/data/redis11.pid
 logfile /data/redis/redis6379/data/redis11.log
-masterauth Y4yhl9tbf110_
-requirepass Y4yhl9tbf110_
+masterauth yourpassword1
+requirepass yourpassword1
 dir /data/redis/redis6379/data
 
 tcp-backlog 511
@@ -387,8 +387,8 @@ docker stop 容器id
 
 docker exec -i -t redis10 /bin/bash
 
-redis-cli --cluster create 192.168.111.81:6379 192.168.111.82:6379 192.168.111.81:6380 192.168.111.81:6381 192.168.111.82:6380 192.168.111.82:6381 --cluster-replicas 1 -a Y4yhl9tbf110_
-redis-cli --cluster info 192.168.111.81:6379 -a Y4yhl9tbf110_
+redis-cli --cluster create 192.168.111.81:6379 192.168.111.82:6379 192.168.111.81:6380 192.168.111.81:6381 192.168.111.82:6380 192.168.111.82:6381 --cluster-replicas 1 -a "yourpassword1"
+redis-cli --cluster info 192.168.111.81:6379 -a "yourpassword1"
 
 
 配置文件示例6379
@@ -398,8 +398,8 @@ port 6379
 cluster-config-file /data/nodes-10.conf
 pidfile /data/redis10.pid
 logfile /data/redis10.log
-masterauth Y4yhl9tbf110_
-requirepass Y4yhl9tbf110_
+masterauth yourpassword1
+requirepass yourpassword1
 dir /data
 
 tcp-backlog 511
@@ -468,8 +468,8 @@ port 6380
 cluster-config-file /data/nodes-11.conf
 pidfile /data/redis11.pid
 logfile /data/redis11.log
-masterauth Y4yhl9tbf110_
-requirepass Y4yhl9tbf110_
+masterauth yourpassword1
+requirepass yourpassword1
 dir /data
 
 tcp-backlog 511
@@ -538,8 +538,8 @@ port 6381
 cluster-config-file /data/nodes-12.conf
 pidfile /data/redis12.pid
 logfile /data/redis12.log
-masterauth Y4yhl9tbf110_
-requirepass Y4yhl9tbf110_
+masterauth yourpassword1
+requirepass yourpassword1
 dir /data
 
 tcp-backlog 511
@@ -624,10 +624,10 @@ cat /data/config/redis6379/redis.conf
 docker run --restart=always -p 6379:6379 -v /data/redis/redis6379:/data -v /data/config/redis6379/redis.conf:/usr/local/etc/redis/redis.conf --name redis10 -d redis:latest redis-server /usr/local/etc/redis/redis.conf
 
 使用
-RedisDesktopManager 
+Redis Insight
 软件连接测试
 密码为
-Y4yhl9tbf110_
+yourpassword1
 
 还可以进入docker容器查看
 docker exec -i -t redis10 /bin/bash
@@ -639,7 +639,7 @@ port 6379
 pidfile /data/redis10.pid
 logfile /data/redis10.log
 
-requirepass Y4yhl9tbf110_
+requirepass yourpassword1
 dir /data
 
 tcp-backlog 511
@@ -714,3 +714,175 @@ D:\Programs\Redis
 netstat -ano|findstr 6379
 
 连接工具，现在可以使用navicat17来管理redis数据库了
+
+------------------------------------------------------------
+
+redis windows 集群版本
+
+D:\programfiles\redis8cluster
+D:\programfiles\redis8cluster\6379
+D:\programfiles\redis8cluster\6380
+D:\programfiles\redis8cluster\6381
+D:\programfiles\redis8cluster\6382
+D:\programfiles\redis8cluster\6383
+
+其他的redis.conf配置文件按这个替换6379为其他端口，并放到目录里redis.conf
+port 6379 
+bind 0.0.0.0
+protected-mode yes
+
+requirepass yourpassword1
+masterauth yourpassword1
+
+maxmemory 256mb
+maxmemory-policy allkeys-lru
+save ""
+appendonly no
+rdbchecksum no
+
+cluster-enabled yes
+
+dir ./6379
+logfile "logs.log"
+cluster-config-file nodes.conf
+
+先启动所有节点
+d:
+cd D:\programfiles\redis8cluster
+开6个独立的cmd每个窗口单独启一个
+redis-server.exe 6379/redis.conf
+redis-server.exe 6380/redis.conf
+redis-server.exe 6381/redis.conf
+redis-server.exe 6382/redis.conf
+redis-server.exe 6383/redis.conf
+redis-server.exe 6384/redis.conf
+
+再开一个命令提示符号
+d:
+cd D:\programfiles\redis8cluster
+
+redis-cli --cluster create 10.235.127.64:6379 10.235.127.64:6380 10.235.127.64:6381 10.235.127.64:6382 10.235.127.64:6383 10.235.127.64:6384 --cluster-replicas 1 -a "yourpassword1"
+
+会提示你是否确定，要输入yes并回车
+
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+>>> Performing hash slots allocation on 6 nodes...
+Master[0] -> Slots 0 - 5460
+Master[1] -> Slots 5461 - 10922
+Master[2] -> Slots 10923 - 16383
+Adding replica 10.235.127.64:6383 to 10.235.127.64:6379
+Adding replica 10.235.127.64:6384 to 10.235.127.64:6380
+Adding replica 10.235.127.64:6382 to 10.235.127.64:6381
+>>> Trying to optimize slaves allocation for anti-affinity
+[WARNING] Some slaves are in the same host as their master
+M: 94f4d1357086f590537711df68d2595e91288d07 10.235.127.64:6379
+   slots:[0-5460] (5461 slots) master
+M: cdd45cf18c010465c1c084995b0165ade978f790 10.235.127.64:6380
+   slots:[5461-10922] (5462 slots) master
+M: 024763dc21f734a6ac2e4f81ff870e9a472749cd 10.235.127.64:6381
+   slots:[10923-16383] (5461 slots) master
+S: 301609d90a14218c09093040350e5497b843fcf8 10.235.127.64:6382
+   replicates 94f4d1357086f590537711df68d2595e91288d07
+S: ce2d92cf04ddb60fc3ffd0fc56fc0317aae6e277 10.235.127.64:6383
+   replicates cdd45cf18c010465c1c084995b0165ade978f790
+S: c005e65b852404a36b0941140186eb106f7a022f 10.235.127.64:6384
+   replicates 024763dc21f734a6ac2e4f81ff870e9a472749cd
+Can I set the above configuration? (type 'yes' to accept): yes
+>>> Nodes configuration updated
+>>> Assign a different config epoch to each node
+>>> Sending CLUSTER MEET messages to join the cluster
+Waiting for the cluster to join
+...............
+>>> Performing Cluster Check (using node 10.235.127.64:6379)
+M: 94f4d1357086f590537711df68d2595e91288d07 10.235.127.64:6379
+   slots:[0-5460] (5461 slots) master
+   1 additional replica(s)
+M: 024763dc21f734a6ac2e4f81ff870e9a472749cd 10.235.127.64:6381
+   slots:[10923-16383] (5461 slots) master
+   1 additional replica(s)
+S: 301609d90a14218c09093040350e5497b843fcf8 10.235.127.64:6382
+   slots: (0 slots) slave
+   replicates 94f4d1357086f590537711df68d2595e91288d07
+M: cdd45cf18c010465c1c084995b0165ade978f790 10.235.127.64:6380
+   slots:[5461-10922] (5462 slots) master
+   1 additional replica(s)
+S: ce2d92cf04ddb60fc3ffd0fc56fc0317aae6e277 10.235.127.64:6383
+   slots: (0 slots) slave
+   replicates cdd45cf18c010465c1c084995b0165ade978f790
+S: c005e65b852404a36b0941140186eb106f7a022f 10.235.127.64:6384
+   slots: (0 slots) slave
+   replicates 024763dc21f734a6ac2e4f81ff870e9a472749cd
+[OK] All nodes agree about slots configuration.
+>>> Check for open slots...
+>>> Check slots coverage...
+[OK] All 16384 slots covered.
+
+这样就创建完集群了，验证集群
+
+redis-cli --cluster info 10.235.127.64:6379 -a yourpassword
+
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+10.235.127.64:6379 (94f4d135...) -> 0 keys | 5461 slots | 1 slaves.
+10.235.127.64:6381 (024763dc...) -> 0 keys | 5461 slots | 1 slaves.
+10.235.127.64:6380 (cdd45cf1...) -> 0 keys | 5462 slots | 1 slaves.
+[OK] 0 keys in 3 masters.
+0.00 keys per slot on average.
+
+说明你的集群配置成功了。连接工具连接一下试试吧
+推荐Redis Insight
+
+快速启动脚本start-cluster.bat
+@echo off
+echo Starting Redis Cluster Nodes...
+
+start "Redis-6379" redis-server.exe 6379/redis.conf
+timeout /t 1 /nobreak >nul
+
+start "Redis-6380" redis-server.exe 6380/redis.conf
+timeout /t 1 /nobreak >nul
+
+start "Redis-6381" redis-server.exe 6381/redis.conf
+timeout /t 1 /nobreak >nul
+
+start "Redis-6382" redis-server.exe 6382/redis.conf
+timeout /t 1 /nobreak >nul
+
+start "Redis-6383" redis-server.exe 6383/redis.conf
+timeout /t 1 /nobreak >nul
+
+start "Redis-6384" redis-server.exe 6384/redis.conf
+timeout /t 1 /nobreak >nul
+
+echo All nodes started! Check the windows for logs.
+pause
+
+
+安全停止集群脚本
+stop-cluster.bat
+
+@echo off
+chcp 65001 >nul
+setlocal
+
+echo ========================================
+echo    Redis Cluster 安全关闭脚本
+echo ========================================
+
+set REDIS_CLI=redis-cli.exe
+set PASSWORD=yourpassword
+
+for %%p in (6379 6380 6381 6382 6383 6384) do (
+    echo 正在关闭端口 %%p ...
+    %REDIS_CLI% -p %%p -a "%PASSWORD%" shutdown >nul 2>&1
+    if %errorlevel% equ 0 (
+        echo [OK]
+    ) else (
+        echo [FAIL] - 节点可能已停止
+    )
+    timeout /t 1 /nobreak >nul
+)
+
+echo ========================================
+echo    所有关闭命令已发送
+echo ========================================
+pause
