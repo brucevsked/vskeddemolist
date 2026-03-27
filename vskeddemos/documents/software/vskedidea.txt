@@ -125,6 +125,9 @@ ctrl+y
 26* 关闭当前标签
 ctrl+F4
 
+27* Non-ASCII characters警报取消
+File -> Settings -> Editor -> Inspections -> 查找Non-ASCII 对号去掉即可。
+
 
 --------------------------------------------------------------------------------
 本项目类导入不识别解决方案
