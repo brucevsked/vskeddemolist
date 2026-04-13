@@ -608,6 +608,8 @@ find / -name 文件名
 find . -name '*' -mmin -1200
 
 find / -name '*' -mmin -1200
+查找"bbb04918aaa"字符串在目录中哪个文件第一次出现
+find /test_data/logs/xxx/2026-02 -type f -name "*.log" -exec grep -l "bbb04918aaa" {} + | head -n 1
 
 37* 端口监听转发 可以将docker容器中忘开放的端口通过这个功能使用
 将容器中3344端口转发给宿主机1122端口，再把宿主机端口开放出去，就可以远程连接容器内的端口了
