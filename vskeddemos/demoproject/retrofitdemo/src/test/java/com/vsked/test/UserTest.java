@@ -1,4 +1,4 @@
-package com.jat.test;
+package com.vsked.test;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

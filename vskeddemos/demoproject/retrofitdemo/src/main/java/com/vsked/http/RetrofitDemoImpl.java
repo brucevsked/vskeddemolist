@@ -1,4 +1,4 @@
-package com.jat.http;
+package com.vsked.http;
 
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -12,12 +12,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -194,28 +197,84 @@ public class RetrofitDemoImpl {
     }
 
 
-    public static byte[] fileToByte(String filename) throws Exception{
-        FileChannel fc = null;
-        RandomAccessFile rf=new RandomAccessFile(filename, "r");
-        try {
-            fc = rf.getChannel();
+    public static String post5(String myUrl,Map<String,Object> parMap,String filePath) throws Exception{
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://www.baidu.com/").client(client).build();
+
+        Map<String, RequestBody>  myParMap=new HashMap<String, RequestBody>();
+
+        ObjectMapper jackson = new ObjectMapper();
+
+        String key="externalApi";
+        Map<String,Object> value= (Map<String, Object>) parMap.get(key);
+        String valueStr=jackson.writeValueAsString(value);
+        byte[] contentByteArray1=valueStr.getBytes("utf-8");
+        RequestBody body=RequestBody.create(contentByteArray1, MediaType.parse("application/json; charset=utf-8"), 0, contentByteArray1.length);
+        myParMap.put(key, body);
+
+        String fpath1=filePath;
+        File tmpFile=new File(fpath1);
+        byte[] contentByteArray=fileToByte(fpath1);
+        RequestBody myFileReqBody1=RequestBody.create(contentByteArray, MediaType.parse("multipart/form-data"), 0, contentByteArray.length);
+        MultipartBody.Part part1=MultipartBody.Part.createFormData("file", tmpFile.getName(), myFileReqBody1);
+
+
+        RetrofitDemo service=retrofit.create(RetrofitDemo.class);
+        Call<ResponseBody> call=service.post5(myUrl,myParMap,part1);
+        Response<ResponseBody> response=call.execute();
+        String result="";
+        ResponseBody responseBody=response.body();
+        if(responseBody!=null){
+            result=responseBody.string();
+        }
+        return result;
+    }
+
+
+    public static void post5Async(String myUrl,Map<String,Object> parMap,String filePath, Callback<ResponseBody> callback) throws Exception{
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://www.baidu.com/").client(client).build();
+
+        Map<String, RequestBody>  myParMap=new HashMap<String, RequestBody>();
+
+        ObjectMapper jackson = new ObjectMapper();
+
+        String key="externalApi";
+        Map<String,Object> value= (Map<String, Object>) parMap.get(key);
+        String valueStr=jackson.writeValueAsString(value);
+        byte[] contentByteArray1=valueStr.getBytes("utf-8");
+        RequestBody body=RequestBody.create(contentByteArray1, MediaType.parse("application/json; charset=utf-8"), 0, contentByteArray1.length);
+        myParMap.put(key, body);
+
+        String fpath1=filePath;
+        File tmpFile=new File(fpath1);
+        byte[] contentByteArray=fileToByte(fpath1);
+        RequestBody myFileReqBody1=RequestBody.create(contentByteArray, MediaType.parse("multipart/form-data"), 0, contentByteArray.length);
+        MultipartBody.Part part1=MultipartBody.Part.createFormData("file", tmpFile.getName(), myFileReqBody1);
+
+
+        RetrofitDemo service=retrofit.create(RetrofitDemo.class);
+        Call<ResponseBody> call=service.post5(myUrl,myParMap,part1);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 文件转换成byte[]
+     * @param filename 文件名
+     * @return byte[]
+     * @throws Exception 抛出异常
+     */
+    public static byte[] fileToByte(String filename) throws Exception {
+        try (RandomAccessFile rf = new RandomAccessFile(filename, "r");
+             FileChannel fc = rf.getChannel()) {
+
             MappedByteBuffer mappedByteBuffer = fc.map(MapMode.READ_ONLY, 0, fc.size()).load();
             byte[] result = new byte[(int) fc.size()];
             if (mappedByteBuffer.remaining() > 0) {
                 mappedByteBuffer.get(result, 0, mappedByteBuffer.remaining());
             }
             return result;
-        }  catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("fileToByte exception:"+ e.getMessage());
             throw e;
-        } finally {
-            try {
-                rf.close();
-                fc.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
-
     }
 }

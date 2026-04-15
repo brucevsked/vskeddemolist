@@ -1,4 +1,4 @@
-package com.jat.http;
+package com.vsked.http;
 
 import java.util.List;
 import java.util.Map;
@@ -48,5 +48,9 @@ public interface RetrofitDemo {
     @POST
     @Headers ({"Content-Type: application/json; charset=utf-8","Accept: application/json"}) //修正请求乱码
     Call<ResponseBody> post4(@Url String myUrl,@Header("Authorization") String token, @Header("param1") String param1);
+
+    @POST
+    @Multipart
+    Call<ResponseBody> post5(@Url String myUrl,@PartMap() Map<String, RequestBody>  parMap, @Part MultipartBody.Part myFile);
 
 }

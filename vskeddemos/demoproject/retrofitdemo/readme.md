@@ -9,13 +9,13 @@
     ├─main  
     │  ├─java  
     │  │  └─com  
-    │  │      └─jat  
+    │  │      └─vsked  
     │  │          └─http  请求发送接口与实现类  
     │  └─resources  日志配置文件  
     └─test  
         └─java  
             └─com  
-                └─jat  
+                └─vsked 
                     ├─http 单元测试  
                     └─test 单元测试示例  
 

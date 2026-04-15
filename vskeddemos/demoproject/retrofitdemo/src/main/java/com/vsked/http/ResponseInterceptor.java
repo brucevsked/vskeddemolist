@@ -1,4 +1,4 @@
-package com.jat.http;
+package com.vsked.http;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
