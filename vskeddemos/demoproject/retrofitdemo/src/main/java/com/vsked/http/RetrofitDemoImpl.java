@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -130,6 +129,15 @@ public class RetrofitDemoImpl {
             result=responseBody.string();
         }
         return result;
+    }
+
+    public static void post2Async(String myUrl,String parString,Callback<ResponseBody> callback) throws Exception{
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://www.baidu.com/").client(client).build();
+        RetrofitDemo service=retrofit.create(RetrofitDemo.class);
+        byte[] contentByteArray=parString.getBytes("utf-8");
+        RequestBody body=RequestBody.create(contentByteArray, MediaType.parse("application/json; charset=utf-8"), 0, contentByteArray.length);
+        Call<ResponseBody> call=service.post2(myUrl,body);
+        call.enqueue(callback);
     }
 
     /**

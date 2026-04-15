@@ -51,7 +51,7 @@ public class TestController {
     public String test2(@RequestBody UserDto userDto){
         log.info("{}",  userDto);
         //通过本示例验证，DTO这一层就可以直接用领域模型或对象模型
-        return "test2ok";
+        return "test2ok"+userDto.toString();
     }
 
 }

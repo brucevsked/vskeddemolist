@@ -1,5 +1,6 @@
 package com.vsked.http;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.ResponseBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +15,14 @@ import java.util.Map;
 public class RetrofitDemoTest {
 
     private static final Logger log = LoggerFactory.getLogger(RetrofitDemoTest.class);
+    ObjectMapper jackson = new ObjectMapper();
 
     public static void main(String[] args) {
         RetrofitDemoTest test=new RetrofitDemoTest();
-        //异步调用测试
-        test.post5Async();
+        //异步调用测试 仅参数
+        test.post2Async();
+        //异步调用测试 参数+文件方式
+        //test.post5Async();
     }
 
    @Test
@@ -69,6 +73,48 @@ public class RetrofitDemoTest {
             String myUrl="http://localhost:8181/test/procJson";
             String result=RetrofitDemoImpl.post2(myUrl,myContent);
             log.debug("|"+result+"|");
+        }catch(Exception e){
+            log.error(e.getMessage(),e);
+        }
+    }
+
+
+    public void post2Async(){
+        try{
+            Map<String, Object> parMap=new HashMap<String, Object>();
+            parMap.put("username", "MyNameIsVsked");
+            parMap.put("password", "参数值b1");
+
+            String data=jackson.writeValueAsString(parMap);
+
+            String myUrl="http://localhost:80/test2";
+
+
+            //异步回调函数，用于处理响应回来的信息
+            Callback<ResponseBody> callback=new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                    try{
+                        ResponseBody responseBody=response.body();
+                        String result="";
+                        if(responseBody!=null){
+                            result=responseBody.string();
+                        }
+                        //我方服务器响应
+                        log.info("{}",result);
+
+                    }catch(Exception e){
+                        log.error(e.getMessage(),e);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable throwable) {
+                    log.error("upload location to our server exception:",throwable);
+                }
+            };
+            RetrofitDemoImpl.post2Async(myUrl,data,callback);
+
         }catch(Exception e){
             log.error(e.getMessage(),e);
         }
