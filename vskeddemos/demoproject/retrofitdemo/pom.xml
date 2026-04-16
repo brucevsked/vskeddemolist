@@ -14,6 +14,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.deploy.skip>true</maven.deploy.skip>
         <maven.install.skip>true</maven.install.skip>
+        <!-- java jdk 版本声明 可变更 根据自己配置去匹配 -->
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <!-- 解决pom头部unkonow错误 -->
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <mavenCompilerPlugin.version>3.8.1</mavenCompilerPlugin.version>
