@@ -71,7 +71,9 @@ ren *.* *.png
 Win+X打开菜单，然后选择：Windows Power Shell（管理员），在该窗口中输入以下命令回车后重启即可
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowSecondsInSystemClock /t REG_DWORD /d 1 /f
 
-
+10* 查看电脑上已经连接的WIFI密码
+netsh wlan show profile name="WIFI名称" key=clear
+运行命令后关键字段为WIFI密码
 
 
 定期清理
