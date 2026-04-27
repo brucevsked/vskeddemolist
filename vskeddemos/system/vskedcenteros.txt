@@ -565,6 +565,8 @@ curl -d'login=emma＆password=123'-X POST https://google.com/login
 发送get请求
 curl http://localhost:8080
 curl http://www.baidu.com
+模拟浏览器发送请求
+curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" https//www.baidu.com
 
 33* 移动命令
 移动目录

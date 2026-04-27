@@ -1,0 +1,13 @@
+
+第一步下载arthas-boot.jar文件。然后运行
+
+java -jar arthas-boot.jar
+
+运行完成后选择一个java进程
+
+执行追踪，也可以是controller层
+trace com.yourproject.xxx.xxxController list
+
+详细追踪
+trace org.ruoyi.system.service.impl.xxxServiceImpl list -n 1
+
