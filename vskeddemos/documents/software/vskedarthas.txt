@@ -11,3 +11,15 @@ trace com.yourproject.xxx.xxxController list
 详细追踪
 trace org.ruoyi.system.service.impl.xxxServiceImpl list -n 1
 
+trace com.baomidou.mybatisplus.core.mapper.BaseMapper selectVoPage -m 1000
+
+查看执行的sql
+watch org.ruoyi.system.mapper.SysApiLogMapper selectVoPage '{params,sql}' -x 2
+
+# 监控 selectPageApiLogList 方法的调用次数和耗时
+monitor org.ruoyi.system.service.impl.SysxxxServiceImpl selectPageApiLogList -c 5
+
+# 查看方法调用堆栈
+stack org.ruoyi.system.service.impl.SysxxxServiceImpl selectPageApiLogList
+
+
