@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>CryptoJS Pkcs7 加密示例</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <h2>CryptoJS AES 加密 (CBC 模式 / Pkcs7 填充)</h2>
+    <h2>java 加密 AES/CBC/PKCS5Padding</h2>
+
+    <label for="plaintext">明文：</label>
+    <input type="text" id="plaintext" value="Hello, world my test!">
+    <br><br>
+
+    <label for="key">密钥 (16字节)：</label>
+    <input type="text" id="key" value="1234567890ABCDE2">
+    <br><br>
+
+    <label for="iv">IV (16字节)：</label>
+    <input type="text" id="iv" value="987654321AAAAAG">
+    <br><br>
+
+    <button onclick="encrypt()">加密</button>
+    <button onclick="decrypt()">解密</button>
+
+    <h3>加密结果：</h3>
+    <p id="encryptedResult"></p>
+
+    <h3>解密结果：</h3>
+    <p id="decryptedResult"></p>
+
+    <script>
+        function encrypt() {
+            const plaintext = document.getElementById('plaintext').value;
+            const keyStr = document.getElementById('key').value;
+            const ivStr = document.getElementById('iv').value;
+
+            const key = CryptoJS.enc.Utf8.parse(keyStr);
+            const iv = CryptoJS.enc.Utf8.parse(ivStr);
+
+            const encrypted = CryptoJS.AES.encrypt(
+                CryptoJS.enc.Utf8.parse(plaintext),
+                key,
+                {
+                    iv: iv,
+                    mode: CryptoJS.mode.CBC,
+                    padding: CryptoJS.pad.Pkcs7
+                }
+            );
+
+            const encryptedText = encrypted.toString();
+            document.getElementById('encryptedResult').innerText = encryptedText;
+            return encryptedText;
+        }
+
+        function decrypt() {
+            const encryptedData = document.getElementById('encryptedResult').innerText;
+            const keyStr = document.getElementById('key').value;
+            const ivStr = document.getElementById('iv').value;
+
+            const key = CryptoJS.enc.Utf8.parse(keyStr);
+            const iv = CryptoJS.enc.Utf8.parse(ivStr);
+
+            const decrypted = CryptoJS.AES.decrypt(
+                encryptedData,
+                key,
+                {
+                    iv: iv,
+                    mode: CryptoJS.mode.CBC,
+                    padding: CryptoJS.pad.Pkcs7
+                }
+            );
+
+            const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+            document.getElementById('decryptedResult').innerText = decryptedText || "解密失败";
+        }
+    </script>
+</body>
+</html>
