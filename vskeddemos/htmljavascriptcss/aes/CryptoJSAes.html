@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <title>CryptoJS Pkcs7 加密示例</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        textarea {
+            width: 500px;
+            height: 80px;
+            font-family: monospace;
+            vertical-align: top;
+        }
+    </style>
 </head>
 <body>
     <h2>CryptoJS AES 加密 (CBC 模式 / Pkcs7 填充)</h2>
@@ -25,7 +33,7 @@
     <button onclick="decrypt()">解密</button>
 
     <h3>加密结果：</h3>
-    <p id="encryptedResult"></p>
+    <textarea id="encryptedResult" ></textarea>
 
     <h3>解密结果：</h3>
     <p id="decryptedResult"></p>
@@ -50,12 +58,12 @@
             );
 
             const encryptedText = encrypted.toString();
-            document.getElementById('encryptedResult').innerText = encryptedText;
+            document.getElementById('encryptedResult').value = encryptedText;
             return encryptedText;
         }
 
         function decrypt() {
-            const encryptedData = document.getElementById('encryptedResult').innerText;
+            const encryptedData = document.getElementById('encryptedResult').value;
             const keyStr = document.getElementById('key').value;
             const ivStr = document.getElementById('iv').value;
 
