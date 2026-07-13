@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+  <!-- must set here! -->
+  <base href="">
+
+  <title>post请求上传文件同时带form表单属性</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+</head>
+
+<body>
+
+<input id="sid" value="" placeholder="sid" />
+<input id="version" value="1.0.6" placeholder="version" />
+<input id="content" value="测试发包" placeholder="content" />
+<input id="downloadUrl" value="http://www.baidu.com" placeholder="downloadUrl" />
+<input id="isActive" value="1" placeholder="isActive" />
+
+<input type="file" id="sfile" />
+
+<button type="button" id="uploadBt">上传</button>
+
+<div id="testdiv"></div>
+
+  <script src="js/lib/axios/axios.min.js"></script>
+
+  <script>
+    axios.defaults.timeout = 15000;  //超时响应
+    axios.defaults.withCredentials = false;   // axios 默认不发送cookie，需要全局设置true发送cookie
+
+    // 绑定按钮点击事件，而不是页面加载时直接执行
+    document.getElementById('uploadBt').addEventListener('click', function() {
+        var url = 'http://127.0.0.1:6038/app/version/add';
+
+        // 1. 收集表单数据，组装成 bo 对象
+        var boData = {
+            sid: document.getElementById('sid').value,
+            version: document.getElementById('version').value,
+            content: document.getElementById('content').value,
+            downloadUrl: document.getElementById('downloadUrl').value,
+            isActive: document.getElementById('isActive').value // 如果后台要求是数字或布尔值，可在此处做类型转换
+        };
+
+        // 2. 创建 FormData 对象用于构建 multipart/form-data 请求
+        var formData = new FormData();
+
+        // 3. 添加文件，name 必须与后端 @RequestPart("file") 一致
+        var fileInput = document.getElementById('sfile');
+        if (fileInput.files.length === 0) {
+            alert('请先选择文件！');
+            return;
+        }
+        formData.append('file', fileInput.files[0]);
+
+        // 4. 添加 bo 对象，name 必须与后端 @RequestPart("bo") 一致
+        // 【核心】：将 boData 转为 JSON 字符串，并包装成 Blob，指定类型为 application/json
+        // 这样 Spring 才能通过 Jackson 正确反序列化为 AppVersion 对象
+        var boBlob = new Blob([JSON.stringify(boData)], { type: 'application/json' });
+        formData.append('bo', boBlob, 'bo.json');
+
+        // 5. 发送 Axios 请求
+        // 【注意】：发送 FormData 时，千万不要手动设置 headers 里的 Content-Type 为 multipart/form-data，
+        // 浏览器会自动设置并附带正确的 boundary 边界符。
+        axios.post(url, formData, {
+            timeout:600000, //连接超时
+            headers: {
+                'accept':'application/json', //服务端响应格式
+                'Content-Type':'multipart/form-data', //客户端请求格式
+                'authorization': 'Bearer 00000000-0000-0000-0000-000000000'
+            }
+        }).then(function (dt) {
+            console.log('上传成功:', dt.data);
+            alert('上传成功');
+            // 如果需要展示结果，可以取消下面的注释
+            // document.getElementById('testdiv').innerHTML = JSON.stringify(dt.data);
+        }).catch(function (error) {
+            console.error('上传失败:', error);
+            // 尝试获取后台返回的错误提示信息
+            var errMsg = error.response ? (error.response.data.msg || error.response.data.message) : error.message;
+            alert('上传失败: ' + errMsg);
+        });
+    });
+  </script>
+
+</body>
+
+</html>
