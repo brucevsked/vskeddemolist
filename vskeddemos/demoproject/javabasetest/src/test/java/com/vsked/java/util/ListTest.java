@@ -4,9 +4,13 @@ import com.vsked.test.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * list是有序的
@@ -75,6 +79,32 @@ public class ListTest {
         log.info("|{}|",dataList);
         dataList.clear();
         log.info("|{}|",dataList);
+    }
+
+    @Test
+    public void filter1(){
+        //源列表
+        List<Map<String,String>> sources=new LinkedList<>();
+        for(int i=0;i<10;i++){
+            Map<String,String> map=new HashMap<>();
+            map.put("id",i+"");
+            map.put("name","name"+i);
+            sources.add(map);
+        }
+        //目标列表
+        List<Map<String,String>> targets=new LinkedList<>();
+        for(int i=5;i<8;i++){
+            Map<String,String> map=new HashMap<>();
+            map.put("id",i+"");
+            map.put("name","name"+i);
+            targets.add(map);
+        }
+        //过滤源列表中数据，保留目标列表中有，源列表也有的数据
+        sources = sources.stream()
+                .filter(sourceMap -> targets.stream()
+                        .anyMatch(targetMap -> sourceMap.get("name").equals(targetMap.get("name"))))
+                .toList();
+        log.info("|{}|",sources);
 
     }
 
