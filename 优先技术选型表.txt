@@ -124,6 +124,8 @@ TestNG
 junit5
 Hamcrest
 
+数据库版本控制与升级脚本生成
+Liquibase 4.11.0
 
 数据库连接池
 HikariCP 3
