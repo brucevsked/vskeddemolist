@@ -1,0 +1,33 @@
+server:
+  port: 80 #端口号
+  shutdown: graceful #开启优雅停机 默认为immediate立即停机
+
+logging:
+  config: classpath:log4j2.xml
+
+
+spring:
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+    show-sql: true
+  datasource:
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: test
+    password: test
+    driver-class-name: org.h2.Driver
+    hikari:
+      connection-test-query: select 1
+  sql:
+    init:
+      mode: always                    # 每次启动都执行
+      schema-locations: classpath:sql/h2/schema.sql
+      data-locations: classpath:sql/h2/data.sql
+
+# H2 Web Console 独立服务端口（访问 http://localhost:8082）
+app:
+  h2:
+    console:
+      port: 8082
