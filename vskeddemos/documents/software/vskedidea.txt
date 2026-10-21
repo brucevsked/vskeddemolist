@@ -128,6 +128,9 @@ ctrl+F4
 27* Non-ASCII characters警报取消
 File -> Settings -> Editor -> Inspections -> 查找Non-ASCII 对号去掉即可。
 
+28* search API call path 通过完整API调用搜索
+ctrl+\
+
 
 --------------------------------------------------------------------------------
 本项目类导入不识别解决方案
