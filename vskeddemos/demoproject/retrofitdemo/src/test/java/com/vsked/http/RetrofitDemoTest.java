@@ -20,9 +20,9 @@ public class RetrofitDemoTest {
     public static void main(String[] args) {
         RetrofitDemoTest test=new RetrofitDemoTest();
         //异步调用测试 仅参数
-        test.post2Async();
+//        test.post2Async();
         //异步调用测试 参数+文件方式
-        //test.post5Async();
+        test.post5Async();
     }
 
    @Test
@@ -181,14 +181,20 @@ public class RetrofitDemoTest {
        //异步调用测试
         try{
             Map<String,Object> externalAPIData=new HashMap<>();
-            externalAPIData.put("name", "thisIsVsked");
-            externalAPIData.put("url", "http://www.vsked.cn");
+            Map<String,String> platformAlarmIdMap=new HashMap<>();
+            platformAlarmIdMap.put("platformAlarmId","20260414102316131000000000000001");
+            externalAPIData.put("data",platformAlarmIdMap);
+            externalAPIData.put("k", "abc1234567890");
+            externalAPIData.put("f", "alarmFileUpload");
+            externalAPIData.put("a", false);
+            externalAPIData.put("i", false);
+            externalAPIData.put("r", false);
 
             //传文件时需要的参数
             Map<String, Object> parMap=new HashMap<String, Object>();
             parMap.put("externalApi", externalAPIData);
 
-            String fileName="d:/03_00_6702_00_20260414102316131000000000000001.bin";
+            String fileName="d:/02_67_6702_00_20260414102316131000000000000001.mp4";
 
             String myUrl="http://localhost:80/test/uploadFile";
 
@@ -223,6 +229,8 @@ public class RetrofitDemoTest {
             log.error(e.getMessage(),e);
         }
     }
+
+
 
 
     @Test
